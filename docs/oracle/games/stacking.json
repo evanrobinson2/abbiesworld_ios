@@ -40,6 +40,23 @@
     },
     "camera": "third_person",
     "art_direction": "Handmade toy world of wood and paint.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "storybook",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "vignette",
+        "colour grade"
+      ],
+      "signature": "A handmade toy world of painted wood with soft light, like a silent-film storybook.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "Real toy materials (painted wood) give an instant childhood feel."
+    },
     "palette": null,
     "audio_mood": "Silent-film piano.",
     "pacing": "slow, short sessions",

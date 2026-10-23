@@ -38,6 +38,23 @@
     },
     "camera": "first_person",
     "art_direction": "Handmade cosy space, campfires and marshmallows.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "stylised_pbr",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "bloom",
+        "fog"
+      ],
+      "signature": "Warm handmade surfaces under physical light; the campfire and sun are the colour anchors.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "Warm light sources in a cold place make a world feel like a camp."
+    },
     "palette": null,
     "audio_mood": "Banjo by the fire; instruments you can find in space.",
     "pacing": "slow, short sessions",

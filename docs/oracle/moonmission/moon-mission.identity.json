@@ -1,0 +1,284 @@
+{
+  "schema_version": "1.1",
+  "game": {
+    "title": "Moon Mission (Abbie's World, AW-STUDY-0036)",
+    "steam_appid": null,
+    "developer": "Evan with Claude",
+    "release": "in development (Part 1: 2026-10-23)",
+    "engine": {
+      "value": "three.js in the browser",
+      "source": "human",
+      "confidence": 0.95
+    },
+    "platforms": [
+      "Mac or PC browser on a big TV",
+      "iPhone home-screen app (solo)"
+    ]
+  },
+  "core": {
+    "fantasy": "A family flies a pink rocket to the Moon together on the living-room TV: each person has an important job, everyone votes on the story, and launch control talks back for real.",
+    "pillars": [
+      "Everyone has a job, and the mission can't go on without it",
+      "We decide together (vote, and the Captain's Hat breaks ties)",
+      "Launch control is a real voice you talk to",
+      "A real-feeling launch day, felt as a six-year-old",
+      "Nothing fails; mistakes are shared and funny"
+    ],
+    "signature_moment": "Abbie yells \"PLUG IN OUR OXYGEN!!!\", slaps her key, the hose clicks in and the green light comes on, and Houston answers \"Oxygen is GO\" a heartbeat before the countdown starts.",
+    "anti_goals": [
+      "no fail screens or blaming one child",
+      "no reading required: every line is also spoken",
+      "no HUD in play; panels, paper and voices carry the information",
+      "nothing masks the world",
+      "nothing above PG",
+      "no copied story, characters, ship designs or music from any reference game"
+    ],
+    "signatures": [
+      {
+        "id": "jobs_not_turns",
+        "layer": "mechanics",
+        "description": "Each beat gives each person a named job on their own key; the beat waits for its owner, and a stalled job can be helped.",
+        "class": "style",
+        "confidence": 0.7
+      },
+      {
+        "id": "live_launch_control",
+        "layer": "audio",
+        "description": "Houston is a real-time voice on a push-to-talk radio that runs a fixed launch script and improvises around it.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "captains_hat_vote",
+        "layer": "mechanics",
+        "description": "Group choices are `> ` lines with a coloured vote chip per person; ties go to whoever wears the Captain's Hat, which moves every choice.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "light_earth_dark_moon",
+        "layer": "art",
+        "description": "First person with your own gloved hands; Earth is light mode (white suits, daylight), the Moon is dark mode (black sky, glowing trim), and the launch is the switch between them.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "panel_on_the_table",
+        "layer": "interaction",
+        "description": "The capsule panel on screen matches a real key panel on the coffee table, picture for picture.",
+        "class": "style",
+        "confidence": 0.5
+      },
+      {
+        "id": "always_ticking_launch_clock",
+        "layer": "pacing",
+        "description": "A real mission clock counts down to launch from the first scene, shown on things and on film-style mission cards, with planned holds so nobody fails.",
+        "class": "style",
+        "confidence": 0.6
+      }
+    ]
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "fellowship": 0.35,
+        "fantasy": 0.2,
+        "narrative": 0.2,
+        "sensation": 0.15,
+        "expression": 0.05,
+        "challenge": 0.05
+      },
+      "motivations": {
+        "social": 0.95,
+        "immersion": 0.85,
+        "creativity": 0.4,
+        "action": 0.3,
+        "achievement": 0.3,
+        "mastery": 0.15
+      },
+      "emotional_targets": {
+        "togetherness": 0.95,
+        "anticipation": 0.9,
+        "wonder": 0.9,
+        "pride": 0.8,
+        "silliness": 0.6
+      },
+      "audience": {
+        "age": "two six-year-olds with a parent (2-4 players)",
+        "skill_floor": "press your one key; shouting helps",
+        "context": "big TV after ballet, one evening per act"
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "do your job",
+          "input": "your key or pad button"
+        },
+        {
+          "verb": "vote",
+          "input": "press on a > line"
+        },
+        {
+          "verb": "talk to Houston",
+          "input": "hold RADIO and speak"
+        },
+        {
+          "verb": "craft",
+          "input": "lay parts on the bench"
+        },
+        {
+          "verb": "draw",
+          "input": "stamp and colour a patch"
+        },
+        {
+          "verb": "fly",
+          "input": "stick and trigger (lander, buggy)"
+        },
+        {
+          "verb": "chat",
+          "input": "tap a character, pick a topic"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "hear the next step",
+          "the owner does their job",
+          "the world answers (light, sound, voice)",
+          "the next step"
+        ],
+        "period_s": {
+          "value": 20,
+          "source": "estimate",
+          "confidence": 0.4
+        }
+      },
+      "meta_loop": {
+        "steps": [
+          "an act per evening",
+          "choices change later lines and items",
+          "memory key or coin at the end of each act"
+        ]
+      },
+      "rules": {
+        "failure_model": "none",
+        "scoring": "points for gentle landings and helping hands, shown on things",
+        "win": "reach the Moon base (Part 1)",
+        "resources": [
+          "oxygen",
+          "fuel",
+          "snacks"
+        ]
+      },
+      "randomness": {
+        "amount": 0.15,
+        "kind": "output"
+      },
+      "information": "perfect",
+      "systems": [
+        "branching script graph with flags",
+        "job queue per beat",
+        "group vote",
+        "live voice director with tools",
+        "shared inventory and crafting",
+        "one launch signal driving light, shake, sound and music"
+      ],
+      "complexity": {
+        "verb_count": 7,
+        "rules_in_first_10_min": {
+          "value": 4,
+          "source": "estimate",
+          "confidence": 0.5
+        }
+      }
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "kids shouting jobs at each other",
+        "helping a stuck sibling",
+        "negotiating votes",
+        "chatting off-script with Houston"
+      ],
+      "decision_density_per_min": {
+        "value": 2,
+        "source": "estimate",
+        "confidence": 0.4
+      },
+      "skill_strategy_chance": {
+        "skill": 0.2,
+        "strategy": 0.2,
+        "chance": 0.1
+      }
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "gamepad per player",
+          "Stream Deck key panel (WebHID)",
+          "push-to-talk voice",
+          "keyboard fallback"
+        ],
+        "controls_count": {
+          "value": 2,
+          "source": "estimate",
+          "confidence": 0.5,
+          "method": "per child: their job key and RADIO"
+        },
+        "mapping": "mixed"
+      },
+      "camera": {
+        "model": "first_person"
+      }
+    },
+    "art": {
+      "direction": "Light mode on Earth, dark mode on the Moon: Faceted Hero characters in white suits with colour trim, the pink rocket in nearly every shot, tactile picture-labelled panels, one crisp mission-card layer",
+      "reference_style_only": [
+        "Deliver Us Mars opening (rhythm: quiet home, tactile cockpit, voice in your ear, roar, silence)"
+      ]
+    },
+    "information_grammar": {
+      "principle": "Panels, paper checklists, job glows on keys and seats, and voices; captions with > choices are the only words."
+    },
+    "narrative": {
+      "narrative_mode": {
+        "enacted": 0.6,
+        "evoked": 0.25,
+        "emergent": 0.15
+      },
+      "tone": {
+        "cozy_tense": -0.3,
+        "whimsical_grounded": 0.1,
+        "earnest_ironic": -0.8,
+        "quiet_loud": 0.2,
+        "handmade_industrial": 0.1
+      },
+      "themes": [
+        "family",
+        "courage",
+        "togetherness",
+        "Daddy's core memories"
+      ]
+    },
+    "pacing": {
+      "session": "30-45 minutes per act, ending somewhere cosy",
+      "acts": [
+        "Launch Morning (3 vignettes, launch, lander)",
+        "The Base (wires, bugs, Star Child)",
+        "Home (buggy ride)"
+      ],
+      "transitions": "a calm 8-15 s cutscene between every scene, with the mission card"
+    }
+  },
+  "ledger": {
+    "style": [
+      "job-per-player couch co-op",
+      "first-person tactile launch day (from the Deliver Us Mars opening's rhythm)",
+      "real launch-control callouts in kid words",
+      "push-to-talk radio voice",
+      "voted branching dialogue with > lines"
+    ],
+    "expression": [
+      "Deliver Us Mars's story, characters, ship and music are never copied; the rocket, cast, script and music are ours"
+    ]
+  }
+}

@@ -38,7 +38,7 @@ function createSupport({env=process.env,store,fetcher,now=()=>Date.now()}={}){
   async checkout(a,origin,amount=5){
    const tier=tierOf(amount);
    const s=await stripe('POST','checkout/sessions',{mode:'subscription',client_reference_id:a.id,
-    line_items:{0:{quantity:1,price_data:{currency:'usd',unit_amount:tier*100,recurring:{interval:'month'},product_data:{name:`Support Abbie's World: $${tier} a month`,description:`$${TIERS[tier]} of AI magic in the game each month`}}}},
+    line_items:{0:{quantity:1,price_data:{currency:'usd',unit_amount:tier*100,recurring:{interval:'month'},product_data:{name:`Support Abbie's World: $${tier} a month`,description:`Early access: a donation and a thank-you, not a promise. Includes $${TIERS[tier]} of AI magic in the game each month. Not tax-deductible.`}}}},
     allow_promotion_codes:'false',billing_address_collection:'auto',
     metadata:{account:a.id,tier},subscription_data:{metadata:{account:a.id,tier}},
     success_url:`${origin}/support/thanks?session={CHECKOUT_SESSION_ID}`,cancel_url:`${origin}/welcome#support`});

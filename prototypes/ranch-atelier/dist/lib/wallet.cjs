@@ -95,14 +95,22 @@ function createWallet({store=blobStore(),caps=CAPS,shards=SHARDS,plan=null}={}){
  const order=()=>{const ks=[...Array(shards).keys()];for(let i=ks.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[ks[i],ks[j]]=[ks[j],ks[i]];}return ks;};
  const pool={
   async room(){const cap=await shardCap(),all=await Promise.all(order().map(k=>store.read(shardPath(k))));return all.reduce((n,r)=>n+Math.max(0,cap-spentOf(r.value)),0);},
+  // A charge that comes up short gives its parts back, but a rival may have been refused by those parts meanwhile.
+  // So a short charge tries again while the pool, re-read, still has room for it: the pool fills to the cent.
   async take(usd){
-   const cap=await shardCap(),parts=[];let rest=usd;
-   for(const k of order()){
-    const {took}=await upTo(shardPath(k),rest,cap,0);
-    if(took>0){parts.push([k,took]);rest-=took;}
-    if(rest<=1e-9)return parts;
+   const cap=await shardCap();
+   for(let i=0;i<6;i++){
+    if(i)await new Promise(r=>setTimeout(r,Math.random()*30*i));
+    const parts=[];let rest=usd;
+    for(const k of order()){
+     const {took}=await upTo(shardPath(k),rest,cap,0);
+     if(took>0){parts.push([k,took]);rest-=took;}
+     if(rest<=1e-9)return parts;
+    }
+    await pool.give(parts);
+    if(await pool.room()<usd-1e-9)return null;
    }
-   await pool.give(parts);return null;
+   return null;
   },
   async give(parts){await Promise.all(parts.map(([k,usd])=>add(shardPath(k),-usd,Infinity).catch(()=>{})));}
  };

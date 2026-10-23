@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "3. Pink rocket as a hex game tile",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Hex game tile diorama of a tiny pink rocket launch site, a rounded toy-like pink-and-white rocket with a silver nose cone on a small launch pad with a little white gantry, on a single hexagonal board game tile with grass edges, isometric view, miniature tabletop diorama on a game board, bright daylight, soft shadows, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "587ba6a6-e22c-4fa4-aa95-2241f2cdae28",
+  "page": "https://www.midjourney.com/jobs/587ba6a6-e22c-4fa4-aa95-2241f2cdae28?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/587ba6a6-e22c-4fa4-aa95-2241f2cdae28/0_0.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "ed59ba064602aaf68d5a29d1e0540affa4fec05a608606809f1aea4c481ac497"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: silver nose, gantry, hex tile sitting among neighbouring tiles on the board. Relax mode."
+}

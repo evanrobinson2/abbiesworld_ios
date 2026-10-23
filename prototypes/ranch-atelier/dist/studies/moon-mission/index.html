@@ -1,0 +1,1145 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Moon Mission</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one reading column that travels from a warm launch-morning dawn down into deep space; the capsule key panel sits in the hero, then the storyboard. Single deliberate dark look. */
+:root{
+  --space:#0b1020; --space2:#121a33; --dawn:#ffb46b; --rocket:#ff7eb6; --ani:#b18cff; --go:#6fe3a5;
+  --ink:#eef1fb; --dim:#a8b1cc; --line:#2a3558; --glass:rgba(255,255,255,.06);
+  --display:"Big Shoulders Display","Arial Narrow",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+html{background:var(--space)}
+body{background:linear-gradient(180deg,#3a2340 0,#1c1838 420px,var(--space) 1100px) var(--space);color:var(--ink);font:17px/1.6 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 64px}
+.wrap{max-width:860px;margin:0 auto}
+header{padding-block:48px 24px;display:grid;gap:14px}
+.eyebrow{font:500 13px/1 var(--mono);letter-spacing:.14em;color:var(--dawn);text-transform:uppercase}
+h1{font:800 clamp(56px,12vw,112px)/.9 var(--display);margin:0;letter-spacing:.01em;text-transform:uppercase;
+  background:linear-gradient(180deg,var(--ink) 30%,var(--rocket));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:20px;max-width:62ch;color:var(--ink);margin:0;text-wrap:pretty}
+.count{display:flex;flex-wrap:wrap;gap:6px;font:500 14px/1 var(--mono);color:var(--dim);margin-top:6px}
+.count span{padding:6px 8px;border:1px solid var(--line);border-radius:6px}
+.count .lift{color:var(--space);background:var(--dawn);border-color:var(--dawn);font-weight:700}
+.panel{margin-top:22px;padding:16px;border-radius:18px;background:#05070f;border:1px solid var(--line);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 20px 50px rgba(0,0,0,.45)}
+.panel h2{margin:0 0 12px;font:600 13px/1 var(--mono);letter-spacing:.12em;color:var(--dim);text-transform:uppercase;border:0;padding:0}
+.keys{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.key{aspect-ratio:1;max-width:100%;border-radius:12px;background:#151b2e;border:1px solid #232c48;display:grid;place-items:center;align-content:center;gap:2px;padding:6px;text-align:center;
+  box-shadow:inset 0 -3px 0 rgba(0,0,0,.4);transition:transform .12s}
+.key:hover{transform:translateY(1px)}
+.key svg{width:44%;fill:none;stroke:var(--c);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.key b{font:700 clamp(9px,1.6vw,12px)/1.1 var(--body);letter-spacing:.04em}
+.key small{font:500 clamp(8px,1.3vw,11px)/1 var(--mono);color:var(--dim)}
+.k-pink{--c:var(--rocket)}.k-purple{--c:var(--ani)}.k-green{--c:var(--go)}.k-amber{--c:var(--dawn)}.k-sky{--c:#8fd0ff}.k-blue{--c:#6f9bff}
+.k-o2{box-shadow:inset 0 -3px 0 rgba(0,0,0,.4),0 0 0 2px var(--rocket),0 0 22px rgba(255,126,182,.45)}
+.panel p{margin:12px 0 0;color:var(--dim);font-size:15px}
+.cast{display:flex;gap:10px;overflow-x:auto;padding-block:20px 6px;scroll-snap-type:x mandatory}
+.cast figure{margin:0;flex:0 0 min(46%,200px);scroll-snap-align:start}
+.cast img{border-radius:12px;aspect-ratio:1;object-fit:cover;width:100%;display:block;background:var(--space2)}
+.cast figcaption{font-size:13px;color:var(--dim);margin-top:6px}
+main h2{font:800 clamp(30px,5vw,42px)/1 var(--display);text-transform:uppercase;letter-spacing:.02em;margin:56px 0 12px;padding-top:18px;border-top:1px solid var(--line);text-wrap:balance}
+main h3{font:700 21px/1.25 var(--body);margin:32px 0 8px;color:var(--dawn);text-wrap:balance}
+main p,main li{max-width:68ch}
+main li{margin:4px 0}
+main strong{color:#fff}
+main code{font:500 .86em var(--mono);background:var(--glass);padding:1px 5px;border-radius:5px;color:#ffd7ea}
+main a{color:var(--rocket)}
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:560px}
+th,td{padding:8px 10px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font:600 12px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);background:var(--space2)}
+tr:last-child td{border-bottom:0}
+td:first-child{font-family:var(--mono);font-size:13px;white-space:nowrap;color:var(--dim)}
+
+.demo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:18px}
+@media (max-width:640px){.demo{grid-template-columns:minmax(0,1fr)}}
+.shot{border-radius:16px;border:1px solid var(--line);overflow:hidden;position:relative;min-width:0}
+.shot .cap{font:500 12px/1.3 var(--mono);color:var(--dim);padding:10px 12px;background:#070a14;border-top:1px solid var(--line)}
+.scene{aspect-ratio:16/9;background:linear-gradient(180deg,#cfe6ff 0,#eaf3ff 55%,#d9dccf 56%,#c9ccbe 100%);position:relative}
+.scene::after{content:"";position:absolute;left:58%;bottom:14%;width:9%;height:58%;border-radius:50% 50% 12% 12%/30% 30% 8% 8%;background:linear-gradient(90deg,#f2a0c6,#ff7eb6 60%,#d65a94)}
+.mcard{position:absolute;left:5%;bottom:9%;font:500 clamp(9px,1.7vw,13px)/1 var(--mono);letter-spacing:.12em;color:#1b2238;white-space:nowrap}
+.mcard i{display:block;height:1px;background:#1b2238;margin-top:6px;width:100%;transform-origin:left}
+.board{aspect-ratio:16/9;background:#f7f7f2;display:block;width:100%}
+.replay{position:absolute;top:10px;right:10px;font:600 12px var(--mono);background:rgba(5,7,15,.75);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:6px 10px;cursor:pointer}
+.replay:focus-visible{outline:2px solid var(--dawn);outline-offset:2px}
+
+.sb{margin-top:26px}
+.sb>h2{font:800 clamp(30px,5vw,42px)/1 var(--display);text-transform:uppercase;margin:0 0 4px;border:0;padding:0}
+.sb>p{color:var(--dim);margin:0 0 14px;max-width:68ch}
+.frames{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+.fr{border-radius:14px;padding:14px;display:grid;gap:6px;align-content:start;min-width:0;border:1px solid}
+.fr.lt{background:#f4f6fb;color:#1b2238;border-color:#dfe4f1}
+.fr.dk{background:#03050b;color:#eef1fb;border-color:#26304f;box-shadow:inset 0 0 0 1px rgba(255,126,182,.15)}
+.fr .fn{font:800 28px/1 var(--display);color:var(--rocket)}
+.fr .fc{font:500 10.5px/1.3 var(--mono);letter-spacing:.1em;opacity:.75}
+.fr h3{font:700 18px/1.2 var(--body);margin:2px 0 0;color:inherit}
+.fr p{margin:0;font-size:14.5px;line-height:1.45}
+.fr .fw{font:500 11px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;opacity:.6;margin-top:4px}
+.fr img{width:calc(100% + 28px);margin:-14px -14px 4px;max-width:none;aspect-ratio:16/9;object-fit:cover;border-radius:13px 13px 0 0;display:block}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-top:12px}
+.gal figure{margin:0;min-width:0}.gal img{border-radius:12px;width:100%;display:block;background:#fff}
+.gal figcaption{font-size:13px;color:var(--dim);margin-top:6px}
+.drift{color:var(--dim);font-size:14.5px;margin:10px 0 0;max-width:68ch}
+footer{margin-top:56px;color:var(--dim);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+@media (max-width:520px){.keys{gap:6px}.key{border-radius:9px}}
+@media (prefers-reduced-motion:reduce){.key{transition:none}}
+</style></head><body style="margin:0">
+<div class="wrap">
+<header>
+  <div class="eyebrow">AW-STUDY-0036 · Game study and identity · Part 1 tonight</div>
+  <h1>Moon Mission</h1>
+  <p class="lede">A family couch game for the big TV. Daddy, Abbie and Ani fly the pink rocket to the Moon base together, out loud: everyone has an important job, everyone votes on the story, and Houston talks back for real.</p>
+  <div class="count" aria-label="Launch countdown"><span>T-10</span><span>9</span><span>8</span><span>7</span><span>6</span><span>5 rumble</span><span>4</span><span>3 engines</span><span>2</span><span>1</span><span class="lift">LIFTOFF</span></div>
+<section class="sb" id="storyboard"><h2>Storyboard: Part 1</h2><p>Tonight, from the kitchen to the Moon base pad. Light frames are Earth (light mode), dark frames are the Moon (dark mode). The launch clock ticks through every one, and a calm cutscene with the mission card sits between each.</p><div class="frames"><article class="fr lt"><img src="art/04-kitchen-dawn.jpg" alt="" loading="lazy"><div class="fn">01</div><div class="fc">HOUSTON BASECAMP · T-00:45:00 · THE KITCHEN</div><h3>Daddy's morning</h3><p>Coffee, bub at his heels, the pink rocket through the window. Two choices: sunrise or Moon pancakes; Grace's radio or bub's toy rocket.</p><div class="fw">Daddy</div></article><article class="fr lt"><img src="art/05-treehouse-suit-room.jpg" alt="" loading="lazy"><div class="fn">02</div><div class="fc">HOUSTON BASECAMP · T-00:30:00 · ABBIE'S TREE HOUSE</div><h3>"What should I wear?"</h3><p>Abbie needs her suit and asks Ani to help. One picks each part, the other fastens it. Abbie draws her patch.</p><div class="fw">Abbie + Ani</div></article><article class="fr lt"><img src="art/06-galley-pantry.jpg" alt="" loading="lazy"><div class="fn">03</div><div class="fc">HOUSTON BASECAMP · T-00:20:00 · THE GALLEY</div><h3>Ani's meal plan</h3><p>Ani packs a snack pack for each of us, one thing from every colour shelf. Abbie shouts requests.</p><div class="fw">Ani</div></article><article class="fr lt"><img src="art/07-rocket-inspection.jpg" alt="" loading="lazy"><div class="fn">04</div><div class="fc">HOUSTON BASECAMP · T-00:12:00 · THE PAD</div><h3>Daddy's flight check</h3><p>Clipboard walk-around of the pink rocket. Oil on a window, an unplugged oxygen line, a loose cap: Daddy finds them, the girls fix them.</p><div class="fw">Daddy, then the girls</div></article><article class="fr lt"><div class="fn">05</div><div class="fc">HOUSTON BASECAMP · T-00:08:00 · THE DRIVEWAY</div><h3>The girls' choices</h3><p>Abbie: toy rocket or a drawing for the base. Ani: star map or harmonica (it comes back for the Star Child).</p><div class="fw">Abbie, Ani</div></article><article class="fr lt"><img src="art/08-crew-bus.jpg" alt="" loading="lazy"><div class="fn">06</div><div class="fc">HOUSTON BASECAMP · T-00:06:00 · THE CREW BUS</div><h3>"Wake up, sleepy heads!"</h3><p>We doze off. Muffled engine, eyes open in two slow blinks, the rocket huge in the windscreen. Houston on the bus radio wakes us.</p><div class="fw">everyone</div></article><article class="fr lt"><img src="art/09-briefing-room.jpg" alt="" loading="lazy"><div class="fn">07</div><div class="fc">HOUSTON BASECAMP · T-00:05:00 · CREW BRIEFING ROOM</div><h3>Whiteboard training</h3><p>The launch plan draws itself stroke by stroke like a kid's marker drawing: stick figures, the hose, the bulb, the ARM lever, whoosh.</p><div class="fw">Houston</div></article><article class="fr lt"><img src="art/10-capsule-interior.jpg" alt="" loading="lazy"><div class="fn">08</div><div class="fc">HOUSTON BASECAMP · T-00:02:00 · THE CAPSULE</div><h3>Strapping in</h3><p>Four seats, the paper checklist, the hatch thunk. "Moon Rocket, this is Houston. Good morning, crew."</p><div class="fw">everyone</div></article><article class="fr lt"><div class="fn">09</div><div class="fc">HOUSTON BASECAMP · T-00:00:30 · THE CAPSULE</div><h3>PLUG IN OUR OXYGEN!!!</h3><p>Live Houston runs the jobs: oxygen, helmets, launch lights, fuel, the GO poll, Daddy's ARM switch.</p><div class="fw">everyone, live voice</div></article><article class="fr dk"><img src="art/02-rocket-launch-pad.jpg" alt="" loading="lazy"><div class="fn">10</div><div class="fc">HOUSTON BASECAMP · T+00:00:00 · LIFTOFF</div><h3>Light mode to dark mode</h3><p>Count down together. The seat shakes, the sky goes blue, deep blue, black. Engine cut-off, stage clunk, floating crayons.</p><div class="fw">everyone</div></article><article class="fr dk"><img src="art/11-earth-porthole.jpg" alt="" loading="lazy"><div class="fn">11</div><div class="fc">HOUSTON BASECAMP · T+00:20:00 · EARTH ORBIT</div><h3>Snack time in space</h3><p>Share Ani's snack packs, look at Earth, a song on Grace's radio, chat with Houston.</p><div class="fw">everyone</div></article><article class="fr dk"><img src="art/12-lander-over-base.jpg" alt="" loading="lazy"><div class="fn">12</div><div class="fc">HOUSTON BASECAMP · T+03:00:00 · LUNAR DESCENT</div><h3>Game 2: the lander</h3><p>Daddy flies; the girls watch the PIP camera and call out rocks. Landing lights (Abbie), feet down (Ani).</p><div class="fw">Daddy + spotters</div></article><article class="fr dk"><div class="fn">13</div><div class="fc">HOUSTON BASECAMP · T+03:12:00 · MOON BASE PAD</div><h3>We're here</h3><p>Touchdown, the airlock lights blink on. Daddy's golden memory key. End of Part 1.</p><div class="fw">everyone</div></article></div></section>
+<section class="sb" id="art"><h2>Concept art: the first pass</h2><p>Midjourney, drawn this morning for Part 1. Every pick, prompt and job id is in tools/moon-mission/art/.</p><div class="gal">
+<figure><img src="art/01-rocket-turnaround.jpg" alt="The pink rocket turnaround"><figcaption>The pink rocket, all the way round</figcaption></figure>
+<figure><img src="art/03-rocket-hex-tile.jpg" alt="The pink rocket on its hex tile"><figcaption>The rocket as a hex tile</figcaption></figure>
+<figure><img src="art/13a-portraits-dad.jpg" alt="Daddy expressions"><figcaption>Daddy: happy, surprised, determined</figcaption></figure>
+<figure><img src="art/13b-portraits-copper-bob.jpg" alt="Abbie expressions"><figcaption>Abbie</figcaption></figure>
+<figure><img src="art/13c-portraits-brown-hair.jpg" alt="Ani expressions"><figcaption>Ani</figcaption></figure>
+</div><p class="drift">Still to fix in the next pass: the flight check and crew bus show a tall realistic rocket instead of our round pink one; the Earth porthole is too photographic; Daddy's beard should be salt-and-pepper, not grey.</p></section>
+  <div class="demo">
+    <figure class="shot" style="margin:0"><div class="scene"><div class="mcard" id="mcard">HOUSTON BASECAMP · T-00:30:00 · ABBIE'S TREE HOUSE<i></i></div></div>
+      <button class="replay" id="r1" type="button">Replay</button>
+      <figcaption class="cap">Mission card on Earth (light mode, dark ink): types in during the calm cutscene, holds, types away. The launch clock is always ticking.</figcaption></figure>
+    <figure class="shot" style="margin:0"><canvas class="board" id="board" width="640" height="360"></canvas>
+      <button class="replay" id="r2" type="button">Draw again</button>
+      <figcaption class="cap">Whiteboard: a procedure draws each stroke with a marker's wobble. No generated pictures.</figcaption></figure>
+  </div>
+  <section class="panel" aria-label="The capsule panel">
+    <h2>The capsule panel on the coffee table</h2>
+    <div class="keys"><div class="key k-pink"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 40c0-10 8-10 8-18s-6-8-6-8M30 12h8v10h-8zM34 22v8c0 8-10 6-10 14" /><circle cx="34" cy="8" r="3"/></svg><b>PLUG IN OXYGEN</b><small>Abbie</small></div><div class="key k-sky"><svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="14"/><path d="M14 22h20v8a6 6 0 0 1-6 6h-8a6 6 0 0 1-6-6z"/></svg><b>HELMETS ON</b><small>everyone</small></div><div class="key k-purple"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8a10 10 0 0 1 6 18v6H18v-6A10 10 0 0 1 24 8zM19 36h10M21 40h6"/></svg><b>LAUNCH LIGHTS</b><small>Ani</small></div><div class="key k-green"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="10" width="16" height="30" rx="3"/><path d="M14 24h16M30 16l6 4v14a3 3 0 0 1-6 0"/></svg><b>FUEL FULL</b><small>Engineer</small></div><div class="key k-amber"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="18" width="28" height="20" rx="3"/><circle cx="20" cy="28" r="5"/><path d="M30 24h4M30 30h4M16 18l14-8"/></svg><b>RADIO</b><small>hold to talk</small></div><div class="key k-sky"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M12 24a12 12 0 1 0 24 0 12 12 0 1 0-24 0M19 24l4 4 7-8"/></svg><b>GO!</b><small>everyone</small></div><div class="key k-blue"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="20" width="20" height="18" rx="2"/><path d="M18 20v-6a6 6 0 0 1 12 0v6M24 27v5"/></svg><b>ARM</b><small>Daddy</small></div><div class="key k-green"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="16" width="24" height="22" rx="3"/><path d="M18 16v-4h12v4M18 26h12"/></svg><b>SNACKS</b><small>orbit</small></div><div class="key k-purple"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 8v14M12 22h24l-6 12M12 22l6 12M14 38h8M26 38h8"/></svg><b>FEET DOWN</b><small>Ani</small></div><div class="key k-pink"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M18 12h12l4 12H14zM24 24v6M12 34l6-4M36 34l-6-4M24 40v-4"/></svg><b>LANDING LIGHTS</b><small>Abbie</small></div></div>
+    <p>Each job is a key. The picture on the key matches the switch on the TV. Abbie's oxygen key is lit: it's her turn.</p>
+  </section>
+  <div class="cast"><figure><img src="img/daddy.jpg" alt="Daddy (now): bald, salt-and-pepper beard"><figcaption>Daddy (now): bald, salt-and-pepper beard</figcaption></figure><figure><img src="img/abbie-trio.jpg" alt="Abbie, pink"><figcaption>Abbie, pink</figcaption></figure><figure><img src="img/ani-trio.jpg" alt="Ani, purple"><figcaption>Ani, purple</figcaption></figure><figure><img src="img/buggy.jpg" alt="The buggy (Act 3)"><figcaption>The buggy (Act 3)</figcaption></figure><figure><img src="img/moon.jpg" alt="The Moon dialect"><figcaption>The Moon dialect</figcaption></figure></div>
+</header>
+<main>
+<p>A family couch game for the big TV. Daddy, Abbie and Ani fly the pink rocket to the Moon base, together, out loud.
+Part 1 (tonight, after ballet): launch morning, the launch itself, the landing, and arriving at the Moon base.</p>
+<p>Identity record: <code>moon-mission.identity.json</code> (schema 1.1). Story source: Evan's trek pack ("Abbie and Daddy's Moon
+Mission", <code>/mnt/project-files/trek.zip</code>). Heroes and buggy art: AW-STUDY-0029 Moon Heroes. Base environment: AW-STUDY-0031
+Moon Base Kit. Voices: AW-STUDY-0030 Family cast.</p>
+<h2>1. The brief, in Evan's words (2026-10-23, 13:06-13:10Z)</h2>
+<ul>
+<li>"you get a special tile in the game -&gt; the pink rocket ship. when you drop it (piece falling animation, but make the
+  ship fall right after)"</li>
+<li>"game 1 is launch sequence, game 2 is lunar lander, game 3 is wire puzzle, game 4 is bug zapper, game 5 is star child
+  harmonizer and game 6 is road ride home on the buggy"</li>
+<li>"I imagine playing this tonight after ballet with the girls on the big TV, so imagine group choices and dynamics, lots
+  of text, side quests / chat with characters, branching dialog, inventory, crafting, etc."</li>
+<li>"we should plan tonight on getting to the moon base.. that's part 1"</li>
+<li>"make a full asset specification for the first act of the game and then propose art direction ... I'm imagining FPS,
+  inspired by Deliver Us Mars opening sequence."</li>
+<li>"it should maybe be 3 vignettes about a morning, where daddy goes first and makes 2 choices about launch day, then ani
+  and abbie build their space suits, and we all get ready to launch, and the launch sequence DEFINITELY uses microphone
+  and real time voice does houston launch control and we HAVE TO GET IT RIGHT"</li>
+<li>"we each have jobs (important six year old jobs. like: 'PLUG IN OUR OXYGEN!!!')"</li>
+<li>13:15Z: "a kind of high resolution mission update overlay that you'd see in movies ... HOUSTON BASECAMP - 00300 -
+  ABBIE'S TREE HOUSE"; Abbie needs her suit and asks Ani to help (group activity); Ani preps the meal plans; Daddy does
+  a flight check and finds dirt or oil and a disconnected plug for the girls to fix; Abbie's and Ani's morning choices;
+  the drive to the rocket; a whiteboard training sequence with child-like stick figures drawn stroke by stroke by a
+  procedure ("do not tokenize the drawing of characters on a whiteboard in a video game, let a procedure do that").</li>
+<li>13:17Z: "we want the pink rocket ship.. fold the art direction into the game design ... their suits need to be light
+  mode, and mine too - and it's dark mode once we're on the moon. and the game timer is always ticking down to launch -
+  and every time we change scenes there's a calm / slow cutscene, and then when we get onto the bus / training sequence,
+  just like training day sequences the sound of the truck starts, muffled, eyes open, and it says wake up sleepy heads!
+  i know you three have been working hard for today, so I hope you enjoyed a little shut eye, now it's time to get ready
+  for our launch sequence."</li>
+<li>Hardware: a PC game cast to the Samsung Frame, a Mac M5, maybe the Polycom for group voice, simple controllers each.</li>
+</ul>
+<h2>2. The shape of the whole game</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Act</th>
+<th>Name</th>
+<th>Games</th>
+<th>Ends with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><strong>Launch Morning</strong> (Part 1, tonight)</td>
+<td>the rocket tile, mission cards, Daddy's choices, three get-ready jobs, the crew bus, whiteboard training, <strong>Game 1 Launch</strong>, <strong>Game 2 Lunar Lander</strong></td>
+<td>the lander's feet touch the pad outside the Moon base; Daddy's memory key</td>
+</tr>
+<tr>
+<td>2</td>
+<td><strong>The Base</strong></td>
+<td><strong>Game 3 Wire Puzzle</strong> (the relays), <strong>Game 4 Bug Zapper</strong> (the gem bugs), <strong>Game 5 Star Child Harmonizer</strong></td>
+<td>the Star Child hatches and sings with you</td>
+</tr>
+<tr>
+<td>3</td>
+<td><strong>Home</strong></td>
+<td><strong>Game 6 Buggy Ride Home</strong></td>
+<td>the buggy rolls into the hangar; the family photo</td>
+</tr>
+</tbody>
+</table></div>
+<p>It's one evening per act. Each act is 30-45 minutes and stops at a cosy place.</p>
+<h2>3. How a family plays it on one TV</h2>
+<p><strong>Who plays.</strong> Daddy plays Daddy. Abbie and Ani play themselves. A fourth seat (Mommy, a friend) can join as Flight
+Engineer at any time. Everyone is in the same rocket. The camera is first person from whoever has the spotlight, and the
+others are seen beside them in their seats.</p>
+<p><strong>Jobs, not turns.</strong> Every beat gives each person a job they own, and the beat can't go on without them. The jobs are
+physical and loud, and each one is a six-year-old's important job:
+- Abbie: <strong>Oxygen Officer</strong> (plug in the oxygen, check the green lights, seal the helmets).
+- Ani: <strong>Lights and Radio Officer</strong> (cabin lights, the radio, and saying "Roger!" to Houston).
+- Daddy: <strong>Commander</strong> (the checklist, the big arm switch, and flying the lander).
+- Guest: <strong>Flight Engineer</strong> (fuel, the countdown clock, the snack pack).
+A job is a key on the capsule panel (the Stream Deck) or a button on your own pad. The key shows the job's picture.</p>
+<p><strong>Group choices.</strong> When the story forks, everyone votes by pressing. Each choice is a line beneath the thought (<code>&gt;</code>),
+with a small glowing chip on it for each vote, coloured by person (pink Abbie, purple Ani, blue Daddy, green Engineer).
+- A majority wins after three seconds.
+- If it's a tie, the <strong>Captain's Hat</strong> decides. The hat is a real object that travels with the crew, and it moves to a new person after
+  every choice, so everyone gets to be the decider.
+- Some choices belong to one person: their face lights up and only their button counts ("Ani, it's your patch!").</p>
+<p><strong>Group dynamics, made fun:</strong>
+- Cheering: holding all buttons together does a "together" move (the cabin cheers, Houston notices).
+- Helping hands: if a job is waiting more than 8 seconds, its key starts to pulse and another person can "help". Both get
+  the credit.
+- No one fails alone. A miss is shared and funny ("Oops, that was the snack button!"), never one child's fault.</p>
+<p><strong>Lots of text, readable from the sofa.</strong> Every line is on screen in big type (TV-safe, 48 px at 1080p, at most two
+lines) and also spoken in the character's own voice, because six-year-olds can't read it all yet. Reading along with
+the voice is part of the fun. Captions sit on the bottom edge like the basement's inner voice, in the Moon dialect:
+white on a thin dark glass bar, with the speaker's colour as a dot.</p>
+<h2>4. Talking, chatting and branching dialogue</h2>
+<p>The grammar is <code>docs/design/INTERACTION_GRAMMAR.md</code> rules 7-8: a thought or line, then <code>&gt;</code> choices beneath.</p>
+<ul>
+<li><strong>Branching dialogue.</strong> Scripted scenes are a small graph in <code>moon-mission/script.json</code>: each node is a line (who, text,
+  voice line id), its choices, what each choice sets (<code>flags</code>) and where it goes. A choice can change a later line,
+  an item you carry, or which side quest opens.</li>
+<li><strong>Chat with characters.</strong> At rest moments (breakfast, the suit workshop, orbit, the base canteen) you can tap any
+  character to talk. You get three or four chat topics as <code>&gt;</code> lines ("Are you scared?", "What's on the Moon?", "Tell me
+  about Grace"). These are scripted. Houston, and later the Star Child, can also answer freely, live (section 6).</li>
+<li><strong>Lines remember.</strong> Characters bring up earlier choices ("You picked the purple patch! Good choice, Lieutenant.").</li>
+</ul>
+<h2>5. Inventory and crafting</h2>
+<p>The shared player inventory (<code>simulations/inventory.mjs</code>) holds what the crew carries. Each item says who found it.</p>
+<p><strong>Crafting is building your suit</strong> (Get ready 1) and Ani's meal plan (Get ready 2), and later fixing things at the base. A recipe is parts laid on the
+workbench:</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Recipe</th>
+<th>Parts</th>
+<th>Makes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Space suit</td>
+<td>suit body + gloves + boots + chest pack</td>
+<td>your suit (colour = you)</td>
+</tr>
+<tr>
+<td>Helmet</td>
+<td>helmet shell + visor + light</td>
+<td>your helmet</td>
+</tr>
+<tr>
+<td>Mission patch</td>
+<td>patch blank + a drawing stamp</td>
+<td>your patch (it shows on the suit all game)</td>
+</tr>
+<tr>
+<td>Oxygen pack</td>
+<td>canister + hose + clip</td>
+<td>plugs into the seat</td>
+</tr>
+<tr>
+<td>Snack pack (Ani's meal plan)</td>
+<td>one thing from each colour shelf + a sticker</td>
+<td>one per crew member, shared in orbit</td>
+</tr>
+<tr>
+<td>Glow wand (Act 2)</td>
+<td>glow stick + crystal shard</td>
+<td>it lights the dark tunnel at the base</td>
+</tr>
+<tr>
+<td>Bug net (Act 2)</td>
+<td>net + pole + crystal</td>
+<td>the bug zapper's tool</td>
+</tr>
+</tbody>
+</table></div>
+<p>Starting items: the toy rocket (Abbie), the old radio (Daddy, from Grace's basement), a star map (Ani), crayons.</p>
+<h2>6. Houston: live launch control by voice</h2>
+<p>Houston is a real-time voice on the capsule radio. The family talks to it out loud, and it answers in its own designed
+voice. "We HAVE TO GET IT RIGHT", so this section is the heart of Part 1.</p>
+<p><strong>How it works (reusing what is live):</strong>
+- The brain is the live-mode relay (<code>api/live.js</code> ticket, then <code>api/live-socket.js</code> to the realtime model), with a new
+  <code>houston</code> policy: its own instructions, its own small tool set, and the same PG and jailbreak guard. Its speaking voice
+  is a designed ElevenLabs voice (<code>houston</code> in <code>tools/voice-cast/cast.json</code>), streamed live with <code>api/live-voice.js</code>.
+- <strong>Push to talk, like a real radio.</strong> Hold the RADIO key on the panel (or a pad's shoulder button) to talk. A radio
+  click and hiss starts and stops it. This keeps the TV's sound out of the mic and makes turn-taking feel real.
+- <strong>Houston runs the launch script, and improvises around it.</strong> The script is the spine: every callout and every job
+  happens in order. Houston's tools are <code>job_done(job)</code>, <code>next_step()</code>, <code>hold(reason)</code>, <code>say_line(id)</code> and <code>cheer()</code>.
+  The game state is the truth: Houston can never skip a job, and it gets each step's state from the game.
+- <strong>It must sound right.</strong> It uses real launch-control rhythm, in kid words: the poll ("Oxygen?" "GO!" "Lights?"
+  "GO!"), "T minus 10", "main engines starting", "liftoff!", "you're clear of the tower", "engine cut-off", "stage
+  separation", "welcome to space, Moon Rocket".
+- <strong>It answers anything kind.</strong> "Houston, can we bring bub?" gets a warm answer and a reason. Off-topic or unkind things
+  get steered back to the mission in one line.
+- <strong>If the network fails</strong>, Houston plays its pre-rendered lines and the jobs still work with buttons. Nobody waits.</p>
+<p><strong>Before tonight (safety and cost):</strong>
+- The realtime model will hear children's voices. Live mode's open item applies: confirm the provider runs with zero
+  data retention for this, or keep the kids' talk to push-to-talk in Daddy's hand tonight. <strong>Evan decides</strong> (section 13).
+- Every paid call goes through <code>wallet().charge</code> (the AI caps). A 40-minute launch evening costs well under the $1000
+  owner cap.</p>
+<h2>7. The six games</h2>
+<p>Each game has a design card (abbies-world-designer skill).</p>
+<h3>The rocket tile (the way in)</h3>
+<ul>
+<li>The pink rocket is a special hex tile in the hand. You drop it like any tile (the piece-fall from
+  <code>simulations/tile-drop-impact.mjs</code>), and a beat later the rocket itself falls onto it from the sky, lands on its feet
+  with a puff of dust and a "clunk-hiss", and stands there humming. Tapping it opens Moon Mission.</li>
+<li>Card: <em>Know:</em> "a rocket is here and it's ours". <em>How would the character know:</em> it lands, steams and its hatch light
+  blinks. <em>Mode:</em> diegetic. <em>Adapts:</em> lights on the ranch turn to look at it; sheep stare.</li>
+</ul>
+<h3>Game 1: Launch (Act 1)</h3>
+<p>Launch morning (cards, get-ready jobs, choices, the crew bus, whiteboard training), then the launch. Full script in section 8.
+- Card: <em>Feel:</em> "We're really doing it. My job matters. LIFTOFF!" <em>How would the characters know:</em> Houston's voice, the
+  panel lights, the seat shaking, the sky going dark blue then black. <em>Mode:</em> diegetic (panel, voice, window), meta
+  (rumble, heartbeat, the music swelling), spatial (each person's job glow on their seat). <em>Adapts:</em> one signal, the
+  countdown, drives light, sound, shake and music together.</p>
+<h3>Game 2: Lunar Lander (Act 1)</h3>
+<p>Daddy flies; the girls spot. A first-person cockpit with a window and the PIP screen (the picture-in-picture camera
+under the lander, which is what we showcase). The girls call out what they see on the PIP ("Rock! Go left!").
+- The rule is simple and the world shows it: falling too fast makes the alarm light blink and the ground rush up.
+  Soft landing = a gentle bump and a cheer.
+- Daddy holds the stick (left stick = tilt, trigger = thrust). Abbie's job: the landing lights. Ani's job: the "feet
+  down" switch. The landing can't finish until both are done.
+- Nothing fails: a hard landing is a big bounce and Houston laughing "Well, you're down!". Points for gentle.
+- Reward: Daddy's memory key (the Moon base is a core memory), golden reward from <code>coin-reward.mjs</code>.</p>
+<h3>Game 3: Wire Puzzle (Act 2)</h3>
+<p>From the trek pack's electrical puzzle. Daddy opens the relay box; the girls each hold one colour of wire and connect
+it on the TV. Light flows when it's right.</p>
+<h3>Game 4: Bug Zapper (Act 2)</h3>
+<p>From gem bugs swat. Gem bugs swarm the crystals. Each player has a crystal zapper and their own colour of sparkle.
+Bugs aren't hurt: zapped bugs turn into glitter and float away happy.</p>
+<h3>Game 5: Star Child Harmonizer (Act 2)</h3>
+<p>From the signal lock game. The meteorite hums a tune. Each player holds one note (one button). Together you match its
+song, and the Star Child hatches. Its chat is live (the second live voice), gentle and curious.</p>
+<h3>Game 6: Buggy Ride Home (Act 3)</h3>
+<p>Daddy drives the buggy (in its fine parts, AW-STUDY-0029). The girls are passengers with jobs: the horn, the headlights,
+the radio song. A calm ride through the waypoints, with Earth rising.</p>
+<h2>8. Act 1 in detail: Launch Morning</h2>
+<p><strong>The reference (style, never expression).</strong> Deliver Us Mars opens with a quiet family moment, then a first-person
+launch day: you walk through the place you'll leave, put your hands on a real-feeling cockpit, work the checklist with
+launch control in your ear, and feel the launch in your body, then the hush of orbit. We take that rhythm: <strong>quiet
+home, tactile cockpit, a voice in your ear, the roar, then silence and the window.</strong> We don't take its story,
+characters, ship or music.</p>
+<h3>Mission cards (between scenes)</h3>
+<p>Evan (13:15Z): "a kind of high resolution mission update overlay that you'd see in movies". Every scene opens with one:</p>
+<p><code>HOUSTON BASECAMP · T-00:30:00 · ABBIE'S TREE HOUSE</code></p>
+<ul>
+<li><strong>Where it sits in the grammar:</strong> overlay, "only you know", precise information (place, mission clock, whose scene).
+  Play itself stays wordless; the card lives in the gap between scenes, like a film's location super, and is gone before
+  you can act. It never covers play and never masks the world (no dimming, no blur).</li>
+<li><strong>Look:</strong> the one razor-sharp layer in a warm, soft game. A thin monospaced line, typed in letter by letter with a
+  quiet teletype tick, a hairline underline drawing left to right, the mission clock ticking live. Bottom-left third,
+  about 3% of the screen, 3 seconds, then it types itself away.</li>
+<li><strong>The launch clock is always ticking.</strong> From the first scene, a real mission clock counts down to launch in real
+  time: on the cards, on the kitchen oven clock, on the bus dashboard, on the pad's big board, on the capsule panel.
+  Nothing fails because of it: like a real launch it has <strong>planned holds</strong>. If the crew needs more time, Houston calls
+  "We're holding at T minus 20" and the clock waits, with a calm music bed, until the crew is ready.</li>
+<li><strong>Calm cutscenes between scenes.</strong> Every change of scene is a slow, quiet 8-15 second cutscene: a long camera move
+  (the tree house at sunrise, the rocket steaming on the pad, the bus on the road), ambient sound and the morning theme,
+  and the mission card typing in over it. It can be skipped once everyone holds their button.</li>
+<li><strong>Reuse:</strong> <code>simulations/mission-card.mjs</code> in the couch kit (<code>missionCard({org, clock, place, who})</code>).</li>
+</ul>
+<h3>Cold open: Daddy's two choices (3 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:45:00 · THE KITCHEN</code>. Dawn, first person as Daddy, coffee, the pink rocket through the window,
+bub at his heels.
+- <strong>Choice 1, how the day starts:</strong> <code>&gt; Wake them early for the sunrise on the rocket</code> (sets <code>sunrise</code>: the launch is
+  golden) or <code>&gt; Let them sleep and make Moon pancakes</code> (sets <code>pancakes</code>: they go in the meal plan).
+- <strong>Choice 2, the one thing Daddy brings:</strong> <code>&gt; Grace's old radio</code> (sets <code>radio</code>: a song from home in orbit) or
+  <code>&gt; Bub's chewed toy rocket</code> (sets <code>bubrocket</code>: a dashboard mascot; bub howls at liftoff).</p>
+<h3>Get ready 1: Abbie's suit (group activity, 8 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:30:00 · ABBIE'S TREE HOUSE</code>. Abbie: "What should I wear? I'll never be ready for launch if I
+don't have my space suit... Ani, will you help me get ready?"
+- <code>&gt; "Of course!"</code> / <code>&gt; "Only if I get to pick the helmet light!"</code> (Ani's pick, her button only).
+- Group crafting on one bench: Abbie picks the parts, Ani hands them over and does the fiddly bits (zips, clips, the
+  glove seals). Each part needs both: one picks, one fastens. Abbie draws her mission patch.
+- Side quest: one glove is missing (bub has it).</p>
+<h3>Get ready 2: Ani's meal plan (6 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:20:00 · THE GALLEY</code>. Ani: "I have to prep the meal plans for the trip, so we're nourished."
+- Crafting: Ani builds a snack pack for each crew member from a pantry shelf (crackers, juice, fruit, Moon pancakes if
+  <code>pancakes</code>). Each crew member says what they like, and Abbie can call out requests. A good pack has something from
+  each colour shelf (a plate-of-colours rule, shown by the tray filling with colour, never a number).
+- Packs go into the inventory and come out in orbit (a shared snack scene).</p>
+<h3>Get ready 3: Daddy's flight check (6 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:12:00 · THE PAD</code>. Daddy walks around the rocket with the inspection clipboard: fins, engines,
+hatch, oxygen line, landing light, the stage ring. Each point is a close-up.
+- Three things are wrong: dirt or oil on a window (wipe it), a disconnected plug on the oxygen line, a loose panel cap.
+  Daddy finds them; <strong>the girls fix them</strong> ("Abbie, can you plug that back in?"), each on their own button.
+- The clipboard gets a tick for each point. Missing a problem is fine: Houston catches it later in the poll and it
+  becomes a fun extra job.</p>
+<h3>The girls' morning choices (3 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:08:00 · THE DRIVEWAY</code>
+- <strong>Abbie:</strong> <code>&gt; Bring my toy rocket for luck</code> or <code>&gt; Bring a drawing for the Moon base wall</code>.
+- <strong>Ani:</strong> <code>&gt; Bring the star map</code> or <code>&gt; Bring a harmonica</code> (it comes back in Game 5, the Star Child Harmonizer).</p>
+<h3>The crew bus: "Wake up, sleepy heads!" (2 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:06:00 · THE CREW BUS</code>. The calm cutscene shows the three of them climbing into the crew bus in
+their white suits and dozing off against the windows. Then, in first person: the bus engine turns over, muffled, as if
+heard through sleep; the eyelids open in two slow blinks (the player's own eyes, a meta beat, not a screen fade); the
+sound comes clear; the pink rocket is huge through the windscreen. Houston on the bus radio:</p>
+<blockquote>
+<p>"Wake up, sleepy heads! I know you three have been working hard for today, so I hope you enjoyed a little shut-eye.
+Now it's time to get ready for our launch sequence."
+The bus pulls up at the training building. Free chat: tap anyone to talk.</p>
+</blockquote>
+<h3>Training: the whiteboard briefing (5 min)</h3>
+<p><code>HOUSTON BASECAMP · T-00:05:00 · CREW BRIEFING ROOM</code>. A real whiteboard in a briefing room. Houston explains the launch,
+and the steps draw themselves on the board <strong>stroke by stroke, like a child's marker drawing</strong>: the rocket, four stick
+figures in seats, a hose going into a seat ("Abbie plugs in the oxygen"), a light bulb ("Ani turns on the launch
+lights"), a lever ("Daddy pulls ARM"), the countdown, a big whoosh.
+- <strong>Procedural, never generated images.</strong> Each picture is a small list of strokes (lines, arcs, loops) drawn by a
+  procedure that moves a marker tip along them at hand speed with a slight wobble, with a marker squeak sound. Words
+  are written the same way in a hand-drawn font, assembled stroke by stroke (single-line font outlines, revealed
+  along the path). Evan: "do not tokenize the drawing of characters on a whiteboard in a video game, let a procedure
+  do that."
+- Each kid's figure is drawn in their marker colour (pink, purple, blue), and the rocket is drawn in pink. The board stays on the wall, and Houston can
+  point back at it in the launch ("Remember the hose picture?").
+- Reuse: <code>simulations/whiteboard.mjs</code> (<code>board.draw(strokes, {color, speed})</code>, <code>board.write(text, {font})</code>), with a
+  small stroke library (rocket, stick figure, seat, hose, bulb, lever, arrow, star, Moon).
+- Ends: "Any questions, crew?" (a free chat with Houston), then the walk-out: elevator up the gantry, white room,
+  climbing into four seats, the hatch thunk, and the first radio call: "Moon Rocket, this is Houston. Good morning,
+  crew."</p>
+<h3>The launch (10-15 min, everyone, live Houston)</h3>
+<p>Houston runs it; every job must be done by its owner (hold the RADIO key to talk back):
+1. Radio check. Each person says their name and "loud and clear". (Ani's job: "Roger!")
+2. <strong>"PLUG IN OUR OXYGEN!!!"</strong> (Abbie). Her key shows the hose; pressing it clicks the hose in, a green light comes on,
+   and the suit hiss starts.
+3. Helmets on, visors down (each person presses their own; a seal sound and the view gets a thin visor edge).
+4. Cabin lights to launch mode (Ani). The cabin goes from white to a red-and-blue glow.
+5. Fuel full (Engineer or Daddy), the fuel gauge fills on the panel.
+6. <strong>The poll.</strong> Houston calls each job and each owner shouts "GO!" (the mic hears it, or press GO).
+7. Daddy's big ARM switch, under a flip cover.
+8. <strong>T minus 10.</strong> Everyone counts down with Houston. Rumble begins at 5, main engines at 3.
+9. <strong>LIFTOFF.</strong> The seat shakes, the sky through the window goes from blue to deep blue to black, the music swells,
+   Houston: "Liftoff! You're clear of the tower!" Bub howls at home (if <code>bubrocket</code>).
+10. Engine cut-off, stage separation (a big clunk), silence, and floating crayons. "Welcome to space, Moon Rocket."
+11. Orbit rest stop: share the snack pack, look at Earth, the radio song (if <code>radio</code>), chat with Houston freely.</p>
+<h3>Game 2 then: to the Moon base</h3>
+<p>Transfer is a short cutscene (the Moon growing in the window, a sleepy "are we there yet" chat). Then the lander
+separates and Game 2 begins. Part 1 ends when the lander touches down on the base's pad, the airlock lights blink on,
+and Daddy gets the golden key: "This place... I've been here before. In a memory."</p>
+<h2>9. Art direction (part of this design)</h2>
+<p>Folded in from the AW-STUDY-0029 Faceted Hero direction, with Evan's changes of 13:17Z. Where they differ, this wins
+for Moon Mission.</p>
+<p><strong>One line:</strong> Earth is light mode, the Moon is dark mode, and the pink rocket carries you from one to the other.</p>
+<ol>
+<li><strong>Light mode on Earth.</strong> Launch morning is bright and clean: white suits, white rooms, daylight, pale sky, soft
+   shadows, with the crew's colours as accents. The kitchen, tree house, galley, pad and briefing room are daylight scenes.</li>
+<li><strong>Dark mode on the Moon.</strong> After liftoff the sky goes deep blue, then black. On the Moon everything is dark mode:
+   black sky, hard white sunlight, lit panels, glowing trim on the suits, the base's lights and holograms (the Moon
+   dialect). The switch from light to dark IS the launch.</li>
+<li><strong>White suits for everyone.</strong> Abbie, Ani and Daddy wear the same white suit with their colour as trim (Abbie pink,
+   Ani purple, Daddy blue) on the patch, glove cuffs, helmet light and boot stripe. In dark mode the trim glows. Suits
+   are fitted to the Meshy bodies by the accessorize kit.</li>
+<li><strong>The pink rocket is the hero.</strong> Pink and white with a silver nose, round portholes and four fins; rounded and
+   toy-like, but built like a real rocket (stage ring, engine bells, umbilical arm). It is in almost every shot: through
+   the kitchen window, the tree house window, on the whiteboard, in the bus windscreen. It is also the hex tile.</li>
+<li><strong>Characters are Faceted Heroes:</strong> Meshy bodies cleaned up, low-poly faceted, with real materials. Ani's skin
+   #ddb08c; Daddy now (bald, salt-and-pepper beard).</li>
+<li><strong>First person with hands.</strong> You see your own gloved hands with your colour on the cuff. FOV 70 degrees, a child's
+   eye height for the girls and an adult's for Daddy. A small head bob when walking, none in the seat.</li>
+<li><strong>Tactile panels.</strong> Every switch is big, chunky and labelled with a picture, not a word, with a guard, a light and a
+   click. The same pictures are on the Stream Deck keys, so the panel on the TV and the panel on the table match.</li>
+<li><strong>Light only from real things.</strong> Nothing masks the world: no haze, fade or blur. The eyelids on the bus are the one
+   exception, and they are the player's own eyes in a cutscene.</li>
+<li><strong>One high-resolution layer: the mission card.</strong> A crisp monospaced line in the cutscenes, dark ink in light mode and
+   white in dark mode. It is the only sharp type, and its contrast with the soft world gives the movie feel.</li>
+<li><strong>The whiteboard</strong> is a child's marker drawing made by a procedure, stroke by stroke.</li>
+<li><strong>Sound on the grid.</strong> Diegetic: the radio, switches, hiss, engines, the bus. Meta: the heartbeat at T minus 5,
+    the muffled wake-up, the music. Overlay: the card's teletype tick, very quiet.</li>
+<li><strong>No HUD during play.</strong> The launch clock lives on things (the oven clock, the bus dashboard, the pad board, the
+    capsule panel); the checklist is paper; jobs glow on their keys and seats; captions only at the bottom.</li>
+</ol>
+<h2>10. Act 1 asset specification</h2>
+<p>Budgets are triangles. Roles are the material role names the game reads as shading (<code>tools/ranch-rebuild/MODELER.md</code>).
+Source: <strong>Meshy</strong> (Meshy plus cleanup), <strong>Recipe</strong> (engineered Blender recipe), <strong>Kit</strong> (exists), <strong>MJ</strong> (Midjourney
+concept first). Priority <strong>T</strong> = tonight, <strong>L</strong> = later.</p>
+<h3>10.1 Characters</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Asset</th>
+<th>Budget</th>
+<th>Parts and notes</th>
+<th>Source</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MM-C01</td>
+<td>Daddy (now), home clothes</td>
+<td>8k</td>
+<td>bald, salt-and-pepper beard, robe and mug pose; rigged</td>
+<td>Meshy + cleanup (Faceted Hero)</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-C02</td>
+<td>Daddy, white space suit</td>
+<td>10k</td>
+<td>white suit, blue trim (glows in dark mode); gloves, boots, chest pack; helmet separate</td>
+<td>Meshy body + accessorize</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-C03</td>
+<td>Abbie, pajamas</td>
+<td>6k</td>
+<td>pink</td>
+<td>Meshy (front_color ref ready)</td>
+<td>L</td>
+</tr>
+<tr>
+<td>MM-C04</td>
+<td>Abbie, white space suit</td>
+<td>8k</td>
+<td>white suit, pink trim; her drawn patch is a decal slot</td>
+<td>Meshy + accessorize</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-C05</td>
+<td>Ani, pajamas</td>
+<td>6k</td>
+<td>purple, #ddb08c</td>
+<td>Meshy (front_clay ref ready)</td>
+<td>L</td>
+</tr>
+<tr>
+<td>MM-C06</td>
+<td>Ani, white space suit</td>
+<td>8k</td>
+<td>white suit, purple trim; patch slot</td>
+<td>Meshy + accessorize</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-C07</td>
+<td>Bub, black lab</td>
+<td>4k</td>
+<td>idle, follow, howl</td>
+<td>Kit (<code>black-lab</code> from School Ready)</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-C08</td>
+<td>First-person hands, gloved</td>
+<td>2k</td>
+<td>per-player colour, press, flip, grip</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-C09</td>
+<td>Houston</td>
+<td>none</td>
+<td>voice only, a radio light that glows when it talks</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.2 Places</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Asset</th>
+<th>Budget</th>
+<th>Parts and notes</th>
+<th>Source</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MM-P01</td>
+<td>Kitchen at dawn</td>
+<td>25k</td>
+<td>counter, coffee machine, table, window looking at the pad, door to the girls' room</td>
+<td>Recipe + MJ</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P02</td>
+<td>Abbie's tree house (suit room)</td>
+<td>25k</td>
+<td>platform, ladder, suit rack, helmet shelf, bench, window to the rocket</td>
+<td>Recipe + MJ</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P11</td>
+<td>The galley (pantry and prep counter)</td>
+<td>15k</td>
+<td>colour shelves, trays, pack sealer</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P12</td>
+<td>Crew briefing room</td>
+<td>12k</td>
+<td>whiteboard on the wall, chairs, a model rocket</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P13</td>
+<td>The road to the pad</td>
+<td>20k</td>
+<td>road, fence, signs, the rocket growing on the horizon</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P03</td>
+<td>Launch pad and gantry</td>
+<td>40k</td>
+<td>pad, gantry tower, swing arm, elevator cage, floodlights, water tower</td>
+<td>Recipe + MJ</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P04</td>
+<td>White room and hatch</td>
+<td>10k</td>
+<td>the room at the end of the arm, hatch frame</td>
+<td>Recipe</td>
+<td>L</td>
+</tr>
+<tr>
+<td>MM-P05</td>
+<td>Capsule interior, 4 seats</td>
+<td>30k</td>
+<td>seats, main panel, side panels, window, hatch, checklist clip, footrests</td>
+<td>Recipe + MJ (hero asset)</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P06</td>
+<td>Earth from orbit</td>
+<td>2k + textures</td>
+<td>sphere, clouds, terminator, city lights</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P07</td>
+<td>Lander cockpit</td>
+<td>15k</td>
+<td>stick, thrust lever, PIP screen, window, two jump seats</td>
+<td>Meshy (24 ref) + Recipe panel</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P08</td>
+<td>Moon surface near the base</td>
+<td>30k</td>
+<td>terrain, pad, approach lights</td>
+<td>Kit (<code>simulations/moon/</code>)</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P09</td>
+<td>Moon base exterior</td>
+<td>~50k</td>
+<td>dome, tower, habitat, airlock</td>
+<td>Kit (AW-STUDY-0031)</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-P10</td>
+<td>Sky dome: light mode to dark mode</td>
+<td>textures</td>
+<td>daylight to deep blue to black, driven by the launch signal</td>
+<td>Recipe (shader)</td>
+<td>T</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.3 Vehicles</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Asset</th>
+<th>Budget</th>
+<th>Parts and notes</th>
+<th>Source</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MM-V01</td>
+<td>Pink rocket, full size</td>
+<td>20k</td>
+<td>nose, capsule, portholes, body, 4 fins, engines, stage ring, hatch</td>
+<td>MJ turnaround, then Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-V02</td>
+<td>Pink rocket, hex-tile size</td>
+<td>3k</td>
+<td>same silhouette, chunky</td>
+<td>from MM-V01</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-V03</td>
+<td>Rocket stage 1 (separating)</td>
+<td>6k</td>
+<td>split from MM-V01</td>
+<td>from MM-V01</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-V05</td>
+<td>Crew bus</td>
+<td>12k</td>
+<td>exterior; interior with bench seats, windows, dashboard clock, radio</td>
+<td>Recipe + MJ</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-V04</td>
+<td>Lunar lander exterior</td>
+<td>15k</td>
+<td>cabin, legs (4), feet, thrusters, ladder</td>
+<td>Meshy (23 ref) + leg (25 ref)</td>
+<td>T</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.4 Props and items</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Asset</th>
+<th>Budget</th>
+<th>Notes</th>
+<th>Source</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MM-I01</td>
+<td>Coffee mug</td>
+<td>300</td>
+<td>steam particle</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I02</td>
+<td>Mission folder and checklist</td>
+<td>500</td>
+<td>paper, Daddy's handwriting, ticks appear</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I03</td>
+<td>Grace's old radio</td>
+<td>1.5k</td>
+<td>from the basement era</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I04</td>
+<td>Bub's toy rocket</td>
+<td>800</td>
+<td>chewed, pink</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I05</td>
+<td>Moon pancakes</td>
+<td>400</td>
+<td>with craters</td>
+<td>Recipe</td>
+<td>L</td>
+</tr>
+<tr>
+<td>MM-I06</td>
+<td>Suit parts kit</td>
+<td>per part</td>
+<td>body, gloves, boots, chest pack, helmet shell, visor, light</td>
+<td>accessorize kit</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I07</td>
+<td>Patch blank and stamp set</td>
+<td>200</td>
+<td>drawable decal</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I08</td>
+<td>Oxygen canister, hose, clip</td>
+<td>1k</td>
+<td>the hose plugs into the seat port</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I09</td>
+<td>Seat oxygen port</td>
+<td>400</td>
+<td>green light</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I10</td>
+<td>Snack pack</td>
+<td>500</td>
+<td>crackers, juice box, sticker</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I11</td>
+<td>Captain's Hat</td>
+<td>600</td>
+<td>moves between seats</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I12</td>
+<td>Floating crayons</td>
+<td>50 each</td>
+<td>float at zero-g</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I13</td>
+<td>Star map</td>
+<td>300</td>
+<td>Ani's</td>
+<td>Recipe</td>
+<td>L</td>
+</tr>
+<tr>
+<td>MM-I14</td>
+<td>Golden memory key</td>
+<td>400</td>
+<td>coin-reward golden pickup</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I16</td>
+<td>Flight-check faults</td>
+<td>300 each</td>
+<td>oil smudge decal, unplugged connector, loose cap</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I17</td>
+<td>Inspection clipboard</td>
+<td>400</td>
+<td>ticks appear</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I18</td>
+<td>Pantry foods (12)</td>
+<td>200 each</td>
+<td>colour shelves</td>
+<td>Recipe</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-I15</td>
+<td>Inventory icons (13)</td>
+<td>256 px</td>
+<td>one per item</td>
+<td>MJ (RC queue item 9)</td>
+<td>T</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.5 Panel, switches and the Stream Deck set</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Asset</th>
+<th>Notes</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MM-U01</td>
+<td>Switch set (toggle, guarded toggle, push, rotary, big ARM switch under a flip cover)</td>
+<td>3D, with lights and clicks</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-U02</td>
+<td>Gauges (oxygen, fuel, countdown clock, altitude)</td>
+<td>3D needles and digits</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-U03</td>
+<td>Job pictures (oxygen hose, helmet, lights, fuel, radio, GO, ARM, snack, feet down, landing lights)</td>
+<td>72 px for Stream Deck keys, same art as the 3D panel labels</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-U04</td>
+<td>Vote chips and Captain's Hat marker</td>
+<td>spatial, on the <code>&gt;</code> line</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-U05</td>
+<td>Caption bar, Moon dialect</td>
+<td>dark glass, speaker dot</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-U06</td>
+<td>Mission card and the launch clock</td>
+<td>monospaced, typed in, live clock; dark ink on Earth, white on the Moon; the clock also on the oven, bus dashboard, pad board and panel</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-U07</td>
+<td>Whiteboard stroke library + single-line hand font</td>
+<td>rocket, stick figure, seat, hose, bulb, lever, arrow, star, Moon; marker squeak</td>
+<td>T</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.6 Sound and voice</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Asset</th>
+<th>Notes</th>
+<th>Source</th>
+<th>P</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MM-A01</td>
+<td>Houston voice</td>
+<td>designed, calm, warm, mid-40s flight director</td>
+<td>ElevenLabs design</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A02</td>
+<td>Daddy, Abbie, Ani voices</td>
+<td>from the Family cast (Abbie and Ani: adult actors voicing kids)</td>
+<td>AW-STUDY-0030</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A03</td>
+<td>Scripted lines (~120)</td>
+<td>pre-rendered</td>
+<td>voice-cast <code>lines</code></td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A04</td>
+<td>Radio click, hiss, squelch</td>
+<td>push-to-talk</td>
+<td>Sound engineer</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A05</td>
+<td>Switch clicks, hose plug, helmet seal, hatch thunk</td>
+<td>material sounds</td>
+<td>Sound engineer</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A06</td>
+<td>Engines: ignition, roar, rumble bed, cut-off, stage clunk</td>
+<td>layered, driven by the launch signal</td>
+<td>Sound engineer</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A07</td>
+<td>Music: morning theme, launch swell, orbit hush, landing</td>
+<td>Suno, one theme in four moods</td>
+<td>Suno</td>
+<td>T</td>
+</tr>
+<tr>
+<td>MM-A08</td>
+<td>Kitchen and tree house room tone, bub sounds</td>
+<td></td>
+<td>Sound engineer</td>
+<td>L</td>
+</tr>
+<tr>
+<td>MM-A09</td>
+<td>Crew bus: engine start (muffled and clear), road, the wake-up line</td>
+<td></td>
+<td>Sound engineer + Houston voice</td>
+<td>T</td>
+</tr>
+</tbody>
+</table></div>
+<h3>10.7 Effects</h3>
+<p>Exhaust plume and steam (pad), dust puff (rocket tile and landing), floating objects, cabin shake curve, window sky
+gradient, lander thruster dust skirt, golden key reward (existing).</p>
+<p><strong>Counts:</strong> 9 characters, 13 places, 5 vehicles, 18 prop groups, 7 panel sets, 8 sound groups, 7 effects. Tonight needs
+about 55 of them; most of the rest exist in kits.</p>
+<h2>11. Part 1 build plan for tonight</h2>
+<p>Evan's evening: after ballet, roughly 6-8 PM local. Target: <strong>playable by 5 PM local (21:00Z)</strong>, with an advance preview
+before that.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Step</th>
+<th>Ready by (local)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>This study, identity, preview page</td>
+<td>10 AM</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Script graph (<code>script.json</code>) for the morning, the launch and the landing; Houston policy and voice</td>
+<td>11:30 AM</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Couch kit in <code>simulations/</code>: players and seats, jobs, votes with the Captain's Hat, Gamepad + Stream Deck (WebHID) + keyboard input, captions with <code>&gt;</code> choices, mission cards, the whiteboard stroke drawer</td>
+<td>12:30 PM</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Capsule interior and the launch (the hero scene), live Houston with push to talk</td>
+<td>2 PM</td>
+</tr>
+<tr>
+<td>5</td>
+<td>The morning: kitchen choices, tree-house suit (with Ani), galley meal plan, Daddy's flight check, the girls' choices, the crew bus wake-up, whiteboard training</td>
+<td>3:30 PM</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Lander (Game 2) with PIP, landing at the base, golden key</td>
+<td>4:30 PM</td>
+</tr>
+<tr>
+<td>7</td>
+<td>The rocket tile drop on the Ranch, end-to-end flow test, ship</td>
+<td>5 PM</td>
+</tr>
+</tbody>
+</table></div>
+<p>Art comes in parallel (never blocking): Midjourney concepts on the Mac, Meshy for the suited heroes once the key is
+given, recipes for the capsule and the rocket. Placeholders are low-poly recipes so the game is playable before the art
+lands.</p>
+<p><strong>Test by state:</strong> <code>?scene=kitchen|suit|meals|check|choices|bus|briefing</code>, <code>?launch</code>, <code>?lander</code>, <code>?arrive</code>, and <code>window.moonMission</code> for a scripted
+playthrough (from the speed reviews).</p>
+<h2>12. Home setup (the living room)</h2>
+<ul>
+<li><strong>Mac M5 to the Frame by a USB-C to HDMI cable.</strong> AirPlay works but adds lag you feel on button timing.</li>
+<li><strong>Stream Deck on the coffee table = the capsule panel.</strong> Chrome talks to it over WebHID; each key shows the job's
+  picture and lights up when it's that job's turn.</li>
+<li><strong>One 8BitDo pad per person</strong> (Bluetooth; the browser's Gamepad API needs no setup). Daddy's has a stick for the lander.</li>
+<li><strong>The Polycom = the capsule radio.</strong> Houston speaks from it and listens through it, and its echo cancelling keeps the
+  TV out of the mic. Hold RADIO to talk.</li>
+<li>Without any of it, the keyboard works: 1-4 are the players, Space is RADIO.</li>
+</ul>
+<h2>13. Decisions for Evan</h2>
+<ol>
+<li><strong>Kids talking to live Houston.</strong> Their voices go to the realtime model. Options: confirm zero data retention first
+   (best), or tonight Daddy holds the RADIO key and the kids shout to him. Recommended: Daddy holds RADIO tonight;
+   shouted "GO!" in the poll is heard on the room mic as a loud sound, not as words.</li>
+<li><strong>Art direction</strong> is now folded into section 9 (light mode on Earth, dark mode on the Moon, white suits).</li>
+<li><strong>Tour:</strong> false for now (a study). The rocket tile joins the tour when it lands in the Ranch hand.</li>
+</ol>
+<h2>14. Reuse</h2>
+<ul>
+<li><code>simulations/tile-drop-impact.mjs</code> (the piece fall), <code>inventory.mjs</code>, <code>coin-reward.mjs</code>, <code>memory-coins.mjs</code>,
+  <code>gamepad.mjs</code>, <code>memory-kit/inner-voice.mjs</code> (captions and <code>&gt;</code> choices).</li>
+<li><code>simulations/moon/</code> (terrain, rocket, meteorite, flight effects) and the Moon Base Kit GLBs.</li>
+<li>Live mode: <code>api/live.js</code>, <code>api/live-socket.js</code>, <code>api/live-voice.js</code>, <code>simulations/live/policy.mjs</code>.</li>
+<li>Family cast voices (<code>tools/voice-cast/cast.json</code>), Moon Heroes refs (<code>tools/moon-heroes/</code>), the accessorize kit
+  (<code>tools/bruiser-study/scale/accessorize.py</code>), the trek minigames for Act 2.</li>
+</ul>
+<h2>15. How it was made, and how to be faster next time</h2>
+<p>To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
+the reference art is frozen first (section 9), the couch kit goes into <code>simulations/</code>, tests run by state, the
+<code>whats-new.json</code> re-insert script, concept art in parallel.</p>
+</main>
+<footer>Source: docs/oracle/moonmission/MOON_MISSION_STUDY.md and moon-mission.identity.json. Reference games are studied for style only; the story, cast, rocket and music are Abbie's World's own.</footer>
+</div>
+<script>
+(()=>{
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+// mission card typewriter
+const card=document.getElementById('mcard'),TXT=card.firstChild.nodeValue,line=card.querySelector('i');
+function typeCard(){ if(reduce) return; let n=0; line.style.transform='scaleX(0)'; card.firstChild.nodeValue='';
+  const tick=setInterval(()=>{ n++; card.firstChild.nodeValue=TXT.slice(0,n); line.style.transform=`scaleX(${n/TXT.length})`;
+    if(n>=TXT.length){clearInterval(tick);} },38); }
+document.getElementById('r1').onclick=typeCard;
+// whiteboard: strokes are point lists; the drawer walks a marker along them with a little wobble
+const cv=document.getElementById('board'),g=cv.getContext('2d');
+const arc=(cx,cy,r,a0,a1,n=28)=>Array.from({length:n+1},(_,i)=>{const a=a0+(a1-a0)*i/n;return[cx+r*Math.cos(a),cy+r*Math.sin(a)]});
+const fig=(x,y)=>[arc(x,y-62,13,0,Math.PI*2),[[x,y-49],[x,y-8]],[[x-18,y-36],[x,y-30],[x+18,y-36]],[[x-14,y+22],[x,y-8],[x+14,y+22]]];
+const rocket=[[[470,300],[470,140],[500,80],[530,140],[530,300],[470,300]],[[470,260],[446,300],[470,300]],[[530,260],[554,300],[530,300]],arc(500,170,12,0,Math.PI*2),
+  [[480,310],[490,336]],[[500,310],[500,344]],[[520,310],[510,336]]];
+const hose=[[[150,270],[190,300],[250,286],[300,300]]];
+const S=[{c:'#e0408a',s:fig(110,300)},{c:'#7a4fd6',s:fig(200,300)},{c:'#2f5fd0',s:fig(300,292).map(st=>st.map(([a,b])=>[a,b-0]))},{c:'#2a2a2a',s:rocket},{c:'#e0408a',s:hose}];
+let seed=7;const rnd=()=>{seed=(seed*16807)%2147483647;return seed/2147483647-.5};
+function seg(st){const out=[];for(let i=0;i<st.length-1;i++){const[a,b]=st[i],[c,d]=st[i+1],L=Math.hypot(c-a,d-b),k=Math.max(2,L/4|0);for(let j=0;j<k;j++)out.push([a+(c-a)*j/k+rnd()*1.2,b+(d-b)*j/k+rnd()*1.2])}out.push(st[st.length-1]);return out}
+function text(){g.fillStyle='#2a2a2a';g.font='28px "Comic Sans MS","Chalkboard SE","Marker Felt",cursive';g.fillText('LAUNCH PLAN',40,52);g.font='18px "Comic Sans MS","Chalkboard SE",cursive';g.fillStyle='#e0408a';g.fillText('Abbie: plug in the oxygen!',40,86);g.fillStyle='#7a4fd6';g.fillText('Ani: launch lights',40,112);g.fillStyle='#2f5fd0';g.fillText('Daddy: ARM',40,138)}
+const strokes=[];function prep(){seed=7;strokes.length=0;S.forEach(o=>o.s.forEach(st=>strokes.push({c:o.c,p:seg(st)})))}
+function clear(){g.fillStyle='#f7f7f2';g.fillRect(0,0,640,360);g.lineWidth=3.2;g.lineCap='round';g.lineJoin='round'}
+function full(){prep();clear();text();strokes.forEach(s=>{g.strokeStyle=s.c;g.beginPath();s.p.forEach(([x,y],i)=>i?g.lineTo(x,y):g.moveTo(x,y));g.stroke()})}
+function animate(){ if(reduce){full();return} prep();clear();text();let si=0,pi=1;
+  (function step(){ for(let k=0;k<3&&si<strokes.length;k++){const s=strokes[si];g.strokeStyle=s.c;g.beginPath();g.moveTo(...s.p[pi-1]);g.lineTo(...s.p[pi]);g.stroke();pi++; if(pi>=s.p.length){si++;pi=1}}
+    if(si<strokes.length)requestAnimationFrame(step)})() }
+full();document.getElementById('r2').onclick=animate;
+})();
+</script></body></html>

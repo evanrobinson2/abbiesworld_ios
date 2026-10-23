@@ -1,58 +1,69 @@
 {
  "asset": "pressure-gauge",
  "name": "Pressure gauge wall panel",
- "brief": "MK-162 Pressure gauge wall panel: two big round dials (air and power) behind glass, with chunky needles pointing at painted green, white and red arcs, fed by a pipe with a valve wheel and a little amber \"check me\" lamp. The diegetic replacement for an air meter: Abbie walks up and reads the wall.",
+ "brief": "MK-162 Pressure gauge wall panel. Round 2, matched to the pick: a panelled wall section with a recessed dark gauge bay holding two big round dials (air and power) with green, white and red arcs, a little control strip, a pipe with a valve wheel running out of it, and a warm porthole beside it. The diegetic replacement for an air meter: Abbie walks up and reads the wall.",
  "rounds": [
   {
    "n": 1,
    "date": "2026-10-23",
    "t": "First build from the pack style and the Faceted Hero rules, no Midjourney pick yet."
+  },
+  {
+   "n": 2,
+   "date": "2026-10-23",
+   "from": "concept.jpg (the Midjourney pick)",
+   "t": "Rebuilt against the Midjourney pick: chunky off-white modules held by dark bumper frames (bkit.module), warm orange windows (bkit.window), darker ground. Round 1 kept in round1/."
   }
  ],
  "stats": {
   "id": "MK-162",
   "name": "Pressure gauge wall panel",
-  "triangles": 1672,
-  "parts": 18,
+  "triangles": 2160,
+  "parts": 21,
   "part_names": [
-   "Plate",
-   "PlateTrim",
+   "WallBody",
+   "WallFrame",
+   "GaugeBay",
    "Bezel0",
    "DialFace0",
    "Needle0",
-   "NeedleHub0",
    "DialGlass0",
-   "LabelPlate0",
    "Bezel1",
    "DialFace1",
    "Needle1",
-   "NeedleHub1",
    "DialGlass1",
-   "LabelPlate1",
-   "CheckLamp",
-   "FeedPipe",
+   "ControlStrip",
+   "StripLamp0",
+   "StripLamp1",
+   "StripLamp2",
    "ValveWheel",
-   "WallBack"
+   "FeedPipe",
+   "PipeValve",
+   "PortholeFrame",
+   "PortholePane",
+   "HazardTrim"
   ],
   "materials": [
    "Glass_Window",
    "Lamp_Amber",
+   "Lamp_Green",
+   "Lamp_Red",
+   "Metal_Charcoal",
+   "Metal_Gunmetal",
    "Metal_Hazard",
    "Metal_Hull",
-   "Metal_HullDark",
-   "Metal_OxygenBlue",
    "Metal_Steel",
    "Paint_Dial",
    "Plastic_Dark",
-   "Plastic_White"
+   "Window_Warm"
   ],
-  "mass_kg": 880.8,
-  "moon_weight_kg": 145.7,
+  "mass_kg": 3431.0,
+  "moon_weight_kg": 567.5,
   "size_m": [
-   1.6,
-   0.24,
-   2.41
+   2.13,
+   0.73,
+   2.35
   ],
-  "maps": "512 px base, roughness, normal"
+  "maps": "1024 px base, roughness, normal"
  }
 }

@@ -42,6 +42,21 @@
     },
     "camera": "first_person",
     "art_direction": "Rough realistic voxel.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "voxel",
+      "family": "voxel",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "flat_colour",
+      "post": [
+        "ambient occlusion"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
     "palette": null,
     "audio_mood": "Tense.",
     "pacing": "brisk, short sessions",

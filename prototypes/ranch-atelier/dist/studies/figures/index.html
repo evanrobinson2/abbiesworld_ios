@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AW-STUDY-0034 - Low-Poly Figure Fidelity</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Young Daddy, bub and the girl in Grace's basement, before and after: one skinned surface per material, welded normals, real UVs and thin parts the light glows through, so the storybook shaders and the pixel pass have form to work with.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: each figure opens on its picture beside the live before/after; the numbers and the method follow. */
+:root{
+ --bg:#ece9e2; --paper:#f7f5f0; --ink:#24221f; --muted:#6b6862; --line:#d3cfc6;
+ --accent:#c9542e; --good:#2f8a5b; --glass:rgba(255,255,255,.55); --rim:rgba(255,255,255,.75);
+ --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+ --body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;
+ --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#1b1a19; --paper:#252321; --ink:#eeebe5; --muted:#a29e97; --line:#3a3734; --accent:#ff8a57; --good:#5cc08b;
+ --glass:rgba(42,40,38,.6); --rim:rgba(255,255,255,.18); color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#1b1a19; --paper:#252321; --ink:#eeebe5; --muted:#a29e97; --line:#3a3734; --accent:#ff8a57; --good:#5cc08b;
+ --glass:rgba(42,40,38,.6); --rim:rgba(255,255,255,.18); color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px}
+.wrap{max-width:1500px;margin:0 auto;display:flex;flex-direction:column;gap:40px}
+h1,h2,h3{font-family:var(--display);font-weight:800;letter-spacing:.01em;margin:0;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,58px);line-height:.95}
+h2{font-size:28px;line-height:1.05}
+p{margin:0;max-width:72ch}
+.muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+header,section{display:grid;gap:12px}
+.pair{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:12px}
+@media (max-width:860px){.pair{grid-template-columns:1fr}}
+.frame{position:relative;margin:0;border-radius:16px;overflow:hidden;background:#3a3430;min-height:320px}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.stage{aspect-ratio:16/10}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.stage.px canvas{image-rendering:pixelated}
+.tag{position:absolute;top:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
+ color:#f6f3ee;background:rgba(24,20,18,.5);padding:6px 8px;border-radius:6px;pointer-events:none;z-index:3}
+.tag.l{left:10px}.tag.r{right:10px}.tag.b{top:auto;bottom:10px;left:10px;text-transform:none;letter-spacing:0;font-size:12px;max-width:calc(100% - 20px)}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tog{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:99px;
+ font:600 14px/1 var(--body);border:1px solid var(--rim);background:linear-gradient(160deg,rgba(255,255,255,.35),transparent 60%),var(--glass);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.55),0 6px 14px -10px rgba(0,0,0,.5)}
+.tog i{width:10px;height:10px;border-radius:50%;background:var(--line);flex:none;transition:background .15s}
+.tog[aria-pressed=true] i{background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.tog:focus-visible{outline:2px solid var(--accent)}
+.stat{font:500 12px/1.3 var(--mono);color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:15px;background:var(--paper);border-radius:14px;overflow:hidden}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font:600 12px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+td.n{font-family:var(--mono);font-size:13.5px}
+.scroll{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:6px;align-content:start}
+.card h3{font-size:21px}
+.card p{font-size:15px}
+.verdict{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:grid;gap:10px}
+.verdict ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:82ch}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
+</head>
+<body>
+<div class="wrap">
+<header>
+ <span class="eyebrow">AW-STUDY-0034 · Figure study</span>
+ <h1>Low-Poly Figure Fidelity</h1>
+ <p class="muted">The kids and the dog in Daddy's memory places were stacks of balls, boxes and tubes. Here they are rebuilt as a few smooth, skinned surfaces with real cloth, hair and fur, still low poly, so the storybook light and the pixel pass have shapes to work with. Each stage shows before on the left and after on the right, under the same light. Drag to turn them.</p>
+</header>
+
+<section id="stages"></section>
+
+<section>
+ <h2>What changed, in numbers</h2>
+ <div class="scroll"><table id="numbers"><thead><tr><th>Figure</th><th>Triangles</th><th>Separate pieces</th><th>Materials</th><th>Cloth, hair and fur surfaces</th><th>Smooth, welded normals</th><th>Thin parts for skin glow</th><th>Bends at joints</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section>
+ <h2>Why the shaders can now do their job</h2>
+ <div class="cards">
+  <div class="card"><h3>One surface, not a pile</h3><p>Each figure is a handful of lofted surfaces: rings along a path, like a sculptor's armature. Where the old kid had 30 separate lumps that each lit like a ball, the light now rolls across one body, so the rim and the soft wrap light read as a form.</p></div>
+  <div class="card"><h3>Normals that keep a little facet</h3><p>Normals are welded across seams and blended back towards the flat faces by a set amount per part (hair more, skin less). It still reads as low poly, but the shading has gradients for the pixel pass to dither instead of noise.</p></div>
+  <div class="card"><h3>UVs in metres</h3><p>Every surface has UVs measured in metres, so a stripe is 5 cm wide on a shirt, a sock or a sleeve. That gives real materials: a knit bump on cotton, a twill on denim, strands in the hair, fur on bub, rubber on soles.</p></div>
+  <div class="card"><h3>Thin parts glow</h3><p>Each vertex knows how thin the body is there. Ears, noses, fingers and bub's ears let the sun through when it is behind them: turn on "Sun behind" to see it.</p></div>
+  <div class="card"><h3>Skinned, so joints close</h3><p>The bodies are skinned to bones, with joints blended over two rings, so elbows and knees bend without gaps. The girl keeps her real walk, sit and reach clips; young Daddy and bub keep the poses the school jump drives.</p></div>
+  <div class="card"><h3>Materials named for what they are</h3><p>"white t-shirt", "red shorts", "blond mop", "black lab coat": one material each, which is how the game reads shading roles, and how a later pass can swap a whole look.</p></div>
+ </div>
+</section>
+
+<section class="verdict">
+ <h2>Verdict</h2>
+ <ul>
+  <li><b>It works, and it stays cheap.</b> Each figure is a few thousand triangles and draws in a handful of calls, fine for a phone.</li>
+  <li><b>The look is ready for the light.</b> With the same storybook light on both, the rebuilt figures show rim, sheen and glowing ears; the old ones only show their seams.</li>
+  <li><b>The games pick it up for free.</b> The school jump and the basement use the same functions as before (makeYoungDaddy, makeBlackLab, loadGraceKid), so their next build gets these figures.</li>
+  <li><b>Next:</b> a Midjourney turnaround of young Daddy, bub and the girl when the Mac is up, then tune each against it from all four sides.</li>
+ </ul>
+</section>
+</div>
+
+<script type="module">
+import * as T from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {storybookLook} from '/simulations/figure-kit.mjs';
+import {makeYoungDaddy} from '/simulations/figures/young-daddy.mjs';
+import {makeBlackLab} from '/simulations/figures/black-lab.mjs';
+import {loadGraceKid, loadGraceKidRound2} from '/simulations/grace-kid.mjs';
+import {makeKid, makeDog} from './before.mjs';
+
+const FIGS = [
+ {id: 'kid', name: 'Young Daddy', ref: '/studies/school/img/concepts/5-characters.jpg', refNote: 'Concept round from the school jump. Since then: a blond mop, never a hat, a white tee and red shorts.', h: 1.35, wide: 1.9},
+ {id: 'dog', name: 'bub, the black lab', ref: '/studies/school/img/concepts/5-characters.jpg', refNote: 'Same concept round; bub is now a black lab with a red collar.', h: .75, wide: 2.3},
+ {id: 'girl', name: 'The girl in Grace\'s basement', ref: '/studies/basement/img/lit.jpg', refNote: 'In the game: she is a few pixels tall in the dark, so her shape and colours must carry.', h: 1.18, wide: 1.8},
+];
+const stagesEl = document.getElementById('stages'), rows = document.querySelector('#numbers tbody');
+const stages = [];
+
+function measure(root) {
+ let tris = 0, pieces = 0, uv = false, mats = new Set(), skinned = false, thin = false;
+ root.traverse(o => {
+  if (!o.isMesh || o.material?.visible === false || o.name === 'carried ball') return;
+  const g = o.geometry; pieces++; tris += (g.index ? g.index.count : g.attributes.position.count) / 3;
+  (Array.isArray(o.material) ? o.material : [o.material]).forEach(m => mats.add(m.name || m.uuid));
+  if (o.material.map || o.material.bumpMap) uv = true;
+  if (o.isSkinnedMesh) skinned = true; if (g.attributes.thin) thin = true;
+ });
+ let flat = false; root.traverse(o => { if (o.isMesh && o.material?.flatShading) flat = true; });
+ return {tris: Math.round(tris), pieces, mats: mats.size, uv, smooth: !flat && skinned, thin, skinned};
+}
+
+async function makeStage(F) {
+ const sec = document.createElement('div'); sec.style.display = 'grid'; sec.style.gap = '10px';
+ sec.innerHTML = `<h2>${F.name}</h2><div class="pair">
+  <figure class="frame"><img src="${F.ref}" alt="Reference for ${F.name}"><span class="tag l">Reference</span><span class="tag b">${F.refNote}</span></figure>
+  <figure class="frame stage"><canvas aria-label="${F.name}, before and after. Drag to orbit, pinch or scroll to zoom."></canvas><span class="tag l">Before</span><span class="tag r">After</span></figure></div>
+  <div class="controls"></div>`;
+ stagesEl.append(sec);
+ const frame = sec.querySelector('.stage'), canvas = sec.querySelector('canvas'), controls = sec.querySelector('.controls');
+ const renderer = new T.WebGLRenderer({canvas, antialias: true});
+ renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
+ renderer.toneMapping = T.ACESFilmicToneMapping; renderer.outputColorSpace = T.SRGBColorSpace;
+ const scene = new T.Scene(); scene.background = new T.Color('#4a3c3a'); scene.fog = new T.Fog('#4a3c3a', 6, 14);
+ const hemi = new T.HemisphereLight('#ffd9bd', '#3b2c30', 1.1); scene.add(hemi);
+ const sun = new T.DirectionalLight('#ffb070', 3.2); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); sun.shadow.bias = -.0005;
+ Object.assign(sun.shadow.camera, {left: -2, right: 2, top: 2, bottom: -2, near: .5, far: 12}); scene.add(sun, sun.target);
+ const fill = new T.DirectionalLight('#9fb4ff', .5); fill.position.set(-3, 2, 2); scene.add(fill);
+ const floor = new T.Mesh(new T.CircleGeometry(3.2, 48), new T.MeshStandardMaterial({color: '#7a6a5c', roughness: 1})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
+ const camera = new T.PerspectiveCamera(30, 1.6, .05, 40);
+ const orbit = new OrbitControls(camera, canvas); orbit.enableDamping = true; orbit.enablePan = false; orbit.minDistance = .8; orbit.maxDistance = 8;
+ orbit.target.set(0, F.h * .55, 0); camera.position.set(.5, F.h * .7, Math.max(F.h * 1.5 + F.wide * .75, F.wide * 1.65)); orbit.update();
+
+ // before and after
+ let before, after, tickB, tickA;
+ if (F.id === 'kid') {
+  before = makeKid(); before.scale.setScalar(F.h / 1.25);
+  const k = makeYoungDaddy(T); after = k.group;
+  tickB = (dt, t, walk) => { const s = walk ? Math.sin(t * 9) : 0; before.userData.legs[0].rotation.x = s * .5; before.userData.legs[1].rotation.x = -s * .5; before.userData.off.rotation.x = s * .45; before.userData.arm.rotation.x = -s * .45; };
+  tickA = (dt, t, walk) => k.update(dt, {walk: walk ? .7 : 0});
+ } else if (F.id === 'dog') {
+  before = makeDog(); before.scale.setScalar(1);
+  const d = makeBlackLab(T); after = d.group;
+  tickB = (dt, t, walk) => before.userData.legs.forEach((l, i) => l.rotation.z = walk ? Math.sin(t * 12 + i * 1.6) * .5 : 0);
+  tickA = (dt, t, walk) => d.update(dt, {speed: walk ? 1.3 : 0, wag: .6});
+ } else {
+  [before, after] = await Promise.all([loadGraceKidRound2(), loadGraceKid()]);
+  let wB = null, wA = null;
+  // keep the soles on the floor the way the basement does: the lowest foot back at its resting height
+  const plant = (g, v = new T.Vector3()) => { g.position.y = 0; g.updateMatrixWorld(true); let need = -1; for (const f of g.userData.feet) need = Math.max(need, f.rest - f.bone.getWorldPosition(v).y); g.position.y = need; };
+  tickB = (dt, t, walk) => { if (wB !== walk) { before.userData.play(walk ? 'walk' : 'idle'); wB = walk; } before.userData.update(dt); plant(before); };
+  tickA = (dt, t, walk) => { if (wA !== walk) { after.userData.play(walk ? 'walk' : 'idle'); wA = walk; } after.userData.update(dt); plant(after); };
+ }
+ const gap = F.wide / 2;
+ before.position.x = -gap + (F.id === 'dog' ? .45 : 0); after.position.x = gap;
+ const face = F.id === 'dog' ? Math.PI + .55 : .35; before.rotation.y = after.rotation.y = face;
+ scene.add(before, after);
+ // the same storybook light on both, so the difference is the model
+ const mats = new Set();
+ before.traverse(o => { if (o.isMesh && o.material?.visible !== false) { if (!o.material.userData?.look) storybookLook(T, o.material, {skin: /skin|nose|jaw|ear|cheek/i.test(o.material.name) ? 1 : 0}); mats.add(o.material); o.castShadow = true; } });
+ after.traverse(o => { if (o.isMesh && o.material?.visible !== false) mats.add(o.material); });
+
+ const nb = measure(before), na = measure(after);
+ const yes = b => b ? 'yes' : 'no';
+ rows.insertAdjacentHTML('beforeend', `<tr><td>${F.name}<br><span class="stat">before → after</span></td><td class="n">${nb.tris} → ${na.tris}</td><td class="n">${nb.pieces} → ${na.pieces}</td><td class="n">${nb.mats} → ${na.mats}</td><td>${yes(nb.uv)} → ${yes(na.uv)}</td><td>${yes(nb.smooth)} → ${yes(na.smooth)}</td><td>${yes(nb.thin)} → ${yes(na.thin)}</td><td>${nb.skinned ? 'skinned' : 'rigid parts on pivots'} → skinned</td></tr>`);
+
+ const S = {look: true, px: false, walk: false, back: false};
+ const setSun = () => { if (S.back) sun.position.set(-1.2, 1.4, -3.2); else sun.position.set(2.6, 3.2, 2.4); sun.target.position.set(0, F.h * .5, 0); };
+ setSun();
+ const toggles = [['look', 'Storybook light'], ['back', 'Sun behind'], ['walk', F.id === 'dog' ? 'Trot' : 'Walk'], ['px', 'Pixel pass']];
+ for (const [key, label] of toggles) {
+  const b = document.createElement('button'); b.className = 'tog'; b.innerHTML = `<i></i>${label}`; b.setAttribute('aria-pressed', S[key]);
+  b.onclick = () => { S[key] = !S[key]; b.setAttribute('aria-pressed', S[key]); apply(); };
+  controls.append(b);
+ }
+ const stat = document.createElement('span'); stat.className = 'stat'; stat.textContent = `after: ${na.tris} triangles, ${na.pieces} draw calls`; controls.append(stat);
+ function apply() {
+  for (const m of mats) if (m.userData?.look) m.userData.look.uLook.value = S.look ? 1 : 0;
+  frame.classList.toggle('px', S.px); setSun(); resize();
+ }
+ function resize() {
+  const w = canvas.clientWidth, h = canvas.clientHeight; if (!w) return;
+  renderer.setPixelRatio(S.px ? .28 : Math.min(2, devicePixelRatio)); renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.updateProjectionMatrix();
+ }
+ new ResizeObserver(resize).observe(canvas); resize();
+ const st = {renderer, scene, camera, orbit, tickA, tickB, S, visible: false};
+ new IntersectionObserver(e => st.visible = e[0].isIntersecting).observe(canvas);
+ stages.push(st);
+ apply();
+}
+
+const clock = new T.Clock(); let t = 0;
+for (const F of FIGS) await makeStage(F);
+renderer_loop();
+function renderer_loop() {
+ requestAnimationFrame(renderer_loop);
+ const dt = Math.min(.05, clock.getDelta()); t += dt;
+ for (const s of stages) { if (!s.visible && t > 1) continue; s.tickA(dt, t, s.S.walk); s.tickB(dt, t, s.S.walk); s.orbit.update(); s.renderer.render(s.scene, s.camera); }
+ if (t > .5) window.__ready = true;
+}
+</script>
+</body>
+</html>

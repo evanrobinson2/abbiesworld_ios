@@ -40,6 +40,23 @@
     },
     "camera": "isometric",
     "art_direction": "Ink-drawn paper puppets.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "cut_paper",
+      "light": "flat",
+      "outlines": true,
+      "outline": "inked_in",
+      "surface": "paper",
+      "post": [
+        "vignette",
+        "colour grade"
+      ],
+      "signature": "Ink-drawn paper puppets as billboards in a 3D world, with a paper grain and a scratchy colour grade.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.75,
+      "lesson": "Paper grain plus ink line is a whole style with no shading at all."
+    },
     "palette": null,
     "audio_mood": "Jaunty creepy score.",
     "pacing": "slow, long sessions",

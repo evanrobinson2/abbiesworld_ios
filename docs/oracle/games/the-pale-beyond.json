@@ -40,6 +40,21 @@
     },
     "camera": "fixed",
     "art_direction": "Painted portraits.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "painterly",
+      "family": "painterly_3d",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "hand_painted",
+      "post": [
+        "colour grade"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
     "palette": null,
     "audio_mood": "Score.",
     "pacing": "slow, long sessions",

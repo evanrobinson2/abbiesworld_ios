@@ -39,6 +39,21 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Toy-box realism.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "soft_diorama",
+      "light": "soft_wrap",
+      "outlines": false,
+      "outline": "none",
+      "surface": "gradient",
+      "post": [
+        "depth of field"
+      ],
+      "signature": null,
+      "source": "derived from the art note by rendering_notes.RULES",
+      "confidence": 0.3
+    },
     "palette": null,
     "audio_mood": "Brass band.",
     "pacing": "brisk, short sessions",

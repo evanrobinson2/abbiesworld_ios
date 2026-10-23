@@ -41,6 +41,22 @@
     },
     "camera": "first_person",
     "art_direction": "Cel-shaded comic.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "toon",
+      "family": "comic_ink",
+      "light": "banded",
+      "outlines": true,
+      "outline": "screen_edges",
+      "surface": "hand_painted",
+      "post": [
+        "edge detection"
+      ],
+      "signature": "Hand-inked hatching painted into the textures plus a screen-space edge pass on silhouettes.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.75,
+      "lesson": "Lines can live in two places (texture and screen); use both so near and far stay inked."
+    },
     "palette": null,
     "audio_mood": "Rock.",
     "pacing": "fast, short sessions",

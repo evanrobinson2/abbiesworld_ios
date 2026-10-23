@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "4. Kitchen at dawn, first person",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "First person view of a bright white kitchen at dawn, my hands holding a steaming coffee mug at the counter, through the big window a tiny pink-and-white rocket stands on its distant launch pad, soft pale sunrise light, white room, soft shadows, light and airy, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "f8d18fd4-8ad0-42ed-b230-ede282beaaa6",
+  "page": "https://www.midjourney.com/jobs/f8d18fd4-8ad0-42ed-b230-ede282beaaa6?index=1",
+  "pick_index": 1,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/f8d18fd4-8ad0-42ed-b230-ede282beaaa6/0_1.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "ab73c628bd4e425cc73a443b585e3664a7de2e96126a761ce2c1f996ac0249e7"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 1: the only true first-person view (hand on the mug), rocket on its pad through the window. The rocket reads white more than pink in all four."
+}

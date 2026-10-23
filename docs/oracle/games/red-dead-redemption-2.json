@@ -42,6 +42,23 @@
     },
     "camera": "third_person",
     "art_direction": "Painterly realism.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "realistic",
+      "family": "painterly_3d",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "volumetric fog",
+        "colour grade"
+      ],
+      "signature": "Physical rendering graded like a landscape painting, with heavy atmosphere.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "Atmosphere and grade can make realism feel painted."
+    },
     "palette": null,
     "audio_mood": "Western score.",
     "pacing": "slow, medium sessions",

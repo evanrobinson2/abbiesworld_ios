@@ -1,0 +1,571 @@
+<title>What They Don't Teach You in 3D School</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one reading column; every lesson is a live 3D plate with its controls, set wide on desktop. */
+:root{
+  --bg:#eef2f6; --plate:#ffffff; --ink:#1b2433; --soft:#536077; --line:#d5dce6;
+  --pink:#c42e6b; --teal:#1f7f84; --gold:#b27a12; --glass:rgba(255,255,255,.72);
+  --display:"Fredoka",ui-rounded,"Arial Rounded MT Bold",system-ui,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1520; --plate:#172031; --ink:#e7ecf4; --soft:#9eabc1; --line:#2a364b;
+  --pink:#f0679c; --teal:#4cc0c4; --gold:#e4b04a; --glass:rgba(23,32,49,.78); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1520; --plate:#172031; --ink:#e7ecf4; --soft:#9eabc1; --line:#2a364b;
+  --pink:#f0679c; --teal:#4cc0c4; --gold:#e4b04a; --glass:rgba(23,32,49,.78); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:400 18px/1.62 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 80px}
+main{max-width:1040px;margin:0 auto;display:grid;gap:56px}
+.col{max-width:680px;margin:0 auto;width:100%;min-width:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;line-height:1.08;margin:0}
+h1{font-size:clamp(2.2rem,6.4vw,4.2rem);letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--pink)}
+h2{font-size:clamp(1.6rem,3.6vw,2.3rem)}
+h3{font-size:1.15rem}
+p{margin:0}
+.stack{display:grid;gap:16px}
+.eyebrow{font:600 .78rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.lede{font-size:1.2rem;color:var(--soft)}
+.byline{font:500 .9rem var(--display);color:var(--soft)}
+a{color:var(--teal);text-underline-offset:3px}
+code{font:400 .86em var(--mono);background:color-mix(in srgb,var(--line) 55%,transparent);padding:.1em .35em;border-radius:5px}
+pre{font:400 .82rem/1.55 var(--mono);background:var(--plate);border:1px solid var(--line);border-radius:12px;padding:14px 16px;overflow-x:auto;margin:0}
+.seen{font-size:.95rem;color:var(--soft)}
+.seen b{color:var(--ink);font-weight:600}
+.aw{border-left:3px solid var(--pink);padding-left:14px;font-size:1rem}
+.aw strong{font-family:var(--display);font-weight:600;color:var(--pink)}
+/* the live plates */
+figure{margin:0}
+.plate{position:relative;border-radius:22px;overflow:hidden;background:#9fc6dc;aspect-ratio:16/9;max-width:100%;
+  box-shadow:0 1px 0 rgba(255,255,255,.5) inset,0 18px 40px -22px rgba(20,30,50,.45)}
+.plate.tall{aspect-ratio:16/10}
+.plate canvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:pan-y;cursor:grab}
+.plate canvas.px{image-rendering:pixelated}
+.split{position:absolute;top:0;bottom:0;width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.15);pointer-events:none}
+.split::after{content:"";position:absolute;top:50%;left:50%;width:30px;height:30px;margin:-15px;border-radius:50%;
+  background:rgba(255,255,255,.85);box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.tag{position:absolute;top:12px;font:600 .72rem/1 var(--display);letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.82);color:#1b2433;pointer-events:none}
+.tag.l{left:12px}.tag.r{right:12px}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:14px 4px 0;font:500 .9rem var(--display);color:var(--soft)}
+.controls label{display:flex;align-items:center;gap:8px}
+.controls input[type=range]{width:130px;accent-color:var(--pink)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 .86rem var(--display);border:1px solid var(--line);background:var(--plate);color:var(--ink);
+  padding:7px 13px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.controls input:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+figcaption{font-size:.92rem;color:var(--soft);padding-top:8px}
+.lesson{display:grid;gap:22px}
+.lesson .num{font:700 .9rem var(--mono);color:var(--pink)}
+/* oracle numbers */
+.bars{display:grid;gap:7px}
+.bar{display:grid;grid-template-columns:minmax(110px,30%) 1fr 44px;gap:10px;align-items:center;font:500 .9rem var(--display)}
+.bar .track{height:14px;border-radius:0 4px 4px 0;background:color-mix(in srgb,var(--line) 45%,transparent);overflow:hidden}
+.bar .fill{height:100%;background:var(--teal);border-radius:0 4px 4px 0}
+.bar .v{text-align:right;font-variant-numeric:tabular-nums;color:var(--soft)}
+.bar.hi .fill{background:var(--pink)}
+.twocol{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
+.twocol>*{min-width:0}
+.tablewrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .78rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+td:first-child{font-family:var(--display);font-weight:600;white-space:nowrap}
+/* the toon set cards */
+.set{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:var(--plate);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:8px;align-content:start}
+.card h3{display:flex;justify-content:space-between;gap:8px;align-items:baseline}
+.card .cost{font:600 .72rem var(--mono);color:var(--gold);white-space:nowrap}
+.card p{font-size:.95rem}
+.card .use{font:500 .82rem var(--display);color:var(--teal)}
+.note{font-size:.88rem;color:var(--soft)}
+@media (max-width:560px){body{font-size:17px}.controls input[type=range]{width:110px}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+
+<main>
+<header class="col stack" style="gap:18px">
+  <span class="eyebrow">Abbie's World · Oracle rendering study · 23 Oct 2026</span>
+  <h1>Shaders: what they don't teach you in <em>3D school</em></h1>
+  <p class="lede">3D school teaches you to model, texture and light a thing so it looks real. Games that look wonderful mostly break those rules on purpose. Here are nine of the rules they break, each one running live below so you can switch it on and off.</p>
+  <p class="byline">Drag any scene to turn it. Everything is plain three.js, the same engine Abbie's World runs on.</p>
+</header>
+
+<figure class="stack" style="gap:0">
+  <div class="plate tall" data-demo="hero">
+    <canvas aria-label="A small ranch scene: plain three.js on the left, the chosen toon look on the right"></canvas>
+    <span class="tag l">Plain three.js</span><span class="tag r" id="heroTag">Sunday Toon</span>
+  </div>
+  <div class="controls">
+    <div class="chips" id="heroChips" role="group" aria-label="Shader look"></div>
+  </div>
+  <figcaption>Same models, same light, same camera. Only the shader changes. Drag across the picture to move the line. These seven looks are the proposed Abbie's World toon set, described at the end.</figcaption>
+</figure>
+
+<section class="col stack">
+  <span class="eyebrow">First, the question</span>
+  <h2>Had the Game Oracle indexed shaders?</h2>
+  <p>No. Before today, the Oracle knew 379 of Evan's games, and for most of them it had one sentence about the art ("Chunky pixel-painterly kingdoms on a floating board") plus Steam's own style tags on about a third of them (realistic, pixel art, cartoon). Nothing said how a game is actually shaded.</p>
+  <p>So the Oracle now has a rendering dimension on every studied game: how light falls (stepped bands, soft wrap, painted in, flat or physical), where the outlines come from, what the surfaces are made of, which screen effects sell the look, and the one trick that makes it. 62 games were studied by hand, 306 were read from their art notes at low confidence, and 11 still need a play session. Each game's Oracle page now has a "How it's drawn" section.</p>
+</section>
+
+<section class="stack" style="gap:24px">
+  <div class="col stack">
+    <span class="eyebrow">What 368 games say</span>
+    <h2>Almost nobody uses outlines. Everybody uses air.</h2>
+    <p>Three things stand out. Only 19 of the 368 games draw any kind of outline. Only 12 use the classic stepped "cel" light. And Evan's five favourites (Tiny Glade, Dorfromantik, Besiege, Bricktales and 9 Kings) use none of either. Their look comes from soft light, clean colour, contact shadows and a little air. That is the strongest finding here, and it shapes the toon set.</p>
+  </div>
+  <div class="twocol col" style="max-width:1040px">
+    <div class="stack" style="gap:12px">
+      <h3>How light falls</h3>
+      <div class="bars" id="barsLight"></div>
+    </div>
+    <div class="stack" style="gap:12px">
+      <h3>Screen effects that sell the look</h3>
+      <div class="bars" id="barsPost"></div>
+    </div>
+  </div>
+  <p class="col note">Counts across 368 studied games. Hand-studied games carry confidence 0.4 to 0.8; the rest are read from one-line art notes at 0.15 to 0.3, so read the shape, not the exact numbers. Pink marks the look Evan's five share.</p>
+</section>
+
+<!-- 1 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 1</span>
+    <h2>Shadows are a colour, not black</h2>
+    <p>3D school darkens a surface as it turns from the light. Painters never do that. A shadow on a red barn on a sunny day is a cool, slightly purple red, because the blue sky is lighting it. Mix toward a cool tint instead of toward black and the scene stops looking dirty.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="hue"><canvas aria-label="Shadow colour demo"></canvas><span class="tag l">Shadows to black</span><span class="tag r">Shadows to sky colour</span></div>
+    <div class="controls"><label for="hueTint">Shadow tint <input type="range" id="hueTint" min="0" max="1" step="0.01" value="1"></label></div>
+  </figure>
+  <div class="col stack">
+    <pre>vec3 shadow = base * mix(vec3(0.18), skyTint, hueShift);
+vec3 lit    = base * sunColour;
+vec3 colour = mix(shadow, lit, light);</pre>
+    <p class="seen"><b>Seen in:</b> Team Fortress 2, Tiny Glade, Fall Guys, Dredge.</p>
+    <p class="aw"><strong>In Abbie's World:</strong> every toon look tints its shadows from the sky colour, so when the sky turns dusk-orange, every shadow follows.</p>
+  </div>
+</section>
+
+<!-- 2 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 2</span>
+    <h2>The light ramp is the art director</h2>
+    <p>Real light falls off smoothly. A toon shader takes that smooth number and pushes it through a ramp: two bands, three, or a soft curve. Team Fortress 2's well-known trick is to wrap the light first (half of it reaches round the back, so nothing goes fully dark) and then look the result up in a hand-painted strip. Change the strip and the whole game changes mood, without touching a single model.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="ramp"><canvas aria-label="Light ramp demo"></canvas></div>
+    <div class="controls">
+      <label for="rampBands">Bands <input type="range" id="rampBands" min="2" max="5" step="1" value="3"></label>
+      <label for="rampSoft">Edge softness <input type="range" id="rampSoft" min="0" max="1" step="0.01" value="0.25"></label>
+      <label for="rampWrap">Wrap <input type="range" id="rampWrap" min="0" max="1" step="0.01" value="0.6"></label>
+    </div>
+    <canvas id="rampStrip" width="600" height="60" style="width:100%;max-width:520px;height:40px;margin-top:10px;border-radius:8px;display:block" aria-label="The light ramp: brightness from the dark side to the lit side"></canvas>
+    <figcaption>The strip is the ramp: left is facing away from the sun, right is facing it.</figcaption>
+  </figure>
+  <div class="col stack">
+    <p class="seen"><b>Seen in:</b> Team Fortress 2 (soft ramp), Borderlands and Marvel Rivals (hard bands), Thronefall (faceted, two tones).</p>
+    <p class="aw"><strong>In Abbie's World:</strong> the ramp is a handful of numbers per place. The Ranch gets soft three-band light; the Moonbase gets two hard bands.</p>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 3</span>
+    <h2>Rim light draws the silhouette</h2>
+    <p>Kids read shapes by their outline. A thin bright edge where a surface turns away from the camera separates every character from the background, even in a busy scene. It costs one line of shader code: the more a surface faces sideways to the camera, the brighter its edge.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="rim"><canvas aria-label="Rim light demo"></canvas></div>
+    <div class="controls"><label for="rimAmt">Rim light <input type="range" id="rimAmt" min="0" max="1.5" step="0.01" value="0.8"></label></div>
+  </figure>
+  <div class="col stack">
+    <pre>float rim = pow(1.0 - dot(normal, toCamera), 3.0);
+colour += rimColour * rim * rimStrength;</pre>
+    <p class="seen"><b>Seen in:</b> Team Fortress 2, Fall Guys, Disney Dreamlight Valley, the Storybook study.</p>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 4</span>
+    <h2>Outlines are geometry, not a filter</h2>
+    <p>The cheapest good outline is a second copy of the model, pushed out a little along its normals, drawn inside-out in ink colour. Only its rim shows, so it looks like a line. Two things school never mentions. The shell needs smooth normals even when the model is faceted, or the corners crack open. And the width should shrink with distance, like a pen line in perspective; lines that stay the same on screen make far-off things look scribbled.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="ink"><canvas aria-label="Outline demo"></canvas></div>
+    <div class="controls">
+      <label for="inkW">Line width <input type="range" id="inkW" min="0" max="0.08" step="0.001" value="0.03"></label>
+      <div class="chips" role="group" aria-label="Line width rule">
+        <button class="chip" id="inkWorld" aria-pressed="true">Thins with distance</button>
+        <button class="chip" id="inkScreen" aria-pressed="false">Same on screen</button>
+      </div>
+    </div>
+  </figure>
+  <div class="col stack">
+    <p class="seen"><b>Seen in:</b> Marvel Rivals and Dispatch (shell outlines), Borderlands (lines painted into textures plus an edge pass), Sable (lines carry everything, almost no shading).</p>
+    <p class="aw"><strong>In Abbie's World:</strong> outlines are an option, not the default, because Evan's five favourites don't use them. Ink Toon is the look for the school, the brute fight and anything comic-shaped.</p>
+  </div>
+</section>
+
+<!-- 5 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 5</span>
+    <h2>Normals are a brush</h2>
+    <p>A normal is the direction a surface faces, and the shader lights it by that direction. Nothing forces the normal to match the real shape. Give a lumpy tree crown the normals of one big sphere and it lights like a single soft ball of leaves, the way an illustrator paints it, instead of a pile of separate blobs. Stylised faces in animated films use the same trick to keep cheeks and noses from catching ugly shadows.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="normals"><canvas aria-label="Normals demo"></canvas><span class="tag l">Real normals</span><span class="tag r">Painted normals</span></div>
+    <figcaption>Look at the tree crown and the character's head. Drag the line to compare.</figcaption>
+  </figure>
+  <div class="col stack">
+    <p class="seen"><b>Seen in:</b> stylised foliage in most toon games, Disney Dreamlight Valley, anime-style character shading.</p>
+    <p class="aw"><strong>In Abbie's World:</strong> the modeler's <code>build.py</code> recipes can write a "lighting shape" for bushes, trees and hair, kept beside the real mesh.</p>
+  </div>
+</section>
+
+<!-- 6 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 6</span>
+    <h2>Grounding beats shadows</h2>
+    <p>School spends weeks on cast shadows. For a toy-sized world, the shadow that matters is the dark smudge right under each thing, where it touches the ground. Without it, objects float. With it, a sharp sun shadow is almost optional. Townscaper and Tiny Glade lean on this: deep soft darkness in corners and at contact points.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="contact"><canvas aria-label="Contact shadow demo"></canvas></div>
+    <div class="controls"><label for="contactAmt">Contact shadows <input type="range" id="contactAmt" min="0" max="1" step="0.01" value="1"></label></div>
+  </figure>
+  <div class="col stack">
+    <p class="seen"><b>Seen in:</b> Townscaper, Tiny Glade, Bad North, Lego Bricktales.</p>
+  </div>
+</section>
+
+<!-- 7 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 7</span>
+    <h2>Air is a shader too</h2>
+    <p>Fog in school is a performance trick to hide the far plane. In stylised games it's the mood. Bad North's islands sit in soft fog; Dredge turns its fog cold and wrong at night; the Storybook study's green haze is what makes the garden feel warm. The fog colour should come from the sky, and distant things should fade toward it, never toward grey.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="air"><canvas aria-label="Fog and air demo"></canvas></div>
+    <div class="controls">
+      <label for="airAmt">Air <input type="range" id="airAmt" min="0" max="0.12" step="0.001" value="0.06"></label>
+      <div class="chips" id="airChips" role="group" aria-label="Air colour"></div>
+    </div>
+  </figure>
+  <div class="col stack">
+    <p class="aw"><strong>In Abbie's World:</strong> fog is in-world air, so it's diegetic: characters can feel a mist rolling in. Nothing fades at the screen edges; the world itself gets hazier.</p>
+  </div>
+</section>
+
+<!-- 8 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 8</span>
+    <h2>Low resolution is a feeling</h2>
+    <p>Valheim renders rough low-poly models with modern light and air, and it's beautiful. Mouthwashing renders at a tiny size on purpose, with wobbling pixels, and it's unsettling. Fewer pixels is a choice with a feeling attached: memory, nostalgia, unease. Grace's 8-bit basement and Daddy's gold coins live here.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="pixel"><canvas class="px" aria-label="Low resolution demo"></canvas></div>
+    <div class="controls">
+      <label for="pxAmt">Pixel size <input type="range" id="pxAmt" min="1" max="8" step="1" value="4"></label>
+      <label for="ditherAmt">Dither <input type="range" id="ditherAmt" min="0" max="1" step="0.01" value="0.7"></label>
+    </div>
+  </figure>
+  <div class="col stack">
+    <p class="seen"><b>Seen in:</b> Valheim, Mouthwashing, Kingdom Two Crowns, Dave the Diver (pixel sprites over 3D).</p>
+  </div>
+</section>
+
+<!-- 9 -->
+<section class="lesson">
+  <div class="col stack">
+    <span class="num">Rule 9</span>
+    <h2>One signal drives every number</h2>
+    <p>Here is the rule that matters most, and it's already Abbie's World canon: the whole game adapts. A toon shader is just a handful of numbers (sun direction and colour, shadow tint, rim colour, sky, fog). Drive all of them from one game signal, such as time of day, a storm coming or a mood, and the world changes together. Against the Storm recolours its whole map for the storm season; Gris gives colour back as the story heals.</p>
+  </div>
+  <figure>
+    <div class="plate" data-demo="day"><canvas aria-label="Time of day demo"></canvas></div>
+    <div class="controls"><label for="dayT">Time of day <input type="range" id="dayT" min="0" max="1" step="0.001" value="0.32"></label><span id="dayLabel" style="font-variant-numeric:tabular-nums">Morning</span></div>
+    <figcaption>One slider moves the sun, its colour, the sky, the fog, the shadow tint and the rim light at once.</figcaption>
+  </figure>
+  <div class="col stack">
+    <p class="aw"><strong>In Abbie's World:</strong> the same signal also drives music, sound and the animals (sheep heading home at dusk), per <code>GAME_FEEL.md</code>.</p>
+  </div>
+</section>
+
+<section class="stack" style="gap:24px">
+  <div class="col stack">
+    <span class="eyebrow">The toon set Evan asked for</span>
+    <h2>Seven looks, one shader</h2>
+    <p>The new toon set isn't built yet, so here it is as a proposal. Every look is the same shader with different numbers, so switching is free and one game signal can blend between them. Try each one in the scene at the top of the page. The Storybook study (AW-STUDY-0028) is the eighth: the full post-processed film look, for hero moments and cutscenes.</p>
+  </div>
+  <div class="set" id="setCards"></div>
+  <p class="col note">Cost on a phone: <b>light</b> means a few extra lines in the one material; <b>medium</b> adds a second draw of each model (outlines) or a screen-space pattern. None of the seven needs post-processing, unlike the Storybook look.</p>
+</section>
+
+<section class="col stack">
+  <span class="eyebrow">Relation to the Storybook study</span>
+  <h2>Storybook is the film; the toon set is the game</h2>
+  <p>AW-STUDY-0028 showed that three.js can match a soft animated-film frame: soft wrapped light, rim light, glowing skin at the shadow edge, ambient occlusion, green haze, lens blur, glow and a colour grade. Its heavy parts (lens blur, glow, occlusion) are post-processing passes that cost real frame time on a phone. The toon set keeps the cheap half of that study inside one material: the wrap, the rim, the skin glow (Clay), the tinted shadows and the air. A scene can play in Sunday Toon and switch on the Storybook passes for a cutscene. <a href="https://app.abbies.world/studies/storybook/">Open the Storybook study</a>.</p>
+</section>
+
+<section class="stack" style="gap:18px">
+  <div class="col stack">
+    <span class="eyebrow">From the Oracle</span>
+    <h2>The tricks, game by game</h2>
+    <p>A sample of the hand-studied games, in our own words. Style is free to learn from; the games' own art, shaders and screenshots stay theirs and are never used here.</p>
+  </div>
+  <div class="tablewrap col" style="max-width:1040px">
+    <table><thead><tr><th>Game</th><th>Look</th><th>The trick</th></tr></thead><tbody id="trickRows"></tbody></table>
+  </div>
+</section>
+
+<footer class="col note stack">
+  <p>Sources: Oracle rendering notes (<code>tools/steam-study/rendering_notes.py</code>, written into <code>docs/oracle/games/*.json</code> as <code>identity.rendering</code>), public knowledge of each game, and AW-STUDY-0028. No game assets, captures or code were used. The scene is primitives built in the page.</p>
+</footer>
+</main>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {mergeGeometries, mergeVertices} from 'three/addons/utils/BufferGeometryUtils.js';
+
+/* ---------- data from the Oracle ---------- */
+const LIGHT=[['Physical light',193],['Soft wrapped light',80,true],['Painted into the art',45],['Flat, no shading',38],['Stepped bands (cel)',12]];
+const POST=[['Colour grade',128],['Bloom',36],['Fog',14],['Depth of field',12,true],['Ambient occlusion',12,true],['Vignette',4]];
+const TRICKS=[
+ ['Team Fortress 2','Toon','Wrapped light looked up through a hand-made warm ramp, plus a strong rim.'],
+ ['Borderlands 2','Comic ink','Hatching painted into textures plus an edge pass on silhouettes.'],
+ ['Sable','Line art','Thick lines and flat colour, almost no shading.'],
+ ['Tiny Glade','Soft diorama','Soft bounce light and contact shadows on clean shapes.'],
+ ['Dorfromantik','Watercolour toy','Gently graded colour and tilt-shift blur make the board a toy.'],
+ ['Townscaper','Soft diorama','Flat pastel colour with deep soft occlusion in every corner.'],
+ ['Bad North','Graphic minimal','Pastel islands in soft fog; the fog colour is the mood.'],
+ ["Don't Starve",'Cut paper','Ink-drawn paper puppets with grain and a scratchy grade.'],
+ ['Gris','Watercolour','Colour itself is unlocked as the story heals.'],
+ ['Valheim','Retro low-poly','Rough models and textures under modern light and air.'],
+ ['Superhot','Graphic minimal','White world, red enemies: colour means one thing only.'],
+ ['Lego Bricktales','Soft diorama','A real material (glossy plastic) is the whole style.'],
+];
+function bars(el,rows){const max=Math.max(...rows.map(r=>r[1]));el.innerHTML=rows.map(([k,v,hi])=>`<div class="bar${hi?' hi':''}" title="${k}: ${v} games"><span>${k}</span><span class="track"><span class="fill" style="width:${v/max*100}%;display:block"></span></span><span class="v">${v}</span></div>`).join('');}
+bars(document.getElementById('barsLight'),LIGHT);bars(document.getElementById('barsPost'),POST);
+document.getElementById('trickRows').innerHTML=TRICKS.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('');
+
+/* ---------- the one shader ---------- */
+const C=h=>new THREE.Color(h);
+function sharedUniforms(){return{
+ uLightDir:{value:new THREE.Vector3(.55,.75,.35).normalize()},uSun:{value:C('#fff4e0')},uSky:{value:C('#a8d4f0')},uGround:{value:C('#7fae5a')},
+ uShadowTint:{value:C('#6a78c8')},uRimCol:{value:C('#fff1d6')},uFogCol:{value:C('#bfe0f2')},
+ uMode:{value:0},uBands:{value:3},uSoft:{value:.3},uHalf:{value:0},uHue:{value:0},uRim:{value:0},uFog:{value:0},
+ uPaper:{value:0},uHalftone:{value:0},uWater:{value:0},uDither:{value:0},uTerm:{value:0},uSphereN:{value:0},uPx:{value:1},uAmb:{value:.35}};}
+const VERT=`attribute vec3 aSphereN;uniform float uSphereN;varying vec3 vN;varying vec3 vW;
+void main(){vec3 n=normalize(mix(normal,aSphereN,uSphereN));vN=normalize(mat3(modelMatrix)*n);vec4 w=modelMatrix*vec4(position,1.);vW=w.xyz;gl_Position=projectionMatrix*viewMatrix*w;}`;
+const FRAG=`uniform vec3 uColor,uLightDir,uSun,uSky,uGround,uShadowTint,uRimCol,uFogCol;
+uniform float uMode,uBands,uSoft,uHalf,uHue,uRim,uFog,uPaper,uHalftone,uWater,uDither,uTerm,uPx,uAmb;
+varying vec3 vN;varying vec3 vW;
+float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float nz(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+float bayer(vec2 p){p=mod(floor(p),4.);int x=int(p.x),y=int(p.y);int i=x+y*4;
+ float m[16];m[0]=0.;m[1]=8.;m[2]=2.;m[3]=10.;m[4]=12.;m[5]=4.;m[6]=14.;m[7]=6.;m[8]=3.;m[9]=11.;m[10]=1.;m[11]=9.;m[12]=15.;m[13]=7.;m[14]=13.;m[15]=5.;
+ float r=0.;for(int k=0;k<16;k++){if(k==i)r=m[k];}return r/16.;}
+void main(){
+ vec3 n=normalize(vN);if(!gl_FrontFacing)n=-n;vec3 V=normalize(cameraPosition-vW);
+ float ndl=dot(n,uLightDir);float l=mix(max(ndl,0.),ndl*.5+.5,uHalf);
+ vec2 sp=gl_FragCoord.xy/uPx;
+ float lb=l;
+ if(uMode>.5){float b=max(uBands,1.);float x=l*b+(bayer(sp)-.5)*uDither;float f=fract(x),i=floor(x);float s=uSoft*.5+.002;lb=clamp((i+smoothstep(1.-2.*s,1.,f))/max(b-1.,1.),0.,1.);}
+ vec3 shadow=uColor*mix(vec3(.16),uShadowTint*.55,uHue);
+ vec3 lit=uColor*uSun*1.08;
+ vec3 col=mix(shadow,lit,lb);
+ col+=uColor*mix(uGround,uSky,n.y*.5+.5)*uAmb*(1.-lb*.6)*.5;
+ col+=uColor*vec3(1.,.28,.18)*uTerm*smoothstep(.12,.3,l)*smoothstep(.55,.3,l)*.9;
+ float fr=pow(1.-max(dot(n,V),0.),3.);
+ col+=uRimCol*fr*uRim*(.35+.65*(ndl*.5+.5))*(1.-smoothstep(.35,.9,n.y));
+ float g=nz(sp*.07)*.6+nz(sp*.31)*.4;
+ col*=mix(1.,(1.-fr*.5)*(.86+.28*g),uWater);col=mix(col,mix(col,vec3(1.),.22),uWater*.6);
+ float cs=7.;vec2 q=mat2(.7071,-.7071,.7071,.7071)*sp;vec2 cell=fract(q/cs)-.5;float rad=sqrt(clamp(1.-lb,0.,1.))*.62;
+ col*=mix(1.,length(cell)<rad?.6:1.,uHalftone);
+ col*=1.-uPaper*(nz(sp*.9)*.14+nz(sp*.045)*.1);
+ float d=length(cameraPosition-vW);float ff=1.-exp(-pow(d*uFog,2.));col=mix(col,uFogCol,ff);
+ gl_FragColor=vec4(col,1.);
+ #include <colorspace_fragment>
+}`;
+const HULLV=`uniform float uW,uScreen;void main(){vec4 w=modelMatrix*vec4(position,1.);vec3 n=normalize(mat3(modelMatrix)*normal);float d=length(cameraPosition-w.xyz);
+ float k=uW*mix(clamp(1.6-d*.06,.35,1.4),d*.09,uScreen);w.xyz+=n*k;gl_Position=projectionMatrix*viewMatrix*w;}`;
+const HULLF=`uniform vec3 uInk;void main(){gl_FragColor=vec4(uInk,1.);
+ #include <colorspace_fragment>
+}`;
+
+/* ---------- presets: the proposed toon set ---------- */
+const BASE={mode:0,bands:3,soft:.3,half:0,hue:0,rim:0,fog:0,paper:0,halftone:0,water:0,dither:0,term:0,sphereN:0,amb:.35,
+ ink:0,inkScreen:0,contact:0,px:1,sun:'#fff4e0',sky:'#a8d4f0',ground:'#7fae5a',tint:'#6a78c8',rimCol:'#fff1d6',fogCol:'#bfe0f2',inkCol:'#2a2238',bg:'#a8d4f0'};
+const SET=[
+ {id:'sunday',name:'Sunday Toon',cost:'light',use:'Ranch default, free building, the café',
+  say:"Three soft bands, sky-tinted shadows, a warm rim and painted normals. No outlines, matching Evan's five favourites.",
+  p:{mode:1,bands:3,soft:.45,half:.6,hue:1,rim:.45,fog:.008,sphereN:1,contact:1}},
+ {id:'ink',name:'Ink Toon',cost:'medium',use:'The school, the brute fight, comic moments',
+  say:'Two crisp bands and an ink shell that thins with distance. Bold and readable from far away.',
+  p:{mode:1,bands:2,soft:.06,half:.35,hue:.85,rim:.2,fog:.02,sphereN:1,contact:1,ink:.03}},
+ {id:'clay',name:'Clay',cost:'light',use:'Characters, the family cast, close-ups',
+  say:'Soft wrapped light with a warm glow at the shadow edge, like skin and clay. The cheap half of the Storybook study.',
+  p:{mode:0,half:1,hue:.9,term:1,rim:.6,fog:.05,sphereN:1,contact:1,sun:'#ffe9c4',fogCol:'#cfe6c9',tint:'#5f7fb0',bg:'#cfe6c9',sky:'#bfe3d0'}},
+ {id:'paper',name:'Paper Toon',cost:'medium',use:'Papercraft figures, storybook pages',
+  say:'Two flat tones, paper grain over everything and printed dots in the shadows, with a thin ink line.',
+  p:{mode:1,bands:2,soft:.08,half:.3,hue:.6,paper:1,halftone:1,ink:.018,contact:1,bg:'#f1e9da',sky:'#f1e9da',fogCol:'#f1e9da',fog:.02}},
+ {id:'water',name:'Watercolour',cost:'medium',use:'Maps, tile boards, memories',
+  say:'Washed colour, darker pigment at the edges and paper granulation. Dorfromantik and Gris are the reference.',
+  p:{mode:1,bands:3,soft:.9,half:.8,hue:1,water:1,paper:.6,fog:.045,contact:.6,bg:'#e8eef0',sky:'#dbe8ee',fogCol:'#e8eef0'}},
+ {id:'moon',name:'Moon Toon',cost:'light',use:'Moonbase, space, night',
+  say:'Cool key light, two hard bands, deep blue shadows and a cyan rim, like a hologram lit by radio glow.',
+  p:{mode:1,bands:2,soft:.05,half:.2,hue:1,rim:1.1,fog:.04,sphereN:1,contact:1,amb:.2,sun:'#e8f0ff',sky:'#1b2547',ground:'#2a2f45',tint:'#2b3a8c',rimCol:'#5ff0ff',fogCol:'#141c36',bg:'#141c36'}},
+ {id:'pixel',name:'Pixel Toon',cost:'light',use:"Grace's basement, the 8-bit coins, memory places",
+  say:'Rendered at a quarter size, three bands with dithering and a chunky line. Instant memory.',
+  p:{mode:1,bands:3,soft:0,half:.5,hue:.8,dither:.8,rim:.2,ink:.025,contact:1,px:.25}},
+];
+const PLAIN={...BASE};
+const preset=p=>({...BASE,...p});
+
+/* ---------- the scene ---------- */
+function blobTex(){const c=document.createElement('canvas');c.width=c.height=128;const g=c.getContext('2d');const r=g.createRadialGradient(64,64,4,64,64,62);
+ r.addColorStop(0,'rgba(20,25,40,.75)');r.addColorStop(.55,'rgba(20,25,40,.35)');r.addColorStop(1,'rgba(20,25,40,0)');g.fillStyle=r;g.fillRect(0,0,128,128);return new THREE.CanvasTexture(c);}
+const BLOB=blobTex();
+function withSphereN(geo,center){const p=geo.attributes.position,n=geo.attributes.normal,a=new Float32Array(p.count*3);
+ for(let i=0;i<p.count;i++){let x,y,z;if(center){x=p.getX(i)-center.x;y=p.getY(i)-center.y;z=p.getZ(i)-center.z;const L=Math.hypot(x,y,z)||1;x/=L;y/=L;z/=L;}else{x=n.getX(i);y=n.getY(i);z=n.getZ(i);}a.set([x,y,z],i*3);}
+ geo.setAttribute('aSphereN',new THREE.BufferAttribute(a,3));return geo;}
+function hullGeo(geo){const g=geo.clone();for(const k of Object.keys(g.attributes))if(k!=='position')g.deleteAttribute(k);const m=mergeVertices(g,1e-3);m.computeVertexNormals();return m;}
+
+function buildScene(U){
+ const scene=new THREE.Scene(),hulls=[],blobs=[],spin=new THREE.Group();scene.add(spin);
+ const hullU={uW:{value:0},uScreen:{value:0},uInk:{value:C('#2a2238')}};
+ const hullMat=new THREE.ShaderMaterial({uniforms:hullU,vertexShader:HULLV,fragmentShader:HULLF,side:THREE.BackSide});
+ const mats={};const mat=hex=>mats[hex]||(mats[hex]=new THREE.ShaderMaterial({uniforms:{...U,uColor:{value:C(hex)}},vertexShader:VERT,fragmentShader:FRAG}));
+ const add=(geo,hex,pos,{rot,center,outline=true}={})=>{withSphereN(geo,center);const m=new THREE.Mesh(geo,mat(hex));m.position.copy(pos);if(rot)m.rotation.set(...rot);spin.add(m);
+  if(outline){const hm=new THREE.Mesh(hullGeo(geo),hullMat);hm.position.copy(pos);if(rot)hm.rotation.copy(m.rotation);spin.add(hm);hulls.push(hm);}return m;};
+ const blob=(x,z,s)=>{const b=new THREE.Mesh(new THREE.PlaneGeometry(s,s),new THREE.MeshBasicMaterial({map:BLOB,transparent:true,depthWrite:false}));b.rotation.x=-Math.PI/2;b.position.set(x,.205,z);spin.add(b);blobs.push(b);};
+ const V=(x,y,z)=>new THREE.Vector3(x,y,z);
+ add(new THREE.CylinderGeometry(6,6.3,.4,48),'#86c060',V(0,0,0),{outline:false});
+ add(new THREE.SphereGeometry(3,32,16,0,Math.PI*2,0,Math.PI/2),'#78b356',V(-3.2,-.6,-3.4),{outline:false});
+ // barn
+ add(new THREE.BoxGeometry(1.8,1.3,1.5),'#c8423f',V(1.4,.85,-.6));
+ const roof=new THREE.CylinderGeometry(1.1,1.1,2.05,3,1);roof.rotateX(-Math.PI/2);roof.rotateY(Math.PI/2);add(roof,'#f4ead8',V(1.4,2.05,-.6));
+ add(new THREE.BoxGeometry(.55,.8,.06),'#5b3a2a',V(1.4,.6,.17),{outline:false});
+ blob(1.4,-.6,3.2);
+ // tree: crown of merged lumps with sphere normals
+ const lumps=[[0,0,0,.95],[.6,.25,.2,.7],[-.55,.2,-.1,.72],[.1,.55,-.4,.66],[-.1,-.2,.55,.62],[.3,.7,.35,.55]].map(([x,y,z,r])=>{const g=new THREE.IcosahedronGeometry(r,2);g.translate(x,y,z);return g;});
+ add(mergeGeometries(lumps),'#3f9a4c',V(-1.7,2.35,.5),{center:V(0,.2,0)});
+ add(new THREE.CylinderGeometry(.14,.2,1.5,10),'#7a5032',V(-1.7,.95,.5));
+ blob(-1.7,.5,2.6);
+ // Abbie stand-in
+ add(new THREE.CapsuleGeometry(.28,.45,6,16),'#f07aa8',V(.1,.75,1.6));
+ add(new THREE.SphereGeometry(.3,24,16),'#f2c7a5',V(.1,1.42,1.6),{center:V(0,0,0)});
+ add(new THREE.SphereGeometry(.32,24,16,0,Math.PI*2,0,Math.PI*.45),'#6b3e2e',V(.1,1.47,1.57));
+ blob(.1,1.6,1.1);
+ // rocks, bushes, fence
+ [[-3,.4,2.2,.42,'#a7a3a8'],[3.4,.35,1.8,.32,'#9d99a0']].forEach(([x,y,z,r,c])=>{add(new THREE.DodecahedronGeometry(r,0),c,V(x,y,z));blob(x,z,r*3);});
+ [[3.1,.5,-2.4,.5],[-.6,.45,-2.4,.45],[2.4,.4,2.8,.35]].forEach(([x,y,z,r])=>{add(new THREE.IcosahedronGeometry(r,2),'#4fa85a',V(x,y,z),{center:V(0,0,0)});blob(x,z,r*3);});
+ for(let i=0;i<7;i++){const a=-.3+i*.32,x=Math.cos(a)*4.6,z=Math.sin(a)*4.6;add(new THREE.BoxGeometry(.12,.7,.12),'#d9b07a',V(x,.55,z));}
+ add(new THREE.TorusGeometry(4.6,.05,6,40,1.95),'#d9b07a',V(0,.75,0),{rot:[Math.PI/2,0,-.3+0],outline:false});
+ return {scene,spin,hulls,hullU,blobs};
+}
+
+function apply(ctx,p){const U=ctx.U;
+ U.uMode.value=p.mode;U.uBands.value=p.bands;U.uSoft.value=p.soft;U.uHalf.value=p.half;U.uHue.value=p.hue;U.uRim.value=p.rim;U.uFog.value=p.fog;
+ U.uPaper.value=p.paper;U.uHalftone.value=p.halftone;U.uWater.value=p.water;U.uDither.value=p.dither;U.uTerm.value=p.term;U.uSphereN.value=p.sphereN;U.uAmb.value=p.amb;
+ U.uSun.value.set(p.sun);U.uSky.value.set(p.sky);U.uGround.value.set(p.ground);U.uShadowTint.value.set(p.tint);U.uRimCol.value.set(p.rimCol);U.uFogCol.value.set(p.fogCol);
+ if(p.lightDir)U.uLightDir.value.copy(p.lightDir);else U.uLightDir.value.set(.55,.75,.35).normalize();
+ ctx.S.hullU.uW.value=p.ink;ctx.S.hullU.uScreen.value=p.inkScreen;ctx.S.hullU.uInk.value.set(p.inkCol);
+ ctx.S.hulls.forEach(h=>h.visible=p.ink>0);ctx.S.blobs.forEach(b=>{b.visible=p.contact>0;b.material.opacity=p.contact;});
+ ctx.S.scene.background=ctx.bg.set(p.bg);ctx.px=p.px;}
+
+/* ---------- demos ---------- */
+const state={hero:SET[0],hue:1,bands:3,soft:.25,wrap:.6,rim:.8,inkW:.03,inkScreen:0,contact:1,air:.06,airCol:0,px:4,dither:.7,day:.32};
+const AIRS=[['Morning mist','#d9ecf5','#a8d4f0'],['Storybook green','#cfe6c9','#bfe3d0'],['Dusk','#f2c9a8','#f0b38a'],['Storm','#8f9aa8','#7d8896']];
+const lerpC=(a,b,t)=>C(a).lerp(C(b),t);
+function dayPreset(t){ // 0 night, .25 dawn, .5 noon, .75 dusk, 1 night
+ const keys=[[0,'#3a4a8a','#141c36','#22284a','#5ff0ff'],[.25,'#ffb38a','#f4c3a8','#5a5aa8','#ffd6b0'],[.5,'#fff6e6','#a8d4f0','#6a78c8','#fff1d6'],[.75,'#ff9a5a','#f0a070','#6a4a9a','#ffc08a'],[1,'#3a4a8a','#141c36','#22284a','#5ff0ff']];
+ let i=0;while(i<keys.length-2&&t>keys[i+1][0])i++;const a=keys[i],b=keys[i+1],k=(t-a[0])/(b[0]-a[0]);
+ const sun=lerpC(a[1],b[1],k),sky=lerpC(a[2],b[2],k),tint=lerpC(a[3],b[3],k),rim=lerpC(a[4],b[4],k);
+ const ang=(t-.25)*Math.PI*2,el=Math.sin(ang);const dir=new THREE.Vector3(Math.cos(ang)*.8,Math.max(el,.12)*.9+.1,.45).normalize();
+ const night=1-Math.min(1,Math.max(0,el*3+.4));
+ return preset({...SET[0].p,sun:'#'+sun.getHexString(),sky:'#'+sky.getHexString(),fogCol:'#'+sky.getHexString(),bg:'#'+sky.getHexString(),tint:'#'+tint.getHexString(),rimCol:'#'+rim.getHexString(),rim:.45+night*.6,amb:.35-night*.15,lightDir:dir,fog:.008+night*.025,ground:night>.5?'#2a2f45':'#7fae5a'});}
+const DEMOS={
+ hero:{split:()=>PLAIN,main:()=>preset(state.hero.p)},
+ hue:{split:()=>preset({...SET[0].p,hue:0,rim:0}),main:()=>preset({...SET[0].p,hue:state.hue,rim:0})},
+ ramp:{main:()=>preset({mode:1,bands:state.bands,soft:state.soft,half:state.wrap,hue:.9,contact:1,sphereN:1})},
+ rim:{main:()=>preset({...SET[0].p,rim:state.rim,rimCol:'#ffe8c0'})},
+ ink:{main:()=>preset({...SET[1].p,ink:state.inkW,inkScreen:state.inkScreen})},
+ normals:{split:()=>preset({...SET[0].p,bands:2,soft:.12,sphereN:0}),main:()=>preset({...SET[0].p,bands:2,soft:.12,sphereN:1})},
+ contact:{main:()=>preset({...SET[0].p,contact:state.contact})},
+ air:{main:()=>{const a=AIRS[state.airCol];return preset({...SET[0].p,fog:state.air,fogCol:a[1],bg:a[1],sky:a[2]});}},
+ pixel:{main:()=>preset({...SET[6].p,px:1/state.px,dither:state.dither})},
+ day:{main:()=>dayPreset(state.day)},
+};
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const live=new Map();
+function start(el){
+ const name=el.dataset.demo,def=DEMOS[name],canvas=el.querySelector('canvas');
+ let renderer;try{renderer=new THREE.WebGLRenderer({canvas,antialias:true});}catch(e){el.insertAdjacentHTML('beforeend','<p style="position:absolute;inset:auto 12px 12px;color:#fff">3D needs WebGL, which this browser has turned off.</p>');return;}
+ renderer.outputColorSpace=THREE.SRGBColorSpace;
+ const U=sharedUniforms(),S=buildScene(U),cam=new THREE.PerspectiveCamera(36,16/9,.1,100);
+ const ctx={U,S,bg:new THREE.Color(),px:1,az:.5,drag:null,split:.5,dirty:true,raf:0};
+ let line;if(def.split){line=document.createElement('div');line.className='split';el.appendChild(line);}
+ const size=()=>{const r=canvas.getBoundingClientRect();ctx.w=r.width;ctx.h=r.height;cam.aspect=r.width/r.height;cam.updateProjectionMatrix();};
+ size();const ro=new ResizeObserver(()=>{size();ctx.dirty=true;});ro.observe(canvas);
+ canvas.addEventListener('pointerdown',e=>{ctx.drag={x:e.clientX,az:ctx.az};canvas.setPointerCapture(e.pointerId);});
+ canvas.addEventListener('pointermove',e=>{if(!ctx.drag)return;const r=canvas.getBoundingClientRect();
+  if(def.split)ctx.split=Math.min(.97,Math.max(.03,(e.clientX-r.left)/r.width));else ctx.az=ctx.drag.az+(e.clientX-ctx.drag.x)*.008;ctx.dirty=true;});
+ canvas.addEventListener('pointerup',()=>ctx.drag=null);
+ const draw=t=>{
+  if(!reduce&&!ctx.drag)ctx.az+=.0018;
+  const R=13.5,az=ctx.az;cam.position.set(Math.sin(az)*R,6.2,Math.cos(az)*R);cam.lookAt(0,1,0);
+  const pr=Math.min(devicePixelRatio,2);
+  const main=def.main(),key=pr*main.px+'|'+ctx.w+'|'+ctx.h;if(key!==ctx.key){ctx.key=key;renderer.setPixelRatio(pr*main.px);renderer.setSize(ctx.w,ctx.h,false);}U.uPx.value=Math.max(1,pr*main.px);
+  if(def.split){const sx=Math.round(ctx.w*ctx.split);line.style.left=(ctx.split*100)+'%';
+   renderer.setScissorTest(true);apply(ctx,def.split());renderer.setScissor(0,0,sx,ctx.h);renderer.setViewport(0,0,ctx.w,ctx.h);renderer.render(S.scene,cam);
+   apply(ctx,main);renderer.setScissor(sx,0,ctx.w-sx,ctx.h);renderer.render(S.scene,cam);renderer.setScissorTest(false);}
+  else{apply(ctx,main);renderer.render(S.scene,cam);}
+  ctx.dirty=false;
+  ctx.raf=requestAnimationFrame(draw);};
+ ctx.raf=requestAnimationFrame(draw);
+ live.set(el,{stop(){cancelAnimationFrame(ctx.raf);ro.disconnect();renderer.dispose();renderer.forceContextLoss();line?.remove();canvas.replaceWith(canvas.cloneNode());}});
+}
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+ if(e.isIntersecting&&!live.has(e.target))start(e.target);
+ else if(!e.isIntersecting&&live.has(e.target)){live.get(e.target).stop();live.delete(e.target);}
+}),{rootMargin:'250px 0px'});
+document.querySelectorAll('[data-demo]').forEach(el=>io.observe(el));
+
+/* ---------- controls ---------- */
+const $=id=>document.getElementById(id);
+const chips=(host,items,get,set)=>{host.innerHTML=items.map((it,i)=>`<button class="chip" data-i="${i}" aria-pressed="${get()===i}">${it}</button>`).join('');
+ host.addEventListener('click',e=>{const b=e.target.closest('.chip');if(!b)return;set(+b.dataset.i);host.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed',String(c===b)));});};
+chips($('heroChips'),SET.map(s=>s.name),()=>SET.indexOf(state.hero),i=>{state.hero=SET[i];$('heroTag').textContent=SET[i].name;});
+chips($('airChips'),AIRS.map(a=>a[0]),()=>state.airCol,i=>state.airCol=i);
+const slide=(id,key,after)=>$(id).addEventListener('input',e=>{state[key]=+e.target.value;after&&after();});
+slide('hueTint','hue');slide('rampBands','bands',drawStrip);slide('rampSoft','soft',drawStrip);slide('rampWrap','wrap',drawStrip);
+slide('rimAmt','rim');slide('inkW','inkW');slide('contactAmt','contact');slide('airAmt','air');slide('pxAmt','px');slide('ditherAmt','dither');
+const NAMES=[[0,'Night'],[.18,'Dawn'],[.3,'Morning'],[.42,'Noon'],[.6,'Afternoon'],[.7,'Dusk'],[.82,'Night']];
+slide('dayT','day',()=>{let n='Night';for(const [t,s] of NAMES)if(state.day>=t)n=s;$('dayLabel').textContent=n;});
+$('inkWorld').onclick=()=>{state.inkScreen=0;$('inkWorld').setAttribute('aria-pressed','true');$('inkScreen').setAttribute('aria-pressed','false');};
+$('inkScreen').onclick=()=>{state.inkScreen=1;$('inkScreen').setAttribute('aria-pressed','true');$('inkWorld').setAttribute('aria-pressed','false');};
+function drawStrip(){const c=$('rampStrip'),g=c.getContext('2d'),W=c.width,H=c.height;
+ const base=[200,66,63],sh=[106*.55,120*.55,200*.55].map((v,i)=>base[i]*v/255),lt=[base[0],base[1]*.96,base[2]*.88];
+ for(let x=0;x<W;x++){const ndl=x/(W-1)*2-1;let l=state.wrap*(ndl*.5+.5)+(1-state.wrap)*Math.max(ndl,0);
+  {const b=state.bands,xx=l*b,f=xx-Math.floor(xx),i=Math.floor(xx),s=state.soft*.5+.002;const sm=t=>{t=Math.min(1,Math.max(0,(t-(1-2*s))/(2*s)));return t*t*(3-2*t);};l=Math.min(1,(i+sm(f))/Math.max(b-1,1));}
+  const col=sh.map((v,i)=>Math.round(v+(lt[i]-v)*l));g.fillStyle=`rgb(${col})`;g.fillRect(x,0,1,H);}}
+drawStrip();
+$('setCards').innerHTML=SET.map(s=>`<div class="card"><h3>${s.name}<span class="cost">${s.cost}</span></h3><p>${s.say}</p><span class="use">${s.use}</span></div>`).join('');
+</script>

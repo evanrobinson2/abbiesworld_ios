@@ -60,3 +60,6 @@ square; public domain). Vanderpoel, *The Human Figure* (planes before detail; pu
 Draw Comics the Marvel Way* (stick figure, cylinders, contour, detail). Evan's reference, the easydrawingguides.com
 superhero tutorials: a contour-first beginner order (head, neck, shoulders, arms in overlapping curves, torso, legs and
 kneecaps, costume). We keep its order of parts and its overlaps, and put the forms first so the drawing works in 3D.
+
+The artist's side (layers, the 12 creative checks, concept sheet to Blender, and the practice-rep protocol) is in
+`ARTIST_METHOD.md`.

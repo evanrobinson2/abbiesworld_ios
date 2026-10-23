@@ -99,6 +99,40 @@ body.l-off #fl,body.r-off #fr{display:flex}
 .list details.done summary{list-style:none;cursor:pointer}.list details.done summary::-webkit-details-marker{display:none}
 .list details.done summary b::after{content:" \u203a";display:inline-block;transition:transform .15s}.list details.done[open] summary b::after{transform:rotate(90deg)}
 .list details.done a{opacity:.75}
+/* read and unread: a dot and bold title until you open it (or mark it unread again) */
+.list a .dot,.card .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--aw-accent);margin-right:6px;vertical-align:middle;flex:none}
+.list a.unread strong{font-weight:800}
+.list a:not(.unread) strong{font-weight:500}
+/* right panel tabs */
+.tabs{display:flex;gap:4px;flex:1;padding:3px;border-radius:999px;background:color-mix(in srgb,var(--aw-ink) 6%,transparent)}
+.tabs button{all:unset;flex:1;text-align:center;padding:7px 10px;border-radius:999px;font-weight:600;font-size:14px;cursor:pointer;color:var(--aw-soft)}
+.tabs button[aria-selected=true]{background:var(--aw-surface);color:var(--aw-ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.tabs button:focus-visible{outline:2px solid var(--aw-accent)}
+.tabs i{font-style:normal;margin-left:6px;font-size:11px;padding:1px 6px;border-radius:9px;background:var(--aw-accent);color:var(--aw-on-accent)}
+.tabs i:empty{display:none}
+[role=tabpanel][hidden]{display:none!important}
+/* the notes app: write, keep, send to the study's thread, ask for a review */
+.notes{overflow-y:auto;padding:0 16px 20px;flex:1;display:grid;align-content:start;gap:12px}
+.notes h3{margin:0;font:600 17px/1.2 var(--aw-display)}
+.notes .to{font-size:12px;color:var(--aw-soft)}
+.notes textarea{box-sizing:border-box;width:100%;min-height:96px;resize:vertical;padding:10px 12px;border-radius:14px;border:1px solid var(--aw-line);background:var(--aw-bg);color:var(--aw-ink);font:15px/1.4 var(--aw-font)}
+.notes textarea:focus{outline:2px solid var(--aw-accent);outline-offset:0;border-color:transparent}
+.notes .acts{display:flex;flex-wrap:wrap;gap:6px}
+.notes .acts button,.links a,.links button{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;font-weight:600;font-size:13px;border:1px solid var(--aw-line);background:color-mix(in srgb,var(--aw-surface) 70%,transparent);color:var(--aw-ink)}
+.notes .acts .primary{background:var(--aw-accent);color:var(--aw-on-accent);border-color:transparent}
+.notes .acts button:disabled{opacity:.45;cursor:default}
+.notes .acts button:focus-visible,.links a:focus-visible,.links button:focus-visible{outline:2px solid var(--aw-accent);outline-offset:2px}
+.notes ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.notes li{padding:10px 12px;border-radius:12px;background:var(--aw-bg);border:1px solid var(--aw-line);font-size:14px;display:grid;gap:4px}
+.notes li p{margin:0;white-space:pre-wrap;color:var(--aw-ink)}
+.notes li small{display:flex;gap:8px;align-items:center;color:var(--aw-soft);font-size:12px}
+.notes li small b{font-weight:600;color:var(--aw-accent)}
+.notes li small button{all:unset;cursor:pointer;margin-left:auto;padding:2px 6px;border-radius:6px}
+.notes li small button:hover{background:color-mix(in srgb,var(--aw-ink) 7%,transparent)}
+.notes .status{font-size:13px;color:var(--aw-soft);min-height:1.2em}
+.links{display:flex;flex-wrap:wrap;gap:6px}
+.chain{display:flex;gap:6px}
+.chain a{flex:1;justify-content:center}
 /* details */
 .facets{overflow-y:auto;padding:0 16px 20px;flex:1;display:grid;align-content:start;gap:16px}
 .facets img.hero{width:100%;aspect-ratio:16/10;object-fit:contain;border-radius:14px;border:1px solid var(--aw-line);background:var(--aw-raised)}
@@ -142,8 +176,9 @@ body.l-off #fl,body.r-off #fr{display:flex}
 </main>
 <div class="grip" id="gr" role="separator" aria-orientation="vertical" aria-label="Resize the details" tabindex="0"></div>
 <aside class="side" id="right" aria-label="Details">
- <div class="bar"><h2>Details</h2><button class="ib" id="hide-r" aria-label="Hide the details" title="Hide the details  ]">__DETAILS__</button></div>
- <div class="facets" id="facets"></div>
+ <div class="bar"><div class="tabs" role="tablist" aria-label="Right panel"><button type="button" role="tab" id="tab-notes" aria-selected="true">Notes<i id="notes-n"></i></button><button type="button" role="tab" id="tab-facets" aria-selected="false">Details</button></div><button class="ib" id="hide-r" aria-label="Hide the panel" title="Hide the panel  ]">__DETAILS__</button></div>
+ <div class="notes" id="notes" role="tabpanel" aria-labelledby="tab-notes"></div>
+ <div class="facets" id="facets" role="tabpanel" aria-labelledby="tab-facets" hidden></div>
 </aside>
 <script type="module">
 import {mountProfileButton, getProfile, currentTheme} from '/theme/aw.mjs';
@@ -158,36 +193,42 @@ for (const b of document.querySelectorAll('.ib')) b.innerHTML = b.innerHTML.repl
 // 0-5, with the reason). Newest first on Home comes from `at`.
 const S = [
  {id:'hexcity', t:'Founding City on Hexes', s:'A headland chosen by simulation; the tile splits into 217 hex blocks and a town grows', src:'hexcity/index.html', img:'hexcity/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0033', at:'2026-10-23T12:45Z', st:'Ready', impact:4, why:'A city-builder version of Abbie\'s World: water by gravity, goods chains, four kinds of household and townspeople who talk, all from the land up.'},
- {id:'storybook', t:'Storybook Light', s:'Can three.js paint the soft clay animated-film look? Live, part by part', src:'storybook/index.html', img:'storybook/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0028', at:'2026-10-23T10:20Z', st:'Ready', impact:4, why:'Shows the film look runs live in the browser: eight switchable shader parts beside your picture.'},
- {id:'moon-base-kit', t:'Moon Base Kit', s:'200 low-poly pieces for the Moon shooter, 20 built with baked maps and mass', src:'moon-base-kit/index.html', img:'moon-base-kit/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0031', at:'2026-10-23T11:45Z', st:'Round 1', impact:4, why:'The world the low-gravity shooter walks through: named parts, real materials baked to colour, roughness and normal maps, mass per part, and diegetic gauges and lamps instead of a HUD.'},
- {id:'brute-fight', t:'Brute Fight', s:'Two painted Meshy brutes brawl in a ranch ring: jab, heavy, uppercut, hammer', src:'brute-fight/index.html', img:'brute-fight/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0027', at:'2026-10-23T10:05Z', st:'Playable', impact:4, why:'The first fighting game: Meshy heroes cleaned up, painted, rigged on one skeleton, 19 moves with a hit and a blocked reaction for every blow.'},
- {id:'family-cast', t:'Family Cast', s:'Everyone in Daddy\'s memory places, then and now, with designed voices to pick', src:'family-cast/index.html', img:'family-cast/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0030', at:'2026-10-23T10:10Z', st:'Picking voices', impact:4, why:'One shared cast for every memory game: a storybook sheet and a designed voice per person, so the school, the basement and the Moon base all sound like the same family.'},
-{id:'school-jump', t:'The School Jump', s:'Climb the old school at dusk, sneak the roof, 31 balls for the dog', src:'school/index.html', img:'school/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0026', at:'2026-10-23T09:30Z', st:'Playable', impact:4, why:'A spoken memory became a playable game in one sitting: first-person climb, iso roof, a hang-drop and a gold memory coin.'},
- {id:'basement', t:'Grace\u2019s Basement', s:'The office under the café: her 1986 computer, playable', src:'basement/index.html', img:'basement/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0024', at:'2026-10-23T08:20Z', st:'Playable', impact:3, why:'The first room you play from the side, with a working computer, disks and ten coins to find.'},
- {id:'welcome', t:'Welcome to Abbie’s World', s:'The tour guide, three welcomes, the 30-second tour', src:'welcome/index.html', img:'welcome/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0022', at:'2026-10-23T07:40Z', st:'Your call', impact:4, why:'How every new player meets the game, and the list of stops every new feature can join.'},
- {id:'turnaround-hero', t:'Turnaround Hero', s:'One exact heroic figure, built the way the bruiser taught us', src:'turnaround-hero/index.html', img:'turnaround-hero/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0023', at:'2026-10-23T07:15Z', st:'Ready', impact:3, why:'Applies the bruiser method to a second figure: turnaround, depth ruler, anatomy base, planes.'},
- {id:'bruiser', t:'Bruiser bake-off', s:'Six ways to split one brute, scored from the same camera', src:'bruiser/index.html', img:'bruiser/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0021', at:'2026-10-23T06:40Z', st:'In progress', impact:4, why:'Finds the way of splitting a model across jobs that gets one exact figure right.'},
- {id:'space-mail', t:'Space Mail', s:'Low-gravity letter romp, playable', src:'spacemail/index.html', img:'spacemail/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0012', at:'2026-10-23T05:03Z', st:'Playable', impact:2, why:'A whole mini game designed from our identity; waiting on your go to build it.'},
- {id:'cafe-study', t:'The café', s:'The study: map, town, front, inside', src:'cafe/study.html', img:'cafe/img/interior-party_0.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:50Z', st:'Your call', impact:2, why:'Decides what Abbie’s café is at every distance before anything is built.'},
- {id:'cafe-r2', t:'Café back bar and styles', s:'Locked back bar; five pieces in three styles', src:'cafe/round2.html', img:'cafe/img/r2/backbar-front_0.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T07:30Z', st:'Your call', impact:3, why:'Picks the model style for every café piece.'},
- {id:'cafe-manifest', t:'Café manifest', s:'Every item in your pick, floors and walls', src:'cafe/manifest.html', img:'cafe/img/interior-party_0.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T07:15Z', st:'Locked', impact:3, why:'The list every café model is built from.'},
- {id:'cafe', t:'The café proofs', s:'48 pictures by view and style', src:'cafe/index.html', img:'cafe/img/tile-party_0.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:12Z', st:'Proofs', impact:1, why:'You picked the dance-party room from these.'},
- {id:'bodies-study', t:'Bodies', s:'The normal human: proportions, muscles, scorecard', src:'bodies-study/index.html', img:'bodies-study/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0016', at:'2026-10-23T05:40Z', st:'Done', impact:4, why:'The canon of a normal human body every figure is measured against.'},
- {id:'bodies', t:'Papercraft figures', s:'Paper bodies from your picks, in 3D', src:'bodies/index.html', img:'bodies/thumb.jpg', g:'Roman paper warrior', n:'AW-STUDY-0017', at:'2026-10-23T05:15Z', st:'In progress', impact:3, why:'Body types the Roman kit and every later figure stand on.'},
- {id:'overview', t:'Paper warrior', s:'Where the warrior stands', src:'warrior/index.html', img:'warrior/img/proof_c.jpg', g:'Roman paper warrior', at:'2026-10-23T04:42Z', st:'Done', impact:5, why:'Set the parts-first rule: each piece is modelled and fitted on its own.'},
- {id:'round1', t:'Round 1', s:'Fit the image', src:'warrior/index.html#round1', img:'warrior/img/master.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:3, why:'First image-to-model fit with a loss you can watch fall.'},
- {id:'round2', t:'Round 2', s:'Keep the style', src:'warrior/index.html#round2', img:'warrior/img/abc_torso.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'Kept the papercraft look while the fit improved.'},
- {id:'round3', t:'Round 3', s:'Three views', src:'warrior/index.html#round3', img:'warrior/img/r3_spin_sheet.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:3, why:'Front, side and back from one sheet; the modeler now fits all three.'},
- {id:'props', t:'Props and kit', s:'How the parts were fitted', src:'warrior/index.html#offshoots', img:'warrior/img/kit_exploded.jpg', g:'Roman paper warrior', at:'2026-10-22T18:40Z', st:'Done', impact:4, why:'Became the six-part Roman kit used by every Roman figure.'},
- {id:'props3d', t:'Five props in 3D', s:'Turn and zoom each prop, next to its image', src:'/models', img:'img/props-cuirass.png', g:'Roman paper warrior', at:'2026-10-23T03:59Z', st:'Live', impact:3, why:'Started the model viewer you now review every model in.'},
- {id:'helmet', t:'Paper helmet', s:'Same camera, loss and crops', src:'helmet/index.html', img:'helmet/C.jpg', g:'Helmet', at:'2026-10-22T18:40Z', st:'Done', impact:4, why:'Made "same camera before and after" a rule for every study.'},
- {id:'ridge', t:'Ridge helmet', s:'Late-Roman helmet for Fritigern', src:'helmet/index.html#ridge', img:'helmet/ridge.jpg', g:'Helmet', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'The first piece of Fritigern’s 4th-century gear.'},
- {id:'atelier', t:'Atelier pack', s:'Trees, rocks and props, before and after', src:'atelier/index.html', img:'atelier/img/after-z.jpg', g:'Models', at:'2026-10-22T18:40Z', st:'Live', impact:5, why:'Its trees, rocks and props replaced the Ranch’s old models in the game.'},
+{id:'school-ready', t:'School Jump: Game-Ready', s:'One tap moves the right hand; a new school, bub the black lab and young Daddy at golden dusk', src:'school-ready/index.html', img:'school-ready/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0032', at:'2026-10-23T12:30Z', st:'Playable', impact:4, why:'The school jump made game ready: the climb fixed, a full UX pass, and every model rebuilt as a hero low-poly recipe that the next memory game can reuse.'},
+ {id:'storybook', t:'Storybook Light', s:'Can three.js paint the soft clay animated-film look? Live, part by part', src:'storybook/index.html', img:'storybook/img/thumb.jpg', g:'Look and welcome', n:'AW-STUDY-0028', at:'2026-10-23T10:20Z', st:'Ready', impact:4, why:'Shows the film look runs live in the browser: eight switchable shader parts beside your picture.', art:['Q566yNYkrgSe2HA2uyZCdw']},
+ {id:'moon-base-kit', t:'Moon Base Kit', s:'200 low-poly pieces for the Moon shooter, 20 built with baked maps and mass', src:'moon-base-kit/index.html', img:'moon-base-kit/img/thumb.jpg', g:'Places and kits', n:'AW-STUDY-0031', at:'2026-10-23T11:45Z', st:'Round 1', impact:4, why:'The world the low-gravity shooter walks through: named parts, real materials baked to colour, roughness and normal maps, mass per part, and diegetic gauges and lamps instead of a HUD.', art:['1MDFHcznkW115exvyowChB'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa', tt:'Bruiser study and Moon heroes'},
+ {id:'brute-fight', t:'Brute Fight', s:'Two painted Meshy brutes brawl in a ranch ring: jab, heavy, uppercut, hammer', src:'brute-fight/index.html', img:'brute-fight/img/thumb.jpg', g:'Humans and humanoids', n:'AW-STUDY-0027', at:'2026-10-23T10:05Z', st:'Playable', impact:4, why:'The first fighting game: Meshy heroes cleaned up, painted, rigged on one skeleton, 19 moves with a hit and a blocked reaction for every blow.', art:['YYF4WSTP3thrYMLN3828x7','RDVtjfhmmwnoyeACiUHEhN'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa', tt:'Bruiser study and Moon heroes'},
+ {id:'family-cast', t:'Family Cast', s:'Everyone in Daddy\'s memory places, then and now, with designed voices to pick', src:'family-cast/index.html', img:'family-cast/thumb.jpg', g:'Humans and humanoids', n:'AW-STUDY-0030', at:'2026-10-23T10:10Z', st:'Picking voices', impact:4, why:'One shared cast for every memory game: a storybook sheet and a designed voice per person, so the school, the basement and the Moon base all sound like the same family.', art:['VYAm5HZuK9hd45yUixN9it'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh', tt:'Family cast'},
+ {id:'figures', t:'Low-Poly Figure Fidelity', s:'Young Daddy, bub and the basement girl rebuilt so the storybook light has form to work on', src:'figures/index.html', img:'figures/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0034', at:'2026-10-23T13:20Z', st:'Ready', impact:4, why:'The memory-place figures were stacks of primitives; now each is a few skinned surfaces with cloth, hair and fur, so rim light, glowing ears and the pixel pass read as a character.'},
+{id:'school-jump', t:'The School Jump', s:'Climb the old school at dusk, sneak the roof, 31 balls for the dog', src:'school/index.html', img:'school/img/thumb.jpg', g:'Games from memories', n:'AW-STUDY-0026', at:'2026-10-23T09:30Z', st:'Playable', impact:4, why:'A spoken memory became a playable game in one sitting: first-person climb, iso roof, a hang-drop and a gold memory coin.', art:['H7vGJvJUVxf6RXQ7E9jLsK','QT4YGo5YrqPrPTyUzBmRpR'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N', tt:'The school jump'},
+ {id:'basement', t:'Grace\u2019s Basement', s:'The office under the café: her 1986 computer, playable', src:'basement/index.html', img:'basement/img/thumb.jpg', g:'Games from memories', n:'AW-STUDY-0024', at:'2026-10-23T08:20Z', st:'Playable', impact:3, why:'The first room you play from the side, with a working computer, disks and ten coins to find.', art:['LnC3NmrDSUefce2F1G4UCz','83Gz9SAGSo8yWfopDDzkhj'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D', tt:'Coffee shop office basement'},
+ {id:'welcome', t:'Welcome to Abbie’s World', s:'The tour guide, three welcomes, the 30-second tour', src:'welcome/index.html', img:'welcome/img/thumb.jpg', g:'Look and welcome', n:'AW-STUDY-0022', at:'2026-10-23T07:40Z', st:'Your call', impact:4, why:'How every new player meets the game, and the list of stops every new feature can join.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYW3oVJ5iRfHfiFPSwzDx1a9', tt:'Welcome tour'},
+ {id:'moon-heroes', t:'Moon Heroes', s:'Faceted Hero look and the 40-body base roster: shapes, sizes, races, aliens', src:'moon-heroes/index.html', img:'moon-heroes/ad/trio.jpg', g:'Humans and humanoids', n:'AW-STUDY-0029', at:'2026-10-23T10:02Z', st:'In progress', impact:4, why:'One faceted body set, PG and true to shape, that every hero and the gear kit fit.', art:['JV5ALAFxhkEcvQubse1joa'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa', tt:'Bruiser study and Moon heroes'},
+ {id:'roman-parts', t:'Roman figure parts', s:'Your reference man, part by part: helmet, cuirass, shoulders, belt, gladius, sandals', src:'/models/roman-helmet', img:'/review/img/roman-helmet-pick.jpg', g:'Humans and humanoids', n:'AW-STUDY-0020', at:'2026-10-23T05:00Z', st:'In progress', impact:3, why:'Parts-first modelling of one exact figure, each piece beside its picture.', art:['WUnBhZUT2bk2fxzwn3gM29','Hf5MLkWn3ZUcng7D7uk6C5'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eYU8LJDZsCWtV2hbr5a2EHcp', tt:'Roman Figure Parts'},
+ {id:'turnaround-hero', t:'Turnaround Hero', s:'One exact heroic figure, built the way the bruiser taught us', src:'turnaround-hero/index.html', img:'turnaround-hero/img/thumb.jpg', g:'Humans and humanoids', n:'AW-STUDY-0023', at:'2026-10-23T07:15Z', st:'Ready', impact:3, why:'Applies the bruiser method to a second figure: turnaround, depth ruler, anatomy base, planes.', art:['Vw2vXowABvCBSY6a9gucm7'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY6QpCj7mmRE64j1pc2aNyFY', tt:'AW-STUDY-0023 - Turnaround Hero'},
+ {id:'bruiser', t:'Bruiser bake-off', s:'Six ways to split one brute, scored from the same camera', src:'bruiser/index.html', img:'bruiser/img/thumb.jpg', g:'Humans and humanoids', n:'AW-STUDY-0021', at:'2026-10-23T06:40Z', st:'In progress', impact:4, why:'Finds the way of splitting a model across jobs that gets one exact figure right.', art:['R9NGKEM9KiNiX7QhqFwwMz','ByAkcmfe5wdxVqUkHVTAjb','SdZ1jB1tQCCL3Nhn2dbi2H'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa', tt:'Bruiser study and Moon heroes'},
+ {id:'space-mail', t:'Space Mail', s:'Low-gravity letter romp, playable', src:'spacemail/index.html', img:'spacemail/img/thumb.jpg', g:'Games from memories', n:'AW-STUDY-0012', at:'2026-10-23T05:03Z', st:'Playable', impact:2, why:'A whole mini game designed from our identity; waiting on your go to build it.'},
+ {id:'cafe-study', t:'The café', s:'The study: map, town, front, inside', src:'cafe/study.html', img:'cafe/img/interior-party_0.jpg', g:'Places and kits', n:'AW-STUDY-0013', at:'2026-10-23T05:50Z', st:'Your call', impact:2, why:'Decides what Abbie’s café is at every distance before anything is built.', art:['194BcmhPoEEPv1FbLeVVXF'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9', tt:'AW-STUDY-0013 - The Coffee Shop'},
+ {id:'cafe-r2', t:'Café back bar and styles', s:'Locked back bar; five pieces in three styles', src:'cafe/round2.html', img:'cafe/img/r2/backbar-front_0.jpg', g:'Places and kits', n:'AW-STUDY-0013', at:'2026-10-23T07:30Z', st:'Your call', impact:3, why:'Picks the model style for every café piece.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9', tt:'AW-STUDY-0013 - The Coffee Shop'},
+ {id:'cafe-manifest', t:'Café manifest', s:'Every item in your pick, floors and walls', src:'cafe/manifest.html', img:'cafe/img/interior-party_0.jpg', g:'Places and kits', n:'AW-STUDY-0013', at:'2026-10-23T07:15Z', st:'Locked', impact:3, why:'The list every café model is built from.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9', tt:'AW-STUDY-0013 - The Coffee Shop'},
+ {id:'cafe', t:'The café proofs', s:'48 pictures by view and style', src:'cafe/index.html', img:'cafe/img/tile-party_0.jpg', g:'Places and kits', n:'AW-STUDY-0013', at:'2026-10-23T05:12Z', st:'Proofs', impact:1, why:'You picked the dance-party room from these.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9', tt:'AW-STUDY-0013 - The Coffee Shop'},
+ {id:'bodies-study', t:'Bodies', s:'The normal human: proportions, muscles, scorecard', src:'bodies-study/index.html', img:'bodies-study/img/thumb.jpg', g:'Humans and humanoids', n:'AW-STUDY-0016', at:'2026-10-23T05:40Z', st:'Done', impact:4, why:'The canon of a normal human body every figure is measured against.', art:['CGwRyJLDXfCvTvyMdMZ7qP','V3o16ka5SEmm4mxZnDZexE','EADPbGGWcNTxFxN8oAiR1Y'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eY1oLKTSHLevi7mbEMgD3h3v', tt:'Human body study'},
+ {id:'bodies', t:'Papercraft figures', s:'Paper bodies from your picks, in 3D', src:'bodies/index.html', img:'bodies/thumb.jpg', g:'Humans and humanoids', n:'AW-STUDY-0017', at:'2026-10-23T05:15Z', st:'In progress', impact:3, why:'Body types the Roman kit and every later figure stand on.', art:['LE82RX3AP9mwMydQowHB6z','MJ7asT8iPXEmhtHfELHbMc','LsA91wWAuyyRc1oxhrXh1E'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa', tt:'AW-STUDY-0017 - Papercraft Figures'},
+ {id:'overview', t:'Paper warrior', s:'Where the warrior stands', src:'warrior/index.html', img:'warrior/img/proof_c.jpg', g:'Humans and humanoids', at:'2026-10-23T04:42Z', st:'Done', impact:5, why:'Set the parts-first rule: each piece is modelled and fitted on its own.', art:['He3iTbBCWNgP76wGvaMurx'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'round1', t:'Round 1', s:'Fit the image', src:'warrior/index.html#round1', img:'warrior/img/master.jpg', g:'Humans and humanoids', at:'2026-10-22T18:40Z', st:'Done', impact:3, why:'First image-to-model fit with a loss you can watch fall.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'round2', t:'Round 2', s:'Keep the style', src:'warrior/index.html#round2', img:'warrior/img/abc_torso.jpg', g:'Humans and humanoids', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'Kept the papercraft look while the fit improved.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'round3', t:'Round 3', s:'Three views', src:'warrior/index.html#round3', img:'warrior/img/r3_spin_sheet.jpg', g:'Humans and humanoids', at:'2026-10-22T18:40Z', st:'Done', impact:3, why:'Front, side and back from one sheet; the modeler now fits all three.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'props', t:'Props and kit', s:'How the parts were fitted', src:'warrior/index.html#offshoots', img:'warrior/img/kit_exploded.jpg', g:'Humans and humanoids', at:'2026-10-22T18:40Z', st:'Done', impact:4, why:'Became the six-part Roman kit used by every Roman figure.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'props3d', t:'Five props in 3D', s:'Turn and zoom each prop, next to its image', src:'/models', img:'img/props-cuirass.png', g:'Humans and humanoids', at:'2026-10-23T03:59Z', st:'Live', impact:3, why:'Started the model viewer you now review every model in.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'helmet', t:'Paper helmet', s:'Same camera, loss and crops', src:'helmet/index.html', img:'helmet/C.jpg', g:'Humans and humanoids', at:'2026-10-22T18:40Z', st:'Done', impact:4, why:'Made "same camera before and after" a rule for every study.', art:['TXjyaZgNac1Q4cSb7aTUnP'], th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'ridge', t:'Ridge helmet', s:'Late-Roman helmet for Fritigern', src:'helmet/index.html#ridge', img:'helmet/ridge.jpg', g:'Humans and humanoids', at:'2026-10-22T18:40Z', st:'Done', impact:2, why:'The first piece of Fritigern’s 4th-century gear.', th:'cmsg_01USVJqCbJruSGtaP4zsE2eYDDPvAco2Q2bZiHCajQNQgZ', tt:'3D Modeler'},
+ {id:'atelier', t:'Atelier pack', s:'Trees, rocks and props, before and after', src:'atelier/index.html', img:'atelier/img/after-z.jpg', g:'Places and kits', at:'2026-10-22T18:40Z', st:'Live', impact:5, why:'Its trees, rocks and props replaced the Ranch’s old models in the game.'},
 ];
 // Paths are written relative to /studies/; make them absolute so /studies (no slash) loads every picture and page.
 const abs = p => /^(\/|https?:)/.test(p) ? p : '/studies/' + p;
 for (const x of S) { x.img = abs(x.img); x.src = abs(x.src); }
-const GROUPS = [...new Set(S.map(x => x.g))];
+// Grouped by meaning (Evan, 2026-10-23: "group them semantically ... one about representing humans ... and humanoids").
+const ORDER = ['Humans and humanoids', 'Games from memories', 'Places and kits', 'Look and welcome'];
+const GROUPS = [...new Set([...ORDER, ...S.map(x => x.g)])].filter(g => S.some(x => x.g === g));
 const by = Object.fromEntries(S.map(x => [x.id, x]));
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const ago = iso => { const m = (Date.now() - Date.parse(iso)) / 6e4; return m < 60 ? Math.max(1, Math.round(m)) + ' min ago' : m < 1440 ? Math.round(m / 60) + ' h ago' : Math.round(m / 1440) + ' days ago'; };
@@ -239,12 +280,16 @@ layout();
 // Outcomes (Evan, 05:52Z): marking a study read or dismissed takes it out of the list and Home; it stays under Done and
 // its page stays where it was. Kept on this device in 'aw-study-outcomes'.
 const outcomes = () => store('aw-study-outcomes') || {};
+// Read and unread (Evan, 12:45Z): a study is unread until you open it, and again whenever it changes. Kept per device.
+const seen = () => store('aw-studies-seen') || {};
+const unread = x => seen()[x.id] !== x.at;
+const markSeen = (x, on = true) => { const v = seen(); if (on) v[x.id] = x.at; else delete v[x.id]; store('aw-studies-seen', v); };
 const done = x => !!outcomes()[x.id];
 const active = () => S.filter(x => !done(x));
 const list = document.getElementById('list'), links = {};
 function drawList(){
  const A = active(), D = S.filter(done), O = outcomes();
- const row = x => `<a href="#${x.id}" data-id="${x.id}"><img alt="" loading="lazy" src="${x.img}"><span><strong>${esc(x.n ? x.n.replace('AW-STUDY-', '#') + ' ' : '')}${esc(x.t)}</strong><small>${esc(O[x.id] ? (O[x.id].o === 'read' ? 'Read' : 'Dismissed') + ' \u00b7 ' + x.s : x.s)}</small></span></a>`;
+ const row = x => `<a href="#${x.id}" data-id="${x.id}"${unread(x) ? ' class="unread"' : ''}><img alt="" loading="lazy" src="${x.img}"><span><strong>${unread(x) ? '<i class="dot" aria-label="Unread"></i>' : ''}${esc(x.n ? x.n.replace('AW-STUDY-', '#') + ' ' : '')}${esc(x.t)}</strong><small>${esc(O[x.id] ? (O[x.id].o === 'read' ? 'Read' : 'Dismissed') + ' \u00b7 ' + x.s : x.s)}</small></span></a>`;
  list.innerHTML = `<a class="home" href="#home" data-id="home"><i>${ICON.home}</i><span><strong>Home</strong></span></a>`
   + GROUPS.map(g => A.filter(x => x.g === g)).filter(xs => xs.length).map(xs => `<div class="group"><b>${esc(xs[0].g)}</b>${xs.map(row).join('')}</div>`).join('')
   + (D.length ? `<details class="group done"${store('aw-studies-done-open') ? ' open' : ''}><summary><b>Done \u00b7 ${D.length}</b></summary>${D.map(row).join('')}</details>` : '');
@@ -262,7 +307,7 @@ const opens = () => store('aw-studies-opens') || {};
 function card(x, line){
  const w = waiting(x), fresh = Date.now() - Date.parse(x.at) < 864e5;
  return `<a class="card" href="#${x.id}"><img alt="" loading="lazy" src="${x.img}"><div><span class="chips">${w ? '<span class="chip go">Waiting on you</span>' : ''}${fresh ? '<span class="chip new">New</span>' : ''}<span class="chip">${esc(x.st)}</span></span>
-  <b>${esc(x.t)}</b><small>${esc([x.n, ago(x.at)].filter(Boolean).join(' · '))}</small><em>${esc(line(x))}</em></div></a>`;
+  <b>${unread(x) ? '<i class="dot" aria-label="Unread"></i>' : ''}${esc(x.t)}</b><small>${esc([x.n, ago(x.at)].filter(Boolean).join(' · '))}</small><em>${esc(line(x))}</em></div></a>`;
 }
 function home(){
  const o = opens(), score = x => (waiting(x) ? 5 : 0) + (o[x.id]?.n || 0) + Math.max(0, 3 - (Date.now() - Date.parse(x.at)) / 864e5);
@@ -271,13 +316,91 @@ function home(){
  const trending = [...A].sort((a, b) => score(b) - score(a)).slice(0, 8);
  const impact = [...A].sort((a, b) => b.impact - a.impact || Date.parse(b.at) - Date.parse(a.at)).slice(0, 8);
  const rowOf = (h, p, xs, line) => xs.length ? `<section class="row"><h2>${h}</h2><p>${p}</p><div class="cards">${xs.map(x => card(x, line)).join('')}</div></section>` : '';
- document.getElementById('home').innerHTML = `<header><h1>Studies</h1><p>How each piece of Abbie's World was worked out: the pictures, the tries and what we learned.</p></header>
+ document.getElementById('home').innerHTML = `<header><h1>Studies</h1><p>How each piece of Abbie's World was worked out: the pictures, the tries and what we learned.${A.filter(unread).length ? ` <b>${A.filter(unread).length} unread.</b>` : ''}</p></header>
   ${A.length ? '' : '<section class="row"><h2>All caught up</h2><p>Every study is read or dismissed. They are all still under Done.</p></section>'}
   ${rowOf('Recent', 'Newest changes first.', recent, y => y.s)}
   ${rowOf('Trending', 'What\u2019s waiting on you, what you\u2019ve opened lately and what just changed.', trending, y => y.s)}
   ${rowOf('Most impactful', 'The studies that changed the game the most.', impact, y => y.why)}
   ${rowOf('Done', 'Read or dismissed. Open one to bring it back.', D, y => (outcomes()[y.id]?.o === 'read' ? 'Read' : 'Dismissed'))}`;
 }
+
+// ---------- links: the live page, its artifacts, and the studies around it ----------
+// Each study links to its claude.ai artifact(s) and back to its live page, so the two stay one study (Evan, 12:45Z).
+const LIVE = 'https://app.abbies.world/studies/#';
+const ring = x => S.filter(y => y.g === x.g && !done(y) || y.id === x.id);
+function linksFor(x){
+ const g = ring(x), i = g.indexOf(x), prev = g[i - 1], next = g[i + 1];
+ const related = S.filter(y => y !== x && y.g === x.g && (y.th && y.th === x.th || y.n && y.n === x.n)).slice(0, 6);
+ return `<div><h4>Links</h4><div class="links">
+   <button type="button" data-copy="${LIVE + x.id}">Copy live link</button>
+   ${(x.art || []).map((a, k) => `<a href="https://claude.ai/artifact/${a}" target="_blank" rel="noopener">Artifact${x.art.length > 1 ? ' ' + (k + 1) : ''} ↗</a>`).join('')}
+   <a href="${x.src}" target="_blank" rel="noopener">Open on its own ↗</a>
+   <button type="button" data-unread="${x.id}">Mark unread</button></div></div>
+  ${prev || next ? `<div><h4>${esc(x.g)}</h4><div class="chain links">${prev ? `<a href="#${prev.id}">‹ ${esc(prev.t)}</a>` : ''}${next ? `<a href="#${next.id}">${esc(next.t)} ›</a>` : ''}</div></div>` : ''}
+  ${related.length ? `<div><h4>Same work</h4><div class="toc">${related.map(y => `<button type="button" data-go="${y.id}">${esc(y.t)}</button>`).join('')}</div></div>` : ''}`;
+}
+document.getElementById('right').addEventListener('click', async e => {
+ const c = e.target.closest('[data-copy]'), u = e.target.closest('[data-unread]');
+ if (c) { try { await navigator.clipboard.writeText(c.dataset.copy); c.textContent = 'Copied'; } catch { prompt('Live link', c.dataset.copy); } }
+ if (u) { markSeen(by[u.dataset.unread], false); drawList(); u.textContent = 'Unread'; }
+});
+
+// ---------- notes: a feedback notebook beside every study ----------
+// Notes stay on this device; Send posts them to the feedback inbox (/api/feedback) tagged with the study's thread, so the
+// thread that owns the study gets them. "Ask for a review" sends them with a request to read and answer them.
+const DESIGN = {th: 'cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i', tt: 'Design lead'};
+const notesEl = document.getElementById('notes'), notesN = document.getElementById('notes-n');
+const allNotes = () => store('aw-study-notes') || {};
+const saveNotes = v => { store('aw-study-notes', v); countNotes(); };
+const countNotes = () => { const id = location.hash.slice(1), n = (allNotes()[id] || []).filter(m => !m.sent).length; notesN.textContent = n ? String(n) : ''; };
+function drawNotes(x){
+ if (!x){
+  const N = allNotes(), ids = Object.keys(N).filter(k => by[k] && N[k].length);
+  notesEl.innerHTML = `<h3>Your notes</h3><p class="to">Open a study to write about it. Notes you have kept:</p>${ids.length ? `<div class="toc">${ids.map(k => `<button type="button" data-go="${k}">${esc(by[k].t)} · ${N[k].length}</button>`).join('')}</div>` : '<p class="to">None yet.</p>'}`;
+  countNotes(); return;
+ }
+ const list = allNotes()[x.id] || [], to = x.th ? x : DESIGN, draft = store('aw-study-draft-' + x.id) || '';
+ notesEl.innerHTML = `<h3>Notes on ${esc(x.t)}</h3><p class="to">Sent to ${esc(to.tt)}.</p>
+  <textarea id="note-in" placeholder="What works, what doesn't, what to try next…" aria-label="New note">${esc(draft)}</textarea>
+  <div class="acts"><button type="button" class="primary" data-n="add">Keep note</button><button type="button" data-n="send"${list.some(m => !m.sent) ? '' : ' disabled'}>Send to the study</button><button type="button" data-n="review"${list.length ? '' : ' disabled'}>Ask for a review</button></div>
+  <p class="status" id="note-status" role="status"></p>
+  ${list.length ? `<ul>${[...list].reverse().map(m => `<li><p>${esc(m.text)}</p><small>${new Date(m.at).toLocaleString([], {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'})}${m.sent ? '<b>Sent</b>' : ''}<button type="button" data-del="${m.at}" aria-label="Delete note">Delete</button></small></li>`).join('')}</ul>` : ''}`;
+ const ta = notesEl.querySelector('#note-in');
+ ta.addEventListener('input', () => store('aw-study-draft-' + x.id, ta.value));
+ ta.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); act('add', x); } });
+ countNotes();
+}
+async function post(x, note){
+ const to = x.th ? x : DESIGN;
+ const r = await fetch('/api/feedback', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({
+  note, page: '/studies/#' + x.id, title: (x.n ? x.n + ' ' : '') + x.t, thread: to.th, threadTitle: to.tt, entryId: 'study:' + x.id,
+  viewport: innerWidth + 'x' + innerHeight, standalone: matchMedia('(display-mode: standalone)').matches})}).catch(() => null);
+ return r?.ok ? true : r?.status || 0;
+}
+async function act(kind, x){
+ const N = allNotes(), list = N[x.id] || [], status = () => notesEl.querySelector('#note-status');
+ if (kind === 'add'){
+  const ta = notesEl.querySelector('#note-in'), text = ta.value.trim(); if (!text) return ta.focus();
+  N[x.id] = [...list, {text, at: Date.now()}]; saveNotes(N); store('aw-study-draft-' + x.id, ''); drawNotes(x); notesEl.querySelector('#note-in').focus(); return;
+ }
+ const pick = kind === 'send' ? list.filter(m => !m.sent) : list;
+ if (!pick.length) return;
+ const head = kind === 'send' ? `Evan's notes on ${x.n ? x.n + ' ' : ''}${x.t}:` : `Evan asks you to review his notes on ${x.n ? x.n + ' ' : ''}${x.t} and answer each one (what you'll change, or why not):`;
+ status().textContent = 'Sending…';
+ const ok = await post(x, head + '\n' + pick.map(m => '- ' + m.text).join('\n') + '\nLive: ' + LIVE + x.id + ((x.art || []).length ? '\nArtifact: https://claude.ai/artifact/' + x.art[0] : ''));
+ if (ok === true){ N[x.id] = list.map(m => pick.includes(m) ? {...m, sent: true} : m); saveNotes(N); drawNotes(x); status().textContent = kind === 'send' ? 'Sent. The study\u2019s thread has them.' : 'Review asked. The answer comes back in the study\u2019s thread.'; }
+ else status().textContent = ok === 401 ? 'Sign in as Evan to send; your notes are kept here.' : 'Couldn\u2019t send just now; your notes are kept here. Try again.';
+}
+notesEl.addEventListener('click', e => {
+ const x = by[location.hash.slice(1)], b = e.target.closest('[data-n]'), d = e.target.closest('[data-del]'), g = e.target.closest('[data-go]');
+ if (g) { location.hash = g.dataset.go; return; }
+ if (!x) return;
+ if (b) act(b.dataset.n, x);
+ if (d) { const N = allNotes(); N[x.id] = (N[x.id] || []).filter(m => String(m.at) !== d.dataset.del); saveNotes(N); drawNotes(x); }
+});
+const tabs = {notes: [document.getElementById('tab-notes'), notesEl], facets: [document.getElementById('tab-facets'), document.getElementById('facets')]};
+function showTab(k){ for (const [n, [t, el]] of Object.entries(tabs)) { t.setAttribute('aria-selected', String(n === k)); el.hidden = n !== k; } store('aw-studies-tab', k); }
+tabs.notes[0].onclick = () => showTab('notes'); tabs.facets[0].onclick = () => showTab('facets');
 
 // ---------- details: facets of what's open ----------
 const facets = document.getElementById('facets'), view = document.getElementById('view');
@@ -297,7 +420,7 @@ function detailsStudy(x){
   ${doc ? `<dt>Pictures</dt><dd>${pics}</dd><dt>3D views</dt><dd>${models}</dd>` : ''}</dl>
   <div><h4>What it changed</h4><p>${esc(x.why)}</p></div>
   ${heads.length ? `<div><h4>In this study</h4><div class="toc">${heads.map((h, i) => `<button type="button" data-h="${i}">${esc(h.textContent.trim())}</button>`).join('')}</div></div>` : ''}
-  <a class="open" href="${x.src.startsWith('/') ? x.src : x.src}" target="_blank" rel="noopener">Open on its own ↗</a>`;
+  ${linksFor(x)}`;
  facets.onclick = e => { const b = e.target.closest('[data-h]'); if (b) heads[Number(b.dataset.h)]?.scrollIntoView({behavior: 'smooth', block: 'start'}); };
 }
 facets.addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) location.hash = b.dataset.go; });
@@ -309,6 +432,7 @@ view.addEventListener('load', () => {
 // ---------- routing ----------
 function route(){
  const id = by[location.hash.slice(1)] ? location.hash.slice(1) : 'home', x = by[id];
+ if (x && unread(x)) { markSeen(x); drawList(); }
  for (const k in links) links[k].setAttribute('aria-current', String(k === id));
  document.getElementById('home').hidden = !!x; view.hidden = !x;
  if (!x){ home(); detailsHome(); document.title = 'Studies'; }
@@ -318,7 +442,7 @@ function route(){
   const o = opens(); o[id] = {n: (o[id]?.n || 0) + 1, at: Date.now()}; store('aw-studies-opens', o);
   if (phone.matches){ P.lPhone = false; layout(); }
  }
- outcomeBar(x);
+ outcomeBar(x); drawNotes(x);
  links[id]?.scrollIntoView({block: 'nearest'});
 }
 // ---------- the outcome toolbar: Read or Dismiss the open study ----------
@@ -339,7 +463,7 @@ bar.addEventListener('click', e => {
  store('aw-study-outcomes', O); drawList(); route();
 });
 addEventListener('storage', e => { if (e.key === 'aw-study-outcomes') { drawList(); route(); } });
-addEventListener('hashchange', route); route();
+addEventListener('hashchange', route); showTab(store('aw-studies-tab') || 'notes'); route();
 
 // ---------- you ----------
 const me = document.getElementById('me');

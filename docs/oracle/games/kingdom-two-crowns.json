@@ -38,6 +38,23 @@
     },
     "camera": "side",
     "art_direction": "Gorgeous pixel art with reflections.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "pixel_art",
+      "family": "pixel",
+      "light": "painted_in",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [
+        "reflection",
+        "colour grade"
+      ],
+      "signature": "Pixel art with a live water reflection and a colour grade that tracks time of day.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.65,
+      "lesson": "One modern effect (reflection) on a simple look feels luxurious."
+    },
     "palette": null,
     "audio_mood": "Ambient, layered.",
     "pacing": "slow, medium sessions",

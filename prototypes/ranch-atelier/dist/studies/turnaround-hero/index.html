@@ -1,10 +1,11 @@
+<meta charset="utf-8">
 <title>AW-STUDY-0023 - Turnaround Hero</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="One exact low-poly heroic figure, modelled with the method the Bruiser Study found: turnaround first, a depth ruler, an anatomy base, then planes.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
 <style>
-/* Layout: his figure beside the empty model slot (same camera) is the page; the turnaround row, plan and gates follow. */
+/* Layout: his figure beside our latest model (live 3D) is the page; the turnaround row, plan and gates follow. */
 :root{
  --bg:#e7e6e1; --paper:#f4f3ef; --ink:#23242a; --muted:#6b6c70; --line:#cfcdc6;
  --accent:#e0592a; --good:#2f8a5b;
@@ -34,7 +35,7 @@ section{display:grid;gap:14px}
 .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .frame{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#8d8e8a}
 .row3 .frame{aspect-ratio:1/2}
-.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
 .tag{position:absolute;left:10px;top:10px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;
  color:#f4f3ef;background:rgba(20,20,22,.55);padding:6px 8px;border-radius:6px}
 .slot{outline:2px dashed rgba(244,243,239,.4);outline-offset:-14px}
@@ -54,25 +55,24 @@ section{display:grid;gap:14px}
 blockquote{margin:0;background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:14px 16px;font:500 14px/1.55 var(--mono);overflow-wrap:anywhere}
 @media (max-width:640px){.pair{grid-template-columns:1fr}.row3{gap:8px}}
 </style>
+<script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
 
 <div class="wrap">
  <header>
   <div class="eyebrow">AW-STUDY-0023</div>
   <h1>Turnaround Hero</h1>
   <p class="muted">One exact figure: your grey, blocky, heroic man. We build him with what the Bruiser Study learned. Turnaround first, a depth ruler, an anatomy base, then big flat planes. Every round is shown beside your picture from the same camera.</p>
-  <span class="chip"><i></i><span>Anatomy check done; modeling starts after your Bruiser feedback</span></span>
+  <span class="chip"><i></i><span>Round 2: right size and pose, still too soft. Next: crisp muscle planes</span></span>
  </header>
 
  <section aria-label="Your figure and the model, same camera">
   <div class="pair">
    <div class="frame"><img src="img/front.jpg" alt="Reference front: grey low-poly heroic man, bald small head, huge shoulders, fists, briefs, faceted shins"><span class="tag">Your figure · front</span></div>
-   <div class="frame slot"><img class="ghost" src="img/front.jpg" alt=""><span class="tag">Model · same camera</span>
-    <div class="empty">Waiting for your go<small>first round lands here, beside him</small></div></div>
+   <div class="frame" style="background:#8d8e8a"><model-viewer src="3d/contour-r5-lowpoly.glb" alt="Our model so far (progressive contouring, round 2), drag to spin" camera-controls camera-orbit="0deg 90deg auto" shadow-intensity="0.6" style="position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent"></model-viewer><span class="tag">Our model so far · drag to spin</span></div>
   </div>
   <div class="pair">
    <div class="frame"><img src="img/back.jpg" alt="Reference back: the same figure from behind"><span class="tag">Your figure · back</span></div>
-   <div class="frame slot"><img class="ghost" src="img/back.jpg" alt=""><span class="tag">Model · same camera</span>
-    <div class="empty">Waiting for your go<small>scored from the back too</small></div></div>
+   <div class="frame" style="background:#8d8e8a"><model-viewer src="3d/contour-r5-lowpoly.glb" alt="Our model so far (progressive contouring, round 2), drag to spin" camera-controls camera-orbit="180deg 90deg auto" shadow-intensity="0.6" style="position:absolute;inset:0;width:100%;height:100%;--poster-color:transparent"></model-viewer><span class="tag">Our model so far · from behind</span></div>
   </div>
  </section>
 
@@ -96,11 +96,23 @@ blockquote{margin:0;background:var(--paper);border:1px solid var(--line);border-
   <h2 id="ta">Step one: the turnaround</h2>
   <p class="muted">Your prompt, word for word, with your figure attached so Midjourney keeps him. You pick the sheet; the model is then scored from all three sides.</p>
   <blockquote>front, side, back views of the same figure, a grey 3d ultra low polygon count, blocky, heroic male figure in a traditional A pose on a gray backdrop, each view is exactly the same character, wearing tight fitted briefs</blockquote>
-  <div class="row3">
-   <div class="frame slot"><span class="tag">Front</span><div class="empty">Queued</div></div>
-   <div class="frame slot"><span class="tag">Side</span><div class="empty">Queued</div></div>
-   <div class="frame slot"><span class="tag">Back</span><div class="empty">Queued</div></div>
+  <div class="frame" style="aspect-ratio:1"><img src="img/turnaround.jpg" alt="Midjourney turnaround of the hero: front, side and three-quarter back views of the same grey low-poly figure in briefs"><span class="tag">Midjourney · the pick</span></div>
+  <p class="muted">Image 3 of the grid: closest to your figure, and every view is fully in frame. Its back view is turned about 130 degrees from the front, which the carve finds by itself.</p>
+ </section>
+
+ <section aria-labelledby="pc">
+  <h2 id="pc">Progressive contouring, then re-meshing</h2>
+  <p class="muted">Your idea, built. Carve what sits inside his outline in every view, split it into parts with the skeleton from the anatomy check, round each part's slices by an amount learned from the Bruiser's Meshy body, then re-mesh. Top row: the views. Middle: the smooth re-mesh. Bottom: the same parts lofted with flat sides. Same camera throughout.</p>
+  <div class="pair">
+   <div class="frame" style="aspect-ratio:1"><img src="img/contour-r5.jpg" alt="Three rows: his turnaround views, our smooth contoured body, and our faceted low-poly body, from the same cameras" style="object-fit:contain"></div>
+   <div class="frame" style="aspect-ratio:1;background:var(--paper)"><model-viewer id="mv" src="3d/contour-r5-lowpoly.glb" alt="Faceted low-poly hero from progressive contouring, spin to look around" camera-controls auto-rotate shadow-intensity="0.6" style="position:absolute;inset:0;width:100%;height:100%"></model-viewer><span class="tag">Spin him · faceted</span></div>
   </div>
+  <dl class="rules">
+   <div class="rule"><dt>Outline: 91 to 92%</dt><dd>His silhouette from the front, side and back views. The carve gets his size and stance right.</dd></div>
+   <div class="rule"><dt>Still too soft</dt><dd>The torso reads as an egg. His crisp pecs, deltoids and traps are designed planes no outline can show.</dd></div>
+   <div class="rule"><dt>What it learned</dt><dd>With 3 views the carve rebuilds 67% of a known body; learned rounding lifts it to 72%. With 8 views it is 81% and 84%. More angles is the big lever.</dd></div>
+   <div class="rule"><dt>Next</dt><dd>Keep the carve for his measurements and joints; build the big muscle planes from the parts kit to those measurements; score against Meshy.</dd></div>
+  </dl>
  </section>
 
  <section aria-labelledby="how">

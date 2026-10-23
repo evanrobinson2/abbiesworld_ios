@@ -42,7 +42,7 @@ section:last-child{border-bottom:0}
 .sub{color:var(--aw-soft,#6b5d4c);font-size:18px;max-width:640px}
 .gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px}
 .gallery figure{margin:0}
-.gallery img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:var(--aw-radius,16px);box-shadow:var(--aw-shadow,0 12px 30px -18px rgba(0,0,0,.35))}
+.gallery img{width:100%;aspect-ratio:4/5;object-fit:contain;border-radius:var(--aw-radius,16px);box-shadow:var(--aw-shadow,0 12px 30px -18px rgba(0,0,0,.35))}
 .gallery figcaption{margin-top:10px;font-weight:500}
 
 .pg p{max-width:720px;font-size:18px;color:var(--aw-soft,#6b5d4c)}

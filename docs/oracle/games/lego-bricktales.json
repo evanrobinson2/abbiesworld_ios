@@ -68,6 +68,23 @@
     },
     "camera": "orbit_diorama",
     "art_direction": "Toy diorama with bright bricks.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "stylised_pbr",
+      "family": "soft_diorama",
+      "light": "pbr",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pbr",
+      "post": [
+        "depth of field",
+        "bloom"
+      ],
+      "signature": "Glossy plastic bricks with real reflections, framed by tilt-shift blur.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.6,
+      "lesson": "A real material (plastic) can be the whole style when the world is a toy."
+    },
     "palette": null,
     "audio_mood": "Light whimsical score.",
     "pacing": "slow, short sessions",

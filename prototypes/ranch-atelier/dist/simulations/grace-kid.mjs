@@ -38,7 +38,8 @@ function childShape(mesh) {
 }
 
 let cache = null;
-export async function loadGraceKid(url = URL_GLTF) {
+// Round 2's girl (the mannequin reshaped in place, flat shaded, vertex colours), kept for the before/after study.
+export async function loadGraceKidRound2(url = URL_GLTF) {
  cache ||= new GLTFLoader().loadAsync(url);
  const gltf = await cache;
  const src = gltf.scene.getObjectByName('Rig') || gltf.scene;
@@ -114,6 +115,82 @@ export async function loadGraceKid(url = URL_GLTF) {
  };
  const update = dt => mixer.update(dt);
  play('idle', 0);
- group.userData = {rig, head, play, update, mixer, actions, height: KID_HEIGHT};
+ // The points that touch the ground (ankles and balls of the feet) with their resting heights, so the scene can keep
+ // every foot on top of whatever step is under it.
+ group.updateMatrixWorld(true);
+ const feet = ['DEF-footL', 'DEF-footR', 'DEF-toeL', 'DEF-toeR'].map(n => rig.getObjectByName(n)).filter(Boolean)
+  .map(bone => ({bone, rest: bone.getWorldPosition(new T.Vector3()).y}));
+ group.userData = {rig, head, play, update, mixer, actions, height: KID_HEIGHT, feet};
+ return group;
+}
+
+// ---------- Round 3 (AW-STUDY-0034, figure fidelity): the same rig and the same clips, a new body. ----------
+// The skeleton itself is reshaped into a child (shorter limbs, narrower shoulders, about 1.18 m), the clips keep only
+// their rotations (and the hips' travel, rescaled), and the body is built over it with figure-kit and the shared
+// child recipe: one skinned surface per material, a striped knit shirt with real UVs, jeans, sneakers, a ponytail.
+// Same API as before: group.userData = {rig, head, play, update, mixer, actions, height, feet}.
+import {buildHuman, humanMaterials} from './figures/human.mjs';
+export const GRACE_GIRL_LOOK = {
+ skin: PAL.skin, blush: '#ec9a86', eyes: '#3a2416',
+ shirt: PAL.shirt, shirtStripe: PAL.stripe, stripePeriod: .05, shirtName: 'red and cream striped shirt', sleeve: .5,
+ bottoms: PAL.jeans, bottomsName: 'jeans', bottomsKind: 'jeans', shoes: PAL.shoe, shoesName: 'white sneakers', sole: PAL.sole,
+ hair: PAL.hair, hairName: 'brown hair', hairStyle: 'ponytail', brow: .55, tie: PAL.sole, seed: 5,
+};
+const SHRINK = {'DEF-shin': .9, 'DEF-foot': .9, 'DEF-forearm': .9, 'DEF-hand': .9, 'DEF-upper_arm': .85, 'DEF-head': .7, 'DEF-neck': .9, 'DEF-thigh': .92};
+export async function loadGraceKid(url = URL_GLTF, look = GRACE_GIRL_LOOK) {
+ cache ||= new GLTFLoader().loadAsync(url);
+ const gltf = await cache;
+ const src = gltf.scene.getObjectByName('Rig') || gltf.scene;
+ const rig = clone(src), group = new T.Group(); group.name = 'kid'; group.add(rig); group.updateMatrixWorld(true);
+ const old = []; rig.traverse(o => { if (o.isSkinnedMesh) old.push(o); });
+ const adult = new T.Box3(); old.forEach(o => adult.expandByObject(o));
+ old.forEach(o => o.parent.remove(o));
+ // child proportions: every offset shrinks to the child's height; a bone's offset is its parent's length, so limbs
+ // and the neck shrink a little more
+ const k = KID_HEIGHT / (adult.max.y - adult.min.y) * 1.03, bones = {};
+ rig.traverse(o => { if (!o.isBone) return; bones[o.name] = o; o.position.multiplyScalar(k * (SHRINK[o.name.replace(/(L|R)$/, '')] || 1)); });
+ bones['DEF-hips'].position.multiplyScalar(SHRINK['DEF-thigh'] * .98);
+ // the clips: rotations only, except the hips' travel, rescaled to the shorter legs
+ const mixer = new T.AnimationMixer(rig), actions = {};
+ for (const [key, name] of Object.entries(CLIPS)) {
+  const clip = gltf.animations.find(a => a.name === name); if (!clip) continue;
+  const c = clip.clone(); c.tracks = c.tracks.filter(t => !/\.scale$/.test(t.name) && (!/\.position$/.test(t.name) || /DEF-hips\.position$/.test(t.name))).map(t => t.clone());
+  for (const t of c.tracks) if (/DEF-hips\.position$/.test(t.name)) for (let i = 0; i < t.values.length; i += 3) {
+   t.values[i] *= k * SHRINK['DEF-thigh'] * .98; t.values[i + 1] *= k * SHRINK['DEF-thigh'] * .98; t.values[i + 2] *= k * SHRINK['DEF-thigh'] * .98;
+   if (key === 'walk') { t.values[i] = 0; t.values[i + 2] = 0; }
+  }
+  actions[key] = mixer.clipAction(c);
+  if (/sitDown|standUp|reach|pickUp/.test(key)) { actions[key].setLoop(T.LoopOnce); actions[key].clampWhenFinished = true; }
+ }
+ // build the body in her idle pose, so the face, shoulders and sleeves are shaped where she spends her time
+ actions.idle?.play(); mixer.update(0);
+ group.updateMatrixWorld(true);
+ const W = n => bones[n].getWorldPosition(new T.Vector3()).toArray();
+ const Ls = W('DEF-upper_armL')[0] > 0 ? 'L' : 'R', side = s => (s === 'L' ? Ls : Ls === 'L' ? 'R' : 'L');
+ const toe = W(`DEF-toe${Ls}`), foot = W(`DEF-foot${Ls}`), mid = W(`DEF-f_middle03${Ls}`), hand = W(`DEF-hand${Ls}`), head = W('DEF-head');
+ const s = KID_HEIGHT / 1.35;
+ const J = {
+  s, hips: W('DEF-hips'), spine: W('DEF-spine002'), chest: W('DEF-spine003'), neck: W('DEF-neck'), head,
+  headC: [0, head[1] + .1 * s, head[2] + .008], headR: [.132 * s * 1.06, .128 * s * 1.06, .126 * s * 1.06],
+  shoulder: W(`DEF-upper_arm${Ls}`), elbow: W(`DEF-forearm${Ls}`), wrist: hand, handEnd: mid.map((v, i) => v + (v - hand[i]) * .15),
+  hip: W(`DEF-thigh${Ls}`), knee: W(`DEF-shin${Ls}`), ankle: foot, toe: [toe[0], .02, toe[2] + (toe[2] - foot[2]) * .45],
+ };
+ const N = {hips: 'DEF-hips', spine: 'DEF-spine002', chest: 'DEF-spine003', neck: 'DEF-neck', head: 'DEF-head',
+  upperArm: S => `DEF-upper_arm${side(S)}`, foreArm: S => `DEF-forearm${side(S)}`, hand: S => `DEF-hand${side(S)}`,
+  thigh: S => `DEF-thigh${side(S)}`, shin: S => `DEF-shin${side(S)}`, foot: S => `DEF-foot${side(S)}`, toe: S => `DEF-toe${side(S)}`};
+ const materials = humanMaterials(T, look);
+ const built = buildHuman(T, bones, J, N, look).build(materials);
+ let current = null;
+ const play = (key, fade = .25, speed = 1) => {
+  const a = actions[key]; if (!a || a === current) return a;
+  a.reset(); a.setEffectiveTimeScale(speed); a.play(); if (current) current.crossFadeTo(a, fade, false); current = a; return a;
+ };
+ const update = dt => mixer.update(dt);
+ current = actions.idle || null;
+ // stand her on the floor: the lowest sole point at rest
+ const low = Math.min(...['L', 'R'].map(S => W(`DEF-foot${S}`)[1])) - .085 * s; rig.position.y -= low;
+ group.updateMatrixWorld(true);
+ const feet = ['DEF-footL', 'DEF-footR', 'DEF-toeL', 'DEF-toeR'].map(n => bones[n]).filter(Boolean).map(bone => ({bone, rest: bone.getWorldPosition(new T.Vector3()).y}));
+ group.userData = {rig, head: bones['DEF-head'], play, update, mixer, actions, height: KID_HEIGHT, feet, materials, triangles: built.triangles, meshes: built.meshes};
  return group;
 }

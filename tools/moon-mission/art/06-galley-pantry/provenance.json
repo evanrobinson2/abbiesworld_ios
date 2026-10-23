@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "6. Bright galley and pantry",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "A bright white space galley pantry with colour-coded shelves, pink, purple and blue bins, rows of snack trays with fruit, crackers and juice pouches, labelled with simple pictures, clean white room, bright daylight, soft shadows, light and cheerful, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "4be06afa-0a15-4999-bd3c-3df6bb1cde4d",
+  "page": "https://www.midjourney.com/jobs/4be06afa-0a15-4999-bd3c-3df6bb1cde4d?index=1",
+  "pick_index": 1,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/4be06afa-0a15-4999-bd3c-3df6bb1cde4d/0_1.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "4c0d9eff5a8279f911855d36a0b987c50a20c2e9d2a3d204c0a378e3eeadefeb"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 1: clearest colour coding (pink, purple, teal bins by shelf), calm white galley, snack trays on the counter. Packaging text is Midjourney gibberish in all four."
+}

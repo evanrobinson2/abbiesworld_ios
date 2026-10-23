@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "5. Tree house space-suit room",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "A kid's wooden tree house turned into a space suit room, three white space suits with pink and purple trim hanging on a rack, a shelf of round white helmets, and a pink-and-white rocket visible through the round window, bright daylight, white walls, soft shadows, cozy and light, stylized cartoon, cinematic, Pixar-meets-NASA, game concept art for a kids' game --ar 16:9 --v 7 --relax",
+  "job_id": "cd8bfacb-1e52-4faa-8376-c6e19ab1e1a3",
+  "page": "https://www.midjourney.com/jobs/cd8bfacb-1e52-4faa-8376-c6e19ab1e1a3?index=0",
+  "pick_index": 0,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/cd8bfacb-1e52-4faa-8376-c6e19ab1e1a3/0_0.png",
+    "size": [
+      1456,
+      816
+    ],
+    "sha256": "2e0ff44678b35dbe62bae8a1edeee7bc4885a429a979fffe00e7342add47fd82"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 0: tree house rafters, three white suits with pink and purple trim, helmet shelf, pink rocket in the round window."
+}

@@ -2,9 +2,9 @@
  "study": "AW-STUDY-0016 - Bodies and Creatures",
  "installment": "1b",
  "title": "Drawing techniques: how a figure is constructed",
- "version": "1.0",
+ "version": "1.1",
  "date": "2026-10-23",
- "reads_with": "human-canon.json (landmark names, widths and depths in heads)",
+ "reads_with": "human-canon.json (landmark names, widths and depths in heads); ARTIST_METHOD.md (layers, creative checks, concept sheet to Blender, practice reps)",
  "how_to_use": "Build in this order. Each step is a simple form placed between two canon landmarks, with its cross-section and how many planes it gets. Contour (muscle bulges) comes only after every form is placed, and detail (folds, cloth, armour) only after the planes read. A modeler builds these as primitives first, then lofts the contour over them; a Midjourney prompt asks for the same order of qualities.",
  "sources": {
   "loomis": "Figure Drawing for All It's Worth (1943): the line of action, the bean-free mannequin frame (ribcage and pelvis blocks on a flexible spine), the 'straights against curves' principle, foreshortening by overlap",
@@ -291,5 +291,88 @@
   "add": "anatomically correct adult proportions, relaxed contrapposto, weight on one leg, smooth clean limbs with simple planes, defined knees elbows and ankles, straight shins, full body, front side and back views",
   "no": "wrinkles, rubber hose arms, sausage limbs, tube limbs, extra fingers, distorted hands",
   "why": "Midjourney draws limbs as contours; naming the construction qualities (planes, defined joints, straight shins) and banning the failure modes keeps arms and legs clean."
- }
+ },
+ "layers": [
+  {
+   "n": 1,
+   "name": "Gesture",
+   "do": "one line of action, fast and light; lower the layer to 20-30% and work over it"
+  },
+  {
+   "n": 2,
+   "name": "Masses",
+   "do": "head, ribcage, pelvis on the gesture; head-to-ribcage rhythm first, then the pelvis angle; sternum line and collarbone handlebars"
+  },
+  {
+   "n": 3,
+   "name": "Construction",
+   "do": "cylinders, joint boxes, foot triangles, mitten hands (steps 2-15)"
+  },
+  {
+   "n": 4,
+   "name": "Check",
+   "do": "flip the canvas; fix proportions by select-and-transform or liquify, never by drawing over"
+  },
+  {
+   "n": 5,
+   "name": "Contour",
+   "do": "one line over the forms; straight against curve; near over far"
+  },
+  {
+   "n": 6,
+   "name": "Values",
+   "do": "clipping mask, three values on the planes, dark to light, highlights last"
+  }
+ ],
+ "creative_checks": [
+  {
+   "id": "gesture",
+   "check": "one clear line of action through the whole figure"
+  },
+  {
+   "id": "contrapposto",
+   "check": "shoulders and hips tilt opposite ways; weight over one foot"
+  },
+  {
+   "id": "silhouette",
+   "check": "reads as a solid black shape; no limb lost inside the body"
+  },
+  {
+   "id": "shape_language",
+   "check": "one dominant shape family (circle, square, triangle) fits the character"
+  },
+  {
+   "id": "big_medium_small",
+   "check": "one big mass, one medium, one small; never three equal"
+  },
+  {
+   "id": "straight_curve",
+   "check": "straight side against curved side on every limb, swapping at each joint"
+  },
+  {
+   "id": "rhythm",
+   "check": "curves flow from one form into the next head to foot"
+  },
+  {
+   "id": "overlap",
+   "check": "near forms overlap far ones at every joint"
+  },
+  {
+   "id": "tangents",
+   "check": "no edges that just touch"
+  },
+  {
+   "id": "exaggeration",
+   "check": "gesture pushed 10-20% past the reference; joints and proportions true"
+  },
+  {
+   "id": "appeal",
+   "check": "detail clusters at the face and hands and rests elsewhere"
+  },
+  {
+   "id": "planes",
+   "check": "6-8 planes per limb read in flat shading before any detail"
+  }
+ ],
+ "creative_scoring": "0 missing, 1 weak, 2 clear; total out of 24; under 16 is a study, not a pick"
 }

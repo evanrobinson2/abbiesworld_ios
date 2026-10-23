@@ -26,11 +26,13 @@ figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
 .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:14px;display:grid;gap:10px;align-content:start}
 .card header{display:flex;gap:10px;align-items:baseline}
 .id{font:500 12px/1 var(--mono);color:var(--suit)}
-.views{display:grid;grid-template-columns:1.25fr 1fr;gap:8px;align-items:start}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start}
+.sq{aspect-ratio:1;object-fit:contain;background:#0b0e14}
+.wait .sq{display:grid;place-items:center;padding:18px;text-align:center;border-radius:10px;border:1px dashed var(--line);color:var(--muted);font-size:14px}
 .views figure{margin:0;position:relative;display:grid;gap:4px}
-.spin{aspect-ratio:1}
-.spin img,.spin model-viewer{width:100%;height:100%;object-fit:cover;border-radius:10px;background:#0b0e14}
-.spin button{position:absolute;right:8px;bottom:8px;border:0;border-radius:999px;padding:7px 13px;font:600 13px var(--body);color:#111;background:rgba(255,255,255,.82);cursor:pointer}
+.spin{aspect-ratio:auto}
+.spin img,.spin model-viewer{width:100%;aspect-ratio:1;height:auto;object-fit:contain;border-radius:10px;background:#0b0e14}
+.spin button{position:absolute;right:8px;bottom:28px;border:0;border-radius:999px;padding:7px 13px;font:600 13px var(--body);color:#111;background:rgba(255,255,255,.82);cursor:pointer}
 .spin.on button{display:none}
 dl{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0}
 dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
@@ -43,12 +45,12 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
 .group li span{font:500 11px var(--mono);color:var(--muted);margin-right:8px}
 .group li.drawn{color:var(--suit);font-weight:600}.group li a{color:var(--green);font:500 11px var(--mono)}
 .rules{display:grid;gap:9px;padding-left:22px;margin:0;max-width:80ch}.rules li::marker{color:var(--suit);font-weight:700}
-@media (max-width:560px){.views{grid-template-columns:1fr}}
+
 </style></head><body><main>
 <header style="display:grid;gap:10px">
- <span class="eyebrow">AW-STUDY-0031 · Moon Base Kit · round 1</span>
+ <span class="eyebrow">AW-STUDY-0031 · Moon Base Kit · round 2</span>
  <h1>The Moon base, built to walk through</h1>
- <p class="lede">200 low-poly pieces proposed for the low-gravity Moon shooter, and the first 20 built: 41,192 triangles in all. Each one is made of named parts with real materials. Panel seams, brushed metal and rock pits are baked into colour, roughness and normal maps, so they still look solid up close in first person. Every part also knows its own mass, so low gravity can throw it honestly.</p>
+ <p class="lede">200 low-poly pieces proposed for the low-gravity Moon shooter, and the first 20 built: 44,980 triangles in all. Each one is made of named parts with real materials. Panel seams, brushed metal and rock pits are baked into colour, roughness and normal maps, so they still look solid up close in first person. Every part also knows its own mass, so low gravity can throw it honestly.</p>
  <p class="muted">The look follows the Moon Heroes "Faceted Hero" direction: flat planes, gunmetal and off-white hull, orange for people and warm windows, green, amber and red lamps for state. Cyan is kept for the Star Child and crystals, and gold for Daddy's memory coins. The heroes, buggy and lander belong to the Moon Heroes study.</p>
 </header>
 <section class="pack">
@@ -56,156 +58,114 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
  <figure><img src="img/pack-abbie-base.jpg" alt="Abbie looking at the moon base"><figcaption>Abbie at the base: the scale we build for</figcaption></figure>
 </section>
 <h2>The 20, built</h2>
-<p class="muted">Left: the three-quarter view. Tap "Spin it" to turn the real model. Right: what Abbie sees from her own eye height, which is the view that matters in first person. These were drawn in Blender tonight because the Mac was offline; Midjourney proofs for all 20 are queued for morning, and round 2 rebuilds each piece against its pick from the same camera.</p>
+<p class="muted">Round 2 rebuilds each piece against its Midjourney pick: chunky off-white modules held by dark bumper frames, with warm orange windows. Top left is the pick, top right the model (tap "Spin it" to turn it), bottom left what Abbie sees from her own eye height, and bottom right round 1, drawn before the picks existed.</p>
 <div class="cards"><article class="card" id="solar-array">
- <header><span class="id">MK-001</span><h3>Solar array wing</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/solar-array.wasm" data-alt="Solar array wing"><img src="img/solar-array.jpg" alt="Solar array wing, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/solar-array-fps.jpg" alt="Solar array wing from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A gunmetal mast on an anchored foot, a slewing head, a torque tube and two wings of four framed cells each, tilted to the low lunar sun. A junction box at the foot carries the green &quot;power good&quot; lamp (diegetic: if the base is short of power, these lamps go amber).</p>
- <dl><div><dt>Triangles</dt><dd>2,096</dd></div><div><dt>Parts</dt><dd>39</dd></div>
- <div><dt>Mass</dt><dd>1,852.0 kg</dd></div><div><dt>Moon weight</dt><dd>306.3 kg</dd></div>
- <div><dt>Size m</dt><dd>8.92 × 2.37 × 3.95</dd></div></dl>
- <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal HullDark</span><span class="chip">Metal SolarCell</span><span class="chip">Metal Steel</span><span class="chip">Rubber Black</span></div>
+ <header><span class="id">MK-001</span><h3>Solar array on a sun-tracking mast</h3></header>
+ <div class="views"><figure><img class="sq" src="img/solar-array-pick.jpg" alt="Midjourney concept for Solar array on a sun-tracking mast" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/solar-array.wasm" data-alt="Solar array on a sun-tracking mast"><img src="img/solar-array.jpg" alt="Solar array on a sun-tracking mast, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/solar-array-fps.jpg" alt="Solar array on a sun-tracking mast from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/solar-array-r1.jpg" alt="Solar array on a sun-tracking mast, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A framed equipment hut with a warm window on a wide dark plinth, a gunmetal mast rising through it to a slewing head with a green &quot;power good&quot; lamp, and two tilted wings of framed dark-blue cells. Diegetic: if the base is short of power, the lamp and the hut window go amber.</p>
+ <dl><div><dt>Triangles</dt><dd>1,240</dd></div><div><dt>Parts</dt><dd>14</dd></div>
+ <div><dt>Mass</dt><dd>3,262.4 kg</dd></div><div><dt>Moon weight</dt><dd>539.6 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.78 × 2.27 × 3.6</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal SolarCell</span><span class="chip">Metal Steel</span><span class="chip">Rubber Black</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="landing-pad">
  <header><span class="id">MK-003</span><h3>Landing pad with beacon ring</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/landing-pad.wasm" data-alt="Landing pad with beacon ring"><img src="img/landing-pad.jpg" alt="Landing pad with beacon ring, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/landing-pad-fps.jpg" alt="Landing pad with beacon ring from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A sintered-regolith slab 12 m across with a steel kerb, a painted hazard ring, a touchdown circle of amber inset lights and a ring of 12 beacon posts that chase toward the pad when a lander is inbound (the diegetic approach signal; this closes the remaster study&#x27;s open beacon-ring item).</p>
- <dl><div><dt>Triangles</dt><dd>7,656</dd></div><div><dt>Parts</dt><dd>96</dd></div>
- <div><dt>Mass</dt><dd>139,897.8 kg</dd></div><div><dt>Moon weight</dt><dd>23,139.1 kg</dd></div>
- <div><dt>Size m</dt><dd>14.11 × 15.06 × 1.2</dd></div></dl>
- <div class="chips"><span class="chip">LampOff Amber</span><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal HullDark</span><span class="chip">Plastic White</span><span class="chip">Stone Basalt</span></div>
+ <div class="views"><figure><img class="sq" src="img/landing-pad-pick.jpg" alt="Midjourney concept for Landing pad with beacon ring" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/landing-pad.wasm" data-alt="Landing pad with beacon ring"><img src="img/landing-pad.jpg" alt="Landing pad with beacon ring, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/landing-pad-fps.jpg" alt="Landing pad with beacon ring from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/landing-pad-r1.jpg" alt="Landing pad with beacon ring, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A raised round pad 12 m across on a thick segmented plinth with warm orange windows all round its side, a hazard-gold ring and target circles on the deck, and a ring of beacon posts with amber lamps that chase toward the pad when a lander is inbound (the diegetic approach signal; closes the remaster study&#x27;s open beacon-ring item).</p>
+ <dl><div><dt>Triangles</dt><dd>6,508</dd></div><div><dt>Parts</dt><dd>84</dd></div>
+ <div><dt>Mass</dt><dd>195,908.3 kg</dd></div><div><dt>Moon weight</dt><dd>32,403.2 kg</dd></div>
+ <div><dt>Size m</dt><dd>12.8 × 12.8 × 1.6</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Amber</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Plastic White</span><span class="chip">Stone Basalt</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="comms-dish">
  <header><span class="id">MK-005</span><h3>Comms dish on a turntable</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/comms-dish.wasm" data-alt="Comms dish on a turntable"><img src="img/comms-dish.jpg" alt="Comms dish on a turntable, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/comms-dish-fps.jpg" alt="Comms dish on a turntable from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A 3.2 m dish on a yoke, a feed horn on three struts, a counterweight and a red blinker. It turns to follow Earth; when it is talking to home its feed lamp glows and the turntable hums.</p>
- <dl><div><dt>Triangles</dt><dd>1,300</dd></div><div><dt>Parts</dt><dd>16</dd></div>
- <div><dt>Mass</dt><dd>4,883.3 kg</dd></div><div><dt>Moon weight</dt><dd>807.7 kg</dd></div>
- <div><dt>Size m</dt><dd>3.24 × 2.37 × 3.52</dd></div></dl>
- <div class="chips"><span class="chip">HeadlightGlass</span><span class="chip">Lamp Red</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span></div>
+ <div class="views"><figure><img class="sq" src="img/comms-dish-pick.jpg" alt="Midjourney concept for Comms dish on a turntable" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/comms-dish.wasm" data-alt="Comms dish on a turntable"><img src="img/comms-dish.jpg" alt="Comms dish on a turntable, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/comms-dish-fps.jpg" alt="Comms dish on a turntable from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/comms-dish-r1.jpg" alt="Comms dish on a turntable, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A domed, framed turntable housing with warm orange windows, a yoke and a 3.2 m panelled dish with a feed on three struts and a red blinker. It turns to follow Earth; when it is talking to home the windows pulse and the turntable hums.</p>
+ <dl><div><dt>Triangles</dt><dd>1,936</dd></div><div><dt>Parts</dt><dd>24</dd></div>
+ <div><dt>Mass</dt><dd>6,216.4 kg</dd></div><div><dt>Moon weight</dt><dd>1,028.2 kg</dd></div>
+ <div><dt>Size m</dt><dd>3.28 × 2.67 × 3.69</dd></div></dl>
+ <div class="chips"><span class="chip">HeadlightGlass</span><span class="chip">Lamp Red</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="ore-processor">
  <header><span class="id">MK-007</span><h3>Regolith ore processor</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/ore-processor.wasm" data-alt="Regolith ore processor"><img src="img/ore-processor.jpg" alt="Regolith ore processor, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/ore-processor-fps.jpg" alt="Regolith ore processor from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A hopper you can tip dust into, a panelled furnace body on legs, a chute that drops bricks of sintered regolith onto a tray, an exhaust stack and a status lamp. Diegetic: the warm window glows while it cooks, the stack puffs slow low-gravity dust, and bricks pile up on the tray.</p>
- <dl><div><dt>Triangles</dt><dd>1,744</dd></div><div><dt>Parts</dt><dd>28</dd></div>
- <div><dt>Mass</dt><dd>10,751.2 kg</dd></div><div><dt>Moon weight</dt><dd>1,778.2 kg</dd></div>
- <div><dt>Size m</dt><dd>3.91 × 3.4 × 3.67</dd></div></dl>
- <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">Stone Basalt</span><span class="chip">Window Warm</span></div>
+ <div class="views"><figure><img class="sq" src="img/ore-processor-pick.jpg" alt="Midjourney concept for Regolith ore processor" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/ore-processor.wasm" data-alt="Regolith ore processor"><img src="img/ore-processor.jpg" alt="Regolith ore processor, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/ore-processor-fps.jpg" alt="Regolith ore processor from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/ore-processor-r1.jpg" alt="Regolith ore processor, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A chunky framed furnace block on four splayed legs, a hopper on top, a glowing furnace mouth at the front with a tray of sintered bricks, an exhaust elbow on the side and a warm side window. Diegetic: the mouth glows while it cooks, the stack puffs slow dust, and bricks pile up on the tray.</p>
+ <dl><div><dt>Triangles</dt><dd>1,792</dd></div><div><dt>Parts</dt><dd>24</dd></div>
+ <div><dt>Mass</dt><dd>6,164.2 kg</dd></div><div><dt>Moon weight</dt><dd>1,019.6 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.37 × 2.2 × 2.88</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">Stone Basalt</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="tank-farm">
  <header><span class="id">MK-011</span><h3>Oxygen tank farm</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/tank-farm.wasm" data-alt="Oxygen tank farm"><img src="img/tank-farm.jpg" alt="Oxygen tank farm, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/tank-farm-fps.jpg" alt="Oxygen tank farm from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>Three upright tanks on a steel skid, joined by a manifold with valve wheels and two big pressure dials. Diegetic: the dials&#x27; needles and the frost line on the tanks say how much air the base has.</p>
- <dl><div><dt>Triangles</dt><dd>3,584</dd></div><div><dt>Parts</dt><dd>38</dd></div>
- <div><dt>Mass</dt><dd>11,593.0 kg</dd></div><div><dt>Moon weight</dt><dd>1,917.5 kg</dd></div>
- <div><dt>Size m</dt><dd>5 × 3.13 × 3.26</dd></div></dl>
- <div class="chips"><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Paint Dial</span><span class="chip">Plastic Dark</span></div>
+ <div class="views"><figure><img class="sq" src="img/tank-farm-pick.jpg" alt="Midjourney concept for Oxygen tank farm" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/tank-farm.wasm" data-alt="Oxygen tank farm"><img src="img/tank-farm.jpg" alt="Oxygen tank farm, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/tank-farm-fps.jpg" alt="Oxygen tank farm from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/tank-farm-r1.jpg" alt="Oxygen tank farm, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>Three tall white capsule tanks on a steel skid, each with a blue band, a warm frost window down its side and a valve on top, joined by a manifold with valve wheels and two big pressure dials at the foot. Diegetic: the dials and the glow level in the windows say how much air the base has.</p>
+ <dl><div><dt>Triangles</dt><dd>3,736</dd></div><div><dt>Parts</dt><dd>37</dd></div>
+ <div><dt>Mass</dt><dd>5,832.4 kg</dd></div><div><dt>Moon weight</dt><dd>964.7 kg</dd></div>
+ <div><dt>Size m</dt><dd>3.6 × 1.6 × 3.14</dd></div></dl>
+ <div class="chips"><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Paint Dial</span><span class="chip">Plastic Dark</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="corridor">
  <header><span class="id">MK-031</span><h3>Corridor segment, straight, ribbed</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/corridor.wasm" data-alt="Corridor segment, straight, ribbed"><img src="img/corridor.jpg" alt="Corridor segment, straight, ribbed, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/corridor-fps.jpg" alt="Corridor segment, straight, ribbed from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>The kit&#x27;s base piece: 4 m long on the 2 m grid, 2.4 m wide, 2.6 m tall, with a chamfered octagonal section. Grated floor over a cable trough, hull wall panels, gunmetal ribs every metre with handholds for low-g, a pipe run on the left wall, a cable tray on the right, a warm light strip in the ceiling and painted wayfinding stripes on the floor (diegetic: follow the orange stripe home).</p>
- <dl><div><dt>Triangles</dt><dd>2,588</dd></div><div><dt>Parts</dt><dd>62</dd></div>
- <div><dt>Mass</dt><dd>13,533.8 kg</dd></div><div><dt>Moon weight</dt><dd>2,238.5 kg</dd></div>
- <div><dt>Size m</dt><dd>2.48 × 4.16 × 2.67</dd></div></dl>
- <div class="chips"><span class="chip">HeadlightGlass</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Rubber Black</span></div>
+ <div class="views"><figure><img class="sq" src="img/corridor-pick.jpg" alt="Midjourney concept for Corridor segment, straight, ribbed" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/corridor.wasm" data-alt="Corridor segment, straight, ribbed"><img src="img/corridor.jpg" alt="Corridor segment, straight, ribbed, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/corridor-fps.jpg" alt="Corridor segment, straight, ribbed from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/corridor-r1.jpg" alt="Corridor segment, straight, ribbed, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>The kit&#x27;s base piece, 4 m on the 2 m grid, an octagonal tube with thick dark end frames and two mid ribs, off-white hull panels outside with small orange windows, and a warm inside: wall ribs, a grated floor with an orange wayfinding stripe (follow it home), a light strip, a pipe run and handholds for low gravity.</p>
+ <dl><div><dt>Triangles</dt><dd>3,032</dd></div><div><dt>Parts</dt><dd>20</dd></div>
+ <div><dt>Mass</dt><dd>21,474.7 kg</dd></div><div><dt>Moon weight</dt><dd>3,551.9 kg</dd></div>
+ <div><dt>Size m</dt><dd>3.14 × 4 × 3.24</dd></div></dl>
+ <div class="chips"><span class="chip">HeadlightGlass</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="bulkhead-door">
  <header><span class="id">MK-035</span><h3>Bulkhead door, round pressure hatch</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/bulkhead-door.wasm" data-alt="Bulkhead door, round pressure hatch"><img src="img/bulkhead-door.jpg" alt="Bulkhead door, round pressure hatch, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/bulkhead-door-fps.jpg" alt="Bulkhead door, round pressure hatch from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A thick hatch with a porthole, a locking wheel, a hinge block and a door-state light ring round the frame: green means the next module holds air, amber means it is cycling, red means stop (diegetic: Abbie reads the ring, not a HUD).</p>
- <dl><div><dt>Triangles</dt><dd>1,704</dd></div><div><dt>Parts</dt><dd>18</dd></div>
- <div><dt>Mass</dt><dd>1,905.9 kg</dd></div><div><dt>Moon weight</dt><dd>315.2 kg</dd></div>
- <div><dt>Size m</dt><dd>2.4 × 0.48 × 2.6</dd></div></dl>
- <div class="chips"><span class="chip">Glass Window</span><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span></div>
+ <div class="views"><figure><img class="sq" src="img/bulkhead-door-pick.jpg" alt="Midjourney concept for Bulkhead door, round pressure hatch" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/bulkhead-door.wasm" data-alt="Bulkhead door, round pressure hatch"><img src="img/bulkhead-door.jpg" alt="Bulkhead door, round pressure hatch, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/bulkhead-door-fps.jpg" alt="Bulkhead door, round pressure hatch from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/bulkhead-door-r1.jpg" alt="Bulkhead door, round pressure hatch, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A deep bezelled round hatch in a panelled wall, a big orange porthole in the middle of the door, a green door-state ring (green: the next module holds air; amber: cycling; red: stop), a chunky hinge on the left and latch dogs on the right, and a locking wheel.</p>
+ <dl><div><dt>Triangles</dt><dd>2,272</dd></div><div><dt>Parts</dt><dd>22</dd></div>
+ <div><dt>Mass</dt><dd>2,884.5 kg</dd></div><div><dt>Moon weight</dt><dd>477.1 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.66 × 0.62 × 2.7</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="command-console">
  <header><span class="id">MK-066</span><h3>Command console with three screens</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/command-console.wasm" data-alt="Command console with three screens"><img src="img/command-console.jpg" alt="Command console with three screens, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/command-console-fps.jpg" alt="Command console with three screens from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A curved desk of three angled bays, each with an Earthlight screen on a tilting arm, a key deck with chunky buttons, and a fold-out step so Abbie can reach (adults stand, she climbs up).</p>
- <dl><div><dt>Triangles</dt><dd>1,412</dd></div><div><dt>Parts</dt><dd>34</dd></div>
- <div><dt>Mass</dt><dd>1,432.2 kg</dd></div><div><dt>Moon weight</dt><dd>236.9 kg</dd></div>
- <div><dt>Size m</dt><dd>2.67 × 1.43 × 1.73</dd></div></dl>
- <div class="chips"><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Lamp Red</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic Dark</span><span class="chip">Plastic White</span><span class="chip">Rubber Black</span><span class="chip">Screen Earthlight</span></div>
+ <div class="views"><figure><img class="sq" src="img/command-console-pick.jpg" alt="Midjourney concept for Command console with three screens" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/command-console.wasm" data-alt="Command console with three screens"><img src="img/command-console.jpg" alt="Command console with three screens, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/command-console-fps.jpg" alt="Command console with three screens from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/command-console-r1.jpg" alt="Command console with three screens, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>One chunky framed console block with a raised hood holding three Earthlight screens and an orange status window, a sloped key deck of chunky coloured buttons, a lit service door below, and a little step in front so Abbie can climb up (adults stand, she climbs).</p>
+ <dl><div><dt>Triangles</dt><dd>2,332</dd></div><div><dt>Parts</dt><dd>31</dd></div>
+ <div><dt>Mass</dt><dd>3,060.6 kg</dd></div><div><dt>Moon weight</dt><dd>506.2 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.1 × 1.43 × 1.58</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Lamp Red</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">OrangeBand</span><span class="chip">Screen Earthlight</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="bunk-pod">
  <header><span class="id">MK-070</span><h3>Bunk pod with privacy shutter</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/bunk-pod.wasm" data-alt="Bunk pod with privacy shutter"><img src="img/bunk-pod.jpg" alt="Bunk pod with privacy shutter, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/bunk-pod-fps.jpg" alt="Bunk pod with privacy shutter from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>Each has a mattress with a strap blanket (low-g: you sleep strapped in), a pillow, a reading lamp and a slatted shutter. Diegetic: a closed shutter with the lamp off means someone is asleep.</p>
- <dl><div><dt>Triangles</dt><dd>1,992</dd></div><div><dt>Parts</dt><dd>40</dd></div>
- <div><dt>Mass</dt><dd>2,423.4 kg</dd></div><div><dt>Moon weight</dt><dd>400.8 kg</dd></div>
- <div><dt>Size m</dt><dd>2.28 × 1.16 × 2.39</dd></div></dl>
- <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Cloth Grey</span><span class="chip">HeadlightGlass</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span></div>
+ <div class="views"><figure><img class="sq" src="img/bunk-pod-pick.jpg" alt="Midjourney concept for Bunk pod with privacy shutter" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/bunk-pod.wasm" data-alt="Bunk pod with privacy shutter"><img src="img/bunk-pod.jpg" alt="Bunk pod with privacy shutter, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/bunk-pod-fps.jpg" alt="Bunk pod with privacy shutter from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/bunk-pod-r1.jpg" alt="Bunk pod with privacy shutter, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>Each capsule is a chunky framed module with an open side showing a blue mattress, pillow and warm reading lamp, a slatted shutter beside it, an orange window at the head end and an amber ladder. Diegetic: a closed shutter with the lamp off means someone is asleep.</p>
+ <dl><div><dt>Triangles</dt><dd>2,808</dd></div><div><dt>Parts</dt><dd>36</dd></div>
+ <div><dt>Mass</dt><dd>6,114.7 kg</dd></div><div><dt>Moon weight</dt><dd>1,011.4 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.36 × 1.25 × 2.32</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Cloth Grey</span><span class="chip">HeadlightGlass</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Plastic White</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="galley-table">
- <header><span class="id">MK-072</span><h3>Galley table with bench</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/galley-table.wasm" data-alt="Galley table with bench"><img src="img/galley-table.jpg" alt="Galley table with bench, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/galley-table-fps.jpg" alt="Galley table with bench from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A table on a single floor-pinned pedestal, a raised lip so things don&#x27;t drift off in low gravity, two cushioned benches with foot straps, two magnetic meal trays and a drink pouch.</p>
- <dl><div><dt>Triangles</dt><dd>1,392</dd></div><div><dt>Parts</dt><dd>27</dd></div>
- <div><dt>Mass</dt><dd>651.5 kg</dd></div><div><dt>Moon weight</dt><dd>107.8 kg</dd></div>
- <div><dt>Size m</dt><dd>1.6 × 2 × 0.98</dd></div></dl>
- <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Fruit Red</span><span class="chip">Leaf Lettuce</span><span class="chip">Metal Foil</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span></div>
+ <header><span class="id">MK-072</span><h3>Galley table with stools</h3></header>
+ <div class="views"><figure><img class="sq" src="img/galley-table-pick.jpg" alt="Midjourney concept for Galley table with stools" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/galley-table.wasm" data-alt="Galley table with stools"><img src="img/galley-table.jpg" alt="Galley table with stools, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/galley-table-fps.jpg" alt="Galley table with stools from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/galley-table-r1.jpg" alt="Galley table with stools, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A round table on one floor-pinned pedestal with a raised lip so things don&#x27;t drift off in low gravity, two chunky padded stools with dark bumpers, and a framed food module on the table with a warm glowing rehydrator window and a hatch.</p>
+ <dl><div><dt>Triangles</dt><dd>2,960</dd></div><div><dt>Parts</dt><dd>19</dd></div>
+ <div><dt>Mass</dt><dd>1,785.2 kg</dd></div><div><dt>Moon weight</dt><dd>295.3 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.13 × 2.11 × 1.37</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Grey</span><span class="chip">Metal Foil</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">OrangeBand</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="hydroponics-rack">
  <header><span class="id">MK-076</span><h3>Hydroponics rack, three tiers</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/hydroponics-rack.wasm" data-alt="Hydroponics rack, three tiers"><img src="img/hydroponics-rack.jpg" alt="Hydroponics rack, three tiers, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/hydroponics-rack-fps.jpg" alt="Hydroponics rack, three tiers from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>Diegetic: plants droop and the lamps flicker when the water or power is low; ripe tomatoes mean it&#x27;s harvest time.</p>
- <dl><div><dt>Triangles</dt><dd>2,972</dd></div><div><dt>Parts</dt><dd>66</dd></div>
- <div><dt>Mass</dt><dd>678.1 kg</dd></div><div><dt>Moon weight</dt><dd>112.2 kg</dd></div>
- <div><dt>Size m</dt><dd>1.95 × 0.66 × 2.33</dd></div></dl>
- <div class="chips"><span class="chip">Fruit Red</span><span class="chip">Lamp Grow</span><span class="chip">Leaf Green</span><span class="chip">Leaf Lettuce</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Plastic Dark</span><span class="chip">Plastic White</span><span class="chip">Soil Grow</span></div>
+ <div class="views"><figure><img class="sq" src="img/hydroponics-rack-pick.jpg" alt="Midjourney concept for Hydroponics rack, three tiers" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/hydroponics-rack.wasm" data-alt="Hydroponics rack, three tiers"><img src="img/hydroponics-rack.jpg" alt="Hydroponics rack, three tiers, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/hydroponics-rack-fps.jpg" alt="Hydroponics rack, three tiers from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/hydroponics-rack-r1.jpg" alt="Hydroponics rack, three tiers, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A chunky framed grow cabinet with an open front, three tiers (lettuce at Abbie&#x27;s height, herbs, then tomato vines spilling over), pink grow light strips above each tier, an orange status window on the side and a water line. Diegetic: plants droop and the pink light flickers when water or power is low; ripe tomatoes mean harvest time.</p>
+ <dl><div><dt>Triangles</dt><dd>2,040</dd></div><div><dt>Parts</dt><dd>45</dd></div>
+ <div><dt>Mass</dt><dd>2,854.4 kg</dd></div><div><dt>Moon weight</dt><dd>472.1 kg</dd></div>
+ <div><dt>Size m</dt><dd>1.97 × 0.94 × 2.05</dd></div></dl>
+ <div class="chips"><span class="chip">Fruit Red</span><span class="chip">Lamp Grow</span><span class="chip">Leaf Green</span><span class="chip">Leaf Lettuce</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal OxygenBlue</span><span class="chip">Plastic White</span><span class="chip">Soil Grow</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="suit-rack">
- <header><span class="id">MK-083</span><h3>Suit rack with spare suits</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/suit-rack.wasm" data-alt="Suit rack with spare suits"><img src="img/suit-rack.jpg" alt="Suit rack with spare suits, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/suit-rack-fps.jpg" alt="Suit rack with spare suits from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>The suits share the heroes&#x27; look: gunmetal plates over grey cloth with the orange chest lamp. Diegetic: a missing suit means someone is outside.</p>
- <dl><div><dt>Triangles</dt><dd>2,468</dd></div><div><dt>Parts</dt><dd>39</dd></div>
- <div><dt>Mass</dt><dd>1,231.1 kg</dd></div><div><dt>Moon weight</dt><dd>203.6 kg</dd></div>
- <div><dt>Size m</dt><dd>2.2 × 0.51 × 2.46</dd></div></dl>
- <div class="chips"><span class="chip">Cloth Suit</span><span class="chip">Glass Window</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span></div>
+ <header><span class="id">MK-083</span><h3>Suit locker with spare suits</h3></header>
+ <div class="views"><figure><img class="sq" src="img/suit-rack-pick.jpg" alt="Midjourney concept for Suit locker with spare suits" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/suit-rack.wasm" data-alt="Suit locker with spare suits"><img src="img/suit-rack.jpg" alt="Suit locker with spare suits, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/suit-rack-fps.jpg" alt="Suit locker with spare suits from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/suit-rack-r1.jpg" alt="Suit locker with spare suits, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A chunky framed wardrobe module, open at the front, with a warm-lit interior: an empty grown-up suit and an empty kid suit on hangers (no faces), helmets on the shelf, boots below, and a tall orange window in the door panel. Diegetic: a missing suit means someone is outside.</p>
+ <dl><div><dt>Triangles</dt><dd>2,504</dd></div><div><dt>Parts</dt><dd>31</dd></div>
+ <div><dt>Mass</dt><dd>4,988.4 kg</dd></div><div><dt>Moon weight</dt><dd>825.1 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.13 × 1.23 × 2.45</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Suit</span><span class="chip">Glass Window</span><span class="chip">HeadlightGlass</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="patch-up-station">
  <header><span class="id">MK-085</span><h3>Patch-up station</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/patch-up-station.wasm" data-alt="Patch-up station"><img src="img/patch-up-station.jpg" alt="Patch-up station, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/patch-up-station-fps.jpg" alt="Patch-up station from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A white cabinet with a glowing green plus (lit = ready), a pull-out drawer of plasters and suit patches, a fold-down seat at kid height and a big friendly press button. PG: it fixes scrapes and suit tears, nothing scary.</p>
- <dl><div><dt>Triangles</dt><dd>932</dd></div><div><dt>Parts</dt><dd>19</dd></div>
- <div><dt>Mass</dt><dd>560.7 kg</dd></div><div><dt>Moon weight</dt><dd>92.7 kg</dd></div>
- <div><dt>Size m</dt><dd>2.35 × 0.79 × 2</dd></div></dl>
- <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Cloth Grey</span><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span></div>
+ <div class="views"><figure><img class="sq" src="img/patch-up-station-pick.jpg" alt="Midjourney concept for Patch-up station" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/patch-up-station.wasm" data-alt="Patch-up station"><img src="img/patch-up-station.jpg" alt="Patch-up station, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/patch-up-station-fps.jpg" alt="Patch-up station from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/patch-up-station-r1.jpg" alt="Patch-up station, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A tall framed white locker with a glowing green plus on its face (lit = ready), a warm window showing the supplies, two pulled-out drawers of plasters and suit patches, and an amber help button. PG: it fixes scrapes and suit tears, nothing scary.</p>
+ <dl><div><dt>Triangles</dt><dd>1,324</dd></div><div><dt>Parts</dt><dd>18</dd></div>
+ <div><dt>Mass</dt><dd>1,642.4 kg</dd></div><div><dt>Moon weight</dt><dd>271.7 kg</dd></div>
+ <div><dt>Size m</dt><dd>1.08 × 1.22 × 1.83</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">OrangeBand</span><span class="chip">Plastic White</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="crater-rim">
  <header><span class="id">MK-096</span><h3>Crater rim arc piece</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/crater-rim.wasm" data-alt="Crater rim arc piece"><img src="img/crater-rim.jpg" alt="Crater rim arc piece, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/crater-rim-fps.jpg" alt="Crater rim arc piece from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
+ <div class="views"><figure class="wait"><div class="sq">Midjourney rerun coming: the first proofs put buildings in the rock.</div><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/crater-rim.wasm" data-alt="Crater rim arc piece"><img src="img/crater-rim.jpg" alt="Crater rim arc piece, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 1, the model</figcaption></figure><figure><img class="sq" src="img/crater-rim-fps.jpg" alt="Crater rim arc piece from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure></div>
  <p>Four of these close a crater; they also make low-g FPS cover. Colours follow the regolith grammar (simulations/moon/moon-regolith.mjs).</p>
  <dl><div><dt>Triangles</dt><dd>1,096</dd></div><div><dt>Parts</dt><dd>10</dd></div>
  <div><dt>Mass</dt><dd>111,268.6 kg</dd></div><div><dt>Moon weight</dt><dd>18,403.8 kg</dd></div>
@@ -213,10 +173,7 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
  <div class="chips"><span class="chip">Stone Basalt</span><span class="chip">Stone Regolith</span></div>
 </article><article class="card" id="boulders">
  <header><span class="id">MK-098</span><h3>Boulder set (three)</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/boulders.wasm" data-alt="Boulder set (three)"><img src="img/boulders.jpg" alt="Boulder set (three), three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/boulders-fps.jpg" alt="Boulder set (three) from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
+ <div class="views"><figure class="wait"><div class="sq">Midjourney rerun coming: the first proofs put buildings in the rock.</div><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/boulders.wasm" data-alt="Boulder set (three)"><img src="img/boulders.jpg" alt="Boulder set (three), three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 1, the model</figcaption></figure><figure><img class="sq" src="img/boulders-fps.jpg" alt="Boulder set (three) from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure></div>
  <p>Each has its own mass, so the small one can be shoved in low gravity and the big one stops a gem bug.</p>
  <dl><div><dt>Triangles</dt><dd>276</dd></div><div><dt>Parts</dt><dd>12</dd></div>
  <div><dt>Mass</dt><dd>11,995.2 kg</dd></div><div><dt>Moon weight</dt><dd>1,984.0 kg</dd></div>
@@ -224,59 +181,44 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
  <div class="chips"><span class="chip">Stone Basalt</span><span class="chip">Stone Regolith</span></div>
 </article><article class="card" id="oxygen-canister">
  <header><span class="id">MK-146</span><h3>Oxygen canister</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/oxygen-canister.wasm" data-alt="Oxygen canister"><img src="img/oxygen-canister.jpg" alt="Oxygen canister, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/oxygen-canister-fps.jpg" alt="Oxygen canister from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A blue cylinder with a steel valve head, a rubber grip band, a carry loop and a green &quot;full&quot; lamp ring that the game dims as it empties (diegetic: the canister itself says how full it is, no HUD bar).</p>
- <dl><div><dt>Triangles</dt><dd>1,124</dd></div><div><dt>Parts</dt><dd>9</dd></div>
- <div><dt>Mass</dt><dd>13.9 kg</dd></div><div><dt>Moon weight</dt><dd>2.3 kg</dd></div>
- <div><dt>Size m</dt><dd>0.2 × 0.2 × 0.72</dd></div></dl>
- <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Rubber Black</span></div>
+ <div class="views"><figure><img class="sq" src="img/oxygen-canister-pick.jpg" alt="Midjourney concept for Oxygen canister" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/oxygen-canister.wasm" data-alt="Oxygen canister"><img src="img/oxygen-canister.jpg" alt="Oxygen canister, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/oxygen-canister-fps.jpg" alt="Oxygen canister from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/oxygen-canister-r1.jpg" alt="Oxygen canister, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A stout blue capsule with an off-white front plate holding a warm window (it glows while there&#x27;s air inside), a dark base ring, a valve block on top with a green &quot;full&quot; ring, and a side strap. Diegetic: the window and ring dim as it empties.</p>
+ <dl><div><dt>Triangles</dt><dd>1,196</dd></div><div><dt>Parts</dt><dd>14</dd></div>
+ <div><dt>Mass</dt><dd>65.4 kg</dd></div><div><dt>Moon weight</dt><dd>10.8 kg</dd></div>
+ <div><dt>Size m</dt><dd>0.35 × 0.37 × 0.73</dd></div></dl>
+ <div class="chips"><span class="chip">Cloth Blue</span><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="battery-cell">
  <header><span class="id">MK-147</span><h3>Battery cell</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/battery-cell.wasm" data-alt="Battery cell"><img src="img/battery-cell.jpg" alt="Battery cell, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/battery-cell-fps.jpg" alt="Battery cell from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A chunky charcoal block with a carry handle, steel contacts, a hazard band and three green charge bars on its side (diegetic: the bars say how full it is).</p>
- <dl><div><dt>Triangles</dt><dd>624</dd></div><div><dt>Parts</dt><dd>12</dd></div>
- <div><dt>Mass</dt><dd>54.0 kg</dd></div><div><dt>Moon weight</dt><dd>8.9 kg</dd></div>
- <div><dt>Size m</dt><dd>0.31 × 0.19 × 0.49</dd></div></dl>
- <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">Plastic Dark</span><span class="chip">Rubber Black</span></div>
+ <div class="views"><figure><img class="sq" src="img/battery-cell-pick.jpg" alt="Midjourney concept for Battery cell" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/battery-cell.wasm" data-alt="Battery cell"><img src="img/battery-cell.jpg" alt="Battery cell, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/battery-cell-fps.jpg" alt="Battery cell from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/battery-cell-r1.jpg" alt="Battery cell, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>Round 2, matched to the Midjourney pick: a chunky cube with dark bumper corners, off-white side panels, a carry handle, an orange window on its flank and three green charge bars behind a dark grille (diegetic: the bars say how full it is).</p>
+ <dl><div><dt>Triangles</dt><dd>1,100</dd></div><div><dt>Parts</dt><dd>14</dd></div>
+ <div><dt>Mass</dt><dd>93.8 kg</dd></div><div><dt>Moon weight</dt><dd>15.5 kg</dd></div>
+ <div><dt>Size m</dt><dd>0.39 × 0.34 × 0.47</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">OrangeBand</span><span class="chip">Plastic Dark</span><span class="chip">Rubber Black</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="status-lamp-post">
  <header><span class="id">MK-161</span><h3>Status lamp beacon post</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/status-lamp-post.wasm" data-alt="Status lamp beacon post"><img src="img/status-lamp-post.jpg" alt="Status lamp beacon post, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/status-lamp-post-fps.jpg" alt="Status lamp beacon post from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>Three caged glass lamps stacked on a post (green all&#x27;s well, amber come back soon, red come inside now), a little solar cap and a bell under the lamps. The game lights one lamp and rings the bell, so the whole base mood is read from the world, not a HUD.</p>
- <dl><div><dt>Triangles</dt><dd>1,408</dd></div><div><dt>Parts</dt><dd>26</dd></div>
- <div><dt>Mass</dt><dd>225.9 kg</dd></div><div><dt>Moon weight</dt><dd>37.4 kg</dd></div>
- <div><dt>Size m</dt><dd>0.6 × 0.6 × 2.98</dd></div></dl>
- <div class="chips"><span class="chip">LampOff Amber</span><span class="chip">LampOff Red</span><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal HullDark</span><span class="chip">Metal SolarCell</span><span class="chip">Metal Steel</span></div>
+ <div class="views"><figure><img class="sq" src="img/status-lamp-post-pick.jpg" alt="Midjourney concept for Status lamp beacon post" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/status-lamp-post.wasm" data-alt="Status lamp beacon post"><img src="img/status-lamp-post.jpg" alt="Status lamp beacon post, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/status-lamp-post-fps.jpg" alt="Status lamp beacon post from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/status-lamp-post-r1.jpg" alt="Status lamp beacon post, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A framed equipment pedestal with a warm window, a post carrying three caged lanterns (green all&#x27;s well, amber come back soon, red come inside now), a bell, and a solar cap on top. The game lights one lantern and rings the bell, so the whole base mood is read from the world, not a HUD.</p>
+ <dl><div><dt>Triangles</dt><dd>2,196</dd></div><div><dt>Parts</dt><dd>34</dd></div>
+ <div><dt>Mass</dt><dd>812.0 kg</dd></div><div><dt>Moon weight</dt><dd>134.3 kg</dd></div>
+ <div><dt>Size m</dt><dd>0.9 × 0.9 × 2.81</dd></div></dl>
+ <div class="chips"><span class="chip">LampOff Amber</span><span class="chip">LampOff Red</span><span class="chip">Lamp Green</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">Metal SolarCell</span><span class="chip">Metal Steel</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="pressure-gauge">
  <header><span class="id">MK-162</span><h3>Pressure gauge wall panel</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/pressure-gauge.wasm" data-alt="Pressure gauge wall panel"><img src="img/pressure-gauge.jpg" alt="Pressure gauge wall panel, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/pressure-gauge-fps.jpg" alt="Pressure gauge wall panel from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>The diegetic replacement for an air meter: Abbie walks up and reads the wall.</p>
- <dl><div><dt>Triangles</dt><dd>1,672</dd></div><div><dt>Parts</dt><dd>18</dd></div>
- <div><dt>Mass</dt><dd>880.8 kg</dd></div><div><dt>Moon weight</dt><dd>145.7 kg</dd></div>
- <div><dt>Size m</dt><dd>1.6 × 0.24 × 2.41</dd></div></dl>
- <div class="chips"><span class="chip">Glass Window</span><span class="chip">Lamp Amber</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal HullDark</span><span class="chip">Metal OxygenBlue</span><span class="chip">Metal Steel</span><span class="chip">Paint Dial</span><span class="chip">Plastic Dark</span><span class="chip">Plastic White</span></div>
+ <div class="views"><figure><img class="sq" src="img/pressure-gauge-pick.jpg" alt="Midjourney concept for Pressure gauge wall panel" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/pressure-gauge.wasm" data-alt="Pressure gauge wall panel"><img src="img/pressure-gauge.jpg" alt="Pressure gauge wall panel, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/pressure-gauge-fps.jpg" alt="Pressure gauge wall panel from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/pressure-gauge-r1.jpg" alt="Pressure gauge wall panel, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A panelled wall section with a recessed dark gauge bay holding two big round dials (air and power) with green, white and red arcs, a little control strip, a pipe with a valve wheel running out of it, and a warm porthole beside it. The diegetic replacement for an air meter: Abbie walks up and reads the wall.</p>
+ <dl><div><dt>Triangles</dt><dd>2,160</dd></div><div><dt>Parts</dt><dd>21</dd></div>
+ <div><dt>Mass</dt><dd>3,431.0 kg</dd></div><div><dt>Moon weight</dt><dd>567.5 kg</dd></div>
+ <div><dt>Size m</dt><dd>2.13 × 0.73 × 2.35</dd></div></dl>
+ <div class="chips"><span class="chip">Glass Window</span><span class="chip">Lamp Amber</span><span class="chip">Lamp Green</span><span class="chip">Lamp Red</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Hull</span><span class="chip">Metal Steel</span><span class="chip">Paint Dial</span><span class="chip">Plastic Dark</span><span class="chip">Window Warm</span></div>
 </article><article class="card" id="jump-pad">
  <header><span class="id">MK-181</span><h3>Jump pad</h3></header>
- <div class="views">
-  <figure class="spin" data-src="m/jump-pad.wasm" data-alt="Jump pad"><img src="img/jump-pad.jpg" alt="Jump pad, three-quarter view" loading="lazy"><button type="button">Spin it</button></figure>
-  <figure><img src="img/jump-pad-fps.jpg" alt="Jump pad from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure>
- </div>
- <p>A 1.6 m round pad with a hazard-chevron grate top, a ring of green &quot;ready&quot; lamps, chunky springs visible in the gap below the top plate, and four anchor feet in a dust skirt. Step on it and the springs squash, the lamps chase inward, and you sail in a slow arc.</p>
- <dl><div><dt>Triangles</dt><dd>3,152</dd></div><div><dt>Parts</dt><dd>42</dd></div>
- <div><dt>Mass</dt><dd>1,072.4 kg</dd></div><div><dt>Moon weight</dt><dd>177.4 kg</dd></div>
- <div><dt>Size m</dt><dd>2.4 × 2.4 × 0.47</dd></div></dl>
- <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hazard</span><span class="chip">Metal Steel</span><span class="chip">OrangeBand</span><span class="chip">Stone Regolith</span></div>
+ <div class="views"><figure><img class="sq" src="img/jump-pad-pick.jpg" alt="Midjourney concept for Jump pad" loading="lazy"><figcaption>The Midjourney pick</figcaption></figure><figure class="spin" data-src="m/jump-pad.wasm" data-alt="Jump pad"><img src="img/jump-pad.jpg" alt="Jump pad, three-quarter view" loading="lazy"><button type="button">Spin it</button><figcaption>Round 2, the model</figcaption></figure><figure><img class="sq" src="img/jump-pad-fps.jpg" alt="Jump pad from Abbie's eye height" loading="lazy"><figcaption>Abbie's eye, 1.1 m</figcaption></figure><figure><img src="img/jump-pad-r1.jpg" alt="Jump pad, round 1" loading="lazy"><figcaption>Round 1, before the pick</figcaption></figure></div>
+ <p>A low round puck 1.8 m across, a thick panelled outer ring with warm orange windows round its side, a green &quot;ready&quot; ring inset on the top and a dark grated launch plate in the middle. Step on it and the plate squashes, the ring chases inward, and you sail in a slow low-gravity arc.</p>
+ <dl><div><dt>Triangles</dt><dd>2,472</dd></div><div><dt>Parts</dt><dd>31</dd></div>
+ <div><dt>Mass</dt><dd>2,423.7 kg</dd></div><div><dt>Moon weight</dt><dd>400.9 kg</dd></div>
+ <div><dt>Size m</dt><dd>1.96 × 1.96 × 0.53</dd></div></dl>
+ <div class="chips"><span class="chip">Lamp Green</span><span class="chip">Metal Charcoal</span><span class="chip">Metal Grate</span><span class="chip">Metal Gunmetal</span><span class="chip">Metal Hull</span><span class="chip">OrangeBand</span><span class="chip">Window Warm</span></div>
 </article></div>
 <h2>All 200</h2>
 <p class="muted">Orange ones are built. The groups are what a whole base needs, from the outside in.</p>
@@ -290,7 +232,7 @@ dl div{display:grid}dt{font:500 10px/1.3 var(--mono);letter-spacing:.08em;text-t
  <li><b>Built for Abbie's size.</b> Everything is checked from 1.1 m eye height. Consoles have a kid step, and the lower bunk and the lettuce tier sit at her height.</li>
 </ol>
 <h2>Next</h2>
-<p>Midjourney proofs for the 20 come next, then round 2 against your picks. After that: the five base buildings the Moon Heroes study handed over (dome, tower, habitat and hangar, airlock, supply crate), and then placing the kit on the Moon tile for the shooter.</p>
+<p>A Midjourney rerun for the crater rim and the boulders, which came back with buildings in the rock. After that: the five base buildings the Moon Heroes study handed over (dome, tower, habitat and hangar, airlock, supply crate), and then placing the kit on the Moon tile for the shooter.</p>
 </main>
 <script>
 let mv;

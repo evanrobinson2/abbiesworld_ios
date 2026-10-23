@@ -1,0 +1,22 @@
+{
+  "study": "AW-STUDY-0036 Moon Mission",
+  "item": "13a. Chat portraits: the dad (happy, surprised, determined)",
+  "date": "2026-10-23",
+  "tool": "Midjourney web (midjourney.com/imagine) in Evan's signed-in Chrome via Claude in Chrome; tools/midjourney download path",
+  "prompt": "Character expression sheet of a friendly fictional cartoon dad astronaut, bald with a salt-and-pepper beard, white space suit, three head-and-shoulders busts side by side: happy, surprised, determined, plain light background, stylized cartoon, Pixar-meets-NASA, game character concept art for a kids' game --ar 3:2 --v 7 --relax",
+  "job_id": "21ee3b63-5825-4156-8ea1-7319fb3bbb11",
+  "page": "https://www.midjourney.com/jobs/21ee3b63-5825-4156-8ea1-7319fb3bbb11?index=3",
+  "pick_index": 3,
+  "grid": "grid.png (the job's four images tiled 2x2, index 0 1 / 2 3)",
+  "ref": {
+    "file": "ref.png",
+    "url": "https://cdn.midjourney.com/21ee3b63-5825-4156-8ea1-7319fb3bbb11/0_3.png",
+    "size": [
+      1344,
+      896
+    ],
+    "sha256": "539876871f92cdf39a3a86496caf4634a3c84c3e63009397739a5fea873c96d6"
+  },
+  "upscale": "skipped: account out of Fast hours (refresh 2026-10-28); upscale buttons need Fast mode. ref.png is the full-size grid image.",
+  "note": "Pick 3: expressions read clearly in order (happy, surprised, determined), clean white suit. Beard came out mostly grey rather than salt-and-pepper; no trim colour was given for the dad."
+}

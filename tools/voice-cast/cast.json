@@ -320,9 +320,10 @@
      "purple",
      "darker skin"
     ],
-    "skin": "#a86e4a",
-    "skinShade": "#8e5838",
-    "ref": "AW-STUDY-0029 Faceted Hero (tools/moon-heroes/00-ani/ref)"
+    "skin": "#ddb08c",
+    "skinShade": "#c8956f",
+    "ref": "AW-STUDY-0029 Faceted Hero (tools/moon-heroes/00-ani/ref)",
+    "skinNote": "a touch warmer than Abbie, drawn light (Evan 12:18Z: the first pass was too dark)"
    }
   },
   {
@@ -442,13 +443,37 @@
   "daddy-young": 1,
   "street-grownup": 1,
   "janitor": 1,
-  "daddy-now": 1
+  "daddy-now": 1,
+  "mommy-young": 1,
+  "mommy-now": 1,
+  "lexi-young": 1,
+  "lexi-now": 1,
+  "jeff-young": 1,
+  "jeff-now": 1,
+  "pearl-young": 1,
+  "pearl-now": 1,
+  "georgia-young": 1,
+  "georgia-now": 1,
+  "abbie": 1,
+  "ani": 1
  },
  "voices": {
   "daddy-young": "CgihQ2SXCatWXGd6dIUA",
   "street-grownup": "o587ZevsDIT8gmoRG7cJ",
   "janitor": "c33yEXOhDbqcoLWO8H2I",
-  "daddy-now": "pISeyczFuBlv1qciFtad"
+  "daddy-now": "pISeyczFuBlv1qciFtad",
+  "mommy-young": "4RArs8D2Ssb6pcr0uWks",
+  "mommy-now": "NVjSK35Q5SvHOj8Hjqfj",
+  "lexi-young": "pwyDgnp6cQcoJSJZfisd",
+  "lexi-now": "3rUiwo7R0sJnfnls5xcn",
+  "jeff-young": "W2p2Jrg8KBkFBYhWrme7",
+  "jeff-now": "9qi3rDQUIxP08fBMSYoR",
+  "pearl-young": "MNNDNRgm3PlvlVYLUrCH",
+  "pearl-now": "vOkdPPoEOBflECD021Fb",
+  "georgia-young": "0HtmVMQQAQmcFnF5KM2J",
+  "georgia-now": "ABFwCaKGLSG9ZXQzf6HA",
+  "abbie": "6v1NVkWFOx7RiSwU4UYB",
+  "ani": "jyg28xewKUsbhcdswLJR"
  },
  "study": "AW-STUDY-0030"
 }

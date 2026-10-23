@@ -40,6 +40,21 @@
     },
     "camera": "isometric",
     "art_direction": "Pre-rendered isometric neon city.",
+    "rendering": {
+      "schema": "oracle.rendering.v1",
+      "style": "realistic",
+      "family": "pre_rendered",
+      "light": "painted_in",
+      "outlines": false,
+      "outline": "none",
+      "surface": "pixel",
+      "post": [
+        "bloom"
+      ],
+      "signature": "Pre-rendered isometric neon city.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.5
+    },
     "palette": null,
     "audio_mood": "Synthwave.",
     "pacing": "brisk, medium sessions",

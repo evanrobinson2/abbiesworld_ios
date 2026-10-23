@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<title>AW-STUDY-0032 - School Jump Game-Ready</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="The school jump made game ready: a climb where one tap moves the right hand, a full UX pass, and new art for the school, bub the black lab, young Daddy, the street and the dusk sky.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* AW-STUDY-0032 keeps the school jump's own look: dusk brick, headlight gold, the basement's VT323 for its voice. */
+:root{--bg:#1d1726;--paper:#29203a;--ink:#f3e9dc;--muted:#b3a5b8;--line:#43365a;--accent:#ffcf6a;--brick:#e07a50;
+ --display:"VT323","Courier New",monospace;--body:"Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f6efe6;--paper:#fffaf3;--ink:#2a2230;--muted:#6f6377;--line:#e0d3c4;--accent:#a8641a;--brick:#a8462a;color-scheme:light}}
+:root[data-theme="light"]{--bg:#f6efe6;--paper:#fffaf3;--ink:#2a2230;--muted:#6f6377;--line:#e0d3c4;--accent:#a8641a;--brick:#a8462a;color-scheme:light}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 var(--body);padding:20px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;letter-spacing:.02em;text-wrap:balance}
+h1{font-size:clamp(44px,8vw,76px);line-height:.9;color:var(--accent)} h2{font-size:34px;line-height:1}
+p{margin:0;max-width:68ch} .muted{color:var(--muted)}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--brick)}
+header,section{display:grid;gap:14px}
+.play{position:relative;display:block;border-radius:16px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/9;background:#000}
+.play img{width:100%;height:100%;object-fit:cover;display:block}
+.play span{position:absolute;left:50%;top:50%;translate:-50% -50%;width:84px;height:84px;border-radius:50%;background:rgba(255,207,106,.92);box-shadow:0 10px 40px rgba(255,190,90,.45)}
+.play span::after{content:"";position:absolute;left:33px;top:24px;border-left:28px solid #2a1d0c;border-top:18px solid transparent;border-bottom:18px solid transparent}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+figure{margin:0;display:grid;gap:6px;min-width:0;align-content:start}
+figure img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;display:block;background:#000}
+figure img.whole{aspect-ratio:auto;object-fit:contain}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+figcaption b{color:var(--ink)}
+iframe{width:100%;aspect-ratio:4/3;border:1px solid var(--line);border-radius:12px;background:#2a1f33;display:block}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--paper);display:grid;gap:6px;align-content:start}
+.card dt{font:500 11px/1.2 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--brick)} .card dd{margin:0 0 6px}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
+@media (max-width:700px){.pair{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0032</div>
+  <h1>School Jump: Game-Ready</h1>
+  <p class="muted">Evan, 2026-10-23, 7:45 AM: "climbing isn't working that well. this needs another UX / UI pass too it's not game ready at all. and the school is inconvincing and needs an upgrade, as does the dog, and the whole artwork." This study takes the game from AW-STUDY-0026 and rebuilds the climb, the screens and every piece of art, keeping its canon: golden dusk, slow station wagons, two barriers, burning headlights you feel, a fictional school and town.</p>
+ </header>
+
+ <section>
+  <h2>Before and after</h2>
+  <p class="muted">Same game state, same moment, the round-three build on the left and this one on the right.</p>
+  <div class="pair">
+   <figure><img src="img/before-climb.jpg" alt="Before: the kid stuck at the green door, flat orange brick, a tiny black blob of a dog"><figcaption><b>Before.</b> The climb stalled at the door: a second grab did nothing until you let go first.</figcaption></figure>
+   <figure><img src="img/after-climb.jpg" alt="After: young Daddy halfway up the brick wall by the drainpipe, the reachable holds shining, bub sitting below"><figcaption><b>After.</b> One tap moves whichever hand can reach. The camera follows you up.</figcaption></figure>
+   <figure><img src="img/before-roof.jpg" alt="Before: the boxy roof with flat brick blocks and ball-shaped trees"><figcaption><b>Before.</b> The roof.</figcaption></figure>
+   <figure><img src="img/after-roof.jpg" alt="After: a gravel roof with a cream fascia, an air handler, a brick barrier and skylights; ribbon windows on the walls below"><figcaption><b>After.</b> Gravel, fascia, skylights, the air handler and the brick barrier.</figcaption></figure>
+  </div>
+  <a class="play" href="../school/play.html" aria-label="Play the school jump"><img src="img/after-title.jpg" alt="The opening shot: the brick school at golden dusk with the glass play orb, the kid and bub on the lawn"></a>
+ </section>
+
+ <section>
+  <h2>Round two: the school, and Sunday Toon</h2>
+  <p class="muted">Evan, 8:47 AM: "the school sucks really needs work, and you need to try that toon shader you just built." The building now follows the key art, with the details that say "school" from the street. The whole scene is drawn in Sunday Toon from the Shaders article.</p>
+  <div class="pair">
+   <figure><img src="img/r2-title.jpg" alt="The climbing wall at low golden sun, a tree's shadow across the brick, a thin slate roof edge, classroom windows on the low wing"><figcaption><b>The wall.</b> A low sun rakes across it and a tree's shadow falls on the climb, as in the key art. A thin slate roof edge replaces the cream slab, and the low wing has windows facing the street.</figcaption></figure>
+   <figure><img src="img/r2-aerial.jpg" alt="The school from above: a tall brick boiler chimney, a flag, hopscotch, rooftop units, rows of classroom windows"><figcaption><b>From above.</b> A brick boiler chimney, a flag on its pole, hopscotch, swings and a slide in the yard, and a chain-link run off the wall.</figcaption></figure>
+  </div>
+  <ul>
+   <li><b>Sunday Toon</b> (<code>simulations/toon-kit.mjs</code>) patches three's own materials, so every texture, shadow and fog keeps working. The light wraps round the back, falls into three soft bands and fills the shadow side with a violet sky tint, and a warm rim picks out edges. <code>?look=ink</code> adds ink lines to the kid, bub and the cars; <code>?look=plain</code> turns it off.</li>
+   <li>A deeper dusk: a lower, oranger sun, less flat fill, and a sky that runs from orange to violet.</li>
+  </ul>
+ </section>
+
+ <section>
+  <h2>The climb, fixed</h2>
+  <ol>
+   <li><b>One tap, the right hand.</b> Tap a hold and the hand that can reach it goes there; the other hand stays put. Before, you had to let go first, so most taps did nothing and the climb stalled at the door. Tapping your own hand still lets it go.</li>
+   <li><b>No dead ends.</b> When both hands could reach, the game picks the one that leaves the most holds in reach further up, then the hand on that side, then the trailing hand. Climbing feels hand over hand and you can't trap yourself.</li>
+   <li><b>Thumb-sized targets.</b> Holds are picked by distance on screen (at least 54 px, about 8% of the screen), and a tap near a shining hold prefers it over a dull one.</li>
+   <li><b>See what you can reach.</b> Reachable holds shine (the worn spot where small hands have been). For the first six grabs, a soft ring sits on the best hold upward. No words.</li>
+   <li><b>A camera that follows.</b> Side-on from across the street, a little to the side, framed in metres so a phone in portrait sees the same climb as a laptop. It rises with you.</li>
+   <li><b>A body that climbs.</b> Young Daddy's arms and legs are real two-bone limbs: hands close on the holds, feet push on the brick, arms shake as you tire.</li>
+   <li><b>Keys on a laptop.</b> Arrow keys or WASD grab the best hold up, down, left or right.</li>
+  </ol>
+ </section>
+
+ <section>
+  <h2>The UX pass</h2>
+  <ul>
+   <li>A breathing glass play orb on the opening shot, the key art's composition: the long wall side-on, the kid and bub on the lawn. It wakes the sound.</li>
+   <li>The kid walks bub to the wall on their own, then the power glass appears. Hold, release in the gold.</li>
+   <li>On the roof, tap bub or anywhere over the yard to throw down a ball when your hands are full. You carry them in your arms.</li>
+   <li>When the ball lands on the roof, bub looks up and whines. That's the reason to climb.</li>
+   <li>Busted: a grown-up gets out on the sidewalk with a flashlight. On the roof you slide back to the last place nobody could see you, not to the start.</li>
+   <li>The hang drop has one small glass timing ring: let go when the dot is in the gold.</li>
+   <li>A gentle buzz in your hand on each grab, a jolt when you're busted (on phones that can).</li>
+   <li>Still zero words on screen: a back chevron, one score chip, a timing glass or ring only while it's needed, a replay orb at the end.</li>
+   <li>The 8-bit look is one switch away: <code>play.html?pixel</code>.</li>
+  </ul>
+ </section>
+
+ <section>
+  <h2>The models, beside their references</h2>
+  <p class="muted">Each one spins and zooms. They are hero low-poly recipes in code: named parts, real materials (brick with mortar relief, a sheen on bub's coat, chrome that reflects the dusk), and nothing opaque.</p>
+  <div class="pair">
+   <figure><img class="whole" src="../school/img/concepts/1-key-art.jpg" alt="Key art: a long low brick school at dusk, a kid climbing by a drainpipe, a dog below, station wagon headlights"><figcaption><b>Reference.</b> Evan's key art (Midjourney, AW-STUDY-0026).</figcaption></figure>
+   <figure><iframe src="viewer.html?m=school" title="The school, interactive" loading="lazy"></iframe><figcaption><b>The school.</b> Brick with mortar and a few flashed bricks, two bands of aluminium ribbon windows with classrooms glimpsed behind, a cream metal fascia, gym piers and high windows, skylights, air handlers, the street, houses and power lines.</figcaption></figure>
+   <dl class="card"><dt>Reference</dt><dd>The family cast's look for bub: a black Labrador, coat #1b1a1a, brown eyes, red collar with a brass tag. Evan: "black lab".</dd><dt>Built</dt><dd>A deep chest and tucked loin lofted along the spine, a broad skull with a stop, a square muzzle, soft drop ears, an otter tail. Legs are two-bone reaches to planted paws: walk, trot, gallop, sit, pant and bark.</dd></dl>
+   <figure><iframe src="viewer.html?m=bub" title="Bub the black lab, interactive" loading="lazy"></iframe><figcaption><b>Bub.</b> Tap the glass under him for stand, walk, trot, gallop and sit.</figcaption></figure>
+   <figure><img class="whole" src="../school/img/concepts/5-characters.jpg" alt="Character sheets: a kid in a red cap and blue jacket with a shaggy golden dog"><figcaption><b>Reference.</b> The character proofs. Canon overrides them: young Daddy has a blond mop and never a hat, in a white tee and red shorts (Evan's picture).</figcaption></figure>
+   <figure><iframe src="viewer.html?m=kid" title="Young Daddy, interactive" loading="lazy"></iframe><figcaption><b>Young Daddy.</b> Stand, walk, climb, throw and shield poses from one rig.</figcaption></figure>
+   <figure><img class="whole" src="../school/img/concepts/1-key-art.jpg" alt="The station wagon in the key art" style="object-position:right bottom"><figcaption><b>Reference.</b> The station wagon in the key art.</figcaption></figure>
+   <figure><iframe src="viewer.html?m=wagon" title="The station wagon, interactive" loading="lazy"></iframe><figcaption><b>The wagon.</b> An '80s family wagon from a side profile: woodgrain panels, chrome trim and roof rack, square headlamps.</figcaption></figure>
+  </div>
+ </section>
+
+ <section>
+  <h2>How it shows information</h2>
+  <dl class="card">
+   <dt>What the player feels</dt><dd>"I'm sneaking. That one shines, I can reach it. My arms are shaking. Don't let the cars see me. I got the coin!"</dd>
+   <dt>How would the character know?</dt><dd>The worn shiny spot on a bracket, headlights on the brick, the car braking, your own breath and shaking arms, bub sitting below watching you.</dd>
+   <dt>Mode</dt><dd>Diegetic first (headlights, the dog's pile, bub watching, lamps coming on as dusk deepens); spatial for reach (the shine and the nudge ring); meta for feelings (burning glare, heartbeat, shaking arms, a buzz in your hand); overlay only for the timing glass and the score chip.</dd>
+   <dt>Who it's for</dt><dd>The player, a child.</dd>
+   <dt>The whole game adapts</dt><dd>One dusk clock drives the sky, the sun's colour, the fog, the classroom and house windows, the wall lamp and the street lights.</dd>
+  </dl>
+ </section>
+
+ <section id="speed">
+  <h2>How it was made, and how to be faster next time</h2>
+  <p>From Evan's words at 7:45 AM to a game-ready build in about an hour. About 40% of the time went on the art recipes, a quarter on composition fixes that only showed up in screenshots, a fifth on the climb.</p>
+  <ul>
+   <li><b>One command for the preview.</b> <code>tools/advance-artifact/bundle.mjs</code> turns any study page into a publishable preview.</li>
+   <li><b>A robot player.</b> <code>tools/minigame-test/school-flow.cjs</code> plays the game by its own rules and screenshots every beat, waiting on game state, never on time. Shoot portrait first.</li>
+   <li><b>A kit to start from.</b> The climb rules, the low-poly kit, bub and young Daddy are shared modules, ready for Grace's basement and the next memory place.</li>
+   <li><b>Frame in metres from the first view</b>, and check props against the camera lines before placing them.</li>
+  </ul>
+  <p class="muted">The full review: <code>docs/oracle/school/SCHOOL_READY_STUDY.md</code>.</p>
+ </section>
+</div>
+</html>

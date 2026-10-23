@@ -13,6 +13,94 @@
       "link": "/studies/hexcity/"
     },
     {
+      "id": "2026-10-23-moon-mission-storyboard",
+      "date": "2026-10-23",
+      "title": "Moon Mission: the storyboard for tonight",
+      "line": "The family Moon game, planned for the big TV: 13 frames from the kitchen to the Moon base pad, everyone's jobs, live Houston on the radio, white suits on Earth and dark mode on the Moon.",
+      "image": "/whats-new/2026-10-23-moon-mission-storyboard.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+      "threadTitle": "Moon Mission game",
+      "tour": false,
+      "link": "/studies/moon-mission/"
+    },
+    {
+      "id": "2026-10-23-moon-base-kit-r2",
+      "date": "2026-10-23",
+      "title": "Moon base kit, rebuilt from your Midjourney picks",
+      "line": "18 of the 20 Moon base pieces rebuilt to match their Midjourney pictures: chunky white modules in dark frames with warm orange windows. Each card shows the picture, the model you can spin, Abbie's view and the first try.",
+      "image": "/whats-new/2026-10-23-moon-base-kit-r2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYNtqXxwWeYiUhSxEPUykrHL",
+      "threadTitle": "Moon base FPS assets",
+      "tour": false,
+      "link": "/studies/moon-base-kit/"
+    },
+    {
+      "id": "2026-10-23-school-toon",
+      "date": "2026-10-23",
+      "title": "The school, redone at dusk",
+      "line": "The school jump's school matches the key art now: a low golden sun, tree shadows on the brick, a slate roof edge, a boiler chimney, a flag, swings and hopscotch. It's all drawn in the new Sunday Toon look.",
+      "image": "/whats-new/2026-10-23-school-toon.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYRypkQBBpSxf7MW2R1c5GRg",
+      "threadTitle": "AW-STUDY-0032 - School Jump Game-Ready",
+      "tour": false,
+      "link": "/studies/school/play.html"
+    },
+    {
+      "id": "2026-10-23-figure-fidelity",
+      "date": "2026-10-23",
+      "title": "Young Daddy, bub and the basement girl, rebuilt",
+      "line": "The kids and the dog in Daddy's memory places are now smooth, skinned figures with real cloth, hair and fur, so the storybook light makes their ears glow and their outlines shine. See them before and after.",
+      "image": "/whats-new/2026-10-23-figure-fidelity.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYSz4GuRXSQnywro62U9WRKG",
+      "threadTitle": "AW-STUDY-0034 - Low-Poly Figure Fidelity",
+      "tour": false,
+      "link": "/studies/figures/"
+    },
+    {
+      "id": "2026-10-23-grace-basement-5",
+      "date": "2026-10-23",
+      "title": "Grace's basement has an ending",
+      "line": "Run the gold disk and the basement warms up. Daddy calls down, Abbie climbs back to the café with his memory in her pocket, and the old set switches off. Every coin is a piece of that memory; find all ten to see it whole.",
+      "image": "/whats-new/2026-10-23-basement-ending.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
+      "id": "2026-10-23-school-ready",
+      "date": "2026-10-23",
+      "title": "The school jump, game ready",
+      "line": "Climbing works now: tap a hold and the hand that can reach it goes there. A new brick school at golden dusk, bub as a real black lab, young Daddy with arms and legs that climb, and station wagons that sweep the wall.",
+      "image": "/whats-new/2026-10-23-school-ready.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYRypkQBBpSxf7MW2R1c5GRg",
+      "threadTitle": "AW-STUDY-0032 - School Jump Game-Ready",
+      "tour": false,
+      "link": "/studies/school/play.html"
+    },
+    {
+      "id": "2026-10-23-study-notes",
+      "date": "2026-10-23",
+      "title": "Notes in every study",
+      "line": "Studies now show which ones are new to you. Each study has a Notes panel on the right: keep notes, send them to the study, or ask for a review. Details links the live page, its artifacts and the next study in the group.",
+      "image": "/whats-new/2026-10-23-study-notes.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/studies/"
+    },
+    {
+      "id": "2026-10-23-grace-basement-4",
+      "date": "2026-10-23",
+      "title": "Feet on the stairs",
+      "line": "In Grace's basement the girl now steps down each stair, with her feet on the treads instead of through them. And if you go back up, \"I have to know\" brings you back to the start to choose again.",
+      "image": "/whats-new/2026-10-23-grace-basement-4.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
       "id": "2026-10-23-moon-base-kit",
       "date": "2026-10-23",
       "title": "Moon base kit: 20 pieces to walk through",
@@ -35,26 +123,26 @@
       "link": "/studies/storybook/"
     },
     {
-     "id": "2026-10-23-family-cast",
-     "date": "2026-10-23",
-     "title": "The family cast",
-     "line": "Everyone in Daddy's memory places, then and now, each with a storybook sheet and designed voices. Tap a voice, tick the one that sounds right, and send your picks.",
-     "image": "/whats-new/2026-10-23-family-cast.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh",
-     "threadTitle": "Family cast",
-     "tour": false,
-     "link": "/studies/family-cast/"
+      "id": "2026-10-23-family-cast",
+      "date": "2026-10-23",
+      "title": "The family cast",
+      "line": "Everyone in Daddy's memory places, then and now, each with a storybook sheet and designed voices. Tap a voice, tick the one that sounds right, and send your picks.",
+      "image": "/whats-new/2026-10-23-family-cast.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh",
+      "threadTitle": "Family cast",
+      "tour": false,
+      "link": "/studies/family-cast/"
     },
     {
-     "id": "2026-10-23-school-jump-3",
-     "date": "2026-10-23",
-     "title": "The school jump: chalk targets and a secret",
-     "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
-     "image": "/whats-new/2026-10-23-school-jump-3.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-     "threadTitle": "The school jump",
-     "tour": false,
-     "link": "/studies/school/play.html"
+      "id": "2026-10-23-school-jump-3",
+      "date": "2026-10-23",
+      "title": "The school jump: chalk targets and a secret",
+      "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
+      "image": "/whats-new/2026-10-23-school-jump-3.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+      "threadTitle": "The school jump",
+      "tour": false,
+      "link": "/studies/school/play.html"
     },
     {
       "id": "2026-10-23-brute-fight",
@@ -68,15 +156,15 @@
       "link": "/studies/brute-fight/play.html"
     },
     {
-     "id": "2026-10-23-school-jump-2",
-     "date": "2026-10-23",
-     "title": "The school jump, at golden dusk",
-     "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
-     "image": "/whats-new/2026-10-23-school-jump-2.jpg",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-     "threadTitle": "The school jump",
-     "tour": false,
-     "link": "/studies/school/play.html"
+      "id": "2026-10-23-school-jump-2",
+      "date": "2026-10-23",
+      "title": "The school jump, at golden dusk",
+      "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
+      "image": "/whats-new/2026-10-23-school-jump-2.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+      "threadTitle": "The school jump",
+      "tour": false,
+      "link": "/studies/school/play.html"
     },
     {
       "id": "2026-10-23-grace-basement-3",
