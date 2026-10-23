@@ -1,0 +1,55 @@
+# Lets Evan's PC upload his Suno songs straight to R2 without R2 keys and without git (the songs are private on Suno,
+# whose CDN refuses them outside his browser). Given an RSA public key from the PC, it makes a presigned PUT URL for
+# music/suno/<id>.mp3 for every song in tools/composer/suno/songs.json (valid 2 hours), encrypts the list to that
+# key (AES-256 + RSA-OAEP), and attaches the ciphertext to the `suno-library` release as suno-put.<run>.enc/.key.
+# Only the PC holding the private key can read the URLs. Afterwards run suno-store to check and catalogue them.
+name: suno-presign
+on:
+  workflow_dispatch:
+    inputs:
+      pubkey: { description: 'RSA public key, PEM, base64 encoded on one line', required: true }
+permissions:
+  contents: write
+jobs:
+  presign:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: R2 keys
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: tools/model-store/r2-keys.sh
+      - name: Presign and encrypt
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          PUBKEY: ${{ inputs.pubkey }}
+        run: |
+          set -euo pipefail
+          pip install -q boto3
+          umask 077; mkdir -p /tmp/p
+          python3 - > /tmp/p/urls.json <<'PY'
+          import boto3, json, os
+          s3 = boto3.client('s3', endpoint_url=f"https://{os.environ['R2_ACCOUNT_ID']}.r2.cloudflarestorage.com", region_name='auto')
+          songs = json.load(open('tools/composer/suno/songs.json'))['songs']
+          print(json.dumps([{'id': s['id'], 'title': s['title'], 'put': s3.generate_presigned_url('put_object', ExpiresIn=7200,
+              Params={'Bucket': os.environ['R2_BUCKET'], 'Key': f"music/suno/{s['id']}.mp3", 'ContentType': 'audio/mpeg'})} for s in songs]))
+          PY
+          echo "$PUBKEY" | base64 -d > /tmp/p/pub.pem
+          openssl rand -out /tmp/p/k 32
+          n=${{ github.run_id }}
+          openssl enc -aes-256-cbc -pbkdf2 -salt -in /tmp/p/urls.json -out "suno-put.$n.enc" -pass file:/tmp/p/k
+          openssl pkeyutl -encrypt -pubin -inkey /tmp/p/pub.pem -pkeyopt rsa_padding_mode:oaep -in /tmp/p/k -out "suno-put.$n.key"
+          rm -rf /tmp/p
+          ls -l suno-put.*
+      - name: Attach to the suno-library release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view suno-library >/dev/null 2>&1 || gh release create suno-library --prerelease --title "Abbie's World: Evan's Suno songs" --notes "Evan's own Suno songs, mirrored from our R2 CDN (music/suno/). Metadata: tools/composer/suno/songs.json."
+          gh release upload suno-library suno-put.* --clobber

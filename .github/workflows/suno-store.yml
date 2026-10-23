@@ -1,5 +1,6 @@
 # Evan's own Suno songs (tools/composer/suno/README.md) -> our CDN. Reads tools/composer/suno/songs.json (ids and
-# metadata only), takes each song's audio from Suno's CDN or, since the CDN refuses private songs outside the browser,
+# metadata only), takes each song's audio from R2 if it is already there (uploaded from Evan's PC through
+# suno-presign), else from Suno's CDN or, since the CDN refuses private songs outside the browser,
 # from a one-off upload branch `claude/suno-library` (run this workflow by hand after pushing it) (tools/composer/suno/library/, Suno downloads plus .json
 # sidecars, pushed from Evan's PC). It checks each file decodes, stores
 # it in R2 under music/suno/<id>.mp3 (+ .jpeg), with music/suno/catalog.json listing them. The site serves R2 at /r2/.
@@ -34,7 +35,19 @@ jobs:
           else echo "No upload branch: Suno's CDN only"; fi
       - name: Tools
         run: sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+      - name: R2 keys
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: tools/model-store/r2-keys.sh
       - name: Collect the songs
+        env:
+          AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
+          AWS_DEFAULT_REGION: auto
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
         run: |
           set -euo pipefail
           mkdir -p out
@@ -50,6 +63,7 @@ jobs:
               fi
               [ -n "$f" ] && cp "$f" "out/$id.mp3" && ok=1 && echo "$id <- $f"
             fi
+            [ -n "$ok" ] || { aws s3 cp "s3://$R2_BUCKET/music/suno/$id.mp3" "out/$id.mp3" --endpoint-url "https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com" --only-show-errors 2>/dev/null && ok=1 && echo "$id <- R2"; }
             [ -n "$ok" ] || for u in "https://cdn1.suno.ai/$id.mp3" "https://audiopipe.suno.ai/?item_id=$id"; do
               code=$(curl -sSL --retry 2 -A "$UA" -e 'https://suno.com/' -o "out/$id.mp3" -w '%{http_code}' "$u" || true)
               [ "$code" = 200 ] && { ok=1; break; }
@@ -67,12 +81,6 @@ jobs:
             '.songs |= map(. as $s | ($ok | map(select(.id == $s.id)) | first) as $o | if $o then . + {duration: $o.d, audio: ("music/suno/" + .id + ".mp3"), art: (if $o.art then "music/suno/" + .id + ".jpeg" else null end)} else . end)' \
             tools/composer/suno/songs.json > out/catalog.json
           echo "stored $(ls out/*.mp3 | wc -l) of $(jq '.songs|length' tools/composer/suno/songs.json)"
-      - name: R2 keys
-        env:
-          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
-          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
-          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
-        run: tools/model-store/r2-keys.sh
       - name: Store in R2
         env:
           AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
