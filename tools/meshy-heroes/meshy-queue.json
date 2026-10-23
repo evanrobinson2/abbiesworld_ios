@@ -480,5 +480,26 @@
  },
  "pricing_source": "https://docs.meshy.ai/en/api/pricing (checked 2026-10-23): multi-image textured 30, rigging 5, animation 3 per action, retexture 10",
  "licence": "Paid plans: private licence, full commercial use, we own the output (https://docs.meshy.ai/en/webapp/pricing)",
- "total_credits_before_anims": 1000
+ "total_credits_before_anims": 1030,
+ "texture_paint_test": {
+  "asked": "Evan 16:58Z: 'after clean up, we can also paint textures with meshy too ... test the texture painting? ... one way we could ensure a base costume, but another way we could add our own flair beyond simple shading and svg decals'",
+  "when": "after our Blender cleanup of the first astronaut (A3 Daddy, uniform, painterly), on the cleaned GLB with our own UVs",
+  "api": "POST /openapi/v1/retexture with model_url = our cleaned GLB, enable_original_uv true, enable_pbr true; 10 credits each",
+  "runs": [
+   {
+    "id": "paint-base",
+    "image_style_url": "his Midjourney pick (base costume, same look as the picture)"
+   },
+   {
+    "id": "paint-flair",
+    "text_style_prompt": "same uniform, hand-painted, scuffed Moon dust on the knees and boots, stitched mission patch on the shoulder, painted orange piping"
+   },
+   {
+    "id": "paint-clay",
+    "text_style_prompt": "same uniform as handmade plasticine, flat bright clay colours with faint thumbprints"
+   }
+  ],
+  "credits": 30,
+  "check": "same UVs and part names after painting (so rig and role materials survive), shown beside the picture"
+ }
 }
