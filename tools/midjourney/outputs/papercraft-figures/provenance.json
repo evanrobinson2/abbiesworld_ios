@@ -1,0 +1,224 @@
+{
+  "set": "papercraft-figures",
+  "round": 1,
+  "generated": "2026-10-23",
+  "tool": "Midjourney web (v8.2), grid only, no upscale",
+  "jobs": [
+    {
+      "name": "roman-legionary",
+      "prompt": "A full-body standing Roman legionary figure made of matte ivory-white folded papercraft, wearing separate distinct paper armor parts: imperial helmet with a transverse fan crest and angular cheek guards, segmented lorica cuirass of overlapping horizontal bands, layered shoulder guards stepping down each arm, a centurion belt with square plaques and an octagonal sunburst buckle, a short gladius at the hip, caged caligae sandals, crisp creases and faceted folds, every armor piece a separate readable part, charming strategy-game hero, three-quarter view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "20e8e127-2f81-4604-a38a-e888189a37f9",
+      "created": "2026-10-23T02:55:23Z",
+      "files": [
+        {
+          "file": "images/roman-legionary_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/20e8e127-2f81-4604-a38a-e888189a37f9/0_0.png",
+          "sha256": "0fa61b1075732f2603ab021cf597813d4cb9585e9f16bd3aa75df77918914f39",
+          "bytes": 1415217
+        },
+        {
+          "file": "images/roman-legionary_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/20e8e127-2f81-4604-a38a-e888189a37f9/0_1.png",
+          "sha256": "1ba3ab67b82d6e9f308c35667d4ac8152c6404c94ba8e2fd799864575e9a2f21",
+          "bytes": 1329310
+        },
+        {
+          "file": "images/roman-legionary_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/20e8e127-2f81-4604-a38a-e888189a37f9/0_2.png",
+          "sha256": "96dd06d1d52b2437ca90cc9a046f3210fe99cfcdf035c8d29871ee46e30160b1",
+          "bytes": 1335374
+        },
+        {
+          "file": "images/roman-legionary_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/20e8e127-2f81-4604-a38a-e888189a37f9/0_3.png",
+          "sha256": "177077d7b6a2b7dbfaf9586d5e5aa8cc7f17041eada6a594ae903bf68f50e51f",
+          "bytes": 1344880
+        }
+      ]
+    },
+    {
+      "name": "gothic-warrior",
+      "prompt": "A full-body standing 4th-century Gothic warrior figure made of matte ivory-white folded papercraft, ridge helmet with a nasal guard, knee-length mail shirt folded as overlapping paper scales, a round shield with a central boss, a long spatha sword, a cloak pinned at the shoulder with a brooch, trousers wrapped with leg bindings, crisp creases and faceted folds, every piece of kit a separate readable paper part, charming strategy-game hero, three-quarter view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "7779e7f7-96ba-4ce6-a03f-3bb47124769f",
+      "created": "2026-10-23T02:56:15Z",
+      "files": [
+        {
+          "file": "images/gothic-warrior_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/7779e7f7-96ba-4ce6-a03f-3bb47124769f/0_0.png",
+          "sha256": "7725f0cb35d160d583593e0e2c44d0b3ce9039a44688b8374e6f7a57a1a1b173",
+          "bytes": 1273937
+        },
+        {
+          "file": "images/gothic-warrior_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/7779e7f7-96ba-4ce6-a03f-3bb47124769f/0_1.png",
+          "sha256": "7476fd98ff57c41d505d8f9773b7ee7378593adaa354f6be53dd0f19d873efc8",
+          "bytes": 1382415
+        },
+        {
+          "file": "images/gothic-warrior_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/7779e7f7-96ba-4ce6-a03f-3bb47124769f/0_2.png",
+          "sha256": "4c38081f095617830da06b2e2a971e14a428fcba10eadcedcfdba30cc1755b30",
+          "bytes": 1491313
+        },
+        {
+          "file": "images/gothic-warrior_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/7779e7f7-96ba-4ce6-a03f-3bb47124769f/0_3.png",
+          "sha256": "ab24c9c2486e5b63bf715c0792d5a07f99d33c876c855ee399e62c3b33888700",
+          "bytes": 1377445
+        }
+      ]
+    },
+    {
+      "name": "ranch-hand",
+      "prompt": "A full-body standing ranch hand figure made of matte ivory-white folded papercraft, wide-brim hat, rolled-sleeve shirt, a work apron with pockets, leather gloves, sturdy boots, a coil of rope over one shoulder and a small water bucket in one hand, crisp creases and faceted folds, every garment and tool a separate readable paper part, charming cosy farming-game character, three-quarter view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "c5774b97-c85c-447d-a24d-6238ec341d2b",
+      "created": "2026-10-23T02:57:28Z",
+      "files": [
+        {
+          "file": "images/ranch-hand_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/c5774b97-c85c-447d-a24d-6238ec341d2b/0_0.png",
+          "sha256": "f9eedcfaf017fd5033323ee8495d275f5589845d46fd5d5a34847ac3b0e913af",
+          "bytes": 1315157
+        },
+        {
+          "file": "images/ranch-hand_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/c5774b97-c85c-447d-a24d-6238ec341d2b/0_1.png",
+          "sha256": "e31a8762b57efe0dc1f8e75cd7833776b01fee0da249df2bda4c3daa82fa788b",
+          "bytes": 1287830
+        },
+        {
+          "file": "images/ranch-hand_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/c5774b97-c85c-447d-a24d-6238ec341d2b/0_2.png",
+          "sha256": "1739d7dbe831248b20577d9682bc55a4b57bd38caee98e6b66d2e4834089207b",
+          "bytes": 1254843
+        },
+        {
+          "file": "images/ranch-hand_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/c5774b97-c85c-447d-a24d-6238ec341d2b/0_3.png",
+          "sha256": "a228de04751539da08405a97b90607bb37dd2f1b9190045acd35c0219c6272ba",
+          "bytes": 1398012
+        }
+      ]
+    },
+    {
+      "name": "moon-explorer",
+      "prompt": "A full-body standing astronaut explorer figure made of matte ivory-white folded papercraft, a round helmet with a folded visor, a chunky life-support backpack, a padded suit of faceted paper panels with ribbed joints at the knees and elbows, big boots, a small antenna and a tool belt with a sample scoop, crisp creases and faceted folds, every suit piece a separate readable paper part, charming space-adventure game hero, three-quarter view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "e927a52e-18ae-49ea-a7eb-42ced40c89ca",
+      "created": "2026-10-23T02:58:42Z",
+      "files": [
+        {
+          "file": "images/moon-explorer_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/e927a52e-18ae-49ea-a7eb-42ced40c89ca/0_0.png",
+          "sha256": "20802a61a39a29cd0d998c662c7ae4eae83d0ba7de4d0c6714a5fe277e1465c7",
+          "bytes": 1374225
+        },
+        {
+          "file": "images/moon-explorer_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/e927a52e-18ae-49ea-a7eb-42ced40c89ca/0_1.png",
+          "sha256": "098109d7882ec31cf2fc6c8e75615de520be799cb62d0e94c36371220d7d7454",
+          "bytes": 1361846
+        },
+        {
+          "file": "images/moon-explorer_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/e927a52e-18ae-49ea-a7eb-42ced40c89ca/0_2.png",
+          "sha256": "9ee80a3193b3be76afd09373e9b90c5d424ed644745c45895c1de6345824e06c",
+          "bytes": 1346292
+        },
+        {
+          "file": "images/moon-explorer_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/e927a52e-18ae-49ea-a7eb-42ced40c89ca/0_3.png",
+          "sha256": "1cbd4098d3e5e49852f4a20cf925c25ed38f423d7cc7871f4cc2a540b7ccf86b",
+          "bytes": 1391884
+        }
+      ]
+    },
+    {
+      "name": "medieval-knight",
+      "prompt": "A full-body standing medieval knight figure made of matte ivory-white folded papercraft, a great helm with an eye slit, a surcoat over plate armor, layered pauldrons, gauntlets, a kite shield and a longsword, armored greaves and sabatons, crisp creases and faceted folds, every armor plate a separate readable paper part, charming strategy-game hero, three-quarter view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "195ab7d6-af75-4cb0-a98d-0c432cfa349c",
+      "created": "2026-10-23T02:59:41Z",
+      "files": [
+        {
+          "file": "images/medieval-knight_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/195ab7d6-af75-4cb0-a98d-0c432cfa349c/0_0.png",
+          "sha256": "78f137d9c77d1baa2d8c7a0c4ff2ead177f93d88b9fc2af13d08c005d7d62c5f",
+          "bytes": 1364882
+        },
+        {
+          "file": "images/medieval-knight_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/195ab7d6-af75-4cb0-a98d-0c432cfa349c/0_1.png",
+          "sha256": "e2b7c6f0194c976c63a25618dfbe3c8f8981489a7060d1cbfb41ccef7a86d4e4",
+          "bytes": 1412853
+        },
+        {
+          "file": "images/medieval-knight_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/195ab7d6-af75-4cb0-a98d-0c432cfa349c/0_2.png",
+          "sha256": "2a1fe25d9fa7b76b91a1fd45ba837f5cb12026c982d03014dc3ef2b13f7bcac8",
+          "bytes": 1319255
+        },
+        {
+          "file": "images/medieval-knight_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/195ab7d6-af75-4cb0-a98d-0c432cfa349c/0_3.png",
+          "sha256": "0b41f251dde5eaa02bcaf3348d118dc194fa72c58e24e081099d0de665289bb3",
+          "bytes": 1317323
+        }
+      ]
+    },
+    {
+      "name": "kid-adventurer",
+      "prompt": "A full-body standing young adventurer figure made of matte ivory-white folded papercraft, an explorer hat, a small backpack with a bedroll, a short cape, a satchel, a wooden toy sword and a lantern, chunky boots, cheerful storybook proportions, crisp creases and faceted folds, every garment and item a separate readable paper part, charming family adventure game hero, three-quarter view, centered and entirely visible, soft studio light, plain light gray background --no text, scenery, pedestal --ar 2:3 --v 8.2",
+      "job_id": "5c72abd9-ed27-44b7-a1db-3ce7c9ede183",
+      "created": "2026-10-23T03:00:41Z",
+      "files": [
+        {
+          "file": "images/kid-adventurer_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5c72abd9-ed27-44b7-a1db-3ce7c9ede183/0_0.png",
+          "sha256": "411df1b6916f0a0a9cca1773fd6cb07102f6707c2668a9aea6dfb9d7a2884960",
+          "bytes": 1290668
+        },
+        {
+          "file": "images/kid-adventurer_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5c72abd9-ed27-44b7-a1db-3ce7c9ede183/0_1.png",
+          "sha256": "fc45f4f6761785633e18d65e67a64f22b3896b889add311ff10c5a5b94b9c911",
+          "bytes": 1352725
+        },
+        {
+          "file": "images/kid-adventurer_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5c72abd9-ed27-44b7-a1db-3ce7c9ede183/0_2.png",
+          "sha256": "cbb4711e4966f845383abfb3ad25916dda4380176102e1df1da091c667722bd9",
+          "bytes": 1433548
+        },
+        {
+          "file": "images/kid-adventurer_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5c72abd9-ed27-44b7-a1db-3ce7c9ede183/0_3.png",
+          "sha256": "7921e14459054155a039933a5e21d4b92951a47eeb456ca49e1d925611050b78",
+          "bytes": 1207549
+        }
+      ]
+    }
+  ]
+}
