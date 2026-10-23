@@ -100,6 +100,43 @@ own colours and face, changing only how they're made (clay dents, cel shading an
 Lesson for the next rep: build the silhouette first from the side view (the puffer's hood and the hero's V read from the
 side), then the costume. A round pec reads as the wrong thing at a distance; use one flat chest plate.
 
+## Quality pass: real figures, real motion, scored (2026-10-23)
+Evan, 16:39Z: "the animations are still not really where they need to be", and "why aren't there any good models?
+... we have nice ones already in game". So the invented recipe characters are retired (hidden in `bodies.mjs`, still
+loadable by id) and every move plays on figures that were already tested in the game:
+- **Game figure**: the Quaternius Universal Animation Library mannequin (CC0, `animation-study-assets/`), now the default.
+- **Young Daddy**: the figure-kit build (`simulations/figures/young-daddy.mjs`).
+- **The girl from Grace's basement** (`simulations/grace-kid.mjs`).
+All three ride the studio's 20 bones through `rigSkinned(T, scene, J, alias)`: an alias map renames their bones, and
+`applyPose` walks to the nearest mapped ancestor when a rig has fewer spine bones than ours.
+
+**Scoring.** Every move was scored 1 to 5 on weight, anticipation, follow-through, arcs, foot contact and balance,
+judged from contact sheets on the game figure and in live playback beside its reference: the original Quaternius clip
+on its own rig, or the CMU take. A move passes at 20 of 30 if it also reads at a glance. The scores live in
+`studies/character-studio/review.json` and the Scores room (`review.html`) shows each one before, after and beside
+its reference, on any of the four bodies.
+
+**Result.** 31 kept, 8 replaced with real game animation (idle, knocked down, slash, cast, crouch walk, roll, crouch
+behind cover, push), 5 new (chat, jog, take a hit, pick up, fix), 11 cut: clap, spin, slide and twist (stiff
+hand-keyed loops), and hang, climb, bow, swim, aim-walk, kart and bike (they need a ledge, ladder, bow, water, gun,
+kart or bike, so they float). Cut moves keep their definition with a `cut` reason in `moves.mjs`, so old links and the
+2D puppet still resolve, but no tile offers them.
+
+**How Quaternius clips are baked.** `tools/character-studio/quaternius/bake.mjs` samples each clip in `clips.json`
+at 30 fps in a headless page and writes the same per-bone world turns retarget.py writes for CMU (`q = D * A2T`).
+In-place loops get a travel speed from the stance foot's backward slide (walk 0.77, jog 2.19, sprint 2.80 hip heights
+a second), so the stage moves the body exactly that fast and the feet stay planted. Lift is written only for clips
+marked `"air": true`, otherwise a roll's raised feet would hoist the body. Replaced CMU takes stay as `cmu_<move>`.
+
+**Sources.** Oracle motion notes for 25 games (Celeste, Little Nightmares, Wii Sports, Splatoon 3, Minecraft, Just
+Dance, Mario Kart 8 Deluxe added for this pass), `docs/oracle/motion/MOCAP_SOURCES.md` for licences (CMU, Mixamo and
+Quaternius ship; LAFAN1 and Bandai Namco are study only and are not used), and the twelve principles of animation.
+
+**Next.** One high-fidelity master set: the Meshy animation library on one rigged Meshy hero (the Meshy hero thread
+owns the run and waits on Evan's go), baked with the same bake step; CMU and Quaternius fill gaps. Props (hammer, axe,
+shovel, bat, bottle, torch, chair, ledge, ladder) bring cut moves back. A webcam take of Evan in the browser
+(MediaPipe) is the fallback for anything still missing; never the kids.
+
 ## What's next
 
 - Inertialized transitions between moves (Bollo), so a change of move keeps momentum.

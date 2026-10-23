@@ -77,7 +77,25 @@ export const GENRES = [
 ];
 
 export const MOVES = [];
-const M = (genre, id, name, fn, extra = {}) => MOVES.push({genre, id, name, fn, len: fn.len, ...extra});
+const M = (genre, id, name, fn, extra = {}) => MOVES.push({genre, id, name, fn, len: fn.len, ...extra, ...(CUT[id] ? {cut: CUT[id]} : {})});
+// Cut in the quality pass (Evan, 2026-10-23 16:39Z: "the animations are still not really where they need to be"): each
+// was scored against real motion and failed. They stay defined so old links and the 2D puppet still resolve, but the
+// studio no longer offers them. docs/oracle/character-studio/CHARACTER_STUDIO.md has the scores.
+export const CUT = {
+ "clap": "a stiff hand-keyed loop; no capture or game clip reads as a clap yet",
+ "hang": "no ledge to hang from, so it reads as floating",
+ "climb": "no ladder, so it reads as floating",
+ "bow": "no bow, and the hand-keyed draw is barely visible",
+ "bike": "no bike, so it reads as floating",
+ "slide": "hand-keyed, no weight in the drop",
+ "spin": "hand-keyed and stiff next to the captured moves",
+ "twist": "hand-keyed; the captured dances read better",
+ "swim": "needs water: on the floor it reads as crawling",
+ "kart": "needs a kart: sitting on nothing reads wrong",
+ "aimwalk": "needs a prop; the plain pistol-ready pose reads as nothing"
+};
+// a held neutral pose, for moves that only exist as game animation (Quaternius) and have no hand-keyed version
+const HOLD = Object.assign(() => P(), {len: 2});
 
 // ===== Cozy life =====
 M('cozy', 'idle', 'Idle, breathing', loop(3.6, p => P({chest: [1.6 * sin(p), 0, 0], spine: [.6 * sin(p), 2 * sin(p / 1), 0], head: [-1.5 * sin(p), 6 * sin(p * .5), 1.5 * sin(p * .5)],
@@ -130,7 +148,7 @@ M('fighting', 'uppercut', 'Uppercut', K([[0, GUARD],
  [.25, P(GUARD, {...LR('thigh', [-40, 0, 8]), ...LR('shin', [70, 0, 0]), spine: [24, -10, 0], chest: [10, -18, 0], upperarm_R: [10, 0, 0], forearm_R: [-100, 0, 0]})],
  [.45, P(GUARD, {...LR('thigh', [-4, 0, 6]), ...LR('shin', [6, 0, 0]), ...LR('foot', [30, 0, 0]), spine: [-10, 18, 0], chest: [-8, 24, 0], head: [-14, 0, 0], upperarm_R: [-150, 0, -20], forearm_R: [-70, 0, 0], root: [0, .12, 0]})],
  [.75, GUARD], [1.1, GUARD]]));
-M('fighting', 'ko', 'Knocked out (and back up)', K([[0, GUARD],
+M('fighting', 'ko', 'Knocked down', K([[0, GUARD],
  [.15, P(GUARD, {spine: [-24, 0, 0], chest: [-12, 0, 0], head: [-30, 0, 0], ...LR('upperarm', [-20, 0, 60]), ...LR('forearm', [-20, 0, 0])})],
  [.5, P({spine: [-10, 0, 0], head: [-20, 0, 0], ...LR('upperarm', [-40, 0, 70]), thigh_L: [-20, 0, 0], shin_L: [30, 0, 0], turn: [-30, 0, 0], root: [0, 0, -.2]})],
  [.85, P({...LR('upperarm', [-150, 0, 40]), ...LR('thigh', [-14, 0, 8]), ...LR('shin', [20, 0, 0]), turn: [-92, 0, 0], root: [0, .06, -.4]})],
@@ -168,7 +186,7 @@ M('adventure', 'bow', 'Draw a bow', K([[0, P({hips: [0, -60, 0], head: [0, 50, 0
 // ===== Stealth and spooky =====
 M('stealth', 'sneak', 'Sneak', gait({len: 1.5, stride: 20, knee: 50, crouch: 26, arm: 8, elbow: 70, bounce: .01, lean: 22, twist: 4,
  more: q => (q.upperarm_L = add(q.upperarm_L, [-30, 0, 10]), q.upperarm_R = add(q.upperarm_R, [-30, 0, 10]), q.head = [-20, 0, 0], q)}), {travel: true});
-M('stealth', 'tiptoe', 'Tiptoe', gait({len: 1.1, stride: 16, knee: 70, arm: 0, elbow: 90, bounce: .02, toe: 34, lean: -4, twist: 0,
+M('stealth', 'tiptoe', 'Crouch walk', gait({len: 1.1, stride: 16, knee: 70, arm: 0, elbow: 90, bounce: .02, toe: 34, lean: -4, twist: 0,
  more: (q, p) => (q.upperarm_L = [-10, 0, 30], q.upperarm_R = [-10, 0, 30], q.hand_L = [50, 0, 0], q.hand_R = [50, 0, 0], q.root = [0, .05, 0],
   q.head = [4, 18 * sin(p / 2), 0], q)}), {travel: true});
 M('stealth', 'look', 'Look around', K([[0, P({...LR('thigh', [-12, 0, 8]), ...LR('shin', [20, 0, 0]), spine: [8, 0, 0]})],
@@ -233,7 +251,7 @@ M('shooter', 'slide', 'Slide', K([[0, P()], [.3, P(CROUCH, {root: [0, 0, .1]})],
  [.5, P({turn: [-40, 0, 0], thigh_L: [-80, 0, 6], shin_L: [10, 0, 0], thigh_R: [-30, 0, 8], shin_R: [100, 0, 0], spine: [30, 0, 0], head: [30, 0, 0], ...LR('upperarm', [-30, 0, 50]), root: [0, .1, .5]})],
  [1.1, P({turn: [-40, 0, 0], thigh_L: [-80, 0, 6], shin_L: [10, 0, 0], thigh_R: [-30, 0, 8], shin_R: [100, 0, 0], spine: [30, 0, 0], head: [30, 0, 0], ...LR('upperarm', [-30, 0, 50]), root: [0, .1, .9]})],
  [1.5, P(CROUCH, {root: [0, 0, .9]})], [1.9, P({root: [0, 0, .9]})], [1.91, P()], [2.1, P()]]));
-M('shooter', 'peek', 'Crouch behind cover and peek', K([[0, P(CROUCH, AIM, {spine: [20, 0, 0], head: [0, 0, 0]})],
+M('shooter', 'peek', 'Crouch behind cover', K([[0, P(CROUCH, AIM, {spine: [20, 0, 0], head: [0, 0, 0]})],
  [.8, P(CROUCH, AIM, {spine: [20, 0, 0]})], [1.2, P(CROUCH, AIM, {spine: [10, 0, -30], chest: [0, 0, -10], head: [0, 0, 20]})],
  [2.2, P(CROUCH, AIM, {spine: [10, 0, -30], chest: [0, 0, -10], head: [0, 0, 20]})], [2.6, P(CROUCH, AIM, {spine: [20, 0, 0]})],
  [3.2, P(CROUCH, AIM, {spine: [20, 0, 0], head: [0, 0, 0]})]]));
@@ -302,5 +320,12 @@ M('emotes', 'laugh', 'Laugh', loop(.36, p => P({spine: [-16, 0, 0], chest: [-6 +
  root: [0, -.015 * abs(sin(p)), 0]})));
 M('emotes', 'shrug', 'Shrug', K([[0, P()], [.4, P({clavicle_L: [0, 0, 16], clavicle_R: [0, 0, 16], ...LR('upperarm', [-10, 0, 10]), ...LR('forearm', [-80, 0, 0]), ...LR('hand', [0, 50, 20]), head: [0, 0, 14], chest: [-4, 0, 0]})],
  [1.3, P({clavicle_L: [0, 0, 16], clavicle_R: [0, 0, 16], ...LR('upperarm', [-10, 0, 14]), ...LR('forearm', [-80, 0, 0]), ...LR('hand', [0, 50, 20]), head: [0, 0, 18], chest: [-4, 0, 0]})], [1.9, P()]]));
+
+// ===== Game animation only (Quaternius Universal Animation Library, CC0) =====
+M('cozy', 'talk', 'Chat', HOLD);
+M('platformer', 'jog', 'Jog', HOLD, {travel: true});
+M('fighting', 'hit', 'Take a hit', HOLD);
+M('builder', 'pickup', 'Pick something up', HOLD);
+M('builder', 'fix', 'Kneel and fix', HOLD);
 
 export const byId = Object.fromEntries(MOVES.map(m => [m.id, m]));

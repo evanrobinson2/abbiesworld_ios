@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-character-studio-scores",
+      "date": "2026-10-23",
+      "title": "Character Studio: real figures, real motion, scored",
+      "line": "Every move now plays on figures we already trust: the game figure, Young Daddy and the girl from Grace's basement. Each move was scored for weight, timing and footwork beside a real clip; 11 stiff ones were cut and 8 swapped for real game animation. The new Scores room shows every one before and after.",
+      "image": "/whats-new/2026-10-23-character-studio-scores.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYMMgGWzaue2qNoRR7u64j2y",
+      "threadTitle": "AW-STUDY-0037 - Character Studio",
+      "tour": false,
+      "link": "/studies/character-studio/#idle"
+    },
+    {
       "id": "2026-10-23-abbietown-homes",
       "date": "2026-10-23",
       "title": "Abbie's Town: home, treehouses and a splash pad",
@@ -24,15 +35,6 @@
       "link": "/studies/abbietown/"
     },
     {
-      "id": "2026-10-23-science-adventure",
-      "date": "2026-10-23",
-      "title": "Abbie's science adventure: the cell brawl",
-      "line": "Five beakers of green goo in the science lab, one for each difficulty. Look through the lens and brawl as tiny cells, up to four of you on one screen: eat, grow, play boost cards, bump each other off the drop, evolve into a water bear and walk off the slide to win the tardigrade backpack charm.",
-      "image": "/whats-new/2026-10-23-science-adventure.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9HBxSBbSfYYnh3RNNKKnMi",
-      "threadTitle": "AW-STUDY-0047 - Abbie's Science Adventure",
-      "tour": true,
-      "link": "/studies/cell/play.html",
       "id": "2026-10-23-backpack-charms",
       "date": "2026-10-23",
       "title": "Backpack charms up close",

@@ -1581,6 +1581,18 @@
     },
     {
      "k": "oracle",
+     "t": "Oracle motion notes: how 25 games move, captured or keyed (Celeste, Wii Sports, Splatoon 3, Just Dance, Mario Kart 8...)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/steam-study/motion_notes.py",
+     "note": "Filled on request for this pass; the walk-builds and signature tricks set the six scoring criteria"
+    },
+    {
+     "k": "oracle",
+     "t": "Free motion capture you can use, with licences",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/motion/MOCAP_SOURCES.md",
+     "note": "CMU, Mixamo and Quaternius ship; LAFAN1 and Bandai Namco are study only and are not used"
+    },
+    {
+     "k": "oracle",
      "t": "Game identity schema, art layer 'motion' field",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/GAME_IDENTITY.md",
      "note": "None of the 380 game records fill it in; filling it for the genre references is on the Oracle backlog"
@@ -1662,6 +1674,18 @@
      "t": "LOOK.md and the abbies-world-designer skill",
      "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/look/LOOK.md",
      "note": "Roboto, flat colour, picture blocks instead of pill bars"
+    },
+    {
+     "k": "canon",
+     "t": "Quaternius Universal Animation Library (CC0)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/animation-study-assets/README.md",
+     "note": "Baked by tools/character-studio/quaternius/bake.mjs; replaced 8 moves and added 5, each shown beside the original clip in the Scores room"
+    },
+    {
+     "k": "tutorial",
+     "t": "Frank Thomas and Ollie Johnston, the 12 principles of animation (The Illusion of Life)",
+     "href": "https://en.wikipedia.org/wiki/Twelve_basic_principles_of_animation",
+     "note": "Weight, anticipation, follow-through and arcs are four of the six scores"
     }
    ],
    "recorded": "2026-10-23, by the study as it was made"
