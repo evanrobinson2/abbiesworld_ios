@@ -2,6 +2,28 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-charm-intro",
+      "date": "2026-10-23",
+      "title": "The charms light the way in",
+      "line": "Winchester opens in the dark with your backpack charms circling under a spotlight. When it's ready they fold into the backpack, the lights go out, and the town drops in.",
+      "image": "/whats-new/2026-10-23-charm-intro.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-23-winchester-warm",
+      "date": "2026-10-23",
+      "title": "Winchester warms up quietly",
+      "line": "The town compiles its own shaders in the background so placing and walking don't hitch.",
+      "image": "/whats-new/2026-10-23-intro-scene.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-models-load",
       "date": "2026-10-23",
       "title": "Models open faster",

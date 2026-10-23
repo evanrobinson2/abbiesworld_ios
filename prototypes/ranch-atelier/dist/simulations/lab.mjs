@@ -43,7 +43,6 @@ import {createImpactEffects,sharedImpactSound,IMPACT_DUST} from './tile-drop-imp
 import {landTile as dropTile} from './tile-reveal.mjs?v=1';
 import {createTileChooser} from './tile-chooser.mjs?v=24';
 import {createWarmUpCard} from './warm-up-card.mjs';
-import {createIntroScene} from './intro-scene.mjs';
 import {createLightBudget} from './light-budget.mjs';
 import {extendTiles,frontier,tileCenter} from './tile-expansion.mjs';
 import {SUGAR_SHACK} from './poi/sugar-shack-spec.mjs';
@@ -571,8 +570,8 @@ tileChooser=createTileChooser({scene,camera,orbit,renderer,canvas:renderer.domEl
 document.querySelector('.scene-world-settings')?.append(worldBackdrop.picker);
 // Compile every tile type's shaders once, right after the first board is up, so placements never wait on the graphics driver.
 // ?nowarm skips it (profiling).
-if(!new URLSearchParams(location.search).has('nowarm'))(function startWarmUp(){// Players get the opening scene at Grace's computer; automated runs (tests, profiling) get the small card instead.
- const card=navigator.webdriver||new URLSearchParams(location.search).has('nointro')?createWarmUpCard():createIntroScene();const tick=()=>{if(!tileChooser||!active||busy||family!=='ranch')return void setTimeout(tick,500);lightBudget.apply(true);tileChooser.warm((done,total,id)=>card.step(done,total,id),{decorate:g=>{const mode=$('#arrival').value;if(!mode||!arrivalPresets[mode]&&!ARRIVALS.some(([id])=>id===mode))return null;const arrival=createArrival(g,mode,{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,parameters:arrivalPresets[mode]});return ()=>arrival.finish();}}).then(ok=>{card.finish(ok);document.body.dataset.shadersWarm=ok?'1':'0';}).catch(error=>{console.warn(error);card.finish(false);});};setTimeout(tick,1500);})();
+if(!new URLSearchParams(location.search).has('nowarm'))(function startWarmUp(){// The opening show lives in the town (town-warm.mjs); the sandbox just gets the small progress card, with no game.
+ const card=createWarmUpCard({game:false});const tick=()=>{if(!tileChooser||!active||busy||family!=='ranch')return void setTimeout(tick,500);lightBudget.apply(true);tileChooser.warm((done,total,id)=>card.step(done,total,id),{decorate:g=>{const mode=$('#arrival').value;if(!mode||!arrivalPresets[mode]&&!ARRIVALS.some(([id])=>id===mode))return null;const arrival=createArrival(g,mode,{reducedMotion:matchMedia('(prefers-reduced-motion: reduce)').matches,parameters:arrivalPresets[mode]});return ()=>arrival.finish();}}).then(ok=>{card.finish(ok);document.body.dataset.shadersWarm=ok?'1':'0';}).catch(error=>{console.warn(error);card.finish(false);});};setTimeout(tick,1500);})();
 
 // AI tiles remain ordinary saved board entries and reuse the shared placement path.
 function saveAIState(id,patch){const tile=extraTiles.find(t=>t.id===id);if(!tile)throw Error('AI tile no longer exists.');tile.ai={...tile.ai,...patch};persist();}
