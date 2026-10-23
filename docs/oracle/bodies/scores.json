@@ -1,0 +1,1512 @@
+{
+ "canon": "1.0",
+ "scored": "tools/paper-body/out",
+ "bodies": [
+  {
+   "name": "female-average",
+   "sex": "female",
+   "build": "average",
+   "heads": 8.04,
+   "score": 74,
+   "passed": 14,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "waist height",
+    "fingertip height",
+    "knee height",
+    "shoulder to hip"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.4,
+     "got": 8.04,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.865,
+     "got": 0.876,
+     "off_heads": 0.08,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.831,
+     "got": 0.84,
+     "off_heads": 0.06,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.824,
+     "got": 0.815,
+     "off_heads": -0.07,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.723,
+     "got": 0.72,
+     "off_heads": -0.02,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.632,
+     "got": 0.6,
+     "off_heads": -0.24,
+     "ok": false
+    },
+    {
+     "check": "troch height",
+     "want": 0.511,
+     "got": 0.52,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.462,
+     "got": 0.465,
+     "off_heads": 0.02,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.632,
+     "got": 0.621,
+     "off_heads": -0.09,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.47,
+     "got": 0.461,
+     "off_heads": -0.07,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.368,
+     "got": 0.406,
+     "off_heads": 0.28,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.277,
+     "got": 0.245,
+     "off_heads": -0.24,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.039,
+     "got": 0.045,
+     "off_heads": 0.04,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.241,
+     "got": 0.216,
+     "off_pct": -10,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.178,
+     "got": 0.194,
+     "off_pct": 9,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.149,
+     "got": 0.151,
+     "off_pct": 1,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.227,
+     "got": 0.226,
+     "off_pct": 0,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.66,
+     "got": 0.721,
+     "off_pct": 9,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "0.98-1.12",
+     "got": 0.95,
+     "ok": false
+    }
+   ]
+  },
+  {
+   "name": "female-fat",
+   "sex": "female",
+   "build": "heavy",
+   "heads": 7.96,
+   "score": 74,
+   "passed": 14,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "fingertip height",
+    "knee height",
+    "chest width",
+    "shoulder to hip"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.3,
+     "got": 7.96,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.863,
+     "got": 0.874,
+     "off_heads": 0.08,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.829,
+     "got": 0.84,
+     "off_heads": 0.08,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.822,
+     "got": 0.815,
+     "off_heads": -0.05,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.719,
+     "got": 0.72,
+     "off_heads": 0.01,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.627,
+     "got": 0.6,
+     "off_heads": -0.2,
+     "ok": true
+    },
+    {
+     "check": "troch height",
+     "want": 0.504,
+     "got": 0.52,
+     "off_heads": 0.12,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.455,
+     "got": 0.465,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.627,
+     "got": 0.62,
+     "off_heads": -0.05,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.463,
+     "got": 0.46,
+     "off_heads": -0.02,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.359,
+     "got": 0.404,
+     "off_heads": 0.33,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.273,
+     "got": 0.245,
+     "off_heads": -0.2,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.039,
+     "got": 0.045,
+     "off_heads": 0.05,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.258,
+     "got": 0.255,
+     "off_pct": -1,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.217,
+     "got": 0.246,
+     "off_pct": 14,
+     "ok": false
+    },
+    {
+     "check": "waist width",
+     "want": 0.208,
+     "got": 0.222,
+     "off_pct": 7,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.299,
+     "got": 0.295,
+     "off_pct": -1,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.66,
+     "got": 0.728,
+     "off_pct": 10,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "0.98-1.12",
+     "got": 0.86,
+     "ok": false
+    }
+   ]
+  },
+  {
+   "name": "female-heroic",
+   "sex": "female",
+   "build": "heroic",
+   "heads": 7.99,
+   "score": 47,
+   "passed": 9,
+   "of": 19,
+   "misses": [
+    "acromion height",
+    "nipple height",
+    "waist height",
+    "troch height",
+    "crotch height",
+    "elbow height",
+    "wrist height",
+    "knee height",
+    "chest width",
+    "shoulder to hip"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 8.2,
+     "got": 7.99,
+     "ok": true,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.878,
+     "got": 0.875,
+     "off_heads": -0.03,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.848,
+     "got": 0.84,
+     "off_heads": -0.06,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.841,
+     "got": 0.815,
+     "off_heads": -0.22,
+     "ok": false
+    },
+    {
+     "check": "nipple height",
+     "want": 0.756,
+     "got": 0.72,
+     "off_heads": -0.3,
+     "ok": false
+    },
+    {
+     "check": "waist height",
+     "want": 0.665,
+     "got": 0.6,
+     "off_heads": -0.53,
+     "ok": false
+    },
+    {
+     "check": "troch height",
+     "want": 0.559,
+     "got": 0.52,
+     "off_heads": -0.31,
+     "ok": false
+    },
+    {
+     "check": "crotch height",
+     "want": 0.512,
+     "got": 0.465,
+     "off_heads": -0.39,
+     "ok": false
+    },
+    {
+     "check": "elbow height",
+     "want": 0.668,
+     "got": 0.62,
+     "off_heads": -0.39,
+     "ok": false
+    },
+    {
+     "check": "wrist height",
+     "want": 0.512,
+     "got": 0.46,
+     "off_heads": -0.43,
+     "ok": false
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.409,
+     "got": 0.408,
+     "off_heads": -0.01,
+     "ok": true
+    },
+    {
+     "check": "knee height",
+     "want": 0.307,
+     "got": 0.245,
+     "off_heads": -0.51,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.044,
+     "got": 0.045,
+     "off_heads": 0.01,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.239,
+     "got": 0.252,
+     "off_pct": 6,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.174,
+     "got": 0.217,
+     "off_pct": 25,
+     "ok": false
+    },
+    {
+     "check": "waist width",
+     "want": 0.134,
+     "got": 0.138,
+     "off_pct": 3,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.205,
+     "got": 0.215,
+     "off_pct": 5,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.66,
+     "got": 0.682,
+     "off_pct": 3,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "0.98-1.12",
+     "got": 1.17,
+     "ok": false
+    }
+   ]
+  },
+  {
+   "name": "female-skinny",
+   "sex": "female",
+   "build": "skinny",
+   "heads": 8.04,
+   "score": 68,
+   "passed": 13,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "waist height",
+    "fingertip height",
+    "knee height",
+    "shoulders width",
+    "shoulder to hip"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.5,
+     "got": 8.04,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.867,
+     "got": 0.876,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.833,
+     "got": 0.84,
+     "off_heads": 0.05,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.827,
+     "got": 0.815,
+     "off_heads": -0.09,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.727,
+     "got": 0.72,
+     "off_heads": -0.05,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.637,
+     "got": 0.6,
+     "off_heads": -0.28,
+     "ok": false
+    },
+    {
+     "check": "troch height",
+     "want": 0.517,
+     "got": 0.52,
+     "off_heads": 0.02,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.469,
+     "got": 0.465,
+     "off_heads": -0.03,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.637,
+     "got": 0.621,
+     "off_heads": -0.12,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.477,
+     "got": 0.461,
+     "off_heads": -0.12,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.376,
+     "got": 0.406,
+     "off_heads": 0.22,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.282,
+     "got": 0.245,
+     "off_heads": -0.27,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.04,
+     "got": 0.045,
+     "off_heads": 0.04,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.218,
+     "got": 0.185,
+     "off_pct": -15,
+     "ok": false
+    },
+    {
+     "check": "chest width",
+     "want": 0.151,
+     "got": 0.163,
+     "off_pct": 7,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.126,
+     "got": 0.123,
+     "off_pct": -2,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.202,
+     "got": 0.198,
+     "off_pct": -2,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.66,
+     "got": 0.721,
+     "off_pct": 9,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "0.98-1.12",
+     "got": 0.93,
+     "ok": false
+    }
+   ]
+  },
+  {
+   "name": "female-toned",
+   "sex": "female",
+   "build": "average",
+   "heads": 7.98,
+   "score": 74,
+   "passed": 14,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "waist height",
+    "fingertip height",
+    "knee height",
+    "chest width"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.4,
+     "got": 7.98,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.865,
+     "got": 0.875,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.831,
+     "got": 0.84,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.824,
+     "got": 0.815,
+     "off_heads": -0.07,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.723,
+     "got": 0.72,
+     "off_heads": -0.02,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.632,
+     "got": 0.6,
+     "off_heads": -0.24,
+     "ok": false
+    },
+    {
+     "check": "troch height",
+     "want": 0.511,
+     "got": 0.52,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.462,
+     "got": 0.465,
+     "off_heads": 0.02,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.632,
+     "got": 0.62,
+     "off_heads": -0.09,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.47,
+     "got": 0.46,
+     "off_heads": -0.08,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.368,
+     "got": 0.406,
+     "off_heads": 0.28,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.277,
+     "got": 0.245,
+     "off_heads": -0.24,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.039,
+     "got": 0.045,
+     "off_heads": 0.04,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.241,
+     "got": 0.237,
+     "off_pct": -1,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.178,
+     "got": 0.205,
+     "off_pct": 15,
+     "ok": false
+    },
+    {
+     "check": "waist width",
+     "want": 0.149,
+     "got": 0.136,
+     "off_pct": -9,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.227,
+     "got": 0.217,
+     "off_pct": -5,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.66,
+     "got": 0.701,
+     "off_pct": 6,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "0.98-1.12",
+     "got": 1.09,
+     "ok": true
+    }
+   ]
+  },
+  {
+   "name": "male-average",
+   "sex": "male",
+   "build": "average",
+   "heads": 8.02,
+   "score": 79,
+   "passed": 15,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "fingertip height",
+    "knee height",
+    "shoulders width"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.5,
+     "got": 8.02,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.867,
+     "got": 0.875,
+     "off_heads": 0.06,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.831,
+     "got": 0.84,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.827,
+     "got": 0.815,
+     "off_heads": -0.09,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.733,
+     "got": 0.72,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.62,
+     "got": 0.6,
+     "off_heads": -0.15,
+     "ok": true
+    },
+    {
+     "check": "troch height",
+     "want": 0.52,
+     "got": 0.52,
+     "off_heads": 0.0,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.469,
+     "got": 0.465,
+     "off_heads": -0.03,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.633,
+     "got": 0.62,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.473,
+     "got": 0.46,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.369,
+     "got": 0.409,
+     "off_heads": 0.29,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.282,
+     "got": 0.245,
+     "off_heads": -0.28,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.04,
+     "got": 0.045,
+     "off_heads": 0.04,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.267,
+     "got": 0.234,
+     "off_pct": -12,
+     "ok": false
+    },
+    {
+     "check": "chest width",
+     "want": 0.193,
+     "got": 0.193,
+     "off_pct": 0,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.167,
+     "got": 0.164,
+     "off_pct": -2,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.207,
+     "got": 0.193,
+     "off_pct": -6,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.68,
+     "got": 0.703,
+     "off_pct": 3,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "1.15-1.4",
+     "got": 1.21,
+     "ok": true
+    }
+   ]
+  },
+  {
+   "name": "male-fat",
+   "sex": "male",
+   "build": "heavy",
+   "heads": 8.0,
+   "score": 79,
+   "passed": 15,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "fingertip height",
+    "knee height",
+    "shoulder to hip"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.4,
+     "got": 8.0,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.865,
+     "got": 0.875,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.828,
+     "got": 0.84,
+     "off_heads": 0.09,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.824,
+     "got": 0.815,
+     "off_heads": -0.07,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.73,
+     "got": 0.72,
+     "off_heads": -0.07,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.615,
+     "got": 0.6,
+     "off_heads": -0.11,
+     "ok": true
+    },
+    {
+     "check": "troch height",
+     "want": 0.514,
+     "got": 0.52,
+     "off_heads": 0.05,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.462,
+     "got": 0.465,
+     "off_heads": 0.02,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.628,
+     "got": 0.621,
+     "off_heads": -0.05,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.466,
+     "got": 0.461,
+     "off_heads": -0.04,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.361,
+     "got": 0.408,
+     "off_heads": 0.35,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.277,
+     "got": 0.245,
+     "off_heads": -0.24,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.039,
+     "got": 0.045,
+     "off_heads": 0.04,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.292,
+     "got": 0.275,
+     "off_pct": -6,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.243,
+     "got": 0.247,
+     "off_pct": 1,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.253,
+     "got": 0.243,
+     "off_pct": -4,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.26,
+     "got": 0.252,
+     "off_pct": -3,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.68,
+     "got": 0.716,
+     "off_pct": 5,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "1.15-1.4",
+     "got": 1.09,
+     "ok": false
+    }
+   ]
+  },
+  {
+   "name": "male-heroic",
+   "sex": "male",
+   "build": "heroic",
+   "heads": 7.99,
+   "score": 47,
+   "passed": 9,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "acromion height",
+    "nipple height",
+    "waist height",
+    "troch height",
+    "crotch height",
+    "elbow height",
+    "wrist height",
+    "knee height",
+    "shoulder to hip"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 8.5,
+     "got": 7.99,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.882,
+     "got": 0.875,
+     "off_heads": -0.06,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.851,
+     "got": 0.84,
+     "off_heads": -0.09,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.847,
+     "got": 0.815,
+     "off_heads": -0.27,
+     "ok": false
+    },
+    {
+     "check": "nipple height",
+     "want": 0.771,
+     "got": 0.72,
+     "off_heads": -0.43,
+     "ok": false
+    },
+    {
+     "check": "waist height",
+     "want": 0.659,
+     "got": 0.6,
+     "off_heads": -0.5,
+     "ok": false
+    },
+    {
+     "check": "troch height",
+     "want": 0.576,
+     "got": 0.52,
+     "off_heads": -0.48,
+     "ok": false
+    },
+    {
+     "check": "crotch height",
+     "want": 0.529,
+     "got": 0.465,
+     "off_heads": -0.55,
+     "ok": false
+    },
+    {
+     "check": "elbow height",
+     "want": 0.676,
+     "got": 0.62,
+     "off_heads": -0.48,
+     "ok": false
+    },
+    {
+     "check": "wrist height",
+     "want": 0.524,
+     "got": 0.46,
+     "off_heads": -0.54,
+     "ok": false
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.418,
+     "got": 0.411,
+     "off_heads": -0.06,
+     "ok": true
+    },
+    {
+     "check": "knee height",
+     "want": 0.318,
+     "got": 0.245,
+     "off_heads": -0.62,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.045,
+     "got": 0.045,
+     "off_heads": 0.0,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.282,
+     "got": 0.273,
+     "off_pct": -3,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.2,
+     "got": 0.217,
+     "off_pct": 9,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.153,
+     "got": 0.15,
+     "off_pct": -2,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.179,
+     "got": 0.184,
+     "off_pct": 3,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.68,
+     "got": 0.667,
+     "off_pct": -2,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "1.15-1.4",
+     "got": 1.48,
+     "ok": false
+    }
+   ]
+  },
+  {
+   "name": "male-skinny",
+   "sex": "male",
+   "build": "skinny",
+   "heads": 8.02,
+   "score": 79,
+   "passed": 15,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "fingertip height",
+    "knee height",
+    "shoulders width"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.6,
+     "got": 8.02,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.868,
+     "got": 0.875,
+     "off_heads": 0.05,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.833,
+     "got": 0.84,
+     "off_heads": 0.05,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.829,
+     "got": 0.815,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.737,
+     "got": 0.72,
+     "off_heads": -0.13,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.625,
+     "got": 0.6,
+     "off_heads": -0.19,
+     "ok": true
+    },
+    {
+     "check": "troch height",
+     "want": 0.526,
+     "got": 0.52,
+     "off_heads": -0.05,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.476,
+     "got": 0.465,
+     "off_heads": -0.08,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.638,
+     "got": 0.62,
+     "off_heads": -0.13,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.48,
+     "got": 0.46,
+     "off_heads": -0.15,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.378,
+     "got": 0.409,
+     "off_heads": 0.24,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.286,
+     "got": 0.245,
+     "off_heads": -0.31,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.04,
+     "got": 0.045,
+     "off_heads": 0.03,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.242,
+     "got": 0.2,
+     "off_pct": -17,
+     "ok": false
+    },
+    {
+     "check": "chest width",
+     "want": 0.164,
+     "got": 0.162,
+     "off_pct": -1,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.141,
+     "got": 0.135,
+     "off_pct": -5,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.184,
+     "got": 0.17,
+     "off_pct": -8,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.68,
+     "got": 0.703,
+     "off_pct": 3,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "1.15-1.4",
+     "got": 1.18,
+     "ok": true
+    }
+   ]
+  },
+  {
+   "name": "male-toned",
+   "sex": "male",
+   "build": "average",
+   "heads": 7.96,
+   "score": 84,
+   "passed": 16,
+   "of": 19,
+   "misses": [
+    "heads tall",
+    "fingertip height",
+    "knee height"
+   ],
+   "checks": [
+    {
+     "check": "heads tall",
+     "want": 7.5,
+     "got": 7.96,
+     "ok": false,
+     "note": ""
+    },
+    {
+     "check": "chin height",
+     "want": 0.867,
+     "got": 0.874,
+     "off_heads": 0.06,
+     "ok": true
+    },
+    {
+     "check": "pit height",
+     "want": 0.831,
+     "got": 0.84,
+     "off_heads": 0.07,
+     "ok": true
+    },
+    {
+     "check": "acromion height",
+     "want": 0.827,
+     "got": 0.815,
+     "off_heads": -0.09,
+     "ok": true
+    },
+    {
+     "check": "nipple height",
+     "want": 0.733,
+     "got": 0.72,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "waist height",
+     "want": 0.62,
+     "got": 0.6,
+     "off_heads": -0.15,
+     "ok": true
+    },
+    {
+     "check": "troch height",
+     "want": 0.52,
+     "got": 0.52,
+     "off_heads": -0.0,
+     "ok": true
+    },
+    {
+     "check": "crotch height",
+     "want": 0.469,
+     "got": 0.465,
+     "off_heads": -0.03,
+     "ok": true
+    },
+    {
+     "check": "elbow height",
+     "want": 0.633,
+     "got": 0.62,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "wrist height",
+     "want": 0.473,
+     "got": 0.46,
+     "off_heads": -0.1,
+     "ok": true
+    },
+    {
+     "check": "fingertip height",
+     "want": 0.369,
+     "got": 0.409,
+     "off_heads": 0.3,
+     "ok": false
+    },
+    {
+     "check": "knee height",
+     "want": 0.282,
+     "got": 0.245,
+     "off_heads": -0.28,
+     "ok": false
+    },
+    {
+     "check": "ankle height",
+     "want": 0.04,
+     "got": 0.045,
+     "off_heads": 0.04,
+     "ok": true
+    },
+    {
+     "check": "shoulders width",
+     "want": 0.267,
+     "got": 0.256,
+     "off_pct": -4,
+     "ok": true
+    },
+    {
+     "check": "chest width",
+     "want": 0.193,
+     "got": 0.205,
+     "off_pct": 6,
+     "ok": true
+    },
+    {
+     "check": "waist width",
+     "want": 0.167,
+     "got": 0.148,
+     "off_pct": -11,
+     "ok": true
+    },
+    {
+     "check": "hips width",
+     "want": 0.207,
+     "got": 0.186,
+     "off_pct": -10,
+     "ok": true
+    },
+    {
+     "check": "head width",
+     "want": 0.68,
+     "got": 0.684,
+     "off_pct": 1,
+     "ok": true
+    },
+    {
+     "check": "shoulder to hip",
+     "want": "1.15-1.4",
+     "got": 1.38,
+     "ok": true
+    }
+   ]
+  }
+ ]
+}
