@@ -1,0 +1,35 @@
+{
+ "job": "cs-1-claymation-adventurer",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a99-9519-7339-a5dd-9201a8801bc8",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view0.jpg",
+    "view1.jpg",
+    "view2.jpg"
+   ]
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16a9b-56d7-747d-9b68-71ad8ff2dd38",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a99-9519-7339-a5dd-9201a8801bc8",
+    "height_meters": 1.7
+   }
+  }
+ ],
+ "credits": 35
+}
