@@ -362,5 +362,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:19:39Z"
+  },
+  {
+    "id": "A5-clay-suit",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "c68acbba-3a2a-489b-aa9b-df4556dc629c",
+    "files": [
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_0.png",
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_1.png",
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_2.png",
+      "tools/meshy-heroes/refs/A5-clay-suit/mj_c68acbba-3a2a-489b-aa9b-df4556dc629c_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:21:32Z"
+  },
+  {
+    "id": "A5-clay-tee",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, stop-motion plasticine claymation figure, handmade modelling clay with faint thumbprints, chunky rounded shapes, big friendly eyes, wide smile, matte surfaces, warm studio light --ar 3:2",
+    "job_id": "e31fa81e-5815-4f74-bb70-635fa4d87df5",
+    "files": [
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_0.png",
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_1.png",
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_2.png",
+      "tools/meshy-heroes/refs/A5-clay-tee/mj_e31fa81e-5815-4f74-bb70-635fa4d87df5_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:23:15Z"
   }
 ]
