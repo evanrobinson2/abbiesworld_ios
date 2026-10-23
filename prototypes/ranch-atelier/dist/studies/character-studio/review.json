@@ -1,0 +1,1166 @@
+{
+ "about": "AW-STUDY-0037 quality pass (Evan 2026-10-23 16:39Z). Scores 1-5 on weight, anticipation, follow-through, arcs, foot contact and balance, judged by eye from contact sheets on the Quaternius figure and live playback beside the reference. A move passes at 20 of 30 if it also reads at a glance; hand-keyed moves that failed are cut, not shipped.",
+ "criteria": [
+  "Weight",
+  "Anticipation",
+  "Follow-through",
+  "Arcs",
+  "Foot contact",
+  "Balance"
+ ],
+ "moves": [
+  {
+   "id": "idle",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    2,
+    4,
+    3
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    3,
+    4,
+    4,
+    5,
+    5
+   ],
+   "verdict": "replaced",
+   "note": "Hand-keyed breathing was a mannequin bobbing; the game idle shifts weight onto one hip."
+  },
+  {
+   "id": "walk",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Real capture; feet plant because the stage moves at the take's own speed."
+  },
+  {
+   "id": "wave",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Real wave, follow-through in the wrist."
+  },
+  {
+   "id": "sit",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    4,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Reads only with a chair; prop coming."
+  },
+  {
+   "id": "clap",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    4,
+    3
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "Stiff hand-keyed loop."
+  },
+  {
+   "id": "run",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Real capture."
+  },
+  {
+   "id": "jump",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    5,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Crouch before, land soft after: good anticipation."
+  },
+  {
+   "id": "flip",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    3
+   ],
+   "verdict": "kept",
+   "note": "A real cartwheel, not a flip; renamed in the next pass."
+  },
+  {
+   "id": "hang",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    1,
+    2
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "No ledge, so it floats."
+  },
+  {
+   "id": "climb",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    1,
+    2
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "No ladder, so it floats."
+  },
+  {
+   "id": "stance",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    3,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Boxer bounce."
+  },
+  {
+   "id": "jabcross",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Real boxing; Quaternius jab and cross kept as candidates."
+  },
+  {
+   "id": "kick",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "uppercut",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    3,
+    3,
+    4,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Small at a distance."
+  },
+  {
+   "id": "ko",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    2,
+    2,
+    3
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "replaced",
+   "note": "A real fall with a hit reaction first."
+  },
+  {
+   "id": "slash",
+   "before": "cmu",
+   "beforeScores": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    4
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    5,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "replaced",
+   "note": "The capture flailed with no sword; the game swing reads as a strike."
+  },
+  {
+   "id": "spin",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    2,
+    1,
+    2,
+    3,
+    3
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "Stiff next to captured moves."
+  },
+  {
+   "id": "cast",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    2,
+    1,
+    2,
+    4,
+    3
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    3,
+    4,
+    4,
+    4,
+    5,
+    4
+   ],
+   "verdict": "replaced",
+   "note": "Short; reads as a spell push."
+  },
+  {
+   "id": "potion",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    3,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Needs a bottle prop to read."
+  },
+  {
+   "id": "bow",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    4,
+    3
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "No bow."
+  },
+  {
+   "id": "sneak",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "tiptoe",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    2,
+    3,
+    3
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "replaced",
+   "note": "Now a crouch walk (the capture read as a plain walk)."
+  },
+  {
+   "id": "look",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    3,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Needs the torch prop."
+  },
+  {
+   "id": "cower",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "zombie",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    3,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "soccer",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "hoops",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "bat",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Needs a bat prop."
+  },
+  {
+   "id": "golf",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Needs a club prop."
+  },
+  {
+   "id": "swim",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    1,
+    2
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "Needs water; the game swim on a floor reads as crawling."
+  },
+  {
+   "id": "aimwalk",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    2,
+    3,
+    3
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "Needs a prop."
+  },
+  {
+   "id": "throw",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "roll",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    2,
+    1,
+    2,
+    2,
+    3
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "replaced",
+   "note": "A real shoulder roll."
+  },
+  {
+   "id": "slide",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    2,
+    2,
+    3
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "No weight in the drop."
+  },
+  {
+   "id": "peek",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    2,
+    4,
+    3
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    3,
+    4,
+    4,
+    5,
+    5
+   ],
+   "verdict": "replaced",
+   "note": "Crouch behind cover."
+  },
+  {
+   "id": "hammer",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Needs a hammer prop."
+  },
+  {
+   "id": "chop",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Needs an axe and a log."
+  },
+  {
+   "id": "dig",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Needs a shovel."
+  },
+  {
+   "id": "carry",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    3,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Has its box."
+  },
+  {
+   "id": "push",
+   "before": "cmu",
+   "beforeScores": [
+    4,
+    3,
+    3,
+    3,
+    3,
+    4
+   ],
+   "after": "quaternius",
+   "afterScores": [
+    5,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "replaced",
+   "note": "Leaning into something heavy beats pushing a swing."
+  },
+  {
+   "id": "disco",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    3,
+    4,
+    4,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "robot",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    4,
+    4,
+    3,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "twist",
+   "before": "hand",
+   "beforeScores": [
+    2,
+    1,
+    1,
+    3,
+    3,
+    3
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "The captured dances read better."
+  },
+  {
+   "id": "charleston",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "verdict": "kept",
+   "note": "A salsa step; renamed in the next pass."
+  },
+  {
+   "id": "kart",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    1,
+    2
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "Needs a kart."
+  },
+  {
+   "id": "bike",
+   "before": "hand",
+   "beforeScores": [
+    1,
+    1,
+    1,
+    2,
+    1,
+    2
+   ],
+   "after": null,
+   "afterScores": null,
+   "verdict": "cut",
+   "note": "Needs a bike."
+  },
+  {
+   "id": "cheer",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": "Jumping jacks."
+  },
+  {
+   "id": "sad",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    5,
+    3,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "laugh",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": ""
+  },
+  {
+   "id": "shrug",
+   "before": "cmu",
+   "beforeScores": [
+    5,
+    4,
+    4,
+    5,
+    3,
+    4
+   ],
+   "after": "cmu",
+   "afterScores": [
+    3,
+    3,
+    3,
+    4,
+    4,
+    5
+   ],
+   "verdict": "kept",
+   "note": "Small; reads close up only."
+  },
+  {
+   "id": "talk",
+   "before": null,
+   "beforeScores": null,
+   "after": "quaternius",
+   "afterScores": [
+    3,
+    3,
+    4,
+    4,
+    5,
+    5
+   ],
+   "verdict": "new",
+   "note": "Game chat loop with hand gestures."
+  },
+  {
+   "id": "jog",
+   "before": null,
+   "beforeScores": null,
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    5,
+    4,
+    4
+   ],
+   "verdict": "new",
+   "note": "A steady game jog between the walk and the sprint."
+  },
+  {
+   "id": "hit",
+   "before": null,
+   "beforeScores": null,
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "new",
+   "note": "A hit reaction, short."
+  },
+  {
+   "id": "pickup",
+   "before": null,
+   "beforeScores": null,
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+   ],
+   "verdict": "new",
+   "note": "Bends at the knees, not the back."
+  },
+  {
+   "id": "fix",
+   "before": null,
+   "beforeScores": null,
+   "after": "quaternius",
+   "afterScores": [
+    4,
+    4,
+    4,
+    4,
+    5,
+    5
+   ],
+   "verdict": "new",
+   "note": "Kneels and works with both hands."
+  }
+ ]
+}

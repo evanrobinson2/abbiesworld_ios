@@ -1,6 +1,7 @@
 // AW-STUDY-0037 realism pass: real motion capture played on the studio skeleton.
 // The clips are CMU Graphics Lab motion capture (free for all uses), retargeted offline by
-// tools/character-studio/mocap/retarget.py into per-frame bone turns from our rest A-pose (rig.mjs pose.q).
+// tools/character-studio/mocap/retarget.py, and Quaternius's Universal Animation Library (CC0, game animation made by
+// hand), baked by tools/character-studio/quaternius/bake.mjs; both into per-frame bone turns from our rest A-pose.
 //   loadMocap(T, base)  -> {moveId: move} with fn(t) returning a pose, len, loop, travel, speed, source
 // Loops were cut on a matching pair of frames one cycle apart; one-shots blend their last 0.35 s into the first
 // frame, so every move can repeat on the stage.
@@ -33,7 +34,7 @@ export async function loadMocap(T, base) {
    return pose;
   };
   fn.len = len;
-  out[id] = {fn, len, loop: clip.loop, speed: clip.speed || 0, travel: clip.speed > .05, source: c.source, what: c.what};
+  out[id] = {fn, len, loop: clip.loop, speed: clip.speed || 0, travel: clip.speed > .05, source: c.source, what: c.what, by: c.by || 'cmu', candidate: !!c.candidate};
  }));
  return out;
 }

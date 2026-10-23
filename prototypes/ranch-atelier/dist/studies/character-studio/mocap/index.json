@@ -40,7 +40,7 @@
    "source": "113_15",
    "what": "sit in chair and get up",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "run": {
    "file": "run.json",
@@ -54,7 +54,7 @@
    "source": "118_01",
    "what": "jump",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "flip": {
    "file": "flip.json",
@@ -68,42 +68,43 @@
    "source": "13_17",
    "what": "boxing",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "jabcross": {
    "file": "jabcross.json",
    "source": "14_01",
    "what": "boxing",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "kick": {
    "file": "kick.json",
    "source": "113_13",
    "what": "punch and kick",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "uppercut": {
    "file": "uppercut.json",
    "source": "111_19",
    "what": "punch kick",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "slash": {
-   "file": "slash.json",
-   "source": "02_07",
-   "what": "swordplay",
+   "file": "q-slash.json",
+   "source": "Sword_Attack",
+   "by": "quaternius",
+   "what": "sword attack",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 1.5
   },
   "potion": {
    "file": "potion.json",
    "source": "13_09",
    "what": "drink soda",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "sneak": {
    "file": "sneak.json",
@@ -124,7 +125,7 @@
    "source": "142_16",
    "what": "scared",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "zombie": {
    "file": "zombie.json",
@@ -138,21 +139,21 @@
    "source": "10_01",
    "what": "soccer, kick ball",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "hoops": {
    "file": "hoops.json",
    "source": "06_14",
    "what": "basketball",
    "loop": false,
-   "seconds": 4.0
+   "seconds": 4
   },
   "bat": {
    "file": "bat.json",
    "source": "124_07",
    "what": "baseball swing",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "golf": {
    "file": "golf.json",
@@ -166,14 +167,14 @@
    "source": "113_24",
    "what": "throw",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "hammer": {
    "file": "hammer.json",
    "source": "62_07",
    "what": "hammering a nail",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "chop": {
    "file": "chop.json",
@@ -187,7 +188,7 @@
    "source": "79_04",
    "what": "digging",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "carry": {
    "file": "carry.json",
@@ -197,39 +198,40 @@
    "seconds": 1.97
   },
   "push": {
-   "file": "push.json",
-   "source": "79_30",
-   "what": "pushing a swing",
-   "loop": false,
-   "seconds": 5.0
+   "file": "q-push.json",
+   "source": "Push_Loop",
+   "by": "quaternius",
+   "what": "push something heavy",
+   "loop": true,
+   "seconds": 2.67
   },
   "disco": {
    "file": "disco.json",
    "source": "111_05",
    "what": "dance",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "robot": {
    "file": "robot.json",
    "source": "120_21",
    "what": "robot",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "charleston": {
    "file": "charleston.json",
    "source": "60_01",
    "what": "salsa",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "cheer": {
    "file": "cheer.json",
    "source": "13_29",
    "what": "jumping jacks",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "sad": {
    "file": "sad.json",
@@ -243,7 +245,7 @@
    "source": "13_14",
    "what": "laugh",
    "loop": false,
-   "seconds": 5.0
+   "seconds": 5
   },
   "shrug": {
    "file": "shrug.json",
@@ -251,6 +253,228 @@
    "what": "shrug",
    "loop": false,
    "seconds": 2.43
+  },
+  "idle": {
+   "file": "q-idle.json",
+   "source": "Idle_Loop",
+   "by": "quaternius",
+   "what": "idle, breathing",
+   "loop": true,
+   "seconds": 2.5
+  },
+  "cast": {
+   "file": "q-cast.json",
+   "source": "Spell_Simple_Shoot",
+   "by": "quaternius",
+   "what": "cast a spell",
+   "loop": false,
+   "seconds": 0.5
+  },
+  "swim": {
+   "file": "q-swim.json",
+   "source": "Swim_Fwd_Loop",
+   "by": "quaternius",
+   "what": "swim forward",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1.33,
+   "lift": 0.45
+  },
+  "kart": {
+   "file": "q-kart.json",
+   "source": "Driving_Loop",
+   "by": "quaternius",
+   "what": "driving",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1.67
+  },
+  "roll": {
+   "file": "q-roll.json",
+   "source": "Roll",
+   "by": "quaternius",
+   "what": "dodge roll",
+   "loop": false,
+   "seconds": 1.47
+  },
+  "peek": {
+   "file": "q-peek.json",
+   "source": "Crouch_Idle_Loop",
+   "by": "quaternius",
+   "what": "crouch behind cover",
+   "loop": true,
+   "seconds": 2.93
+  },
+  "tiptoe": {
+   "file": "q-tiptoe.json",
+   "source": "Crouch_Fwd_Loop",
+   "by": "quaternius",
+   "what": "crouch walk",
+   "loop": true,
+   "seconds": 2
+  },
+  "ko": {
+   "file": "q-ko.json",
+   "source": "Death01",
+   "by": "quaternius",
+   "what": "knocked down",
+   "loop": false,
+   "seconds": 2.37
+  },
+  "aimwalk": {
+   "file": "q-aimwalk.json",
+   "source": "Pistol_Idle_Loop",
+   "by": "quaternius",
+   "what": "pistol ready",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1.67
+  },
+  "talk": {
+   "file": "q-talk.json",
+   "source": "Idle_Talking_Loop",
+   "by": "quaternius",
+   "what": "talking",
+   "loop": true,
+   "seconds": 2.93
+  },
+  "q_walk": {
+   "file": "q-q_walk.json",
+   "source": "Walk_Loop",
+   "by": "quaternius",
+   "what": "walk",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1.33
+  },
+  "q_run": {
+   "file": "q-q_run.json",
+   "source": "Sprint_Loop",
+   "by": "quaternius",
+   "what": "sprint",
+   "candidate": true,
+   "loop": true,
+   "seconds": 0.67
+  },
+  "q_jab": {
+   "file": "q-q_jab.json",
+   "source": "Punch_Jab",
+   "by": "quaternius",
+   "what": "jab",
+   "candidate": true,
+   "loop": false,
+   "seconds": 0.83
+  },
+  "q_cross": {
+   "file": "q-q_cross.json",
+   "source": "Punch_Cross",
+   "by": "quaternius",
+   "what": "cross",
+   "candidate": true,
+   "loop": false,
+   "seconds": 1
+  },
+  "q_dance": {
+   "file": "q-q_dance.json",
+   "source": "Dance_Loop",
+   "by": "quaternius",
+   "what": "dance",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1
+  },
+  "q_sit": {
+   "file": "q-q_sit.json",
+   "source": "Sitting_Idle_Loop",
+   "by": "quaternius",
+   "what": "sitting",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1.67
+  },
+  "q_jump": {
+   "file": "q-q_jump.json",
+   "source": "Jump_Start",
+   "by": "quaternius",
+   "what": "jump start",
+   "candidate": true,
+   "loop": false,
+   "seconds": 1.33
+  },
+  "q_interact": {
+   "file": "q-q_interact.json",
+   "source": "Interact",
+   "by": "quaternius",
+   "what": "interact",
+   "candidate": true,
+   "loop": false,
+   "seconds": 2
+  },
+  "q_shoot": {
+   "file": "q-q_shoot.json",
+   "source": "Pistol_Shoot",
+   "by": "quaternius",
+   "what": "pistol shoot",
+   "candidate": true,
+   "loop": false,
+   "seconds": 0.63
+  },
+  "q_formal": {
+   "file": "q-q_formal.json",
+   "source": "Walk_Formal_Loop",
+   "by": "quaternius",
+   "what": "formal walk",
+   "candidate": true,
+   "loop": true,
+   "seconds": 1.33
+  },
+  "jog": {
+   "file": "q-jog.json",
+   "source": "Jog_Fwd_Loop",
+   "by": "quaternius",
+   "what": "jog",
+   "loop": true,
+   "seconds": 0.93
+  },
+  "fix": {
+   "file": "q-fix.json",
+   "source": "Fixing_Kneeling",
+   "by": "quaternius",
+   "what": "fixing, kneeling",
+   "loop": true,
+   "seconds": 5.17
+  },
+  "pickup": {
+   "file": "q-pickup.json",
+   "source": "PickUp_Table",
+   "by": "quaternius",
+   "what": "pick up",
+   "loop": false,
+   "seconds": 0.83
+  },
+  "hit": {
+   "file": "q-hit.json",
+   "source": "Hit_Chest",
+   "by": "quaternius",
+   "what": "hit in the chest",
+   "loop": false,
+   "seconds": 0.33
+  },
+  "cmu_slash": {
+   "file": "slash.json",
+   "source": "02_07",
+   "what": "swordplay",
+   "loop": false,
+   "seconds": 5,
+   "candidate": true
+  },
+  "cmu_push": {
+   "file": "push.json",
+   "source": "79_30",
+   "what": "pushing a swing",
+   "loop": false,
+   "seconds": 5,
+   "candidate": true
   }
  }
 }
