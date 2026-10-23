@@ -407,7 +407,8 @@
    "enable_pbr": true,
    "credits": 10,
    "save_to": "tools/character-studio/meshy/brute1/",
-   "for": "Character Studio, then Texture Studio weight transfer"
+   "for": "Character Studio, then Texture Studio weight transfer",
+   "text_style_prompt": "stylized brawler, hand-painted skin with real shading, red fighting trunks, taped hands, PG"
   },
   {
    "id": "brute2-retexture",
@@ -418,7 +419,8 @@
    "enable_pbr": true,
    "credits": 10,
    "save_to": "tools/character-studio/meshy/brute2/",
-   "for": "Character Studio, then Texture Studio weight transfer"
+   "for": "Character Studio, then Texture Studio weight transfer",
+   "text_style_prompt": "stylized brawler, hand-painted skin with real shading, blue fighting trunks, taped hands, PG"
   },
   {
    "id": "cs-1-claymation-adventurer",
