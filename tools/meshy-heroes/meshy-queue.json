@@ -407,7 +407,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-bub/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "brute1-retexture",
@@ -498,7 +499,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-gold-coin/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-star",
@@ -509,7 +511,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-star/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-brass-key",
@@ -520,7 +523,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-brass-key/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-moon",
@@ -531,7 +535,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-moon/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-floppy-disk",
@@ -542,7 +547,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-floppy-disk/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #3 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-heart",
@@ -553,7 +559,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-heart/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #2 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-coffee-cup",
@@ -564,7 +571,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-coffee-cup/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "charm-rocket",
@@ -575,7 +583,8 @@
    "save_to": "tools/meshy-heroes/meshy/charm-rocket/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first",
    "single_view": true,
-   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade"
+   "note": "Midjourney pick #1 from the Backpack thread (20:39Z); untextured, run in parallel after the tardigrade",
+   "target_polycount": 8000
   },
   {
    "id": "A3-paint-suit-paint-base",
