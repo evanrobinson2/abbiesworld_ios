@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-town-chronograph",
+      "date": "2026-10-23",
+      "title": "The weather instrument in the town",
+      "line": "The chronograph now sits top left in Abbie's Town and the demo, with her backpack on it. Time of day dims the town, and weather and season are on the dial. Drafted: weather and season don't change the town yet.",
+      "image": "/whats-new/2026-10-23-town-chronograph.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-aurora-mk2-ships",
       "date": "2026-10-23",
       "title": "Aurora Mk 2 in 3D: eight ships",
