@@ -54,3 +54,28 @@ engine is the biggest saving per visitor.
   transfer: about $40 for a 100,000-visitor day, $460 to $500 for 500,000; $1,000 buys about 1.6 million first visits.
 - The same protection is a real-world risk for a classroom: 30 children starting at once behind one school address is
   a few thousand requests a second. Fewer requests per visit (bundling the ~290 files) lowers that line.
+
+## Scale plan (launch gate)
+
+What changes at each size of day, from the readings above (one first visit is about 4.6 MB and 290 requests, 99.7% of
+them from Vercel's cache, so the site's own functions see almost none of a crowd).
+
+| Day | Vercel transfer | AI | What we do |
+| --- | --- | --- | --- |
+| Up to 10,000 visitors | inside the 1 TB a month already paid for | public pool $100 | nothing; watch the dashboard |
+| 50,000 | about $10 | the pool runs dry around 5,000 inventions | `AI_SURGE_MODE=true`; raise `AI_CAP_PUBLIC_USD` only on Evan's word |
+| 100,000 | about $40 | same | same; check the dashboard every hour |
+| 500,000 | about $460 to $500 | same | same; Spend Management pauses the project at $1,000 |
+| Bots or an attack | rises fast | untouched (caps hold) | Attack Challenge Mode on |
+
+Two known risks and their fixes, in order of value:
+
+1. **Classrooms.** Vercel's platform protection blocks one address past roughly 1,500 requests a second. Thirty children
+   opening the game together behind one school address make a few thousand. Fix: fewer requests per visit. Load
+   `three.module.js` once instead of from four folders, load `rapier.mjs` (1.6 MB) only when physics is used, and bundle
+   the ~120 small simulation modules. Target: under 80 requests per first visit, which puts a class of 30 well under the line.
+2. **Hosting bill past 500,000 visitors a day.** The same bundling cuts bytes per visit; beyond that, serve the largest
+   files (`rapier.mjs`, `earth.jpg`) from R2 through the cached `/r2/*` route, which Cloudflare does not bill per byte.
+
+Dashboard for all of this: https://claude.ai/artifact/NRets5nz9TF8jG1k1FvtsM (visits, inventions, AI spend, data sent,
+where visitors came from, and the sign-in to supporter funnel).
