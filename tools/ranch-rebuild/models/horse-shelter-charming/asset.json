@@ -1,0 +1,307 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/horse-shelter-charming",
+ "name": "horse-shelter-charming",
+ "version": 1,
+ "created": "2026-10-23",
+ "updated": "2026-10-23",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "shelter for horses and cattle",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "charming (storybook toy)"
+ },
+ "brief": {
+  "prompt": "a whimsical storybook version of a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a whimsical storybook version of a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "533354ee-d670-4b87-a103-105981cdbb14",
+    "grid_url": "https://www.midjourney.com/jobs/533354ee-d670-4b87-a103-105981cdbb14?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "767f3a91-9eec-4737-9e46-42b504c4f7c3",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:16:48.256Z",
+    "grid_done_at": "2026-10-23T00:17:06.261Z",
+    "upscale_clicked_at": "2026-10-23T00:17:17.285Z",
+    "downloaded_at": "2026-10-23T00:18:28.817Z",
+    "pick_reason": "stable door with top half open, hay rack on the wall, deep leaning overhang, stone foundation"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical storybook version of a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, chubby rounded proportions, a slightly crooked leaning roofline, soft bulging walls, oversized door and windows, toy-like, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "1e2d44e1-e3a8-4e9b-b398-60500320e28b",
+    "grid_url": "https://www.midjourney.com/jobs/1e2d44e1-e3a8-4e9b-b398-60500320e28b?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "ae10eeea-224a-4edf-9963-885566e7fb1e",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-23T00:18:37.835Z",
+    "grid_done_at": "2026-10-23T00:18:55.841Z",
+    "upscale_clicked_at": "2026-10-23T00:19:05.889Z",
+    "downloaded_at": "2026-10-23T00:20:29.325Z",
+    "pick_reason": "front with open stable door, side with hay rack, plain back; one stable, evenly spaced"
+   }
+  },
+  "files": {
+   "hero.png": "c3ef43fb3ed4e124040a5753d109be99591469c6dea37a1b3e08e7acbb704642",
+   "turnaround.png": "cebfeff0af49a66f7d74b8b6b4650df2f08f321c9ff2a4867cb196a45b7f406d",
+   "view_front.png": "28191bb688819d20d4a6190b094ffb4a89abde226ae550cf5d001bd9402bc60a",
+   "view_side.png": "fb8eaeadeabc30c459b14d5a71c9805306c9d68ad2b4b22d821bfcb3ddf8ab72",
+   "view_back.png": "0f3f89f6cb5b6f02af6a3f262afac878cebf9f0fca21eed4bc257fdb10c11c97"
+  },
+  "folder": "tools/ranch-rebuild/mj/horse-shelter-charming"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/horse-shelter-charming/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First charming build: bell roof 63->26 deg, plates 2.45, 0.85 m eaves, bulge 0.055, lean 0.1, sag 0.16, kick 0.55; hero camera 26 deg yaw / 5 up.",
+    "hero_iou": 0.742
+   },
+   {
+    "round": 2,
+    "change": "Lower roof (56->27 deg, deck lift 0.30), plates 2.6, 0.9 m eaves; hero camera recalibrated on a grid to 36 deg yaw / 2 up (0.769 at the old camera).",
+    "hero_iou": 0.83
+   },
+   {
+    "round": 3,
+    "change": "Taller walls (2.9) and a 52 deg top pitch, door and windows raised to match.",
+    "hero_iou": 0.81
+   },
+   {
+    "round": 4,
+    "change": "Plates 2.7, 56 deg top, eaves cut to 0.62 m, bulge 0.08, kick 0.7.",
+    "hero_iou": 0.768
+   },
+   {
+    "round": 5,
+    "change": "Low walls (2.45) under wide flared eaves (0.95 m, 54->25 deg), door/windows/rack lowered.",
+    "hero_iou": 0.816
+   },
+   {
+    "round": 6,
+    "change": "Steeper top (57 deg), eaves 0.75 m, bulge 0.10, sag 0.10: aspect matches the hero (h/w 0.838 vs 0.836).",
+    "hero_iou": 0.83
+   },
+   {
+    "round": 7,
+    "change": "Tried shorter overhangs (0.55 eave, 0.32 gable): worse, reverted.",
+    "hero_iou": 0.811
+   },
+   {
+    "round": 8,
+    "change": "Upper door leaf opened 55 deg instead of 78 so its face shows, lighter pink planks against salmon timbers, darker stones; final 768 px / 48 samples render.",
+    "hero_iou": 0.831
+   }
+  ],
+  "what_was_done": [
+   [
+    "Start",
+    "Copied models/horse-shelter (build.py, make_views.py, hero_check.py, run.sh) and reshaped it: same 4.6 x 5.5 m plan, origin, -Y front gable with the stable door, same five construction states and STATE groups, same part names and material names (Glass_Dark is the only new material, for the new windows)."
+   ],
+   [
+    "Views",
+    "views/hero.png is the only scoring target: the harness mask of mj hero.png, cut at the ground line (drops the dirt patch) and with the right corner stones filled from a traced polygon (the mask notched them). All three sheet views are dropped: view_front and view_back are the same gables but drawn with walls ~2.3x as tall as wide and eave tips at half height (hero: about a third), and view_side is a 3/4 view, not orthographic. The back gable's look (no door, plain planks, curved braces) still came from the sheet."
+   ],
+   [
+    "Camera",
+    "hero_check.py scores from the MJ hero's direction (front gable on the right, -X long side on the left); recalibrated for this hero on a yaw 26-48 x elevation 0-18 grid to 36 deg yaw, 2 deg up."
+   ],
+   [
+    "Massing",
+    "Plates at 2.45 m, a bell-flared roof whose pitch eases from 57 deg at the ridge to 25 deg at the eave edge (deck underside ~5.1 m at the ridge), 0.75 m flared eaves, 0.4 m gable overhang, a ridge that sags 0.1 m mid-length, a 0.4 x 0.3 m ridge beam that kicks 0.6 m up at the front and is yawed 2 deg, walls that splay out to 1.1x toward the ground, and a 0.1 m lean toward +X at the top."
+   ],
+   [
+    "Craft",
+    "Fat 0.34 m chamfered posts, 0.28 m plates and ties, curved knee braces, stepped eave corbels, bell-curved principal and common rafters, chunky chamfered footing stones with big corner blocks, round boulders and a flagstone threshold, big 0.56 m shake courses, an oversized 1.8 x 3.05 m arched stable door with fat lintel, lower leaf with Z brace and strap hinges, upper leaf swung 55 deg out on its hinge, a dark recess behind, a gable window with a cross, arched windows on both long sides, and a toy hay rack (timber shelf, iron bars, heaped hay) left of the door."
+   ],
+   [
+    "Game readiness",
+    "Triangles: planned 212, foundation 944, frame 2,616, roof 5,712, complete 8,320 (budget 9k). 14 meshes, one flat material each. Bounds 6.55 x 7.17 m (normal 6.43 x 6.88), so the width:depth ratio (0.91 vs 0.93) is close to the normal model's for the game's rescale."
+   ]
+  ],
+  "creative_additions": "Drooping string lines and chamfered stakes in the planned stage, round boulders and a flagstone threshold at the footing, stepped eave corbels, arched windows on both long sides, and a slight crook (2 deg yaw) in the kicked ridge beam."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   6.548127174377441,
+   7.171192169189453,
+   6.188955307006836
+  ],
+  "triangles": 8320,
+  "materials": [
+   "Plank_RoseLight",
+   "Soil_Floor",
+   "Hay_Straw",
+   "Timber_Brown",
+   "Plank_Shadow",
+   "Metal_Iron",
+   "Plank_Rose",
+   "Plank_RoseDark",
+   "Roof_Teal",
+   "Stone_Teal",
+   "Glass_Dark"
+  ],
+  "parts": [
+   {
+    "name": "door",
+    "materials": [
+     "Plank_RoseLight"
+    ]
+   },
+   {
+    "name": "floor",
+    "materials": [
+     "Soil_Floor"
+    ]
+   },
+   {
+    "name": "hay",
+    "materials": [
+     "Hay_Straw"
+    ]
+   },
+   {
+    "name": "hay_rack",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "interior_shadow",
+    "materials": [
+     "Plank_Shadow"
+    ]
+   },
+   {
+    "name": "iron_fittings",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "plank_walls",
+    "materials": [
+     "Plank_Rose"
+    ]
+   },
+   {
+    "name": "plank_walls_dark",
+    "materials": [
+     "Plank_RoseDark"
+    ]
+   },
+   {
+    "name": "roof_shingles",
+    "materials": [
+     "Roof_Teal"
+    ]
+   },
+   {
+    "name": "roof_timbers",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "stone_footing",
+    "materials": [
+     "Stone_Teal"
+    ]
+   },
+   {
+    "name": "timber_frame",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "window_frames",
+    "materials": [
+     "Timber_Brown"
+    ]
+   },
+   {
+    "name": "window_glass",
+    "materials": [
+     "Glass_Dark"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "complete",
+  "foundation",
+  "frame",
+  "planned",
+  "roof"
+ ],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.831,
+  "per_view": {},
+  "triangle_budget": 9000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.831 from the hero's direction; the bell roof, kicked ridge beam, flared eaves, splayed walls and big arched door all read at small size.",
+   "Construction stages read as a sequence and keep the charming shapes: stakes with drooping string lines, chunky footing, curved toy frame, bell roof on the open frame, finished stable.",
+   "Drop-in: same states, part names and material names as the normal model, nearly the same footprint ratio."
+  ],
+  "off": [
+   "Timber stays named Timber_Brown (so the game's role and naming match the normal model) but is coloured the hero's salmon pink; Stone_Teal is the hero's grey-green.",
+   "The hero's upper door leaf shows almost face-on and arched; mine is a three-board leaf opened 55 deg with a flat-stepped top.",
+   "The hero walls bulge softly; mine splay linearly-ish toward the footing (a vertex deform), not a rounded bulge, to stay inside the triangle budget.",
+   "The hero has a deeper visible eave on its long side at nearly level height; my far eave reads a little higher because of the harness lens perspective.",
+   "Sheet views were not scored (all three dropped, see Views), so there is no sheet IoU.",
+   "The hero camera was calibrated on this model (grid search), so the hero number is a guide."
+  ]
+ },
+ "exports": {
+  "runtime": "horse-shelter-charming.glb",
+  "variants": {
+   "complete": "variants/complete.glb",
+   "foundation": "variants/foundation.glb",
+   "frame": "variants/frame.glb",
+   "planned": "variants/planned.glb",
+   "roof": "variants/roof.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/cattle-shelter-planned.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/cattle-shelter-foundation.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/cattle-shelter-frame.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/cattle-shelter-roof.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/buildings/cattle-shelter-complete.json"
+   ]
+  }
+ },
+ "files": {
+  "horse-shelter-charming.glb": {
+   "sha256": "412f733708efa3099543aaa37e9779cbab8ef70de510a62d2b4de82a1d99a686",
+   "bytes": 454716
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "41cee5aef601ddf5dc84300b611b85e77744bdc3",
+  "path": "tools/ranch-rebuild/models/horse-shelter-charming"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
