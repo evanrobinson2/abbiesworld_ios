@@ -179,3 +179,15 @@ html.ui-v2:not(#v2a):not(#v2b):not(#v2c) body #v2-hand .generator-hero.v2-faced{
 #v2-held .v2-held-face{display:block;width:100%;height:100%}
 #v2-held .v2-held-sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;background:radial-gradient(circle at var(--sx,30%) var(--sy,20%),#ffffffc0,#ffffff30 28%,transparent 55%),linear-gradient(115deg,transparent 35%,#ffffff40 48%,transparent 60%);background-size:100% 100%,240% 240%;background-position:0 0,var(--sx,30%) var(--sy,20%);opacity:.9}
 @media(prefers-reduced-motion:reduce){#v2-held .v2-held-card{transition:none!important;--rx:0deg!important;--ry:0deg!important}}
+
+/* The toy box as a maker's mark (Evan, 2026-10-23: "a <> logo ... just to the right of version ... a square and smaller,
+   web site looking logo ... so it doesn't feel like something you're supposed to touch"). The version label (version-chip.js)
+   moves left to make room; the shelf opens from the corner. */
+html.ui-v2 #v2-box{left:auto;right:calc(env(safe-area-inset-right) + 10px);bottom:calc(env(safe-area-inset-bottom) + 6px);width:18px;height:18px;border-radius:4px;
+  background:none;border:1.5px solid #fff;box-shadow:0 0 0 1px #111,inset 0 0 0 1px #111;color:#fff;opacity:.85}
+html.ui-v2 #v2-box b{font:800 8.5px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:-.04em;text-shadow:1px 0 #111,-1px 0 #111,0 1px #111,0 -1px #111}
+html.ui-v2 #v2-box:hover{opacity:1}
+html.ui-v2 #v2-box .v2-dot{width:8px;height:8px;top:-4px;right:-4px;box-shadow:0 0 0 1.5px #fff}
+html.ui-v2 .vchip{right:calc(max(10px,env(safe-area-inset-right)) + 26px)}
+html.ui-v2 #v2-shelf{left:auto;right:calc(env(safe-area-inset-right) + 10px);bottom:calc(env(safe-area-inset-bottom) + 34px);transform-origin:90% 100%}
+@media(max-width:520px){html.ui-v2 #v2-hand{left:4px}}

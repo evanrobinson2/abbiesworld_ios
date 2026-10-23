@@ -138,7 +138,7 @@ MASKS = []
 SCORES = {}
 
 
-def sheet(tag, objs, hero_path, hero_turn, res=512, samples=24):
+def sheet(tag, objs, hero_path, hero_turn, res=512, samples=24, picture='ref/bruiser.png'):
     """shots.png: row 1 the hero mesh, row 2 ours, at front / three-quarter / side / back; then the study camera."""
     import bpy
     from PIL import Image, ImageDraw
@@ -168,7 +168,7 @@ def sheet(tag, objs, hero_path, hero_turn, res=512, samples=24):
         scores[v] = round(float((mh & mo).sum() / max((mh | mo).sum(), 1)), 4)
     SCORES.update(scores)
     # the study camera: his picture beside ours, turned the way the hero mesh had to turn to match it
-    ref = np.asarray(Image.open(os.path.join(STUDY, 'ref', 'bruiser.png')).convert('RGB').resize((res, res))) / 255.0
+    ref = np.asarray(Image.open(os.path.join(STUDY, picture)).convert('RGB').resize((res, res))) / 255.0
     _, o = shoot([hero, ours], hero_turn, res, samples)
     tiles[0].append(ref); tiles[1].append(o)
     img = np.concatenate([np.concatenate(r, 1) for r in tiles], 0)
@@ -205,8 +205,8 @@ def main():
     info = dict(tag=tag, spec=a.spec, sides=a.sides, step=a.step, torso_mult=a.torso_mult, tol=a.tol, faces=faces, parts=[o.name for o in objs])
     if a.shots:
         hero = os.path.join(STUDY, spec['source'].replace('../', '', 1)) if spec['source'].startswith('../') else spec['source']
-        hero_turn = json.load(open(os.path.join(STUDY, 'meshy', 'align.json')))['turn_deg']
-        im = sheet(tag, objs, os.path.join(HERE, spec['source']), hero_turn, a.res)
+        hero_turn = spec.get('picture_turn', 0.0)
+        im = sheet(tag, objs, os.path.join(HERE, spec['source']), hero_turn, a.res, picture=spec.get('picture', 'ref/bruiser.png'))
         info['iou_vs_hero'] = dict(SCORES); info['iou_mean'] = round(float(np.mean(list(SCORES.values()))), 4)
         from PIL import ImageDraw
         ImageDraw.Draw(im).text((8, a.res + 24), 'IoU vs hero ' + ' '.join(f'{k} {v:.3f}' for k, v in SCORES.items()), fill=(20, 20, 20))

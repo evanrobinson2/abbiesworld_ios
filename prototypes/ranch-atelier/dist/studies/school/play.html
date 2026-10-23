@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>The School Jump</title>
+<style>
+/* AW-STUDY-0026: the school jump. A first-person climb in the basement's 8-bit look that rises, without a cut, into an
+   iso roof you sneak across. No words on screen. The one overlay is the hang-drop timing glass, shown only while you hang. */
+html,body{margin:0;height:100%;background:#1b1426;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none}
+canvas{display:block;width:100vw;height:100dvh;image-rendering:pixelated}
+.glass{position:fixed;border-radius:999px;background:linear-gradient(180deg,rgba(255,255,255,.34),rgba(255,255,255,.1));border:1px solid rgba(255,255,255,.45);
+ box-shadow:0 10px 30px rgba(20,10,40,.35),inset 0 1px 0 rgba(255,255,255,.6),inset 0 -6px 14px rgba(80,40,120,.18)}
+#hang{left:50%;bottom:max(18px,env(safe-area-inset-bottom));translate:-50% 0;width:min(56vw,240px);height:34px;display:none}
+#hang i{position:absolute;top:50%;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%}
+#zone{position:absolute;top:6px;bottom:6px;border-radius:999px;background:linear-gradient(90deg,#ffd76a,#ffb347);box-shadow:0 0 14px #ffcf5a}
+#dot{background:radial-gradient(circle at 35% 30%,#fff,#e9f2ff 40%,#8fb4ff);box-shadow:0 2px 8px rgba(0,0,40,.4)}
+#back,#again{width:44px;height:44px;display:grid;place-items:center;color:#fff;text-decoration:none;cursor:pointer}
+#back{left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));opacity:.8}
+#again{left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;width:64px;height:64px;display:none}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body>
+<a id="back" class="glass" href="./" aria-label="Back to the study"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+<div id="hang" class="glass" aria-hidden="true"><div id="zone"></div><i id="dot"></i></div>
+<div id="again" class="glass" role="button" aria-label="Play again"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg></div>
+<script type="module">
+import * as T from 'three';
+
+// Shared pieces from the basement and the presentation layer; the page still runs on its own if they are missing.
+const opt = async (path) => { try { return await import(path); } catch { return {}; } };
+const [PL, GB, MC, CR] = await Promise.all([opt('/simulations/presentation-layer.mjs'), opt('/simulations/grace-basement.mjs'), opt('/simulations/memory-coins.mjs'), opt('/simulations/coin-reward.mjs')]);
+const presentation = PL.presentation || ((o) => o);
+const playerCamera = PL.playerCamera || ((c) => c);
+
+const q = new URLSearchParams(location.search);
+const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFShadowMap;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+document.body.prepend(renderer.domElement);
+const scene = new T.Scene();
+const DUSK = new T.Color('#f2a07a'), NIGHTSKY = new T.Color('#3b2f5c');
+scene.background = new T.Color('#c9849a'); scene.fog = new T.Fog('#b98aa6', 40, 95);
+const camera = playerCamera(new T.PerspectiveCamera(66, 1, .05, 200));
+
+// ---------- Light: one late-October dusk drives sky, sun, windows and streetlights. ----------
+scene.add(new T.HemisphereLight('#ffd9c2', '#3a3150', 1.1));
+const sun = new T.DirectionalLight('#ffb27a', 2.2); sun.position.set(-30, 22, -12); sun.castShadow = true;
+Object.assign(sun.shadow.camera, {left: -26, right: 26, top: 26, bottom: -26, near: 1, far: 90}); sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -.0006;
+scene.add(sun, sun.target);
+
+// ---------- Materials, named by what they are. ----------
+function brickTex() {
+ const c = Object.assign(document.createElement('canvas'), {width: 128, height: 128}), g = c.getContext('2d');
+ g.fillStyle = '#7a3f2c'; g.fillRect(0, 0, 128, 128);
+ for (let r = 0; r < 16; r++) for (let k = -1; k < 5; k++) { const x = k * 32 + (r % 2) * 16, y = r * 8; g.fillStyle = ['#a65a3c', '#b4643f', '#9b5236', '#ad6044'][(r * 7 + k * 3) & 3]; g.fillRect(x + 1, y + 1, 30, 6); }
+ const t = new T.CanvasTexture(c); t.wrapS = t.wrapT = T.RepeatWrapping; t.colorSpace = T.SRGBColorSpace; t.magFilter = T.NearestFilter; return t;
+}
+function meshTex() {
+ const c = Object.assign(document.createElement('canvas'), {width: 32, height: 32}), g = c.getContext('2d');
+ g.fillStyle = '#4b5560'; g.fillRect(0, 0, 32, 32); g.strokeStyle = '#a9b4bd'; g.lineWidth = 1.4;
+ for (let i = -32; i < 64; i += 6) { g.beginPath(); g.moveTo(i, 0); g.lineTo(i + 32, 32); g.stroke(); g.beginPath(); g.moveTo(i + 32, 0); g.lineTo(i, 32); g.stroke(); }
+ const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.magFilter = T.NearestFilter; return t;
+}
+const BRICK = brickTex();
+const M = {
+ brick: (rx, ry) => { const t = BRICK.clone(); t.needsUpdate = true; t.repeat.set(rx, ry); return new T.MeshStandardMaterial({map: t, roughness: .9, name: 'brick wall'}); },
+ coping: new T.MeshStandardMaterial({color: '#d8d0c4', roughness: .8, name: 'concrete coping'}),
+ roof: new T.MeshStandardMaterial({color: '#8d8794', roughness: 1, name: 'tar and gravel roof'}),
+ gymRoof: new T.MeshStandardMaterial({color: '#7c7686', roughness: 1, name: 'gym roof membrane'}),
+ door: new T.MeshStandardMaterial({color: '#2f7f86', roughness: .55, metalness: .2, name: 'painted steel door'}),
+ frame: new T.MeshStandardMaterial({color: '#245c62', roughness: .5, metalness: .3, name: 'door frame'}),
+ brass: new T.MeshStandardMaterial({color: '#d8b04a', roughness: .3, metalness: .9, name: 'brass knob'}),
+ steel: new T.MeshStandardMaterial({color: '#9aa3ab', roughness: .4, metalness: .8, name: 'galvanised steel'}),
+ pipe: new T.MeshStandardMaterial({color: '#c9c3b5', roughness: .5, metalness: .3, name: 'drainpipe'}),
+ conduit: new T.MeshStandardMaterial({color: '#7d8a92', roughness: .4, metalness: .7, name: 'electrical conduit'}),
+ grate: new T.MeshStandardMaterial({map: meshTex(), roughness: .6, metalness: .6, name: 'mesh grate'}),
+ hvac: new T.MeshStandardMaterial({color: '#b9bec4', roughness: .5, metalness: .5, name: 'rooftop air handler'}),
+ hvacDark: new T.MeshStandardMaterial({color: '#4a4f5a', roughness: .7, name: 'air handler vents'}),
+ wall: new T.MeshStandardMaterial({color: '#a2735c', roughness: .9, name: 'parapet wall'}),
+ grass: new T.MeshStandardMaterial({color: '#6f8a4a', roughness: 1, name: 'school field grass'}),
+ asphalt: new T.MeshStandardMaterial({color: '#5d5966', roughness: 1, name: 'schoolyard asphalt'}),
+ road: new T.MeshStandardMaterial({color: '#3e3a47', roughness: 1, name: 'street asphalt'}),
+ paint: new T.MeshStandardMaterial({color: '#f1e6b0', roughness: 1, name: 'road paint'}),
+ window: new T.MeshStandardMaterial({color: '#2b3550', emissive: '#ffcf8a', emissiveIntensity: .15, roughness: .2, name: 'classroom window'}),
+ leaf: new T.MeshStandardMaterial({color: '#c46a3a', roughness: 1, flatShading: true, name: 'autumn maple leaves'}),
+ leaf2: new T.MeshStandardMaterial({color: '#7a8a3a', roughness: 1, flatShading: true, name: 'spruce needles'}),
+ bark: new T.MeshStandardMaterial({color: '#4a3528', roughness: 1, name: 'tree bark'}),
+ ball: new T.MeshStandardMaterial({color: '#d7f04a', roughness: .9, emissive: '#7a8a10', emissiveIntensity: .25, name: 'tennis ball felt'}),
+ skin: new T.MeshStandardMaterial({color: '#f0c29b', roughness: .8, name: 'skin'}),
+ jacket: new T.MeshStandardMaterial({color: '#3e6fd8', roughness: .8, name: 'kid jacket'}),
+ cap: new T.MeshStandardMaterial({color: '#d83a3a', roughness: .8, name: 'ball cap'}),
+ jeans: new T.MeshStandardMaterial({color: '#2e3550', roughness: .9, name: 'jeans'}),
+ fur: new T.MeshStandardMaterial({color: '#b5793f', roughness: 1, name: 'dog fur'}),
+ furDark: new T.MeshStandardMaterial({color: '#6e4524', roughness: 1, name: 'dog ears'}),
+ house: ['#c9b79c', '#9fb2c4', '#d9c6a0', '#b7a3b8'].map((c, i) => new T.MeshStandardMaterial({color: c, roughness: .9, name: `house siding ${i}`})),
+ shingle: new T.MeshStandardMaterial({color: '#4e3f45', roughness: 1, flatShading: true, name: 'roof shingles'}),
+};
+const box = (w, h, d, mat, x, y, z, name) => { const m = new T.Mesh(new T.BoxGeometry(w, h, d), mat); m.position.set(x, y, z); m.castShadow = m.receiveShadow = true; if (name) m.name = name; scene.add(m); return m; };
+const cyl = (r, h, mat, x, y, z, name, seg = 10) => { const m = new T.Mesh(new T.CylinderGeometry(r, r, h, seg), mat); m.position.set(x, y, z); m.castShadow = true; if (name) m.name = name; scene.add(m); return m; };
+
+// ---------- The school: a stylized version of the one-storey brick school from Evan's aerial photo. ----------
+// Main block A, north wing B, the taller gym C, a lower annex D and the entrance canopy E. Heights in metres.
+const H = 4.2, GYM = 6.4, CANOPY = 3.0;
+const RECT = {A: [-7, 5, -3.5, 3.5, H], B: [1, 7, -7, -3.5, H], C: [0, 8, 3.5, 9, GYM], D: [-10, -7, -5, -1, 3.4], E: [5, 7.6, -1, 3.5, CANOPY]};
+const occluders = [];
+for (const [k, [x0, x1, z0, z1, h]] of Object.entries(RECT)) {
+ const w = x1 - x0, d = z1 - z0, cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
+ if (k === 'E') { // the canopy: a flat slab on four posts
+  const s = box(w, .25, d, M.coping, cx, h - .12, cz, 'entrance canopy'); occluders.push(s);
+  for (const [px, pz] of [[x1 - .2, z0 + .2], [x1 - .2, z1 - .2]]) cyl(.09, h - .25, M.steel, px, (h - .25) / 2, pz, 'canopy post');
+  continue;
+ }
+ const body = box(w, h, d, M.brick(w / 2.2, h / 1.1), cx, h / 2, cz, `school ${k === 'C' ? 'gym' : 'wing'} wall`); occluders.push(body);
+ const top = box(w, .06, d, k === 'C' ? M.gymRoof : M.roof, cx, h + .03, cz, 'roof'); top.castShadow = false;
+ for (const [px, pz, pw, pd] of [[cx, z0 + .1, w, .2], [cx, z1 - .1, w, .2], [x0 + .1, cz, .2, d], [x1 - .1, cz, .2, d]]) occluders.push(box(pw, .35, pd, M.coping, px, h + .17, pz, 'parapet coping'));
+ // classroom windows on every long face except the climbing wall
+ if (k !== 'C') for (let x = x0 + 1.2; x < x1 - .8; x += 1.6) for (const [z, n] of [[z0 - .02, 'n'], [z1 + .02, 's']]) {
+  const win = box(1.1, 1.1, .05, M.window, x, 1.8, z); win.castShadow = false;
+ }
+}
+// Walls and such on the roof to hide behind (from the aerial: stairwell, air handlers, the dark gym units, a divider).
+const BLOCKERS = [
+ [-3, -1.2, -2, 0, 1.8, 'stairwell'], [-5.4, -3.8, .8, 2.4, 1.1, 'air handler'], [-1, -.6, .8, 3.5, 1.05, 'divider wall'],
+ [-6, -3.8, -2.7, -2.3, 1, 'divider wall'], [2, 4, -6.2, -4.6, 1.2, 'air handler'], [2.2, 3.6, -1.6, -.4, .9, 'air handler'],
+ [1.4, 3.4, 5.2, 7, 1, 'gym unit'], [5, 7, 5.6, 8, 1, 'gym unit'],
+];
+for (const [x0, x1, z0, z1, h, name] of BLOCKERS) {
+ const base = x0 > -.1 && z0 >= 3.5 ? GYM : H;
+ const b = box(x1 - x0, h, z1 - z0, name.includes('wall') ? M.wall : M.hvac, (x0 + x1) / 2, base + h / 2, (z0 + z1) / 2, name); occluders.push(b);
+ if (!name.includes('wall')) { const v = box((x1 - x0) * .7, .05, (z1 - z0) * .5, M.hvacDark, (x0 + x1) / 2, base + h + .03, (z0 + z1) / 2); v.castShadow = false; }
+}
+// skylight domes (the white dots in the photo)
+for (const [x, z] of [[-4.5, -1], [-1.8, 2.2], [0, -2.5], [3.5, 1.5], [4, -6]]) { const d = new T.Mesh(new T.SphereGeometry(.28, 10, 6, 0, Math.PI * 2, 0, Math.PI / 2), M.window); d.position.set(x, H + .05, z); d.name = 'skylight dome'; scene.add(d); }
+
+// Ground: field to the east, asphalt yard north, parking south-west, the street to the south, houses across it.
+const ground = (w, d, mat, x, z, y = 0) => { const m = new T.Mesh(new T.PlaneGeometry(w, d), mat); m.rotation.x = -Math.PI / 2; m.position.set(x, y, z); m.receiveShadow = true; scene.add(m); return m; };
+ground(140, 140, M.grass, 0, 0, -.02); ground(16, 9, M.asphalt, 4, -11.5, .005); ground(10, 14, M.asphalt, -15, 7, .005); ground(140, 6, M.road, 0, 15.5, .01);
+for (let x = -60; x < 60; x += 4) ground(1.8, .14, M.paint, x, 15.5, .02);
+for (let x = -16; x <= -9; x += 2.2) ground(.1, 3.4, M.paint, x, 3.8, .02);
+function tree(x, z, s = 1, conifer = false) {
+ cyl(.14 * s, 1.6 * s, M.bark, x, .8 * s, z, 'tree trunk');
+ const g = conifer ? new T.ConeGeometry(1.1 * s, 3 * s, 7) : new T.IcosahedronGeometry(1.4 * s, 0);
+ const c = new T.Mesh(g, conifer ? M.leaf2 : M.leaf); c.position.set(x, (conifer ? 2.8 : 2.6) * s, z); c.castShadow = true; c.name = conifer ? 'spruce' : 'maple'; scene.add(c);
+}
+[[-12, -6, 1.1], [-9.5, 10.5, 1.3], [-4, 11, 1], [11.5, -9, 1.2, true], [14, 11, 1.1], [-13, 12, .9, true], [9, 12.5, 1], [18, -2, 1.4]].forEach(a => tree(...a));
+for (let i = 0; i < 7; i++) { // houses across the street
+ const x = -27 + i * 9, m = M.house[i % 4];
+ box(6, 3.2, 6, m, x, 1.6, 23, 'house');
+ const r = new T.Mesh(new T.ConeGeometry(4.8, 2, 4), M.shingle); r.rotation.y = Math.PI / 4; r.position.set(x, 4.2, 23); r.scale.z = .75; r.castShadow = true; r.name = 'house roof'; scene.add(r);
+ const w = box(1.2, 1, .05, M.window, x - 1.2, 1.8, 19.97); w.castShadow = false;
+}
+
+// ---------- The climbing walls: the north-west face (door, hinges, knob, grate, drainpipe, conduit) and the gym wall. ----------
+// A wall is an origin on the ground, a right vector and the normal toward the climber. Holds are (u along, y up).
+class Wall {
+ constructor(origin, right, normal) { this.o = origin; this.r = right; this.n = normal; }
+ at(u, y, out = 0) { return this.o.clone().addScaledVector(this.r, u).add(new T.Vector3(0, y, 0)).addScaledVector(this.n, out); }
+ put(mesh, u, y, out = 0) { mesh.position.copy(this.at(u, y, out)); mesh.lookAt(mesh.position.clone().add(this.n)); scene.add(mesh); mesh.castShadow = true; return mesh; }
+}
+const NW = new Wall(new T.Vector3(-7, 0, 1.0), new T.Vector3(0, 0, 1), new T.Vector3(-1, 0, 0));
+const GW = new Wall(new T.Vector3(2.5, H, 3.5), new T.Vector3(-1, 0, 0), new T.Vector3(0, 0, -1));
+const part = (geo, mat, name) => Object.assign(new T.Mesh(geo, mat), {name});
+// north-west face: three bays (the middle one with the door) stepped out a little
+NW.put(part(new T.BoxGeometry(1.5, H, .12), M.brick(.7, 1.9), 'bay pilaster'), 2.25, H / 2, .06);
+NW.put(part(new T.BoxGeometry(1.24, 2.3, .08), M.frame, 'door frame'), 0, 1.15, .04);
+NW.put(part(new T.BoxGeometry(1.0, 2.1, .06), M.door, 'steel door'), 0, 1.05, .09);
+NW.put(part(new T.BoxGeometry(.56, .4, .05), M.grate, 'mesh grate'), -.03, 2.53, .07);
+NW.put(part(new T.BoxGeometry(.18, .26, .05), M.steel, 'wall lamp'), -1.0, 2.45, .2);
+const pipe = NW.put(part(new T.CylinderGeometry(.06, .06, H - .3, 10), M.pipe, 'drainpipe'), .95, (H - .3) / 2 + .15, .14); pipe.lookAt(pipe.position.clone().add(new T.Vector3(0, 1, 0))); pipe.rotation.set(0, 0, 0);
+const cond = NW.put(part(new T.CylinderGeometry(.035, .035, 2.6, 8), M.conduit, 'electrical conduit'), .2, 3.1, .1); cond.rotation.set(Math.PI / 2, 0, 0);
+// beside the door: the hydro station in its wire-mesh cage behind aluminium poles, under an angled sheet-metal hood.
+// Scenery only, never a handhold.
+{
+ const alu = new T.MeshStandardMaterial({color: '#c4cad0', roughness: .35, metalness: .85, name: 'aluminium sheet metal'});
+ const cage = new T.MeshStandardMaterial({map: meshTex(), transparent: true, opacity: .85, roughness: .6, metalness: .6, name: 'wire mesh cage'});
+ NW.put(part(new T.BoxGeometry(.75, 1.5, .7), cage, 'hydro station cage'), -1.75, .75, .38);
+ NW.put(part(new T.BoxGeometry(.5, 1.1, .4), new T.MeshStandardMaterial({color: '#5d6a52', roughness: .7, name: 'hydro transformer box'}), 'hydro transformer'), -1.75, .55, .3);
+ const hood = NW.put(part(new T.BoxGeometry(.9, .12, .85), alu, 'angled sheet-metal hood'), -1.75, 1.62, .42); hood.rotateX(-.35);
+ for (const du of [-.5, 0, .5]) NW.put(part(new T.CylinderGeometry(.04, .04, 1.0, 8), alu, 'aluminium pole'), -1.75 + du, .5, 1.0).rotation.set(0, 0, 0);
+}
+GW.put(part(new T.BoxGeometry(.7, .5, .08), M.grate, 'louvre vent'), -.3, .9, .04);
+GW.put(part(new T.BoxGeometry(.7, .5, .08), M.grate, 'louvre vent'), -.25, 1.85, .04);
+const pipe2 = GW.put(part(new T.CylinderGeometry(.05, .05, 2.2, 10), M.pipe, 'drainpipe'), .38, 1.1, .1); pipe2.rotation.set(0, 0, 0);
+
+const HOLD_GEO = {
+ hinge: new T.CylinderGeometry(.035, .035, .14, 8), knob: new T.SphereGeometry(.055, 10, 8), bar: new T.BoxGeometry(.5, .05, .06),
+ clamp: new T.TorusGeometry(.075, .022, 6, 12), lip: new T.BoxGeometry(.5, .08, .12), lamp: new T.BoxGeometry(.2, .04, .25),
+};
+const glowTex = (() => { const c = Object.assign(document.createElement('canvas'), {width: 64, height: 64}), g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 2, 32, 32, 30); r.addColorStop(0, 'rgba(255,240,190,1)'); r.addColorStop(1, 'rgba(255,200,120,0)'); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return new T.CanvasTexture(c); })();
+function holds(wall, list) {
+ return list.map(([id, u, y, kind, extra = {}]) => {
+  const geo = HOLD_GEO[kind === 'top' ? 'lip' : kind]; const mat = kind === 'knob' ? M.brass : kind === 'lip' || kind === 'top' ? M.coping : M.steel;
+  const mesh = part(geo, mat, id); wall.put(mesh, u, y, .13);
+  if (kind === 'hinge') mesh.rotation.set(0, 0, 0);
+  if (kind === 'clamp') mesh.rotation.y = 0;
+  // the worn, shiny spot where small hands have been: a soft glow drawn for the player only
+  const glow = presentation(new T.Sprite(new T.SpriteMaterial({map: glowTex, transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0})), {purpose: 'reachable hold'});
+  glow.scale.setScalar(.34); glow.position.copy(wall.at(u, y, .2)); scene.add(glow);
+  const hit = new T.Mesh(new T.SphereGeometry(.17, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.copy(glow.position); hit.userData.hold = true; scene.add(hit);
+  const h = {id, u, y, kind, wall, mesh, glow, hit, ...extra}; hit.userData.h = h; return h;
+ });
+}
+const CLIMB1 = {wall: NW, top: H, holds: holds(NW, [
+ ['low hinge', -.5, .35, 'hinge'], ['middle hinge', -.5, 1.05, 'hinge'], ['top hinge', -.5, 1.75, 'hinge'], ['door knob', .38, 1.0, 'knob'],
+ ['door frame top', 0, 2.2, 'bar'], ['grate corner', -.25, 2.5, 'clamp'], ['grate top', .15, 2.72, 'bar'],
+ ['pipe bracket', .95, 2.45, 'clamp'], ['conduit clamp', .45, 3.1, 'clamp'], ['far conduit clamp', 1.45, 3.1, 'clamp'], ['high pipe bracket', .95, 3.6, 'clamp'],
+ ['roof edge', .6, 4.25, 'top'], ['roof edge east', 1.3, 4.25, 'top'], ['wall lamp', -1.0, 2.45, 'lamp', {loose: true}],
+])};
+const CLIMB2 = {wall: GW, top: GYM - H, holds: holds(GW, [
+ ['low louvre', -.3, .9, 'bar'], ['pipe clamp', .38, 1.4, 'clamp'], ['high louvre', -.25, 1.85, 'bar'], ['gym edge', .1, 2.28, 'top'], ['loose bracket', .85, 1.9, 'lamp', {loose: true}],
+])};
+const SW = new Wall(new T.Vector3(5, CANOPY, 1.2), new T.Vector3(0, 0, -1), new T.Vector3(1, 0, 0));
+const CLIMB3 = {wall: SW, top: H - CANOPY, holds: holds(SW, [['vent hood', -.2, .55, 'bar'], ['main roof edge', .15, 1.3, 'top']])};
+const allHolds = [...CLIMB1.holds, ...CLIMB2.holds, ...CLIMB3.holds];
+
+// ---------- The kid (you), the dog, tennis balls. ----------
+function makeKid() {
+ const g = new T.Group(); g.name = 'kid';
+ const add = (geo, mat, x, y, z, name) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; m.name = name; g.add(m); return m; };
+ const legs = [add(new T.CylinderGeometry(.07, .07, .42, 6), M.jeans, -.09, .21, 0, 'left leg'), add(new T.CylinderGeometry(.07, .07, .42, 6), M.jeans, .09, .21, 0, 'right leg')];
+ add(new T.CapsuleGeometry(.17, .28, 3, 8), M.jacket, 0, .66, 0, 'jacket');
+ add(new T.SphereGeometry(.16, 10, 8), M.skin, 0, 1.05, 0, 'head');
+ add(new T.CylinderGeometry(.165, .17, .08, 10), M.cap, 0, 1.15, 0, 'cap'); add(new T.BoxGeometry(.18, .025, .16), M.cap, 0, 1.12, .14, 'cap brim');
+ const arms = new T.Group(); g.add(arms);
+ const carry = []; for (let i = 0; i < 3; i++) { const b = new T.Mesh(new T.SphereGeometry(.07, 8, 6), M.ball); b.position.set((i - 1) * .12, .7 + (i === 1 ? .09 : 0), .2); b.visible = false; b.name = 'carried ball'; g.add(b); carry.push(b); }
+ g.userData = {legs, carry}; return g;
+}
+const kid = makeKid(); kid.scale.setScalar(1.25); kid.visible = false; scene.add(kid);
+function makeDog() {
+ const g = new T.Group(); g.name = 'dog';
+ const add = (geo, mat, x, y, z) => { const m = new T.Mesh(geo, mat); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
+ add(new T.CapsuleGeometry(.2, .45, 3, 8), M.fur, 0, .42, 0).rotation.z = Math.PI / 2;
+ const head = add(new T.SphereGeometry(.18, 10, 8), M.fur, .42, .62, 0); add(new T.BoxGeometry(.16, .1, .12), M.fur, .58, .58, 0);
+ add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, .14); add(new T.BoxGeometry(.06, .16, .1), M.furDark, .4, .72, -.14);
+ for (const [x, z] of [[.22, .1], [.22, -.1], [-.22, .1], [-.22, -.1]]) add(new T.CylinderGeometry(.05, .05, .3, 6), M.fur, x, .15, z);
+ const tail = add(new T.CylinderGeometry(.03, .02, .3, 6), M.fur, -.42, .58, 0); tail.rotation.z = -.8;
+ const hit = new T.Mesh(new T.SphereGeometry(1.1, 8, 6), new T.MeshBasicMaterial({visible: false})); hit.position.y = .5; g.add(hit);
+ g.userData = {head, tail, hit}; g.scale.setScalar(1.3); return g;
+}
+const dog = makeDog(); dog.position.set(12, 0, 2); dog.rotation.y = Math.PI; scene.add(dog);
+const PILE = new T.Vector3(13.4, 0, -1.5);
+
+let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+const REGIONS = {low: ['A', 'B'], gym: ['C'], canopy: ['E']};
+const inRect = (k, x, z, m = .35) => { const [x0, x1, z0, z1] = RECT[k]; return x > x0 + m && x < x1 - m && z > z0 + m && z < z1 - m; };
+const inBlock = (x, z, m = .32) => BLOCKERS.some(([x0, x1, z0, z1]) => x > x0 - m && x < x1 + m && z > z0 - m && z < z1 + m);
+const walkable = (lvl, x, z) => REGIONS[lvl].some(k => inRect(k, x, z)) && !inBlock(x, z);
+const levelY = lvl => ({low: H, gym: GYM, canopy: CANOPY})[lvl];
+const balls = [];
+for (const [lvl, n] of [['low', 21], ['gym', 5], ['canopy', 5]]) {
+ let made = 0, tries = 0;
+ while (made < n && tries++ < 5000) {
+  const k = REGIONS[lvl][Math.floor(rnd() * REGIONS[lvl].length)], [x0, x1, z0, z1] = RECT[k];
+  const x = x0 + .6 + rnd() * (x1 - x0 - 1.2), z = z0 + .6 + rnd() * (z1 - z0 - 1.2);
+  if (!walkable(lvl, x, z) || balls.some(b => b.home.distanceTo(new T.Vector3(x, levelY(lvl) + .09, z)) < (lvl === 'canopy' ? .5 : 1.2))) continue;
+  if (lvl === 'low' && Math.hypot(x + 6.4, z - 1.2) < 1.5) continue;
+  const m = new T.Mesh(new T.SphereGeometry(.09, 10, 8), M.ball); m.castShadow = true; m.name = 'tennis ball';
+  const home = new T.Vector3(x, levelY(lvl) + .09, z); m.position.copy(home); scene.add(m);
+  balls.push({m, home, lvl, state: 'roof'}); made++;
+ }
+}
+const memoryCoin = GB.createCoin ? GB.createCoin(.16) : new T.Mesh(new T.CylinderGeometry(.16, .16, .03, 16), new T.MeshStandardMaterial({color: '#ffcc33', metalness: .8, roughness: .3, name: 'coin gold'}));
+if (!GB.createCoin) memoryCoin.rotation.x = Math.PI / 2;
+memoryCoin.name = 'gold memory coin'; memoryCoin.position.set(6.9, CANOPY + .35, -.3); scene.add(memoryCoin);
+const coinTaken = () => MC.has?.('school-jump:canopy');
+if (coinTaken()) memoryCoin.visible = false;
+
+// ---------- The street: cars on a steady rhythm. Headlights are the "seen" signal: if their light is on you, they see you. ----------
+const ROAD_Z = 15.5, CAR_PERIOD = 10, CAR_SPEED = 10;
+const carColors = ['#c8423a', '#e6d36a', '#4d7fd6', '#e9e4dc', '#2f8a6a'];
+function makeCar(i) {
+ const g = new T.Group(); g.name = 'passing car';
+ const paint = new T.MeshStandardMaterial({color: carColors[i % carColors.length], roughness: .4, metalness: .4, name: 'car paint'});
+ const b = new T.Mesh(new T.BoxGeometry(3.6, .7, 1.7), paint); b.position.y = .55; b.castShadow = true; g.add(b);
+ const c = new T.Mesh(new T.BoxGeometry(2, .55, 1.5), new T.MeshStandardMaterial({color: '#2a2f3c', roughness: .2, name: 'car glass'})); c.position.set(-.2, 1.15, 0); g.add(c);
+ const lampMat = new T.MeshStandardMaterial({color: '#fff6d8', emissive: '#fff1b8', emissiveIntensity: 2, name: 'headlamp'});
+ const tailMat = new T.MeshStandardMaterial({color: '#7a1010', emissive: '#ff2a2a', emissiveIntensity: .6, name: 'tail lamp'});
+ for (const z of [-.55, .55]) { const h = new T.Mesh(new T.BoxGeometry(.06, .16, .3), lampMat); h.position.set(1.81, .62, z); g.add(h); const t = new T.Mesh(new T.BoxGeometry(.06, .14, .3), tailMat); t.position.set(-1.81, .62, z); g.add(t); }
+ // the beam: a spot that sweeps the roof edge as the car passes (stylized: the driver glances up at the school)
+ const beam = new T.SpotLight('#fff1c8', 0, 30, .5, .55, 1.1); beam.castShadow = true; beam.shadow.mapSize.set(512, 512); beam.shadow.bias = -.002;
+ beam.position.set(0, 8, 0); g.add(beam); g.add(beam.target);
+ scene.add(g); return {g, beam, tailMat, i, x: 999, dir: 1, active: false, seen: 0, brake: 0};
+}
+const cars = [makeCar(0), makeCar(1)];
+
+// ---------- Sound: synthesised; the street, the dog and the climb are in the world; the heartbeat is meta. ----------
+let ac = null;
+function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
+function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = false, lp = 0, delay = 0} = {}) {
+ const a = audio(); if (!a) return; const now = a.currentTime + delay, out = a.createGain(); out.gain.setValueAtTime(g, now); out.gain.exponentialRampToValueAtTime(.0001, now + t);
+ let src; if (noise) { const b = a.createBuffer(1, Math.max(1, a.sampleRate * t), a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; src = a.createBufferSource(); src.buffer = b; }
+ else { src = a.createOscillator(); src.type = type; src.frequency.setValueAtTime(f, now); if (slide) src.frequency.exponentialRampToValueAtTime(Math.max(20, f + slide), now + t); }
+ let node = src; if (lp) { const fl = a.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = lp; src.connect(fl); node = fl; }
+ node.connect(out).connect(a.destination); src.start(now); src.stop(now + t + .02);
+}
+const SFX = {
+ grab: () => { blip({f: 140, t: .07, type: 'triangle', g: .14}); blip({noise: true, t: .03, g: .06, lp: 2400}); },
+ metal: () => blip({f: 900, t: .1, type: 'triangle', g: .05, slide: -300}),
+ slip: () => { blip({noise: true, t: .22, g: .1, lp: 1400}); blip({f: 300, t: .2, type: 'sawtooth', g: .02, slide: -200, lp: 900}); },
+ rattle: () => { for (let i = 0; i < 4; i++) blip({f: 1400 + i * 90, t: .03, type: 'square', g: .03, delay: i * .05}); },
+ breath: (k = 1) => blip({noise: true, t: .35 + .1 * k, g: .02 + .02 * k, lp: 700}),
+ haul: () => [330, 392, 523].forEach((f, i) => blip({f, t: .12, type: 'square', g: .04, delay: i * .09})),
+ step: () => blip({noise: true, t: .04, g: .04, lp: 900}),
+ pick: () => blip({f: 660, t: .08, type: 'square', g: .04, slide: 300}),
+ bounce: () => blip({f: 180, t: .09, type: 'sine', g: .12, slide: -60}),
+ bark: () => { blip({f: 520, t: .09, type: 'square', g: .05, slide: -220, lp: 1600}); blip({f: 480, t: .1, type: 'square', g: .05, slide: -200, lp: 1600, delay: .16}); },
+ beat: (k) => { blip({f: 58, t: .12, type: 'sine', g: .2 + .15 * k}); blip({f: 52, t: .1, type: 'sine', g: .14 + .1 * k, delay: .16}); },
+ horn: () => { blip({f: 392, t: .5, type: 'sawtooth', g: .05, lp: 1400}); blip({f: 466, t: .5, type: 'sawtooth', g: .04, lp: 1400}); },
+ coin: () => [988, 1319, 1568, 1976].forEach((f, i) => blip({f, t: .14, type: 'square', g: .035, delay: i * .08})),
+ tick: () => blip({f: 1600, t: .02, type: 'square', g: .015}),
+ win: () => [523, 659, 784, 1047, 784, 1047].forEach((f, i) => blip({f, t: .16, type: 'square', g: .04, delay: i * .12})),
+};
+let engine = null;
+function engineUpdate(level, pitch) {
+ const a = ac; if (!a) return;
+ if (!engine) { const o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain(); o.type = 'sawtooth'; f.type = 'lowpass'; f.frequency.value = 320; g.gain.value = 0; o.connect(f).connect(g).connect(a.destination); o.start(); engine = {o, g}; }
+ engine.g.gain.setTargetAtTime(level * .05, a.currentTime, .1); engine.o.frequency.setTargetAtTime(55 + pitch * 30, a.currentTime, .2);
+}
+// The little inner voice (and one grown-up). Spoken, never written on screen.
+function say(text, {grownUp = false} = {}) {
+ try { const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
+  u.pitch = grownUp ? .6 : 1.7; u.rate = grownUp ? 1.05 : 1.08; u.volume = .9;
+  const vs = s.getVoices(), en = vs.filter(v => /^en/i.test(v.lang)); u.voice = en.find(v => /child|junior|samantha|karen|female/i.test(v.name)) || en[0] || null;
+  s.speak(u); } catch {}
+}
+const LINES = {
+ start: 'Okay. Door first. Like always.', wrong: ['Oops. Not that one.', 'Breathe. Find the shiny one.', 'Arms getting wobbly...', 'You can do it. One more good grab.'],
+ loose: 'Whoa, that one wiggles!', tired: 'Whew. Noodle arms. Let\'s try again.', top: 'Made it!', firstBall: 'There\'s one!', dog: ['Good dog!', 'Catch!', 'Go get it!', 'Good catch!'],
+ busted: 'Hey! You! Down off that roof!', afterBust: 'Oops. Wait for the cars next time.', gym: 'The gym roof. Higher.', notYet: 'Not yet. There are still balls up here.',
+ hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'A gold coin! One of Daddy\'s memories.', done: 'Best day ever.',
+};
+let wrongLine = 0;
+
+// ---------- Game state. ----------
+const S = {mode: 'climb', climb: CLIMB1, hands: [null, null], wrong: 0, lvl: 'low', target: null, carry: 0, thrown: 0, seen: 0, beatAt: 0,
+ hangT: 0, hangMiss: 0, tween: null, ended: false, said: {}};
+const MAX_WRONG = 4, REACH = .9, STAND_REACH = 1.9;
+const CLIMB_PIX = .24, ROOF_PIX = .4; // the basement's chunky pixels, a little finer on the roof so the street reads
+let time = 0, pixK = CLIMB_PIX;
+
+const v3 = (x = 0, y = 0, z = 0) => new T.Vector3(x, y, z);
+const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+function climbView(c = S.climb) {
+ const hs = S.hands.filter(Boolean), w = c.wall;
+ const u = hs.length ? hs.reduce((s, h) => s + h.u, 0) / hs.length : 0.1;
+ const top = hs.length ? Math.max(...hs.map(h => h.y)) : 0;
+ const eye = Math.max(1.15, top - .2), sway = Math.sin(time * 1.6) * .012 * (1 + S.wrong * 1.5);
+ const pos = w.at(u * .7 + sway, eye + sway * .5, 1.5), look = w.at(u * .7, eye + .3, 0);
+ return {pos, look, fov: 66};
+}
+function isoView() {
+ const p = kid.position, look = v3(p.x + 1.2, levelY(S.lvl) * .6, p.z + 3.2);
+ return {pos: look.clone().add(v3(-9.5, 13, -9.5)), look, fov: 36};
+}
+function tweenCamera(to, dur, done, k = null) { S.tween = {from: {pos: camera.position.clone(), look: S.look.clone(), fov: camera.fov, k: pixK}, to, t: 0, dur, done, k}; }
+S.look = v3();
+
+function reachable(h) {
+ if (!['climb', 'descend'].includes(S.mode) || h.wall !== S.climb.wall || S.hands.includes(h)) return false;
+ const hs = S.hands.filter(Boolean), top = hs.length ? Math.max(...hs.map(x => x.y)) : 0;
+ if (S.mode === 'descend') { // going home: reach down from the lower hand
+  const anchor = hs.reduce((a, b) => (!a || b.y < a.y ? b : a), null);
+  return h.kind !== 'top' && h.y < top - .05 && Math.hypot(h.u - anchor.u, h.y - anchor.y) <= REACH;
+ }
+ if (top <= 1.5 && h.y <= STAND_REACH) return true; // still standing: anything you can reach from the ground
+ const anchor = hs.reduce((a, b) => (!a || b.y > a.y ? b : a), null);
+ return !!anchor && Math.hypot(h.u - anchor.u, h.y - anchor.y) <= REACH;
+}
+function grab(h) {
+ audio();
+ if (!reachable(h)) return wrongMove(h, false);
+ if (h.loose) { h.wobble = 1; SFX.rattle(); say(LINES.loose); return wrongMove(h, true); }
+ const lower = () => S.hands[0].y <= S.hands[1].y ? 0 : 1;
+ const i = !S.hands[0] ? 0 : !S.hands[1] ? 1 : S.mode === 'descend' ? 1 - lower() : lower();
+ S.hands[i] = h; h.wiggle = .6; SFX.grab(); if (h.kind !== 'knob') SFX.metal();
+ if (h.kind === 'top') return topOut();
+ if (S.mode === 'descend' && Math.min(...S.hands.map(x => x.y)) <= 1.1) return landHome();
+}
+function wrongMove(h, silent) {
+ S.wrong++; S.shake = .5; SFX.slip(); SFX.breath(S.wrong / MAX_WRONG);
+ if (S.wrong > MAX_WRONG) return tired();
+ if (!silent) say(LINES.wrong[wrongLine++ % LINES.wrong.length]);
+ S.fumble = {h, t: 0};
+}
+function tired() {
+ say(LINES.tired); S.mode = 'slide';
+ const from = climbView(), c = S.climb; S.hands = [null, null];
+ setTimeout(() => { S.wrong = 0; S.mode = 'climb'; }, 1600);
+ tweenCamera(climbView(c), 1.4);
+}
+function topOut() {
+ S.mode = 'haul'; SFX.haul(); say(S.climb === CLIMB1 ? LINES.top : LINES.gym);
+ const c = S.climb, w = c.wall, standY = w.o.y + c.top;
+ const spot = w.at(.6, 0, -.7); kid.position.set(spot.x, standY, spot.z); kid.rotation.y = Math.atan2(-w.n.x, -w.n.z);
+ // the camera rises over the coping from exactly where the hands were, then swings up into the iso view
+ const over = {pos: w.at(.6, c.top + 1.0, .4), look: w.at(.6, c.top + .3, -2.5), fov: 60};
+ tweenCamera(over, .9, () => {
+  S.lvl = c === CLIMB2 ? 'gym' : 'low'; kid.visible = true; S.hands = [null, null]; S.wrong = 0;
+  tweenCamera(isoView(), 1.8, () => { S.mode = 'roof'; }, ROOF_PIX);
+ });
+}
+function startClimb(c, {fromIso = false} = {}) {
+ S.climb = c; S.hands = [null, null]; S.wrong = 0; S.mode = fromIso ? 'tween' : 'climb';
+ if (fromIso) { kid.visible = false; tweenCamera(climbView(c), 1.6, () => { S.mode = 'climb'; }, .22); }
+}
+
+// ---------- Roof: walk, pick up, throw to the dog, hide from headlights. ----------
+const ray = new T.Raycaster(), ndc = new T.Vector2();
+function pick(ev) { const r = renderer.domElement.getBoundingClientRect(); ndc.set((ev.clientX - r.left) / r.width * 2 - 1, -(ev.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); }
+const SPOTS = {gymWall: {lvl: 'low', at: v3(2.5, H, 2.8)}, hang: {lvl: 'gym', at: v3(6.2, GYM, 4.0)}, smallWall: {lvl: 'canopy', at: v3(5.6, CANOPY, 1.2)}, home: {lvl: 'low', at: v3(-6.5, H, 1.6)}};
+function onRoofTap(ev) {
+ pick(ev);
+ if (S.carry && ray.intersectObject(dog.userData.hit).length) return throwBall();
+ const y = levelY(S.lvl), p = v3(); ray.ray.intersectPlane(new T.Plane(v3(0, 1, 0), -y), p);
+ if (!p) return;
+ for (const [k, s] of Object.entries(SPOTS)) if (s.lvl === S.lvl && Math.hypot(p.x - s.at.x, p.z - s.at.z) < 1.3) { S.target = s.at.clone(); S.onArrive = k; return; }
+ S.target = p; S.onArrive = null;
+}
+function arrive(k) {
+ if (k === 'gymWall') return startClimb(CLIMB2, {fromIso: true});
+ if (k === 'smallWall') return startClimb(CLIMB3, {fromIso: true});
+ if (k === 'home') return coinTaken() || S.canopyDone ? startDescent() : null;
+ if (k === 'hang') {
+  const left = balls.filter(b => b.lvl !== 'canopy' && b.state !== 'dog').length;
+  if (left) return say(LINES.notYet);
+  return startHang();
+ }
+}
+// Hollywood ending: back the way you came, down the conduit, the grate and the door, feet on the grass, dog at your side.
+function startDescent() {
+ S.climb = CLIMB1; S.mode = 'tween'; kid.visible = false; S.wrong = 0;
+ S.hands = [CLIMB1.holds.find(h => h.id === 'roof edge'), CLIMB1.holds.find(h => h.id === 'roof edge east')];
+ tweenCamera(climbView(CLIMB1), 1.8, () => { S.mode = 'descend'; say(LINES.home); }, CLIMB_PIX);
+}
+function landHome() {
+ S.mode = 'ending'; SFX.bounce(); S.hands = [null, null];
+ kid.position.copy(NW.at(.3, 0, 1.1)); kid.position.y = 0; kid.rotation.y = -Math.PI / 2; kid.visible = true;
+ dog.position.set(-8.2, 0, 2.6); S.dogHome = true;
+ tweenCamera({pos: v3(-14, 3.2, -3), look: v3(-7.5, 1.6, 1.5), fov: 50}, 2.4, () => finish('hollywood'), ROOF_PIX);
+}
+function throwBall() {
+ const d = Math.hypot(dog.position.x - kid.position.x, dog.position.z - kid.position.z);
+ if (d > 11) return;
+ const b = balls.find(x => x.state === 'carried'); if (!b) return;
+ b.state = 'flying'; S.carry--; b.m.visible = true; b.m.position.copy(kid.position).add(v3(0, .8, 0));
+ const from = b.m.position.clone(), to = dog.position.clone().add(v3(.4, 1, 0)), peak = Math.max(from.y, to.y) + 1.6;
+ say(LINES.dog[S.thrown % LINES.dog.length]);
+ fly(b.m, from, to, peak, .9, () => {
+  SFX.bark(); S.dogHop = 1; b.state = 'dog'; S.thrown++;
+  const n = S.thrown - 1, layer = n < 16 ? 0 : n < 25 ? 1 : n < 29 ? 2 : 3, idx = [n, n - 16, n - 25, n - 29][layer], side = [4, 3, 2, 1][layer];
+  const spot = PILE.clone().add(v3((idx % side - (side - 1) / 2) * .19, .09 + layer * .16, (Math.floor(idx / side) - (side - 1) / 2) * .19));
+  setTimeout(() => fly(b.m, b.m.position.clone(), spot, spot.y + .5, .5, () => SFX.bounce()), 400);
+  if (S.thrown >= balls.length) { S.canopyDone = true; SFX.win(); say(LINES.allBalls); S.dogParty = 2.5; }
+ });
+}
+const flying = [];
+function fly(obj, from, to, peak, dur, done) { flying.push({obj, from, to, peak, dur, t: 0, done}); }
+function busted() {
+ if (S.mode !== 'roof') return;
+ S.mode = 'busted'; SFX.horn(); say(LINES.busted, {grownUp: true}); S.seen = 0;
+ for (const b of balls) if (b.state === 'carried') { b.state = 'roof'; b.m.visible = true; b.m.position.copy(b.home); }
+ S.carry = 0; S.target = null;
+ setTimeout(() => { kid.visible = false; S.lvl = 'low'; startClimb(CLIMB1); S.mode = 'tween'; tweenCamera(climbView(CLIMB1), 2.2, () => { S.mode = 'climb'; say(LINES.afterBust); }, .22); }, 1300);
+}
+// ---------- The hang drop: the one overlay, because the timing has to be exact. ----------
+const hangEl = document.getElementById('hang'), zoneEl = document.getElementById('zone'), dotEl = document.getElementById('dot');
+const ZONE = [.62, .82];
+function startHang() {
+ S.mode = 'hang'; S.hangT = 0; say(LINES.hang); hangEl.style.display = 'block';
+ zoneEl.style.left = ZONE[0] * 100 + '%'; zoneEl.style.width = (ZONE[1] - ZONE[0]) * 100 + '%';
+ kid.position.set(6.2, GYM - 1.05, 3.32); kid.rotation.y = Math.PI;
+ tweenCamera({pos: v3(1.5, GYM + 2.4, -3.5), look: v3(6.2, GYM - 1.6, 3.2), fov: 44}, 1);
+}
+const swing = () => .5 + .5 * Math.sin(S.hangT * (2.2 + S.hangMiss * .15));
+function dropTry() {
+ const s = swing();
+ if (s >= ZONE[0] && s <= ZONE[1]) {
+  hangEl.style.display = 'none'; SFX.haul(); say(LINES.drop); S.mode = 'drop';
+  const from = kid.position.clone(), to = v3(6.2, CANOPY, 2.6);
+  fly(kid, from, to, from.y + .2, .55, () => { SFX.bounce(); S.lvl = 'canopy'; kid.rotation.set(0, Math.PI, 0); tweenCamera(isoView(), 1.2, () => { S.mode = 'roof'; }); });
+ } else {
+  S.hangMiss++; SFX.slip(); SFX.breath(S.hangMiss / 3); say(LINES.missDrop); S.shake = .5;
+  if (S.hangMiss >= 3) { S.hangMiss = 0; hangEl.style.display = 'none'; say(LINES.tired); kid.position.set(6.2, GYM, 4.1); S.lvl = 'gym'; S.mode = 'tween'; tweenCamera(isoView(), 1, () => { S.mode = 'roof'; }); }
+ }
+}
+// ---------- Endings. ----------
+const againEl = document.getElementById('again');
+function finish(kind) {
+ if (S.ended) return; S.ended = kind; SFX.win(); say(LINES.done); S.dogParty = 99;
+ setTimeout(() => { againEl.style.display = 'grid'; }, 3500);
+}
+againEl.onclick = () => location.reload();
+
+// ---------- Input. ----------
+renderer.domElement.addEventListener('pointerdown', ev => {
+ audio(); if (!S.greeted) { S.greeted = true; say(LINES.start); }
+ if (S.mode === 'climb' || S.mode === 'descend') {
+  pick(ev); const hit = ray.intersectObjects(S.climb.holds.map(h => h.hit))[0];
+  if (hit) grab(hit.object.userData.h); else { SFX.tick(); }
+ } else if (S.mode === 'roof') onRoofTap(ev);
+ else if (S.mode === 'hang') dropTry();
+});
+const keys = {};
+addEventListener('keydown', e => { keys[e.key.toLowerCase()] = true; if (e.key === ' ' && S.mode === 'hang') dropTry(); if (e.key === ' ' && S.mode === 'roof' && S.carry) throwBall(); });
+addEventListener('keyup', e => { keys[e.key.toLowerCase()] = false; });
+
+// ---------- Information manifest. ----------
+PL.volunteer?.('school-jump', {place: 'The school roof at dusk', dialect: 'Suburb at dusk, 1986: brick, headlights, a dog in the field, a little inner voice', items: [
+ {id: 'tired', says: 'how tired my arms are', who: 'player', for: ['player'], prefer: ['meta'], read: () => S.wrong / MAX_WRONG, ways: {meta: 'breathing gets heavier, the view sways more, the inner voice encourages'}},
+ {id: 'reach', says: 'which hold I can reach', who: 'player', for: ['player'], prefer: ['spatial'], read: () => allHolds.filter(reachable).map(h => h.id), ways: {spatial: 'a soft worn shine on the holds within reach'}},
+ {id: 'cars', says: 'a car is coming', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => cars.filter(c => c.active).length, ways: {diegetic: 'engine sound rises; headlights sweep the roof edge on a steady rhythm'}},
+ {id: 'seen', says: 'the car sees me', who: 'characters', for: ['player', 'director'], prefer: ['diegetic', 'meta', 'spatial'], read: () => S.seen, ways: {diegetic: 'you stand in the headlight, the car brakes and its tail lights flare', meta: 'a heartbeat that speeds up', spatial: 'a ring at your feet fills as they look'}},
+ {id: 'balls', says: 'how many balls the dog has', who: 'characters', for: ['player', 'director'], prefer: ['diegetic'], read: () => S.thrown, ways: {diegetic: 'the pile by the dog grows'}},
+ {id: 'hang', says: 'when to let go', who: 'player', for: ['player'], prefer: ['overlay'], read: () => S.mode === 'hang' ? swing() : null, ways: {overlay: 'a small glass timing bar, only while hanging'}},
+]});
+
+// ---------- Seen ring (presentation layer): fills while a car is looking at you. ----------
+const ringMat = new T.MeshBasicMaterial({color: '#ffd166', transparent: true, opacity: .9, depthWrite: false, side: T.DoubleSide});
+const ring = presentation(new T.Mesh(new T.RingGeometry(.5, .72, 40, 1, 0, .01), ringMat), {purpose: 'seen by a car'}); ring.rotation.x = -Math.PI / 2; scene.add(ring);
+const tmpV = v3(), occ = [];
+function carSees(car) {
+ const chest = kid.position.clone().add(v3(0, .6, 0)), src = car.beam.getWorldPosition(v3()), aim = car.beam.target.getWorldPosition(v3()).sub(src).normalize();
+ const to = chest.clone().sub(src), dist = to.length(); to.normalize();
+ if (dist > car.beam.distance * .95 || to.angleTo(aim) > car.beam.angle * .85) return false;
+ ray.set(src, to); ray.far = dist - .25; const hit = ray.intersectObjects(occluders, false)[0]; ray.far = Infinity;
+ return !hit;
+}
+
+// ---------- Loop. ----------
+const view = {w: 0, h: 0};
+function resize() { view.w = innerWidth; view.h = innerHeight; camera.aspect = view.w / view.h; camera.updateProjectionMatrix(); setRes(); }
+function setRes() { const k = Math.min(1, Math.max(.18, pixK)) * Math.min(2, devicePixelRatio); renderer.setPixelRatio(1); renderer.setSize(Math.round(view.w * k), Math.round(view.h * k), false); }
+addEventListener('resize', resize); resize();
+const start = climbView(); camera.position.copy(start.pos); S.look.copy(start.look); camera.lookAt(S.look);
+
+// hands and arms for the first-person climb
+const hands = [0, 1].map(i => {
+ const g = new T.Group(); g.name = 'my hand';
+ const palm = new T.Mesh(new T.SphereGeometry(.07, 10, 8), M.skin); palm.scale.set(1, 1.1, .7); g.add(palm);
+ const arm = new T.Mesh(new T.CylinderGeometry(.055, .065, 1, 8), M.jacket); arm.name = 'my sleeve'; scene.add(arm);
+ scene.add(g); return {g, arm, pos: v3(), rest: v3()};
+});
+const up = v3(0, 1, 0);
+function placeHands(dt) {
+ const climbing = !kid.visible && S.mode !== 'roof';
+ const w = S.climb.wall, fwd = v3(), right = v3(); camera.getWorldDirection(fwd); right.crossVectors(fwd, up).normalize();
+ hands.forEach((hd, i) => {
+  hd.g.visible = hd.arm.visible = climbing;
+  const h = S.hands[i], side = i ? 1 : -1;
+  const shoulder = camera.position.clone().addScaledVector(right, side * .22).add(v3(0, -.32, 0)).addScaledVector(fwd, .15);
+  let target;
+  if (h) { target = w.at(h.u + side * .03, h.y - .03, .2); if (h.wiggle) h.wiggle = Math.max(0, h.wiggle - dt * 2); }
+  else if (S.fumble && i === (S.hands[0] ? 1 : 0)) { const f = S.fumble; f.t += dt; target = w.at(f.h.u, f.h.y - f.t * 1.2, .25); if (f.t > .45) S.fumble = null; }
+  else target = shoulder.clone().addScaledVector(fwd, .45).add(v3(0, -.08, 0)).addScaledVector(right, side * .05);
+  const tremble = S.wrong * .004 * Math.sin(time * 40 + i * 2);
+  hd.pos.lerp(target, Math.min(1, dt * 14)); hd.g.position.copy(hd.pos).add(v3(tremble, tremble, 0));
+  const mid = shoulder.clone().add(hd.g.position).multiplyScalar(.5), dir = hd.g.position.clone().sub(shoulder), len = dir.length();
+  hd.arm.position.copy(mid); hd.arm.scale.set(1, len, 1); hd.arm.quaternion.setFromUnitVectors(up, dir.normalize());
+ });
+}
+let last = performance.now(), stepT = 0;
+function frame(now) {
+ const dt = Math.min(.05, (now - last) / 1000); last = now; time += dt;
+ // camera
+ if (S.tween) {
+  const tw = S.tween; tw.t = Math.min(1, tw.t + dt / tw.dur); const e = ease(tw.t);
+  const to = typeof tw.to === 'function' ? tw.to() : tw.to;
+  camera.position.lerpVectors(tw.from.pos, to.pos, e); S.look.lerpVectors(tw.from.look, to.look, e); camera.fov = tw.from.fov + (to.fov - tw.from.fov) * e; camera.updateProjectionMatrix();
+  if (tw.k != null) { pixK = tw.from.k + (tw.k - tw.from.k) * e; setRes(); }
+  if (tw.t >= 1) { S.tween = null; tw.done?.(); }
+ } else if (S.mode === 'climb' || S.mode === 'slide' || S.mode === 'descend') {
+  const v = climbView(); camera.position.lerp(v.pos, Math.min(1, dt * 5)); S.look.lerp(v.look, Math.min(1, dt * 5));
+ } else if (S.mode === 'roof' || S.mode === 'busted') {
+  const v = isoView(); camera.position.lerp(v.pos, Math.min(1, dt * 3)); S.look.lerp(v.look, Math.min(1, dt * 3));
+ }
+ if (S.shake) { S.shake = Math.max(0, S.shake - dt); camera.position.x += (Math.random() - .5) * S.shake * .06; camera.position.y += (Math.random() - .5) * S.shake * .06; }
+ camera.lookAt(S.look);
+ placeHands(dt);
+ // holds: shine on what you can reach, the loose lamp wobbles
+ for (const h of allHolds) {
+  const r = reachable(h) && !S.tween; h.glow.material.opacity += ((r ? .55 + .25 * Math.sin(time * 4) : 0) - h.glow.material.opacity) * Math.min(1, dt * 8);
+  if (h.loose) { h.wobble = Math.max(0, (h.wobble || 0) - dt); h.mesh.rotation.z = Math.sin(time * 30) * .25 * h.wobble + Math.sin(time * 2.3) * .03; }
+ }
+ // walking on the roof
+ if (S.mode === 'roof') {
+  let mv = v3();
+  if (keys.w || keys.arrowup) mv.add(v3(1, 0, 1)); if (keys.s || keys.arrowdown) mv.add(v3(-1, 0, -1));
+  if (keys.a || keys.arrowleft) mv.add(v3(1, 0, -1)); if (keys.d || keys.arrowright) mv.add(v3(-1, 0, 1));
+  if (mv.lengthSq()) S.target = null;
+  else if (S.target) { mv = S.target.clone().sub(kid.position); mv.y = 0; if (mv.length() < .12) { const k = S.onArrive; S.target = null; S.onArrive = null; if (k) arrive(k); mv.set(0, 0, 0); } }
+  if (mv.lengthSq()) {
+   mv.normalize().multiplyScalar(3.2 * dt); const p = kid.position;
+   if (walkable(S.lvl, p.x + mv.x, p.z + mv.z)) p.add(mv); else if (walkable(S.lvl, p.x + mv.x, p.z)) p.x += mv.x; else if (walkable(S.lvl, p.x, p.z + mv.z)) p.z += mv.z; else S.target = null;
+   kid.rotation.y = Math.atan2(mv.x, mv.z); stepT += dt; if (stepT > .28) { stepT = 0; SFX.step(); }
+   kid.userData.legs[0].rotation.x = Math.sin(time * 14) * .5; kid.userData.legs[1].rotation.x = -Math.sin(time * 14) * .5;
+  } else kid.userData.legs.forEach(l => l.rotation.x *= .8);
+  kid.position.y = levelY(S.lvl);
+  for (const b of balls) if (b.state === 'roof' && b.lvl === S.lvl && S.carry < 3 && b.m.position.distanceTo(kid.position.clone().add(v3(0, .09, 0))) < .55) {
+   b.state = 'carried'; b.m.visible = false; S.carry++; SFX.pick(); if (!S.said.ball) { S.said.ball = 1; say(LINES.firstBall); }
+  }
+  if (S.lvl === 'canopy' && memoryCoin.visible && kid.position.distanceTo(v3(6.9, CANOPY, -.3)) < .7) {
+   memoryCoin.visible = false; MC.give?.('school-jump:canopy', 'The school roof'); S.dogHop = 1; SFX.bark();
+   if (CR.coinReward) { S.reward = CR.coinReward(T, {scene, camera, from: memoryCoin.position.clone(), coin: memoryCoin, audio: audio(), presentation}); setTimeout(() => say(LINES.coin), 1200); }
+   else { SFX.coin(); say(LINES.coin); }
+  }
+ }
+ kid.userData.carry.forEach((b, i) => { b.visible = i < S.carry; });
+ if (S.mode === 'hang') { S.hangT += dt; const s = swing(); dotEl.style.left = s * 100 + '%'; kid.rotation.z = (s - .5) * .5; } else kid.rotation.z = 0;
+ // dog: follows you along the field edge, hops for a catch, wags
+ const dz = Math.max(-6, Math.min(9, kid.visible ? kid.position.z : 2)), D = dog.userData;
+ if (!S.dogHome) dog.position.z += (dz - dog.position.z) * Math.min(1, dt * 1.2);
+ S.dogHop = Math.max(0, (S.dogHop || 0) - dt * 1.6); dog.position.y = Math.sin(S.dogHop * Math.PI) * .7;
+ D.tail.rotation.x = Math.sin(time * (S.carry ? 22 : 8)) * .6;
+ if (S.dogParty > 0) { S.dogParty -= dt; dog.rotation.y += dt * 6; dog.position.y = Math.abs(Math.sin(time * 6)) * .4; }
+ // cars on a steady rhythm: one every CAR_PERIOD seconds, alternating directions
+ let loud = 0, near = 99, anySeen = false;
+ cars.forEach((c, i) => {
+  const phase = ((time + i * CAR_PERIOD) % (CAR_PERIOD * 2)), live = phase < CAR_PERIOD;
+  c.dir = i ? -1 : 1; c.active = live;
+  if (!live) { c.g.visible = false; c.beam.intensity = 0; c.wasLive = false; c.brake = 0; return; }
+  if (!c.wasLive) { c.x = -c.dir * 38; c.wasLive = true; }
+  c.g.visible = true; c.x += c.dir * CAR_SPEED * (1 - c.brake * .65) * dt;
+  c.g.position.set(c.x, 0, ROAD_Z + (c.dir > 0 ? .9 : -.9)); c.g.rotation.y = c.dir > 0 ? 0 : Math.PI;
+  c.beam.intensity = 260 * Math.max(0, 1 - Math.abs(c.x) / 40); c.beam.target.position.set(6, H, c.dir > 0 ? -12 : 12); // forward and up at the school (local axes turn with the car)
+  const sees = (S.mode === 'roof') && kid.visible && carSees(c);
+  c.brake += ((sees ? 1 : 0) - c.brake) * Math.min(1, dt * 4); c.tailMat.emissiveIntensity = .6 + c.brake * 3;
+  anySeen ||= sees; const d = Math.abs(c.x - kid.position.x); near = Math.min(near, d); loud = Math.max(loud, Math.max(0, 1 - d / 40));
+ });
+ if (ac) engineUpdate(loud, loud);
+ S.seen = anySeen ? S.seen + dt : Math.max(0, S.seen - dt * .7);
+ if (S.seen > 2) busted();
+ // meta: heartbeat speeds up while they look; spatial: the ring at your feet fills
+ const k = Math.min(1, S.seen / 2);
+ if (k > .05 && time > S.beatAt) { SFX.beat(k); S.beatAt = time + (.9 - .5 * k); }
+ ring.visible = k > .02 && kid.visible; ring.position.copy(kid.position).add(v3(0, .03, 0));
+ ring.geometry.dispose(); ring.geometry = new T.RingGeometry(.5, .72, 40, 1, Math.PI / 2, Math.max(.01, k * Math.PI * 2)); ringMat.color.setHSL(.12 - .12 * k, .95, .6);
+ // flights
+ for (const f of [...flying]) { f.t = Math.min(1, f.t + dt / f.dur); const e = f.t; f.obj.position.lerpVectors(f.from, f.to, e); f.obj.position.y = (1 - e) * (1 - e) * f.from.y + 2 * (1 - e) * e * f.peak + e * e * f.to.y; if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done?.(); } }
+ if (memoryCoin.visible) memoryCoin.rotation.z += dt * 2;
+ if (S.reward && !S.reward.update(dt)) S.reward = null;
+ // the light: dusk deepens slowly; windows and headlights matter more as it does
+ const night = Math.min(1, time / 240); scene.background.copy(new T.Color('#c9849a').lerp(NIGHTSKY, night)); sun.intensity = 2.2 - 1.5 * night; M.window.emissiveIntensity = .15 + .9 * night;
+ renderer.render(scene, camera);
+ requestAnimationFrame(frame);
+}
+requestAnimationFrame(frame);
+window.schoolJump = {S, startDescent, CLIMB3, grab, allHolds, CLIMB1, CLIMB2, kid, balls, cars, startHang, dropTry, busted, throwBall, topOut, arrive, startClimb};
+</script>
+</body>
+</html>
