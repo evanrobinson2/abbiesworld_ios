@@ -226,12 +226,28 @@ shop however she wants and decorating it", "and meta meta - it fits into my simu
 
 | Layer | Who plays | What it is |
 |---|---|---|
-| **Games** | Abbie | Three hands-on mini games: the espresso machine (a mechatronics puzzle), the smoothie machine (a timing game), the dance party (rhythm) |
+| **Games** | Abbie | Three hands-on mini games: the espresso machine (a mechatronics puzzle), the smoothie machine (a timing game), the dance party (a memory game: follow my lead) |
 | **Meta** | Abbie | Building out and decorating the shop however she wants (with wall painting and the art auction) |
 | **Meta-meta** | Evan | The café is a business inside the town simulation, and he runs it from the grown-up workbench |
 
 All three share one rule: **the machine is the controller.** No buttons in a drawer: you touch the real part (the
 grinder, the portafilter, the steam knob, the blender jar), and the world answers with sight and sound.
+
+### The main loop: run the shop for the day (Evan, 07:23Z)
+
+Evan: "of course the main loop is you run the shop for the day." Everything above hangs off one day:
+
+1. **Morning: open up.** The café is calm (day mode). Deliveries arrive from the neighbouring tiles; empty jars fill.
+   Deal the day's decoration cards and place a few.
+2. **The day: customers come.** They arrive from the town's schedules, with picture bubbles for what they want. An
+   espresso order may need the machine fixed first (Game 1); a smoothie order is Game 2. Happy customers raise the
+   party signal and add stars to the sign.
+3. **Dusk: party mode.** The floor, the neon and the music wake. Dance party (Game 3) for the crowd that stays.
+4. **Close: count the day.** Stars fly to the sign, a card is dealt (pick one of three), and an auction evening
+   sometimes sells her paintings. Evan's business view (meta-meta) has the day's ledger.
+
+The day runs on the game's clock and the sun dial; one signal (time, rush, party) drives light, music, people and
+the room.
 
 ### Game 1: the espresso machine, a mechatronics puzzle (Evan, 07:23Z)
 
@@ -271,16 +287,18 @@ Evan: "smoothie is timing game". The giant bubbly smoothie machine, on the café
 - **Ingredients come from the neighbours** (Garden berries, Ranch milk, Meadow honey, Moonbase space treats); an
   empty jar means a neighbour hasn't delivered. Speed rises in the rush and with the party signal at dusk.
 
-### Game 3: the dance party (party mode, at dusk)
+### Game 3: the dance party, a memory game (Evan, 07:23Z)
 
-A rhythm game on the light-up floor, on the Music Bible's beat (D major, about 124 bpm, the 3+3+2 rhythm).
+Evan: "dance party is a memory game.. follow my lead". Simon-says on the light-up floor, at dusk.
 
-- Floor tiles light up in a pattern that travels with the music; tap them on the beat (or step on them, with the
-  shoulder camera). Customers copy Abbie's moves.
-- The DJ in the cup booth drops a sting when the crowd is happy; streaks grow the party signal, so the neon brightens
-  and more people dance.
-- Two can play: a parent taps the bass tiles, the child taps the bright ones. There's no losing, and a missed step
-  just makes a funny stumble.
+- **The DJ leads:** the DJ in the cup booth (or a dancer) does a short move sequence, and the matching floor tiles
+  light up with a sound each (the Music Bible's notes, so a correct sequence is a melody).
+- **Follow my lead:** Abbie repeats it by tapping the tiles in order (or stepping on them with the shoulder camera).
+  Each round adds one move. The crowd joins in behind her as the streak grows, and the party signal rises.
+- **Take the lead:** after a good streak Abbie leads, makes up a sequence, and the customers follow it (and sometimes
+  get it charmingly wrong).
+- **Kind to small memories:** a miss replays the sequence slower, with no losing. Two can play: a parent leads, the
+  child follows, then swap.
 
 ### The meta: building out and decorating
 
@@ -330,7 +348,7 @@ reskins."
 1. Ultra-fine espresso machine and juice machine, as working low-poly part assemblies.
 2. Game 1 (espresso mechatronics puzzle), ending in the existing recipe as the shot.
 3. Game 2 (smoothie timing game).
-4. Game 3 (dance party), using the dance floor and the Music Bible.
+4. Game 3 (dance party memory game), using the dance floor and the Music Bible.
 5. Decorating, then wall painting, then the art auction.
 6. The business view in the grown-up workbench, wired to the town simulation.
 
