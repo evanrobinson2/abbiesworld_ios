@@ -60,6 +60,37 @@
       "confidence": 0.7,
       "lesson": "A top-down 2D game can still have depth: stack the pool in blurred, tinted layers and move the player up a layer as they grow. Our film-look depth of field and an SVG or shader cell rim do the rest."
     },
+    "motion": {
+      "schema": "oracle.motion.v1",
+      "method": "procedural",
+      "mocap": 0.0,
+      "locomotion": [
+        "procedural_ik",
+        "procedural"
+      ],
+      "tricks": [
+        "Animators author motion once in a special editor on test creatures, marked up by meaning (this is a hand, this is a mouth)",
+        "At runtime the motion is retargeted to any creature the player built, with an IK solver placing feet, hands and mouths",
+        "Paint is procedural too: brush scripts read the body and flare colour at the ends of limbs"
+      ],
+      "lesson": "Animate by meaning, not by bone: author \"reach with the mouth\" once and retarget it to any shape the child makes.",
+      "sources": [
+        {
+          "title": "Chris Hecker et al.: Real-time motion retargeting to highly varied user-created morphologies (SIGGRAPH 2008)",
+          "url": "https://chrishecker.com/Real-time_Motion_Retargeting_to_Highly_Varied_User-Created_Morphologies"
+        },
+        {
+          "title": "CGW: Spore experts share animation techniques at SIGGRAPH 2008",
+          "url": "https://www.cgw.com/Press-Center/Siggraph/2008/Spore-Experts-Share-Animation-Techniques-at-SIGG.aspx"
+        },
+        {
+          "title": "CGW Oct 2008: Evolutionary Chain",
+          "url": "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx"
+        }
+      ],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.75
+    },
     "palette": null,
     "audio_mood": "Gentle procedural ambient music, wet squelches and chomps; the editor plays your creature's own tune.",
     "pacing": "brisk, medium sessions",

@@ -16,7 +16,8 @@
       "enum": [
         "1.0",
         "1.1",
-        "1.2"
+        "1.2",
+        "1.3"
       ]
     },
     "game": {
@@ -394,21 +395,63 @@
                 },
                 "family": {
                   "description": "Finer look than style (oracle.rendering.v1, tools/steam-study/rendering_notes.py).",
-                  "enum": ["toon", "comic_ink", "painterly_3d", "hand_painted_2d", "watercolour", "storybook", "soft_diorama", "flat_low_poly", "cut_paper", "line_art", "graphic_minimal", "voxel", "pixel", "pixel_3d", "retro_low_poly", "pre_rendered", "stylised_pbr", "realistic"]
+                  "enum": [
+                    "toon",
+                    "comic_ink",
+                    "painterly_3d",
+                    "hand_painted_2d",
+                    "watercolour",
+                    "storybook",
+                    "soft_diorama",
+                    "flat_low_poly",
+                    "cut_paper",
+                    "line_art",
+                    "graphic_minimal",
+                    "voxel",
+                    "pixel",
+                    "pixel_3d",
+                    "retro_low_poly",
+                    "pre_rendered",
+                    "stylised_pbr",
+                    "realistic"
+                  ]
                 },
                 "light": {
                   "description": "How light falls on surfaces.",
-                  "enum": ["banded", "soft_wrap", "painted_in", "flat", "pbr"]
+                  "enum": [
+                    "banded",
+                    "soft_wrap",
+                    "painted_in",
+                    "flat",
+                    "pbr"
+                  ]
                 },
                 "outline": {
                   "description": "Where the lines come from.",
-                  "enum": ["none", "inverted_hull", "screen_edges", "inked_in", "line_art"]
+                  "enum": [
+                    "none",
+                    "inverted_hull",
+                    "screen_edges",
+                    "inked_in",
+                    "line_art"
+                  ]
                 },
                 "surface": {
-                  "enum": ["flat_colour", "gradient", "hand_painted", "paper", "watercolour", "pixel", "pbr"]
+                  "enum": [
+                    "flat_colour",
+                    "gradient",
+                    "hand_painted",
+                    "paper",
+                    "watercolour",
+                    "pixel",
+                    "pbr"
+                  ]
                 },
                 "signature": {
-                  "type": ["string", "null"],
+                  "type": [
+                    "string",
+                    "null"
+                  ],
                   "description": "The one trick that makes the look, in our own words."
                 },
                 "lesson": {
@@ -1299,6 +1342,80 @@
             "signatures_ref": {
               "type": "string",
               "description": "Path to the game's entry in hud-signatures.json or card-signatures.json."
+            }
+          }
+        },
+        "animation": {
+          "type": "object",
+          "description": "How the characters move (schema 1.3, oracle.motion.v1, tools/steam-study/motion_notes.py). art.motion stays the one-line description.",
+          "properties": {
+            "schema": {
+              "type": "string"
+            },
+            "method": {
+              "enum": [
+                "keyframe",
+                "mocap",
+                "procedural",
+                "physics",
+                "sprite",
+                "mixed"
+              ]
+            },
+            "mocap": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            },
+            "locomotion": {
+              "type": "array",
+              "items": {
+                "enum": [
+                  "blend_tree",
+                  "motion_matching",
+                  "root_motion",
+                  "procedural_ik",
+                  "physics",
+                  "procedural",
+                  "sprite_frames",
+                  "beat_sync"
+                ]
+              }
+            },
+            "tricks": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "lesson": {
+              "type": "string"
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "title",
+                  "url"
+                ],
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "source": {
+              "type": "string"
+            },
+            "confidence": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
             }
           }
         }

@@ -186,7 +186,8 @@
         "Moebius-like clean comic shapes",
         "desert canyons",
         "climbing films"
-      ]
+      ],
+      "motion": "mixed; Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics"
     },
     "information_grammar": {
       "info_kinds": {
@@ -271,6 +272,23 @@
       "structure": "campaign",
       "tension_curve": "rising_to_end",
       "failure_cost": "none"
+    },
+    "animation": {
+      "schema": "oracle.motion.v1",
+      "method": "mixed",
+      "mocap": 0.3,
+      "locomotion": [
+        "procedural_ik",
+        "blend_tree"
+      ],
+      "tricks": [
+        "Each hand reaches by its own trigger and IK places it on the hold; the body swings under the rope with physics",
+        "Breathing and trembling arms show stamina"
+      ],
+      "lesson": "Let the player drive each hand; IK and a little physics make any wall climbable.",
+      "sources": [],
+      "source": "oracle motion study 2026-10-23 (public talks, interviews and breakdowns; no game files)",
+      "confidence": 0.5
     }
   },
   "dna": {
