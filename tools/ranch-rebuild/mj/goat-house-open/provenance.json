@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goat-house-open",
+  "item": "R3",
+  "wave": "Ranch remaster wave 1",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a small cozy goat house with three timber plank walls and one fully open side, terracotta red walls, a teal shingled roof cap, a wooden ramp leading up to a flat climbing deck on the roof, a straw floor inside, a wooden hay rack on the inside wall and a small bell on the gate, sized for two goats, stylized 3D game asset, low-poly diorama style with soft smooth shading, flat painted colors, soft studio lighting, plain warm cream background, no text, centered, full object visible --ar 1:1",
+      "grid_job_id": "bbaad95d-6bd8-4a66-bf55-fc524edb51af",
+      "grid_url": "https://www.midjourney.com/jobs/bbaad95d-6bd8-4a66-bf55-fc524edb51af?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "0de2dd94-71e2-47f2-82ff-4c975e2f242b",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-23T03:02:29.913Z",
+      "grid_done_at": "2026-10-23T03:02:49.936Z",
+      "upscale_clicked_at": "2026-10-23T03:03:12.214Z",
+      "downloaded_at": "2026-10-23T03:04:55.941Z",
+      "pick_reason": "only variant with a real ramp up to a flat railed climbing deck, plus hay rack, gate bell and an open straw-floored side; a goat stands on the deck (ignore it when modeling); variants 0 and 3 had a ladder or leaning planks, variant 2 had no roof deck"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "a5274548752fbf603a96f85c908c6ff8e4e0442f2ce9cd755ed61a00ee8e79b3",
+      "bytes": 4220806,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/0de2dd94-71e2-47f2-82ff-4c975e2f242b/0_0.png"
+    }
+  }
+}
