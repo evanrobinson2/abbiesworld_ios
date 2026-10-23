@@ -59,14 +59,14 @@ export function filmLook(T, renderer, scene, camera, o = {}) {
 
  const litMat = post(`
   uniform sampler2D tColor, tDepth, tAO; uniform mat4 uProjInv, uCamWorld; uniform vec3 uCamPos, uFogLow, uFogHigh, uSunDir, uSunCol;
-  uniform vec2 uAOTexel; uniform float uAOOn, uFogOn, uFogDensity, uFogStart;
+  uniform vec2 uAOTexel; uniform float uAOOn, uFogOn, uFogDensity, uFogStart; uniform vec3 uClear;
   varying vec2 vUv;
   ${VPOS}
   void main(){
    vec4 c = texture2D(tColor, vUv);
    vec3 vp = vpos(vUv), wp = (uCamWorld * vec4(vp, 1.0)).xyz, ray = normalize(wp - uCamPos);
    vec3 col = c.rgb;
-   if (uAOOn > 0.5){
+   if (uAOOn > 0.5 && c.a > 0.004){ // the empty sky has no depth to occlude (and its AO is NaN, which turned it black)
     float ao = texture2D(tAO, vUv).r * 2.0;
     ao += texture2D(tAO, vUv + vec2(uAOTexel.x, 0.0)).r + texture2D(tAO, vUv - vec2(uAOTexel.x, 0.0)).r;
     ao += texture2D(tAO, vUv + vec2(0.0, uAOTexel.y)).r + texture2D(tAO, vUv - vec2(0.0, uAOTexel.y)).r;
@@ -79,10 +79,15 @@ export function filmLook(T, renderer, scene, camera, o = {}) {
     fc += uSunCol * 0.12 * pow(max(dot(ray, uSunDir), 0.0), 5.0);
     col = mix(col, fc, f);
    }
+   // the scene pass clears to alpha 0 and three premultiplies the clear colour by it, so put the page's clear colour
+   // back where nothing was drawn (keepAlpha pages show their CSS sky there instead)
+   col += uClear * (1.0 - c.a);
+   if (any(isnan(col)) || any(isinf(col))) col = uClear; // never let a bad pixel through to the blur and glow
+   col = min(col, vec3(2.0)); // a sub-pixel glint (thousands bright) would smear into a white blob in the lens blur
    gl_FragColor = vec4(col, c.a);
   }`, {tColor: {value: rtScene.texture}, tDepth: {value: rtScene.depthTexture}, tAO: {value: rtAO.texture}, uCamWorld: {value: camera.matrixWorld},
   uCamPos: {value: camera.position}, uFogLow: U.fogLow, uFogHigh: U.fogHigh, uSunDir: U.sunDir, uSunCol: U.sunCol,
-  uAOTexel: {value: new T.Vector2()}, uAOOn: {value: 1}, uFogOn: {value: 1}, uFogDensity: U.fogDensity, uFogStart: U.fogStart, ...CAM});
+  uAOTexel: {value: new T.Vector2()}, uClear: {value: new T.Color()}, uAOOn: {value: 1}, uFogOn: {value: 1}, uFogDensity: U.fogDensity, uFogStart: U.fogStart, ...CAM});
 
  const COC = `
   uniform float uFocus, uAperture, uMaxBlur, uNear, uFar;
@@ -102,6 +107,7 @@ export function filmLook(T, renderer, scene, camera, o = {}) {
     ang += 2.39996323;
     vec2 tc = vUv + vec2(cos(ang), sin(ang)) * uTexel * radius;
     vec3 sc = texture2D(tLit, tc).rgb; float sd = viewZ(tc), ss = abs(coc(sd));
+    if (any(isnan(sc)) || any(isinf(sc)) || isnan(ss) || isinf(ss)) continue;
     if (sd > cd) ss = clamp(ss, 0.0, cs * 2.0);
     float m = smoothstep(radius - 0.5, radius + 0.5, ss);
     acc += mix(acc / tot, sc, m); tot += 1.0; radius += 0.6 / radius;
@@ -115,6 +121,7 @@ export function filmLook(T, renderer, scene, camera, o = {}) {
    vec3 c = (texture2D(tSrc, vUv + uTexel * vec2(-1.0, -1.0)).rgb + texture2D(tSrc, vUv + uTexel * vec2(1.0, -1.0)).rgb
     + texture2D(tSrc, vUv + uTexel * vec2(-1.0, 1.0)).rgb + texture2D(tSrc, vUv + uTexel * vec2(1.0, 1.0)).rgb) * 0.25;
    float l = max(c.r, max(c.g, c.b));
+   c = min(c, vec3(3.0)); // one hot pixel (a grazing highlight) must not bloom into a starburst
    gl_FragColor = vec4(c * smoothstep(uThreshold, uThreshold + 0.6, l), 1.0);
   }`, {tSrc: {value: null}, uTexel: {value: new T.Vector2()}, uThreshold: U.threshold});
  const blurMat = post(`
@@ -136,7 +143,8 @@ export function filmLook(T, renderer, scene, camera, o = {}) {
   void main(){
    vec4 L = texture2D(tLit, vUv); vec3 c = L.rgb;
    float d = viewZ(vUv), k = coc(d);
-   if (uDofOn > 0.5) c = mix(c, texture2D(tDof, vUv).rgb, smoothstep(0.25, 1.4, abs(k)));
+   vec3 dv = texture2D(tDof, vUv).rgb;
+   if (uDofOn > 0.5 && !any(isnan(dv)) && !any(isinf(dv))) c = mix(c, min(dv, vec3(1.1)), smoothstep(0.25, 1.4, abs(k))); // capped: a defocused speck must not flare white
    vec3 glow = texture2D(tB1, vUv).rgb * 0.55 + texture2D(tB2, vUv).rgb * 0.9;
    if (uBloomOn > 0.5) c += glow * uBloom;
    c *= uExposure;
@@ -169,7 +177,8 @@ export function filmLook(T, renderer, scene, camera, o = {}) {
   camera.updateMatrixWorld();
   CAM.uProjInv.value.copy(camera.projectionMatrixInverse); CAM.uProj.value.copy(camera.projectionMatrix);
   CAM.uNear.value = camera.near; CAM.uFar.value = camera.far;
-  const clearA = renderer.getClearAlpha(); renderer.setClearAlpha(0);
+  const clearA = renderer.getClearAlpha(); renderer.getClearColor(litMat.uniforms.uClear.value); if (o.keepAlpha) litMat.uniforms.uClear.value.setRGB(0, 0, 0);
+  renderer.setClearAlpha(0);
   renderer.setRenderTarget(rtScene); renderer.clear(); renderer.render(scene, camera);
   renderer.setClearAlpha(clearA);
   if (on.ao) pass(aoMat, rtAO);

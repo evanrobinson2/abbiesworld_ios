@@ -29,6 +29,7 @@ export async function loadMocap(T, base) {
    const x = Math.min(t * clip.fps, n - 1), i = Math.floor(x), j = Math.min(i + 1, n - 1), u = x - i;
    const r = [0, 1, 2].map(a => F[i].r[a] + (F[j].r[a] - F[i].r[a]) * u);
    pose.root = e ? r.map((v, a) => v + (F[0].r[a] - v) * e) : r;
+   if (c.lift) pose.root[1] += c.lift;
    return pose;
   };
   fn.len = len;

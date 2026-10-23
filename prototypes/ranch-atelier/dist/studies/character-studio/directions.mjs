@@ -53,8 +53,9 @@ function clayMaterial(T, color, U, {rough = .78, bump = .55, scale = 9} = {}) {
    .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
     { vec3 q = vClayP + uFrame * .0; float a = cNoise(q), b = cNoise(q * 2.3 + 11.), c = cNoise(q * .7 + 23.);
       float print = smoothstep(.55, .8, cNoise(q * .45 + 5.)); // thumbprint patches
-      normal = normalize(normal + uBump * (vec3(a, b, c) - .5) * (.35 + print)); }`)
-   .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = clamp(roughnessFactor + (cNoise(vClayP * 3.) - .5) * .25, .3, 1.);');
+      normal = normalize(normal + uBump * (vec3(a, b, c) - .5) * (.35 + print));
+      normal = normalize(vec3(normal.xy, max(normal.z, .2))); } // a dent never faces away from the camera: at the silhouette that made white sparks`)
+   .replace('#include <roughnessmap_fragment>', '#include <roughnessmap_fragment>\nroughnessFactor = clamp(roughnessFactor + (cNoise(vClayP * 3.) - .5) * .25, .5, 1.);');
  };
  m.customProgramCacheKey = () => 'clay';
  return m;

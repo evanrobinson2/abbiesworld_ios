@@ -31,8 +31,11 @@ async function shot(file, {id, f = .4, body, dir, plain = true, dist = 4.2}) {
  }, [id, f, body, dir, plain]);
  await page.waitForTimeout(500);
  await page.evaluate(d => {
-  const s = window.studio, t = s.controls.target;
-  s.controls.target.set(t.x, .9, t.z); s.camera.position.set(t.x + d * .42, 1.25, t.z + d * .9);
+  // frame the body itself (one-shot captures step about), from a little above so the floor fills the tile
+  const s = window.studio, box = new s.camera.position.constructor(), lo = box.clone().setScalar(1e9), hi = box.clone().setScalar(-1e9);
+  s.scene.traverse(o => { if (o.isBone) { o.getWorldPosition(box); lo.min(box); hi.max(box); } });
+  const c = lo.clone().add(hi).multiplyScalar(.5), h = Math.max(hi.y - lo.y, hi.x - lo.x, hi.z - lo.z, 1.2);
+  s.controls.target.copy(c); s.camera.position.set(c.x + d * .42 * h / 1.8, c.y + .9 * h / 1.8, c.z + d * .9 * h / 1.8); s.camera.lookAt(c);
  }, dist);
  await page.waitForTimeout(350);
  await page.screenshot({path: file});

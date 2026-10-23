@@ -26,7 +26,7 @@ STUDIO_TO_BVH = {
 # limb -> (bvh joint, bvh child) for the T-pose direction, and (joint, joint) names in rest-joints.json for ours
 LIMBS = {
     'upperarm': (('Arm', 'ForeArm'), ('s', 'e')), 'forearm': (('ForeArm', 'Hand'), ('e', 'w')),
-    'hand': (('Hand', 'FingerBase'), ('w', 'f')), 'thigh': (('UpLeg', 'Leg'), ('h', 'k')),
+    'hand': (('Hand', 'HandIndex1'), ('w', 'f')), 'thigh': (('UpLeg', 'Leg'), ('h', 'k')),
     'shin': (('Leg', 'Foot'), ('k', 'a')), 'foot': (('Foot', 'ToeBase'), ('a', 't')),
 }
 
@@ -199,6 +199,7 @@ def main():
                 'speed': round(speed, 3) if spec.get('travel') else 0, 'frames': [[f['q'][b] for b in STUDIO_TO_BVH] + [f['r']] for f in frames]}
         json.dump(clip, open(os.path.join(out_dir, move + '.json'), 'w'), separators=(',', ':'))
         index[move] = {'file': move + '.json', 'source': spec['file'], 'what': spec.get('what', ''), 'loop': bool(spec.get('loop')), 'seconds': round(len(frames) / 30, 2)}
+        if spec.get('lift'): index[move]['lift'] = spec['lift']  # extra height in hip heights (a pantomimed swim floats)
     json.dump({'bones': list(STUDIO_TO_BVH), 'clips': index}, open(os.path.join(out_dir, 'index.json'), 'w'), indent=1)
 
 

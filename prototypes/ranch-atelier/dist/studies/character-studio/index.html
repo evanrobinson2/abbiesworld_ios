@@ -34,7 +34,7 @@ body{background:var(--bg);color:var(--ink);font:400 14px/1.35 var(--font);overfl
 .block:focus-visible,.tile:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .rail{position:fixed;top:calc(env(safe-area-inset-top,0px) + 62px);z-index:3;display:flex;flex-direction:column;gap:22px}
 .rail.left{left:max(16px,env(safe-area-inset-left,0px))}
-.rail.right{right:max(16px,env(safe-area-inset-right,0px));align-items:flex-end}
+.rail.right{right:max(46px,calc(env(safe-area-inset-right,0px) + 30px));align-items:flex-end} /* clear of the Context tab */
 .tile{position:relative;width:58px;height:58px;border:0;padding:0;border-radius:var(--r);background:var(--surface) center/cover no-repeat;cursor:pointer;
  box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s}
 .tile:active{transform:translateY(0)}
@@ -51,12 +51,14 @@ body{background:var(--bg);color:var(--ink);font:400 14px/1.35 var(--font);overfl
 .genre{display:flex;align-items:center;gap:6px}
 .genre i{width:22px;height:22px;border-radius:6px;background-color:var(--bg);background-repeat:no-repeat;flex:none}
 .block[aria-pressed="true"] i{background-color:var(--surface)}
-.pose{width:78px;height:98px;flex:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:0 4px 6px;
+.pose{width:78px;height:104px;flex:none;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:2px;padding:6px 4px 6px;
  background-color:var(--surface);background-repeat:no-repeat;font:500 10.5px/1.15 var(--font);text-align:center;color:var(--ink);white-space:normal}
 .pose[aria-pressed="true"]{background-color:color-mix(in srgb,var(--accent) 16%,var(--surface));color:var(--ink);box-shadow:0 0 0 2px var(--accent),0 3px 0 var(--edge)}
+.pose .pic{width:66px;height:66px;border-radius:8px;flex:none;background-repeat:no-repeat}
+.pose .nm{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .tag{font:500 9px var(--font);color:var(--soft);margin-top:2px}
 #load{position:fixed;left:50%;top:45%;transform:translate(-50%,-50%);font:500 14px var(--font);color:var(--soft);z-index:2}
-@media (max-width:640px){.title small{display:none}.rail{top:calc(env(safe-area-inset-top,0px) + 56px);gap:20px}.tile{width:46px;height:46px}.pose{width:68px;height:90px}}
+@media (max-width:640px){.title small{display:none}.rail{top:calc(env(safe-area-inset-top,0px) + 56px);gap:20px}.tile{width:46px;height:46px}.pose{width:70px;height:98px}.pose .pic{width:58px;height:58px}}
 @media (prefers-reduced-motion:reduce){.block,.tile{transition:none}}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
@@ -116,7 +118,7 @@ floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
 const box = new T.Mesh(new T.BoxGeometry(.42, .32, .34), new T.MeshStandardMaterial({color: '#c79a62', roughness: .9}));
 box.castShadow = true; box.visible = false; scene.add(box);
 toonify(T, scene, TOON_LOOKS.sunday);
-const film = filmLook(T, renderer, scene, camera, {fogDensity: .02, fogStart: 9, focus: 6, aperture: .7, aoRadius: .3, bloom: .12, sunCol: '#ffd6a0'});
+const film = filmLook(T, renderer, scene, camera, {fogDensity: .02, fogStart: 9, focus: 6, aperture: .7, aoRadius: .3, bloom: .12, threshold: 1.3, sunCol: '#ffd6a0'});
 
 let dir = 'studio', bodyId = 'mannequin', room = 'stage', real = true, tour = false, dressed = null;
 let actor = null, move = byId.idle, t0 = performance.now() / 1000;
@@ -126,9 +128,10 @@ const active = () => (real && mocap[move.id]) || move;
 
 // pictures for the blocks, rendered once by tools/character-studio/thumbs.mjs: one tile per move, in MOVES order
 const COLS = 10;
-function sprite(el, i, size, dx = 0) {
- el.style.backgroundImage = 'url(img/moves.jpg)'; el.style.backgroundSize = `${COLS * size}px auto`;
- el.style.backgroundPosition = `${-(i % COLS) * size + dx}px ${-Math.floor(i / COLS) * size}px`;
+const ROWS = Math.ceil(MOVES.length / COLS);
+function sprite(el, i) { // sized by the element, so one sprite serves the 22 px genre icons and the pose tiles
+ el.style.backgroundImage = 'url(img/moves.jpg)'; el.style.backgroundSize = `${COLS * 100}% ${ROWS * 100}%`;
+ el.style.backgroundPosition = `${(i % COLS) / (COLS - 1) * 100}% ${Math.floor(i / COLS) / (ROWS - 1) * 100}%`;
 }
 function castBlocks() {
  const el = $('#cast'); el.innerHTML = '';
@@ -153,7 +156,7 @@ function genreBlocks() {
  const el = $('#genres'); el.innerHTML = '';
  for (const g of GENRES) {
   const b = document.createElement('button'); b.className = 'block genre'; b.setAttribute('aria-pressed', String(g.id === genre));
-  const i = document.createElement('i'); sprite(i, MOVES.findIndex(m => m.genre === g.id), 22);
+  const i = document.createElement('i'); sprite(i, MOVES.findIndex(m => m.genre === g.id));
   b.append(i, g.name); b.onclick = () => { genre = g.id; genreBlocks(); moveTiles(); };
   el.appendChild(b);
  }
@@ -163,8 +166,9 @@ function moveTiles() {
  MOVES.forEach((m, i) => {
   if (m.genre !== genre) return;
   const b = document.createElement('button'); b.className = 'block pose'; b.setAttribute('aria-pressed', String(m.id === move.id));
-  sprite(b, i, 78, 0); b.style.backgroundSize = `${COLS * 78}px auto`; b.style.backgroundPosition = `${-(i % COLS) * 78}px ${-Math.floor(i / COLS) * 78 - 6}px`;
-  b.innerHTML = `${m.name}${real && mocap[m.id] ? '<span class="tag">motion capture</span>' : ''}`;
+  // the pose picture sits above the name, never under it
+  const pic = document.createElement('i'); pic.className = 'pic'; sprite(pic, i); b.appendChild(pic);
+  b.insertAdjacentHTML('beforeend', `<span class="nm">${m.name}</span>${real && mocap[m.id] ? '<span class="tag">motion capture</span>' : ''}`);
   b.onclick = () => pick(m.id);
   el.appendChild(b);
  });
@@ -174,7 +178,7 @@ function pick(id, keepTour) {
  if (!keepTour) { tour = false; $('#tour').setAttribute('aria-pressed', 'false'); }
  const g = GENRES.find(x => x.id === move.genre), a = active();
  $('#nowName').textContent = move.name;
- $('#nowSrc').textContent = a.source ? `${a.source.replace(/^CMU mocap /, 'CMU motion capture ')}` : `Hand-keyed · ${g.name}, as in ${g.from}`;
+ $('#nowSrc').textContent = a.source ? `CMU motion capture · take ${a.source}` : `Hand-keyed · ${g.name}, as in ${g.from}`;
  if (genre !== move.genre) { genre = move.genre; genreBlocks(); }
  moveTiles();
  try { history.replaceState(null, '', '#' + id); } catch {}
@@ -274,10 +278,13 @@ function frame() {
   if (hold.state) actor.pose(holdPose(now)); else actor.play(a, t);
   if (hold.state) holdStep(o, dt, now);
   else if (a.travel) {
-   dist += dt * (a.speed || a.fn.speed || 1) * actor.hip;
+   if (freeze == null) dist += dt * (a.speed || a.fn.speed || 1) * actor.hip;
    const ang = dist / R; o.position.set(Math.sin(ang) * R, 0, Math.cos(ang) * R); o.rotation.y = ang + Math.PI / 2;
   } else o.rotation.y += (0 - o.rotation.y) * .08;
-  controls.target.lerp(tmp2.set(o.position.x * .6, actor.hip * 1.05, o.position.z * .6), .06);
+  // the camera keeps the body, not its spot on the floor, in view: one-shot captures can step a metre or two
+  if (a.travel) tmp2.set(o.position.x * .6, actor.hip * 1.05, o.position.z * .6);
+  else { actor.rig.bones.hips.getWorldPosition(tmp2); tmp2.y = actor.hip * 1.05; }
+  controls.target.lerp(tmp2, .06);
   film.U.focus.value = camera.position.distanceTo(o.position);
   box.visible = move.prop === 'box' && !hold.state;
   if (box.visible) {
@@ -302,5 +309,6 @@ pick(byId[start] ? start : 'idle');
 loadMocap(T, BASE).then(m => { mocap = m; pick(move.id); }).catch(e => console.warn('mocap', e));
 setBody().then(() => frame());
 </script>
+<script type="module" src="/look/context-card.mjs" data-context-study="character-studio"></script>
 </body>
 </html>

@@ -21,13 +21,6 @@
   "foot_R"
  ],
  "clips": {
-  "idle": {
-   "file": "idle.json",
-   "source": "111_32",
-   "what": "stretch and yawn",
-   "loop": false,
-   "seconds": 5.0
-  },
   "walk": {
    "file": "walk.json",
    "source": "105_29",
@@ -69,20 +62,6 @@
    "what": "cartwheel",
    "loop": false,
    "seconds": 4.03
-  },
-  "hang": {
-   "file": "hang.json",
-   "source": "01_03",
-   "what": "playground climb, hang, swing",
-   "loop": false,
-   "seconds": 5.0
-  },
-  "climb": {
-   "file": "climb.json",
-   "source": "01_02",
-   "what": "playground climb",
-   "loop": false,
-   "seconds": 5.0
   },
   "stance": {
    "file": "stance.json",
@@ -133,13 +112,6 @@
    "loop": true,
    "seconds": 2.23
   },
-  "tiptoe": {
-   "file": "tiptoe.json",
-   "source": "13_10",
-   "what": "reach for, tiptoe",
-   "loop": false,
-   "seconds": 5.0
-  },
   "look": {
    "file": "look.json",
    "source": "77_05",
@@ -189,26 +161,12 @@
    "loop": false,
    "seconds": 3.73
   },
-  "swim": {
-   "file": "swim.json",
-   "source": "79_02",
-   "what": "swimming (pantomime)",
-   "loop": false,
-   "seconds": 5.0
-  },
   "throw": {
    "file": "throw.json",
    "source": "113_24",
    "what": "throw",
    "loop": false,
    "seconds": 5.0
-  },
-  "aimwalk": {
-   "file": "aimwalk.json",
-   "source": "105_18",
-   "what": "careful walk, looking around",
-   "loop": true,
-   "seconds": 1.83
   },
   "hammer": {
    "file": "hammer.json",
@@ -256,13 +214,6 @@
    "file": "robot.json",
    "source": "120_21",
    "what": "robot",
-   "loop": false,
-   "seconds": 5.0
-  },
-  "twist": {
-   "file": "twist.json",
-   "source": "13_29",
-   "what": "jumping jacks, side twists",
    "loop": false,
    "seconds": 5.0
   },

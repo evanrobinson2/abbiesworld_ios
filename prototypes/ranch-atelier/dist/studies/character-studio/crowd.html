@@ -4,15 +4,22 @@
 <meta charset="utf-8">
 <title>Golden Hour Promenade</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script src="/theme/boot.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 <style>
 /* AW-STUDY-0037 Character Studio, the crowd: townsfolk walking a square at golden hour, seen through a long lens. */
-:root{--ink:#3a2618;--glass:rgba(255,246,232,.55);--rim:rgba(255,255,255,.7);--accent:#e2557a}
-html,body{height:100%;margin:0;background:#f2c48e;overflow:hidden;font:600 13px/1 'Nunito Sans',system-ui,sans-serif;color:var(--ink)}
+:root{--surface:var(--aw-surface,#fbf8f2);--ink:var(--aw-ink,#2b2218);--line:var(--aw-line,#e2d8c6);--accent:var(--aw-accent,#7a5236);
+ --on-accent:var(--aw-on-accent,#ffffff);--edge:color-mix(in srgb,var(--accent) 35%,var(--line));--font:'Roboto',system-ui,-apple-system,'Segoe UI',sans-serif}
+html,body{height:100%;margin:0;background:#f2c48e;overflow:hidden;font:500 13px/1 var(--font);color:var(--ink)}
 canvas{display:block;width:100%;height:100%;touch-action:none}
-.dock{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;gap:6px;padding:6px;border-radius:999px;
- background:linear-gradient(160deg,rgba(255,255,255,.4),transparent 60%),var(--glass);border:1px solid var(--rim);box-shadow:0 8px 24px rgba(80,40,20,.2);max-width:calc(100vw - 32px);overflow-x:auto}
-button{font:inherit;color:inherit;background:rgba(255,255,255,.5);border:1px solid var(--rim);border-radius:999px;padding:8px 12px;cursor:pointer;white-space:nowrap}
-button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:transparent}
+/* the looks: a short row of toy blocks, bottom left, out of the walkers' way (LOOK.md: flat, Roboto, blocks that press) */
+.dock{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 16px);display:flex;gap:8px;max-width:calc(100vw - 32px);overflow-x:auto;scrollbar-width:none;padding-top:4px}
+.dock::-webkit-scrollbar{display:none}
+button{font:500 13px var(--font);color:var(--ink);background:var(--surface);border:0;border-radius:10px;padding:8px 12px;cursor:pointer;white-space:nowrap;
+ box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s,box-shadow .08s}
+button:active{transform:translateY(0);box-shadow:0 0 0 var(--edge)}
+button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 60%,#000)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js"}}</script>
 </head>
@@ -27,6 +34,8 @@ import {toonify, TOON_LOOKS} from '/simulations/toon-kit.mjs';
 import {gait, byId} from './moves.mjs';
 import {loadBody} from './bodies.mjs';
 import {dress} from './directions.mjs';
+import {loadMocap} from './mocap.mjs';
+import {filmLook} from '/simulations/film-look.mjs';
 
 T.Cache.enabled = true;
 const canvas = document.getElementById('c');
@@ -35,8 +44,6 @@ renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
 renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.PCFSoftShadowMap;
 renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
 const scene = new T.Scene();
-const HAZE = new T.Color('#f0c79a');
-scene.fog = new T.FogExp2(HAZE, .018);
 
 // sky: a gradient dome, warm at the horizon where the sun sits, cooler overhead
 const sky = new T.Mesh(new T.SphereGeometry(400, 32, 16), new T.ShaderMaterial({side: T.BackSide, depthWrite: false, fog: false,
@@ -45,7 +52,7 @@ const sky = new T.Mesh(new T.SphereGeometry(400, 32, 16), new T.ShaderMaterial({
  fragmentShader: `uniform vec3 top, mid, sunDir; varying vec3 vD;
   void main(){ float h = clamp(vD.y, 0., 1.); vec3 c = mix(mid, top, pow(h, .6));
    float s = max(dot(normalize(vD), normalize(sunDir)), 0.); c += vec3(1., .72, .4) * (pow(s, 40.) * 1.2 + pow(s, 6.) * .25);
-   gl_FragColor = vec4(c, 1.);
+   gl_FragColor = vec4(c, 0.); // alpha 0: the film look's haze and AO leave the sky alone
    #include <colorspace_fragment>
   }`}));
 scene.add(sky);
@@ -102,18 +109,27 @@ toonify(T, scene, TOON_LOOKS.sunday);
 // the townsfolk: each walks its own lane round the square, with its own pace, stride and arm swing
 const camera = new T.PerspectiveCamera(22, 1, .5, 900);
 const controls = new OrbitControls(camera, canvas);
-controls.target.set(0, .9, 0); controls.enableDamping = true; controls.maxPolarAngle = 1.48; controls.minDistance = 4; controls.maxDistance = 120;
-camera.position.set(34, 9, 30);
+controls.target.set(0, .9, 0); controls.enableDamping = true; controls.maxPolarAngle = 1.48; controls.minDistance = 4; controls.maxDistance = 60;
+camera.position.set(22, 11, 20); // inside the ring of trees, high enough to look over them
 const loader = new GLTFLoader(), drawing = {value: 0}, folk = [];
+// shot like an animated film: contact shadows, golden air that thickens with distance, a long lens's soft focus, glow
+const film = filmLook(T, renderer, scene, camera, {fogLow: '#f3c48f', fogHigh: '#f6d6b0', fogDensity: .012, fogStart: 24, sunDir,
+ sunCol: '#ffb36b', focus: 44, aperture: 1.1, aoRadius: .5, bloom: .2, threshold: .9});
+// real walks first: the motion-capture walk, run and carry, each walker on its own time; procedural gaits fill in
+const mocap = await loadMocap(T, new URL('./', location.href)).catch(() => ({}));
 const rnd = (i, k) => (Math.sin(i * 12.9898 + k * 78.233) * 43758.5453 % 1 + 1) % 1;
 const CAST = [];
 for (let i = 0; i < 26; i++) {
- const body = i % 9 === 4 ? 'red' : i % 9 === 8 ? 'blue' : i % 3 === 0 ? 'smooth' : 'mannequin';
- const kind = i % 11 === 5 ? 'carry' : i % 13 === 7 ? 'jog' : 'walk';
+ const body = i % 3 === 0 ? 'smooth' : 'mannequin';
+ const kind = i % 11 === 5 ? 'carry' : i % 13 === 7 ? 'jog' : i % 4 === 2 ? 'stroll' : i % 17 === 3 ? 'sad' : 'walk';
  CAST.push({i, body, kind, lane: 4.2 + (i % 7) * 1.85 + rnd(i, 1) * .5, dir: i % 2 ? 1 : -1, phase: rnd(i, 2) * Math.PI * 2});
 }
 function makeGait(c) {
  const r = k => rnd(c.i, k);
+ if (c.kind === 'walk' && mocap.walk) return mocap.walk;
+ if (c.kind === 'jog' && mocap.run) return mocap.run;
+ if (c.kind === 'carry' && mocap.carry) return mocap.carry;
+ if (c.kind === 'sad' && mocap.sad) return mocap.sad;
  if (c.kind === 'jog') return gait({len: .7 + r(3) * .08, stride: 36, knee: 85, arm: 34, elbow: 80, bounce: .045, lean: 9, twist: 8});
  if (c.kind === 'carry') return byId.carry.fn;
  return gait({len: .98 + r(3) * .3, stride: 20 + r(4) * 8, knee: 38 + r(5) * 10, arm: 12 + r(6) * 14, elbow: 14 + r(7) * 16, lean: r(8) * 6 - 1, twist: 4 + r(9) * 5, sway: 1 + r(10) * 3});
@@ -139,13 +155,13 @@ for (const L of LOOKS) {
   const box = new T.Mesh(new T.BoxGeometry(.4, .3, .32), new T.MeshStandardMaterial({color: '#c79a62', roughness: .9}));
   box.castShadow = true; box.visible = c.kind === 'carry'; scene.add(box);
   scene.add(actor.object);
-  const g = makeGait(c);
-  folk.push({c, actor, move: {fn: g, speed: g.speed}, box, s: c.phase * c.lane});
+  const g = makeGait(c), move = g.fn ? g : {fn: g, speed: g.speed};
+  folk.push({c, actor, move, box, s: c.phase * c.lane});
   if (folk.length % 6 === 0 || folk.length === CAST.length) restyle();
  }
 })();
 
-function resize() { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.fov = innerWidth < innerHeight ? 34 : 22; camera.updateProjectionMatrix(); }
+function resize() { const q = Math.min(devicePixelRatio, 2); renderer.setPixelRatio(q); renderer.setSize(innerWidth, innerHeight, false); film.setSize(innerWidth, innerHeight, q); camera.aspect = innerWidth / innerHeight; camera.fov = innerWidth < innerHeight ? 44 : 30; camera.updateProjectionMatrix(); }
 addEventListener('resize', resize); resize();
 let last = performance.now() / 1000, idle = 0;
 controls.addEventListener('start', () => { idle = -6; });
@@ -169,10 +185,13 @@ function frame() {
  // a slow crane round the square until someone takes the camera
  idle += dt;
  if (idle > 0) { const ang = Math.atan2(camera.position.z, camera.position.x) + dt * .025, d = Math.hypot(camera.position.x, camera.position.z); camera.position.x = Math.cos(ang) * d; camera.position.z = Math.sin(ang) * d; }
- controls.update(); renderer.render(scene, camera);
+ controls.update(); film.U.focus.value = camera.position.distanceTo(controls.target);
+ film.U.sunDir.value.copy(sunDir);
+ if (window.crowd?.plain) renderer.render(scene, camera); else film.render();
 }
 frame();
-window.crowd = {camera, controls, folk, setLook: id => { look = id; restyle(); }};
+window.crowd = {camera, controls, folk, film, plain: false, setLook: id => { look = id; restyle(); }};
 </script>
+<script type="module" src="/look/context-card.mjs" data-context-study="character-studio"></script>
 </body>
 </html>
