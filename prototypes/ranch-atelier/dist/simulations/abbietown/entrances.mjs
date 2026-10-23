@@ -19,6 +19,10 @@ export const ENTRANCES = {
   'town:launch': {name: 'Launch', kind: 'stage', region: 'abbie-daddy-side', scene: 'launch-pad', module: 'moon-mission', owner: 'AW-STUDY-0036',
     note: 'The rocket port on the road north of the home hex. Walk here from Downtown (AbbieTown.walk).'},
   'town:school-door': {name: 'Muraco front door', kind: 'door', region: 'abbie-daddy-side', scene: 'school-door', url: `/studies/school/play.html?from=${encodeURIComponent(backUrl('town:school-door'))}`, owner: 'AW-STUDY-0032'},
+  // AW-STUDY-0054: the toy-car coaster built in the skate park by the high school. Scene 'skate-park' is the hex city thread's pad
+  // (AbbieTown.stage.tiles.downtown.spots.skatepark); AbbieTown.enterScene('skate-park') flies there, the ride opens from it.
+  'town:skate-park': {name: 'The toy-car coaster', kind: 'ride', region: 'downtown', scene: 'skate-park', url: `/studies/coaster/play.html?from=${encodeURIComponent(backUrl('town:skate-park'))}`, owner: 'AW-STUDY-0054',
+    grants: ['toy-car charm'], note: 'A 30 second first-person ride. The page flows down from the tile view to the track by itself; from the town, open it with ?skip=tile to start already zoomed in.'},
   'town:ranch-gate': {name: 'The ranch gate', kind: 'ride', region: 'abbie-daddy-side', scene: 'dio-abbie-daddy-side', url: '/?from=town', owner: 'ranch'},
 };
 

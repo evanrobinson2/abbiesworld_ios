@@ -3023,6 +3023,64 @@
         }
       ],
       "note": "No Oracle, blog or tutorial consultation yet; recorded honestly so the card shows what is missing."
+    },
+    "coaster": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Game Oracle: not reached this round",
+          "note": "Cloud threads cannot reach the Oracle's host. Next round asks it for rail-ride and coaster studies before the big loop is redrawn."
+        },
+        {
+          "k": "devblog",
+          "t": "Feeling of Speed (Critical Points)",
+          "href": "https://critpoints.net/2016/11/24/feeling-of-speed/",
+          "note": "Narrow field of view changes, dense nearby detail and speed lines make a ride feel fast; so the track is lined with lamps, poles and bunting, and the lines and the field of view follow your speed"
+        },
+        {
+          "k": "design",
+          "t": "Designing the perfectly smooth roller coaster ride (Technology Review)",
+          "href": "https://www.technologyreview.com/s/419909/designing-the-perfectly-smooth-roller-coaster-ride/",
+          "note": "A plain circle makes the force on a rider jump; real loops use clothoids. Our loop is a circle for now; the clothoid loop is the first item in what to do next"
+        },
+        {
+          "k": "tutorial",
+          "t": "Tilt Shift shader pass (luma.gl docs), and a depth-based tilt-shift on Godot Shaders",
+          "href": "https://luma.gl/docs/api-reference/shadertools/shader-passes/tilt-shift",
+          "note": "Found by search, seen as summaries only: a sharp band across the middle and blur that grows with distance from it. We built that as one pass over the whole picture, no depth buffer"
+        },
+        {
+          "k": "reference",
+          "t": "Printables, the hotwheels tag (Evan's concept source)",
+          "href": "https://www.printables.com/tag/hotwheels",
+          "note": "The page shows no licences, so every model there is reference only and none is copied. Track pieces, loops, launchers and start gates inspired the recipe. No toy brand's name, logo or car design is used"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study; presentation layer",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "The ride is feel first: wind, rumble and speed lines (meta); stars and a thin progress line (overlay); the countdown lamps are on the gate (diegetic)"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar: tap what shines",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md",
+          "note": "The car glows with a ring; one tap gets you in"
+        },
+        {
+          "k": "canon",
+          "t": "Speed reviews of the school jump and the basement",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_READY_STUDY.md",
+          "note": "Reused the toon kit, the headless flow test and the advance-artifact bundler"
+        },
+        {
+          "k": "canon",
+          "t": "Charms and the backpack",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/charms/CHARMS_STUDY.md",
+          "note": "The win is a charm; her keychain charms hang from the car's mirror and swing"
+        }
+      ],
+      "recorded": "2026-10-23, as the study was built"
     }
   }
 }
