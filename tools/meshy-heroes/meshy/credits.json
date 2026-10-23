@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 1335,
+ "total": 1340,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -466,6 +466,11 @@
    "what": "A6-paint-tee 3d",
    "credits": 30,
    "at": "2026-10-23T21:23:19Z"
+  },
+  {
+   "what": "A6-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:25:25Z"
   }
  ]
 }
