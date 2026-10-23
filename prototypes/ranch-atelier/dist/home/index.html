@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><script src="/theme/boot.js?v=1"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Abbie's World</title>
+<meta name="description" content="Bring your imagination to life and play in it. Build what you want and see how much fun you can have. Free, and always PG.">
+<meta property="og:title" content="Abbie's World"><meta property="og:description" content="Bring your imagination to life and play in it."><meta property="og:image" content="/home/ranch.jpg">
+<link rel="manifest" href="/manifest.webmanifest"><link rel="apple-touch-icon" href="/icons/app-180.png"><meta name="theme-color" content="#f3eee3">
+<link rel="stylesheet" href="/home/home.css?v=1">
+</head>
+<body>
+<header class="bar">
+ <a class="mark" href="/welcome" aria-label="Abbie's World home">AW</a>
+ <nav><a href="#how">How it works</a><a href="#pg">Always PG</a><a href="#support">Support</a><a href="/terms">Terms</a></nav>
+ <a class="signin" id="signin" href="/api/auth/login?return=/sandbox">Sign in</a>
+</header>
+
+<main>
+ <section class="hero">
+  <div class="hero-text">
+   <h1>Abbie's World</h1>
+   <p class="lede">Bring your imagination to life, then play in it.</p>
+   <p>Say what you want to build and watch it appear. Then see how much fun you can have.</p>
+   <div class="actions"><a class="btn primary" href="/sandbox">Play now</a><a class="btn" id="signin-hero" href="/api/auth/login?return=/sandbox">Sign in to keep your worlds</a></div>
+   <p class="fine">Free. A grown-up signs in. We ask nothing of you.</p>
+  </div>
+  <a class="hero-art" href="/sandbox" aria-label="Play the ranch"><img src="/home/ranch.jpg" alt="A little ranch with barns, a coop, fences, an orchard and a vegetable patch" width="780" height="640"></a>
+ </section>
+
+ <section id="how" class="steps">
+  <h2>How it works</h2>
+  <ol>
+   <li><span class="n">1</span><h3>Imagine it</h3><p>Ask for anything: a ranch with sheep, a base on the moon, a spooky town for trick or treat.</p></li>
+   <li><span class="n">2</span><h3>Watch it come alive</h3><p>Buildings, animals and people appear, and the world runs on its own: day and night, rain and sun, the seasons.</p></li>
+   <li><span class="n">3</span><h3>Play in it</h3><p>Talk to it, change it, add to it, and see what happens next.</p></li>
+  </ol>
+ </section>
+
+ <section class="everything">
+  <h2>It's everything</h2>
+  <p class="sub">A ranch is just the start. If you can imagine it, it can be a place in Abbie's World.</p>
+  <div class="gallery">
+   <figure><img src="/home/ranch.jpg" alt="The ranch in the morning" loading="lazy"><figcaption>The ranch</figcaption></figure>
+   <figure><img src="/home/moon.jpg" alt="A moon base with domes, a rover and the Earth in the sky" loading="lazy"><figcaption>A base on the moon</figcaption></figure>
+   <figure><img src="/home/rain.jpg" alt="Rain falling over the ranch" loading="lazy"><figcaption>Weather that rolls in</figcaption></figure>
+   <figure><img src="/home/cards.jpg" alt="Abbie's own collectible card" loading="lazy"><figcaption>Cards for everyone in it</figcaption></figure>
+  </div>
+ </section>
+
+ <section id="pg" class="pg">
+  <h2>Always PG</h2>
+  <p>Abbie's World is made for kids. Everything you build here stays PG, and the Computer that helps you build only helps with the game. A grown-up signs in, and it's free. We don't keep anything about you except that you signed in.</p>
+ </section>
+
+ <section id="support" class="support">
+  <div class="card">
+   <h2>Support Abbie's World</h2>
+   <p>Playing is free, and so is a little AI magic. For $5 a month you get $4 of AI magic every month: talking to the Computer and having it build for you. The other dollar helps pay for the servers. You can cancel any time.</p>
+   <a class="btn primary" id="support-start" href="/api/support?start=1" hidden>Support for $5 a month</a>
+   <a class="btn" id="support-manage" href="/api/support?manage=1" hidden>Change or cancel</a>
+   <p class="fine" id="support-note">Monthly support opens soon.</p>
+   <p class="fine"><a href="/terms">The short terms</a></p>
+  </div>
+  <div class="card studio">
+   <h2>A studio of all of us</h2>
+   <p>Abbie's World is made by Evan, a dad building it for his daughter, with a lot of help from AI. If the Kickstarter raises $200,000, Evan will take a leave of absence from his job to found a studio and build it full time: a studio where everyone who makes it shares the money and makes games together.</p>
+   <p>Everyone who gives $1,000 or more gets up to 8 hours with Evan, learning how he builds all of this.</p>
+   <a class="btn" id="kickstarter" href="#support" hidden>Back it on Kickstarter</a>
+   <p class="fine" id="kickstarter-soon">The Kickstarter is coming soon.</p>
+  </div>
+ </section>
+</main>
+
+<footer><span class="mark small">AW</span><span>Abbie's World</span><a href="/sandbox">Play</a><a href="/api/auth/login?return=/sandbox" id="signin-foot">Sign in</a></footer>
+<script src="/home/home.js?v=1" defer></script>
+</body></html>

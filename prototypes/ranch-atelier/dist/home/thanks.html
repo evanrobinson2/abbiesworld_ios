@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><script src="/theme/boot.js?v=1"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Thank you · Abbie's World</title><meta name="robots" content="noindex">
+<link rel="stylesheet" href="/home/home.css?v=1">
+</head>
+<body>
+<header class="bar"><a class="mark" href="/welcome" aria-label="Abbie's World home">AW</a><nav></nav></header>
+<main>
+ <section class="thanks">
+  <h1 id="title">Thank you</h1>
+  <p class="lede" id="line">Finishing up with Stripe…</p>
+  <div class="actions"><a class="btn primary" href="/sandbox">Play now</a><a class="btn" id="kickstarter" href="/welcome#support">Back the studio on Kickstarter</a></div>
+  <p class="fine">You can change or cancel any time from <a href="/api/support?manage=1">your support page</a>. <a href="/terms">The short terms</a>.</p>
+ </section>
+</main>
+<script>
+(async()=>{
+ const $=id=>document.getElementById(id),id=new URLSearchParams(location.search).get('session');
+ try{
+  const r=await fetch('/api/support?confirm='+encodeURIComponent(id||''),{cache:'no-store'});const out=await r.json();
+  $('line').textContent=out.ok?"You're supporting Abbie's World. You have $4 of AI magic to use this month: talk to the Computer and let it build for you."
+   :r.status===401?'Sign in again with the same account to finish.':"We couldn't confirm the payment yet. If Stripe charged you, it will show up in a minute; nothing is lost.";
+  if(!out.ok)$('title').textContent='Almost there';
+ }catch{$('line').textContent="We couldn't reach the server. If Stripe charged you, nothing is lost: come back in a minute.";}
+ try{const l=await (await fetch('/api/links')).json();if(l.kickstarter)$('kickstarter').href=l.kickstarter;}catch{}
+})();
+</script>
+</body></html>
