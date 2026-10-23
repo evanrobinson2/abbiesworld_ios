@@ -87,8 +87,8 @@ ball("waist_joint","waist",24)
 ellipsoid("abdomen","hc","waist",66,60,44,t=0.55,taper=0.12)
 pel=(P["hR"]+P["hL"])/2
 ellipsoid("pelvis",pel+Vector((0,0,-0.05)),pel+(Vector((0,0,0.6)) if os.environ.get("REST")=="1" else Vector((0.18,0,0.6))),38,56,40,t=0.15)
-THICK=dict(R=dict(sh=20,ua=(17,14,4),el=14,fa=(15,10,3),wr=10,hand=(15,8)),
-           L=dict(sh=23,ua=(19,15,5),el=15,fa=(17,11,4),wr=11,hand=(17,8)))
+THICK=dict(R=dict(sh=20,ua=(17,14,4),el=14,fa=(17,13,3),wr=10,hand=(15,8)),
+           L=dict(sh=23,ua=(19,15,5),el=15,fa=(20,15,4),wr=11,hand=(17,8)))
 for side in ("R","L"):
     T=THICK[side]
     ball(f"shoulder_{side}",f"s{side}",T["sh"]); spindle(f"upper_arm_{side}",f"s{side}",f"e{side}",*T["ua"],peak=0.3)
