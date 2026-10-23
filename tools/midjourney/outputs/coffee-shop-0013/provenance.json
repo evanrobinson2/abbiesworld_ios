@@ -236,6 +236,120 @@
           "bytes": 1700070
         }
       ]
+    },
+    {
+      "name": "exterior-elegant",
+      "view": "exterior",
+      "style": "elegant",
+      "prompt": "eye level photograph of the front of an elegant contemporary small cafe, Abbie's Cafe, blush rose painted wood and black steel, tall arched windows glowing warm, champagne gold door handles, a hand-painted wooden sign with three gold stars, mauve striped awning, ivory bistro chairs, potted olive trees, warm taupe stone pavement, dusk light, architectural photography, refined boutique, nobody in frame --ar 3:2 --v 8.2 --no text, letters",
+      "job_id": "cb496189-0df1-4e23-b81c-8197c31a6a04",
+      "created": "2026-10-23T05:06:20Z",
+      "files": [
+        {
+          "file": "images/exterior-elegant_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/cb496189-0df1-4e23-b81c-8197c31a6a04/0_0.png",
+          "sha256": "551f1518b0845181af79a38a28b375b665da8c5331528b2fba85d34c8c373571",
+          "bytes": 1934168
+        },
+        {
+          "file": "images/exterior-elegant_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/cb496189-0df1-4e23-b81c-8197c31a6a04/0_1.png",
+          "sha256": "0313058240bec83f839b3221e57490d2898034866fb2027eda79440dcf418b0d",
+          "bytes": 2012953
+        },
+        {
+          "file": "images/exterior-elegant_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/cb496189-0df1-4e23-b81c-8197c31a6a04/0_2.png",
+          "sha256": "75414ec5f5a92fd1d6dc14f45ac5572ae26696ae6c4689ad4496b075155f86f8",
+          "bytes": 1906209
+        },
+        {
+          "file": "images/exterior-elegant_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/cb496189-0df1-4e23-b81c-8197c31a6a04/0_3.png",
+          "sha256": "ec9e3f95144061a3c1af0a631d3e05679bced60cf95fb9741ebf97f39c55fc0b",
+          "bytes": 1993976
+        }
+      ]
+    },
+    {
+      "name": "exterior-party",
+      "view": "exterior",
+      "style": "party",
+      "prompt": "eye level cartoon render of the front of Abbie's Cafe, a cool kids dance party hangout spot, wobbly curvy hot magenta pink walls, round porthole windows, a giant neon coffee cup on the roof, disco ball over the door, electric violet and tangerine zigzags, a painted sign with three big yellow stars, lime green steps, turquoise speakers, glowing string lights, playful Planet Zoo style game art, bold and zany, not fairy, not princess, no animals, nobody in frame --ar 3:2 --v 8.2 --no text, letters",
+      "job_id": "0fd147f8-aee7-4a70-993d-a7672925a41e",
+      "created": "2026-10-23T05:06:50Z",
+      "files": [
+        {
+          "file": "images/exterior-party_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/0fd147f8-aee7-4a70-993d-a7672925a41e/0_0.png",
+          "sha256": "942970a98aae68a7a0b25b0927ea885de730b231c6f18307ffb526951171a511",
+          "bytes": 1928490
+        },
+        {
+          "file": "images/exterior-party_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/0fd147f8-aee7-4a70-993d-a7672925a41e/0_1.png",
+          "sha256": "1fe15946e4bd4c1a4f5d894f673e95b267ed6f32f3cf731ed043a526222bccba",
+          "bytes": 1592136
+        },
+        {
+          "file": "images/exterior-party_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/0fd147f8-aee7-4a70-993d-a7672925a41e/0_2.png",
+          "sha256": "8d7dc5e591588cc84837290d9f0fce0de775bea1730fd80fa059c1352051d07c",
+          "bytes": 1672533
+        },
+        {
+          "file": "images/exterior-party_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/0fd147f8-aee7-4a70-993d-a7672925a41e/0_3.png",
+          "sha256": "f49fdffc0ca5cdcb1b9be57f98f048359346152db6962aba4494dda9c732f41d",
+          "bytes": 1457249
+        }
+      ]
+    },
+    {
+      "name": "exterior-game",
+      "view": "exterior",
+      "style": "game",
+      "prompt": "eye level 3D game render of the front of Abbie's Cafe, a cosy stylised cartoon coffee shop, bubblegum pink walls, mint green door, coral awning, cream window frames, butter yellow hanging wooden sign with three stars, chalkboard easel, flower boxes, sky blue bicycle, cobblestones, clean hand-painted textures, soft global illumination, typical modern 3D game, nobody in frame --ar 3:2 --v 8.2 --no text, letters",
+      "job_id": "f3ce40a1-140e-4216-94b7-561d863f3e3d",
+      "created": "2026-10-23T05:07:20Z",
+      "files": [
+        {
+          "file": "images/exterior-game_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/f3ce40a1-140e-4216-94b7-561d863f3e3d/0_0.png",
+          "sha256": "72a15e37c746d18432760f251cff1075ec826629af70b01e1d6c53cae01b1c1b",
+          "bytes": 1907881
+        },
+        {
+          "file": "images/exterior-game_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/f3ce40a1-140e-4216-94b7-561d863f3e3d/0_1.png",
+          "sha256": "98c03c1e20441802337afd14be2b5903ecc6edbc5ad81baaaf87f73349e2adc5",
+          "bytes": 1919794
+        },
+        {
+          "file": "images/exterior-game_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/f3ce40a1-140e-4216-94b7-561d863f3e3d/0_2.png",
+          "sha256": "6ef08c04b4887a05a524bea2fe3fa32d5207d1addf42a841579e7786e0e52427",
+          "bytes": 1623767
+        },
+        {
+          "file": "images/exterior-game_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/f3ce40a1-140e-4216-94b7-561d863f3e3d/0_3.png",
+          "sha256": "4e0772dca7626039f7490d38035476c4e292c596f8aefaf9f59d2d5ff17896fc",
+          "bytes": 1826357
+        }
+      ]
     }
   ]
 }
