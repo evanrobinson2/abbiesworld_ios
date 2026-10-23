@@ -388,5 +388,31 @@
     ],
     "mode": "fast",
     "at": "2026-10-23T17:23:15Z"
+  },
+  {
+    "id": "A5-paint-suit",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "94fb29e4-62d1-40c0-a540-efd5a4231972",
+    "files": [
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_0.png",
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_1.png",
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_2.png",
+      "tools/meshy-heroes/refs/A5-paint-suit/mj_94fb29e4-62d1-40c0-a540-efd5a4231972_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:24:56Z"
+  },
+  {
+    "id": "A5-paint-tee",
+    "prompt": "stocky adult man astronaut engineer, tool belt, yellow accents, in a snug plain t-shirt and snug knee-length shorts made to fit under a space suit, short socks, simple soft boots, bare head, hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, painterly stylized 3D character, hand-painted brush-stroke textures, angular graphic shapes, strong teal and orange rim light, bold colour, mature animated-series look --ar 3:2",
+    "job_id": "63abc2d9-0412-40ae-9bfb-e1b8fc375cb6",
+    "files": [
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_0.png",
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_1.png",
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_2.png",
+      "tools/meshy-heroes/refs/A5-paint-tee/mj_63abc2d9-0412-40ae-9bfb-e1b8fc375cb6_3.png"
+    ],
+    "mode": "fast",
+    "at": "2026-10-23T17:26:35Z"
   }
 ]
