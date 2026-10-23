@@ -9,6 +9,8 @@ const FORMS = {count: ['count', 'gauge', 'phase'], level: ['gauge', 'phase', 'co
 const FORM_NAMES = {count: 'Number', gauge: 'Gauge', phase: 'Moon', list: 'List', timer: 'Timer', state: 'Sign'};
 const MAX_PINS = 3, PIN_KEY = 'chrono-pins', WAVE_KEY = 'chrono-waved', TODO_KEY = 'ranch-todos';
 const store = {get(k, d) { try { return JSON.parse(localStorage.getItem(k) || 'null') ?? d; } catch { return d; } }, set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }};
+// The speed pusher reads as a stopwatch (the old half-gauge looked cut off).
+const STOPWATCH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="13.5" r="7.5"/><path d="M10 3h4M12 3v3M18.5 6.5l1.5-1.5M12 13.5l3-3"/></svg>';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 
 export function mountChrono({press, icons}) {
@@ -29,12 +31,15 @@ export function mountChrono({press, icons}) {
     <circle class="ch-orb" r="3.6" cx="32" cy="3.5" fill="#ffd34d" stroke="#fff" stroke-width="1.4"/>
    </svg><span class="ch-nap" aria-hidden="true"><i></i><i></i></span></button>
   <button class="ch-read" type="button" aria-label="Time of day"><strong class="ch-time">–</strong><small class="ch-date"></small></button>
-  <div class="ch-registers" role="group" aria-label="Dials"></div>
+  <div class="ch-registers" role="group" aria-label="The world"></div>
+  <div class="ch-tiles v2-glass" role="group" aria-label="This place"></div>
   <div class="ch-pushers"><button class="ch-push ch-pause" type="button" aria-label="Pause"></button><button class="ch-push ch-speed" type="button" aria-label="Speed"></button></div>`);
  chrono.id = 'v2-chrono';
  const pop = el('div', 'v2-toy v2-glass'); pop.id = 'v2-chrono-pop'; pop.hidden = true;
  document.body.append(chrono, pop);
- const regs = chrono.querySelector('.ch-registers');
+ // Two tiers (Evan, 2026-10-23: "high level -> world, second level -> tile based"): the case carries the world
+ // (time, weather, season); a slimmer band under it carries this place's dials, to-dos and warnings.
+ const regs = chrono.querySelector('.ch-registers'), tileRegs = chrono.querySelector('.ch-tiles');
  // On a phone the case folds to the dial and the time (8% budget); tapping the dial unfolds the pushers and dials
  // for a while. On a wide screen the dial sets the time of day.
  const narrow = matchMedia('(max-width:520px)');
@@ -121,7 +126,7 @@ export function mountChrono({press, icons}) {
    g.onclick = e => { if (e.target.closest('.ch-wave')) { waved.add(offer.scene + ':' + offer.id); store.set(WAVE_KEY, [...waved]); lastKey = ''; render(); return; } pin(offer, formsFor(offer)[0]); };
    nodes.push(g); }
   const add = register('ch-add', 'Pin a dial', icons.plus); add.onclick = () => openShelf(add); nodes.push(add);
-  regs.replaceChildren(...nodes);
+  regs.replaceChildren(...nodes.slice(0, 2)); tileRegs.replaceChildren(...nodes.slice(2));
  }
  function pin(item, form) { pins = [...pins.filter(p => !(p.scene === item.scene && p.id === item.id)), {scene: item.scene, id: item.id, form}].slice(-MAX_PINS); closePop(); savePins(); }
 
@@ -169,7 +174,7 @@ export function mountChrono({press, icons}) {
   chrono.classList.toggle('paused', paused);
   const pauseButton = chrono.querySelector('.ch-pause'); if (pauseButton.dataset.state !== String(paused)) { pauseButton.dataset.state = String(paused); pauseButton.innerHTML = paused ? icons.play : icons.pause; pauseButton.setAttribute('aria-label', paused ? 'Play' : 'Pause'); }
   const pace = ($('#simulation-speed .pace-badge')?.textContent || '').trim(), speed = chrono.querySelector('.ch-speed'), text = !pace || pace === '›' ? '1×' : pace;
-  if (speed.dataset.pace !== text) { speed.dataset.pace = text; speed.innerHTML = icons.speed + `<b>${esc(text)}</b>`; speed.setAttribute('aria-label', 'Speed ' + text); }
+  if (speed.dataset.pace !== text) { speed.dataset.pace = text; speed.innerHTML = STOPWATCH + `<b>${esc(text)}</b>`; speed.setAttribute('aria-label', 'Speed ' + text); }
   render();
  }
  onManifestChange(() => { lastKey = ''; render(); });
