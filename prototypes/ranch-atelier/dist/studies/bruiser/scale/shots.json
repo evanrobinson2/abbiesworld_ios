@@ -58,5 +58,10 @@
   "src": "scale/011_cage_lod_r0.3.jpg",
   "n": "011",
   "cap": "The polygon dial at 9,000 faces."
+ },
+ {
+  "src": "scale/012_brute2_cage_r0.1.jpg",
+  "n": "012",
+  "cap": "Brute #2, same scripts, nothing changed: Meshy (20 credits) then learn and cage. 3,000 faces, 98.8% match from every side."
  }
 ]

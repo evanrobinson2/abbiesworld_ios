@@ -1,0 +1,18 @@
+{
+ "tag": "brute2_cage_r0.1",
+ "spec": "spec2",
+ "base": "spec2",
+ "ratio": 0.1,
+ "planar": 0,
+ "faces": 3072,
+ "bound": 14178,
+ "unbound": 1188,
+ "iou_vs_hero": {
+  "front": 0.986,
+  "three-quarter": 0.9889,
+  "side": 0.9916,
+  "back": 0.9872
+ },
+ "iou_mean": 0.9884,
+ "shot": "shots/012_brute2_cage_r0.1.png"
+}
