@@ -7,19 +7,19 @@ const DIO_R = 105, DIO_N = 44, DIO_ORIGIN = [land.W + 3600, land.D / 2]; // tile
 const DIOS = [
  {id: 'downtown', name: 'Downtown', bearing: 180, centre: [4340, 1640], R: 900, vex: 2.4, pin: '⛪', heroes: ['common', 'cafe', 'comellas', 'hoagies', 'lab', 'ginn'],
   look: {bg: '#f3dcbd', sun: '#ffd49a', sunI: 2.7, sunDir: [-520, 520, 620], sky: '#ffe9cf', gnd: '#8a6a4a', hemiI: 1.05, grass: ['#7fa14f', '#a8b45e'], soil: '#8a5a3a', fov: 32, dist: 250, azimuth: 205, lowPitch: 20, highPitch: 54,
-   mood: 'a late-afternoon square, brass and brick'}},
+   mood: 'a late-afternoon square, brass and brick', wash: 'downtown'}},
  {id: 'anis-side', name: "Ani's side", bearing: 300, centre: [3180, 3020], R: 820, vex: 3.4, pin: '\u{1F986}', heroes: ['horn', 'ani'],
   look: {bg: '#cfe8f1', sun: '#eef4ff', sunI: 2.0, sunDir: [420, 900, -380], sky: '#dff1ff', gnd: '#4d6a5c', hemiI: 1.3, grass: ['#64a07c', '#8bb86a'], soil: '#5d6b4a', fov: 48, dist: 330, azimuth: 150, lowPitch: 30, highPitch: 70,
-   mood: 'a cool bright morning by the pond, wide and airy'}},
- {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'],
+   mood: 'a cool bright morning by the pond, wide and airy', wash: 'anis-side'}},
+ {id: 'abbie-daddy-side', name: "Abbie and Daddy's side", bearing: 60, centre: [4930, 3440], R: 820, vex: 2.8, pin: '\u{1F3E1}', heroes: ['home', 'muraco', 'leonard'], houses: 9,
   look: {bg: '#f6c4ad', sun: '#ff9d6a', sunI: 2.9, sunDir: [-800, 360, 120], sky: '#ffd5c2', gnd: '#7a4a5a', hemiI: 1.0, grass: ['#c2a447', '#d98a45'], soil: '#7a4a3a', fov: 40, dist: 300, azimuth: 235, lowPitch: 38, highPitch: 78,
-   mood: 'a sunset hill, almost a board seen from above'}},
+   mood: 'a sunset hill, almost a board seen from above', wash: 'abbie-daddy-side'}},
 ];
 // hero places: model scale on the tile, footprint radius for the layout, and whether the place hugs the street
 const HERO = {cafe: {sc: .85, r: 12, shop: 1}, comellas: {sc: .85, r: 12, shop: 1}, hoagies: {sc: .85, r: 12, shop: 1}, lab: {sc: .85, r: 12, shop: 1}, common: {sc: .55, r: 19}, ginn: {sc: .5, r: 21},
  muraco: {sc: .5, r: 21}, leonard: {sc: .5, r: 29}, horn: {sc: .6, r: 16, fixed: 1}, home: {sc: .8, r: 22}, ani: {sc: .8, r: 22}};
 const dioGroup = new THREE.Group(); dioGroup.position.set(X(DIO_ORIGIN[0]), 0, Z(DIO_ORIGIN[1])); scene.add(dioGroup); dioGroup.visible = false;
-const dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
+const SQUARE = /*SQUARE*/null; const dioHouses = {}, dioSpots = {}, dioTiles = {}, stageFrames = [], scenes = {}; let lockOrbit = false;
 const dioTile = {}; // id -> {cx, cy (map metres of the tile's middle), group, ...}
 const smooth = t => { t = Math.max(0, Math.min(1, t)); return t * t * (3 - 2 * t); };
 const inHex = (x, y, R) => { const a = 30 * Math.PI / 180, ca = Math.cos(a), sa = Math.sin(a), u = x * ca + y * sa, v = -x * sa + y * ca, ax = Math.abs(u), ay = Math.abs(v); return ay <= R * Math.sqrt(3) / 2 && ax <= R - ay / Math.sqrt(3); };
@@ -42,10 +42,10 @@ function buildDiorama(d, ti) {
  const heroes = d.heroes.map(id => { const s = town.spots.find(p => p.id === id), H = HERO[id]; return {id, s, H, x: (s.x - d.centre[0]) / scl, y: (s.y - d.centre[1]) / scl, r: H.r}; });
  { const main = (() => { // Main Street: the busiest main road nearest the common, for the shops to line up along
    const c = heroes.find(h => h.id === 'common'); if (!c) return null; let best = null; for (const r of roads) if (r.c <= 3) for (const p of r.p) { const dd = Math.hypot(p[0] - c.x, p[1] - c.y); if (!best || dd < best.d) best = {d: dd, road: r}; } return best && best.road; })();
-  if (main) { const pts = main.p, along = (t) => { let run = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); if (t <= run + l || i === pts.length - 1) { const k = Math.min(1, (t - run) / l); return {x: pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k, y: pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k, tx: (pts[i][0] - pts[i - 1][0]) / l, ty: (pts[i][1] - pts[i - 1][1]) / l}; } run += l; } };
+  if (main) { const pts = main.p, along = (t) => { let run = 0; for (let i = 1; i < pts.length; i++) { const l = Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]); if (t <= run + l || i === pts.length - 1) { const k = (t - run) / l; return {x: pts[i - 1][0] + (pts[i][0] - pts[i - 1][0]) * k, y: pts[i - 1][1] + (pts[i][1] - pts[i - 1][1]) * k, tx: (pts[i][0] - pts[i - 1][0]) / l, ty: (pts[i][1] - pts[i - 1][1]) / l}; } run += l; } };
    let total = 0; for (let i = 1; i < pts.length; i++) total += Math.hypot(pts[i][0] - pts[i - 1][0], pts[i][1] - pts[i - 1][1]);
    const c = heroes.find(h => h.id === 'common'); let t0 = total / 2, bd = 1e9; for (let t = 0; t < total; t += 2) { const a = along(t), dd = Math.hypot(a.x - c.x, a.y - c.y); if (dd < bd) { bd = dd; t0 = t; } }
-   [['cafe', 1, -14], ['comellas', 1, 8], ['hoagies', -1, -14], ['lab', -1, 8]].forEach(([id, side, off]) => { const h = heroes.find(q => q.id === id); if (!h) return; const a = along(Math.max(10, Math.min(total - 10, t0 + off + 22))); h.x = a.x - a.ty * side * 12; h.y = a.y + a.tx * side * 12; h.shop = {tx: a.tx, ty: a.ty, side}; h.pinned = true; });
+   [['cafe', 1, -14], ['comellas', 1, 8], ['hoagies', -1, -14], ['lab', -1, 8]].forEach(([id, side, off]) => { const h = heroes.find(q => q.id === id); if (!h) return; const a = along(t0 + off + 22); h.x = a.x - a.ty * side * 12; h.y = a.y + a.tx * side * 12; h.shop = {tx: a.tx, ty: a.ty, side}; h.pinned = true; });
    if (c) { const a = along(t0), side = -1; c.x = a.x - a.ty * side * 40; c.y = a.y + a.tx * side * 40; } } }
  for (let it = 0; it < 120; it++) for (const a of heroes) { if (a.H.fixed || a.pinned) continue;
   for (const b of heroes) if (a !== b) { const dx = a.x - b.x, dy = a.y - b.y, dd = Math.hypot(dx, dy) || .01, need = a.r + b.r + 5; if (dd < need) { const k = (need - dd) / (b.H.fixed || b.pinned ? 1 : 2); a.x += dx / dd * k; a.y += dy / dd * k; } }
@@ -63,8 +63,10 @@ function buildDiorama(d, ti) {
  verts.forEach((v, i) => { pos.set([v.px, v.h, -v.py], i * 3); const wet = !isNaN(v.w), t = .5 + .5 * Math.sin(v.px * .21) * Math.cos(v.py * .17); cc.copy(c0).lerp(c1, Math.max(0, Math.min(1, (v.h - 3) / 22 * .6 + t * .4))); if (wet) cc.copy(cw); cols.set([cc.r, cc.g, cc.b], i * 3); });
  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(pos, 3)); geo.setAttribute('color', new THREE.BufferAttribute(cols, 3)); geo.setIndex(idx); geo.computeVertexNormals();
  const ground = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({vertexColors: true, roughness: .95, flatShading: true})); ground.receiveShadow = true; out.add(ground);
- // the water: where all three corners are under a real lake
- { const wi = []; for (let i = 0; i < idx.length; i += 3) if ([0, 1, 2].every(k => !isNaN(verts[idx[i + k]].w))) wi.push(idx[i], idx[i + 1], idx[i + 2]); if (wi.length) { const wp = new Float32Array(verts.length * 3); verts.forEach((v, i) => wp.set([v.px, isNaN(v.w) ? v.h : v.w, -v.py], i * 3)); const wg = new THREE.BufferGeometry(); wg.setAttribute('position', new THREE.BufferAttribute(wp, 3)); wg.setIndex(wi); wg.computeVertexNormals(); const wm = new THREE.Mesh(wg, new THREE.MeshStandardMaterial({color: '#3f9ac0', roughness: .15, metalness: .1, transparent: true, opacity: .86})); wm.receiveShadow = true; out.add(wm); } }
+ // the water: any triangle that touches a real lake; depth drives colour, foam and opacity, ripples and glints move with time
+ { const wi = []; for (let i = 0; i < idx.length; i += 3) if ([0, 1, 2].some(k => !isNaN(verts[idx[i + k]].w))) wi.push(idx[i], idx[i + 1], idx[i + 2]);
+  if (wi.length) { const wp = new Float32Array(verts.length * 3), dp = new Float32Array(verts.length); verts.forEach((v, i) => { const wet = !isNaN(v.w); wp.set([v.px, wet ? v.w : v.h + .02, -v.py], i * 3); dp[i] = wet ? Math.max(0, v.w - v.h) : 0; });
+   const wg = new THREE.BufferGeometry(); wg.setAttribute('position', new THREE.BufferAttribute(wp, 3)); wg.setAttribute('depth', new THREE.BufferAttribute(dp, 1)); wg.setIndex(wi); wg.computeVertexNormals(); const wm = new THREE.Mesh(wg, waterMaterial()); wm.receiveShadow = true; wm.renderOrder = 2; out.add(wm); } }
  // the tile's edge: soil down to a plinth, as every Abbie's World tile
  { const used = new Map(); for (let i = 0; i < idx.length; i += 3) for (let k = 0; k < 3; k++) { const a = idx[i + k], b = idx[i + (k + 1) % 3], kk = a < b ? a + '_' + b : b + '_' + a; used.set(kk, (used.get(kk) || 0) + 1); }
   const sv = []; for (const [kk, n] of used) if (n === 1) { const [a, b] = kk.split('_').map(Number), A = verts[a], B = verts[b]; sv.push(A.px, A.h, -A.py, B.px, B.h, -B.py, B.px, -4, -B.py, A.px, A.h, -A.py, B.px, -4, -B.py, A.px, -4, -A.py); }
@@ -90,11 +92,30 @@ function buildDiorama(d, ti) {
  G = realG; cafe = realCafe;
  // 7 houses of the real mix, thinned and set along the streets
  const taken = [...pads.map(p => ({x: p.h.x, y: p.h.y, r: p.h.r + 6}))], mine = [];
+ let gb = null; if (d.id === 'abbie-daddy-side') { const home = pads.find(p => p.h.id === 'home'); if (home) { const hx = home.h.x, hz = -home.h.y; let best = null;
+   for (const r of [40, 48, 34]) for (let k = 0; k < 24; k++) { const a = k * Math.PI / 12, px = hx + Math.cos(a) * r, py = -hz + Math.sin(a) * r; if (!inHex(px, py, DIO_R * .72) || !isNaN(waterY(px, py))) continue;
+    if (pads.some(p => p !== home && Math.hypot(p.h.x - px, p.h.y - py) < p.h.r + 14)) continue; const nr = nearRoad(px, py); if (nr && nr.d < 7) continue; const sc0 = (nr ? nr.d : 60) + r * .3; if (!best || sc0 < best.s) best = {px, py, s: sc0}; }
+   if (best) { const sx = best.px, sz = -best.py, face = Math.atan2(hx - sx, hz - sz); gb = {sx, sz, face}; taken.push({x: best.px, y: best.py, r: 17}, {x: sx - Math.sin(face) * 15, y: -(sz - Math.cos(face) * 15), r: 14}); } } }
+ let cds = null; if (d.id === 'anis-side') { const an = pads.find(p => p.h.id === 'ani'); if (an) { let best = null;
+   for (const r of [44, 52, 38]) for (let k = 0; k < 24; k++) { const a = k * Math.PI / 12, px = an.h.x + Math.cos(a) * r, py = an.h.y + Math.sin(a) * r; if (!inHex(px, py, DIO_R * .7) || !isNaN(waterY(px, py))) continue;
+    let bad = false; for (let q = 0; q < 12; q++) { const ex = px + Math.cos(q * .52) * 24, ey = py + Math.sin(q * .52) * 24; if (!isNaN(waterY(ex, ey)) || !inHex(ex, ey, DIO_R * .9)) bad = true; } if (bad) continue;
+    if (pads.some(p => p !== an && Math.hypot(p.h.x - px, p.h.y - py) < p.h.r + 26)) continue; const nr = nearRoad(px, py); if (!nr || nr.d > 70) continue; const hs = Math.abs(hf(px + 20, py) - hf(px - 20, py)) + Math.abs(hf(px, py + 20) - hf(px, py - 20)); const sc0 = nr.d + hs * 3; if (!best || sc0 < best.s) best = {px, py, s: sc0, nr}; }
+   if (best) { cds = {px: best.px, py: best.py, nr: best.nr}; taken.push({x: best.px, y: best.py, r: 30}); } } }
+ if (d.id === 'downtown') { // the town square: the real outline of the buildings around the common (public footprints, shapes only), shrunk to cartoon scale
+  const cp = pads.find(p => p.h.id === 'common'); if (cp) { const K = .21, grp = new THREE.Group(), WALL = ['#b5604a', '#d9c9a4', '#c9c0ae', '#e0c070', '#a9735a', '#cfd6cf'], ROOF = ['#5a4a40', '#6b5648', '#4a4f55'];
+   SQUARE.buildings.forEach((b, i) => { const sh = new THREE.Shape(b.p.map(([x, y]) => new THREE.Vector2(x * K, y * K))), hgt = b.a > 1500 ? 7 : 3.4 + (i * 37 % 10) / 5, hs = (i * 53 % 17) / 17;
+    const gx = cp.h.x + b.p.reduce((s, p) => s + p[0], 0) / b.p.length * K, gy = cp.h.y + b.p.reduce((s, p) => s + p[1], 0) / b.p.length * K; if (!inHex(gx, gy, DIO_R * .9)) return;
+    const geo = new THREE.ExtrudeGeometry(sh, {depth: hgt, bevelEnabled: false}).rotateX(-Math.PI / 2), m = new THREE.Mesh(geo, hkM(WALL[i % WALL.length])), cap = new THREE.Mesh(new THREE.ExtrudeGeometry(sh, {depth: .5, bevelEnabled: false}).rotateX(-Math.PI / 2), hkM(ROOF[i % ROOF.length]));
+    const ey = hf(gx, gy); for (const o of [m, cap]) { o.position.set(cp.h.x, ey - .3, -cp.h.y); o.castShadow = o.receiveShadow = true; } cap.position.y = ey - .3 + hgt; grp.add(m, cap); taken.push({x: gx, y: gy, r: Math.sqrt(b.a) * K * .5 + 3}); });
+   out.add(grp); } }
  for (const h of town.houses.slice().sort((a, b) => Math.hypot(a.x - d.centre[0], a.y - d.centre[1]) - Math.hypot(b.x - d.centre[0], b.y - d.centre[1]))) {
   const px = (h.x - d.centre[0]) / scl, py = (h.y - d.centre[1]) / scl; if (!inHex(px, py, DIO_R * .88)) continue; const wy = waterY(px, py); if (!isNaN(wy)) continue;
   const nr = nearRoad(px, py); if (nr && nr.d < nr.w / 2 + 4.6) continue; if (taken.some(t => Math.hypot(t.x - px, t.y - py) < (t.r || 9.5))) continue; if (h.fam === 'shop' && d.id !== 'downtown') continue;
-  taken.push({x: px, y: py, r: 9.5}); mine.push({...h, px, py, hz: hf(px, py)}); if (mine.length > 70) break; }
+  taken.push({x: px, y: py, r: 9.5}); mine.push({...h, px, py, hz: hf(px, py)}); if (mine.length > (d.houses ?? 70)) break; }
  { const yaw = h => Math.atan2(h.fx, -h.fy), HS = .66, grp = new THREE.Group(); out.add(grp);
+  const kit = mine.filter(h => h.fam !== 'shop'); // the real mix, rebuilt as the nine-type kit; shops stay as the instanced blocks
+  kit.forEach((h, i) => { const hs = Math.abs(Math.sin(h.px * 12.9 + h.py * 78.2)) , {tier, type} = houseType(h, hs), g = buildHouse(type, tier, h.w * HS, h.d * HS, Math.max(4.2, h.h * HS), h.wall, h.roofc, hs); g.position.set(h.px, h.hz - .2, -h.py); g.rotation.y = yaw(h); grp.add(g); (dioHouses[d.id] ||= []).push({x: h.px, z: -h.py, y: h.hz, type, tier, yaw: yaw(h)}); });
+  mine.splice(0, mine.length, ...mine.filter(h => h.fam === 'shop'));
   for (const fam of Object.keys(BODY)) { const list = mine.filter(h => h.fam === fam); if (list.length) grp.add(inst(boxGeo, BODY[fam], list, h => { v3.set(h.px, h.hz - .3, -h.py); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w * HS, (h.h + .3) * HS, h.d * HS); col.set(h.wall); })); }
   const gab = mine.filter(h => h.roof === 'gable' || h.roof === 'steep'), hip = mine.filter(h => h.roof === 'hip'), flat = mine.filter(h => h.roof === 'flat');
   grp.add(inst(gableGeo, roofMat, gab, h => { v3.set(h.px, h.hz + h.h * HS, -h.py); q.setFromEuler(e.set(0, yaw(h), 0)); sc.set(h.w * HS * 1.06, h.d * .5 * h.pitch * 1.1 * HS, h.d * HS * 1.1); col.set(h.roofc); }));
@@ -109,9 +130,47 @@ function buildDiorama(d, ti) {
   grp.add(inst(crownGeo, leafMat, broad, t => { v3.set(t.px, t.hz + 3.6 * t.s, -t.py); q.setFromEuler(e.set(t.px % 1, t.py % 3, 0)); sc.set(2.6 * t.s, 2.9 * t.s, 2.6 * t.s); col.set(t.c); }));
   grp.add(inst(pineGeo, leafMat, pine, t => { v3.set(t.px, t.hz + .4, -t.py); q.identity(); sc.set(1.9 * t.s, 8 * t.s, 1.9 * t.s); col.set(t.c); })); out.add(grp); }
  // 9 what only this place has
- DRESS[d.id]?.(out, {hf, pads, roads, nearRoad, waterY, mainR, verts, taken});
+ DRESS[d.id]?.(out, {hf, pads, roads, nearRoad, waterY, mainR, verts, taken, gb, cds});
  return {group: out, hf, pads, tile: tileC, roads, verts};
 }
+
+function stripMesh(pts, width, color, yAt) { // a flat road strip along points {x, z}, laid on the ground by yAt(x, z)
+ const pos = [], idx = []; for (let i = 0; i < pts.length; i++) { const a = pts[Math.max(0, i - 1)], b = pts[Math.min(pts.length - 1, i + 1)], tx = b.x - a.x, tz = b.z - a.z, l = Math.hypot(tx, tz) || 1, nx = -tz / l * width / 2, nz = tx / l * width / 2;
+  pos.push(pts[i].x + nx, yAt(pts[i].x + nx, pts[i].z + nz), pts[i].z + nz, pts[i].x - nx, yAt(pts[i].x - nx, pts[i].z - nz), pts[i].z - nz); if (i) { const k = i * 2; idx.push(k - 2, k + 1, k - 1, k - 2, k, k + 1); } }
+ const g = new THREE.BufferGeometry(); g.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3)); g.setIndex(idx); g.computeVertexNormals(); const m = new THREE.Mesh(g, hkM(color)); m.receiveShadow = true; return m; }
+
+function buildLaunch() { // Launch: a rocket on its pad on a green island north of the trio, a car road to each of the two home sides
+ const L = new THREE.Group(), LZ = -DIO_R * 2.2; L.position.set(0, 0, LZ); dioGroup.add(L);
+ const isl = new THREE.Mesh(HK.cyl, hkM('#7fa14f')); isl.scale.set(30, 1.2, 30); isl.position.y = -1; isl.receiveShadow = true; const rim = new THREE.Mesh(HK.cyl, hkM('#8a5a3a')); rim.scale.set(30.5, 1.4, 30.5); rim.position.y = -2.2; L.add(rim, isl);
+ const B = (w, h, dd, c, x, y, z) => { const m = new THREE.Mesh(boxGeo, hkM(c)); m.scale.set(w, h, dd); m.position.set(x, y, z); m.castShadow = true; L.add(m); return m; }, Cy = (r0, r1, h, c, x, y, z) => { const m = new THREE.Mesh(new THREE.CylinderGeometry(r0, r1, h, 14), hkM(c)); m.position.set(x, y + h / 2, z); m.castShadow = true; L.add(m); return m; };
+ Cy(7, 7.4, .6, '#b8b2a8', 0, 0, 0); Cy(1.6, 1.6, 10, '#f49ac2', 0, .6, 0); const nose = new THREE.Mesh(new THREE.ConeGeometry(1.6, 3.6, 14), hkM('#f49ac2')); nose.position.set(0, 12.4, 0); nose.castShadow = true; L.add(nose);
+ for (let i = 0; i < 3; i++) { const a = i * 2.094, f = B(.3, 3.2, 2.6, '#c84a3a', Math.cos(a) * 2.2, 1.6, Math.sin(a) * 2.2); f.rotation.y = -a; } Cy(.35, .35, 12, '#9aa3a6', 5, 0, 2); B(.4, .4, 3.4, '#9aa3a6', 5, 11.6, .4); // the gantry tower and arm
+ B(14, .6, 5, '#7a7a76', 0, 0, 12); for (let i = -2; i <= 2; i++) B(.5, .1, 2.4, '#f4efe4', i * 2.4, .65, 12); // a small hangar apron with stripes
+ const sign = B(5, 1.6, .25, '#f4efe4', -9, 2.4, 9); Cy(.1, .1, 2.4, '#6a4a2e', -9, 0, 9);
+ const tiles = [{x: Math.sin(rad(60)) * DIO_R, z: -Math.cos(rad(60)) * DIO_R}, {x: Math.sin(rad(300)) * DIO_R, z: -Math.cos(rad(300)) * DIO_R}];
+ for (const t of tiles) { const a = {x: t.x * .88, z: t.z - DIO_R * .78}, pts = []; for (let i = 0; i <= 10; i++) { const u = i / 10; pts.push({x: a.x + (0 - a.x) * u + Math.sin(u * Math.PI) * (t.x > 0 ? 6 : -6), z: a.z + (LZ + 28 - a.z) * u}); } dioGroup.add(stripMesh(pts, 5, '#4f4b49', () => .3)); }
+ return L;
+}
+
+const waterU = {uWT: {value: 0}}; // water time, advanced in dioFrame
+function waterMaterial() { // shallow turquoise to deep blue by depth, a foam line on the shore, drifting ripples and glints
+ const m = new THREE.MeshStandardMaterial({color: '#3f9ac0', roughness: .12, metalness: .12, transparent: true, depthWrite: false});
+ m.onBeforeCompile = sh => { sh.uniforms.uWT = waterU.uWT;
+  sh.vertexShader = sh.vertexShader.replace('#include <common>', '#include <common>\nattribute float depth; varying float vDepth; varying vec3 vWP;').replace('#include <begin_vertex>', '#include <begin_vertex>\nvDepth = depth; vWP = (modelMatrix * vec4(position, 1.0)).xyz;');
+  sh.fragmentShader = sh.fragmentShader.replace('#include <common>', '#include <common>\nuniform float uWT; varying float vDepth; varying vec3 vWP;')
+   .replace('#include <color_fragment>', `#include <color_fragment>
+    float dd = clamp(vDepth / 3.2, 0.0, 1.0);
+    vec3 shallow = vec3(0.56, 0.86, 0.80), mid = vec3(0.25, 0.60, 0.76), deep = vec3(0.10, 0.34, 0.55);
+    vec3 wc = mix(shallow, mid, smoothstep(0.0, 0.45, dd)); wc = mix(wc, deep, smoothstep(0.4, 1.0, dd));
+    float rip = sin(vWP.x * 1.3 + uWT * 1.1) * sin(vWP.z * 1.1 - uWT * .9) + sin((vWP.x + vWP.z) * 2.3 + uWT * 1.7) * .5;
+    float foam = (1.0 - smoothstep(0.05, 0.55 + rip * .12, vDepth)) * (0.7 + 0.3 * sin(vWP.x * 3.0 + vWP.z * 2.0 + uWT * 2.0));
+    diffuseColor.rgb = mix(wc, vec3(0.97, 0.99, 1.0), clamp(foam, 0.0, 1.0));
+    diffuseColor.a = mix(0.42, 0.93, smoothstep(0.0, 0.5, dd)) + foam * .3;`)
+   .replace('#include <normal_fragment_maps>', `#include <normal_fragment_maps>
+    normal = normalize(normal + vec3(sin(vWP.x * 2.1 + uWT * 1.3) * .09, 0.0, cos(vWP.z * 1.9 - uWT * 1.1) * .09));`)
+   .replace('#include <opaque_fragment>', `float gl = pow(max(0.0, sin(vWP.x * 5.0 + uWT * 2.2) * sin(vWP.z * 4.6 - uWT * 1.8)), 9.0) * .28; outgoingLight += vec3(gl);
+    #include <opaque_fragment>`); };
+ return m; }
 const dioCafes = [];
 
 // ---- what only each place has ----
@@ -132,7 +191,18 @@ const DRESS = {
   for (let k = 0; k < 4; k++) { const car = new THREE.Group(), body = new THREE.Mesh(boxGeo, M(['#b9322c', '#2f5d8a', '#e8e2d0', '#3b6f4a'][k])), cab = new THREE.Mesh(boxGeo, M('#9fb7c6')); body.scale.set(3.6, .9, 1.6); body.position.y = .7; cab.scale.set(1.8, .7, 1.4); cab.position.set(-.2, 1.4, 0); car.add(body, cab); put(car, ...pt(-20 + k * 11, s * 1.9), along); }
   for (let k = 0; k < 7; k++) for (const side of [1, -1]) { const tr = new THREE.Group(), tk = new THREE.Mesh(new THREE.CylinderGeometry(.18, .25, 2.2, 6), M('#6b4f36')), cr = new THREE.Mesh(new THREE.IcosahedronGeometry(1.7, 0), M('#e8b932', {flatShading: true})), pit = new THREE.Mesh(new THREE.CylinderGeometry(.9, .9, .12, 8), M('#4a3f36')); tk.position.y = 1.1; cr.position.y = 3.4; pit.position.y = .06; tr.add(pit, tk, cr); put(tr, ...pt(-33 + k * 11, side * 6.4)); }
  },
- 'anis-side'(out, c) { // the hill by Horn Pond: the highest ground of the tile, with a cairn, a flag and a bench to look out from
+ 'anis-side'(out, c) { // her cul de sac: a ring road round a green, six houses facing in, a short road out to the street; then the hill by Horn Pond
+  if (c.cds) { const {px, py, nr} = c.cds, cy = c.hf(px, py) + .15, g = new THREE.Group(); g.position.set(px, 0, -py); out.add(g);
+   const ring = []; for (let i = 0; i <= 32; i++) { const a = i / 32 * Math.PI * 2; ring.push({x: Math.cos(a) * 11, z: Math.sin(a) * 11}); }
+   g.add(stripMesh(ring, 4.2, '#5e5a58', (x, z) => c.hf(px + x, py - z) + .15)); const island = new THREE.Mesh(HK.cyl, hkM('#6fa34a')); island.scale.set(7.5, .5, 7.5); island.position.set(0, cy - .1, 0); island.receiveShadow = true; g.add(island);
+   const tr = new THREE.Mesh(new THREE.IcosahedronGeometry(2.2, 0), hkM('#d9842f')); tr.position.set(0, cy + 4, 0); tr.castShadow = true; const tk = new THREE.Mesh(HK.cyl, hkM('#6b4f36')); tk.scale.set(.35, 3, .35); tk.position.set(0, cy, 0); g.add(tk, tr);
+   const dx = nr.x - px, dy = nr.y - py, dl = Math.hypot(dx, dy) || 1, stem = [], n = Math.max(2, Math.ceil(dl / 6)); for (let i = 0; i <= n; i++) { const t = i / n, x = dx * t * (1 - 11 / dl) + dx / dl * 11, y = dy * t * (1 - 11 / dl) + dy / dl * 11; stem.push({x, z: -y}); }
+   g.add(stripMesh(stem, 4.2, '#5e5a58', (x, z) => c.hf(px + x, py - z) + .15));
+   const stemAng = Math.atan2(-dy, dx), types = ['colonial', 'cape', 'splitlevel', 'farmhouse', 'colonial', 'cape']; let hi = 0;
+   for (let i = 0; i < 8; i++) { const a = i / 8 * Math.PI * 2; if (Math.abs(((a - stemAng + Math.PI * 3) % (Math.PI * 2)) - Math.PI) > Math.PI - .5) continue; const hx = Math.cos(a) * 20, hz = Math.sin(a) * 20, tp = types[hi++ % types.length], wide = 8.5 + (hi % 3), hh = new THREE.Group();
+    hh.add(buildHouse(tp, tp === 'cape' ? 0 : 1, wide, 7, 4.4, ['#e5d8b8', '#c9d6c8', '#e8c9b0', '#d6dbe2', '#e0cf9a'][hi % 5], ['#5a4a40', '#4a4f55', '#6b4a3a'][hi % 3], (hi * .37) % 1)); hh.position.set(hx, c.hf(px + hx, py - hz) - .2, hz); hh.rotation.y = Math.atan2(-hx, -hz); g.add(hh); }
+   (dioSpots['anis-side'] ||= {}).culdesac = {x: px, z: -py, y: cy, facing: 0}; }
+  // the hill by Horn Pond: the highest ground of the tile, with a cairn, a flag and a bench to look out from
   let best = null; for (const v of c.verts) if (isNaN(v.w) && Math.hypot(v.px, v.py) < DIO_R * .8 && !c.pads.some(p => Math.hypot(v.px - p.h.x, v.py - p.h.y) < p.h.r + 10) && (!best || v.h > best.h)) best = v;
   if (!best) return; const g = new THREE.Group(); g.position.set(best.px, best.h, -best.py); out.add(g);
   for (let i = 0; i < 6; i++) { const r = new THREE.Mesh(new THREE.DodecahedronGeometry(.9 - i * .08, 0), M(['#9a9a96', '#b3afa6', '#8b8984'][i % 3], {flatShading: true})); r.position.set(Math.cos(i * 1.2) * (i < 4 ? 1.4 : .4), i < 4 ? .5 : 1.4, Math.sin(i * 1.2) * (i < 4 ? 1.4 : .4)); g.add(r); }
@@ -140,25 +210,29 @@ const DRESS = {
   const bench = new THREE.Mesh(boxGeo, M('#6a4a2e')); bench.scale.set(2.4, .25, .7); bench.position.set(-3, .3, 1.5); g.add(bench);
   const hill = out.userData; hill.summit = {x: best.px, y: best.py, h: best.h};
  },
- 'abbie-daddy-side'(out, c) { // the road to Launch: a signpost and a small rocket at the north edge of the tile
-  const top = c.verts.reduce((b, v) => (v.py > b.py && Math.abs(v.px) < 30 && v.py < DIO_R * .75 && isNaN(v.w) ? v : b), {py: -1e9}); if (top.py < -1e8) return; const g = new THREE.Group(); g.position.set(top.px, top.h, -top.py); out.add(g); (dioSpots['abbie-daddy-side'] ||= {}).launch = {x: top.px, z: -top.py, y: top.h, facing: 0};
-  const pad = new THREE.Mesh(new THREE.CylinderGeometry(3.4, 3.8, .5, 14), M('#b8b2a8')); pad.position.y = .25; const body = new THREE.Mesh(new THREE.CylinderGeometry(1.2, 1.2, 6, 14), M('#f49ac2')); body.position.y = 3.5; const nose = new THREE.Mesh(new THREE.ConeGeometry(1.2, 2.6, 14), M('#f49ac2')); nose.position.y = 7.8;
-  for (let i = 0; i < 3; i++) { const f = new THREE.Mesh(boxGeo, M('#c84a3a')); f.scale.set(.2, 2, 1.6); f.position.set(Math.cos(i * 2.1) * 1.5, 1.6, Math.sin(i * 2.1) * 1.5); f.rotation.y = -i * 2.1; g.add(f); } g.add(pad, body, nose);
-  const post = new THREE.Mesh(new THREE.CylinderGeometry(.1, .1, 2.6, 5), M('#6a4a2e')), arrow = new THREE.Mesh(boxGeo, M('#e8643c')); post.position.set(-6, 1.3, 4); arrow.scale.set(2.2, .7, .1); arrow.position.set(-6, 2.6, 4); arrow.rotation.y = -.3; g.add(post, arrow);
+ 'abbie-daddy-side'(out, c) { // the house and back yard, the Gingerbread House a short walk away, and the bunker door behind it (sealed: not built yet)
+  const home = c.pads.find(p => p.h.id === 'home'); if (!home) return; const hx = home.h.x, hz = -home.h.y;
+  const best = c.gb; if (!best) return; const sx = best.sx, sz = best.sz, gy = c.hf(sx, -sz), face = best.face, g = new THREE.Group(); g.position.set(sx, gy, sz); g.rotation.y = face; out.add(g);
+  buildGingerbread(g); (dioSpots['abbie-daddy-side'] ||= {}).gingerbread = {x: sx, z: sz, y: gy, facing: face};
+  const bx = sx - Math.sin(face) * 15, bz = sz - Math.cos(face) * 15, bg = new THREE.Group(); bg.position.set(bx, c.hf(bx, -bz), bz); bg.rotation.y = face; out.add(bg); buildBunker(bg); dioSpots['abbie-daddy-side'].bunker = {x: bx, z: bz, y: bg.position.y, facing: face};
+  // a stepping-stone path of round candies from the house to the shop
+  for (let i = 1; i < 8; i++) { const t = i / 8, px = hx + (sx - hx) * t, pz = hz + (sz - hz) * t, s = new THREE.Mesh(HK.cyl, hkM(['#f2a7c3', '#f7e08a', '#a9e0c4', '#f6b97a'][i % 4])); s.scale.set(.9, .18, .9); s.position.set(px, c.hf(px, -pz) + .05, pz); s.receiveShadow = true; out.add(s); }
+  const mark = (id, x, z, y) => { (dioSpots['abbie-daddy-side'] ||= {})[id] = {x, z, y, facing: 0}; };
+  { const lx = 0, lz = -DIO_R * 2.2, tc = {x: Math.sin(rad(60)) * DIO_R, z: -Math.cos(rad(60)) * DIO_R}; mark('launch', lx - tc.x, lz - tc.z, 0); }
  },
 };
 
 // ---- the view: each region has its own opinion about the pulled-back view (palette, light, lens, tilt, distance) ----
 // The pitch-by-zoom curve is the open-land camera's (simulations/land-camera.mjs, AW-STUDY-0018), tuned for each region.
 const ORDER_DIO = ['dio-trio', 'dio-downtown', 'dio-anis-side', 'dio-abbie-daddy-side'];
-const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42};
-const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70};
+const LOOK_REAL = {bg: '#cfe2ea', sun: '#fff0d6', sunI: 2.4, sunDir: [-600, 900, 400], sky: '#e6f1ff', gnd: '#7a6a4a', hemiI: 1.15, fov: 42, wash: 'real'};
+const LOOK_TRIO = {bg: '#ebdccb', sun: '#fff1d8', sunI: 2.4, sunDir: [-500, 900, 500], sky: '#f2efe6', gnd: '#7a6a4a', hemiI: 1.1, fov: 36, dist: 560, azimuth: 180, lowPitch: 34, highPitch: 70, wash: 'trio'};
 let viewDio = false, look = LOOK_REAL, dragging = false; const dioC = new THREE.Color(), dioV = new THREE.Vector3(), rad = a => a * Math.PI / 180;
 const pitchFor = (dist, L) => rad(L.lowPitch + (L.highPitch - L.lowPitch) * Math.pow(Math.max(0, Math.min(1, Math.log(dist / 40) / Math.log(760 / 40))), .8));
 canvas.addEventListener('pointerdown', () => { dragging = true; }); addEventListener('pointerup', () => { dragging = false; });
 function setupDioramas() {
- const DV = DIOS.map(buildDiorama);
- DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}}; });
+ const DV = DIOS.map(buildDiorama); buildLaunch();
+ DIOS.forEach((d, i) => { const v = DV[i]; dioTiles[d.id] = {hf: v.hf, group: v.group, centre: v.group.position.clone().add(dioGroup.position), spots: dioSpots[d.id] || {}, houses: dioHouses[d.id] || []}; });
  DIOS.forEach((d, i) => { const t = DV[i].tile; spotByID['dio-' + d.id] = {id: 'dio-' + d.id, name: d.name, line: d.look.mood[0].toUpperCase() + d.look.mood.slice(1) + '.', x: DIO_ORIGIN[0] + t.x, y: DIO_ORIGIN[1] + t.y, z: 10}; ICON['dio-' + d.id] = d.pin; });
  spotByID['dio-trio'] = {id: 'dio-trio', name: 'Three regions', line: "Downtown, Ani's side, and Abbie and Daddy's side, small enough to hold.", x: DIO_ORIGIN[0], y: DIO_ORIGIN[1], z: 6}; ICON['dio-trio'] = '⬡';
 }
@@ -166,22 +240,21 @@ function visitDio(id) {
  const s = spotByID[id], L = id === 'dio-trio' ? LOOK_TRIO : DIOS.find(d => 'dio-' + d.id === id).look; shown = id; current = ORDER_DIO.indexOf(id); look = L;
  const tgt = new THREE.Vector3(X(s.x), s.z, Z(s.y)), pitch = pitchFor(L.dist, L), az = rad(L.azimuth), h = Math.cos(pitch) * L.dist;
  fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(tgt.x + Math.sin(az) * h, tgt.y + Math.sin(pitch) * L.dist, tgt.z - Math.cos(az) * h), t1: tgt};
- bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1;
+ if (id !== 'dio-trio') { bubble.innerHTML = `<b>${s.name}</b>${s.line}`; bubble.style.opacity = 1; clearTimeout(visitDio.t); visitDio.t = setTimeout(() => { bubble.style.opacity = 0; }, 7000); } else bubble.style.opacity = 0;
 }
 function setView(on) {
- viewDio = on; dioGroup.visible = on; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
+ viewDio = on; dioGroup.visible = on; bubble.classList.toggle('dock', on); bubble.onclick = () => { bubble.style.opacity = 0; }; document.getElementById('dio').setAttribute('aria-pressed', on); document.querySelector('.hud').classList.toggle('dio', on);
  controls.minDistance = on ? 20 : 30; controls.maxDistance = on ? 760 : 14000;
  if (on) visitDio('dio-trio'); else { look = LOOK_REAL; home(); }
 }
 document.getElementById('dio').onclick = () => setView(!viewDio);
 function dioFrame(dt, t) {
+ waterU.uWT.value = t;
  const k = 1 - Math.exp(-dt * 3.5), L = look;
+ if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
  if (Math.abs(camera.fov - L.fov) > .05) { camera.fov += (L.fov - camera.fov) * k; camera.updateProjectionMatrix(); }
- if (viewDio && !fly && !dragging && L.lowPitch) { // the zone's tilt follows the zoom: close and low, far and high
-  const tg = controls.target, dist = camera.position.distanceTo(tg), cur = Math.asin(Math.max(-1, Math.min(1, (camera.position.y - tg.y) / dist))), want = pitchFor(dist, L);
-  if (Math.abs(want - cur) > .003) { const p = cur + (want - cur) * .05, hx = camera.position.x - tg.x, hz = camera.position.z - tg.z, hl = Math.hypot(hx, hz) || 1; camera.position.set(tg.x + hx / hl * Math.cos(p) * dist, tg.y + Math.sin(p) * dist, tg.z + hz / hl * Math.cos(p) * dist); } }
  for (const c of dioCafes) c.key.rotation.y = t;
  for (const f of stageFrames) f(dt, t);
 }
@@ -213,6 +286,9 @@ function setupStage() {
   frame: fn => { stageFrames.push(fn); return () => { const i = stageFrames.indexOf(fn); if (i >= 0) stageFrames.splice(i, 1); }; },
   flyTo: (target, o = {}) => { const v = target.isVector3 ? target : new THREE.Vector3(target.x, target.y || 0, target.z); const dist = o.dist || 120, pitch = rad(o.pitch ?? 50), az = rad(o.azimuth ?? 180), h = Math.cos(pitch) * dist; fly = {at: clock.elapsedTime, p0: camera.position.clone(), t0: controls.target.clone(), p1: new THREE.Vector3(v.x + Math.sin(az) * h, v.y + Math.sin(pitch) * dist, v.z - Math.cos(az) * h), t1: v.clone()}; },
   setLook: l => { look = {...look, ...l}; }, hideChrome: on => { document.querySelector('.hud').style.display = on ? 'none' : ''; bubble.style.opacity = on ? 0 : bubble.style.opacity; }};
+ const ground = (wx, wz) => { for (const d of DIOS) { const t = dioTiles[d.id], px = wx - t.group.position.x - dioGroup.position.x, py = -(wz - t.group.position.z - dioGroup.position.z); if (inHex(px, py, DIO_R)) return t.hf(px, py) + dioGroup.position.y; } return 0; };
+ stage.ground = ground;
+ for (const t of Object.values(dioTiles)) for (const sp of Object.values(t.spots)) { const f = sp.facing || 0, ox = Math.sin(f), oz = Math.cos(f); sp.out = {dirX: ox, dirZ: oz}; sp.street = {dirX: oz, dirZ: -ox}; const cx = sp.x + ox * 8.5, cz = sp.z + oz * 8.5; sp.curb = {x: cx, y: t.hf(cx, -cz), z: cz}; }
  // the named scenes: the café curb, the homes, and Launch sit on their tiles
  const at = (tile, hero, extra = {}) => { const sp = dioTiles[tile]?.spots[hero]; if (!sp) return; registerScene({id: extra.id, region: tile, anchor: [sp.x, sp.z], y: sp.y, facing: sp.facing, bounds: extra.bounds || 30}); };
  at('downtown', 'cafe', {id: 'cafe-curb'}); at('abbie-daddy-side', 'home', {id: 'abbie-kitchen'}); at('abbie-daddy-side', 'home', {id: 'treehouse'}); at('anis-side', 'ani', {id: 'anis-kitchen'}); at('abbie-daddy-side', 'launch', {id: 'launch-pad'}); at('downtown', 'lab', {id: 'lab-door'}); at('abbie-daddy-side', 'muraco', {id: 'school-door'});

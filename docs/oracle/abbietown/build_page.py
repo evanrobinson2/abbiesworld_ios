@@ -14,16 +14,22 @@ for name in ['town.mjs', 'regions.mjs', 'manifest.mjs', 'entrances.mjs']:
     code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
     code = re.sub(r'^export ', '', code, flags=re.M)
     parts.append(f'// ---- simulations/abbietown/{name} ----\n' + code)
+# the watercolour distance pass (AW-STUDY-0050) lives in the shared kit, one folder up
+code = (sim.parent / 'watercolour-distance.mjs').read_text()
+code = re.sub(r'^import .*?;\n', '', code, flags=re.M)
+code = re.sub(r'^export ', '', code, flags=re.M)
+parts.append('// ---- simulations/watercolour-distance.mjs ----\n' + code)
 modules = '\n'.join(parts)
 land = json.dumps(json.loads((sim / 'land.json').read_text()), separators=(',', ':')).replace('</', '<\\/')
 history = json.dumps(json.loads((sim / 'history.json').read_text()), separators=(',', ':'))
 import base64
+square = json.dumps(json.loads((sim / 'square.json').read_text()), separators=(',', ':'))
 overlay = 'data:image/png;base64,' + base64.b64encode((sim / 'overlay.png').read_bytes()).decode()
 context = subprocess.run(['node', str(root / 'tools/context-card/snippet.mjs'), 'abbietown'], capture_output=True, text=True, check=True).stdout
-template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'dioramas.block.js').read_text())
+template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'housekit.block.js').read_text() + (here / 'dioramas.block.js').read_text())
 def page(three, orbit):
     imap = json.dumps({'imports': {'three': three, 'three/addons/controls/OrbitControls.js': orbit}})
-    return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context).replace('/*HISTORY*/', history).replace('/*OVERLAY*/', overlay)
+    return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context).replace('/*HISTORY*/', history).replace('/*OVERLAY*/', overlay).replace('/*SQUARE*/null', square)
 art = page('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js', 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js')
 btns = '<div class="chips"><button class="btn" id="csv">Download the manifest (CSV)</button><button class="chip" id="json">JSON</button></div>'
 assert btns in art

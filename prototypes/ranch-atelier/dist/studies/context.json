@@ -427,6 +427,36 @@
           "k": "canon",
           "t": "Games study and speed review",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/basement/BASEMENT_STUDY.md"
+        },
+        {
+          "k": "reference",
+          "t": "v86, the x86 emulator in the browser (BSD-2)",
+          "href": "https://github.com/copy/v86",
+          "note": "Runs real FreeDOS and our KEYSTORM disk; licences in tools/grace-dos/README.md"
+        },
+        {
+          "k": "reference",
+          "t": "FreeDOS (GPL)",
+          "href": "https://www.freedos.org/",
+          "note": "The real DOS on Grace's computer; source tarballs are in the repo"
+        },
+        {
+          "k": "reference",
+          "t": "SeaBIOS (LGPL)",
+          "href": "https://www.seabios.org/",
+          "note": "BIOS for the emulated PC"
+        },
+        {
+          "k": "reference",
+          "t": "Quaternius Universal Base Characters (CC0)",
+          "href": "https://quaternius.com/",
+          "note": "The rigged mannequin reshaped into the girl"
+        },
+        {
+          "k": "canon",
+          "t": "Memory kit: era pass, inner voice and dialog scripts",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/simulations/memory-kit",
+          "note": "Shared by every memory place (basement, school roof, Moon Mission dialog)"
         }
       ],
       "recorded": "2026-10-23, gathered afterwards from the study docs"
@@ -2241,6 +2271,165 @@
           "t": "Base heroes PG rules",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/moonheroes/BASE_ROSTER.md",
           "note": "smooth featureless bodies, true adult proportions, no anatomical detail"
+        }
+      ]
+    },
+    "hand-drawn": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Game Oracle: Guilty Gear Xrd record and 'How it's drawn' (outline shells, held frames), plus the 19 of 368 games that use outlines",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/docs/oracle/games",
+          "note": "confirmed Xrd as the reference for limited-animation 3D"
+        },
+        {
+          "k": "devblog",
+          "t": "GuiltyGear Xrd's Art Style: The X Factor Between 2D and 3D (GDC 2015, Motomura)",
+          "href": "https://gdcvault.com/play/1022031/GuiltyGearXrd-s-Art-Style-The",
+          "note": "edited normals, painted line width, animation on held frames"
+        },
+        {
+          "k": "devblog",
+          "t": "Guilty Gear Xrd Art Talk at GDC 2015 (Arc System Works)",
+          "href": "https://www.arcsystemworks.com/guilty-gear-xrd-art-talk-at-game-developers-conference-2015/",
+          "note": "the studio's own write-up of the talk"
+        },
+        {
+          "k": "devblog",
+          "t": "Junya C. Motomura: Behind the Scenes of Guilty Gear Xrd (BlenderNation)",
+          "href": "https://www.blendernation.com/2015/07/26/junya-c-motomura-behind-the-scenes-of-guilty-gear-xrd/",
+          "note": "how the poses are posed to read as drawn"
+        },
+        {
+          "k": "devblog",
+          "t": "Motomura Junya: GuiltyGearXrd slides (PDF)",
+          "href": "https://www.ggxrd.com/Motomura_Junya_GuiltyGearXrd.pdf",
+          "note": "frame timing and the camera choices"
+        },
+        {
+          "k": "design",
+          "t": "How Spider-Man got a makeover: Spider-Verse (Hollywood Reporter)",
+          "href": "https://www.hollywoodreporter.com/behind-screen/how-spider-man-got-a-makeover-spider-verse-1165982",
+          "note": "animating on twos and ones as a choice per beat"
+        },
+        {
+          "k": "design",
+          "t": "Spider-Verse look explained (VFX Voice)",
+          "href": "https://vfxvoice.com/?p=5908138",
+          "note": "hand-drawn line work added over 3D, redrawn per frame"
+        },
+        {
+          "k": "tutorial",
+          "t": "three.js AnimationMixer: update(deltaTimeInSeconds)",
+          "href": "https://threejs.org/docs/#api/en/animation/AnimationMixer",
+          "note": "stepping the mixer by whole drawings is how poses are held"
+        },
+        {
+          "k": "canon",
+          "t": "Painted Brush kit (Inspiring Shaders, AW-STUDY-0045)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+          "note": "the shading and ink shell this look is a preset of"
+        },
+        {
+          "k": "canon",
+          "t": "The Perfect Drawing Pipeline: code pencil (AW-STUDY-0045)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/trace-lab/pencil.py",
+          "note": "pressure and wobble ideas, ported as pen swell and boil"
+        },
+        {
+          "k": "canon",
+          "t": "Character Studio directions (stick man, clay on twos)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/character-studio/directions.mjs",
+          "note": "the drawing counter and stepped time were already there"
+        },
+        {
+          "k": "canon",
+          "t": "Brute fight hit-stop (AW-STUDY-0027)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/brute-fight/play.html",
+          "note": "every blow already freezes; the look turns that freeze into a held drawing"
+        },
+        {
+          "k": "canon",
+          "t": "GAME_FEEL.md and the HUD study",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "style on figures only, nothing masks the world, no words on the play screen"
+        }
+      ]
+    },
+    "rig-hero": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Character Studio bone names (AW-STUDY-0037)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/character-studio/CHARACTER_STUDIO.md",
+          "note": "the shared bone names the rig follows"
+        },
+        {
+          "k": "tutorial",
+          "t": "Unity 2D Animation package manual",
+          "href": "https://docs.unity3d.com/Packages/com.unity.2d.animation@latest",
+          "note": "sprite skinning route noted as the soft-mesh upgrade; not used here"
+        },
+        {
+          "k": "reference",
+          "t": "Pasted hero picture from Evan",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/rig-cutout/example",
+          "note": "the source of every part sprite"
+        }
+      ]
+    },
+    "watercolour": {
+      "recorded": "2026-10-23, while building",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Zelda: Breath of the Wild",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json",
+          "note": "the identity record for the game this look is read from; the far world gets softer instead of more detailed"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: GRIS",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/gris.json",
+          "note": "watercolour as a whole-game language; colour carries the mood"
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle: Dorfromantik",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json",
+          "note": "a tile board seen from above in soft painted washes"
+        },
+        {
+          "k": "devblog",
+          "t": "Zelda: Breath of the Wild art director on the game's art style",
+          "href": "https://nintendoeverything.com/zelda-breath-of-the-wild-art-director-on-how-the-wind-waker-hd-shaped-the-games-art-style/",
+          "note": "why the world reads as a painted picture rather than a simulation of light"
+        },
+        {
+          "k": "design",
+          "t": "Inspiring Shaders, entry 6 (our study)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/shaders/INSPIRING_SHADERS_STUDY.md",
+          "note": "the starting point: distance gets softer and more painted, it hides detail and adds mood"
+        },
+        {
+          "k": "tutorial",
+          "t": "Interactive watercolor rendering: tutorial (Bousseau, Inria)",
+          "href": "https://artis.inrialpes.fr/Membres/Adrien.Bousseau/watercolor_tutorial/tutorial2.pdf",
+          "note": "the ingredients we kept: abstraction into flat washes, pigment granulation, paper texture, edge darkening"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL: nothing masks the world",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "wash is capped and only grows with distance; no HUD or words added"
+        },
+        {
+          "k": "canon",
+          "t": "Painted Brush and the toon kit",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/painted-brush.mjs",
+          "note": "the pass reads colour and depth only, so it composes with every material look and with Paint the world"
         }
       ]
     }

@@ -72,6 +72,23 @@ html,body{margin:0;height:100%;background:#0b2a24;overflow:hidden;touch-action:n
 #maker .go:active{transform:scale(.93)}
 #maker .go svg{width:36px;height:36px}
 #maker .row button.dice{width:40px;height:40px}
+#pausem{left:50%;top:50%;transform:translate(-50%,-50%) scale(.85);display:flex;gap:14px;padding:16px 18px;opacity:0;pointer-events:none;z-index:9;transition:opacity .25s,transform .35s cubic-bezier(.2,1.4,.4,1)}
+#pausem.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+#pausem button{width:58px;height:58px;border-radius:50%;border:2px solid rgba(255,255,255,.7);background:rgba(255,255,255,.14);padding:12px;cursor:pointer}
+#pausem button:active{transform:scale(.93)}#pausem svg{width:100%;height:100%;fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+#hint{position:fixed;left:50%;top:64%;translate:-50% 0;z-index:5;pointer-events:none;opacity:0;transition:opacity .5s}
+#hint.on{opacity:.95}#hint svg{width:84px;height:84px;display:block;overflow:visible}
+#hint .ring{animation:hintring 1.6s ease-out infinite;transform-origin:center}@keyframes hintring{from{r:8;opacity:.9}to{r:34;opacity:0}}
+#hint .fing{animation:hintdrag 1.6s ease-in-out infinite}@keyframes hintdrag{0%{transform:translate(0,0)}60%{transform:translate(26px,-16px)}100%{transform:translate(0,0)}}
+#win .rew{position:absolute;left:0;right:0;top:9%;display:flex;flex-direction:column;align-items:center;gap:14px;opacity:0;transition:opacity .8s .6s}
+#win.on .rew{opacity:1}
+#win .row{display:flex;gap:16px;align-items:center}
+#win .charm{width:min(26vw,110px);aspect-ratio:1;border-radius:50%;border:3px solid #fff;display:grid;place-items:center;padding:14px;background:radial-gradient(circle at 35% 28%,rgba(255,255,255,.7),rgba(190,170,255,.28) 55%,rgba(60,40,120,.45));box-shadow:0 0 34px rgba(190,170,255,.65),inset 0 -8px 14px rgba(40,20,90,.35);animation:charmin 1.2s .8s cubic-bezier(.2,1.5,.4,1) backwards}
+#win .charm svg{width:100%;height:auto}
+#win .gcoin{width:min(18vw,74px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7c0,#ffcc33 45%,#c98a08);box-shadow:0 0 0 3px #7a4f00,0 0 30px rgba(255,208,70,.8);animation:charmin 1.2s 1.3s cubic-bezier(.2,1.5,.4,1) backwards}
+@keyframes charmin{from{transform:scale(.2) rotate(-40deg);opacity:0}}
+#win .stats{display:flex;gap:10px}#win .stats b{padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.5);color:#fff;font:600 17px Fredoka,system-ui,sans-serif}
+.beaker .star{pointer-events:none}
 #picker{position:fixed;left:50%;top:70%;transform:translate(-50%,-50%) scale(.6);display:flex;gap:18px;z-index:6;opacity:0;pointer-events:none;transition:opacity .3s,transform .45s cubic-bezier(.2,1.4,.4,1)}
 #picker.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
 #picker button{width:min(34vw,150px);aspect-ratio:1;border-radius:50%;padding:10px;cursor:pointer;position:relative}
@@ -106,13 +123,20 @@ html,body{margin:0;height:100%;background:#0b2a24;overflow:hidden;touch-action:n
 <div id="huds"></div>
 <button id="back" class="glass" aria-label="Back to the lab"><svg viewBox="0 0 20 20"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div id="picker" aria-label="Choose a part"></div>
+<div id="pausem" class="glass" role="menu" aria-label="Paused">
+ <button data-act="resume" aria-label="Keep playing"><svg viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="#fff"/></svg></button>
+ <button data-act="sound" aria-label="Sound"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9z" fill="#fff"/><path class="on" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="off" d="M16 9l5 6M21 9l-5 6" /></svg></button>
+ <button data-act="again" aria-label="Start over"><svg viewBox="0 0 24 24"><path d="M5 12a7 7 0 1 0 2.2-5.1M5 4v4h4"/></svg></button>
+ <button data-act="town" aria-label="Leave"><svg viewBox="0 0 24 24"><path d="M14 4h5v16h-5M4 12h11M8 8l-4 4 4 4"/></svg></button>
+</div>
+<div id="hint" aria-hidden="true"><svg viewBox="-42 -42 84 84"><circle class="ring" r="8" fill="none" stroke="#fff" stroke-width="3"/><g class="fing"><circle r="9" fill="#fff" fill-opacity=".85"/></g><path d="M6 -6l16 -12M16 -20l7 2l-2 7" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".7"/></svg></div>
 <div id="maker" class="glass" aria-label="Build your cell"><svg id="mkSvg" viewBox="-120 -100 240 200"><g id="mkLayer"></g></svg>
  <div class="row" data-row="colour" role="group" aria-label="Colour"></div><div class="row" data-row="mouth" role="group" aria-label="Mouth"></div>
  <div class="row" data-row="move" role="group" aria-label="How it swims"></div><div class="row" data-row="eyes" role="group" aria-label="Eyes"></div>
  <div class="stats" aria-hidden="true"></div>
  <div class="row"><button class="dice" type="button" aria-label="Surprise me"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3" fill="#fff"/><circle cx="15" cy="15" r="1.3" fill="#fff"/><circle cx="15" cy="9" r="1.3" fill="#fff"/><circle cx="9" cy="15" r="1.3" fill="#fff"/></svg></button>
   <button class="go" type="button" aria-label="Drop in"><svg viewBox="0 0 24 24" fill="#17612a"><path d="M12 3c3.5 4.6 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.5-6.4 6-11z"/></svg></button></div></div>
-<div id="win" aria-label="Off the slide"><svg class="scope" viewBox="0 0 120 200" aria-hidden="true"><path d="M20 190h80M60 190V80M60 80l30-50M84 14l18 24" stroke="#c9c2dd" stroke-width="12" stroke-linecap="round" fill="none"/><circle cx="96" cy="26" r="16" fill="#9ee8ff" stroke="#fff" stroke-width="4"/><rect x="28" y="140" width="64" height="9" rx="3" fill="#e6e1f2"/></svg><div class="glow"></div><div class="bench"></div><div class="slide"><i></i></div><div class="bear"></div></div>
+<div id="win" aria-label="Off the slide"><svg class="scope" viewBox="0 0 120 200" aria-hidden="true"><path d="M20 190h80M60 190V80M60 80l30-50M84 14l18 24" stroke="#c9c2dd" stroke-width="12" stroke-linecap="round" fill="none"/><circle cx="96" cy="26" r="16" fill="#9ee8ff" stroke="#fff" stroke-width="4"/><rect x="28" y="140" width="64" height="9" rx="3" fill="#e6e1f2"/></svg><div class="glow"></div><div class="bench"></div><div class="slide"><i></i></div><div class="bear"></div><div class="rew"><div class="row"><div class="charm"></div><div class="gcoin"></div></div><div class="stats"></div></div></div>
 <div id="lab">
  <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" aria-label="The science lab bench">
   <defs>
@@ -204,7 +228,7 @@ const sound = (() => {
   unlock() {
    if (ac) { ac.resume?.(); return; }
    try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { return; }
-   master = ac.createGain(); master.gain.value = .5; master.connect(ac.destination);
+   master = ac.createGain(); master.gain.value = S.muted ? 0 : .5; master.connect(ac.destination);
    const len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0); let last = 0;
    for (let i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
    hum = ac.createBufferSource(); hum.buffer = buf; hum.loop = true; humF = ac.createBiquadFilter(); humF.type = 'lowpass'; humF.frequency.value = 380;
@@ -227,6 +251,7 @@ const sound = (() => {
   pop() { S.tone(900, .1, {to: 1500, vol: .15}); S.noise(.15, {vol: .2, f: 3000}); },
   hurt() { S.tone(140, .2, {type: 'triangle', to: 70, vol: .3}); },
   grow() { [523, 659, 784, 1046].forEach((f, i) => S.tone(f, .35, {type: 'triangle', vol: .16, at: i * .09})); },
+  mute(m) { S.muted = m; if (master) master.gain.value = m ? 0 : .5; },
   coin() { [988, 1319, 1976].forEach((f, i) => S.tone(f, .18, {type: 'square', vol: .07, at: i * .08})); },
   // the music: soft pentatonic plinks; danger speeds them up, drops them low and minor
   music(mood, hp) {
@@ -291,7 +316,7 @@ function applyCreation(C = creation) {
 }
 applyCreation();
 const cells = [], food = [], clouds = [], fx = [], players = [];
-let hitStop = 0, camX = 0, camY = 0, zoom = 1.4, mood = 0, time = 0, playing = false, ended = false, giant = null, shake = 0, exit = null, popT = 0;
+let paused = false, runStart = 0, hintOn = false, hitStop = 0, camX = 0, camY = 0, zoom = 1.4, mood = 0, time = 0, playing = false, ended = false, giant = null, shake = 0, exit = null, popT = 0;
 
 function makeCell(kind, x, y, r, look = kind, parts = KINDS[kind]?.parts || []) {
  const c = {kind, x, y, r, vx: 0, vy: 0, heading: rnd(0, TAU), speed: 0, parts: new Set(parts), hp: r * .25, maxHp: r * .25, jaw: 0, hurt: 0,
@@ -339,7 +364,7 @@ function makePlayer(slot, device, bot, mouth) {
  P.hud.innerHTML = `<span class="me" style="--c:${LOOKS[P.look].body};--d:${LOOKS[P.look].deep}"></span>` + '<span class="bead"><i></i></span>'.repeat(5) + (slot === 0 ? '<span class="coin"></span><b class="coins">0</b>' : '');
  hudL.append(P.hud);
  P.handEl = document.createElement('div'); P.handEl.className = 'hand ' + ['tl', 'tr', 'bl', 'br'][slot]; document.body.append(P.handEl);
- P.H = hand(P.handEl); P.H.onPlay = i => playCard(P, i);
+ P.H = hand(P.handEl, LOOKS[P.look]); P.H.onPlay = i => playCard(P, i);
  if (bot) P.handEl.style.display = 'none';
  players[slot] = P; spawn(P, true); renderHud(P); return P;
 }
@@ -679,13 +704,33 @@ function win(P) {
 function winScene(P) {
  // the lens closes back down to the bench, and the little water bear is out on the lab table
  const W2 = $('#win'); W2.querySelector('.bear').innerHTML = TARDIGRADE_ICON.replace(/#ff8fd0/g, LOOKS[P.look].body);
+ W2.querySelector('.charm').innerHTML = TARDIGRADE_ICON.replace(/#ff8fd0/g, LOOKS[P.look].body);
+ const secs = time - runStart, rec = saveClear(level5, secs);
+ W2.querySelector('.stats').innerHTML = `<b>${mmss(secs)}</b><b>★ ${level5}</b>` + (rec.wins > 1 ? `<b>♛ ${mmss(rec.best)}</b>` : '');
  W2.classList.add('on');
+ for (let k = 0; k < 14; k++) setTimeout(() => sparks(0, 0, 200, ['#ffd84a', '#fff', LOOKS[P.look].body][k % 3], 14, 1.2), 900 + k * 220);
  import('/simulations/backpack.mjs?v=3').then(m => m.earnCharm?.('tardigrade')).catch(() => {});
  let first = false; try { first = giveMemoryCoin('science-lab:off-the-slide', 'The science lab'); } catch {}
  setTimeout(() => voice.say((first ? "A gold coin too, one of Daddy's core memories! He showed me pond water under a microscope once. " : '') + 'And a tardigrade charm for my backpack!',
-  {choices: [{label: 'Again', go: () => { location.search = `?level=${level5}&again=1`; }}, ...(level5 < 5 ? [{label: 'Harder goo', go: () => { location.search = `?level=${level5 + 1}&again=1`; }}] : []), {label: 'Back to town', go: () => leave()}]}), 900);
+  {choices: [{label: 'Again', go: () => { location.search = `?level=${level5}&again=1${again()}`; }}, ...(level5 < 5 ? [{label: 'Harder goo', go: () => { location.search = `?level=${level5 + 1}&again=1${again()}`; }}] : []), {label: 'Back to town', go: () => leave()}]}), 900);
  renderHud(players[0]);
 }
+const again = () => (Q.get('from') ? '&from=' + encodeURIComponent(Q.get('from')) : ''); // the way back to the town survives Again and Harder goo
+const readClears = () => { try { return JSON.parse(localStorage.getItem('aw-cell-clears') || '{}') || {}; } catch { return {}; } };
+function saveClear(level, secs) {
+ const all = readClears(), c = all[level] || {wins: 0, best: 1e9};
+ all[level] = {wins: c.wins + 1, best: Math.min(c.best, Math.round(secs))};
+ try { localStorage.setItem('aw-cell-clears', JSON.stringify(all)); window.AbbiesKeep?.keep(); } catch {}
+ return all[level];
+}
+const mmss = t => Math.floor(t / 60) + ':' + String(Math.floor(t % 60)).padStart(2, '0');
+// a gold star over each beaker the player has cleared (their best time rides in its label)
+function starBeakers() {
+ const all = readClears();
+ document.querySelectorAll('.beaker').forEach(b => { b.querySelector('.star')?.remove(); const c = all[b.dataset.level]; if (!c) return;
+  const g = document.createElementNS(NS, 'path'); g.setAttribute('class', 'star'); g.setAttribute('d', 'M38 -26l5 11 12 1-9 8 3 12-11-6-11 6 3-12-9-8 12-1z'); g.setAttribute('fill', '#ffd84a'); g.setAttribute('stroke', '#7a4f00'); g.setAttribute('stroke-width', '2'); g.setAttribute('stroke-linejoin', 'round'); b.append(g); b.setAttribute('aria-label', `goo ${b.dataset.level}, cleared in ${mmss(c.best)}`); });
+}
+starBeakers();
 const leave = () => { location.href = Q.get('from') || '/town'; };
 
 // ---- drawing -----------------------------------------------------------------------------------------------------
@@ -737,10 +782,13 @@ function devLayer() {
  devText.textContent = `dev · difficulty ${level5} · ` + players.filter(Boolean).map(p => `p${p.slot + 1}${p.bot ? 'bot' : ''} L${p.level} e${p.eaten} dmg${p.dmg.toFixed(0)} ${p.stage}`).join(' | ') + ` · mood ${mood.toFixed(2)} fps ${fps.toFixed(0)}`;
 }
 
-let last = performance.now(), fps = 60;
+let last = performance.now(), fps = 60, slow = 0;
 function loop(now) {
  const dt = Math.min(.05, (now - last) / 1000); last = now; fps += (1 / Math.max(dt, 1e-3) - fps) * .05;
- hitStop = Math.max(0, hitStop - dt); update(hitStop ? 0 : dt); draw(dt);
+ hitStop = Math.max(0, hitStop - dt); update(hitStop || paused ? 0 : dt); draw(paused ? 0 : dt);
+ // a slow device gets a cheaper pond (the shader is the heavy part) rather than a stuttering game
+ if (hintOn && players[0]?.c && players[0].c.speed > 30) hideHint();
+ slow = fps < 36 && playing && !paused ? slow + dt : Math.max(0, slow - dt); if (slow > 3 && pond.scale > .45) { pond.scale = Math.max(.45, pond.scale - .1); pond.resize(); slow = 0; }
  popT -= dt; if (popT < 0 && playing) { populate(); popT = .5; }
  voice.tick(now);
  requestAnimationFrame(loop);
@@ -755,9 +803,12 @@ volunteer('cell-brawl', {place: 'science lab: a drop of green goo on a slide', d
 ]});
 
 // ---- the lab: five beakers of goo, the lens, and in -----------------------------------------------------------------
+const hideHint = () => { if (!hintOn) return; hintOn = false; $('#hint').classList.remove('on'); try { localStorage.setItem('aw-cell-seen', '1'); } catch {} };
 function startGame(C) {
  const mouth = C.mouth;
  playing = true; $('#huds').classList.add('on'); document.documentElement.style.setProperty('--hand-h', '84px');
+ runStart = time; hintOn = false;
+ try { if (!localStorage.getItem('aw-cell-seen')) { hintOn = true; $('#hint').classList.add('on'); setTimeout(hideHint, 9000); } } catch {}
  if (!input.devices.length) input.join('touch');
  const me = input.devices[0];
  makePlayer(0, me, false, C);
@@ -820,7 +871,19 @@ document.querySelectorAll('.beaker').forEach(bk => bk.addEventListener('pointerd
  setTimeout(openLens, 650);
 }));
 for (const b of document.querySelectorAll('.bub')) b.animate([{transform: 'translateY(0)', opacity: 1}, {transform: 'translateY(-40px)', opacity: 0}], {duration: 1200 + Math.random() * 900, iterations: Infinity, delay: Math.random() * 900});
-$('#back').addEventListener('pointerdown', e => { e.stopPropagation(); leave(); });
+// the chevron is the way out: in play it pauses, with sound, start over, and leaving inside
+const pm = $('#pausem'), setPause = on => { paused = on; pm.classList.toggle('on', on); if (!playing && !ended) return; };
+const sync = () => { pm.querySelector('[data-act=sound]').classList.toggle('muted', !!sound.muted); pm.querySelector('.on').style.display = sound.muted ? 'none' : ''; pm.querySelector('.off').style.display = sound.muted ? '' : 'none'; };
+try { sound.mute(localStorage.getItem('aw-cell-mute') === '1'); } catch {}
+sync();
+pm.addEventListener('pointerdown', e => { const b = e.target.closest('button'); if (!b) return; e.stopPropagation(); sound.unlock(); const a = b.dataset.act;
+ if (a === 'resume') setPause(false);
+ else if (a === 'sound') { sound.mute(!sound.muted); try { localStorage.setItem('aw-cell-mute', sound.muted ? '1' : '0'); } catch {} sync(); }
+ else if (a === 'again') location.search = `?level=${level5}&again=1${again()}`;
+ else leave(); });
+$('#back').addEventListener('pointerdown', e => { e.stopPropagation(); if (playing && !ended) setPause(!paused); else leave(); });
+addEventListener('keydown', e => { if ((e.key === 'Escape' || e.key === 'p') && playing && !ended) setPause(!paused); });
+document.addEventListener('visibilitychange', () => { if (document.hidden && playing && !ended) setPause(true); });
 requestAnimationFrame(loop);
 if (Q.has('play')) { $('#lab').classList.add('gone'); creation.mouth = Q.get('play') === 'jaw' ? 'jaw' : 'filter'; startGame(creation); }
 else if (Q.has('again')) { $('#lab').classList.add('gone'); openMaker(); } // the destiny loop: from the win straight back to the creator
