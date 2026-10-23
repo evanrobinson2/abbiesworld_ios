@@ -6,7 +6,7 @@ from skimage.morphology import skeletonize
 from scipy import ndimage as ndi
 ap = argparse.ArgumentParser(); ap.add_argument("src"); ap.add_argument("out"); ap.add_argument("--tone", type=float, default=1.0)
 ap.add_argument("--grain", type=float, default=.9); ap.add_argument("--tint", default="blue"); ap.add_argument("--scale", type=int, default=3)
-ap.add_argument("--seed", type=int, default=3); ap.add_argument("--wobble", type=float, default=.7); ap.add_argument("--layers", type=int, default=1); ap.add_argument("--hatch", type=float, default=0)
+ap.add_argument("--seed", type=int, default=3); ap.add_argument("--wobble", type=float, default=.7); ap.add_argument("--layers", type=int, default=1); ap.add_argument("--hatch", type=float, default=0); ap.add_argument("--shade", default="")
 a = ap.parse_args(); S = a.scale; rng = np.random.default_rng(a.seed)
 img = cv2.imread(a.src); H, W = img.shape[:2]; big = cv2.resize(img, (W*S, H*S), interpolation=cv2.INTER_CUBIC)
 g = cv2.cvtColor(big, cv2.COLOR_BGR2GRAY).astype(np.float32); dk = np.clip(cv2.GaussianBlur(g,(0,0),40)-g, 0, None); dk /= dk.max()
@@ -54,7 +54,7 @@ for layer in range(passes):
 
 # hatching: the original's soft tone (not line) becomes parallel pencil strokes, pressure from local tone, tapered
 if a.hatch > 0:
-    tone = cv2.GaussianBlur(dk, (0,0), 2*S); soft = (tone > .012) & ~ndi.binary_dilation(ink, iterations=2*S)
+    tone = cv2.GaussianBlur(dk, (0,0), 2*S) if not a.shade else cv2.GaussianBlur((255-cv2.resize(cv2.imread(a.shade,0),(Ws,Hs))).astype(np.float32)/255*.25, (0,0), 2*S); soft = (tone > .012) & ~ndi.binary_dilation(ink, iterations=2*S)
     ang = np.deg2rad(52); d = np.array([np.cos(ang), np.sin(ang)]); nrm = np.array([-d[1], d[0]]); sp_ = max(3, int(4.2*S*(1.1-a.hatch*.3)))
     diag = int(np.hypot(Hs, Ws)); cen = np.array([Ws/2, Hs/2])
     for off in range(-diag//2, diag//2, sp_):
