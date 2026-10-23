@@ -29,6 +29,27 @@ export function developerHelper(object, isDeveloper) {
   return object;
 }
 
+// Selection cue for a picked thing: a soft warm ring on the ground around it (spatial layer), never a debug box.
+// Drop-in for the old red selection box: same setFromObject(obj), geometry and material, so callers dispose it the same way.
+export function selectionCue(T, object, {color = '#fff1c4'} = {}) {
+  const ring = new T.Mesh(new T.RingGeometry(.84, 1, 64), new T.MeshBasicMaterial({color, transparent: true, opacity: .8, depthWrite: false, toneMapped: false, side: T.DoubleSide}));
+  ring.geometry.rotateX(-Math.PI / 2);
+  ring.renderOrder = 100;
+  ring.raycast = () => {};
+  const box = new T.Box3(), size = new T.Vector3(), center = new T.Vector3();
+  ring.setFromObject = target => {
+    box.setFromObject(target);
+    if (box.isEmpty()) return ring;
+    box.getSize(size); box.getCenter(center);
+    const r = Math.max(size.x, size.z) * .62 + .02;
+    ring.scale.set(r, 1, r);
+    ring.position.set(center.x, box.min.y + Math.max(size.y * .01, .004), center.z);
+    return ring;
+  };
+  presentation(ring, {purpose: 'selection'});
+  return object ? ring.setFromObject(object) : ring;
+}
+
 export const isPresentation = o => o?.userData?.layer === 'presentation' || o?.layers?.isEnabled?.(PRESENTATION_CHANNEL) && !o.layers.isEnabled(0);
 export const isWorld = o => !!o && !isPresentation(o);
 
@@ -45,8 +66,9 @@ export function renderWorldOnly(renderer, scene, camera) {
 }
 
 // Filter plain entity records before they reach any perception summary (voice controller, directors, Oracle).
-// Drops presentation entities, hidden things and marker shapes that only exist to point at something.
-const MARKERS = new Set(['ring', 'empty', 'marker', 'gizmo', 'helper', 'label']);
+// Drops presentation entities, hidden things and markers that only exist to point at something.
+// 'ring' and 'empty' are real holodeck shapes (a hoop, a group the voice can move), so they stay perceivable.
+const MARKERS = new Set(['marker', 'gizmo', 'helper', 'label', 'selection']);
 export function perceivable(entities = []) {
   return entities.filter(e => e && e.layer !== 'presentation' && e.visible !== false && !MARKERS.has(e.type) && !e.developerOnly);
 }

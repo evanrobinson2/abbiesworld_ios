@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-selection-ring",
+      "date": "2026-10-23",
+      "title": "A soft ring, not a box",
+      "line": "Tap a building and a warm ring now glows on the ground around it, instead of the red debug box. Only you see the ring: the people on the ranch and the voice see just the ranch.",
+      "image": "/whats-new/2026-10-23-selection-ring.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
+      "threadTitle": "Design knowledge into practice"
+    },
+    {
       "id": "2026-10-23-sandbox-v2",
       "date": "2026-10-23",
       "title": "The world, edge to edge",
