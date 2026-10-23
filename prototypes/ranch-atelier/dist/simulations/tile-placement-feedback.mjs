@@ -26,5 +26,7 @@ export function installTileCarryStyle(){if(document.getElementById('tile-carry-s
 body.tile-in-hand,body.tile-in-hand canvas{cursor:grabbing!important}
 body.tile-in-hand #tile-chooser .tile-options button{outline:2px dashed var(--app-accent,#b84931);outline-offset:-5px}
 #scene-drag-ghost.is-snapping::after,#scene-drag-ghost.is-snapping .tile-carry-label{visibility:hidden}
-@media(prefers-reduced-motion:reduce){#scene-drag-ghost{transform:translate(-50%,-86%);transition:none}.tile-carry-label{transform:translateX(-50%)}}
+#scene-drag-ghost.is-waiting .live-tray-canvas{animation:tile-wind-up .42s cubic-bezier(.4,0,.6,1) infinite alternate}
+@keyframes tile-wind-up{from{transform:translateY(0) rotate(-1.5deg) scale(1,1)}to{transform:translateY(-7%) rotate(1.5deg) scale(1.03,.95)}}
+@media(prefers-reduced-motion:reduce){#scene-drag-ghost{transform:translate(-50%,-86%);transition:none}#scene-drag-ghost.is-waiting .live-tray-canvas{animation:none}.tile-carry-label{transform:translateX(-50%)}}
 `;document.head.append(style);}

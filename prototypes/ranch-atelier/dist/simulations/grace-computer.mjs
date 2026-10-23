@@ -101,7 +101,16 @@ export function createGraceComputer({screenMaterial} = {}) {
 
  for (const [x, z] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) box('foot', .03, .006, .02, 'foot', x * (W / 2 - .025), -.002, z * (D / 2 - .04));
 
- root.userData.screen = screen;
+ // Power: a rocker switch low on the right side (it tips to show on or off), and the cord socket on the back.
+ const power = new T.Group(); power.name = 'power switch'; power.position.set(W / 2 + .001, .05, zf - .07); root.add(power);
+ box('power switch surround', .004, .03, .022, 'gap', 0, 0, 0, power);
+ const rocker = new T.Group(); rocker.name = 'power rocker'; power.add(rocker);
+ box('power rocker red', .006, .013, .018, Object.assign(new T.MeshStandardMaterial({color: '#b0302a', roughness: .5}), {name: 'power rocker red'}), .003, .0065, 0, rocker);
+ box('power rocker white', .006, .013, .018, 'beige', .003, -.0065, 0, rocker);
+ rocker.rotation.z = .18; // off: the red half stands out; on tips it in (rotation.z = -.18)
+ const socket = box('power socket', .03, .022, .004, 'gap', W / 2 - .05, .04, -D / 2 - .001);
+
+ root.userData.screen = screen; root.userData.rocker = rocker; root.userData.socket = socket;
  return root;
 }
 

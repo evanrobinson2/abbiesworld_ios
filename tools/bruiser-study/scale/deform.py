@@ -133,8 +133,8 @@ def main():
     info = dict(tag=tag, spec=a.spec, base=a.base, ratio=a.ratio, planar=a.planar, faces=len(o.data.polygons),
                 bound=int((who >= 0).sum()), unbound=int((who < 0).sum()))
     if a.shots:
-        hero_turn = json.load(open(os.path.join(STUDY, 'meshy', 'align.json')))['turn_deg']
-        im = figure.sheet(tag, [o], hero_path, hero_turn, a.res)
+        hero_turn = edit.get('picture_turn', 0.0)
+        im = figure.sheet(tag, [o], hero_path, hero_turn, a.res, picture=edit.get('picture', 'ref/bruiser.png'))
         info['iou_vs_hero'] = dict(figure.SCORES); info['iou_mean'] = round(float(np.mean(list(figure.SCORES.values()))), 4)
         from PIL import ImageDraw
         ImageDraw.Draw(im).text((8, a.res + 24), 'IoU vs hero ' + ' '.join(f'{k} {v:.3f}' for k, v in figure.SCORES.items()), fill=(20, 20, 20))
