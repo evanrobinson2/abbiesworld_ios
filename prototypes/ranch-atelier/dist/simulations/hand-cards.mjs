@@ -15,6 +15,8 @@ let forge = null;
 const loadForge = () => forge ??= import('../cards/forge.mjs?v=4');
 
 export async function cardFace(hero) {
+ // Cards v3 (AW-STUDY-0014) is the default face; /sandbox?cards=v2 brings these v2 faces back on this device.
+ { try { const v3 = await import('../cards/v3/hand.mjs'); if (v3.cardsStyle() && await v3.cardFace(hero)) return; } catch (error) { console.warn('Cards v3 face failed', error); } }
  const id = hero.dataset.generator, base = SPECS[id] || {name: hero.querySelector('.generator-hero-name')?.textContent || id, type: 'helper', rarity: 'seed', enamel: '#4f5864'};
  try {
   const {renderCard, CARD, L} = await loadForge();
