@@ -28,8 +28,8 @@ export async function loadModelCar(T, def) {
     car.worldToLocal(wc); pivot.position.copy(wc); car.add(pivot); pivot.updateMatrixWorld(true); pivot.attach(w); wheels.push(pivot); }
   src.traverse(o => { if (o.isMesh) { o.castShadow = o.receiveShadow = true; if (!found.includes(o)) { o.material = o.material.clone(); paints.push(o.material); } } });
   const H = bb.max.y - bb.min.y;
-  car.userData.def = {...def, wheelR: wheels.length ? Math.max(.08, new T.Box3().setFromObject(wheels[0]).getSize(new T.Vector3()).y / 2) : .2, eye: [H + .45, .15], model: true};
-  car.userData.wheels = wheels; car.userData.eye = new T.Vector3(0, H + .45, .15); // a toy car is too small to sit in: ride on its roof
+  car.userData.def = {...def, wheelR: wheels.length ? Math.max(.08, new T.Box3().setFromObject(wheels[0]).getSize(new T.Vector3()).y / 2) : .2, eye: [H + .3, .35], model: true};
+  car.userData.wheels = wheels; car.userData.eye = new T.Vector3(0, H + .3, .35); // a toy car is too small to sit in: ride on its roof
   car.userData.paint = col => { paints.forEach(m => { m.color?.set(col); }); };
   car.userData.inCar = () => {};
   if (def.colour) car.userData.paint(def.colour);
