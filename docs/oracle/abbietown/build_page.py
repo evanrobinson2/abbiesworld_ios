@@ -25,7 +25,7 @@ history = json.dumps(json.loads((sim / 'history.json').read_text()), separators=
 import base64
 overlay = 'data:image/png;base64,' + base64.b64encode((sim / 'overlay.png').read_bytes()).decode()
 context = subprocess.run(['node', str(root / 'tools/context-card/snippet.mjs'), 'abbietown'], capture_output=True, text=True, check=True).stdout
-template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'dioramas.block.js').read_text())
+template = (here / 'abbietown.template.html').read_text().replace('/*DIORAMAS*/', (here / 'housekit.block.js').read_text() + (here / 'dioramas.block.js').read_text())
 def page(three, orbit):
     imap = json.dumps({'imports': {'three': three, 'three/addons/controls/OrbitControls.js': orbit}})
     return template.replace('/*IMPORTMAP*/', imap).replace('/*MODULES*/', modules).replace('/*LAND*/', land).replace('/*CONTEXT*/', context).replace('/*HISTORY*/', history).replace('/*OVERLAY*/', overlay)
