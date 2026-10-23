@@ -2999,6 +2999,31 @@
         }
       ]
     },
+    "kart": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "Effect Hunt study: the jet cart, beacons, tow-back this builds on",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/effect-hunt/EFFECT_HUNT_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL.md: no words, 8% HUD, world layer vs presentation layer",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "devblog",
+          "t": "The design origins of drifting in Mario Kart (Game Developer), found by search, not read in full",
+          "href": "https://www.gamedeveloper.com/design/the-design-origins-of-drifting-in-i-mario-kart-i-"
+        },
+        {
+          "k": "devblog",
+          "t": "Procedural track generation, Retro Karting League devlog (itch.io), found by search, not read in full",
+          "href": "https://sporktank.itch.io/retro-karting-league/devlog/377781/procedural-track-generation"
+        }
+      ],
+      "note": "No Oracle consultation (not reachable from the cloud thread). Mario Kart is inspired-by only."
+    },
     "world-event-cards": {
       "items": [
         {

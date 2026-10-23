@@ -13,6 +13,39 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-23-aurora-mk2-ships",
+      "date": "2026-10-23",
+      "title": "Aurora Mk 2 in 3D: eight ships",
+      "line": "Meshy turned all eight ship pictures into 3D models, and each one is mirrored so it is exactly symmetric. Spin each beside its picture and tell me which one to build out.",
+      "image": "/whats-new/2026-10-23-aurora-mk2-ships.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJNoFLSpdq2Dfxnhw1Dt7fJ",
+      "threadTitle": "Aurora Mk 2 spaceship",
+      "tour": false,
+      "link": "/studies/spaceships/models.html"
+    },
+    {
+      "id": "2026-10-23-kart-mode",
+      "date": "2026-10-23",
+      "title": "Kart mode: the board becomes a racetrack",
+      "line": "Drive the jet cart round a looping track stencilled from the town's tiles: crash through cones and hay, bounce off benches, hit ramps and boost pads, and when you place a tile the track grows to include it.",
+      "image": "/whats-new/2026-10-23-kart-mode.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF9Mas7aH7R2p9xFLqr9qzV",
+      "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
+      "tour": false,
+      "link": "/studies/kart/play.html"
+    },
+    {
+      "id": "2026-10-23-paint-balls",
+      "date": "2026-10-23",
+      "title": "Fling your own paint",
+      "line": "Spending the Paint card now gives you a random handful of splat balls, big or small. Drag one from the right edge and let go: it flies, splats, and grows glowing plants, faster than before.",
+      "image": "/whats-new/2026-10-23-paint-balls.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/sandbox"
+    },
+    {
       "id": "2026-10-23-more-world-events",
       "date": "2026-10-23",
       "title": "Fireballs, water balloons, cats and dogs, tie-dye",
