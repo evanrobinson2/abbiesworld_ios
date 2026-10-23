@@ -11,6 +11,15 @@
       "threadTitle": "Weather and clouds"
     },
     {
+      "id": "2026-10-23-model-review-row",
+      "date": "2026-10-23",
+      "title": "Model pages are one review row",
+      "line": "Each model page is now your picture, the 3D model, and your notes with Reject, Adjust and Accept on the right. Name and score sit above, details below. Your verdict comes straight to Claude.",
+      "image": "/whats-new/2026-10-23-model-review-row.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa",
+      "threadTitle": "Models review"
+    },
+    {
       "id": "2026-10-23-sign-in",
       "date": "2026-10-23",
       "title": "Anyone can sign in and play",
