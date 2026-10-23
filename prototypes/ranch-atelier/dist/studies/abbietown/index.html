@@ -291,6 +291,7 @@ const SPOTS = [
  {id: 'leonard', name: 'Leonard Field', at: 'leonard', line: 'The field and the little beach on the pond.', coins: 1, where: 'data'},
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
+ {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];
 // Off the map: roads out of town lead to them, and they show on the horizon.
@@ -644,6 +645,8 @@ const ROWS = [
  ['Horn Pond', 'Rowboat', 3, 'each', 2, 'new', 3, ''],
  ['Horn Pond', 'Park bench', 1.8, 'each', 12, 'kit: ranch-bench', 3, ''],
  ['Horn Pond', 'Heron', 1, 'each', 1, 'new', 3, ''],
+ ['The science lab', 'Lab building with a little observatory dome', 16, 'each', 1, 'new', 1, 'the way into the cell game (AW-STUDY-0047)'],
+ ['The science lab', 'Beaker of strange green goo by the door', .4, 'each', 1, 'new', 1, 'tap it to play'],
  ['The town common', 'Bandstand', 8, 'each', 1, 'new', 2, ''],
  ['The town common', 'Lamp posts around the green', 4, 'each', 10, 'new', 3, ''],
 ];
@@ -679,7 +682,7 @@ function manifestCSV(rows) {
 const land = makeLand(JSON.parse(document.getElementById('land').textContent));
 const W = land.W, D = land.D;
 const X = x => x - W / 2, Z = y => -(y - D / 2);
-const ICON = {cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
+const ICON = {lab: '\u{1F9EA}', cafe: '☕', comellas: '\u{1F355}', hoagies: '\u{1F96A}', muraco: '\u{1F3EB}', leonard: '⚽', ginn: '\u{1F682}', horn: '\u{1F986}', common: '⛪', launch: '\u{1F680}', nova: '✨'};
 
 // ---------- scene ----------
 const stage = document.getElementById('stage'), canvas = document.getElementById('c');
@@ -843,7 +846,7 @@ function drape(g, s, w, d, c, ox = 0, oz = 0, lift = .35) {
  geo.computeVertexNormals(); const m = new THREE.Mesh(geo, M(c)); m.receiveShadow = true; g.add(m); return m;
 }
 function coin(g, x, y, z) { const m = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, .5, 24), coinMat); m.rotation.x = Math.PI / 2; m.position.set(x, y, z); m.castShadow = true; g.add(m); coins.push(m); return m; }
-let cafe = null;
+let cafe = null; const beakers = []; const CELL_GAME = '/studies/cell/play.html';
 const BUILD = {
  cafe(g) { const s = shopfront('#f1e6d6', '#2f8f86', '#ffffff'); g.add(s.g); cafe = s;
   const sign = cyl(g, 2.4, 2.4, .5, '#2f8f86', 0, 0, 0, 24); sign.rotation.x = Math.PI / 2; sign.position.set(0, 7.4, 7.3); cafe.sign = sign;
@@ -880,6 +883,17 @@ const BUILD = {
   box(g, 3, .4, 40, '#9a7a52', 0, 1, -24); for (let i = 0; i < 4; i++) box(g, 2.2, .8, .6, '#7a5a3a', -8 + i * 5, 0, 6);
   const boat = new THREE.Mesh(new THREE.CapsuleGeometry(1, 3, 4, 8), M('#e8e2d0')); boat.rotation.z = Math.PI / 2; boat.scale.set(1, 1, .6); const lvl = Math.max(...land.raw.water.filter(w => /horn pond/i.test(w.n)).map(w => w.lvl)); boat.position.set(4, lvl - s.z + .6, -40); g.add(boat);
   coin(g, 0, 10, 0); },
+ lab(g) { const b = shopfront('#e4eef0', '#3aa0a8', '#ffffff'); g.add(b.g);
+  const dome = new THREE.Mesh(new THREE.SphereGeometry(3.4, 18, 10, 0, Math.PI * 2, 0, Math.PI / 2), M('#c9d4da', {metalness: .4, roughness: .3})); dome.position.set(-3, 10.4, -2); dome.castShadow = true; g.add(dome);
+  const flask = cyl(g, 2.2, 2.2, .5, '#3aa0a8', 0, 0, 0, 24); flask.rotation.x = Math.PI / 2; flask.position.set(0, 7.4, 7.3);
+  // the beaker of strange green goo by the door: tap it to play the cell game
+  const beaker = new THREE.Group(); beaker.userData.link = CELL_GAME;
+  const glass = new THREE.Mesh(new THREE.CylinderGeometry(.9, .8, 2.2, 18, 1, true), M('#dff6ff', {transparent: true, opacity: .35, roughness: .05, side: THREE.DoubleSide})); glass.position.y = 1.1;
+  const goo = new THREE.Mesh(new THREE.CylinderGeometry(.82, .74, 1.4, 18), M('#6cff4a', {emissive: '#3bd61c', emissiveIntensity: .9, roughness: .3})); goo.position.y = .75;
+  const lip = new THREE.Mesh(new THREE.TorusGeometry(.92, .08, 6, 18), M('#dff6ff')); lip.rotation.x = Math.PI / 2; lip.position.y = 2.2;
+  beaker.add(glass, goo, lip); beaker.bubbles = [];
+  for (let i = 0; i < 5; i++) { const bub = new THREE.Mesh(new THREE.SphereGeometry(.14 + i * .03, 8, 6), M('#b9ff9e', {emissive: '#6cff4a', emissiveIntensity: .6})); bub.userData.phase = i / 5; beaker.add(bub); beaker.bubbles.push(bub); }
+  beaker.position.set(5.5, 0, 9.8); beaker.scale.setScalar(1.8); g.add(beaker); beakers.push(beaker); },
  common(g, s) { drape(g, s, 60, 60, '#6aa346');
   const ch = new THREE.Group(); box(ch, 14, 10, 24, '#f6f3ec', 0, 0, 0); gable(ch, 25, 6, 15, '#3c4246', 0, 10, 0).rotation.y = Math.PI / 2;
   box(ch, 6, 18, 6, '#f6f3ec', 0, 0, 13); box(ch, 4.6, 5, 4.6, '#f6f3ec', 0, 18, 13); const sp = new THREE.Mesh(new THREE.ConeGeometry(2.6, 14, 8), M('#f6f3ec')); sp.position.set(0, 30, 13); sp.castShadow = true; ch.add(sp);
@@ -912,7 +926,7 @@ function placeSpots() {
 
 // ---------- pins, bubbles, the camera ----------
 const pinsEl = document.getElementById('pins'), bubble = document.getElementById('bubble');
-const ORDER = ['cafe', 'comellas', 'hoagies', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'launch', 'nova'];
+const ORDER = ['cafe', 'comellas', 'hoagies', 'lab', 'common', 'muraco', 'leonard', 'ginn', 'horn', 'launch', 'nova'];
 const pins = {};
 function makePins() {
  for (const id of ORDER) { const s = spotByID[id]; if (!s) continue; const b = document.createElement('button'); b.className = 'pin'; b.setAttribute('aria-label', s.name); b.innerHTML = `<span>${ICON[id]}</span>`; b.onclick = () => visit(id); pinsEl.appendChild(b); pins[id] = b; }
@@ -938,6 +952,15 @@ document.getElementById('signin').onclick = e => {
  cafe.body.material.forEach(m => m.color.set(signedIn ? '#f7b8d2' : '#f1e6d6')); cafe.aw.material = stripes(signedIn ? '#d9578d' : '#2f8f86', '#ffffff'); cafe.sign.material = M(signedIn ? '#d9578d' : '#2f8f86');
  cafe.key.visible = !signedIn; cafe.pop = 1; visit('cafe');
 };
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null;
+canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => {
+ if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const r = canvas.getBoundingClientRect();
+ ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
+ const hit = ray.intersectObjects(beakers, true)[0]; if (!hit) return;
+ let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) location.href = o.userData.link;
+});
+canvas.addEventListener('pointermove', e => { if (e.buttons) return; const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera); canvas.style.cursor = ray.intersectObjects(beakers, true).length ? 'pointer' : ''; });
 let charmTimer = 0;
 document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
 
@@ -970,7 +993,7 @@ document.querySelector('#assume tbody').innerHTML = Object.entries({
  'Height': 'true scale: 1 m up is 1 m across', 'Data': 'MassGIS public layers; style, use and year from the assessor, nothing personal'}).map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('');
 
 // ---------- places list ----------
-document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
+document.getElementById('places').innerHTML = [...SPOTS, ...BEYOND].map(s => `<button class="place" data-id="${s.id}"><span class="t"><span>${ICON[s.id]}</span>${s.name}${s.becomes ? ` <span class="muted" style="font-size:13px">becomes ${s.becomes}</span>` : ''}</span><span class="w ${s.where === 'guess' ? 'guess' : ''}">${s.where === 'data' ? 'from the map' : s.where === 'guess' ? 'placed by the common, to confirm' : s.where === 'new' ? 'new in Abbie\'s town' : 'off the map'}</span><p>${s.line}</p>${s.coins ? `<span class="coins">● ${s.coins} coin${s.coins > 1 ? 's' : ''}${s.key ? ' and the register key' : ''}</span>` : ''}</button>`).join('');
 document.querySelectorAll('.place').forEach(b => b.onclick = () => { stage.scrollIntoView({behavior: 'smooth', block: 'center'}); visit(b.dataset.id); });
 
 // ---------- go ----------
@@ -988,6 +1011,7 @@ renderer.setAnimationLoop(() => {
  // the sun's shadow follows what you look at
  const tg = controls.target; sun.target.position.copy(tg); sun.position.set(tg.x - 600, tg.y + 900, tg.z + 400); const span = Math.min(1600, Math.max(200, camera.position.distanceTo(tg) * .7)); Object.assign(sun.shadow.camera, {left: -span, right: span, top: span, bottom: -span}); sun.shadow.camera.updateProjectionMatrix();
  for (const c of coins) c.rotation.z = t * 1.6;
+ for (const b of beakers) for (const bub of b.bubbles) { const k = (t * .5 + bub.userData.phase) % 1; bub.position.set(Math.sin(k * 9 + bub.userData.phase * 6) * .35, 1.2 + k * 1.9, Math.cos(k * 7) * .3); bub.scale.setScalar(1 - k * .6); }
  if (cafe) { cafe.key.rotation.y = t; if (cafe.pop) { cafe.pop = Math.max(0, cafe.pop - dt * 1.5); const s = 1 + Math.sin(cafe.pop * Math.PI) * .15; cafe.g.scale.setScalar(s); } }
  if (!reduce) { const d = (t * 16) % (lineLen * 2), dir = d < lineLen ? 1 : -1, at = d < lineLen ? d : lineLen * 2 - d, [px, py] = onLine(at), [qx, qy] = onLine(at + dir * 5); train.position.set(X(px), land.heightAt(px, py) + 1, Z(py)); train.lookAt(X(qx), land.heightAt(px, py) + 1, Z(qy)); }
  renderer.render(scene, camera);

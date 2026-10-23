@@ -40,6 +40,7 @@ export const SPOTS = [
  {id: 'leonard', name: 'Leonard Field', at: 'leonard', line: 'The field and the little beach on the pond.', coins: 1, where: 'data'},
  {id: 'ginn', name: 'Ginn Field', at: 'ginn', line: 'The train park, by the lakes.', coins: 1, where: 'data'},
  {id: 'horn', name: 'Horn Pond', at: 'horn', line: 'The long walk round the pond.', coins: 1, where: 'data'},
+ {id: 'lab', name: 'The science lab', at: 'centre', line: 'Green goo bubbles in a beaker by the door. Tap the beaker to shrink down into a cell.', coins: 0, where: 'new', link: '/studies/cell/play.html'},
  {id: 'common', name: 'The town common', at: 'common', line: 'The middle of everything: the church, the flag, the pond.', coins: 0, where: 'data'},
 ];
 // Off the map: roads out of town lead to them, and they show on the horizon.
