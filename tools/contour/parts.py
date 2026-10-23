@@ -34,7 +34,10 @@ def seg_dist(P, a, b):
 def split(vol, g, bones):
     X, Y, Z = g.points()
     P = np.stack([X[vol], Y[vol], Z[vol]], 1)
-    D = np.stack([seg_dist(P, b['a'], b['b']) / b['r'] for b in bones], 1)
+    D = np.stack([seg_dist(P, b['a'], b['b']) - b['r'] for b in bones], 1)     # distance to each bone's surface
+    for i, b in enumerate(bones):
+        if b.get('zmin') is not None:
+            D[P[:, 2] < b['zmin'], i] = np.inf                                     # the torso stops at the crotch
     lab = np.full(vol.shape, -1, int); lab[vol] = D.argmin(1)
     return lab
 
@@ -78,7 +81,8 @@ def main():
         name, turn, path = v.split(':', 2); views.append((name, float(turn), path))
     sk = json.load(open(a.skeleton))
     J = {k: world(st, v['front'], v['side']) for k, v in sk['joints'].items()}
-    bones = [dict(name=b[0], a=J[b[1]], b=J[b[2]], r=b[3], n=b[4]) for b in sk['bones']]
+    bones = [dict(name=b[0], a=J[b[1]], b=J[b[2]], r=b[3], n=b[4], zmin=sk.get('torso_zmin') if b[0] == 'torso' else None)
+             for b in sk['bones']]
     os.makedirs(a.out, exist_ok=True)
     g = C.Grid(0.01)
     hull = C.carve(st, g, views, a.slack)
@@ -88,14 +92,14 @@ def main():
         m = lab == i
         if not m.any():
             continue
-        c = contour_part(m, g, b['n'], torso=b['name'] in ('torso', 'chest'))
+        c = contour_part(m, g, b['n'], torso=b['name'] == 'torso')
         f = ndimage.gaussian_filter(c.astype(float), a.smooth)       # smooth along the part: no slice banding
         field = np.maximum(field, f)
         report.append(dict(part=b['name'], voxels=int(m.sum()), kept=round(float(c.sum() / max(m.sum(), 1)), 3)))
     vol = field > 0.5
     by_bone = {}
     for i, b in enumerate(bones):
-        by_bone[b['name']] = (ndimage.gaussian_filter(contour_part(lab == i, g, b['n'], torso=b['name'] in ('torso', 'chest')).astype(float), a.smooth) > 0.5)
+        by_bone[b['name']] = (ndimage.gaussian_filter(contour_part(lab == i, g, b['n'], torso=b['name'] == 'torso').astype(float), a.smooth) > 0.5)
     groups = {gname: np.any([by_bone[n] for n in names if n in by_bone], 0) for gname, names in GROUPS.items()}
     spec = to_spec(groups, g, 'Turnaround Hero, progressive contouring (no Meshy)')
     json.dump(spec, open(os.path.join(a.out, 'spec.json'), 'w'), indent=0)

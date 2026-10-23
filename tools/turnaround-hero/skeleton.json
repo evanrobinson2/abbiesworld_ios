@@ -1,44 +1,267 @@
 {
- "about": "Joints read by hand from ref/views/mj_front.png (col, row) and mj_side.png (col; he faces image left), 1024 frame, crown row 53, soles row 987. His right is image left in the front view. Bones: [name, from, to, thickness (m, the nearest-bone scale), superellipse n (0 = keep as carved)].",
+ "about": "Joints read by hand from ref/views/mj_front.png (col, row) and mj_side.png (col; he faces image left), 1024 frame, crown row 53, soles row 987. His right is image left in the front view. Bones: [name, from, to, thickness (m, the nearest-bone scale), superellipse n (0 = keep as carved)]. Nearest bone is by distance minus thickness (surface distance), and the torso stops at the crotch (torso_zmin).",
  "joints": {
-  "crown":      {"front": [512, 60],  "side": 450},
-  "head":       {"front": [512, 110], "side": 450},
-  "neck":       {"front": [512, 190], "side": 505},
-  "chest":      {"front": [512, 300], "side": 505},
-  "pelvis":     {"front": [512, 470], "side": 525},
-  "shoulder_R": {"front": [318, 255], "side": 520},
-  "elbow_R":    {"front": [300, 430], "side": 495},
-  "wrist_R":    {"front": [335, 545], "side": 455},
-  "hand_R":     {"front": [350, 610], "side": 445},
-  "shoulder_L": {"front": [706, 255], "side": 520},
-  "elbow_L":    {"front": [722, 430], "side": 495},
-  "wrist_L":    {"front": [700, 545], "side": 455},
-  "hand_L":     {"front": [690, 610], "side": 445},
-  "hip_R":      {"front": [455, 500], "side": 530},
-  "knee_R":     {"front": [420, 720], "side": 520},
-  "ankle_R":    {"front": [400, 905], "side": 540},
-  "toe_R":      {"front": [395, 965], "side": 430},
-  "hip_L":      {"front": [570, 500], "side": 530},
-  "knee_L":     {"front": [615, 720], "side": 520},
-  "ankle_L":    {"front": [625, 905], "side": 540},
-  "toe_L":      {"front": [630, 965], "side": 430}
+  "crown": {
+   "front": [
+    512,
+    75
+   ],
+   "side": 455
+  },
+  "head": {
+   "front": [
+    512,
+    110
+   ],
+   "side": 450
+  },
+  "neck": {
+   "front": [
+    512,
+    190
+   ],
+   "side": 505
+  },
+  "chest": {
+   "front": [
+    512,
+    300
+   ],
+   "side": 505
+  },
+  "pelvis": {
+   "front": [
+    512,
+    470
+   ],
+   "side": 525
+  },
+  "shoulder_R": {
+   "front": [
+    318,
+    255
+   ],
+   "side": 520
+  },
+  "elbow_R": {
+   "front": [
+    300,
+    430
+   ],
+   "side": 495
+  },
+  "wrist_R": {
+   "front": [
+    335,
+    545
+   ],
+   "side": 455
+  },
+  "hand_R": {
+   "front": [
+    350,
+    610
+   ],
+   "side": 445
+  },
+  "shoulder_L": {
+   "front": [
+    706,
+    255
+   ],
+   "side": 520
+  },
+  "elbow_L": {
+   "front": [
+    722,
+    430
+   ],
+   "side": 495
+  },
+  "wrist_L": {
+   "front": [
+    700,
+    545
+   ],
+   "side": 455
+  },
+  "hand_L": {
+   "front": [
+    690,
+    610
+   ],
+   "side": 445
+  },
+  "hip_R": {
+   "front": [
+    455,
+    500
+   ],
+   "side": 530
+  },
+  "knee_R": {
+   "front": [
+    420,
+    720
+   ],
+   "side": 520
+  },
+  "ankle_R": {
+   "front": [
+    400,
+    905
+   ],
+   "side": 540
+  },
+  "toe_R": {
+   "front": [
+    395,
+    965
+   ],
+   "side": 430
+  },
+  "hip_L": {
+   "front": [
+    570,
+    500
+   ],
+   "side": 530
+  },
+  "knee_L": {
+   "front": [
+    615,
+    720
+   ],
+   "side": 520
+  },
+  "ankle_L": {
+   "front": [
+    625,
+    905
+   ],
+   "side": 540
+  },
+  "toe_L": {
+   "front": [
+    630,
+    965
+   ],
+   "side": 430
+  },
+  "chin": {
+   "front": [
+    512,
+    150
+   ],
+   "side": 470
+  }
  },
  "bones": [
-  ["head", "crown", "head", 0.11, 2.5],
-  ["neck", "head", "neck", 0.12, 2.5],
-  ["torso", "neck", "pelvis", 0.30, 3.0],
-  ["chest", "chest", "chest", 0.34, 3.0],
-  ["upperarm_R", "shoulder_R", "elbow_R", 0.13, 2.5],
-  ["forearm_R", "elbow_R", "wrist_R", 0.12, 2.5],
-  ["hand_R", "wrist_R", "hand_R", 0.08, 3.0],
-  ["upperarm_L", "shoulder_L", "elbow_L", 0.13, 2.5],
-  ["forearm_L", "elbow_L", "wrist_L", 0.12, 2.5],
-  ["hand_L", "wrist_L", "hand_L", 0.08, 3.0],
-  ["thigh_R", "hip_R", "knee_R", 0.13, 2.5],
-  ["shin_R", "knee_R", "ankle_R", 0.11, 2.5],
-  ["foot_R", "ankle_R", "toe_R", 0.07, 0],
-  ["thigh_L", "hip_L", "knee_L", 0.13, 2.5],
-  ["shin_L", "knee_L", "ankle_L", 0.11, 2.5],
-  ["foot_L", "ankle_L", "toe_L", 0.07, 0]
- ]
+  [
+   "head",
+   "crown",
+   "chin",
+   0.1,
+   2.5
+  ],
+  [
+   "neck",
+   "chin",
+   "neck",
+   0.1,
+   2.5
+  ],
+  [
+   "torso",
+   "neck",
+   "pelvis",
+   0.24,
+   3.0
+  ],
+  [
+   "upperarm_R",
+   "shoulder_R",
+   "elbow_R",
+   0.13,
+   2.5
+  ],
+  [
+   "forearm_R",
+   "elbow_R",
+   "wrist_R",
+   0.12,
+   2.5
+  ],
+  [
+   "hand_R",
+   "wrist_R",
+   "hand_R",
+   0.08,
+   3.0
+  ],
+  [
+   "upperarm_L",
+   "shoulder_L",
+   "elbow_L",
+   0.13,
+   2.5
+  ],
+  [
+   "forearm_L",
+   "elbow_L",
+   "wrist_L",
+   0.12,
+   2.5
+  ],
+  [
+   "hand_L",
+   "wrist_L",
+   "hand_L",
+   0.08,
+   3.0
+  ],
+  [
+   "thigh_R",
+   "hip_R",
+   "knee_R",
+   0.13,
+   2.5
+  ],
+  [
+   "shin_R",
+   "knee_R",
+   "ankle_R",
+   0.11,
+   2.5
+  ],
+  [
+   "foot_R",
+   "ankle_R",
+   "toe_R",
+   0.07,
+   0
+  ],
+  [
+   "thigh_L",
+   "hip_L",
+   "knee_L",
+   0.13,
+   2.5
+  ],
+  [
+   "shin_L",
+   "knee_L",
+   "ankle_L",
+   0.11,
+   2.5
+  ],
+  [
+   "foot_L",
+   "ankle_L",
+   "toe_L",
+   0.07,
+   0
+  ]
+ ],
+ "torso_zmin": 0.95
 }
