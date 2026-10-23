@@ -36,6 +36,20 @@ matters): the pull took 24 s to lift and the landing 185 s to settle, and the ti
 | Customizer | `tile-pull.mjs` (`openCustomizer`), `tile-chooser.mjs` (`customize`) | Bring the model back to its card: it shrinks into the card, and the card grows into that tile's own customizer. Kinds as small cards (Ranch, Paddock, Sugar shack; garden kinds; planets) and each setting as a row of hex pips (households, vegetation, cargo). Settings are a draft until Print. |
 | Print | `tile-pull.mjs` (`openPrintWindow`), `tile-chooser.mjs` (`printCustom`), `live-tray-preview.mjs` (`reveal`) | The only re-simulation. The card becomes a little printer: the head waits over an empty bed while the tile is really made, then lays it down from the bottom up (a clipping plane on the live preview), with a paper-feed tick per layer, then an ink stamp and a thump. At least about four seconds. The new model goes back on the card, ready to pull. |
 
+## Round 2 (Evan, 08:43Z to 08:54Z)
+
+- "drag the icon itself off the shelf, and drop it on the board, it should then roll like a die": the card rides on
+  the finger, and the landing is `rollTile` in `tile-drop-impact.mjs` (falls in from the side, tumbles about its centre,
+  hops twice, squares up on its hex; dust and crunch-thud on the first hit).
+- Five reveal effects to pick from, on the same throw: https://claude.ai/artifact/Wiev9pUG9fkNg9Q9ZmmHCy (A tape burst,
+  his idea; B print up; C pop-up book; D sprout ring; E brick rain). The pick goes in next.
+- "custom -> that needs to FLIP THE CARD and show the custom mechanics at play on a simulated tile that is constantly
+  printing": the customizer is the card turned over, the live tile on the card's body colour with a print head that
+  keeps sweeping it; Accept keeps the old tile printing in the bed until the new one is made, then lays it down and stamps it.
+- "If you click it, that is a CARD": a tap opens the same card-designer card. The glass tile sheet no longer opens from a card.
+- "first one should not be selected by default": no card looks picked. "this shouldn't happen": the frame round the Ranch
+  card was its focus ring doubled by the selected glow; a card in the hand shows focus by lifting.
+
 ## Design card
 
 - What the player feels: "the tile is right there on the card; I can grab it and drop it." And "if I put it back, I

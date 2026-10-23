@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-23-tile-pull",
+      "date": "2026-10-23",
+      "title": "Pull a tile off its card",
+      "line": "Every card's tile is ready before you touch it. Drag a card onto the board and it rolls like a die into place. Tap a card to turn it over and make the tile yours; Accept prints it.",
+      "image": "/whats-new/2026-10-23-tile-pull.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": true,
+      "link": "/sandbox"
+    },
+    {
       "id": "2026-10-23-grace-basement",
       "date": "2026-10-23",
       "title": "Grace's basement",
