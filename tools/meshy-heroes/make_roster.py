@@ -5,6 +5,8 @@ plus the story heroes Abbie and Ani (story-heroes canon). Run: python3 make_rost
 """
 import json
 
+# Evan 16:46Z: "they have to have nothing in their hands or hanging off them unless it's permanent."
+CLEAN = "hands empty and open, nothing held, carried or hanging off the body, only parts that are permanently attached"
 BODY = ("smooth featureless seamless store mannequin, bald, PG, no anatomical detail, "
         "A-pose with arms a little away from the body, front side and back views of the same figure, "
         "orthographic, square to the camera, full body, untextured white clay, faceted low-poly planes, "
@@ -78,7 +80,7 @@ LOOKS = {
 }
 # Evan 16:46Z: "you can't put those to meshy with helmets in their hands ... do them with uniform, and then in snug
 # t-shirt and shorts that can fit comfortable under a space suit." Round 2: empty hands, no helmet anywhere, two outfits.
-VIEWS = ("hands empty and open, no helmet anywhere in the picture, front side and back views of the same character, "
+VIEWS = ("hands empty and open, nothing held, carried or hanging off the body, no helmet anywhere in the picture, front side and back views of the same character, "
          "A-pose with arms a little away from the body, full body, orthographic, plain light grey background --ar 3:2")
 OUTFITS = {
  "suit": "in a chunky Moon astronaut uniform with oxygen pack, boots and gloves, bare head",
@@ -94,7 +96,7 @@ CREW = [
 ]
 
 def entry(id_, name, group, prompt, **kw):
-    return dict(id=id_, name=name, group=group, mj_prompt=prompt, mj="queued", meshy="queued",
+    return dict(id=id_, name=name, group=group, mj_prompt=f"{prompt.split(', front side')[0]}, {CLEAN}, front side{prompt.split(', front side', 1)[1]}", mj="queued", meshy="queued",
                 meshy_settings=dict(mode="image-to-3d", texture=False, credits=20), **kw)
 
 roster = dict(
