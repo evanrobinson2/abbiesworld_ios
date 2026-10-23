@@ -11,6 +11,15 @@
       "threadTitle": "Sandbox v2 interface"
     },
     {
+      "id": "2026-10-23-low-clouds",
+      "date": "2026-10-23",
+      "title": "Clouds over the ranch",
+      "line": "Clouds now sail low over the tiles, about 20 m up, and their shadows slide across the fields beneath them.",
+      "image": "/whats-new/2026-10-23-low-clouds.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
+      "threadTitle": "Weather and clouds"
+    },
+    {
       "id": "2026-10-23-cel-cards",
       "date": "2026-10-23",
       "title": "Cards in clean cel shading",

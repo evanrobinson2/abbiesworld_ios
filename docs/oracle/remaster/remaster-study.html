@@ -96,9 +96,25 @@ td { padding: 12px 10px; border-bottom: 1px solid var(--rule); vertical-align: t
 ol.order { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; max-width: 72ch; }
 ol.order b { color: var(--sun); }
 ul.done { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 72ch; }
+
+.wipes { display: grid; gap: 34px; padding-block: 20px 8px; }
+.pair { display: grid; gap: 8px; }
+.pair .label { font: 600 1.05rem/1.2 var(--display); }
+.wipe { position: relative; width: 100%; aspect-ratio: 16 / 10; max-width: 100%; border-radius: 16px; overflow: hidden; background: var(--dusk-deep); touch-action: pan-y; cursor: ew-resize; user-select: none; -webkit-user-select: none; }
+.wipe img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; border-radius: 0; box-shadow: none; }
+.wipe .after { clip-path: inset(0 0 0 var(--x, 50%)); }
+.wipe .bar { position: absolute; top: 0; bottom: 0; left: var(--x, 50%); width: 3px; margin-left: -1.5px; background: var(--ink); box-shadow: 0 0 12px rgba(0,0,0,.5); }
+.wipe .knob { position: absolute; top: 50%; left: var(--x, 50%); width: 42px; height: 42px; margin: -21px 0 0 -21px; border-radius: 50%; background: var(--ink); box-shadow: 0 4px 14px rgba(0,0,0,.45); }
+.wipe .knob::before, .wipe .knob::after { content: ""; position: absolute; top: 15px; border: 6px solid transparent; }
+.wipe .knob::before { left: 4px; border-right-color: var(--dusk); }
+.wipe .knob::after { right: 4px; border-left-color: var(--dusk); }
+.tag { position: absolute; top: 12px; font: 500 0.72rem/1 var(--mono); letter-spacing: .12em; text-transform: uppercase; background: rgba(18,22,42,.72); color: var(--ink); padding: 6px 9px; border-radius: 6px; }
+.tag.b { left: 12px; } .tag.a { right: 12px; }
+.wipe:focus-visible { outline: 3px solid var(--sun); outline-offset: 3px; }
 </style>
 
 <div class="wrap">
+<div class="wipes"><div class="pair"><div class="wipe" tabindex="0" role="slider" aria-label="Crop bed: drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><img src="captures/ranch/r01-crop-bed.jpg" alt="Before"><img class="after" src="captures/after/r01-crop-bed.jpg" alt="After"><div class="bar"></div><div class="knob"></div><span class="tag b">Before</span><span class="tag a">After</span></div><p class="label">Crop bed</p></div><div class="pair"><div class="wipe" tabindex="0" role="slider" aria-label="Goat house: drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><img src="captures/ranch/r02-goat-yard.jpg" alt="Before"><img class="after" src="captures/after/r02-goat-yard.jpg" alt="After"><div class="bar"></div><div class="knob"></div><span class="tag b">Before</span><span class="tag a">After</span></div><p class="label">Goat house</p></div><div class="pair"><div class="wipe" tabindex="0" role="slider" aria-label="Goat house from above: drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><img src="captures/ranch/r16-goat-shelter-top.jpg" alt="Before"><img class="after" src="captures/after/r16-goat-shelter-top.jpg" alt="After"><div class="bar"></div><div class="knob"></div><span class="tag b">Before</span><span class="tag a">After</span></div><p class="label">Goat house from above</p></div><div class="pair"><div class="wipe" tabindex="0" role="slider" aria-label="Lamps by day: drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><img src="captures/ranch/r17-lamp-close.jpg" alt="Before"><img class="after" src="captures/after/r17-lamp-close.jpg" alt="After"><div class="bar"></div><div class="knob"></div><span class="tag b">Before</span><span class="tag a">After</span></div><p class="label">Lamps by day</p></div><div class="pair"><div class="wipe" tabindex="0" role="slider" aria-label="Lamps at night: drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><img src="captures/ranch/r18-lamp-close-night.jpg" alt="Before"><img class="after" src="captures/after/r18-lamp-close-night.jpg" alt="After"><div class="bar"></div><div class="knob"></div><span class="tag b">Before</span><span class="tag a">After</span></div><p class="label">Lamps at night</p></div><div class="pair"><div class="wipe" tabindex="0" role="slider" aria-label="The whole tile: drag to compare before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><img src="captures/ranch/r00-wide.jpg" alt="Before"><img class="after" src="captures/after/r00-wide.jpg" alt="After"><div class="bar"></div><div class="knob"></div><span class="tag b">Before</span><span class="tag a">After</span></div><p class="label">The whole tile</p></div></div>
 <header class="hero">
   <p class="eyebrow">AW-STUDY-0007 · Proposal · 2026-10-23</p>
   <h1>Ranch and Moon remaster</h1>
@@ -258,3 +274,15 @@ ul.done { margin: 0; padding-left: 1.2em; display: grid; gap: 6px; max-width: 72
   <p class="muted mono">Source: docs/oracle/remaster/ on main · captures: tools/remaster-shots/</p>
 </section>
 </div>
+<script>
+document.querySelectorAll('.wipe').forEach(w => {
+  const set = x => { x = Math.max(0, Math.min(100, x)); w.style.setProperty('--x', x + '%'); w.setAttribute('aria-valuenow', Math.round(x)); };
+  const at = e => { const r = w.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); };
+  let down = false;
+  w.addEventListener('pointerdown', e => { down = true; w.setPointerCapture(e.pointerId); at(e); });
+  w.addEventListener('pointermove', e => { if (down) at(e); });
+  w.addEventListener('pointerup', () => { down = false; });
+  w.addEventListener('pointercancel', () => { down = false; });
+  w.addEventListener('keydown', e => { const x = Number(w.getAttribute('aria-valuenow')); if (e.key === 'ArrowLeft') set(x - 5); if (e.key === 'ArrowRight') set(x + 5); });
+});
+</script>

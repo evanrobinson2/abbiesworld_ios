@@ -3,15 +3,56 @@
   "items": [
     {
       "id": "paper-man-1",
-      "at": "2026-10-23T04:30:00Z",
-      "title": "Paper man #1",
-      "ask": "Does the paper man match your pick? Keep it, or say what's off.",
+      "at": "2026-10-23T04:45:00Z",
+      "title": "Paper man #1, round 2",
+      "ask": "Round 2: re-measured from your pick, with heavier shoulders, arms and thighs. It's closer, but the folds are still softer than your pick. Your new picks (man 3, woman 2) are being built the same way.",
       "thread": "Roman model study",
       "before": "img/paper-man-1-pick.jpg",
       "after": "img/paper-man-1-model.jpg",
       "glb": "3d/paper-man-1.glb",
-      "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
-      "linkLabel": "Figure picks",
+      "link": "https://ranch.abbies.world/studies/#bodies",
+      "linkLabel": "Paper bodies",
+      "status": "waiting"
+    },
+    {
+      "id": "paper-woman-2",
+      "at": "2026-10-23T04:44:30Z",
+      "title": "Heroic woman 2",
+      "ask": "Being modelled from your pick now, with smaller shoulder bulbs.",
+      "thread": "Roman model study",
+      "image": "img/paper-woman-2-pick.jpg",
+      "status": "coming"
+    },
+    {
+      "id": "paper-man-3",
+      "at": "2026-10-23T04:44:00Z",
+      "title": "Paper man 3",
+      "ask": "Being modelled from your pick now.",
+      "thread": "Roman model study",
+      "image": "img/paper-man-3-pick.jpg",
+      "status": "coming"
+    },
+    {
+      "id": "ranch-remaster-wave-1",
+      "at": "2026-10-23T04:35:00Z",
+      "title": "Ranch remaster, wave 1",
+      "ask": "The new goat house, garden beds and lamps are in the Ranch. Keep them, or say what's off.",
+      "thread": "Model challenge",
+      "before": "img/ranch-remaster-before.jpg",
+      "after": "img/ranch-remaster-after.jpg",
+      "link": "https://claude.ai/artifact/QRZqj7Um4FCaGWRG1NsGmA",
+      "linkLabel": "Drag to compare",
+      "status": "waiting"
+    },
+    {
+      "id": "shoulder-study",
+      "at": "2026-10-23T04:30:30Z",
+      "title": "Over-the-shoulder play",
+      "ask": "Pick which of the five ideas to build first (I'd start with the soft shoulder and the dive).",
+      "thread": "AW-STUDY-0011 - Over-the-Shoulder Play",
+      "image": "img/shoulder-study.jpg",
+      "link": "https://claude.ai/artifact/F8HG8LMckTjCwQzDsHDsoz",
+      "linkLabel": "The study",
       "status": "waiting"
     },
     {
@@ -31,17 +72,18 @@
       "image": "img/paper-bodies.jpg",
       "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
       "linkLabel": "Figure picks",
-      "status": "waiting"
+      "status": "done"
     },
     {
       "id": "abbies-world-score",
       "at": "2026-10-23T03:44:00Z",
       "title": "Abbie's World Score",
-      "ask": "Read the score and say if it measures the right things.",
+      "ask": "Melody A or B? Then name the world versions you'd keep.",
       "thread": "AW-STUDY-0010 - Abbie's World Score",
       "link": "https://claude.ai/artifact/5Es88srv8cG13XiYU6FFCW",
-      "linkLabel": "The score",
-      "status": "waiting"
+      "linkLabel": "Listen",
+      "status": "waiting",
+      "image": "img/abbies-world-score.jpg"
     },
     {
       "id": "ranch-remaster-concepts",

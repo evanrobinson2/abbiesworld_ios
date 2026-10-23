@@ -2,8 +2,24 @@
   "asset": "male-hero",
   "request": "Evan, 2026-10-23: \"man #1\" (model the first take of the toned male Midjourney grid), as the proof before kids, fat men, old people, dioramas and the Fritigern story",
   "rounds": [
-    {"round": 1, "date": "2026-10-23", "score_iou": 0.83, "triangles": 1198,
-     "notes": "Built from front-view pixel landmarks of concept.png. Abs and traps first tried as stuck-on blocks; they read as armour, so they became creases. score.py now pads tall concepts to a square before resizing (the 2:3 mask had been squashed, which scored 0.34)."}
-  ],
-  "viewer": "https://claude.ai/artifact/QmMPGjRSGReUbVHykANaDf"
+    {
+      "round": 1,
+      "date": "2026-10-23",
+      "score_iou": 0.83,
+      "triangles": 1198,
+      "notes": "Built from front-view pixel landmarks of concept.png. Abs and traps first tried as stuck-on blocks; they read as armour, so they became creases. score.py now pads tall concepts to a square before resizing (the 2:3 mask had been squashed, which scored 0.34)."
+    },
+    {
+      "round": 2,
+      "date": "2026-10-23",
+      "request": "Evan, 04:23Z: \"it's not really getting it ... redo the papercraft with before after\"",
+      "notes": "Re-measured: limb, waist and shoulder widths now trace the pick's mask row by row (the recipe picks the rows and parts). Heavier deltoids fused to the traps, thicker arms, wider neck and jaw, pec shelf and ab folds, briefs cut high at the hip, separate knee bands. Same-camera shots for every round come from figures/shot.py. Still softer and rounder than the pick's crisp folds.",
+      "shots": {
+        "pick": "concept.png",
+        "r1": "rounds/r1/shot.png",
+        "r2": "r/shot.png",
+        "side_by_side": "r/before-after.jpg"
+      }
+    }
+  ]
 }
