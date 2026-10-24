@@ -1030,6 +1030,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/bubble_dance.glb"
    ]
+  },
+  "596": {
+   "task_id": "01a16ef7-4495-757a-a28d-f02f2b85cabc",
+   "credits": 3,
+   "name": "Ymca Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/ymca_dance.glb"
+   ]
+  },
+  "591": {
+   "task_id": "01a16ef7-4490-74ff-b19a-18a52f71f4f0",
+   "credits": 3,
+   "name": "Hip Hop Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/hip_hop_dance.glb"
+   ]
+  },
+  "78": {
+   "task_id": "01a16ef7-4491-725d-96c5-84e5d3f37309",
+   "credits": 3,
+   "name": "Rhythmic Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/not_your_mom.glb"
+   ]
+  },
+  "336": {
+   "task_id": "01a16ef7-4497-713e-9739-a3079ed3f87c",
+   "credits": 3,
+   "name": "Long Breathe and Look Around",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/long_breathe_and_look_around.glb"
+   ]
+  },
+  "281": {
+   "task_id": "01a16ef7-9ad9-775d-b013-df8a63827728",
+   "credits": 3,
+   "name": "Female Bend Over Pick Up Inspect",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_bend_over_pick_up_inspect.glb"
+   ]
+  },
+  "278": {
+   "task_id": "01a16ef7-9aa0-77ff-9bb3-3824d272f8d5",
+   "credits": 3,
+   "name": "Female Stand Pick Fruit Basket",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_stand_pick_fruit_basket.glb"
+   ]
+  },
+  "283": {
+   "task_id": "01a16ef7-9b2f-7425-8676-5d036a9e8d3c",
+   "credits": 3,
+   "name": "Pull Radish",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/pull_radish.glb"
+   ]
+  },
+  "341": {
+   "task_id": "01a16ef7-4494-779a-a3af-10aad4996a98",
+   "credits": 3,
+   "name": "Walk Slowly and Look Around",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_slowly_and_look_around.glb"
+   ]
+  },
+  "284": {
+   "task_id": "01a16ef7-c159-76d7-bf89-9c0ac84af1a0",
+   "credits": 3,
+   "name": "Collect Object",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/collect_object.glb"
+   ]
+  },
+  "268": {
+   "task_id": "01a16ef7-ef76-7742-9767-4e2624e85904",
+   "credits": 3,
+   "name": "Sit and Doze Off",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_and_doze_off.glb"
+   ]
   }
  }
 }
