@@ -69,7 +69,7 @@ export function createEffectIcons(T) {
   return {
     mount(button, id) {
       if (!builders[id]) return false;
-      const canvas = document.createElement('canvas'); canvas.width = canvas.height = SIZE * dpr; canvas.style.cssText = 'width:38px;height:38px;pointer-events:none;display:block';
+      const canvas = document.createElement('canvas'); canvas.width = canvas.height = SIZE * dpr; canvas.style.cssText = 'width:42px;height:42px;pointer-events:none;display:block';
       const scene = new T.Scene(), camera = new T.PerspectiveCamera(32, 1, 0.1, 20); camera.position.set(0, 0.3, 2.8); camera.lookAt(0, 0, 0);
       scene.add(new T.AmbientLight(0xffffff, 1.1)); const key = new T.DirectionalLight(0xffffff, 2.2); key.position.set(2, 3, 3); scene.add(key);
       const model = builders[id](); scene.add(model); paint(model, false);

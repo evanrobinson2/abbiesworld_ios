@@ -127,7 +127,7 @@ function draw() {
  nb.querySelector('ul').innerHTML = [
   // A favour reads as its next step, with who asked; the steps already done are ticked under it.
   ...favours.map(q => { const next = q.steps.find(st => !st.done), done = q.status === 'done';
-   return li(done ? `Helped ${q.giverName.replace(/^The /, 'the ')}` : (next?.say || q.ask), done, done ? '' : ` <small>for ${esc(q.giverName.replace(/^The /, 'the ').replace(/^A /, 'a '))}</small>`) +
+   return li(done ? `Helped ${q.giverName.replace(/^The /, 'the ')}` : (next?.say || q.ask), done, done ? '' : ` <small>for ${esc(q.giverName.replace(/^The /, 'the ').replace(/^A /, 'a '))}${q.item?.carrying ? ` · carrying ${esc(q.item.icon)} ${esc(q.item.name.toLowerCase())}` : ''}</small>`) +
     q.steps.filter(st => st.done && !done).map(st => `<li class="done step"><i>✓</i><span>${esc(st.say || '')}</span></li>`).join(''); }),
   ...charms.map(c => li(c.t, c.done))].join('');
 }
