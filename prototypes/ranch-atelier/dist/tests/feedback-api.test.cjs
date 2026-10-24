@@ -17,6 +17,39 @@ async function call(handler, req) {
   return { status: res.statusCode, body: type === 'application/json' ? JSON.parse(res.body) : res.body, type };
 }
 const jpeg = 'data:image/jpeg;base64,' + Buffer.from('fake-jpeg').toString('base64');
+test('study revisions preserve multiline feedback, isolate studies and retry without duplicating', async () => {
+  const blob=fakeBlob(), handler=createHandler(blob,{env:{OWNER_TOOLS_LOCKED:'true'},who:()=>({owner:true})});
+  const body={note:'Publishing test\nSecond line',studyId:'faster-study-publishing',studyRevision:'a'.repeat(64),requestId:'m0000000-abcdef12',sha:'b'.repeat(40)};
+  assert.equal((await call(handler,{method:'POST',body})).status,200);
+  assert.equal((await call(handler,{method:'POST',body})).body.duplicate,true);
+  assert.equal((await call(handler,{method:'POST',body:{...body,studyRevision:'c'.repeat(64)}})).status,409);
+  const read=await call(handler,{method:'GET',url:'/api/feedback?studyId=faster-study-publishing'});
+  assert.equal(read.body.items.length,1); assert.equal(read.body.items[0].note,body.note);
+  assert.equal(read.body.items[0].studyRevision,body.studyRevision); assert.ok(read.body.items[0].receivedAt);
+  assert.equal((await call(handler,{method:'GET',url:'/api/feedback?studyId=another-study'})).body.items.length,0);
+  for(const bad of ['../study','UPPER','a'.repeat(81)])assert.equal((await call(handler,{method:'POST',body:{...body,studyId:bad}})).status,400);
+  assert.equal((await call(handler,{method:'POST',body:{...body,studyRevision:'short'}})).status,400);
+});
+test('new study IDs do not bypass owner authorization or same-origin checks',async()=>{
+  const body={note:'test',studyId:'new-study',studyRevision:'a'.repeat(64)};
+  for(const who of [()=>null,()=>({owner:false})]){
+    const handler=createHandler(fakeBlob(),{env:{OWNER_TOOLS_LOCKED:'true'},who});
+    assert.equal((await call(handler,{method:'POST',body})).status,401);
+    assert.equal((await call(handler,{method:'GET',url:'/api/feedback?studyId=new-study'})).status,401);
+  }
+  const handler=createHandler(fakeBlob(),{env:{OWNER_TOOLS_LOCKED:'true'},who:()=>({owner:true})});
+  assert.equal((await call(handler,{method:'POST',headers:{host:'app.abbies.world',origin:'https://unrelated.vercel.app'},body})).status,403);
+  assert.equal((await call(handler,{method:'OPTIONS'})).status,405);
+});
+test('study filtering happens before pagination, with revision history retained',async()=>{
+  const blob=fakeBlob(), handler=createHandler(blob,UNLOCKED);
+  for(let n=0;n<65;n++){const id='m00000'+String(n).padStart(2,'0')+'-abcdef12';blob.files.set('feedback/v1/'+id+'.json',Buffer.from(JSON.stringify({id,note:'note '+n,studyId:n<3?'quiet-study':'busy-study',studyRevision:'a'.repeat(64)})))}
+  assert.equal((await call(handler,{method:'GET',url:'/api/feedback?studyId=quiet-study'})).body.items.length,3);
+  const first=await call(handler,{method:'GET',url:'/api/feedback?studyId=busy-study'});
+  assert.equal(first.body.items.length,50);assert.ok(first.body.nextBefore);
+  const second=await call(handler,{method:'GET',url:'/api/feedback?studyId=busy-study&before='+first.body.nextBefore});
+  assert.equal(second.body.items.length,12);
+});
 test('feedback stores note and picture, lists newest first, serves the picture', async () => {
   const blob = fakeBlob(), handler = createHandler(blob, UNLOCKED);
   const first = await call(handler, { method: 'POST', body: { note: 'barn is too red', image: jpeg, thread: 'cmsg_01ABCDEFGHIJKLMNOP', page: '/sandbox' } });
@@ -40,4 +73,27 @@ test('feedback rejects empty posts, bad pictures and foreign origins', async () 
   assert.equal((await call(handler, { method: 'POST', body: { image: 'data:image/png;base64,AAAA' } })).status, 400);
   assert.equal((await call(handler, { method: 'POST', headers: { origin: 'https://evil.test' }, body: { note: 'hi' } })).status, 403);
   assert.equal((await call(handler, { method: 'GET', url: '/api/feedback?image=../x' })).status, 400);
+});
+
+test('study notes preserve multiline text, metadata and server time; retries do not duplicate', async () => {
+  const blob = fakeBlob(), handler = createHandler(blob, UNLOCKED);
+  const body = {note:'The reveal feels lovely.\nKeep the pause before the car.',studyId:'toy-world-title',studyContext:'intro reveal 1',studyLevel:'Proposal',requestId:'mhl12345-aabbccdd'};
+  const a = await call(handler,{method:'POST',body});
+  const retry = await call(handler,{method:'POST',body});
+  assert.equal(a.status,200); assert.equal(retry.body.duplicate,true); assert.equal(a.body.id,retry.body.id);
+  const read = await call(handler,{method:'GET',url:'/api/feedback?studyId=toy-world-title'});
+  assert.equal(read.body.items.length,1);assert.equal(read.body.items[0].note,body.note);
+  assert.equal(read.body.items[0].studyContext,body.studyContext);assert.ok(Date.parse(read.body.items[0].receivedAt));
+  assert.equal((await call(handler,{method:'POST',body:{...body,note:'different'}})).status,409);
+  assert.equal((await call(handler,{method:'POST',body:{...body,requestId:'../bad'}})).status,400);
+});
+
+test('study filtering precedes pagination, so other studies cannot hide older notes', async () => {
+ const blob=fakeBlob(),handler=createHandler(blob,UNLOCKED);
+ for(let i=0;i<115;i++) {const id=(100000000+i).toString(36).padStart(8,'0')+'-aabbccdd';blob.files.set('feedback/v1/'+id+'.json',Buffer.from(JSON.stringify({id,note:'note '+i,studyId:i<55?'toy-world-menu':'toy-world-racer',receivedAt:new Date().toISOString()})));}
+ const first=await call(handler,{method:'GET',url:'/api/feedback?studyId=toy-world-menu'});
+ assert.equal(first.body.items.length,50);assert.ok(first.body.nextBefore);assert.ok(first.body.items.every(x=>x.studyId==='toy-world-menu'));
+ const second=await call(handler,{method:'GET',url:'/api/feedback?studyId=toy-world-menu&before='+first.body.nextBefore});
+ assert.equal(second.body.items.length,5);assert.equal(second.body.nextBefore,null);
+ assert.equal(new Set([...first.body.items,...second.body.items].map(x=>x.id)).size,55);
 });

@@ -6,7 +6,10 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
 (async () => {
   const [,, pre = 'route'] = process.argv;
   const b = await chromium.launch({args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--autoplay-policy=no-user-gesture-required']});
-  const ctx = await b.newContext({viewport: {width: 1280, height: 720}}), p = await ctx.newPage();
+  // SwiftShader on CI is pixel-bound: the desktop-sized route exhausted its
+  // 25-minute budget before the basement finished. Keep the complete route and
+  // its screenshots at a smaller 16:9 viewport; visual checks cover desktop size.
+  const ctx = await b.newContext({viewport: {width: 640, height: 360}}), p = await ctx.newPage();
   p.on('pageerror', e => console.log('err', e.message)); p.on('console', m => { if (m.type() === 'error') console.log('console', m.text().slice(0, 200)); });
   const until = async (fn, ms = 300000) => { await p.waitForFunction(fn, null, {timeout: ms, polling: 250}); await p.waitForTimeout(800); };
   const shot = n => p.screenshot({path: `${pre}-${n}.png`});

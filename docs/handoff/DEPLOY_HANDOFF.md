@@ -49,6 +49,6 @@ main `fab70d98251fb2ac13f51da1a992afe7f4eb3527`, READY 17:13:49Z (1:13 PM local)
 8. Cloud threads cannot reach `*.vercel.app` directly; use `get_access_to_vercel_url` or `web_fetch_vercel_url` on custom domains.
 9. The auto-mode classifier can deny edits that touch tests or settings. Report rather than work around.
 10. Every Evan-visible Ranch deploy needs a `whats-new.json` entry with `"tour": true` or `"tour": false` (CLAUDE.md).
-11. Instant preview is separate: static pages under `preview/<name>/index.html` on any branch sync to R2 via a GitHub Action and serve at https://app.abbies.world/r2/previews/<name>/index.html. No deploy needed.
+11. Study publication is separate: use `preview/<id>/study.json` and main's `study-publish.yml` for immutable R2 bundles and conditional stable-link promotion, as specified in `docs/design/STUDIES.md`. Ordinary study revisions need no game deployment. The old `/r2/previews/` route is legacy; it is not the standard for new studies. Initial shared-feedback metadata changes and new server behavior still require the coordinated main-app release.
 
 Docs: `docs/architecture/DEPLOYS.md`. Team memory files `deploy-path` and `town-hud-wiring` hold the same notes. Nothing of mine is unpushed.

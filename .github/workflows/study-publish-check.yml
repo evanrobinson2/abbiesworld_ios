@@ -1,0 +1,21 @@
+name: study-publish-check
+on:
+  pull_request:
+    branches: [main]
+    paths: ['preview/**', 'tools/study-publish/**', '.github/workflows/study-publish*.yml', 'prototypes/ranch-atelier/dist/studies/context.json']
+permissions:
+  contents: read
+jobs:
+  publisher:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with: {persist-credentials: false, filter: 'blob:none'}
+      - run: python -m unittest discover -s tools/study-publish -p 'test_*.py' -v
+      - name: Validate all registered study bundles without running their code
+        run: |
+          for manifest in preview/*/study.json; do
+            [ -f "$manifest" ] || continue
+            study=$(basename "$(dirname "$manifest")")
+            python tools/study-publish/publish.py check --id "$study" --sha "$GITHUB_SHA"
+          done

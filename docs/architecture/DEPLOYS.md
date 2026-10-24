@@ -12,6 +12,14 @@ Threads were also stopped by the cloud session's own permission check when they 
 
 ## The path
 
+### Study publication (default for standalone studies)
+
+Use the existing R2 rewrite with `study-publish.yml`, following `docs/design/STUDIES.md`. Source `preview/<id>/study.json` plus declared files becomes a content-addressed `/r2/studies/<id>/versions/<revision>/` bundle. A separate conditional promotion changes only `current.json`; `/r2/studies/<id>/index.html` remains the review link. Rollback selects a previous bundle. No Vercel build or game deployment occurs for ordinary study revisions. The publisher uses existing R2 secrets in the main-owned workflow; source files are data and are not executed with credentials. Legacy preview publishing is restricted to main and skips these packages.
+
+The shared feedback API's generic study metadata support requires one initial coordinated app release. Subsequent study IDs/revisions do not require API changes. Authentication, app-origin checks and private Blob storage remain unchanged. Independent Vercel study projects need an explicit server/runtime reason and a reviewed auth/capture plan. This exception does not authorize new projects by default.
+
+### Game and server deployment
+
 - **One deployer.** The thread "Vercel deploys broken" (cmsg_01USVJqCbJruSGtaP4zsE2eYURFnTpcr61eZdt8GXrQYfS)
   owns production deploys of `abbies-ranch-atelier`. Other threads merge into `main` and do not deploy.
 - **Tell the deployer.** After a merge that changes `prototypes/ranch-atelier/dist`, message that thread

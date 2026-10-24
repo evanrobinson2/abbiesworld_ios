@@ -2,6 +2,27 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-study-publishing",
+      "date": "2026-10-24",
+      "title": "Versioned study publishing",
+      "line": "Studies can publish selected components and assets independently of the game, with exact-revision shared feedback. Rollout and live proof are tracked in AW #638.",
+      "image": "/whats-new/study-publishing.svg",
+      "thread": "01a16f34-c876-7360-9312-7ee7306dcb82",
+      "threadTitle": "Studies - Decrease Report Readiness Latency",
+      "tour": false
+    },
+    {
+      "id": "toy-world-review-20261024",
+      "date": "2026-10-24",
+      "title": "The living toy world study room",
+      "line": "Review the title, menu and home, world selector, Design, Capture and six arcade racer layouts. Each has a visible maturity stamp and shared timestamped notes. Includes the Mini Game Designer process proposal. Study work, not a replacement for the live game.",
+      "image": "/whats-new/2026-10-24-toy-world-review.png",
+      "threadTitle": "Abbie’s World study review",
+      "tour": false,
+      "link": "/studies/toy-world-review/?study=title",
+      "thread": "01a16dd6-b560-7b62-a9fc-84aa0bf9fab9"
+    },
+    {
       "id": "2026-10-24-carwash-level1",
       "date": "2026-10-24",
       "title": "Carwash · Level 1 Exploration",

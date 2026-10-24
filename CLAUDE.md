@@ -4,6 +4,7 @@ How Claude works in this repository (Abbie's World / Atelier Ranch). What we are
 documents; what is built lives in the status documents. Keep these three apart.
 
 ## Read first
+- `docs/design/STUDIES.md`: the repo-wide study and communication convention for every operator. Research and creative directions mature through attention, refinement and feedback; display Exploration, Proposal, Draft or Final / Game Ready. Delivery requires a verified working canonical online link, not merely an artifact, merge or deployment receipt.
 - `VISION.md`: "The Living Holodeck", the founding product vision.
 - `docs/MODELER_VISION.md`: the long-term source of truth for the AI modeler. We are building more than a 3D asset
   generator: a system that preserves creative intent, so whole experiences can be rebuilt, extended and upgraded as
@@ -24,6 +25,7 @@ Read `INVARIANTS.md`; CI (`invariants` workflow) enforces each one.
 - Every voice is an ElevenLabs designed voice (never cloned); no browser speech synthesis or other TTS.
 
 ## Ground rules
+- Study publication uses the versioned R2 workflow in `docs/design/STUDIES.md`: selected immutable bundles, stable links, authenticated shared notes, conditional promotion and rollback. Every operator follows that standard. Static studies, including packaged game components, do not require a game deployment. New server behavior and accepted game integration still use the coordinated deployment process and invariants.
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.
 - `main` is the source for everything, including the live Ranch Atelier site. Branch from `main` and open PRs against
   `main`. Vercel project `abbies-ranch-atelier` is not Git-linked: deploy it with `create_deployment`, a `gitSource` of

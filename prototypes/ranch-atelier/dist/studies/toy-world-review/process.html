@@ -1,0 +1,372 @@
+<h1>Mini Game Designer process study</h1>
+<p>This study proposes how Abbie’s World turns an emotional intention into a small, complete game. It is a living research and design workspace: add context, refine it with Evan’s feedback and validate it through a complete pilot. No pilot is claimed complete here.</p>
+<p>Current review question: which parts of this process help us preserve creative intent and produce satisfying playable milestones, and which create needless overhead?</p>
+<details class="study-context"><summary>Sources and study context</summary><p>Maturity: <strong>Proposal</strong>. Owner chat: <code>01a16dd6-b560-7b62-a9fc-84aa0bf9fab9</code>.</p>
+<p>Working artifact: <a target="_blank" rel="noopener" href="https://chatgpt.com/space/page_d1cd857933e081919b3188485df97f3e">https://chatgpt.com/space/page_d1cd857933e081919b3188485df97f3e</a></p>
+<p>Canonical study: <a href="?study=process">this study room</a>. Publication verification is recorded in the repository study record.</p>
+<p>Design card</p>
+<ul>
+<li>What the reader needs to feel or know: My ideas can become coherent games, and I can shape the work as it develops.</li>
+<li>How would the character know: This is a grown-up production study outside game fiction.</li>
+<li>Mode: overlay, for deliberate reading and review outside play.</li>
+<li>Who it is for: Evan and project operators.</li>
+<li>The whole game adapts: no gameplay, lighting, people or audio changes are claimed by this study.</li>
+</ul>
+</details>
+<h2>Original process proposal</h2>
+<p>The Mini Game Designer should be a repeatable creative production process that turns an emotional intention into a small, complete, distinctive game—and carries responsibility for getting it there.</p>
+<p>You should be able to say:</p>
+<p>“I want the feeling of finding a tiny civilization under a stone. Curious, slightly mischievous, affectionate. There should be collecting, little machines, and creatures that have opinions.”</p>
+<p>From there, I should be able to investigate your libraries, propose coherent interpretations, develop one into a blueprint, build the right experiments, produce the assets and presentation, and bring you playable milestones with specific questions.</p>
+<p>The important word is coherent. A charming model, an interesting mechanic, and pleasant music only become a game when they support the same experience.</p>
+<p>I looked at the repository’s existing foundations. The Game Oracle already describes consultation that produces verbs, rules, goals, presentation styles, and asset requests. The game identity framework already connects fantasy, mechanics, dynamics, feel, art, interface, audio, and pacing. Existing farm studies record reuse, assumptions, integration, and rough edges.</p>
+<p>Those are substantial foundations. What follows is a proposed process specification built around them. I haven’t audited the full corpus or located the library under the exact name csources, so your library counts remain context supplied by you.</p>
+<h3>1. The process starts with an experience brief.</h3>
+<p>The first conversation should capture what you mean without requiring you to become a game designer or fill out a long form.</p>
+<p>I would extract:</p>
+<div class="table-scroll"><table>
+<tr><th>Element</th><th>What we need to understand</th></tr>
+<tr><td>Desired feeling</td><td>What should the player feel while acting?</td></tr>
+<tr><td>Emotional contrast</td><td>What gives that feeling texture: safety with mystery, competence with chaos, tenderness with responsibility?</td></tr>
+<tr><td>Player fantasy</td><td>Who am I here, and what am I allowed to do?</td></tr>
+<tr><td>Concepts</td><td>Creatures, machines, gardens, collecting, weather, secrets, transformation…</td></tr>
+<tr><td>Attraction</td><td>What specifically interests you about those concepts?</td></tr>
+<tr><td>Signature moment</td><td>The short experience that would make you say, “Yes, that’s it.”</td></tr>
+<tr><td>Audience and context</td><td>Who plays, on which device, with what reading ability, for how long?</td></tr>
+<tr><td>Boundaries</td><td>What would spoil the experience?</td></tr>
+<tr><td>Relationship to Abbie’s World</td><td>A place, an activity, a standalone diversion, a quest, a persistent system?</td></tr>
+</table></div>
+<p>“Collecting” deserves interpretation. It might mean completing a set, discovering unusual specimens, taking care of things, arranging a display, or remembering an adventure. Those lead to different games.</p>
+<p>Likewise, “cozy” is insufficient direction. A cozy game can be contemplative, busy, funny, absorbing, mysterious, or socially warm.</p>
+<p>The process should return a short interpretation:</p>
+<p>“I think the appeal is discovering a little society and earning its trust through useful inventions. Collecting matters because objects acquire personal meaning. The machines should create opportunities for surprises.”</p>
+<p>You can correct that before it becomes expensive.</p>
+<p>Unanswered details should become visible assumptions. Only questions that change the direction materially should interrupt progress.</p>
+<h3>2. Feelings become design hypotheses that can be tested.</h3>
+<p>Every important emotional intention needs a proposed cause in play.</p>
+<div class="table-scroll"><table>
+<tr><th>Intended feeling</th><th>Proposed cause</th><th>Evidence to look for</th></tr>
+<tr><td>Curiosity</td><td>Partial clues and discoveries that change what the player thinks is possible</td><td>Player investigates without repeated prompting</td></tr>
+<tr><td>Affection</td><td>Creatures remember and visibly respond to the player’s actions</td><td>Player distinguishes individuals and cares about outcomes</td></tr>
+<tr><td>Competence</td><td>Understandable rules with room for better solutions</td><td>Player predicts consequences and improves deliberately</td></tr>
+<tr><td>Mischief</td><td>Reversible disruption produces amusing reactions</td><td>Player experiments beyond the required solution</td></tr>
+<tr><td>Ownership</td><td>Choices leave recognizable, persistent changes</td><td>Player identifies something as “mine”</td></tr>
+<tr><td>Relief</td><td>A clear source of pressure resolves visibly and audibly</td><td>Player notices and enjoys the release</td></tr>
+</table></div>
+<p>These are hypotheses, not universal recipes.</p>
+<p>For example, adding a timer to make something “exciting” can undermine the pleasure of examining it. Adding a collection checklist can make discovery feel obligatory. The process should catch those conflicts early.</p>
+<p>Each hypothesis gets an ID, a proposed implementation, a test, and a status. That gives us a traceable chain:</p>
+<p>Feeling → player behavior → rule or interaction → presentation → playable evidence.</p>
+<h3>3. Research should retrieve useful design knowledge at several levels.</h3>
+<p>The libraries have different jobs:</p>
+<div class="table-scroll"><table>
+<tr><th>Resource</th><th>Role in the process</th></tr>
+<tr><td>Game Oracle</td><td>Find relevant precedents and explain how they work</td></tr>
+<tr><td>Game identities</td><td>Compare the combinations of choices that create a recognizable experience</td></tr>
+<tr><td>Historical games and anatomy studies</td><td>Recover compact loops, unusual rules, feedback patterns, and economical designs</td></tr>
+<tr><td>Modern game studies</td><td>Examine interaction, onboarding, accessibility, presentation, and current player expectations</td></tr>
+<tr><td>Source libraries</td><td>Locate reusable implementations and understand their dependencies</td></tr>
+<tr><td>Hand-built models</td><td>Supply characters, objects, environments, and a consistent visual vocabulary</td></tr>
+<tr><td>Audio and effects libraries</td><td>Supply responsive, coherent feedback and atmosphere</td></tr>
+<tr><td>Previous Abbie’s World studies</td><td>Reuse tested knowledge and avoid repeating failed experiments</td></tr>
+</table></div>
+<p>Searching only by genre would waste much of this collection. We need searches such as:</p>
+<ul>
+<li>“Discovery that changes how you use familiar objects.”</li>
+<li>“Small creatures communicating needs without dialogue.”</li>
+<li>“Machines whose mistakes are entertaining.”</li>
+<li>“Planning with visible consequences and no countdown.”</li>
+<li>“A collection that becomes part of the environment.”</li>
+</ul>
+<p>Each selected reference should produce a specific lesson:</p>
+<p>“This mechanism exposes the next demand before the player commits resources, creating anticipation without requiring fast reactions.”</p>
+<p>It should also state the conditions under which that lesson works, its implementation implications, and what we are deliberately leaving behind.</p>
+<p>A useful research packet would contain a few complementary references: one for the central loop, one for interaction, one for emotional tone, and perhaps one surprising historical precedent.</p>
+<p>The quantity of ingested games is valuable, but the actionable unit is an evidenced lesson we can retrieve and apply. A title being indexed does not mean its dynamics have been understood through play.</p>
+<h3>4. Synthesis produces genuinely different game directions.</h3>
+<p>Before committing, I would normally produce three compact concepts. Each should explore a different interpretation of the emotional brief.</p>
+<p>For the tiny-civilization example:</p>
+<div class="table-scroll"><table>
+<tr><th>Direction</th><th>Main activity</th><th>Source of depth</th><th>Emotional emphasis</th></tr>
+<tr><td>The Borrowers’ Workshop</td><td>Assemble little contraptions from found objects</td><td>Interacting mechanical properties</td><td>Mischief and competence</td></tr>
+<tr><td>Understone Post</td><td>Discover routes and deliver peculiar parcels</td><td>Learning the inhabitants and their relationships</td><td>Affection and curiosity</td></tr>
+<tr><td>The Rain Collectors</td><td>Redirect droplets through a miniature settlement</td><td>Spatial consequences and changing conditions</td><td>Care and discovery</td></tr>
+</table></div>
+<p>Each concept includes:</p>
+<ul>
+<li>A one-sentence promise.</li>
+<li>The player’s main verb.</li>
+<li>One concrete minute of play.</li>
+<li>The signature moment.</li>
+<li>The meaningful choices.</li>
+<li>How it changes over repeated play.</li>
+<li>Candidate assets and reusable systems.</li>
+<li>The largest uncertainty.</li>
+<li>A credible scope.</li>
+<li>Why it fits—or strains—the brief.</li>
+</ul>
+<p>I should recommend one and explain the tradeoff. You should be able to combine a particular quality from another without accidentally merging three entire games.</p>
+<p>This is also where we reject attractive but incompatible ideas. Every added mechanic must earn its place through the intended experience.</p>
+<h3>5. The selected game receives its own identity.</h3>
+<p>The existing identity framework is useful for designing our games as well as studying others.</p>
+<p>The new identity should establish:</p>
+<ul>
+<li>Player fantasy: the role and power the player experiences.</li>
+<li>Three ranked pillars: principles strong enough to justify cutting features.</li>
+<li>Signature moment: what makes the game worth making.</li>
+<li>Signature interaction: what makes it pleasurable to touch.</li>
+<li>Emotional progression: how the experience changes during a session.</li>
+<li>Distinctive behavior: what this world does that gives it personality.</li>
+<li>Boundaries: experiences we deliberately exclude.</li>
+<li>Identity risks: choices that could dilute it.</li>
+</ul>
+<p>For example:</p>
+<p>Promise: Help a stubborn little settlement prepare for rain using contraptions made from oversized household objects.</p>
+<p>Pillars: understandable physical consequences; affectionate inhabitants; delightful improvisation.</p>
+<p>Signature moment: your improvised leaf gutter fills a thimble reservoir, and a resident proudly starts a ridiculous waterwheel.</p>
+<p>That moment gives engineering, art, animation, sound, and interface a common target.</p>
+<p>It also creates a decision rule: if a feature makes that experience harder to understand or less satisfying, it needs a strong justification.</p>
+<h3>6. “Mini” needs a scope agreement.</h3>
+<p>Small should describe the production envelope and the clarity of the experience. It should still leave room for surprise, mastery, and personality.</p>
+<p>Each game needs explicit budgets for:</p>
+<ul>
+<li>Play space and scene count.</li>
+<li>Player verbs and input complexity.</li>
+<li>Rules introduced during onboarding.</li>
+<li>Content required for a complete session.</li>
+<li>New systems versus reused systems.</li>
+<li>New models, animations, sounds, and interface elements.</li>
+<li>Persistence and integration.</li>
+<li>Loading, memory, and rendering on the target device.</li>
+<li>Production time and external generation costs.</li>
+</ul>
+<p>There should also be a complexity budget for the player. A feature can be cheap to implement and expensive to understand.</p>
+<p>I would divide scope into three sets:</p>
+<div class="table-scroll"><table>
+<tr><th>Set</th><th>Meaning</th></tr>
+<tr><td>Essential experience</td><td>Everything needed to deliver the promise</td></tr>
+<tr><td>Depth</td><td>Variations that extend the same satisfying activity</td></tr>
+<tr><td>Later possibilities</td><td>Attractive additions that do not belong in the current build</td></tr>
+</table></div>
+<p>We should decide the cut order before production gets difficult. Usually we can reduce content variety before sacrificing interaction quality, readability, or the signature moment.</p>
+<p>And the delivery target must be explicit. The repository’s development practices distinguish the web runtime from native iOS integration. A playable web study cannot silently count as an integrated iOS mini game.</p>
+<h3>7. The study page becomes the living design blueprint.</h3>
+<p>The page should let you understand the game, play the latest meaningful version, see what we know, and influence the next decision.</p>
+<p>Its primary content should be:</p>
+<div class="table-scroll"><table>
+<tr><th>Part</th><th>Contents</th></tr>
+<tr><td>The promise</td><td>Feeling, fantasy, pillars, signature moment</td></tr>
+<tr><td>Current playable</td><td>Build identity, controls, what to try, known limitations</td></tr>
+<tr><td>Current question</td><td>The uncertainty this milestone is testing</td></tr>
+<tr><td>Design</td><td>Loop, rules, choices, pacing, failure and recovery</td></tr>
+<tr><td>Experience storyboard</td><td>Entry, first action, discovery, complication, payoff, exit</td></tr>
+<tr><td>Presentation</td><td>Art direction, camera, animation, UI, audio</td></tr>
+<tr><td>Production inventory</td><td>Selected assets, systems, gaps, dependencies</td></tr>
+<tr><td>Evidence</td><td>Playtests, recordings, measurements, observations</td></tr>
+<tr><td>Decisions</td><td>What changed, why, and which assumptions it affects</td></tr>
+<tr><td>Next milestone</td><td>Deliverable, acceptance criteria, unresolved choices</td></tr>
+</table></div>
+<p>Long technical detail can live in disclosures or linked records. The first view should make the current experience and current decision obvious.</p>
+<p>Crucially, the page needs to distinguish:</p>
+<ul>
+<li>Intended</li>
+<li>Implemented</li>
+<li>Verified</li>
+<li>Accepted</li>
+</ul>
+<p>“Creatures remember your kindness” might be intended. A changing number might be implemented. A correctly restored relationship might be verified. Whether it creates affection still needs observation and judgment.</p>
+<p>The blueprint should exist before a playable build and evolve throughout production. It should never become a polished description that outruns the actual game.</p>
+<p>The game embedded in the study should use the same gameplay implementation as the eventual release, consistent with the repository’s existing “one actual simulation, several presentations” principle.</p>
+<h3>8. Rules need enough precision to build without improvising the game halfway through.</h3>
+<p>For every main verb, specify:</p>
+<ul>
+<li>When it is available.</li>
+<li>How the player discovers it.</li>
+<li>What input invokes it.</li>
+<li>What targets are valid.</li>
+<li>What the preview communicates.</li>
+<li>What changes when committed.</li>
+<li>What invalid attempts do.</li>
+<li>Whether the action can be canceled or undone.</li>
+<li>Which consequences happen immediately or later.</li>
+<li>How success and failure are communicated.</li>
+</ul>
+<p>For every resource, specify where it comes from, where it goes, limits, persistence, and what happens when it runs out.</p>
+<p>For every important entity, specify its meaningful states and transitions.</p>
+<p>For the session, specify:</p>
+<ul>
+<li>What gets the player started.</li>
+<li>Why the next action is interesting.</li>
+<li>How complexity grows.</li>
+<li>What prevents a dominant repetitive solution.</li>
+<li>What constitutes completion, satisfaction, or a good stopping point.</li>
+<li>What makes returning worthwhile, if returning matters.</li>
+</ul>
+<p>Some mini games are toys with self-directed goals. Others are challenges with endings. The process should identify which kind we are making instead of automatically adding scores, currencies, unlocks, and failure screens.</p>
+<h3>9. Asset selection is part of game design.</h3>
+<p>A model’s appearance alone does not establish whether it supports a mechanic.</p>
+<p>A useful asset record needs to tell us whether it can be:</p>
+<ul>
+<li>Picked up, opened, attached, filled, ridden, broken, or transformed.</li>
+<li>Animated through the states the game requires.</li>
+<li>Recognized at the normal camera distance.</li>
+<li>Used with the chosen collision and interaction system.</li>
+<li>Rendered within the target device’s budget.</li>
+<li>Combined coherently with the other selected assets.</li>
+</ul>
+<p>A gorgeous watering can may be unusable for a pouring interaction if the handle, pivot, spout, and animation behavior are unsuitable.</p>
+<p>For each required asset, the process should make one explicit choice: reuse, adapt, create, or remove the need through redesign.</p>
+<p>The production manifest should identify the asset, version, gameplay role, required states, scale, attachments, presentation requirements, provenance, and validation evidence. Source code and asset reuse permissions belong in those records as separate fields; finding something in a historical-game collection should not automatically mark it available for shipping.</p>
+<p>The existing project already requires registration and review of new assets. The process should incorporate that workflow, including inspection inside the real game camera.</p>
+<h3>10. Sound, animation, and UI are designed together around actions.</h3>
+<p>The unit of presentation design should often be an event in play.</p>
+<p>For a successful placement:</p>
+<div class="table-scroll"><table>
+<tr><th>Channel</th><th>Intended contribution</th></tr>
+<tr><td>Input</td><td>Release or confirm feels unambiguous</td></tr>
+<tr><td>Visual preview</td><td>Player understands position and consequence</td></tr>
+<tr><td>Motion</td><td>Object settles with the right weight</td></tr>
+<tr><td>Sound</td><td>Contact identifies material and confirms completion</td></tr>
+<tr><td>World response</td><td>Nearby actors or systems acknowledge the result</td></tr>
+<tr><td>UI</td><td>Only the information needed for the next choice changes</td></tr>
+</table></div>
+<p>We need an event map covering selection, hesitation, invalid action, commitment, success, discovery, danger, failure, recovery, completion, and idle life.</p>
+<p>Audio direction should specify a sound palette, ambient layers, priority, repetition variation, music behavior, and what happens when sound is muted. Essential information must remain understandable.</p>
+<p>UI design should answer, at every important moment:</p>
+<p>What can I do? What will happen? What just happened? What should I notice next?</p>
+<p>That includes the less glamorous states: loading, interrupted gestures, pause, resume, restart, returning to the parent world, saving, and recoverable errors.</p>
+<p>A touch interaction needs special attention to finger occlusion and camera ownership. A decorative object should not look more actionable than the actual objective.</p>
+<p>The first playable experiment should already contain the feedback needed to judge the main action. Otherwise we risk rejecting a good mechanic because it feels lifeless—or approving one whose appeal depends on presentation we have not tested.</p>
+<h3>11. Production advances through evidence-bearing milestones.</h3>
+<p>I propose these milestones:</p>
+<div class="table-scroll"><table>
+<tr><th>Milestone</th><th>Deliverable</th><th>Question it must answer</th></tr>
+<tr><td>Experience brief</td><td>Interpreted feeling, concepts, assumptions</td><td>Have we understood the desired experience?</td></tr>
+<tr><td>Direction</td><td>Contrasting concepts and recommendation</td><td>Which game is worth pursuing?</td></tr>
+<tr><td>Blueprint</td><td>Identity, rules, scope, inventory, risks</td><td>Can we build a coherent version within the envelope?</td></tr>
+<tr><td>Interaction proof</td><td>The main verb with representative feedback</td><td>Is the central action understandable and satisfying?</td></tr>
+<tr><td>Loop proof</td><td>A complete repeatable cycle of play</td><td>Are there interesting reasons to continue?</td></tr>
+<tr><td>Representative slice</td><td>One short sequence at intended presentation quality</td><td>Do gameplay, art, sound, and UI work together?</td></tr>
+<tr><td>Complete mini game</td><td>Full bounded experience with recovery and ending</td><td>Does it hold together beyond the showcase moment?</td></tr>
+<tr><td>Integration and delivery</td><td>Verified target runtime and world connection</td><td>Does the delivered game work where it belongs?</td></tr>
+</table></div>
+<p>These are decision points, not equal-sized production phases. A risky camera or simulation may need an earlier experiment. A heavily reused game may pass several milestones quickly.</p>
+<p>Every milestone should show:</p>
+<ul>
+<li>What you can actually play or inspect.</li>
+<li>What changed.</li>
+<li>What the evidence supports.</li>
+<li>What remains uncertain.</li>
+<li>My recommendation.</li>
+<li>The particular feedback that would help.</li>
+</ul>
+<p>“Does it look good?” is rarely enough.</p>
+<p>Better questions are:</p>
+<p>“Try choosing the next machine without opening the help. Is its effect understandable?”</p>
+<p>“Does the creature’s refusal feel funny, or does it feel like the controls failed?”</p>
+<p>“After the first discovery, did you want another possibility or a harder challenge?”</p>
+<h3>12. Feedback needs a method for becoming changes.</h3>
+<p>Your reaction should be captured in your language first. Then I should diagnose it, propose a response, and test the result.</p>
+<p>For example:</p>
+<p>Your feedback: “It feels like chores.”</p>
+<p>Possible causes include mandatory repetition, obvious decisions, weak consequences, delayed payoff, excessive travel, or too much obligation.</p>
+<p>The response should identify which explanation the evidence supports. Adding rewards indiscriminately could make the problem worse.</p>
+<p>Every significant feedback item should record:</p>
+<ul>
+<li>Your original observation.</li>
+<li>My interpretation.</li>
+<li>The proposed change.</li>
+<li>Affected design decisions.</li>
+<li>What we expect to improve.</li>
+<li>How we will check.</li>
+<li>Whether you found the revision better.</li>
+</ul>
+<p>We should preserve previous builds at major decisions so comparisons are concrete.</p>
+<p>If feedback changes a pillar, the process should revisit downstream rules, assets, and presentation. It should make the consequences visible rather than quietly accumulate contradictory requirements.</p>
+<h3>13. “Dutifully follow it” requires durable execution records.</h3>
+<p>The process cannot depend on one conversation remembering everything.</p>
+<p>Each game needs a small persistent record containing:</p>
+<ul>
+<li>Current blueprint revision.</li>
+<li>Current milestone.</li>
+<li>Accepted decisions and their authority.</li>
+<li>Open assumptions and risks.</li>
+<li>Tasks and dependencies.</li>
+<li>Asset and generation-job references.</li>
+<li>Current build and source revision.</li>
+<li>Test evidence and known defects.</li>
+<li>Exact next action.</li>
+<li>What requires your feedback and what can proceed independently.</li>
+</ul>
+<p>A resumed session should read that record, inspect the actual project state, and continue from the next valid action.</p>
+<p>Autonomy should have clear boundaries:</p>
+<div class="table-scroll"><table>
+<tr><th>Kind of decision</th><th>Default behavior</th></tr>
+<tr><td>Routine implementation within the blueprint</td><td>Proceed and verify</td></tr>
+<tr><td>Fix that restores agreed behavior</td><td>Proceed and record</td></tr>
+<tr><td>Small reversible tuning experiment</td><td>Try, compare, retain evidence</td></tr>
+<tr><td>Change to the fantasy, pillars, or main loop</td><td>Bring a concrete proposal</td></tr>
+<tr><td>Material expansion of scope or cost</td><td>Explain the tradeoff before committing</td></tr>
+<tr><td>Failed milestone</td><td>Investigate, revise, or recommend stopping</td></tr>
+</table></div>
+<p>If one asset is delayed, independent work should continue. If the main action repeatedly fails to satisfy, producing more scenery should not count as progress.</p>
+<p>Background continuation would need an explicitly configured execution arrangement. The process should never imply that work is continuing after a session ends merely because a checklist exists.</p>
+<h3>14. Completion includes experiential judgment.</h3>
+<p>A game can be technically correct and still fail its promise.</p>
+<p>We need separate judgments for:</p>
+<div class="table-scroll"><table>
+<tr><th>Dimension</th><th>Evidence</th></tr>
+<tr><td>Correctness</td><td>Rules, accounting, state transitions, save/resume</td></tr>
+<tr><td>Usability</td><td>Observed understanding, control errors, recovery</td></tr>
+<tr><td>Feel</td><td>Responsiveness, motion, sound, readable consequences</td></tr>
+<tr><td>Emotional fit</td><td>Player reactions and behavior relative to the brief</td></tr>
+<tr><td>Coherence</td><td>Mechanics, assets, interface, and audio support the same identity</td></tr>
+<tr><td>Depth</td><td>Meaningful variation within the chosen scope</td></tr>
+<tr><td>Delivery</td><td>Verified device, runtime, entry, exit, persistence</td></tr>
+</table></div>
+<p>Automated checks can establish parts of this. I can inspect and critique the experience. Your reactions and observation of the intended players remain essential evidence for emotional fit.</p>
+<p>We should avoid compressing all of this into a single “fun score.” A broken interaction or a missing emotional payoff should remain visible.</p>
+<h3>15. Each completed game should improve the process.</h3>
+<p>The final retrospective should return useful knowledge to the Oracle and libraries:</p>
+<ul>
+<li>Which design hypotheses held up.</li>
+<li>Which references were actually useful.</li>
+<li>Which controls players misunderstood.</li>
+<li>Which models worked at gameplay scale.</li>
+<li>Which sound and animation combinations improved readability.</li>
+<li>Which systems were genuinely reusable.</li>
+<li>Which scope assumptions were wrong.</li>
+<li>Which rejected ideas remain promising elsewhere.</li>
+</ul>
+<p>These lessons should remain contextual:</p>
+<p>“This placement preview helped younger players predict the result in this game.”</p>
+<p>That is more useful than turning one success into a universal rule.</p>
+<p>Reusable code should be promoted after its boundaries are understood. A one-off convenience should not automatically become a new framework.</p>
+<p>The first implementation of this process should be one complete pilot.</p>
+<p>I would start with five reusable artifacts:</p>
+<ol>
+<li>An experience-brief template.</li>
+<li>A research and concept-comparison format.</li>
+<li>A study-page blueprint structure.</li>
+<li>A milestone and evidence record.</li>
+<li>A feedback and decision log.</li>
+</ol>
+<p>Then apply them to one game from feeling through delivery. The pilot should exercise research, existing models, at least one consequential mechanic, sound, touch interaction, a real feedback revision, and integration. That would reveal where the process needs more structure and where it creates unnecessary work.</p>
+<p>For our next design discussion, the most important choice is the pilot’s emotional brief. Give me a feeling and a few concepts in your own language—even contradictory ones. That will let us test whether this process can turn your intent into a distinctive game, while we refine the process itself.</p>
+<h2>Study communication convention</h2>
+<p>Evan clarified on October 24, 2026 that this process itself counts as an Abbie’s World study. Studies begin when he asks for research or pushes in particular directions. Attention, refinement and feedback solidify them until ready for the game. All repo operators follow <a target="_blank" rel="noopener" href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/STUDIES.md">Studies in Abbie’s World</a>.</p>
+<p>The visible maturity stamp for this study is <strong>Proposal</strong>. Its review page must use the shared right-side feedback panel, one timestamped multiline note at a time. Delivery stays pending until its exact online link and review flow work. A study’s publication is separate from acceptance and game integration.</p>
+<h2>Oracle consultation and evidence</h2>
+<p>On October 24, a concise summary was sent to the Game Oracle’s <code>/api/consult</code> endpoint, requesting a critical 50,000-token opinion on the process in the context of Abbie’s World. The inspected implementation limits inputs to 1,200 characters and model output to 3,000 tokens. The returned response explicitly reported <code>source: studies</code> and <code>model: null</code>: no model-generated critique was produced. It returned a mechanically assembled game plan, not an evaluation of this proposal. Do not describe it as an endorsement or a completed opinion.</p>
+<p>The response’s Abbie’s World identity was: “You are a child whose words and hands make a living toy world: you say it or place it, and the ranch, its animals and its people answer.” The verbs were say, place, draw, care for and visit. This identity is relevant context; the unrelated retrieved Spore and Animal Crossing rules are not validated process recommendations.</p>
+<p>The original response is preserved in <code>oracle-consultation-response.json</code> beside this record. The requested 50,000-token opinion remains outstanding. Future analysis must clearly identify its author and distinguish retrieved evidence, interpretation and observed play.</p>
+<h2>Context and next revision</h2>
+<ul>
+<li>Evan’s original process proposal and October 24 clarification, preserved above.</li>
+<li>Game Oracle: <a target="_blank" rel="noopener" href="https://abbies-game-oracle.vercel.app">https://abbies-game-oracle.vercel.app</a> — studies-only response, not a model opinion.</li>
+<li>Shared study convention: <code>docs/design/STUDIES.md</code>.</li>
+<li>Repo design and delivery contracts: <code>CLAUDE.md</code>, <code>INVARIANTS.md</code>, and <code>prototypes/ranch-atelier/DEVELOPMENT-PRACTICES.md</code>.</li>
+<li>Coordination: Summarize Abbie’s World iOS, chat <code>01a16f0e-987e-7860-9a71-4d493ec3cbd1</code>, is publishing the shared study-room UI and feedback flow.</li>
+<li>Additional game-development blogs, tutorials and external research: none newly consulted for this registration; record them when actually used.</li>
+</ul>
+<p>Next: publish this Proposal in the shared study room, verify the exact online URL and feedback round trip, then refine the process against Evan’s notes and one complete pilot. Do not replace the original proposal with an invented Oracle opinion.</p>

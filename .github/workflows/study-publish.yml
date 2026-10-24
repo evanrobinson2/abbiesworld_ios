@@ -1,0 +1,68 @@
+name: study-publish
+on:
+  workflow_dispatch:
+    inputs:
+      study: {description: 'Stable study ID', required: true, type: string}
+      action: {description: 'Publish immutable bundle, or promote/rollback an uploaded revision', required: true, type: choice, options: [publish, promote]}
+      sha: {description: 'Exact source commit SHA (publish only)', type: string}
+      revision: {description: 'Uploaded revision digest (promote only)', type: string}
+      expected: {description: 'Expected current revision, or none for first promotion', type: string}
+permissions:
+  contents: read
+concurrency:
+  group: study-publish-${{ inputs.study }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+          filter: blob:none
+          sparse-checkout: |
+            tools/study-publish
+            tools/model-store/r2-keys.sh
+          sparse-checkout-cone-mode: false
+      - name: Validate inputs and fetch source as data
+        env:
+          STUDY: ${{ inputs.study }}
+          ACTION: ${{ inputs.action }}
+          SOURCE_SHA: ${{ inputs.sha }}
+          REVISION: ${{ inputs.revision }}
+          EXPECTED: ${{ inputs.expected }}
+        run: |
+          [[ "$STUDY" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ && ${#STUDY} -le 80 ]]
+          if [ "$ACTION" = publish ]; then
+            [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
+            git fetch --filter=blob:none --depth=1 origin "$SOURCE_SHA"
+            python tools/study-publish/publish.py check --id "$STUDY" --sha "$SOURCE_SHA"
+          else
+            [[ "$ACTION" = promote && "$REVISION" =~ ^[a-f0-9]{64}$ ]]
+            [[ "$EXPECTED" = none || "$EXPECTED" =~ ^[a-f0-9]{64}$ ]]
+          fi
+      - name: Resolve existing R2 credentials
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: bash tools/model-store/r2-keys.sh
+      - name: Publish or conditionally promote the selected study
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ secrets.R2_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
+          STUDY: ${{ inputs.study }}
+          ACTION: ${{ inputs.action }}
+          SOURCE_SHA: ${{ inputs.sha }}
+          REVISION: ${{ inputs.revision }}
+          EXPECTED: ${{ inputs.expected }}
+        run: |
+          if [ "$ACTION" = publish ]; then
+            python tools/study-publish/publish.py publish --id "$STUDY" --sha "$SOURCE_SHA"
+          else
+            python tools/study-publish/publish.py promote --id "$STUDY" --revision "$REVISION" --expected "$EXPECTED"
+          fi

@@ -1,0 +1,107 @@
+{
+  "schema": "oracle.plan.v1",
+  "idea": "In the context of Abbie's World, Evan requests a 50,000-token critical opinion appended to his Mini Game Designer process. The proposal turns emotional intent into an experience brief, testable emotional hypotheses, Oracle/library research, three contrasting concepts, a distinct identity, explicit mini scope, a living study blueprint, precise rules, asset reuse/adapt/create decisions, coordinated sound/animation/UI, playable evidence milestones, feedback diagnosis, durable execution records, experiential acceptance, and contextual lessons returned to the Oracle. It proposes one complete pilot and five templates. Assess what is strong, missing, overengineered, or risky for Abbie's World: young/family players, touch input, actual reusable libraries, model and audio factories, shared simulation, world integration, persistence, and verified delivery. Give your substantive critique and concrete improvements; indicate if your interface cannot supply the requested long-form opinion. Do not treat this process itself as a game to be designed.",
+  "audience": "maker",
+  "source": "studies",
+  "model": null,
+  "reading": "No model was used; this plan is assembled from the Oracle's studies for \"In the context of Abbie's World, Evan requests a 50,000-token critical opinion appended to his Mini Game Designer proces\".",
+  "title": "In the context of Abbie's",
+  "pitch": "A small clean game built around: In the context of Abbie's World, Evan requests a 50,000-token critical opinion appended to his Mini Game Designer process. The proposal turns emotional intent into an experience brief, testable emotio",
+  "fantasy": "You are a child whose words and hands make a living toy world: you say it or place it, and the ranch, its animals and its people answer.",
+  "verbs": [
+    "say",
+    "place",
+    "draw",
+    "care for",
+    "visit"
+  ],
+  "rules": [
+    {
+      "rule": "Size decides who eats whom, shown on the creatures themselves; being eaten just pops you back out of an egg.",
+      "why": "From Spore (Cell Stage)"
+    },
+    {
+      "rule": "Parts found in the goo become choices in a playful cell editor; every change shows at once in how Abbie's cell swims.",
+      "why": "From Spore (Cell Stage)"
+    },
+    {
+      "rule": "Growing lifts the camera to the next, bigger layer of the pool, where the old giants are now your size.",
+      "why": "From Spore (Cell Stage)"
+    },
+    {
+      "rule": "Let the Ranch follow Evan's real hour and season so light, music and animals match his day.",
+      "why": "From Animal Crossing: New Horizons"
+    },
+    {
+      "rule": "Neighbours bring news and requests in person, on the character, never as a quest log.",
+      "why": "From Animal Crossing: New Horizons"
+    },
+    {
+      "rule": "Placement is rewarded by the world: something grows, settles, chimes or simulates within half a second.",
+      "why": "House identity"
+    }
+  ],
+  "goal": "Finish the thing you set out to build, or keep playing as long as you like.",
+  "fail": null,
+  "beats": [
+    {
+      "title": "Set the scene",
+      "what": "The world shows where the game happens.",
+      "player": "Looks around and taps."
+    },
+    {
+      "title": "Play",
+      "what": "The core verbs, repeated, with the world answering each one.",
+      "player": "Say, place, draw, care for, visit."
+    },
+    {
+      "title": "Payoff",
+      "what": "The world celebrates what was made.",
+      "player": "Watches and shares."
+    }
+  ],
+  "choices": [],
+  "presentation": {
+    "style": "clean",
+    "name": "Clean",
+    "why": "Suggested by the idea's words.",
+    "overlays": [],
+    "readAloud": false,
+    "pacing": {
+      "shotSeconds": null,
+      "promptWaitSeconds": null
+    }
+  },
+  "factory": [],
+  "references": [
+    {
+      "title": "Abbie's World (Ranch Atelier)",
+      "take": null,
+      "leave": null
+    },
+    {
+      "title": "Spore (Cell Stage)",
+      "take": "Size decides who eats whom, shown on the creatures themselves; being eaten just pops you back out of an egg. Parts found in the goo become choices in a playful cell editor; every change shows at once in how Abbie's cell swims. A top-down dr",
+      "leave": "Spore's creatures and parts; its later stages (creature, tribe, civilisation, space); its menus and editor art"
+    },
+    {
+      "title": "Animal Crossing: New Horizons",
+      "take": "Let the Ranch follow Evan's real hour and season so light, music and animals match his day. Bend the far ground away from the camera so the horizon stays close and cosy. Neighbours bring news and requests in person, on the character, never ",
+      "leave": "its animal villagers and their names; its debt-and-loan economy; its item catalogue"
+    }
+  ],
+  "kidFit": "Best for free building; nothing to read.",
+  "grounding": {
+    "identities": [
+      "Abbie's World (Ranch Atelier)",
+      "Spore (Cell Stage)",
+      "Animal Crossing: New Horizons"
+    ],
+    "studies": [
+      "Black & White",
+      "Freeciv",
+      "NetHack"
+    ],
+    "styleSuggested": "clean"
+  }
+}

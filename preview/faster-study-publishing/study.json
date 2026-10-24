@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "faster-study-publishing",
+  "title": "Study publishing without rebuilding the game",
+  "maturity": "Draft",
+  "entry": "index.html",
+  "intent": "Publish durable, reviewable study revisions independently of the main app, retaining authenticated feedback and capture.",
+  "reviewQuestion": "Does a stable study link, exact revision and shared notes make each iteration clear and trustworthy?",
+  "ownerThread": "01a16f34-c876-7360-9312-7ee7306dcb82",
+  "shared": [{"source":"prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs","target":"components/presentation-layer.mjs"}],
+  "external": []
+}
