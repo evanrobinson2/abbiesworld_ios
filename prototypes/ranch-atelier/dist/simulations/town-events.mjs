@@ -10,6 +10,10 @@
 import {createWorldEffects} from './world-effects.mjs';
 import {createEffectIcons} from './effect-icons.mjs';
 
+// Evan, 2026-10-24 (#546): no cooldowns, nothing runs out, every element is there from the start. So by default every effect is
+// always charged and tapping drops it, as often as you like. Charging from backpack items (effect-charge.mjs) is kept for a mode
+// he may want back: ?charge=1, or localStorage aw-effect-charge-mode = 'on'.
+const FREE = (() => { try { return !(/[?&]charge=1\b/.test(location.search) || localStorage.getItem('aw-effect-charge-mode') === 'on'); } catch { return true; } })();
 const DAY_SECONDS = 360; // the town has no clock for effects yet: an effect's "day" is six minutes
 const svg = body => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
 const EFFECTS = [

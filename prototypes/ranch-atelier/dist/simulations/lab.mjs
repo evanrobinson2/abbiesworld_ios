@@ -167,7 +167,7 @@ function playPaintCard(){
 // A ball let go at (x,y) px with velocity (vx,vy) px/s: it starts on the ground under the finger and carries the flick.
 function throwPaintBall(ball,x,y,vx,vy){
  if(!paintWorld||family!=='ranch'||!active)return false;
- const g=groundThrow(T,camera,renderer.domElement,orbit.target,x,y,vx,vy);if(!g)return false;
+ const g=groundThrow(T,camera,renderer.domElement,orbit.target,x,y,vx,vy,(wx,wz)=>active?.heightAt?.(wx,wz)??0);if(!g)return false;
  paintWorld.launch({...g,colour:ball.colour,R:(.75+Math.random()*.4)*ball.R,lift:.45,vy:1.1},farmClock);
  setTimeout(()=>paintWorld.save('ranch-'+paintSeed),4000);return true;
 }
