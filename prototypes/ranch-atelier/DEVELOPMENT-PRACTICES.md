@@ -136,3 +136,12 @@ The checkpoint branch is `codex/sandbox-production-2026-10-21`; it is not eviden
 Use Game Oracle at [abbies-game-oracle.vercel.app](https://abbies-game-oracle.vercel.app) for game-reference research. Preserve the distinction between source-reported tags, direct visual observations and inferences. Dated catalog counts are not permanent guarantees. Research informs original implementation; it does not justify claiming unimplemented mechanics or copying proprietary code.
 
 Keep implementation contracts near code and release evidence with its artifacts. When a rule changes, record the decision and date, update this guide and link the affected implementation. Explicit later user direction takes precedence over older notes. Clearly label requirements, implemented behavior, measured results, known limitations and proposals so future contributors can tell them apart.
+
+
+## 13. Avatar-played minigames declare FPS and reuse the host lifecycle
+
+Evan, 2026-10-24: carwash and Hot Wheels are played as the existing avatar in FPS mode; this applies to other avatar-played minigames too. Declare the mode explicitly before entry because it determines controls. Missing assets may use low-poly placeholders.
+
+Minigames must not overwrite or supersede shared player identity, avatar, input/camera, wardrobe, inventory, pause, save or transition systems. Use their existing integration points, retaining one authoritative owner. The minigame owns its local activity state and objectives. Nearby missions are invitations, not automatic entry. Standard entry, cancellation, pause and exit preserve the same player and restore the prior world/control context.
+
+The carwash's first mission step dresses that same avatar in a fun temporary uniform through the wardrobe system; it does not replace the character. Restore the previous outfit at exit. Work-station part views and zoom are shared camera/input mode requests, not an independent player controller. Optional pursuits suspend and resume the same mission state. See [avatar minigame acceptance contract](../../docs/oracle/carwash/AVATAR_MINIGAME_CONTRACT.md). A surface-tool study is not evidence that FPS integration is complete.
