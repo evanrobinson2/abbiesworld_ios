@@ -74,3 +74,26 @@ test('feedback rejects empty posts, bad pictures and foreign origins', async () 
   assert.equal((await call(handler, { method: 'POST', headers: { origin: 'https://evil.test' }, body: { note: 'hi' } })).status, 403);
   assert.equal((await call(handler, { method: 'GET', url: '/api/feedback?image=../x' })).status, 400);
 });
+
+test('study notes preserve multiline text, metadata and server time; retries do not duplicate', async () => {
+  const blob = fakeBlob(), handler = createHandler(blob, UNLOCKED);
+  const body = {note:'The reveal feels lovely.\nKeep the pause before the car.',studyId:'toy-world-title',studyContext:'intro reveal 1',studyLevel:'Proposal',requestId:'mhl12345-aabbccdd'};
+  const a = await call(handler,{method:'POST',body});
+  const retry = await call(handler,{method:'POST',body});
+  assert.equal(a.status,200); assert.equal(retry.body.duplicate,true); assert.equal(a.body.id,retry.body.id);
+  const read = await call(handler,{method:'GET',url:'/api/feedback?studyId=toy-world-title'});
+  assert.equal(read.body.items.length,1);assert.equal(read.body.items[0].note,body.note);
+  assert.equal(read.body.items[0].studyContext,body.studyContext);assert.ok(Date.parse(read.body.items[0].receivedAt));
+  assert.equal((await call(handler,{method:'POST',body:{...body,note:'different'}})).status,409);
+  assert.equal((await call(handler,{method:'POST',body:{...body,requestId:'../bad'}})).status,400);
+});
+
+test('study filtering precedes pagination, so other studies cannot hide older notes', async () => {
+ const blob=fakeBlob(),handler=createHandler(blob,UNLOCKED);
+ for(let i=0;i<115;i++) {const id=(100000000+i).toString(36).padStart(8,'0')+'-aabbccdd';blob.files.set('feedback/v1/'+id+'.json',Buffer.from(JSON.stringify({id,note:'note '+i,studyId:i<55?'toy-world-menu':'toy-world-racer',receivedAt:new Date().toISOString()})));}
+ const first=await call(handler,{method:'GET',url:'/api/feedback?studyId=toy-world-menu'});
+ assert.equal(first.body.items.length,50);assert.ok(first.body.nextBefore);assert.ok(first.body.items.every(x=>x.studyId==='toy-world-menu'));
+ const second=await call(handler,{method:'GET',url:'/api/feedback?studyId=toy-world-menu&before='+first.body.nextBefore});
+ assert.equal(second.body.items.length,5);assert.equal(second.body.nextBefore,null);
+ assert.equal(new Set([...first.body.items,...second.body.items].map(x=>x.id)).size,55);
+});

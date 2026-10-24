@@ -1,5 +1,7 @@
 # Ranch Atelier
 
+Read `../../docs/design/STUDIES.md` for the repo-wide study convention. Every study is a continuing research/design conversation with an honest maturity stamp, shared timestamped feedback and recorded context. Delivery is pending until its canonical online link and review flow work. A published study is not automatically a live game feature.
+
 Read [Development practices](DEVELOPMENT-PRACTICES.md) before extending the Ranch/Sandbox app. It consolidates the project decisions through 2026-10-21 and distinguishes requirements from proposals and dated implementation evidence. Later explicit user instructions take precedence over older notes.
 
 The deployed app source is `dist/`, production https://abbies-ranch-atelier.vercel.app.
