@@ -49,6 +49,13 @@ Reuses: model library and project-chat packs, `loadout.mjs`, `tile-placement-fee
 ## Open for Evan (recommendations in the page)
 Where the door is (recommended: the dashed new-world hex in the board of boards), helper brain first, first families for phase 1 (Ranch, Woodland, Moon base).
 
+## Phase 0 and a first playable slice (Evan 12:21Z: "i d/c if it's open", so experimental is fine)
+- `simulations/scene-lab/engine.mjs`: the scene document and generators as a module, tested by `simulations/tests/scene-lab.test.mjs` (determinism, undo, every family on every shape,
+  pins survive a new first pass, kinds turned out are never used).
+- `studies/scene-builder/` is the lab, in the site and listed in the Studies page; it opens only with `?exp=scene-builder` (otherwise it says it is not open yet).
+- Registered as experimental in `game-registry.json` with what it still needs: a door in the world, real models and the town renderer, a headless run of the whole flow.
+- The Study preview above stays as the frozen concept.
+
 ## Not yet
 Sound (catalogue only, one per material), real models (stand-in shapes), real physics engine, real AI, server save, WFC-style solver, experiments runner.
 Tour: **false** (not reachable from the game). Invariants: not live, so no registry entry yet; no MIDI, no synthesized audio, no TTS in the mock.
