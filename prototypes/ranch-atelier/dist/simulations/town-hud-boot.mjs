@@ -12,7 +12,7 @@ await ready();
 const town = window.AbbieTown, stage = town?.stage;
 if (document.body.classList.contains('play') && stage) {
   mountTownHud({stage, board: town.board});
-  import('./town-hand.mjs?v=2').then(m => m.mountTownHand({board: town.board, stage, visit: id => town.visit('dio-' + id)})).catch(e => console.warn('Town hand', e));
+  Promise.all([import('./town-hand.mjs?v=5'), import('./town-tiles.mjs?v=6')]).then(([m, t]) => { t.mountTownTiles(); m.mountTownHand({board: town.board, stage, visit: id => town.visit('dio-' + id)}); }).catch(e => console.warn('Town hand', e));
 }
 // The world answers taps (houses, trees, places, ducks, bub, the car): its own file, started here so it also survives a regenerated page.
 if (document.body.classList.contains('play') && stage) import('./abbietown/interactions.mjs?v=1').then(m => m.mountInteractions(town)).catch(e => console.warn('Town interactions', e));
