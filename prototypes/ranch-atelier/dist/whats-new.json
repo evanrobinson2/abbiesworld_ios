@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-one-glass-bar",
+      "date": "2026-10-24",
+      "title": "One glass bar along the top",
+      "line": "Time, weather, the hex glow and the world effects now share a single glass bar, on iPad and phone too.",
+      "image": "/whats-new/2026-10-24-one-glass-bar.png",
+      "thread": "issue-544",
+      "threadTitle": "One top glass bar",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-town-wasd",
       "date": "2026-10-24",
       "title": "Slide around the map with WASD",

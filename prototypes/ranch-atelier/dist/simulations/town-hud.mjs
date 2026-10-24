@@ -13,9 +13,10 @@ import {hexGlow} from './hex-glow.mjs?v=1';
 const CSS = `
 html.aw-town-hud .pl-door{justify-content:flex-end}html.aw-town-hud .pl-door a{display:none}
 html.aw-town-hud .hud,html.aw-town-hud #town-events-btn,html.aw-town-hud #v2-events{display:none!important}
-#aw-top{position:fixed;z-index:38;left:calc(env(safe-area-inset-left) + 12px);right:calc(env(safe-area-inset-right) + 12px);top:calc(env(safe-area-inset-top) + 10px);display:flex;align-items:flex-start;flex-wrap:wrap;gap:8px 10px;pointer-events:none}
-#aw-top>*{pointer-events:auto}
-html.aw-town-hud #aw-top #v2-chrono{position:static;margin:0}
+#aw-top{position:fixed;z-index:38;left:calc(env(safe-area-inset-left) + 12px);top:calc(env(safe-area-inset-top) + 10px);display:flex;align-items:center;flex-wrap:nowrap;gap:10px;padding:6px 10px 6px 6px;border-radius:44px;box-sizing:border-box;width:fit-content;max-width:calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right));overflow:hidden}
+#aw-top>*{flex:none}
+#aw-top .aw-sep{width:1px;align-self:stretch;margin:6px 0;background:#2a201426}
+html.aw-town-hud #aw-top #v2-chrono{position:static;margin:0;padding:0;background:none;border:0;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}
 html.aw-town-hud #v2-chrono .ch-pushers{flex-direction:row;margin-left:2px}
 html.aw-town-hud #v2-chrono .ch-tiles{display:none}
 .aw-ico{all:unset;box-sizing:border-box;cursor:pointer;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;color:var(--v2-ink,#2b1d0e);flex:none;position:relative;
@@ -26,9 +27,9 @@ html.aw-town-hud #v2-chrono .ch-tiles{display:none}
 .aw-ico[data-locked]{opacity:.5}
 .aw-ico.pulse{animation:aw-ico-pulse .6s cubic-bezier(.3,1.6,.5,1)}
 @keyframes aw-ico-pulse{40%{transform:scale(1.28)}}
-#aw-grid{width:54px;height:54px;border-radius:50%;padding:6px;display:grid;place-items:center;pointer-events:auto}
+#aw-grid{width:46px;height:46px;display:grid;place-items:center}
 #aw-grid .aw-ico{width:100%;height:100%}
-#aw-effects{display:flex;align-items:center;gap:6px;padding:6px;border-radius:30px;max-width:calc(100vw - 24px);overflow-x:auto;scrollbar-width:none}
+#aw-effects{display:flex;align-items:center;gap:6px;flex:0 1 auto!important;min-width:0;overflow-x:auto;overscroll-behavior:contain;scrollbar-width:none;padding:2px}
 #aw-effects::-webkit-scrollbar{display:none}
 #aw-balloons{display:flex;align-items:center;gap:6px}
 #aw-balloons:empty{display:none}
@@ -54,12 +55,13 @@ export function mountTownHud({stage, board} = {}) {
   document.head.append(el('style', {id: 'aw-town-hud-css', textContent: CSS}));
 
   // TOP: one row. The chronograph moves in; its to-do band goes (the notebook holds the quests now).
-  const top = el('div', {id: 'aw-top'}), effects = el('div', {id: 'aw-effects', className: 'v2-glass'}), balloons = el('div', {id: 'aw-balloons'});
+  const top = el('div', {id: 'aw-top', className: 'v2-glass'}), effects = el('div', {id: 'aw-effects'}), balloons = el('div', {id: 'aw-balloons'});
   effects.setAttribute('role', 'toolbar'); effects.setAttribute('aria-label', 'World effects'); effects.append(balloons);
-  const chrono = document.getElementById('v2-chrono'); if (chrono) top.append(chrono);
-  const gridWrap = el('div', {id: 'aw-grid', className: 'v2-glass'}), grid = el('button', {type: 'button', className: 'aw-ico', title: 'Light up the hex grid'}, HEX);
+  const chrono = document.getElementById('v2-chrono'); if (chrono) { chrono.classList.remove('v2-glass'); top.append(chrono); } // one glass bar holds everything: the chronograph's own glass goes
+  const sep = () => el('i', {className: 'aw-sep'});
+  const gridWrap = el('div', {id: 'aw-grid'}), grid = el('button', {type: 'button', className: 'aw-ico', title: 'Light up the hex grid'}, HEX);
   grid.setAttribute('aria-label', 'Hex gridlines'); grid.setAttribute('aria-pressed', 'false'); gridWrap.append(grid);
-  top.append(gridWrap, effects); document.body.append(top);
+  top.append(sep(), gridWrap, sep(), effects); document.body.append(top);
   let glow = null;
   grid.onclick = () => { if (!glow && stage && board) glow = hexGlow(stage, board.hexSide); if (!glow) return; grid.setAttribute('aria-pressed', String(glow.toggle())); };
 
