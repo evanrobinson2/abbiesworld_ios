@@ -20,6 +20,7 @@ const PRICES={
  inventCall:0.02,            // one Make design (api/invent.js); a wish already in the shared cache is free
  photoCheck:0.005,           // one PG look at a photo sent with a model order
  elevenChar:0.0001,          // ElevenLabs flash, per character spoken
+ tileChatCall:0.01,          // one tile-chat plan (api/tile-chat.js)
  advisorCall:0.002           // one short gpt-6-luna line from a town character (api/advisor.js)
 };
 
