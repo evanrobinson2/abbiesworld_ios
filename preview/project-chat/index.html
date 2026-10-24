@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0061 Project chat (preview, pretend sender)</title>
+<style>html,body{margin:0;height:100%;overflow:hidden;background:radial-gradient(120% 90% at 50% 0,#2a1f4a,#120c24);color:#fff8ee;font:600 15px ui-rounded,system-ui,sans-serif}
+svg{position:fixed;inset:0;width:100%;height:100%}.hex{fill:#ffffff14;stroke:#ffffff55;stroke-width:2;cursor:pointer;transition:.15s}.hex:hover{fill:#ffffff30}.hex.sel{fill:#5ee08a55;stroke:#5ee08a;stroke-width:4}
+#note{position:fixed;left:12px;bottom:12px;max-width:min(420px,60vw);padding:10px 14px;border-radius:14px;background:#0006;font-weight:500;font-size:13px;color:#d9cbe8}</style></head>
+<body>
+<svg id="board" viewBox="-420 -320 840 640" preserveAspectRatio="xMidYMid meet"></svg>
+<div id="note"><b>Preview with a pretend sender.</b> Pick a blank hex, then open Project chat and send something: the status bar walks Sent, Received, Working, Done on a timer. In the game the same panel talks to the real project and only shows for Evan's signed-in account.</div>
+<script type="module">
+import {mountProjectChat} from './panel.mjs';
+const svg = document.getElementById('board'), S = 80, NS = 'http://www.w3.org/2000/svg', cells = [[0,0],[1,0],[0,1],[-1,1],[-1,0],[0,-1],[1,-1]];
+cells.forEach(([q, r], i) => { const x = 1.5 * S * q, y = Math.sqrt(3) * S * (r + q / 2), p = document.createElementNS(NS, 'polygon'); p.setAttribute('class', 'hex');
+  p.setAttribute('points', Array.from({length: 6}, (_, k) => `${x + S * .94 * Math.cos(k * Math.PI / 3)},${y + S * .94 * Math.sin(k * Math.PI / 3)}`).join(' '));
+  p.onclick = () => { svg.querySelectorAll('.sel').forEach(e => e.classList.remove('sel')); p.classList.add('sel'); dispatchEvent(new CustomEvent('aw:hex-selected', {detail: {id: 'blank-' + i, label: 'Blank hex ' + (i + 1)}})); }; svg.append(p); });
+// Pretend sender: same JSON shapes as /api/project-chat, status advances on a timer.
+const issues = new Map(); let n = 100;
+const fake = async (url, init = {}) => {
+  const ok = body => ({ok: true, json: async () => body});
+  if (init.method === 'POST') { const id = ++n; issues.set(id, Date.now()); return ok({ok: true, issue: id}); }
+  const m = String(url).match(/issue=(\d+)/); if (!m) return ok({enabled: true, ready: true});
+  const t = (Date.now() - issues.get(+m[1])) / 1000, status = t < 3 ? 'sent' : t < 6 ? 'received' : t < 14 ? 'working' : 'result';
+  const comments = t > 6 ? [{at: 'a', text: 'Picked up. Planning the hex now.'}] : []; if (t >= 14) comments.push({at: 'b', text: 'Done (pretend): the change is merged and will be in the next deploy.'});
+  return ok({status, comments});
+};
+mountProjectChat({fetcher: (u, i) => String(u).endsWith('models.json') ? fetch(u) : fake(u, i), poll: 1500, library: '../diorama-swipe/models.json', thumbBase: 'https://ranch.abbies.world'}).then(c => c?.open.click());
+</script></body></html>
