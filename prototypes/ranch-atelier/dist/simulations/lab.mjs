@@ -69,8 +69,8 @@ import {ACTIVITY_RATE,dayName} from './ranch-rhythm.mjs?v=3';
 import {ranchName} from './ranch-names.mjs';
 import {advanceClock,timeOfDay,TIME_HOURS,nightProgress} from './ranch-clock.mjs?v=2';
 import {createPaintWorld} from './paint-world/paint-world.mjs';
-import {mountPaintHand} from './paint-world/paint-card.mjs';
-import {createBallTray,rollGrant,groundThrow} from './paint-world/paint-balls.mjs';
+import {rollGrant,groundThrow} from './paint-world/paint-balls.mjs';
+import {createPaintHud} from './paint-world/paint-hud.mjs';
 import {createFarmLights} from './ranch-lights.mjs?clock=6';
 import {facetPicker} from './facet-picker.mjs';
 import {REGIONAL} from './ranch-regional.mjs?v=3';
@@ -154,15 +154,14 @@ function paintWorldReady(){
  if(family!=='ranch'||!active)return;
  if(!paintWorld){
   paintWorld=createPaintWorld({scene,camera,unit:.1,heightAt:(x,z)=>active?.heightAt?.(x,z)??0});paintWorld.warm(renderer,camera);
-  paintTray=createBallTray({onThrow:throwPaintBall});
-  const el=document.createElement('div');el.id='paint-hand';document.body.append(el);paintHand=mountPaintHand(el,playPaintCard);
+  paintHand=createPaintHud({onThrow:throwPaintBall});paintTray=paintHand.tray;
  }
  if(paintSeed!==sceneSeed){paintSeed=sceneSeed;paintWorld.load('ranch-'+sceneSeed)||paintWorld.clear();}
 }
 // Spending the card gives a random handful of splat balls (how many, how big); they wait on the right edge to be flung.
 function playPaintCard(){
  if(!paintWorld||family!=='ranch'||!active||busy)return;
- const grant=rollGrant();paintTray.grant(grant);paintHand.set(grant.colours[0]);
+ const grant=rollGrant();paintHand.grant(grant);
  renderer.domElement.dataset.paintPlays=String(Number(renderer.domElement.dataset.paintPlays||0)+1);renderer.domElement.dataset.paintGrant=JSON.stringify({count:grant.count,size:grant.size.id});
 }
 // A ball let go at (x,y) px with velocity (vx,vy) px/s: it starts on the ground under the finger and carries the flick.
@@ -172,7 +171,7 @@ function throwPaintBall(ball,x,y,vx,vy){
  paintWorld.launch({...g,colour:ball.colour,R:(.75+Math.random()*.4)*ball.R,lift:.45,vy:1.1},farmClock);
  setTimeout(()=>paintWorld.save('ranch-'+paintSeed),4000);return true;
 }
-function paintFrame(dt){if(!paintWorld)return;const on=family==='ranch'&&!!active;paintWorld.root.visible=on;paintHand.el.style.display=on?'':'none';paintTray.el.style.display=on?'':'none';if(on)paintWorld.update(dt,farmClock);}orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;
+function paintFrame(dt){if(!paintWorld)return;const on=family==='ranch'&&!!active;paintWorld.root.visible=on;paintHand.setVisible(on);if(on)paintWorld.update(dt,farmClock);}orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;orbit.minDistance=1.2;orbit.maxDistance=800;orbit.maxPolarAngle=Math.PI*.47;orbit.enableDamping=false;
 const cameraFollow=createCameraFollow(camera,orbit);orbit.addEventListener('start',()=>cameraFollow.stop());
 renderer.domElement.addEventListener('wheel',e=>{if(e.shiftKey&&!e.ctrlKey)cameraFollow.stop();},{capture:true});
 // At the bottom of the zoom the camera steps down into first person (first-person.mjs); zooming out steps back up.
