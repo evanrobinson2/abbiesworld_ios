@@ -3758,6 +3758,14 @@
         }
       ],
       "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
+    },
+    "world-browser": {
+      "items": [
+        {"k": "canon", "t": "Evan's #617 direction (World Browser, Capture, shared-by-default)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/617"},
+        {"k": "canon", "t": "Winchester flow study (#614)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/winchester-flow/index.html"},
+        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+      ],
+      "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
     }
   }
 }

@@ -9,6 +9,10 @@
       "destination": "/studies/winchester-flow/index.html"
     },
     {
+      "source": "/study/world-browser",
+      "destination": "/studies/world-browser/index.html"
+    },
+    {
       "source": "/study/:tab(intro|title|create-new)",
       "destination": "/studies/winchester-flow/index.html"
     },
