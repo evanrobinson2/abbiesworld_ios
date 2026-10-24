@@ -76,3 +76,13 @@ Gold medallions are the only mission entry points, each where its mission begins
 toy-car coaster, Moon Mission (black truck, now at the bakery curb), Moon mining (outpost, only once a Moon tile is placed).
 The noticeboard only lists missions and flies the camera to the right medallion; it never starts one. The science lab mission is
 removed (parked). In the study every medallion on the stage is tappable and starts its mission with the zoom.
+
+## Correction (Evan, 2026-10-24 1:48 AM): not medallions, the backpack charms themselves
+Missions start at the location of their **backpack charm**: the floating charm with a halo beam over it is the mission start.
+No separate medallion object. Map: floppy (basement) at the café cellar door; star (school jump) at the school; toy car
+(coaster) at the coaster; rocket (Moon Mission) at the black truck at the bakery curb; moon cheese (mining) at the Moon outpost
+(only with a Moon tile). Walking into the charm plays the zoom with a smoke puff on the place; winning it drops the charm into
+the chest and the beam goes dark. Open question: replaying a mission after its charm is earned (the beam is off; suggest the
+place keeps a dim, beamless charm ghost to replay). Bub, coffee cup and brass key have no beam: they are found, not played.
+Spec for the floating pickup: spin about a vertical axis every 2.4 s, bob 6 px every 2.2 s, soft gold glow, breathing ground
+shadow; beam in the game's colour (floppy blue, rocket amber, star pink, toy car green, cheese grey-blue).
