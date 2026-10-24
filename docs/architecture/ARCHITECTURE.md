@@ -95,6 +95,16 @@ in [INVENTORY.md](INVENTORY.md).
 - The Ranch app's feedback button saves to Ranch's Blob store. `feedback-inbox.yml` (every 5 minutes) copies new items into branch
   `feedback-inbox` and comments on the "Feedback inbox" PR **[verified from code]**.
 
+### 2.10 Shared studio context (implementation, 2026-10-24)
+- `studies/context.json.studio` is the curated source; `tools/context-card/studio.mjs` hashes cited repo sources and
+  builds the committed `game-oracle/data/studio-context.json` bundle. Study cards and model consultations inherit it.
+- Owner-only `/api/studio-context` assembles a bounded packet and optionally reads the existing private feedback
+  service. Private notes are never added to the public bundle. No additional store, queue, model or scheduled job.
+- App/database export adapters use the same pure packet builder as repo agents. Recording digestion and promotion
+  of reusable lessons are incremental editorial steps; they are not automatic video understanding.
+- **[inferred from implementation; live verification pending]** These routes require deployment of the Ranch and
+  Oracle changes. No claim of production availability or complete recorded-feedback coverage is made here.
+
 ## 3. Deployment topology and environments
 
 | Thing | Where | How it deploys | Envs |

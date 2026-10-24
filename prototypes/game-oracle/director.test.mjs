@@ -4,6 +4,19 @@ import {searchKnowledge,getIdentity,steamLibrary,repo} from './lib/knowledge.js'
 import {createHandler} from './api/consult.js';
 import knowledge from './api/knowledge.js';import steam from './api/steam.js';import mcp from './api/mcp.js';
 const fakeRes=()=>({headers:{},setHeader(k,v){this.headers[k]=v},status(n){this.code=n;return this},json(b){this.body=b;this.code??=200;return this},end(){return this}});
+test('studio brief is consultable and accompanies model prompts with the same revision',async()=>{
+ const res=fakeRes();knowledge({method:'GET',url:'/api/knowledge?studio=1'},res);
+ assert.equal(res.body.schema,'aw.studio-context.v1');
+ let sent;
+ const plan=await consult({idea:'clean a toy car'},{credential:{token:'test',method:'oidc'},fetcher:async(url,opts)=>{
+  sent=JSON.parse(opts.body);return {ok:true,json:async()=>({choices:[{message:{content:JSON.stringify(modelPlan)}}]})};
+ }});
+ assert.equal(JSON.parse(sent.messages[1].content).studioContext.revision,res.body.revision);
+ assert.equal(plan.grounding.studioRevision,res.body.revision);
+ assert.equal(plan.source,'model');
+ const fallback=await consult({idea:'clean a toy car'});
+ assert.equal(fallback.source,'studies');assert.equal(fallback.model,null);
+});
 const modelPlan={reading:'A sheep round-up.',title:'Sheep Round-Up',pitch:'Herd the sheep home before sunset.',fantasy:'You are a shepherd.',verbs:['herd','build','call'],
  rules:[{rule:'Sheep walk away from you.',why:'Herding'},{rule:'Fences you build guide them.',why:'Building is the verb'}],goal:'All sheep in the pen.',fail:null,
  beats:[{title:'Morning',what:'Sheep spread out.',player:'Looks'},{title:'Round-up',what:'Herding.',player:'Builds fences'}],

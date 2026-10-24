@@ -3,6 +3,7 @@
 // factories, grounded in the studies the Oracle holds. It never emits code and never copies a game's
 // expression (art, text, characters, levels); it takes style and mechanics only (GAME_IDENTITY.md).
 import {searchKnowledge,styles,HOUSE_IDENTITY,repo,identityCard} from './knowledge.js';
+import studioContext from '../data/studio-context.json' with {type:'json'};
 
 export const PLAN_SCHEMA='oracle.plan.v1';
 export const DEFAULT_MODEL='anthropic/claude-sonnet-5.5';
@@ -52,7 +53,7 @@ Reply with one JSON object only, exactly this shape:
  "kidFit": "<who can play it and how>"}`;
 
 function contextFor(idea,audience,ctx){
- return JSON.stringify({idea,audience:audienceRules(audience),
+ return JSON.stringify({idea,audience:audienceRules(audience),studioContext,
   suggestedStyle:{id:ctx.style.id,summary:ctx.style.summary,overlays:ctx.style.overlays,pacing:ctx.style.pacing,kidFit:ctx.style.kidFit},
   referenceIdentities:ctx.identities.map(({title,fantasy,pillars,signatureMoment,antiGoals,signatures,take,leave})=>({title,fantasy,pillars,signatureMoment,antiGoals,signatures:(signatures||[]).map(s=>s.description),take:(take||[]).map(t=>t.setting),leave})),
   studies:ctx.studies.map(s=>({title:s.title,genre:s.genre,findings:s.findings.slice(0,3).map(f=>f.title+': '+f.finding)})),
@@ -81,7 +82,7 @@ export function normalisePlan(raw,{idea,audience,source,model,ctx}){
   factory:arr(raw.factory,18).map(f=>({factory:FACTORIES.includes(f?.factory)?f.factory:null,name:str(f?.name,48),brief:str(f?.brief,300),for:str(f?.for,120)})).filter(f=>f.factory&&f.name&&f.brief),
   references:arr(raw.references,6).map(r=>({title:str(r?.title,80),take:str(r?.take,240),leave:str(r?.leave,240)})).filter(r=>r.title),
   kidFit:str(raw.kidFit),
-  grounding:{identities:ctx.identities.map(i=>i.title),studies:ctx.studies.map(s=>s.title),styleSuggested:ctx.style.id}};
+  grounding:{studioRevision:studioContext.revision,identities:ctx.identities.map(i=>i.title),studies:ctx.studies.map(s=>s.title),styleSuggested:ctx.style.id}};
  if(!plan.title||!plan.rules.length||!plan.beats.length)throw new Error('The Oracle plan was missing a title, rules or beats.');
  return plan;
 }

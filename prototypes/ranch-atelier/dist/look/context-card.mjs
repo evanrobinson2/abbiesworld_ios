@@ -31,7 +31,7 @@ export function loadContext(url = '/studies/context.json'){
 export function resolveContext(data, id){
  const S = data?.studies || {}; let e = S[id], seen = new Set();
  while (e?.same && !seen.has(e.same)) { seen.add(e.same); e = S[e.same]; }
- const items = [...(e?.items || [])];
+ const items = [...(data?.studio?.entries || []).map(x => ({k:'canon', t:x.title, href:REPO+x.ref, note:`[${x.status}] ${x.summary}`})), ...(e?.items || [])];
  for (const u of e?.use || []) {
   const d = data.digests?.[u]; if (!d) continue;
   items.push({k: 'canon', t: d.t, href: d.href});
@@ -47,7 +47,7 @@ const item = x => `<li>${x.href ? `<a href="${esc(x.href)}" target="_blank" rel=
 export function contextHTML(data, id){
  const r = resolveContext(data, id);
  return `<section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
-  <p class="ctx-lead">${r.known ? 'What this study drew on.' : 'Nothing recorded for this study yet.'}</p>
+  <p class="ctx-lead">${data?.studio ? `Shared studio brief · ${esc(data.studio.reviewedAt)}. ${r.known ? 'Study sources included below.' : 'Study-specific sources not yet recorded.'}` : r.known ? 'What this study drew on.' : 'Nothing recorded for this study yet.'}</p>
   ${r.kinds.map(g => `<details class="ctx-kind"${g.items.length <= 6 ? ' open' : ''}><summary><b>${esc(g.label)}</b><i>${g.items.length || ''}</i></summary>
    ${g.items.length ? `<ul>${g.items.map(item).join('')}</ul>` : '<p class="ctx-none">None recorded</p>'}</details>`).join('')}
   <p class="ctx-foot">${r.recorded ? `Recorded ${esc(r.recorded)}. ` : ''}<a href="${EDIT}" target="_blank" rel="noopener">Sources file</a></p></section>`;

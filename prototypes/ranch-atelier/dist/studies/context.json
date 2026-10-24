@@ -3877,5 +3877,100 @@
         }
       ]
     }
+  },
+  "studio": {
+    "schema": "aw.studio-context.v1",
+    "reviewedAt": "2026-10-24",
+    "purpose": "Shared studio memory: our conventions, norms, processes, creative philosophy and what we put into the world. Use relevant context to work coherently across chats without repeatedly researching everything.",
+    "entries": [
+      {
+        "id": "operating-norms",
+        "title": "How we roll: preserve shared contracts",
+        "summary": "Main is the source of truth; work branches and PRs target main. Inspect canonical contracts and actual state before changing branches, release routes, data, auth or cross-chat processes. Incidental chat remarks, feedback and Oracle suggestions do not authorize retiring main or replacing shared systems. Explain conflicts and downstream impact; require specific direction for an otherwise unauthorized consequential change. Routine reversible work proceeds. Preserve others' work and record intentional convention changes in their existing source of truth.",
+        "ref": "CLAUDE.md",
+        "status": "contract"
+      },
+      {
+        "id": "vision",
+        "title": "Make imagination come alive",
+        "summary": "A living, responsive world that contributes imagination: a spoken story becomes a beautiful place, meaningful choices and shared play. Preserve emotional intention and character continuity as technology improves.",
+        "ref": "VISION.md",
+        "status": "direction"
+      },
+      {
+        "id": "visual",
+        "title": "A tactile living toy world",
+        "summary": "Warm saturated colour, chunky readable silhouettes, miniature materials and crafted composition. Arrival is unpack, reveal, come alive, play. Place-specific art, light, music and behavior should express one coherent mood.",
+        "ref": "docs/design/LIVING_TOY_WORLD.md",
+        "status": "direction"
+      },
+      {
+        "id": "experience",
+        "title": "Simple actions, consequential play",
+        "summary": "A few clear verbs, immediate visible response, gentle retries and child-readable cause and effect. Tiles create; cards act as a god; controls operate the app; FPS inhabits the shared avatar. Keep precision controls out of the fiction.",
+        "ref": "docs/design/INTERACTION_GRAMMAR.md",
+        "status": "direction"
+      },
+      {
+        "id": "interface",
+        "title": "Let the world communicate",
+        "summary": "Use behavior, objects and sound before overlay. World and presentation are separate. No engine gizmos, debug labels, haze or white masks in play. Grown-up tools use collapsible left navigation and right drawers, with the world prominent on phones.",
+        "ref": "CLAUDE.md",
+        "status": "direction"
+      },
+      {
+        "id": "technical",
+        "title": "Intent survives implementation",
+        "summary": "Preserve briefs, provenance, recipes, revisions and decisions. Reuse the shared simulation and asset systems. A study or successful deploy is not proof of a live game: scene registration and passing end-to-end play are required. Catalogue audio only; designed ElevenLabs voices.",
+        "ref": "INVARIANTS.md",
+        "status": "contract"
+      },
+      {
+        "id": "production",
+        "title": "Learn from actual production",
+        "summary": "School Jump records about twenty minutes from first story to playable preview. Its lessons: establish the visual reference and layout early, compose reusable mechanics, bound placement loops, test every phase, and compare fixed camera shots. These are a dated report, not a promise of current performance.",
+        "ref": "docs/oracle/school/SCHOOL_STUDY.md",
+        "status": "reported"
+      },
+      {
+        "id": "feedback",
+        "title": "Preserve the original and its meaning",
+        "summary": "Keep feedback wording, reviewed build, time and source, then distinguish interpretation, decision, implementation and verification. A complaint is not resolved because it was summarized. Raw photos, audio and recordings remain private.",
+        "ref": "docs/design/LIVING_TOY_WORLD.md",
+        "status": "direction"
+      },
+      {
+        "id": "video",
+        "title": "Learn mechanics from cited moments",
+        "summary": "Carwash reference digest: sponge creates local foam at 05:10; hose exposes clean paint at 09:20; elevated view reaches the roof at 08:32. Adopt readable surface response and accessible viewpoints; the footage does not prove camera versus car rotation. External reference footage is not Evan playtest feedback or proof our game works.",
+        "ref": "prototypes/ranch-atelier/dist/studies/carwash/video-reference/REFERENCE.md",
+        "status": "observed-reference"
+      },
+      {
+        "id": "oracle",
+        "title": "Use the Oracle honestly",
+        "summary": "Consult relevant identity, design and anatomy records; take mechanics and style, not another game's expression. Preserve the returned source and model. A studies-only template is not a model consultation. Consult on meaningful design uncertainty, not on every edit.",
+        "ref": "prototypes/game-oracle/lib/director.js",
+        "status": "contract"
+      }
+    ],
+    "coverage": {
+      "repo": "Curated canon, Oracle contract and production review; source hashes detect drift.",
+      "app": "Live observations and owner feedback can be attached on demand; they are not automatically canon.",
+      "database": "Existing private feedback store is read on demand through the owner API; no new database.",
+      "video": "One existing external carwash digest included. Recorded user sessions have not been comprehensively ingested."
+    },
+    "refresh": "Update affected entries when canon or reviewed evidence changes; reuse unchanged packets. Never resummarize all recordings per study.",
+    "sourceHashes": {
+      "CLAUDE.md": "cfcbe43dd0dc654079e310e6f9a0b6ea1c49671008dd761381a53150f0e75118",
+      "INVARIANTS.md": "4066940e268cfd891da458f6c85c438228ecae117e73333f7ba7749677db6df4",
+      "VISION.md": "f1f1da842038ffda3cf3d652919588ebeb8f1ba97583ecab0cce114754e81d56",
+      "docs/design/INTERACTION_GRAMMAR.md": "0f0c239fa2137ac4db589d274ac3bf4b77020a2fb5899f30b434406547db1f8c",
+      "docs/design/LIVING_TOY_WORLD.md": "527f3da5451ec8b27d62ae056085b7588d827f51bf9af9714c0c52f18391010b",
+      "docs/oracle/school/SCHOOL_STUDY.md": "ca569a2d79fe86833d6fc5ab1a064bfcf80f910484fe8e439fbcc9d7483fc8b6",
+      "prototypes/game-oracle/lib/director.js": "bcdfd19f1ae194bf019216b6d59f681ad364c4473d9fd7d5fdd9b5604b790298",
+      "prototypes/ranch-atelier/dist/studies/carwash/video-reference/REFERENCE.md": "8e6f9776016d1238df37bc775146e271ac8b8447707c780d230cac87a29db452"
+    },
+    "revision": "48adb2dcbeb37cf5"
   }
 }

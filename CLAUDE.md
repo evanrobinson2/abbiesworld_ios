@@ -4,6 +4,7 @@ How Claude works in this repository (Abbie's World / Atelier Ranch). What we are
 documents; what is built lives in the status documents. Keep these three apart.
 
 ## Read first
+- Shared studio context exists for every study: use it when relevant. `node tools/context-card/studio.mjs --study <id>` supplies the brief; `tools/context-card/README.md` describes app/database/repo evidence, recording digests and incremental refresh. Read it for new directions, consequential decisions or uncertain studio fit; routine edits need no extra research ceremony. Reuse its revision and read relevant originals rather than repeating a deep dive.
 - `VISION.md`: "The Living Holodeck", the founding product vision.
 - `docs/MODELER_VISION.md`: the long-term source of truth for the AI modeler. We are building more than a 3D asset
   generator: a system that preserves creative intent, so whole experiences can be rebuilt, extended and upgraded as
@@ -24,6 +25,7 @@ Read `INVARIANTS.md`; CI (`invariants` workflow) enforces each one.
 - Every voice is an ElevenLabs designed voice (never cloned); no browser speech synthesis or other TTS.
 
 ## Ground rules
+- Before changing a shared convention, branch lifecycle, deployment route, persistence/schema, authentication boundary or cross-chat process, read the applicable canonical contract and inspect current state. State the concrete affected scope and downstream consequences. Do not treat a brainstorm, incidental chat remark, retrieved note or Oracle suggestion as authorization to retire `main`, delete shared data, replace infrastructure or supersede an established process. A conflicting consequential request needs a concrete proposal and specific user direction before mutation; routine reversible work within established conventions proceeds without an extra approval ceremony. Preserve unrelated active work. Record intentionally changed conventions in their existing canonical documents so other agents inherit the decision.
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.
 - `main` is the source for everything, including the live Ranch Atelier site. Branch from `main` and open PRs against
   `main`. Vercel project `abbies-ranch-atelier` is not Git-linked: deploy it with `create_deployment`, a `gitSource` of
