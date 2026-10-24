@@ -27,7 +27,7 @@
         },
         {
           "k": "design",
-          "t": "Oskar Stålberg, How Townscaper works",
+          "t": "Oskar StÃ¥lberg, How Townscaper works",
           "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making"
         },
         {
@@ -415,7 +415,7 @@
         },
         {
           "k": "canon",
-          "t": "Café study, section 9 (the office basement)",
+          "t": "CafÃ© study, section 9 (the office basement)",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cafe/CAFE_STUDY.md"
         },
         {
@@ -607,7 +607,7 @@
           "k": "devblog",
           "t": "Unpacking: a narrative through 1,000 household items (GDC 2022)",
           "href": "https://www.gamedeveloper.com/gdc2022/gdc-2022-unpacking-a-narrative-through-1-000-household-items",
-          "note": "\"No item? No trait!\" Gave the café its pin board and tip jar"
+          "note": "\"No item? No trait!\" Gave the cafÃ© its pin board and tip jar"
         },
         {
           "k": "devblog",
@@ -631,13 +631,13 @@
           "k": "devblog",
           "t": "Animal Crossing: New Horizons, how the furniture was made",
           "href": "https://nintendoeverything.com/animal-crossing-new-horizons-dev-on-how-the-furniture-was-made/",
-          "note": "personality over realism, every side finished, a footprint in grid squares; the café props already follow it"
+          "note": "personality over realism, every side finished, a footprint in grid squares; the cafÃ© props already follow it"
         },
         {
           "k": "design",
           "t": "A Little to the Left: the daily tidy",
           "href": "https://www.gonintendo.com/contents/12096-a-little-to-the-left-devs-hope-the-game-s-daily-tidy-feature-becomes-part-of-players",
-          "note": "a bite-sized daily puzzle; idea for a daily café tidy, not built"
+          "note": "a bite-sized daily puzzle; idea for a daily cafÃ© tidy, not built"
         },
         {
           "k": "tutorial",
@@ -662,7 +662,7 @@
         },
         {
           "k": "canon",
-          "t": "Café study",
+          "t": "CafÃ© study",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/cafe/CAFE_STUDY.md"
         },
         {
@@ -677,9 +677,9 @@
         },
         {
           "k": "canon",
-          "t": "Café model kit (Blender Python recipes, materials, mass, joints)",
+          "t": "CafÃ© model kit (Blender Python recipes, materials, mass, joints)",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/cafe-build/kit.py",
-          "note": "every café model is built from these recipes"
+          "note": "every cafÃ© model is built from these recipes"
         },
         {
           "k": "canon",
@@ -712,7 +712,7 @@
           "note": "the in-game characters the photo booth poses"
         }
       ],
-      "recorded": "2026-10-23; models and photo booth added 14:15Z; real consultation pass 14:30Z: the Oracle was asked about cozy shop games (it has no records yet for Coffee Talk, Unpacking, A Little to the Left or Animal Crossing, so their dev blogs were read directly), and the café changed from what they taught."
+      "recorded": "2026-10-23; models and photo booth added 14:15Z; real consultation pass 14:30Z: the Oracle was asked about cozy shop games (it has no records yet for Coffee Talk, Unpacking, A Little to the Left or Animal Crossing, so their dev blogs were read directly), and the cafÃ© changed from what they taught."
     },
     "cafe-r2": {
       "same": "cafe-study",
@@ -1285,7 +1285,7 @@
         },
         {
           "k": "devblog",
-          "t": "How Townscaper works: a story four games in the making (Oskar Stålberg)",
+          "t": "How Townscaper works: a story four games in the making (Oskar StÃ¥lberg)",
           "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making",
           "note": "split a hex into smaller cells and relax them for organic blocks"
         },
@@ -1553,7 +1553,7 @@
         },
         {
           "k": "devblog",
-          "t": "How Townscaper works: a story four games in the making (Oskar Stålberg)",
+          "t": "How Townscaper works: a story four games in the making (Oskar StÃ¥lberg)",
           "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making",
           "note": "how a few rules make a town feel hand-made"
         },
@@ -1607,7 +1607,7 @@
         },
         {
           "k": "canon",
-          "t": "Memory coins and the café key",
+          "t": "Memory coins and the cafÃ© key",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/memory-coins.mjs",
           "note": "Daddy's core memories, one count across places"
         },
@@ -1615,7 +1615,7 @@
           "k": "canon",
           "t": "Coffee shop study (58 models)",
           "href": "https://app.abbies.world/models/",
-          "note": "the café interior the town's coffee shop opens into"
+          "note": "the cafÃ© interior the town's coffee shop opens into"
         },
         {
           "k": "canon",
@@ -2160,7 +2160,7 @@
         },
         {
           "k": "reference",
-          "t": "Resident Evil 4, the attaché case",
+          "t": "Resident Evil 4, the attachÃ© case",
           "href": "https://residentevil.fandom.com/wiki/Attache_Case",
           "note": "An inventory you open like a real case, with charms hanging off it (the RE4 remake keychains): the half-shell idea, and proof charms read as rewards."
         },
@@ -2387,7 +2387,7 @@
         },
         {
           "k": "reference",
-          "t": "Board storage today (card-library.js) and the ◎ World menu (board3.js)",
+          "t": "Board storage today (card-library.js) and the â—Ž World menu (board3.js)",
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/card-library.js",
           "note": "boards are stored by id with one 'current' pointer; the Basin is ?world=basin"
         },
@@ -3364,7 +3364,7 @@
         },
         {
           "k": "design",
-          "t": "Pokémon badge case (design knowledge)",
+          "t": "PokÃ©mon badge case (design knowledge)",
           "href": "https://bulbapedia.bulbagarden.net/wiki/Badge_Case",
           "note": "An earned set looks best displayed together, with empty spots that say how many are left."
         },
@@ -3761,17 +3761,41 @@
     },
     "world-browser": {
       "items": [
-        {"k": "canon", "t": "Evan's #617 direction (World Browser, Capture, shared-by-default)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/617"},
-        {"k": "canon", "t": "Winchester flow study (#614)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/winchester-flow/index.html"},
-        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+        {
+          "k": "canon",
+          "t": "Evan's #617 direction (World Browser, Capture, shared-by-default)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/617"
+        },
+        {
+          "k": "canon",
+          "t": "Winchester flow study (#614)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/winchester-flow/index.html"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        }
       ],
       "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
     },
     "player-home": {
       "items": [
-        {"k": "canon", "t": "Evan's #619 direction (player and signature home)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/619"},
-        {"k": "canon", "t": "Backpack study: default bunny look and the charm list", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md"},
-        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+        {
+          "k": "canon",
+          "t": "Evan's #619 direction (player and signature home)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/619"
+        },
+        {
+          "k": "canon",
+          "t": "Backpack study: default bunny look and the charm list",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        }
       ],
       "recorded": "2026-10-24, no outside sources used; the two reference photos were not readable from the cloud worker, so the issue's written description was used"
     },
@@ -3816,6 +3840,49 @@
           "k": "reference",
           "t": "Evan's eight reference photos (pink retro convertible, pink boxy off-roader, dark armoured toy, orange creature in packaging, toy demo)",
           "note": "Not inspected: the files are on Evan's PC and this cloud thread had no PC agent. The grounded descriptions in the issue were used for packaging and silhouettes; cars are the existing original garage"
+        }
+      ]
+    },
+    "toy-world-review": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "Living toy world vision",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/LIVING_TOY_WORLD.md"
+        },
+        {
+          "k": "canon",
+          "t": "Evan’s October 24 study brief",
+          "note": "Title, menu, world selector, Design/Capture, arcade racer and customizable home. Charms remain signature rewards; decorating is a complete way to play."
+        },
+        {
+          "k": "reference",
+          "t": "Existing game assets and studies",
+          "note": "Backpack and charm models, Meshy Abbie, coaster cars, Winchester Flow and arcade race simulation reused. No newly commissioned final art or audio."
+        },
+        {
+          "k": "oracle",
+          "t": "No fresh model consultation for this review room",
+          "note": "Existing racer context is retained in arcade-racer; it is not an endorsement of this expanded suite."
+        }
+      ]
+    },
+    "mini-game-designer": {
+      "items": [
+        {
+          "k": "reference",
+          "t": "Editable process proposal",
+          "href": "https://chatgpt.com/space/page_d1cd857933e081919b3188485df97f3e"
+        },
+        {
+          "k": "canon",
+          "t": "Study convention",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/STUDIES.md"
+        },
+        {
+          "k": "oracle",
+          "t": "October 24 consultation returned studies-only",
+          "note": "source: studies, model: null. No model-generated critique or endorsement. Requested 50,000-token opinion remains outstanding."
         }
       ]
     }
