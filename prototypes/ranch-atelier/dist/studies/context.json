@@ -234,6 +234,22 @@
     }
   },
   "studies": {
+    "faster-study-publishing": {
+      "title": "Study publishing without rebuilding the game",
+      "maturity": "Draft",
+      "ownerThread": "01a16f34-c876-7360-9312-7ee7306dcb82",
+      "record": "docs/design/STUDIES.md",
+      "canonical": "https://app.abbies.world/r2/studies/faster-study-publishing/index.html",
+      "publication": "Pending live acceptance; this URL is a reserved destination, not a delivery claim.",
+      "items": [
+        {"k":"canon","t":"Existing study, deployment, auth, feedback and capture contracts","href":"https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/STUDIES.md"},
+        {"k":"research","t":"R2 atomic conditional writes","href":"https://developers.cloudflare.com/r2/api/s3/extensions/"},
+        {"k":"reference","t":"Vercel static and prebuilt deployments","href":"https://vercel.com/docs/cli/deploy"},
+        {"k":"reference","t":"GitHub workflow concurrency","href":"https://docs.github.com/en/actions/how-tos/write-workflows/choose-when-workflows-run/control-workflow-concurrency"},
+        {"k":"research","t":"Eight successful instant-preview runs: 169–251 seconds; run 40118049076 had 95s checkout and 67s all-preview sync","href":"https://github.com/evanrobinson2/abbiesworld_ios/actions/runs/40118049076"}
+      ],
+      "note": "No Oracle consultation claimed. Implementation must prove two revisions, stale-writer rejection, promotion, rollback, phone/desktop review, authenticated note readback and fresh MCP capture. Study publication is not game readiness."
+    },
     "school-jump": {
       "items": [
         {

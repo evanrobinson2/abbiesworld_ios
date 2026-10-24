@@ -3,6 +3,8 @@
 Read [Development practices](DEVELOPMENT-PRACTICES.md) before extending the Ranch/Sandbox app. It consolidates the project decisions through 2026-10-21 and distinguishes requirements from proposals and dated implementation evidence. Later explicit user instructions take precedence over older notes.
 
 The deployed app source is `dist/`, production https://abbies-ranch-atelier.vercel.app.
+
+For study publication, read the root `AGENTS.md` and `docs/design/STUDIES.md`. Use the shared versioned study publisher, preserving `/view-context.js`, exact bundle revision, authenticated feedback and fresh capture. Study publication is separate from game deployment and game readiness.
 The project contains existing uncommitted work from multiple slug chats. Preserve it.
 
 The `ranch-view` MCP connection reads the paired browser's current app view. Use

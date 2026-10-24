@@ -1,23 +1,24 @@
-# Instant previews, separate from production deploys. Put static files under preview/<name>/ on any branch and push
-# (or run this workflow by hand with a branch and name). Within about a minute they are at
+# Legacy previews only. New studies use study-publish.yml and docs/design/STUDIES.md.
+# Main-owned legacy pages remain at
 #   https://app.abbies.world/r2/previews/<name>/index.html
-# through the existing /r2/* rewrite. No Vercel build, no deploy batch. Previews are scratch: they never touch the
-# live site, and deleting preview/<name>/ and pushing removes them from R2 as well.
+# through the existing /r2/* rewrite. No Vercel build. Removing a directory does NOT delete its old R2 prefix.
 # Secrets as for model-store: R2_ACCOUNT_ID, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY, R2_BUCKET.
 name: instant-preview
 on:
   push:
+    branches: [main]
     paths: ['preview/**']
   workflow_dispatch:
     inputs:
       name: { description: 'Preview name (folder under preview/)', required: true }
 concurrency:
-  group: instant-preview-${{ github.ref }}
+  group: instant-preview-legacy
   cancel-in-progress: false
 permissions:
   contents: read
 jobs:
   preview:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -39,6 +40,7 @@ jobs:
         run: |
           ep="https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com"
           for d in preview/*/; do
+            [ ! -f "$d/study.json" ] || continue
             n=$(basename "$d")
             [ -z "$ONLY" ] || [ "$ONLY" = "$n" ] || continue
             aws s3 sync "$d" "s3://${R2_BUCKET}/previews/${n}/" --endpoint-url "$ep" --delete \

@@ -128,3 +128,5 @@ tools/family-teleport/private/
 
 # headless game-test run output (tools/game-registry/run-tests.mjs)
 game-test-shots/
+/.study-output/
+/tools/study-publish/__pycache__/
