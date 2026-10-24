@@ -3188,6 +3188,36 @@
           "note": "Copyright Office declined a video game preservation exemption in 2024"
         }
       ]
+    },
+    "wright-farm": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Oracle: Animal Crossing New Horizons, Dorfromantik, Tiny Glade, Bricktales, Unpacking records",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "canon",
+          "t": "Models library (1,489 models): barn, farmhouse, well, tractor, pumpkins, hay, sheep, dog, cat reused",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/models/library.json"
+        },
+        {
+          "k": "design",
+          "t": "Wright-Locke Farm, Winchester: the animals and the places a visitor walks (public pages; inspired by only)",
+          "href": "https://www.wlfarm.org/"
+        },
+        {
+          "k": "design",
+          "t": "Stardew Valley design analysis (animals as friends you check on daily)",
+          "href": "https://www.kokutech.com/blog/gamedev/design-patterns/world-building/stardew-valley"
+        },
+        {
+          "k": "canon",
+          "t": "Cards v3, HUD study and Game Feel: hearts live on the animal, no HUD words",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        }
+      ]
     }
   }
 }
