@@ -21,7 +21,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook, UPGRADES, upgradeLevel, capacity, starsLeft, nextLevel, buyUpgrade} from './backpack.mjs?v=14';
+import {glyph, look as bagLook, earnedCharms, keychain, newCharms, charmReplay, taught, markTaught, coinCount, CHARMS, setLook, UPGRADES, upgradeLevel, capacity, starsLeft, nextLevel, buyUpgrade} from './backpack.mjs?v=14';
 import {sfx as catalogSfx} from './catalog-sfx.mjs';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -212,7 +212,7 @@ async function openPop() {
   try {
     if (!view) {
       const B = await import('./backpack.mjs?v=14');
-      view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onUse: useItem,
+      view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onUse: useItem, onReplay: (id, d) => { closePop(); location.href = d.url.replace(/from=[^&]*/, 'from=' + encodeURIComponent(location.pathname + location.search)); },
         onChange: l => { setLook(l); drawPeek(); }});
     } else { view.setLook(bagLook()); view.setContents(contents); }
     drawUpgrades();
@@ -243,7 +243,9 @@ function checkCharms() {
 function nextCharm() {
   const c = charmQueue.shift(); if (!c) { charmBusy = false; return; }
   charmBusy = true; jingle();
-  pickUp({id: 'charm-' + c.id, name: c.name, icon: c.icon}, `A ${c.name.toLowerCase()} charm for my backpack!`, () => setTimeout(nextCharm, 400));
+  // The first charm teaches what a charm is for, once per player (their profile remembers it).
+  const lesson = !taught('charm-replay') && markTaught('charm-replay');
+  pickUp({id: 'charm-' + c.id, name: c.name, icon: c.icon}, `A ${c.name.toLowerCase()} charm for my backpack!` + (lesson ? ' Tap a charm and then tap it again, and I can go play it again.' : ''), () => setTimeout(nextCharm, 400));
 }
 function jingle() {
   if (window.AWLook?.state?.prefs?.mute) return;
