@@ -1,6 +1,6 @@
 {
  "cap": 2400,
- "total": 2131,
+ "total": 2151,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -486,6 +486,16 @@
    "what": "anim 1",
    "credits": 3,
    "at": "2026-10-24T00:34:00Z"
+  },
+  {
+   "what": "charm-floppy-disk-tex retexture",
+   "credits": 10,
+   "at": "2026-10-24T00:36:15Z"
+  },
+  {
+   "what": "charm-rocket-tex retexture",
+   "credits": 10,
+   "at": "2026-10-24T00:36:15Z"
   }
  ],
  "live_balance": {
