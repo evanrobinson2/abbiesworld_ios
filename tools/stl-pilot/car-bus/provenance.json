@@ -1,0 +1,33 @@
+{
+  "slug": "car-bus",
+  "title": "Volkswagen Bus 1970s",
+  "model_url": "https://www.printables.com/model/13466-volkswagen-bus-1970s",
+  "author": "ChelsCCT (Chelsey Creates Things)",
+  "author_url": "https://www.printables.com/@ChelsCCT",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "category": "toy car",
+  "origin": "author's original creation (imported from Thingiverse)",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "327f213f1f7647dc9f41735687cd3fef5099cf462b704cb64a53af1ee628fa6c",
+      "bytes": 9923584
+    },
+    {
+      "file": "source_top.stl",
+      "sha256": "74263739eaa980eef09c8ed128fe59bc447886d7f1477e85909dd47a55a99b9c",
+      "bytes": 1579084
+    },
+    {
+      "file": "source_wheel.stl",
+      "sha256": "34fa4ce08dc865913fd0c1c4034f7eab0d07e11f77d061130412a0e14565b85c",
+      "bytes": 2550184
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

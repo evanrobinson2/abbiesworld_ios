@@ -33,6 +33,20 @@ CARS = {
                         length_m=4.6, tex=1024, target=6000, paint=("concept_paint", (0.75, 0.78, 0.82, 1))),
     "car-sedan": dict(body=("source_body.stl", "body"), wheel=None, R=(0, 0, 90), flip=False,
                       length_m=4.4, tex=512, target=4500, paint=("sedan_paint", (0.75, 0.10, 0.10, 1))),
+    "car-bus": dict(body=("source_body.stl", "body"), wheel=("source_wheel.stl", "wheel"), R=(0, 0, 90), flip=False,
+                    axle_f=(0.2, 0.8), wheel_z=10.0, inset=6.0, length_m=4.5, tex=512, target=5500,
+                    extra=["source_top.stl"],
+                    # brand rule: sand the raised nose badge and the number-plate lettering flat (source mm: x, z of the centre)
+                    flatten=[dict(end="min", c=(-22.85, 69.2), R=10.5), dict(end="max", c=(-24.5, 55.9), R=14.0)],
+                    paint=("camper_paint", (0.82, 0.78, 0.60, 1))),
+    "car-kart": dict(body=("source_body.stl", "body"), wheel=None, R=(0, 0, 0), flip=False,
+                     length_m=2.0, tex=512, target=5500, paint=("kart_paint", (0.85, 0.12, 0.10, 1))),
+    "car-cage-kart": dict(body=("source_body.stl", "body"), wheel=None, R=(0, 0, 0), flip=False,
+                          length_m=2.6, tex=512, target=5000, paint=("cage_kart_paint", (0.90, 0.60, 0.10, 1))),
+    "car-box-truck": dict(body=("source_body.stl", "body"), wheel=None, R=(90, 0, 0), flip=False,
+                          length_m=5.5, tex=512, target=4500, paint=("box_truck_paint", (0.40, 0.55, 0.30, 1))),
+    "car-small-truck": dict(body=("source_body.stl", "body"), wheel=None, R=(0, 0, 90), flip=False,
+                            length_m=5.5, tex=512, target=5000, paint=("truck_cab_paint", (0.20, 0.22, 0.30, 1))),
 }
 WHEEL_TRIS = 220  # budget per wheel; the body gets the rest
 
@@ -65,7 +79,10 @@ def run(slug, D):
         fn, role = C[key]
         bpy.ops.wm.stl_import(filepath=os.path.join(D, fn))
         o = bpy.context.selected_objects[0]; o.name = role; objs[key] = o
-    rec("import", t0, tris(objs.values()), files=[C[k][0] for k in objs])
+    extras = []
+    for fn in C.get("extra", []):
+        bpy.ops.wm.stl_import(filepath=os.path.join(D, fn)); eo = bpy.context.selected_objects[0]; eo.name = "extra"; extras.append(eo)
+    rec("import", t0, tris(list(objs.values()) + extras), files=[C[k][0] for k in objs] + C.get("extra", []))
 
     # ---- repair (weld, normals, drop dust, fill small holes) ----------------------------------------
     t0 = time.perf_counter(); rep = dict(open_edges_before=0, open_edges_after=0, dust_shells_removed=0)
@@ -103,6 +120,24 @@ def run(slug, D):
         bm.edges.ensure_lookup_table()
         rep["open_edges_after"] += sum(1 for e in bm.edges if len(e.link_faces) != 2)
         bm.to_mesh(o.data); bm.free()
+    if extras:  # parts printed apart but modelled in the same coordinates: merge them into the body
+        bpy.ops.object.select_all(action="DESELECT")
+        for o in extras + [objs["body"]]: o.select_set(True)
+        bpy.context.view_layer.objects.active = objs["body"]; bpy.ops.object.join()
+    import numpy as np
+    for fl in C.get("flatten", []):  # sand raised badges flat: pull protruding vertices in a disc back to the surrounding panel
+        me = objs["body"].data; n = len(me.vertices); co = np.empty(n * 3, dtype=np.float32); me.vertices.foreach_get("co", co); co = co.reshape(n, 3)
+        ymin, ymax = co[:, 1].min(), co[:, 1].max(); sgn = 1 if fl["end"] == "min" else -1  # outward = -y at the min end
+        dist = np.hypot(co[:, 0] - fl["c"][0], co[:, 2] - fl["c"][1]); near_end = (co[:, 1] < ymin + 40) if fl["end"] == "min" else (co[:, 1] > ymax - 40)
+        ring = near_end & (dist > fl["R"] + 1) & (dist < fl["R"] + 7)
+        if ring.sum() > 20:  # fit the surrounding panel as a plane y = a + b x + c z, outer skin only (the nearest half of the ring in y)
+            ry = co[ring, 1]; keep = (ry < np.median(ry)) if fl["end"] == "min" else (ry > np.median(ry))
+            rx_, rz_, ry_ = co[ring, 0][keep], co[ring, 2][keep], ry[keep]
+            A = np.stack([np.ones_like(rx_), rx_, rz_], axis=1); sol = np.linalg.lstsq(A, ry_, rcond=None)[0]
+            pred = sol[0] + sol[1] * co[:, 0] + sol[2] * co[:, 2]
+            band = (co[:, 1] > pred - 9) & (co[:, 1] < pred + 3) if fl["end"] == "min" else (co[:, 1] < pred + 9) & (co[:, 1] > pred - 3)
+            disc = near_end & (dist <= fl["R"]) & band
+            co[disc, 1] = pred[disc]; me.vertices.foreach_set("co", co.ravel()); me.update(); rep["flattened_vertices"] = rep.get("flattened_vertices", 0) + int(disc.sum())
     rec("repair", t0, tris(objs.values()), **rep)
 
     # ---- orient to the build frame, find or place wheels --------------------------------------------
@@ -148,7 +183,7 @@ def run(slug, D):
         for s in shells[1:]:
             lo, hi = bb(s); d = hi - lo
             dims = sorted([d.x, d.y, d.z])
-            roundish = dims[1] / max(dims[2], 1e-9) > 0.75 and dims[0] / dims[2] < 0.75
+            roundish = (dims[1] / max(dims[2], 1e-9) > 0.75 and dims[0] / dims[2] < 0.75) or (dims[1] / max(dims[0], 1e-9) > 0.85 and dims[2] / max(dims[1], 1e-9) > 1.8)  # wheel, or a wheel pair on its axle
             low = (lo.z + hi.z) / 2 < blo.z + (bhi.z - blo.z) * 0.45
             (wheels if roundish and low else rest).append(s)
         if rest:  # glue stray bits (mirrors, lamps) back onto the body
@@ -273,6 +308,10 @@ def run(slug, D):
     rec("decimate_uv_bake", t0, tris([body]) + sum(tris([w]) for w in wheels), parts=info, texture_px=C["tex"])
     t0 = time.perf_counter()
 
+    for o in [body] + wheels:  # decimation can leave degenerate faces that break the glTF exporter
+        bm_ = bmesh.new(); bm_.from_mesh(o.data); bmesh.ops.dissolve_degenerate(bm_, dist=1e-7, edges=bm_.edges); bm_.to_mesh(o.data); bm_.free()
+        o.data.validate(clean_customdata=True)
+    body.name = "body"  # set last: leftover shell objects can hold the name while wheels are being renamed
     # ---- export --------------------------------------------------------------------------------------
     glb = os.path.join(D, f"{slug}.glb")
     bpy.ops.object.select_all(action="DESELECT")

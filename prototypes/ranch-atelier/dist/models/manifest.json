@@ -10709,6 +10709,7 @@
     "author": "3dworkbench",
     "licence": "CC BY 4.0",
     "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Toy racer",
     "url": "https://www.printables.com/model/624877-3dworkbench-toy-car",
     "authorUrl": "https://www.printables.com/@3dworkbench",
     "credit": "author's original creation"
@@ -10716,7 +10717,7 @@
    "steps": [
     [
      "Where it came from.",
-     "Toy racer by 3dworkbench on Printables, shared under CC BY 4.0 (credit the author)."
+     "Toy racer, made by 3dworkbench and shared on Printables under CC BY 4.0 (credit the author)."
     ],
     [
      "What we did.",
@@ -10768,6 +10769,7 @@
     "author": "Thump2010",
     "licence": "CC0",
     "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Chunky toddler car",
     "url": "https://www.printables.com/model/457455-safer-toddlers-toy-car",
     "authorUrl": "https://www.printables.com/@Thump2010_791839",
     "credit": "remix of 'Toddlers Toy Car' by Newton101 (thingiverse.com); credit both"
@@ -10775,7 +10777,7 @@
    "steps": [
     [
      "Where it came from.",
-     "Chunky toddler car by Thump2010 on Printables, shared under CC0 1.0 (public domain)."
+     "Chunky toddler car, made by Thump2010 and shared on Printables under CC0 1.0 (public domain)."
     ],
     [
      "What we did.",
@@ -10828,6 +10830,7 @@
     "author": "Korbinian",
     "licence": "CC BY 4.0",
     "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Toy pickup truck",
     "url": "https://www.printables.com/model/389381-toy-car",
     "authorUrl": "https://www.printables.com/@Korbinian",
     "credit": "author's original creation"
@@ -10835,7 +10838,7 @@
    "steps": [
     [
      "Where it came from.",
-     "Toy pickup truck by Korbinian on Printables, shared under CC BY 4.0 (credit the author)."
+     "Toy pickup truck, made by Korbinian and shared on Printables under CC BY 4.0 (credit the author)."
     ],
     [
      "What we did.",
@@ -10887,6 +10890,7 @@
     "author": "Jibraan Ahmed",
     "licence": "CC BY 4.0",
     "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Red sedan",
     "url": "https://www.printables.com/model/834935-low-poly-car",
     "authorUrl": "https://www.printables.com/@JibraanAhmed_1958699",
     "credit": "author's original creation"
@@ -10894,7 +10898,7 @@
    "steps": [
     [
      "Where it came from.",
-     "Red sedan by Jibraan Ahmed on Printables, shared under CC BY 4.0 (credit the author)."
+     "Red sedan, made by Jibraan Ahmed and shared on Printables under CC BY 4.0 (credit the author)."
     ],
     [
      "What we did.",
@@ -10945,6 +10949,7 @@
     "author": "jirka.skladal",
     "licence": "CC0",
     "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Wedge toy car",
     "url": "https://www.printables.com/model/303932-toy-car",
     "authorUrl": "https://www.printables.com/@jirkaskladal_405051",
     "credit": "author's original creation"
@@ -10952,7 +10957,7 @@
    "steps": [
     [
      "Where it came from.",
-     "Wedge toy car by jirka.skladal on Printables, shared under CC0 1.0 (public domain)."
+     "Wedge toy car, made by jirka.skladal and shared on Printables under CC0 1.0 (public domain)."
     ],
     [
      "What we did.",
@@ -11004,6 +11009,7 @@
     "author": "SirJellybeans",
     "licence": "CC BY 4.0",
     "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Concept sports car",
     "url": "https://www.printables.com/model/1554985-low-poly-print-in-place-futuristic-model-car",
     "authorUrl": "https://www.printables.com/@SirJellybeans",
     "credit": "author's own model; the Printables picture is marked AI-generated"
@@ -11011,7 +11017,7 @@
    "steps": [
     [
      "Where it came from.",
-     "Concept sports car by SirJellybeans on Printables, shared under CC BY 4.0 (credit the author)."
+     "Concept sports car, made by SirJellybeans and shared on Printables under CC BY 4.0 (credit the author)."
     ],
     [
      "What we did.",
@@ -11026,6 +11032,249 @@
     [
      "Wheels",
      "Fused to the body"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-bus",
+   "name": "Camper bus",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-bus/ref.jpg",
+    "glb": "/models/stl-car-bus/model.glb"
+   },
+   "good": [
+    "Instantly readable 1970s-style camper bus with its split windscreen, bumper and roof.",
+    "Four separate wheels that can spin.",
+    "The raised badge on the nose and the lettering on the rear plate were sanded flat, so no brand mark is left."
+   ],
+   "off": [
+    "The window frames and roof edge come out soft and lumpy at this size.",
+    "Wheel positions were placed by eye from the body shape.",
+    "The model is still the shape of a famous real van, so check it is generic enough before shipping."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "ChelsCCT (Chelsey Creates Things)",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Volkswagen Bus 1970s",
+    "url": "https://www.printables.com/model/13466-volkswagen-bus-1970s",
+    "authorUrl": "https://www.printables.com/@ChelsCCT",
+    "credit": "author's original creation (imported from Thingiverse)"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Camper bus, made by ChelsCCT (Chelsey Creates Things) and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.957 wide × 1.739 tall × 4.5 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-cage-kart",
+   "name": "Roll-cage buggy",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "good",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-cage-kart/ref.jpg",
+    "glb": "/models/stl-car-cage-kart/model.glb"
+   },
+   "good": [
+    "Clean open roll-cage buggy with seat, steering wheel and big tyres.",
+    "Four wheels were found as separate pieces in the file, so they sit exactly right and can spin.",
+    "Light and open, so it reads well from far away."
+   ],
+   "off": [
+    "The thin cage bars are chunky at this size.",
+    "One plain gold colour, with no stripes or number."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Joe Naab",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Go kart model",
+    "url": "https://www.printables.com/model/597582-go-kart-model",
+    "authorUrl": "https://www.printables.com/@JoeNaab_1282550",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Roll-cage buggy, made by Joe Naab and shared on Printables under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.531 wide × 1.118 tall × 2.6 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-small-truck",
+   "name": "Truck cab",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-small-truck/ref.jpg",
+    "glb": "/models/stl-car-small-truck/model.glb"
+   },
+   "good": [
+    "Strong, simple lorry cab with a good silhouette.",
+    "Three wheel sets, each with its own axle, that can spin."
+   ],
+   "off": [
+    "It is just the cab with no trailer.",
+    "Each wheel set joins a left and right wheel on one axle, so they turn together (fine for rolling, not for steering).",
+    "A bit tall and square for a toy."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Pusesis productions",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Small truck toy",
+    "url": "https://www.printables.com/model/1081809-small-truck-toy",
+    "authorUrl": "https://www.printables.com/@PisesisProdu_2571265",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Truck cab, made by Pusesis productions and shared on Printables under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.608 wide × 3.636 tall × 5.5 long, m"
+    ],
+    [
+     "Wheels",
+     "3"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-box-truck",
+   "name": "Box truck",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "weak",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-box-truck/ref.jpg",
+    "glb": "/models/stl-car-box-truck/model.glb"
+   },
+   "good": [
+    "Friendly chunky box truck with a rounded cab."
+   ],
+   "off": [
+    "Only one axle has wheels that can spin; the front wheels are fused to the body.",
+    "So it cannot be used for driving as it is."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "D3D",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Box Truck Toy",
+    "url": "https://www.printables.com/model/911977-box-truck-toy",
+    "authorUrl": "https://www.printables.com/@d3dp",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Box truck, made by D3D and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.967 wide × 2.744 tall × 5.5 long, m"
+    ],
+    [
+     "Wheels",
+     "1"
     ],
     [
      "Licence",

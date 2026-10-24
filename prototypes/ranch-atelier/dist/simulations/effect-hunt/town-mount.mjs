@@ -29,7 +29,8 @@ export function mountHunt({stage, board = window.AbbieTown.board, doc = document
  const kart = createKart({scene, world, driver: hunt.driver, board, tow: hunt.tow, width: 11, vehicleRoot: hunt.vehicleRoot, camera: cam, renderer, topScene: stage.scene, inCar: () => hunt.mode !== 'god', onEvent: e => { if (e.t === 'lap' && e.done) window.dispatchEvent(new CustomEvent('aw:kart-race-done', {detail: e})); }});
  kart.ready({atStart: false}).then(() => { const t = kart.track, q = world.toScene(t.start.x, t.start.y); hunt.driver.place(q.x, q.z, Math.atan2(t.start.tx, -t.start.ty)); }).catch(e => console.warn('kart mode: track not built', e));
  const off = stage.frame(dt => { const s = hunt.frame(Math.min(dt || .016, .05)); kart.frame(dt || .016); ctl.target.set(s.x + stage.dioGroup.position.x, s.y + stage.dioGroup.position.y, s.z + stage.dioGroup.position.z); });
+ let dropPicker = () => {}, gone = false; import('../kart/toy-cars.mjs').then(m => { if (!gone) dropPicker = m.mountCarPicker({hunt}); }).catch(() => {}); // tap for the next toy car
  window.__kart = kart;
  window.__effectHunt = hunt; // for tests and the console
- return {hunt, paint, kart, dispose() { off(); kart.dispose(); hunt.dispose(); paint.dispose(); ctl.enabled = saved.enabled; }};
+ return {hunt, paint, kart, dispose() { gone = true; dropPicker(); off(); kart.dispose(); hunt.dispose(); paint.dispose(); ctl.enabled = saved.enabled; }};
 }

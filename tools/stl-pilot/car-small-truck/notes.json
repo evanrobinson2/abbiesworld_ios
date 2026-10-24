@@ -1,0 +1,77 @@
+{
+  "slug": "car-small-truck",
+  "stages": {
+    "import": {
+      "seconds": 0.01,
+      "tris": 20237,
+      "files": [
+        "source_body.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.35,
+      "tris": 19586,
+      "open_edges_before": 316,
+      "open_edges_after": 316,
+      "dust_shells_removed": 0
+    },
+    "orient_and_wheels": {
+      "seconds": 0.02,
+      "tris": 19586,
+      "wheels": 3,
+      "body_dims_mm": [
+        2.7,
+        1.3,
+        1.8
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.01,
+      "tris": 19586,
+      "final_size_m_wh_l": [
+        2.608,
+        3.636,
+        5.5
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 2.3,
+      "tris": 5000,
+      "parts": {
+        "body": {
+          "before": 17486,
+          "after": 4340
+        },
+        "wheel": {
+          "before": 700,
+          "after": 220
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.18,
+      "tris": 5000,
+      "glb": "car-small-truck.glb",
+      "bytes": 274680
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 5000,
+  "pipeline": "stl_cars.py",
+  "wheel_shells_found": 3,
+  "scale_to_metres": {
+    "factor": 2.0698034517866057,
+    "final_size_m": [
+      2.608,
+      3.636,
+      5.5
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 5000,
+  "high_poly_tris": 17486,
+  "wheel_count": 3,
+  "script_total_s": 3.4,
+  "process_wall_s": 4.65
+}

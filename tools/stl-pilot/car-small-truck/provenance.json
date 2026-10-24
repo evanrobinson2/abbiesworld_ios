@@ -1,0 +1,23 @@
+{
+  "slug": "car-small-truck",
+  "title": "Small truck toy",
+  "model_url": "https://www.printables.com/model/1081809-small-truck-toy",
+  "author": "Pusesis productions",
+  "author_url": "https://www.printables.com/@PisesisProdu_2571265",
+  "licence": "Creative Commons Zero / Public Domain (CC0 1.0)",
+  "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "category": "toy car",
+  "origin": "author's original creation",
+  "attribution_required": false,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "fb047322c76604547fd6133fb07ed7d45b3cbec88efdf2699ad4befe2c94c73e",
+      "bytes": 1012084
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}
