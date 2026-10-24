@@ -32,3 +32,16 @@ test('forItem finds the favour for the object she carries, and says where she go
  const f = Q.forItem('quest-sugar'); assert.equal(f.quest.id, 'bake-sugar'); assert.equal(f.next.at, 'common');
  assert.equal(Q.forItem('nothing'), null);
 });
+
+import {readFileSync} from 'node:fs';
+import {questLines} from '../../../../../tools/voice-cast/quest-lines.mjs';
+const here = p => new URL(p, import.meta.url);
+test('every favour line is in the voice-cast lines file, said by a designed voice that is in the cast', () => {
+ const file = JSON.parse(readFileSync(here('../../../../../tools/voice-cast/lines/quests.json'), 'utf8')).lines;
+ assert.deepEqual(file, questLines(), 'run: node tools/voice-cast/quest-lines.mjs');
+ const cast = JSON.parse(readFileSync(here('../../../../../tools/voice-cast/cast.json'), 'utf8')).characters.map(c => c.id);
+ for (const g of Object.values(Q.GIVERS)) assert.ok(cast.includes(g.cast), g.cast);
+});
+test('the help never uses the browser voice', () => {
+ assert.ok(!/speechSynthesis|SpeechSynthesisUtterance/.test(readFileSync(here('../abbietown/quest-help.mjs'), 'utf8').replace(/\/\/.*$/gm, '')));
+});

@@ -18,14 +18,14 @@ const KEY = 'aw-quests', EVENT = 'aw-quests-change';
 
 // Who asks. `at` is one of the town's spots (cafe, school, common, noticeboard, lab, ...) so the town can place them.
 export const GIVERS = {
- baker: {name: 'The baker', at: 'cafe', voice: 'warm and floury'},
- teacher: {name: 'The teacher', at: 'school', voice: 'bright and patient'},
- librarian: {name: 'The librarian', at: 'common', voice: 'soft, as if in a library'},
- postie: {name: 'The postie', at: 'common', voice: 'chirpy and in a hurry'},
- gardener: {name: 'The gardener', at: 'common', voice: 'slow and sunny'},
- scientist: {name: 'The scientist', at: 'school', voice: 'excited, a little breathless'},
- neighbour: {name: 'A neighbour', at: 'noticeboard', voice: 'friendly and chatty'},
- farmer: {name: 'The farmer', at: 'farm', voice: 'easy and cheerful, smells of hay'}
+ baker: {name: 'The baker', at: 'cafe', cast: 'city-baker', voice: 'warm and floury'},
+ teacher: {name: 'The teacher', at: 'school', cast: 'town-teacher', voice: 'bright and patient'},
+ librarian: {name: 'The librarian', at: 'common', cast: 'town-librarian', voice: 'soft, as if in a library'},
+ postie: {name: 'The postie', at: 'common', cast: 'town-postie', voice: 'chirpy and in a hurry'},
+ gardener: {name: 'The gardener', at: 'common', cast: 'town-gardener', voice: 'slow and sunny'},
+ scientist: {name: 'The scientist', at: 'school', cast: 'town-scientist', voice: 'excited, a little breathless'},
+ neighbour: {name: 'A neighbour', at: 'noticeboard', cast: 'town-neighbour', voice: 'friendly and chatty'},
+ farmer: {name: 'The farmer', at: 'farm', cast: 'town-farmer', voice: 'easy and cheerful, smells of hay'}
 };
 
 // A step is {do: 'visit' | 'collect' | 'bring', at?: spot, item?: id, say}. report() ticks one off when it matches.
