@@ -620,6 +620,96 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/quad_jump_left.glb"
    ]
+  },
+  "475": {
+   "task_id": "01a16b63-6ae2-751b-92a9-e179265c93df",
+   "credits": 3,
+   "name": "Quad Climb Right",
+   "category": "BodyMovements",
+   "sub_category": "HangingfromLedge",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/quad_climb_right.glb"
+   ]
+  },
+  "461": {
+   "task_id": "01a16b63-6ae7-74cd-ab0c-c3f8275365f4",
+   "credits": 3,
+   "name": "Jump with Arms and Legs Open",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jump_with_arms_and_legs_open.glb"
+   ]
+  },
+  "474": {
+   "task_id": "01a16b63-6aea-719b-b0fa-4eccae5a1505",
+   "credits": 3,
+   "name": "Quad Jump Up",
+   "category": "BodyMovements",
+   "sub_category": "HangingfromLedge",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/quad_jump_up.glb"
+   ]
+  },
+  "462": {
+   "task_id": "01a16b63-6ae9-715c-93a6-7e361ffa64ad",
+   "credits": 3,
+   "name": "Backflip Jump",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/backflip_jump.glb"
+   ]
+  },
+  "460": {
+   "task_id": "01a16b63-6ae7-71ad-8d49-f9000abf96ce",
+   "credits": 3,
+   "name": "Jump with Arms Open",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jump_with_arms_open.glb"
+   ]
+  },
+  "463": {
+   "task_id": "01a16b63-c302-73eb-8717-d33e798109bc",
+   "credits": 3,
+   "name": "Run and Jump",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/run_and_jump.glb"
+   ]
+  },
+  "450": {
+   "task_id": "01a16b63-c3dc-7057-adf7-abafd43a645d",
+   "credits": 3,
+   "name": "Wall Flip",
+   "category": "BodyMovements",
+   "sub_category": "PerformingStunt",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/wall_flip.glb"
+   ]
+  },
+  "427": {
+   "task_id": "01a16b63-c44e-7468-beab-e502d454da94",
+   "credits": 3,
+   "name": "Vault and Land",
+   "category": "BodyMovements",
+   "sub_category": "VaultingOverObstacle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/vault_and_land.glb"
+   ]
+  },
+  "426": {
+   "task_id": "01a16b63-c3e4-7759-9efc-8a73041de3e3",
+   "credits": 3,
+   "name": "Roll Behind Cover",
+   "category": "BodyMovements",
+   "sub_category": "VaultingOverObstacle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/roll_behind_cover.glb"
+   ]
   }
  }
 }
