@@ -257,7 +257,7 @@ button{font:inherit;cursor:pointer}
 
 <section id="floating">
  <div class="head"><div class="eyebrow">Evan, 6:51 PM · drafted, not in the game yet</div><h2>Floating charms, iconic medallions and halo beams</h2></div>
- <p>Charms are the only reward, and they hang in the world as spinning, glowing pickups. Walk into one and it flies to your chest. Try it: the board below is the Winchester sample, every charm floats in a hidden nook near its place. Move the pointer over the board and a small ring shimmers faster the closer you are to an uncollected charm (the hot and cold feel, with no arrow and no list). Tap a floating charm to collect it. The round gold <b>medallions</b> with a halo laser into the sky mark the minigames (basement, Moon Mission, school jump, toy-car coaster): the medallion is the door to a game, the floating charm is the prize, and the beam is visible from across the board. Beam style should match the Effect Hunt beams.</p>
+ <p>Charms are the only reward, and they hang in the world as spinning, glowing pickups. Walk into one and it flies to your chest. Try it: the board below is the Winchester sample, every charm floats in a hidden nook near its place. Move the pointer over the board and a small ring shimmers faster the closer you are to an uncollected charm (the hot and cold feel, with no arrow and no list). Tap a floating charm to collect it. A charm with a <b>halo laser into the sky</b> over it is a minigame: <b>missions start at the location of their backpack charm</b> (Evan), so walking into the floating floppy, star, toy car, rocket or moon cheese starts that game, and winning it puts the charm in your chest. The beam is visible from across the board. Beam style should match the Effect Hunt beams. Charms without a beam (bub, coffee cup, brass key) are found, not played.</p>
  <div class="stage" style="height:min(70vh,600px)" id="flStage"><svg class="board" id="fl" viewBox="0 0 900 640"></svg>
   <div class="row" style="position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.7);border-radius:99px;padding:6px 14px;font-weight:700;color:#2a2420"><span id="flCnt"></span></div></div>
  <div class="cards">
@@ -485,15 +485,16 @@ const MED = [{at:'cellar', k:'floppy', mission:'basement', beam:'#7fd1ff', dx:0,
  {at:'coaster', k:'coaster', mission:'coaster', beam:'#7dff9b', dx:0, dy:-6, g:'<path d="M-10 6Q-6-10 0 0T10-8" fill="none" stroke="#ff7a1a" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="-8" r="2.6" fill="#e5392d"/>'}];
 MED.push({at:'outpost', k:'mining', mission:'mining', moon:true, beam:'#d8dcec', dx:0, dy:-6, g:'<path d="M-8 6L8-8M-3-8h11v11" fill="none" stroke="#8a93b3" stroke-width="3" stroke-linecap="round"/>'});
 
-function medalsSVG(tiles) { let md = '';
-MED.filter(m => !m.moon || tiles.moon).forEach((m, i) => { const p = place(m.at), x = p.x + m.dx, y = p.y + m.dy - 44;
- md += `<g data-med="${m.k}" data-mission="${m.mission}" style="cursor:pointer"><polygon points="${x - 7},${y} ${x + 7},${y} ${x + 3},-20 ${x - 3},-20" fill="${m.beam}" opacity=".55" class="glow" style="animation-delay:${i * .4}s"/><polygon points="${x - 2.5},${y} ${x + 2.5},${y} ${x + 1},-20 ${x - 1},-20" fill="#fff" opacity=".9"/><ellipse cx="${x}" cy="${y + 40}" rx="16" ry="5" fill="${m.beam}" opacity=".5" class="glow"/><g transform="translate(${x},${y})"><g class="glint" style="animation-delay:${i * .3}s"><circle r="17" fill="#ffd96a" stroke="#a87820" stroke-width="3"/><circle r="13" fill="#fffaf0" stroke="#e0a528" stroke-width="1.5"/>${m.g}</g></g></g>`; });
+const MCHARM = {basement:'basement', jump:'school-roof', coaster:'toy-car', moon:'rocket', mining:'moon-cheese'}; // the backpack charm that starts each mission
+function medalsSVG(tiles, earned = new Set()) { let md = '';
+MED.filter(m => (!m.moon || tiles.moon) && !earned.has(MCHARM[m.mission])).forEach((m, i) => { const p = place(m.at), x = p.x + m.dx, y = p.y + m.dy - 44;
+ md += `<g data-med="${m.k}" data-mission="${m.mission}" style="cursor:pointer"><polygon points="${x - 7},${y} ${x + 7},${y} ${x + 3},-20 ${x - 3},-20" fill="${m.beam}" opacity=".55" class="glow" style="animation-delay:${i * .4}s"/><polygon points="${x - 2.5},${y} ${x + 2.5},${y} ${x + 1},-20 ${x - 1},-20" fill="#fff" opacity=".9"/><ellipse cx="${x}" cy="${y + 40}" rx="16" ry="5" fill="${m.beam}" opacity=".5" class="glow"/><g transform="translate(${x},${y})"><g class="glint" style="animation-delay:${i * .3}s"><circle r="23" fill="rgba(255,226,122,.5)" class="glow"/><g class="spin" style="animation-delay:${i * .3}s"><foreignObject x="-19" y="-19" width="38" height="38"><div xmlns="http://www.w3.org/1999/xhtml" style="width:38px;height:38px;display:grid;place-items:center">${picHTML(MCHARM[m.mission]).replace('<img ', '<img style="width:38px;height:38px;object-fit:contain" ').replace('<svg ', '<svg style="width:38px;height:38px" ')}</div></foreignObject></g></g></g></g>`; });
  return md; }
 
 // ---------- state ----------
 const state = {earned: new Set(), tiles: {}, open: false, focus: null, mode: 'none', rules: 'demo', moonDone: false, missions: new Set(), seen: new Set()};
 const main = $('#main');
-function renderMain(extra = {}) { boardSVG(main, {tiles: state.tiles, earned: state.earned, mode: state.mode, focus: state.focus, lock: state.lock, ...extra}); main.insertAdjacentHTML('beforeend', medalsSVG(state.tiles)); main.querySelectorAll('[data-mission]').forEach(n => n.onclick = e => { e.stopPropagation(); const m = MISS.find(x => x.id === n.dataset.mission); if (m) goMission(m); }); wireMarks(); }
+function renderMain(extra = {}) { boardSVG(main, {tiles: state.tiles, earned: state.earned, mode: state.mode, focus: state.focus, lock: state.lock, ...extra}); main.insertAdjacentHTML('beforeend', medalsSVG(state.tiles, state.earned)); main.querySelectorAll('[data-mission]').forEach(n => n.onclick = e => { e.stopPropagation(); const m = MISS.find(x => x.id === n.dataset.mission); if (m) goMission(m); }); wireMarks(); }
 function wireMarks() { main.querySelectorAll('[data-charm]').forEach(n => n.addEventListener('click', () => { say(byId[n.dataset.charm].quest); })); main.querySelectorAll('g').forEach(() => 0); }
 const say = t => { const h = $('#hint'); h.textContent = t; h.classList.add('on'); clearTimeout(say.t); say.t = setTimeout(() => h.classList.remove('on'), 4200); };
 
@@ -624,10 +625,11 @@ const fl = $('#fl'); let flPtr = null;
 function renderFloat() {
  boardSVG(fl, {tiles: state.tiles, earned: state.earned, mode: 'none'});
  let h = '';
- CH.filter(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)).forEach((c, i) => { const p = place(c.at), o = FOFF[c.id] || [0, 0], x = p.x + o[0], y = p.y + o[1] - 18;
+ CH.filter(c => !Object.values(MCHARM).includes(c.id) && !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)).forEach((c, i) => { const p = place(c.at), o = FOFF[c.id] || [0, 0], x = p.x + o[0], y = p.y + o[1] - 18;
   h += `<g transform="translate(${x},${y})" data-f="${c.id}" style="cursor:pointer"><ellipse cx="0" cy="${26}" rx="14" ry="4" fill="rgba(0,0,0,.28)" class="glow"/><g class="glint" style="animation-delay:${i * .2}s"><circle r="22" fill="rgba(255,226,122,.45)" class="glow"/><g class="spin" style="animation-delay:${i * .3}s"><foreignObject x="-17" y="-17" width="34" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="width:34px;height:34px;display:grid;place-items:center">${picHTML(c.id).replace('<img ', '<img style="width:34px;height:34px;object-fit:contain" ').replace('<svg ', '<svg style="width:34px;height:34px" ')}</div></foreignObject></g></g></g>`; });
- const md = medalsSVG(state.tiles);
+ const md = medalsSVG(state.tiles, state.earned);
  fl.insertAdjacentHTML('beforeend', md + h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
+ fl.querySelectorAll('[data-mission]').forEach(n => n.onclick = e => { e.stopPropagation(); $('#flCnt').textContent = 'This charm starts its mission: use the stage above to walk into one.'; });
  fl.querySelectorAll('[data-f]').forEach(n => n.onclick = e => { e.stopPropagation(); earn(n.dataset.f); });
  $('#flCnt').textContent = state.earned.size + ' of ' + CH.length + ' in the chest';
 }
