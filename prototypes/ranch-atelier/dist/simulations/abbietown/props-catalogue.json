@@ -1,0 +1,1628 @@
+[
+ {
+  "id": "d1cf53be1465",
+  "name": "Cream topper",
+  "glb": "/models/cafe-cup-topper/model.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4,
+  "kb": 239,
+  "from": "Cafe"
+ },
+ {
+  "id": "c49d0a74b477",
+  "name": "Giant sundae",
+  "glb": "/models/cafe-giant-sundaes/model.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4,
+  "kb": 150,
+  "from": "Cafe"
+ },
+ {
+  "id": "8ea63121701c",
+  "name": "Pink door",
+  "glb": "/models/cafe-door-pink/model.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4,
+  "kb": 192,
+  "from": "Cafe"
+ },
+ {
+  "id": "76e87ca29a04",
+  "name": "Bladderwrack frond cluster",
+  "glb": "/coastal-assets/CE-013.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 3,
+  "kb": 112,
+  "from": "Coast"
+ },
+ {
+  "id": "e1f1b13b2e4e",
+  "name": "Open coastal fish drying frame",
+  "glb": "/coastal-assets/CE-003.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 5,
+  "kb": 92,
+  "from": "Coast"
+ },
+ {
+  "id": "3ead4be924d8",
+  "name": "Paired thole-pin oar support",
+  "glb": "/coastal-assets/CE-046.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 5,
+  "kb": 14,
+  "from": "Coast"
+ },
+ {
+  "id": "b5614280fe11",
+  "name": "Pierced stone mooring anchor",
+  "glb": "/coastal-assets/CE-035.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 5,
+  "kb": 21,
+  "from": "Coast"
+ },
+ {
+  "id": "adc6e71db4d7",
+  "name": "Raised salt storage bin and cover",
+  "glb": "/coastal-assets/CE-027.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 5,
+  "kb": 52,
+  "from": "Coast"
+ },
+ {
+  "id": "ec11f898027d",
+  "name": "Rooted eelgrass patch",
+  "glb": "/coastal-assets/CE-011.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 3,
+  "kb": 16,
+  "from": "Coast"
+ },
+ {
+  "id": "bb120eef04de",
+  "name": "Seaweed soaking trough",
+  "glb": "/coastal-assets/CE-056.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 5,
+  "kb": 29,
+  "from": "Coast"
+ },
+ {
+  "id": "8e3002339667",
+  "name": "Small open coastal rowing boat",
+  "glb": "/coastal-assets/CE-006.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 8,
+  "kb": 102,
+  "from": "Coast"
+ },
+ {
+  "id": "659983140eeb",
+  "name": "Socketed timber mast step",
+  "glb": "/coastal-assets/CE-045.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 5,
+  "kb": 20,
+  "from": "Coast"
+ },
+ {
+  "id": "cf294a06e55c",
+  "name": "Spined sea-holly rosette",
+  "glb": "/coastal-assets/CE-015.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 3,
+  "kb": 18,
+  "from": "Coast"
+ },
+ {
+  "id": "07dd0f1e349f",
+  "name": "Stone-built quay edge segment",
+  "glb": "/coastal-assets/CE-031.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 5,
+  "kb": 62,
+  "from": "Coast"
+ },
+ {
+  "id": "f571a7a8607a",
+  "name": "Ventilated salt-cake drying rack",
+  "glb": "/coastal-assets/CE-025.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 3,
+  "kb": 75,
+  "from": "Coast"
+ },
+ {
+  "id": "58cf23a2b589",
+  "name": "Chunky toddler car",
+  "glb": "/models/stl-car-toddler/model.glb",
+  "roles": [
+   "road"
+  ],
+  "size": 8,
+  "kb": 206,
+  "from": "Town"
+ },
+ {
+  "id": "2a5f84ea27f8",
+  "name": "Parisian Street Lamp",
+  "glb": "/models/stl-street-lamp/model.glb",
+  "roles": [
+   "street"
+  ],
+  "size": 10,
+  "kb": 208,
+  "from": "Town"
+ },
+ {
+  "id": "96dcfa631a5e",
+  "name": "Picnic Table",
+  "glb": "/models/stl-picnic-table/model.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 7.5,
+  "kb": 110,
+  "from": "Town"
+ },
+ {
+  "id": "6dbf42453254",
+  "name": "Red sedan",
+  "glb": "/models/stl-car-sedan/model.glb",
+  "roles": [
+   "road"
+  ],
+  "size": 8,
+  "kb": 155,
+  "from": "Town"
+ },
+ {
+  "id": "bbb9a5d06d30",
+  "name": "the park bench",
+  "glb": "/models/stl-park-bench/model.glb",
+  "roles": [
+   "street",
+   "park"
+  ],
+  "size": 6,
+  "kb": 190,
+  "from": "Town"
+ },
+ {
+  "id": "314080341e5b",
+  "name": "Wedge toy car",
+  "glb": "/models/stl-car-wedge/model.glb",
+  "roles": [
+   "road"
+  ],
+  "size": 8,
+  "kb": 256,
+  "from": "Town"
+ },
+ {
+  "id": "a7decd595fbf",
+  "name": "Ranch chicken coop",
+  "glb": "/gateway-art-lab/assets/claude-sonnet-5.5--coop--r1/model.glb",
+  "roles": [
+   "farm",
+   "yard"
+  ],
+  "size": 6,
+  "kb": 167,
+  "from": "Ranch"
+ },
+ {
+  "id": "da072261d84a",
+  "name": "Ranch chicken coop",
+  "glb": "/gateway-art-lab/assets/gemini-3.8-flash--coop--r2/model.glb",
+  "roles": [
+   "farm",
+   "yard"
+  ],
+  "size": 6,
+  "kb": 77,
+  "from": "Ranch"
+ },
+ {
+  "id": "7cd88eff7b85",
+  "name": "Ranch water trough",
+  "glb": "/gateway-art-lab/assets/claude-sonnet-5.5--trough--r0/model.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 5,
+  "kb": 140,
+  "from": "Ranch"
+ },
+ {
+  "id": "959090e2e296",
+  "name": "Ranch water trough",
+  "glb": "/gateway-art-lab/assets/claude-sonnet-5.5--trough--r1/model.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 5,
+  "kb": 141,
+  "from": "Ranch"
+ },
+ {
+  "id": "1d095b7158a5",
+  "name": "BA 0001",
+  "glb": "/sets-media/BA-0001.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 8,
+  "kb": 240,
+  "from": "Home"
+ },
+ {
+  "id": "99376db6bee4",
+  "name": "BA 0002",
+  "glb": "/sets-media/BA-0002.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 8,
+  "kb": 188,
+  "from": "Home"
+ },
+ {
+  "id": "59ba09f2c4f1",
+  "name": "BA 0011",
+  "glb": "/sets-media/BA-0011.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 5,
+  "kb": 32,
+  "from": "Home"
+ },
+ {
+  "id": "11c3a143120a",
+  "name": "BA 0013",
+  "glb": "/sets-media/BA-0013.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4,
+  "kb": 45,
+  "from": "Home"
+ },
+ {
+  "id": "56b3f46440d5",
+  "name": "BA 0014",
+  "glb": "/sets-media/BA-0014.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4,
+  "kb": 22,
+  "from": "Home"
+ },
+ {
+  "id": "cefc3507df50",
+  "name": "BA 0019",
+  "glb": "/sets-media/BA-0019.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4.2,
+  "kb": 27,
+  "from": "Home"
+ },
+ {
+  "id": "6c27463b1f1a",
+  "name": "BA 0020",
+  "glb": "/sets-media/BA-0020.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4.4,
+  "kb": 34,
+  "from": "Home"
+ },
+ {
+  "id": "19cb937e4889",
+  "name": "BA 0021",
+  "glb": "/sets-media/BA-0021.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 1.6,
+  "kb": 238,
+  "from": "Home"
+ },
+ {
+  "id": "935f511ac745",
+  "name": "BA 0022",
+  "glb": "/sets-media/BA-0022.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 2,
+  "kb": 241,
+  "from": "Home"
+ },
+ {
+  "id": "1a92c87b0279",
+  "name": "BA 0023",
+  "glb": "/sets-media/BA-0023.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 2.4,
+  "kb": 77,
+  "from": "Home"
+ },
+ {
+  "id": "a231586fd5da",
+  "name": "BA 0025",
+  "glb": "/sets-media/BA-0025.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 2,
+  "kb": 58,
+  "from": "Home"
+ },
+ {
+  "id": "8f48deed2136",
+  "name": "BA 0028",
+  "glb": "/sets-media/BA-0028.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 3,
+  "kb": 69,
+  "from": "Home"
+ },
+ {
+  "id": "a03e04fabe37",
+  "name": "BA 0031",
+  "glb": "/sets-media/BA-0031.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 3.6,
+  "kb": 42,
+  "from": "Home"
+ },
+ {
+  "id": "6e1601661068",
+  "name": "BA 0034",
+  "glb": "/sets-media/BA-0034.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 2.4,
+  "kb": 62,
+  "from": "Home"
+ },
+ {
+  "id": "897b2b23505c",
+  "name": "BA 0048",
+  "glb": "/sets-media/BA-0048.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 3,
+  "kb": 176,
+  "from": "Home"
+ },
+ {
+  "id": "212807237337",
+  "name": "BA 0050",
+  "glb": "/sets-media/BA-0050.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 4,
+  "kb": 66,
+  "from": "Home"
+ },
+ {
+  "id": "5e2cc5aa9614",
+  "name": "BA 0051",
+  "glb": "/sets-media/BA-0051.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 2.2,
+  "kb": 196,
+  "from": "Home"
+ },
+ {
+  "id": "5c522c6045bc",
+  "name": "BA 0058",
+  "glb": "/sets-media/BA-0058.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 4,
+  "kb": 64,
+  "from": "Home"
+ },
+ {
+  "id": "90156e651d6e",
+  "name": "BA 0061",
+  "glb": "/sets-media/BA-0061.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 3,
+  "kb": 164,
+  "from": "Home"
+ },
+ {
+  "id": "398df695440b",
+  "name": "BA 0062",
+  "glb": "/sets-media/BA-0062.glb",
+  "roles": [
+   "park"
+  ],
+  "size": 7,
+  "kb": 46,
+  "from": "Home"
+ },
+ {
+  "id": "05ff095758d6",
+  "name": "BA 0063",
+  "glb": "/sets-media/BA-0063.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 23,
+  "from": "Home"
+ },
+ {
+  "id": "4d3ffe3b579e",
+  "name": "BA 0064",
+  "glb": "/sets-media/BA-0064.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 9,
+  "kb": 52,
+  "from": "Home"
+ },
+ {
+  "id": "14a3a9e92977",
+  "name": "BA 0065",
+  "glb": "/sets-media/BA-0065.glb",
+  "roles": [
+   "park"
+  ],
+  "size": 5.5,
+  "kb": 9,
+  "from": "Home"
+ },
+ {
+  "id": "7c5080ef698f",
+  "name": "BA 0066",
+  "glb": "/sets-media/BA-0066.glb",
+  "roles": [
+   "shop",
+   "yard"
+  ],
+  "size": 3.2,
+  "kb": 134,
+  "from": "Home"
+ },
+ {
+  "id": "69b8071550de",
+  "name": "BA 0069",
+  "glb": "/sets-media/BA-0069.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 5,
+  "kb": 60,
+  "from": "Home"
+ },
+ {
+  "id": "04a38a6708c9",
+  "name": "BA 0074",
+  "glb": "/sets-media/BA-0074.glb",
+  "roles": [
+   "water",
+   "garden"
+  ],
+  "size": 7,
+  "kb": 20,
+  "from": "Home"
+ },
+ {
+  "id": "e0f730f11d7c",
+  "name": "BA 0079",
+  "glb": "/sets-media/BA-0079.glb",
+  "roles": [
+   "yard",
+   "park"
+  ],
+  "size": 4.2,
+  "kb": 47,
+  "from": "Home"
+ },
+ {
+  "id": "e0dec0e1274f",
+  "name": "Bound stone garden hoe",
+  "glb": "/domestic-assets/GF-007.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 2.4,
+  "kb": 15,
+  "from": "Home"
+ },
+ {
+  "id": "70164f19b8f7",
+  "name": "Capped dry fuel storage alcove",
+  "glb": "/domestic-assets/GF-133.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 3,
+  "kb": 48,
+  "from": "Home"
+ },
+ {
+  "id": "cbd8bfaf063a",
+  "name": "Cradled garden water jar",
+  "glb": "/domestic-assets/GF-014.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 1.8,
+  "kb": 100,
+  "from": "Home"
+ },
+ {
+  "id": "18f7ef26f218",
+  "name": "Creeping tiny leaved thyme",
+  "glb": "/domestic-assets/GF-149.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 55,
+  "from": "Home"
+ },
+ {
+  "id": "6fafe3194525",
+  "name": "Flatbread selling tray",
+  "glb": "/domestic-assets/BA-0043.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 57,
+  "from": "Home"
+ },
+ {
+  "id": "7fb6e18317ce",
+  "name": "Flatbread selling tray",
+  "glb": "/sets-media/BA-0043.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 49,
+  "from": "Home"
+ },
+ {
+  "id": "020b38df68ea",
+  "name": "Flowered stone garden edge",
+  "glb": "/domestic-assets/GF-010.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 5,
+  "kb": 36,
+  "from": "Home"
+ },
+ {
+  "id": "dbe62d032f04",
+  "name": "Garden household cat",
+  "glb": "/domestic-assets/GF-171.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 4,
+  "kb": 46,
+  "from": "Home"
+ },
+ {
+  "id": "ce8b607143aa",
+  "name": "Garden tender",
+  "glb": "/domestic-assets/GF-008.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 4.5,
+  "kb": 53,
+  "from": "Home"
+ },
+ {
+  "id": "ba1ed59278ff",
+  "name": "Handled ceramic market jar",
+  "glb": "/domestic-assets/BA-0024.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 119,
+  "from": "Home"
+ },
+ {
+  "id": "a6603abc2c1e",
+  "name": "Handled ceramic market jar",
+  "glb": "/sets-media/BA-0024.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 111,
+  "from": "Home"
+ },
+ {
+  "id": "a23ce0d30734",
+  "name": "Low woven selling table",
+  "glb": "/domestic-assets/BA-0012.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 65,
+  "from": "Home"
+ },
+ {
+  "id": "8d87245bdd74",
+  "name": "Low woven selling table",
+  "glb": "/sets-media/BA-0012.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 57,
+  "from": "Home"
+ },
+ {
+  "id": "0b53275ae2a4",
+  "name": "Onion crop patch",
+  "glb": "/domestic-assets/GF-004.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 45,
+  "from": "Home"
+ },
+ {
+  "id": "e6167c3b7c9f",
+  "name": "Raised sealed seed jar store",
+  "glb": "/domestic-assets/GF-023.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 3,
+  "kb": 212,
+  "from": "Home"
+ },
+ {
+  "id": "ce63a6424e94",
+  "name": "Reed roof garden rest shelter",
+  "glb": "/domestic-assets/GF-017.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 4.5,
+  "kb": 87,
+  "from": "Home"
+ },
+ {
+  "id": "b9d3b2c7fc60",
+  "name": "Sand packed root storage pit",
+  "glb": "/domestic-assets/GF-026.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 3,
+  "kb": 52,
+  "from": "Home"
+ },
+ {
+  "id": "179494dc6568",
+  "name": "Three tier bulb curing rack",
+  "glb": "/domestic-assets/GF-027.glb",
+  "roles": [
+   "yard"
+  ],
+  "size": 3,
+  "kb": 192,
+  "from": "Home"
+ },
+ {
+  "id": "78087dbecb5c",
+  "name": "Upland shepherd dog",
+  "glb": "/domestic-assets/UP-007.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 4,
+  "kb": 59,
+  "from": "Home"
+ },
+ {
+  "id": "0b48313657b9",
+  "name": "Vendor sitting stool",
+  "glb": "/domestic-assets/BA-0018.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 17,
+  "from": "Home"
+ },
+ {
+  "id": "085f68d727c2",
+  "name": "Vendor sitting stool",
+  "glb": "/sets-media/BA-0018.glb",
+  "roles": [
+   "shop"
+  ],
+  "size": 2.4,
+  "kb": 9,
+  "from": "Home"
+ },
+ {
+  "id": "2dc92860253f",
+  "name": "NS03",
+  "glb": "/night-assets/NS03/model.glb",
+  "roles": [
+   "street"
+  ],
+  "size": 11,
+  "kb": 150,
+  "from": "Town"
+ },
+ {
+  "id": "6df84862f58e",
+  "name": "NS04",
+  "glb": "/night-assets/NS04/model.glb",
+  "roles": [
+   "street",
+   "shop"
+  ],
+  "size": 4,
+  "kb": 160,
+  "from": "Town"
+ },
+ {
+  "id": "d55b6a8ca58e",
+  "name": "NS05",
+  "glb": "/night-assets/NS05/model.glb",
+  "roles": [
+   "street",
+   "yard"
+  ],
+  "size": 3.2,
+  "kb": 120,
+  "from": "Town"
+ },
+ {
+  "id": "888fdd845cb3",
+  "name": "NS08",
+  "glb": "/night-assets/NS08/model.glb",
+  "roles": [
+   "street",
+   "park"
+  ],
+  "size": 6.2,
+  "kb": 133,
+  "from": "Town"
+ },
+ {
+  "id": "44150e029e00",
+  "name": "NS09",
+  "glb": "/night-assets/NS09/model.glb",
+  "roles": [
+   "road"
+  ],
+  "size": 8.5,
+  "kb": 155,
+  "from": "Town"
+ },
+ {
+  "id": "56239b5edb98",
+  "name": "NS10",
+  "glb": "/night-assets/NS10/model.glb",
+  "roles": [
+   "street",
+   "shop"
+  ],
+  "size": 3.6,
+  "kb": 68,
+  "from": "Town"
+ },
+ {
+  "id": "e9f5b8dcdef5",
+  "name": "Beehive box on stand",
+  "glb": "/simulation-assets/generated/kit-beehive-box-on-stand.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 12,
+  "from": "Ranch"
+ },
+ {
+  "id": "01d59595a40f",
+  "name": "Birch",
+  "glb": "/simulation-assets/atelier/birch.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 14,
+  "from": "Ranch"
+ },
+ {
+  "id": "c2857361eb13",
+  "name": "Boulder a",
+  "glb": "/simulation-assets/atelier/boulder-a.glb",
+  "roles": [
+   "yard",
+   "park",
+   "water"
+  ],
+  "size": 3,
+  "kb": 6,
+  "from": "Ranch"
+ },
+ {
+  "id": "2e591805b3f1",
+  "name": "Boulder b",
+  "glb": "/simulation-assets/atelier/boulder-b.glb",
+  "roles": [
+   "yard",
+   "park",
+   "water"
+  ],
+  "size": 3,
+  "kb": 9,
+  "from": "Ranch"
+ },
+ {
+  "id": "f7eb836abd0f",
+  "name": "Bush a",
+  "glb": "/simulation-assets/atelier/bush-a.glb",
+  "roles": [
+   "yard",
+   "garden"
+  ],
+  "size": 3,
+  "kb": 5,
+  "from": "Ranch"
+ },
+ {
+  "id": "5b13dd52e48c",
+  "name": "Bush b",
+  "glb": "/simulation-assets/atelier/bush-b.glb",
+  "roles": [
+   "yard",
+   "garden"
+  ],
+  "size": 3,
+  "kb": 25,
+  "from": "Ranch"
+ },
+ {
+  "id": "4fba6309fab5",
+  "name": "Compost bin · empty",
+  "glb": "/simulation-assets/supplies/compost-empty.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 61,
+  "from": "Ranch"
+ },
+ {
+  "id": "0f347e7977ee",
+  "name": "Compost bin · full",
+  "glb": "/simulation-assets/supplies/compost-full.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 71,
+  "from": "Ranch"
+ },
+ {
+  "id": "37e9e72e7973",
+  "name": "Compost bin · partial",
+  "glb": "/simulation-assets/supplies/compost-partial.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 71,
+  "from": "Ranch"
+ },
+ {
+  "id": "ac47dd7eb572",
+  "name": "Crate stack",
+  "glb": "/simulation-assets/atelier/crate-stack.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 9,
+  "from": "Ranch"
+ },
+ {
+  "id": "6fa914ea8477",
+  "name": "Farm tractor",
+  "glb": "/simulation-assets/generated/kit-farm-tractor.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 8,
+  "kb": 32,
+  "from": "Ranch"
+ },
+ {
+  "id": "c55d4bc83a5b",
+  "name": "Fir a",
+  "glb": "/simulation-assets/atelier/fir-a.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 8,
+  "from": "Ranch"
+ },
+ {
+  "id": "867b07bba61d",
+  "name": "Fir b",
+  "glb": "/simulation-assets/atelier/fir-b.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 7,
+  "from": "Ranch"
+ },
+ {
+  "id": "0f166feaa3ee",
+  "name": "Hay bale stack",
+  "glb": "/simulation-assets/generated/kit-hay-bale-stack.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 7,
+  "from": "Ranch"
+ },
+ {
+  "id": "57797dc6b4a5",
+  "name": "Kitchen Garden · complete",
+  "glb": "/simulation-assets/buildings/kitchen-garden-complete.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 150,
+  "from": "Ranch"
+ },
+ {
+  "id": "a329275aadf5",
+  "name": "Log pile",
+  "glb": "/simulation-assets/atelier/log-pile.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 38,
+  "from": "Ranch"
+ },
+ {
+  "id": "ab51e41fb1f9",
+  "name": "Oak a",
+  "glb": "/simulation-assets/atelier/oak-a.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 15,
+  "from": "Ranch"
+ },
+ {
+  "id": "b46c1bf87351",
+  "name": "Oak b",
+  "glb": "/simulation-assets/atelier/oak-b.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 16,
+  "from": "Ranch"
+ },
+ {
+  "id": "6e1a0236834e",
+  "name": "Rain barrel",
+  "glb": "/simulation-assets/atelier/rain-barrel.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 14,
+  "from": "Ranch"
+ },
+ {
+  "id": "717ba6bea763",
+  "name": "Roadside mailbox",
+  "glb": "/simulation-assets/generated/kit-roadside-mailbox.glb",
+  "roles": [
+   "street",
+   "yard"
+  ],
+  "size": 3,
+  "kb": 8,
+  "from": "Ranch"
+ },
+ {
+  "id": "b0b0c20953de",
+  "name": "Stump",
+  "glb": "/simulation-assets/atelier/stump.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 3,
+  "kb": 10,
+  "from": "Ranch"
+ },
+ {
+  "id": "507f846425ec",
+  "name": "Water trough",
+  "glb": "/simulation-assets/generated/kit-water-trough.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 5,
+  "kb": 12,
+  "from": "Ranch"
+ },
+ {
+  "id": "d8b936cc5646",
+  "name": "Wheelbarrow with pumpkins",
+  "glb": "/simulation-assets/generated/kit-wheelbarrow-with-pumpkins.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 4,
+  "kb": 26,
+  "from": "Ranch"
+ },
+ {
+  "id": "cd6a3e986224",
+  "name": "Bound stone garden hoe",
+  "glb": "/garden-assets/GF-007.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 2.4,
+  "kb": 14,
+  "from": "Ranch"
+ },
+ {
+  "id": "0ccba56fcd48",
+  "name": "Chickpea crop patch",
+  "glb": "/garden-assets/GF-003.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 57,
+  "from": "Ranch"
+ },
+ {
+  "id": "219375c88c3b",
+  "name": "Flowering culinary herbs",
+  "glb": "/garden-assets/GF-005.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 40,
+  "from": "Ranch"
+ },
+ {
+  "id": "cb9e346e98bc",
+  "name": "Garden tender",
+  "glb": "/garden-assets/GF-008.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 4.5,
+  "kb": 52,
+  "from": "Ranch"
+ },
+ {
+  "id": "048ad7427c0a",
+  "name": "Horse faceted",
+  "glb": "/asset-studies/horse-faceted.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 4,
+  "kb": 37,
+  "from": "Ranch"
+ },
+ {
+  "id": "3e196d318b0b",
+  "name": "Horse soft toy",
+  "glb": "/asset-studies/horse-soft-toy.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 4,
+  "kb": 94,
+  "from": "Ranch"
+ },
+ {
+  "id": "7c5d50e7b5ab",
+  "name": "Horse wooden",
+  "glb": "/asset-studies/horse-wooden.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 4,
+  "kb": 62,
+  "from": "Ranch"
+ },
+ {
+  "id": "fe2eafa06f1d",
+  "name": "Onion crop patch",
+  "glb": "/garden-assets/GF-004.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 44,
+  "from": "Ranch"
+ },
+ {
+  "id": "14a5f426c661",
+  "name": "Raised planting bed",
+  "glb": "/garden-assets/GF-002.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 41,
+  "from": "Ranch"
+ },
+ {
+  "id": "47ee7ca12511",
+  "name": "Tree faceted",
+  "glb": "/asset-studies/tree-faceted.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 20,
+  "from": "Ranch"
+ },
+ {
+  "id": "09bbf6f418fb",
+  "name": "Tree wooden",
+  "glb": "/asset-studies/tree-wooden.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 9,
+  "from": "Ranch"
+ },
+ {
+  "id": "0fc5dfcbc40c",
+  "name": "Potting bench",
+  "glb": "/models/ranch-potting-bench-charming/model.glb",
+  "roles": [
+   "street",
+   "park"
+  ],
+  "size": 6,
+  "kb": 111,
+  "from": "Ranch"
+ },
+ {
+  "id": "33b7e1ac7e15",
+  "name": "Stone edging",
+  "glb": "/models/ranch-stone-edging-charming/model.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 5,
+  "kb": 46,
+  "from": "Ranch"
+ },
+ {
+  "id": "58fc708d967f",
+  "name": "Watering pot",
+  "glb": "/models/ranch-watering-pot-charming/model.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 1.8,
+  "kb": 33,
+  "from": "Ranch"
+ },
+ {
+  "id": "d07224019eee",
+  "name": "Broad bean stand",
+  "glb": "/proportion-study-assets/bronze-age-world/garden-farm/outputs/assets/GF-033.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 41,
+  "from": "Woodland"
+ },
+ {
+  "id": "9b6acfac0e8c",
+  "name": "Crossed hewing trestle",
+  "glb": "/woodland-assets/WW-013.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 4,
+  "kb": 33,
+  "from": "Woodland"
+ },
+ {
+  "id": "ce2fb87bfdae",
+  "name": "Flowering flax patch",
+  "glb": "/tile-game-assets/bronze-age-world/garden-farm/outputs/assets/GF-031.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 61,
+  "from": "Woodland"
+ },
+ {
+  "id": "445e64cf5bd2",
+  "name": "Fresh-cut hardwood log",
+  "glb": "/woodland-assets/WW-002.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 4,
+  "kb": 151,
+  "from": "Woodland"
+ },
+ {
+  "id": "666ac7afa5c7",
+  "name": "Lance leaved olive tree",
+  "glb": "/tile-game-assets/bronze-age-world/garden-farm/outputs/assets/GF-152.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 246,
+  "from": "Woodland"
+ },
+ {
+  "id": "96e17beddcd0",
+  "name": "Large spiral seed sunflower",
+  "glb": "/proportion-study-assets/bronze-age-world/garden-farm/outputs/assets/GF-567.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 148,
+  "from": "Woodland"
+ },
+ {
+  "id": "0bdcd4f716b8",
+  "name": "Lashed vine trellis",
+  "glb": "/tile-game-assets/bronze-age-world/garden-farm/outputs/assets/GF-036.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 32,
+  "from": "Woodland"
+ },
+ {
+  "id": "220f34e53630",
+  "name": "Low quince fruit tree",
+  "glb": "/proportion-study-assets/bronze-age-world/garden-farm/outputs/assets/GF-154.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 124,
+  "from": "Woodland"
+ },
+ {
+  "id": "9598448d07da",
+  "name": "Open-sided timber stack rain cap",
+  "glb": "/woodland-assets/WW-063.glb",
+  "roles": [
+   "yard",
+   "farm"
+  ],
+  "size": 4,
+  "kb": 56,
+  "from": "Woodland"
+ },
+ {
+  "id": "797532ebe3bc",
+  "name": "Oval leaf smooth bark beech tree",
+  "glb": "/simulations/regional-assets/WW-148.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 258,
+  "from": "Woodland"
+ },
+ {
+  "id": "1d5c5df049a0",
+  "name": "Runner rooted strawberry patch",
+  "glb": "/simulations/regional-assets/GF-235.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 96,
+  "from": "Woodland"
+ },
+ {
+  "id": "16d2180125e8",
+  "name": "Spreading apple orchard tree",
+  "glb": "/tile-game-assets/bronze-age-world/garden-farm/outputs/assets/GF-153.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 184,
+  "from": "Woodland"
+ },
+ {
+  "id": "251d21c6a9e3",
+  "name": "Stone lined garden draw well",
+  "glb": "/tile-game-assets/bronze-age-world/garden-farm/outputs/assets/GF-011.glb",
+  "roles": [
+   "garden",
+   "yard"
+  ],
+  "size": 4.5,
+  "kb": 227,
+  "from": "Woodland"
+ },
+ {
+  "id": "13831a09d917",
+  "name": "Wetland reed clump",
+  "glb": "/tile-game-assets/bronze-age-world/riverbanks-wetlands/outputs/assets/RW-006.glb",
+  "roles": [
+   "water"
+  ],
+  "size": 3,
+  "kb": 118,
+  "from": "Woodland"
+ },
+ {
+  "id": "6c2f7c6a2864",
+  "name": "White bracted bunchberry colony",
+  "glb": "/simulations/regional-assets/WW-528.glb",
+  "roles": [
+   "garden"
+  ],
+  "size": 4,
+  "kb": 115,
+  "from": "Woodland"
+ },
+ {
+  "id": "aaaace0a5107",
+  "name": "Whorled needle crowned pine tree",
+  "glb": "/simulations/regional-assets/WW-140.glb",
+  "roles": [
+   "park",
+   "yard"
+  ],
+  "size": 9,
+  "kb": 253,
+  "from": "Woodland"
+ },
+ {
+  "id": "bdcd3b0568cf",
+  "name": "Woolly pasture sheep",
+  "glb": "/tile-game-assets/bronze-age-world/upland-pasture/outputs/assets/UP-006.glb",
+  "roles": [
+   "farm"
+  ],
+  "size": 4,
+  "kb": 93,
+  "from": "Woodland"
+ },
+ {
+  "id": "217b421a17dc",
+  "name": "RC 017",
+  "glb": "/simulations/city/assets/RC-017.glb",
+  "roles": [
+   "street"
+  ],
+  "size": 9,
+  "kb": 21,
+  "from": "Winchester"
+ },
+ {
+  "id": "ff6940a9d725",
+  "name": "RC 022",
+  "glb": "/simulations/city/assets/RC-022.glb",
+  "roles": [
+   "street",
+   "park"
+  ],
+  "size": 10,
+  "kb": 24,
+  "from": "Winchester"
+ },
+ {
+  "id": "032e9b3f7f27",
+  "name": "RC 023",
+  "glb": "/simulations/city/assets/RC-023.glb",
+  "roles": [
+   "street",
+   "park"
+  ],
+  "size": 6,
+  "kb": 11,
+  "from": "Winchester"
+ },
+ {
+  "id": "cf15efd09901",
+  "name": "RC 024",
+  "glb": "/simulations/city/assets/RC-024.glb",
+  "roles": [
+   "park",
+   "street"
+  ],
+  "size": 7,
+  "kb": 21,
+  "from": "Winchester"
+ },
+ {
+  "id": "20e90a5bde4e",
+  "name": "RC 025",
+  "glb": "/simulations/city/assets/RC-025.glb",
+  "roles": [
+   "shop",
+   "street"
+  ],
+  "size": 5,
+  "kb": 10,
+  "from": "Winchester"
+ },
+ {
+  "id": "0abb368f65d4",
+  "name": "RC 026",
+  "glb": "/simulations/city/assets/RC-026.glb",
+  "roles": [
+   "park"
+  ],
+  "size": 9,
+  "kb": 25,
+  "from": "Winchester"
+ },
+ {
+  "id": "9e4432fbed5a",
+  "name": "RC 027",
+  "glb": "/simulations/city/assets/RC-027.glb",
+  "roles": [
+   "street"
+  ],
+  "size": 8,
+  "kb": 11,
+  "from": "Winchester"
+ },
+ {
+  "id": "a21d2ab6a590",
+  "name": "RC 029",
+  "glb": "/simulations/city/assets/RC-029.glb",
+  "roles": [
+   "street"
+  ],
+  "size": 5,
+  "kb": 14,
+  "from": "Winchester"
+ },
+ {
+  "id": "67e184c3c249",
+  "name": "RC 030",
+  "glb": "/simulations/city/assets/RC-030.glb",
+  "roles": [
+   "shop",
+   "street"
+  ],
+  "size": 4.5,
+  "kb": 29,
+  "from": "Winchester"
+ }
+]

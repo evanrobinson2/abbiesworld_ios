@@ -1,0 +1,12 @@
+{
+ "source": "Blender render (refs/charm-toy-car/render_ref.py) of tools/stl-pilot/car-racer/car-racer.glb, painted glossy red enamel body and cream wheels",
+ "why": "No Midjourney car pick exists and the Mac is offline; issue #534 asks for a Meshy car charm",
+ "base_model": {
+  "title": "3dworkbench Toy Car",
+  "url": "https://www.printables.com/model/624877-3dworkbench-toy-car",
+  "author": "3dworkbench",
+  "licence": "CC BY 4.0",
+  "attribution_required": true
+ },
+ "made": "2026-10-24T01:15Z"
+}

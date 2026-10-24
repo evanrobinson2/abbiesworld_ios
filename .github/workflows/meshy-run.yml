@@ -17,6 +17,8 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
       - name: Run Meshy jobs
         env:
           MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
@@ -38,6 +40,7 @@ jobs:
           if [ "$code" != 200 ]; then exit 1; fi
           if [ "$JOBS" = "check" ]; then exit 0; fi
           pip install -q pillow numpy
+          case "$JOBS" in --anims*) pip install -q bpy ;; esac  # Blender as a module, to cut each clip down to the hero rig
           git config user.name "meshy-run"; git config user.email "meshy-run@users.noreply.github.com"
           if [ "$RIG_ONLY" = "true" ]; then set -- --rig-only $JOBS; else set -- $JOBS; fi
           python3 tools/meshy-heroes/meshy_run.py "$@" | tee /tmp/meshy.log

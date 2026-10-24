@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 API = "https://api.meshy.ai/openapi"
-CAP = 2000
+CAP = 2400  # Evan raised it from 2,000 on 2026-10-24 00:31Z for the core animation set
 CREDITS = HERE / "meshy" / "credits.json"
 lock = threading.Lock()
 
@@ -245,6 +245,8 @@ if __name__ == "__main__":
         d = ROOT / "tools/meshy-heroes/meshy/anims"; d.mkdir(parents=True, exist_ok=True)
         pf = d / "provenance.json"
         prov = json.loads(pf.read_text()) if pf.exists() else {"rig_task_id": rig_tid, "clips": {}}
+        lib = {x["action_id"]: x for x in json.loads((d / "library.json").read_text())}
+        clips = ROOT / "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims"; clips.mkdir(parents=True, exist_ok=True)
         def one(a):
             if a in prov["clips"]:
                 return
@@ -255,9 +257,18 @@ if __name__ == "__main__":
             files = []
             for k, u in rr.items():
                 if isinstance(u, str) and u.startswith("http") and "glb" in k:
-                    fetch(u, d / f"{a}_{k.replace('_url', '')}.glb"); files.append(f"{a}_{k.replace('_url', '')}.glb")
+                    raw = Path("/tmp/meshy-anims") / f"{a}_{k}.glb"
+                    fetch(u, raw)  # the whole character + clip (~8 MB): cut to the clip on the hero rig, never committed
+                    out = clips / f"{lib[int(a)]['key'].lower()}.glb"
+                    c = subprocess.run([sys.executable, str(HERE / "anim_clean.py"), str(raw), str(out), lib[int(a)]["key"].lower()],
+                                       capture_output=True, text=True)
+                    if c.returncode == 0:
+                        files.append(str(out.relative_to(ROOT)))
+                    else:  # paid for: keep the task id so the clip can be fetched again without paying
+                        print("CLEAN FAIL anim", a, c.stderr[-300:], flush=True)
             with lock:
-                prov["clips"][a] = {"task_id": tid, "credits": 3, "files": files}
+                prov["clips"][a] = {"task_id": tid, "credits": 3, "name": lib[int(a)]["name"], "category": lib[int(a)]["category"],
+                                    "sub_category": lib[int(a)]["sub_category"], "files": files}
         def safe_one(a):
             try:
                 one(a)
@@ -268,7 +279,7 @@ if __name__ == "__main__":
             with ThreadPoolExecutor(5) as ex:
                 list(ex.map(safe_one, actions[i:i + 10]))
             pf.write_text(json.dumps(prov, indent=1))
-            git(f"Meshy animations: {len(prov['clips'])} clips on the reference rig", [d])
+            git(f"Meshy animations: {len(prov['clips'])} clips on the reference rig", [d, clips])
         sys.exit()
     if ids == ["tasks"]:  # recent image-to-3d tasks with thumbnails, to recover runs whose push failed
         d = ROOT / "tools/meshy-heroes/meshy/recent-tasks"; d.mkdir(parents=True, exist_ok=True)

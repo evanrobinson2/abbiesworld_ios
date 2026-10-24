@@ -84,6 +84,8 @@ export const CHARMS = [
  {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster'},
  {id: 'moon-buggy', name: 'Moon buggy', icon: '🚙', quest: 'Roll the Moon Buggy through the carwash and get soaked'},
  // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
+ // Halloween (experimental): knock on five doors in one night. Seasonal, so it never counts toward 'all-memories'.
+ {id: 'pumpkin', name: 'Pumpkin', icon: '🎃', quest: 'Trick-or-treat at five doors on Halloween night'},
  {id: 'moon-cheese', name: 'Moon cheese', icon: '🧀', quest: 'Mine three moon cheeses at the Moon kiosk', repeat: true, hang: 2}
 ];
 
@@ -474,6 +476,12 @@ function charmMesh(id, m) {
   for (const x of [-.026, .026]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.014, .014, .012, 10), tyre, 'buggy wheel', x, -.016, z * .026).rotation.x = Math.PI / 2;
   for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .005, .006), lamp, 'buggy headlight', .044, .006, z * .01);
   add(new T.CylinderGeometry(.002, .002, .03, 5), M('buggy bar', '#9fb3c8'), 'buggy bars', .016, .02, 0).rotation.z = .3;
+ } else if (id === 'pumpkin') { // a little pumpkin: six orange ribs round a stem, with a friendly lit face
+  const rind = M('enamel pumpkin orange', '#f08a24', {roughness: .35, emissive: '#5a2600', emissiveIntensity: .25}), leaf = M('enamel pumpkin stem', '#4f8a3e', {roughness: .5}), glow = M('pumpkin face glow', '#ffe08a', {roughness: .3, emissive: '#ffb02e', emissiveIntensity: 1});
+  for (let i = 0; i < 6; i++) { const a = i * Math.PI / 3, rib = add(new T.IcosahedronGeometry(.026, 1), rind, 'pumpkin rib', Math.cos(a) * .014, 0, Math.sin(a) * .014); rib.scale.set(.8, 1, .8); }
+  add(new T.CylinderGeometry(.005, .007, .016, 6), leaf, 'pumpkin stem', 0, .032, 0);
+  for (const x of [-.013, .013]) add(new T.ConeGeometry(.006, .01, 3), glow, 'pumpkin eye', x, .006, .034).rotation.x = Math.PI / 2;
+  add(new T.BoxGeometry(.026, .006, .004), glow, 'pumpkin smile', 0, -.014, .036);
  } else if (id === 'rocket') { // the red rocket with a porthole
   const red = M('enamel rocket red', '#d9393a', {roughness: .25}), cream = M('enamel rocket cream', '#f4ece0', {roughness: .3});
   add(new T.CylinderGeometry(.024, .026, .07, 8), cream, 'rocket body');

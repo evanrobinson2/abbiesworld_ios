@@ -1,0 +1,293 @@
+# Group|Item|library regex|method|priority|note   (method: S scene-code Blender, M Meshy, P free kit, D from drone/photos, V variant of an existing model)
+PEOPLE|Crossing guard with stop paddle|crossing|S|1|hi-vis vest, paddle; stands at the school corner
+PEOPLE|Mail carrier|mail ?(carrier|man)|S|1|blue shorts in summer, satchel
+PEOPLE|Barista|barista|V|1|Abbie's coffee shop
+PEOPLE|French baker|baker|V|1|Moon Mission start
+PEOPLE|Deli worker at Frozen Hoagies|deli|V|2|paper hat
+PEOPLE|Librarian|librarian|S|2|cardigan, cart of books
+PEOPLE|Firefighter|fire ?fight|S|1|turnout coat and helmet
+PEOPLE|Police officer|police|S|2|friendly, bike patrol
+PEOPLE|Teacher|teacher|S|2|
+PEOPLE|Principal|principal|V|3|
+PEOPLE|School bus driver|bus driver|V|2|
+PEOPLE|Lifeguard|lifeguard|S|2|Leonard Field beach
+PEOPLE|Dog walker with three dogs|dog walker|S|1|leashes need rig
+PEOPLE|Jogger|jogger|S|1|loop path around Horn Pond
+PEOPLE|Parent with stroller|stroller|S|2|
+PEOPLE|Cyclist in a helmet|cyclist|S|2|
+PEOPLE|Skater kid|skat(er|e)|V|1|skate park beside the café
+PEOPLE|Soccer kid in a bib|soccer|V|1|
+PEOPLE|Soccer coach with whistle|coach|V|2|
+PEOPLE|Little league batter|batter|V|2|
+PEOPLE|Umpire|umpire|V|3|
+PEOPLE|Kid on a scooter|scooter|V|2|
+PEOPLE|Toddler with a balloon|toddler|S|2|
+PEOPLE|Grandparent on a bench|grand(ma|pa|parent)|S|1|
+PEOPLE|Man reading the newspaper|newspaper|S|3|
+PEOPLE|Gardener with a wheelbarrow|gardener|S|2|
+PEOPLE|Landscaper with a leaf blower|leaf ?blower|S|3|October sound
+PEOPLE|Snow plow driver|plow|S|3|winter
+PEOPLE|Ice cream truck driver|ice ?cream|S|2|
+PEOPLE|Farmer at Wright-Locke|farmer|V|1|
+PEOPLE|Farm stand seller|farm ?stand|S|2|
+PEOPLE|Church organist|organist|S|3|
+PEOPLE|Choir singers|choir|S|3|
+PEOPLE|Town clerk|clerk|S|3|
+PEOPLE|Commuter with a briefcase|commuter|S|1|train platform
+PEOPLE|Train conductor|conductor|S|2|
+PEOPLE|Newspaper kid on a bike|paper ?(boy|girl|kid)|S|3|
+PEOPLE|Pizza delivery driver|delivery|S|3|
+PEOPLE|Shop owner sweeping the step|shop ?owner|S|2|
+PEOPLE|Fisher at Horn Pond|fish(er|erman)|S|2|
+PEOPLE|Kayaker|kayak|S|2|
+PEOPLE|Birdwatcher with binoculars|bird ?watch|S|3|
+PEOPLE|Photographer with a camera|photograph|S|2|drone day
+PEOPLE|Painter at an easel|painter|S|3|
+PEOPLE|Busker with a guitar|busk|S|2|
+PEOPLE|Dad with a toolbox|dad with|V|3|
+PEOPLE|Neighbor waving from a porch|neighbo|S|1|
+PEOPLE|Kid with a lemonade stand|lemonade|S|1|
+PEOPLE|Trick-or-treaters in costume|trick|S|1|Halloween
+PEOPLE|Kid in a snowsuit|snowsuit|S|3|
+PEOPLE|Girl scouts selling cookies|scout|S|3|
+PEOPLE|Dance class kids|dance|S|3|
+PEOPLE|Karate kids|karate|S|3|
+PEOPLE|Pharmacist|pharmac|S|3|
+PEOPLE|Bank teller|teller|S|3|
+PEOPLE|Barber|barber|S|3|
+PEOPLE|Florist|florist|S|2|
+PEOPLE|Bookshop owner|bookshop|S|3|
+PEOPLE|Vet|veterinar|S|3|
+PEOPLE|Dentist|dentist|S|3|
+PEOPLE|Mayor with a sash|mayor|S|3|
+PEOPLE|Town historian in a tricorn hat|histor|S|3|
+PEOPLE|Parade marching band kid|marching|S|2|
+PEOPLE|Grocery cashier|cashier|S|3|
+PEOPLE|Delivery van driver|van driver|S|3|
+PLACES|Winchester Town Hall with clock tower|town ?hall|S|1|centre of the green
+PLACES|Public library|library|S|1|
+PLACES|Fire station with open bay|fire ?(station|house)|S|1|
+PLACES|Police station|police ?station|S|3|
+PLACES|Post office with blue box|post ?office|S|2|
+PLACES|White church with steeple|church|S|1|
+PLACES|Unitarian church (stone)|unitarian|S|3|
+PLACES|Lyceum building|lyceum|S|3|
+PLACES|Commuter rail station and platform|(rail|train) ?station|S|1|
+PLACES|French bakery|bakery|S|1|Moon Mission start
+PLACES|Frozen Hoagies shop|hoagie|S|1|
+PLACES|Savings bank|bank|S|3|
+PLACES|Pharmacy|pharmacy|S|3|
+PLACES|Hardware store|hardware|S|2|
+PLACES|Independent bookshop|bookshop|S|2|
+PLACES|Pizza place|pizza|S|2|
+PLACES|Donut shop|donut|S|2|
+PLACES|Florist|florist|S|3|
+PLACES|Barber shop with pole|barber|S|3|
+PLACES|Toy store|toy ?(store|shop)|S|2|
+PLACES|Ice cream stand|ice ?cream ?(stand|shop)|S|1|
+PLACES|Corner grocery|grocery|S|3|
+PLACES|Gas station|gas ?station|S|3|
+PLACES|Movie theatre marquee|(movie|cinema|theat)|S|3|
+PLACES|Vet clinic|vet clinic|S|3|
+PLACES|Muraco school|school|S|1|school jump game
+PLACES|Playground with slide|playground|S|1|
+PLACES|Skate park|skate ?park|S|1|
+PLACES|Leonard Field soccer pitch|soccer ?(field|pitch)|S|1|
+PLACES|Baseball diamond with backstop|(baseball|backstop)|S|2|
+PLACES|Ginn Field play train|play ?train|S|2|
+PLACES|Horn Pond dock|dock|S|1|
+PLACES|Horn Pond boathouse|boathouse|S|2|
+PLACES|Lake beach with lifeguard chair|lifeguard ?chair|S|2|
+PLACES|Mill pond spillway|spillway|S|1|
+PLACES|Town common bandstand|bandstand|S|2|
+PLACES|Wright-Locke farm barn|barn|P|1|farm tiles thread
+PLACES|Farm stand|farm ?stand|S|2|
+PLACES|Community garden plots|community garden|S|3|
+PLACES|Cemetery with iron gate|cemetery|S|3|Halloween
+PLACES|Water tower|water ?tower|S|2|
+PLACES|Covered bridge or stone footbridge|footbridge|S|2|
+PLACES|Stone wall lane|stone ?wall|P|1|New England signature
+PLACES|Woodland trail head|trail ?head|S|2|
+PLACES|Scout hut|scout|S|3|
+PLACES|Historic colonial house|colonial|S|1|51% of town
+PLACES|Cape cod house|\bcape\b|S|1|
+PLACES|Victorian with porch|victorian|S|1|
+PLACES|Triple-decker|triple|S|2|
+PLACES|Garage with open door|garage|S|2|
+PLACES|Treehouse|tree ?house|S|1|
+PLACES|Drive-in or outdoor movie lawn|drive-?in|S|3|
+PLACES|Fairground or street fair|fair|S|3|
+PLACES|Coffee shop (Abbie's)|coffee|P|1|exists
+PLACES|Basement|basement|P|1|exists
+PLACES|Moon base airlock|airlock|P|1|exists
+THINGS|Fire hydrant|hydrant|S|1|
+THINGS|Wooden utility pole with wires|utility pole|S|1|look of the town
+THINGS|Street lamp|(street ?lamp|lamp ?post)|S|1|
+THINGS|Stop sign|stop ?sign|S|1|
+THINGS|Street name sign pair|street ?sign|S|2|
+THINGS|Traffic light|traffic ?light|S|2|
+THINGS|Crosswalk stripes|crosswalk|S|2|
+THINGS|Granite curb run|curb|S|2|
+THINGS|Storm drain|drain|S|3|
+THINGS|Manhole cover|manhole|S|3|
+THINGS|Parking meter|parking ?meter|S|3|
+THINGS|Blue mailbox|mailbox|S|1|
+THINGS|Bench|bench|P|1|
+THINGS|Public trash can|trash|P|2|
+THINGS|Recycling bin|recycl|P|2|
+THINGS|Bike rack|bike ?rack|S|2|
+THINGS|Sandwich board sign|sandwich ?board|S|2|
+THINGS|Planter with mums|planter|S|2|
+THINGS|Striped awning|awning|S|2|
+THINGS|Flagpole with flag|flag|S|1|
+THINGS|War memorial|memorial|S|2|
+THINGS|Drinking fountain|fountain|S|3|
+THINGS|Picnic table|picnic|P|1|
+THINGS|Bus stop shelter|bus ?stop|S|3|
+THINGS|School bus|school ?bus|P|1|
+THINGS|Commuter train (engine and coaches)|(commuter|locomotive|train)|P|1|
+THINGS|Level crossing gates|crossing ?gate|S|2|
+THINGS|Ice cream truck|ice ?cream ?truck|P|1|
+THINGS|Fire engine|fire ?(engine|truck)|P|1|
+THINGS|Police car|police ?car|P|3|
+THINGS|Mail truck|mail ?truck|P|2|
+THINGS|Snow plow truck|plow|P|3|
+THINGS|Station wagon|wagon|P|2|
+THINGS|Minivan|minivan|P|2|
+THINGS|Pickup truck|pickup|P|2|
+THINGS|Parked sedan|sedan|P|2|
+THINGS|Bicycle|bicycle|P|1|
+THINGS|Kick scooter|scooter|P|2|
+THINGS|Skateboard|skateboard|P|1|
+THINGS|Kayak and paddle|kayak|P|2|
+THINGS|Rowboat|rowboat|P|2|
+THINGS|Canoe|canoe|P|3|
+THINGS|Sailboat on the pond|sailboat|P|3|
+THINGS|Swing set|swing|P|1|
+THINGS|Trampoline|trampoline|S|2|
+THINGS|Basketball hoop|basketball|S|2|
+THINGS|Lawn mower|mower|S|2|
+THINGS|Charcoal grill|grill|P|2|
+THINGS|Adirondack chair|adirondack|P|2|
+THINGS|Garden hose and reel|hose|S|3|
+THINGS|Wheelbarrow|wheelbarrow|P|2|
+THINGS|Picket fence run|picket|S|1|
+THINGS|Hedge run|hedge|S|2|
+THINGS|Leaf pile and rake|(leaf|rake)|S|1|October
+THINGS|Pumpkin and jack-o-lantern|pumpkin|P|1|
+THINGS|Hay bale|hay|P|1|
+THINGS|Scarecrow|scarecrow|P|1|
+THINGS|Corn stalks|corn|P|2|
+THINGS|Apple basket|apple|P|2|
+THINGS|Snowman|snowman|P|2|
+THINGS|Sled|sled|P|2|
+THINGS|Christmas lights on a porch|christmas|P|2|
+THINGS|Kite|kite|S|3|
+THINGS|Soccer ball and goal|soccer|P|1|
+THINGS|Baseball bat and glove|baseball|P|2|
+THINGS|Football|football|P|3|
+THINGS|Frisbee|frisbee|S|3|
+THINGS|Sandcastle|sandcastle|S|3|
+THINGS|Beach umbrella|umbrella|P|3|
+THINGS|Beach towel and bucket|bucket|S|3|
+THINGS|Fishing rod|fishing|S|2|
+THINGS|Lemonade stand|lemonade|S|1|
+THINGS|Bird feeder|feeder|S|2|
+THINGS|Birdhouse|birdhouse|S|2|
+THINGS|Mailbox on a post (yard)|mailbox|S|2|
+THINGS|Garden gnome|gnome|P|3|
+THINGS|Wind chimes|chime|S|3|
+THINGS|Church bell|bell|P|1|bell is diegetic HUD
+THINGS|Town clock face|clock|S|1|time told by the world
+THINGS|Weather vane|weather ?vane|S|1|
+THINGS|Rain barrel|rain ?barrel|S|3|
+THINGS|Compost bin|compost|S|3|
+THINGS|Cellar bulkhead door|bulkhead|S|2|coffee shop to basement
+THINGS|Floppy disk charm|floppy|P|1|exists
+THINGS|Backpack|backpack|P|1|exists
+THINGS|Moon buggy|buggy|P|1|exists
+THINGS|Moon cheese wheel|cheese|P|1|exists
+THINGS|Telescope|telescope|P|2|
+THINGS|Microscope|microscope|P|3|
+THINGS|Ham radio|radio|P|2|
+THINGS|Rocket on its pad|rocket|P|1|horizon
+THINGS|New Nova skyline|nova|S|2|horizon
+THINGS|Birthday cake with candles|cake|P|2|
+THINGS|Piano|piano|P|2|
+THINGS|Easel and canvas|easel|P|3|
+THINGS|Camera tripod|tripod|P|3|
+THINGS|Drone (our own)|drone|S|1|Saturday project
+THINGS|Polaroid camera|polaroid|P|1|exists as charm idea
+THINGS|Mini phone|phone|P|1|floppy unlocks it
+THINGS|Treasure map|map|S|3|
+THINGS|Stone cairn|cairn|S|3|
+THINGS|Lantern|lantern|P|1|
+THINGS|Campfire with logs|campfire|P|2|
+THINGS|Tent|tent|P|2|
+THINGS|Boulder (glacial erratic)|boulder|P|1|
+THINGS|Cattail clump|cattail|S|3|
+THINGS|Lily pads|lily|S|3|
+THINGS|Fallen leaf scatter|leaves|S|2|
+THINGS|Sugar maple|maple|P|1|
+THINGS|Oak tree|\boak|P|1|
+THINGS|White pine|pine|P|1|
+THINGS|Birch|birch|P|1|
+THINGS|Hydrangea shrub|hydrangea|S|2|
+THINGS|Lilac bush|lilac|S|3|
+THINGS|Dandelions and clover patch|dandelion|S|3|
+THINGS|Stepping stones|stepping|S|3|
+THINGS|Fountain in the common|fountain|S|3|
+ANIMALS|Bub the black lab|(bub|labrador|lab\b)|V|1|the family dog
+ANIMALS|Cat on a windowsill|\bcat\b|P|1|
+ANIMALS|Gray squirrel|squirrel|P|1|
+ANIMALS|Chipmunk|chipmunk|S|2|
+ANIMALS|Canada goose|goose|P|1|
+ANIMALS|Mallard duck|duck|P|1|
+ANIMALS|Duckling line|duckling|S|2|
+ANIMALS|Great blue heron|heron|P|1|
+ANIMALS|Mute swan|swan|S|2|
+ANIMALS|Snapping turtle|turtle|P|2|
+ANIMALS|Painted turtle on a log|turtle|P|2|
+ANIMALS|Bullfrog|frog|P|2|
+ANIMALS|White-tailed deer|deer|P|1|
+ANIMALS|Red fox|fox|P|2|
+ANIMALS|Raccoon|raccoon|P|1|
+ANIMALS|Skunk|skunk|P|2|
+ANIMALS|Wild turkey|turkey|P|1|
+ANIMALS|Red-tailed hawk|hawk|P|2|
+ANIMALS|Barred owl|owl|P|2|
+ANIMALS|Crow|crow|P|2|
+ANIMALS|Robin|robin|S|2|
+ANIMALS|Northern cardinal|cardinal|S|2|
+ANIMALS|Blue jay|jay|S|2|
+ANIMALS|Chickadee|chickadee|S|3|
+ANIMALS|Woodpecker|woodpecker|S|3|
+ANIMALS|Seagull|gull|P|3|
+ANIMALS|Pigeon|pigeon|P|2|
+ANIMALS|Bat|\bbat\b|P|2|
+ANIMALS|Fireflies|firefl|S|1|June evenings
+ANIMALS|Monarch butterfly|butterfl|P|2|
+ANIMALS|Honey bee|\bbee\b|S|2|
+ANIMALS|Dragonfly|dragonfl|S|3|
+ANIMALS|Ladybug|ladybug|S|3|
+ANIMALS|Garden snail|snail|S|3|
+ANIMALS|Earthworm|worm|S|3|
+ANIMALS|Koi or pond fish|(koi|fish)|P|2|
+ANIMALS|Coyote|coyote|P|3|
+ANIMALS|Groundhog|groundhog|S|2|
+ANIMALS|Cottontail rabbit|rabbit|P|2|
+ANIMALS|Opossum|possum|S|3|
+ANIMALS|Cow|\bcow\b|P|1|
+ANIMALS|Horse|horse|P|1|
+ANIMALS|Pony|pony|P|2|
+ANIMALS|Goat|goat|P|1|
+ANIMALS|Pig|\bpig\b|P|1|
+ANIMALS|Chicken and chicks|chick|P|1|
+ANIMALS|Sheep|sheep|P|1|
+ANIMALS|Alpaca|alpaca|P|3|
+ANIMALS|Barn cat|barn cat|V|2|
+ANIMALS|Farm dog|farm dog|V|3|
+ANIMALS|Moon cow or moon animal|moon (cow|animal)|P|2|
+ANIMALS|Toy animals for the carwash|toy (animal|duck|bear)|P|1|
+ANIMALS|Hermit crab|crab|P|3|
+ANIMALS|Seal at the coast|seal|P|3|
