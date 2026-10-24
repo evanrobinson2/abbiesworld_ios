@@ -37,3 +37,17 @@ It says liked/hated, never left/right. Download, copy and import buttons are in 
 - Not in the game: no scene or passing in-game test yet, so per the invariants it stays a study. Next: play the top-rated
   dioramas as real tiles behind `?exp=diorama`. Tour: **false** (study only). No sounds, no MIDI.
 - Rebuild the page after editing the template: `python3 tools/diorama-swipe/build_page.py`.
+
+## Round 2: step into the tile, and talk to it (drafted)
+Evan 2026-10-24 02:11Z: first person on a tile if he chooses, and a chat box to the AI gateway that organises or adjusts the assets on the tile from the database.
+
+**Is it possible?** Mostly yes, built from what already exists: the AI Gateway (`openai/gpt-6-luna`, as `api/advisor.js`, `invent.js`, `ai-compose.js`), the wallet caps ($1 person, $100 public, $1000 owner; `lib/wallet.cjs`), the PG screen and live guard, sign-in, and `simulations/first-person.mjs`.
+Missing before this round: any chat that edits a tile, and first person outside the sandbox (the preview copies the game's module, so there is still one implementation).
+
+**Slice drafted**
+- `simulations/tile-chat/contract.mjs`: the only verbs the chat may use (move, swap, add, remove, rotate, scale, restyle). Every edit is resolved against the model library and clamped to the hex, applied to a copy, and logged with the previous layout so each edit undoes. Removing and bringing in assets also feeds the taste learner.
+- Free helper (no AI, no cost): plain phrases such as "remove the cow", "swap the house for a barn", "add 2 chickens", "make everything moon base", "undo". It says so when it cannot find a thing in the library.
+- `api/tile-chat.js` (new; off by default since 2026-10-24, only `TILE_CHAT_ENABLED=true` turns it on, because the tile game was dropped): same-origin, signed-in, PG screen, guard charged at `guardCall`, plan charged at `tileChatCall` ($0.01) before the Gateway is called. The AI returns words for the verbs only, never code or asset keys. Tests: `tests/tile-chat.test.cjs`.
+- Preview: Step in (F) puts the camera at eye height on the tile; Chat opens the helper; each edit shows an Undo.
+
+**Not working yet:** the AI path cannot be tried from the instant preview (static host, no game sign-in), so the preview falls back to the free helper and says so; the endpoint is merged but only goes live with the next Ranch deploy batch. First person was tested with stand-in shapes only. Edits live on the tile in memory and in the liked card; there is no server-side tile save yet. Not in the game: still a study, tour: false.

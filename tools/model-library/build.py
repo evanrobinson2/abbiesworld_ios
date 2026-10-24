@@ -101,7 +101,7 @@ def kind(text, col='', name=None):
         if re.search(rx, t): return name
     return 'Prop'
 
-STAGE = re.compile(r'(armature|_glb\.glb|/basic_animations/|running|walking|_rigged|remesh|/variants/|-(foundation|frame|planned|roof|ready|growing|ripe|sprout)\b|_rules\b|\bsym\b|_sym\b|-aligned|/aligned)', re.I)
+STAGE = re.compile(r'(armature|_glb\.glb|/basic_animations/|/anims/|running|walking|_rigged|remesh|/variants/|-(foundation|frame|planned|roof|ready|growing|ripe|sprout)\b|_rules\b|\bsym\b|_sym\b|-aligned|/aligned)', re.I)
 
 def pretty(p, hit):
     base = os.path.splitext(os.path.basename(p))[0]
@@ -123,6 +123,32 @@ def sort_key(p):
     return (0 if p.startswith(DIST + '/models/') else 1 if '/models/' in p else 2 if 'sandbox2' not in p and p.startswith(DIST) else 3, len(p))
 
 out = []
+def tris(data):
+    """Triangle count of a GLB or glTF, from its accessor counts (0 when unreadable)."""
+    try:
+        if data[:4] == b'glTF':
+            n = int.from_bytes(data[12:16], 'little'); j = json.loads(data[20:20 + n])
+        else:
+            j = json.loads(data)
+        acc = j.get('accessors', [])
+        t = 0
+        for m in j.get('meshes', []):
+            for pr in m.get('primitives', []):
+                a = pr.get('indices', pr.get('attributes', {}).get('POSITION'))
+                if a is not None and a < len(acc): t += acc[a]['count'] // 3 if 'indices' in pr else acc[a]['count'] // 3
+        return t
+    except Exception:
+        return 0
+
+def detail(t):
+    return 'Unknown' if not t else 'Low poly (under 10k)' if t < 10000 else 'Medium (10k to 50k)' if t < 50000 else 'High (over 50k)'
+
+def home(path, branch=False):
+    if branch: return 'Branch only'
+    if '/studies/' in path or path.startswith('docs/'): return 'Study folder'
+    if '/tools/' in path or path.startswith('tools/'): return 'Tools and experiments'
+    return 'Game site files'
+
 for h, paths in by_hash.items():
     p = sorted(paths, key=sort_key)[0]
     rel = p[len(DIST) + 1:] if p.startswith(DIST + '/') else p
@@ -148,6 +174,7 @@ for h, paths in by_hash.items():
         'glb': ('/' + rel) if served else None,
         'file': p, 'copies': len(paths),
     }
+    e['tris'] = tris(open(p, 'rb').read()); e['detail'] = detail(e['tris']); e['home'] = home(p)
     if m:
         e['id'] = m['id']; e['ref'] = m['urls'].get('ref'); e['verdict'] = m.get('status')
         e['source_info'] = (m.get('source') or {}).get('url')
@@ -189,6 +216,7 @@ for blob, (b, path) in found.items():
     it = {'key': h[:12], 'name': nm, 'collection': col, 'place': place, 'source': src, 'type': kind(nm + ' ' + path, col, nm), 'pass': 'Upgrade' if UPG.search(path + ' ' + nm) else 'Original', 'bytes': len(data),
         'level': 'stage' if STAGE.search('/' + path) and not path.startswith('UE5/') else 'model', 'status': 'branch', 'glb': None, 'file': path,
         'branch': b.replace('origin/', ''), 'copies': 1}
+    it['tris'] = tris(data); it['detail'] = detail(it['tris']); it['home'] = 'Branch only'
     if os.path.exists(f'{THUMBS}/{h[:12]}.png'): it['thumb'] = f'/models/library/t/{h[:12]}.webp'
     branch_items.append(it)
 out += branch_items

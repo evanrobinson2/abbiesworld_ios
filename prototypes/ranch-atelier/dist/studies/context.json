@@ -3491,6 +3491,16 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md"
         },
         {
+          "k": "canon",
+          "t": "AI Gateway pattern, wallet caps and PG guard as already used by api/advisor.js and api/invent.js (tile chat reuses them)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/api/advisor.js"
+        },
+        {
+          "k": "canon",
+          "t": "simulations/first-person.mjs: the game's first person, reused rather than rebuilt",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/first-person.mjs"
+        },
+        {
           "k": "research",
           "t": "Thompson sampling for bandits (Beta posteriors per asset, group prior, pair bonus); the method behind the next batch",
           "href": "https://en.wikipedia.org/wiki/Thompson_sampling"
@@ -3499,6 +3509,37 @@
           "k": "oracle",
           "t": "Game Oracle: Tiny Glade, Dorfromantik, Townscaper style records (not freshly consulted for this draft)",
           "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "design",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded for this draft"
+        }
+      ]
+    },
+    "project-chat": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Dispatch bridge and issue intake (docs/dispatch/ISSUE_INTAKE.md): the route the chat rides",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/dispatch/ISSUE_INTAKE.md"
+        },
+        {
+          "k": "canon",
+          "t": "Information grammar: the chat is presentation layer only, never in the world (HUD study, Game Feel)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "oracle",
+          "t": "None consulted for this draft"
         },
         {
           "k": "devblog",

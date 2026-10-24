@@ -4,8 +4,8 @@
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const ST = (() => { try { return JSON.parse(localStorage.getItem('aw-lib') || '{}'); } catch { return {}; } })();
 const save = () => { try { localStorage.setItem('aw-lib', JSON.stringify({size: S.size, group: S.group, stages: S.stages})); } catch {} };
-const S = {q:'', col:null, place:null, source:null, type:null, status:null, pass:null, group: ST.group || 'collection', size: ST.size || 190, stages: !!ST.stages, sel: null};
-const FACETS = [['pass','Pass'], ['source','Source'], ['type','Type'], ['place','Place'], ['status','Status']];
+const S = {q:'', col:null, place:null, source:null, type:null, status:null, pass:null, detail:null, home:null, group: ST.group || 'collection', size: ST.size || 190, stages: !!ST.stages, sel: null};
+const FACETS = [['pass','Pass'], ['detail','Detail'], ['source','Source'], ['type','Type'], ['home','Lives in'], ['place','Place'], ['status','Status']];
 const STATUS = {reviewed:'On the review desk', unreviewed:'In the game files, not reviewed', branch:'Only on an unmerged branch'};
 const SRCDOT = {Meshy:'#7a4bd1', Printables:'#d8801f', Blender:'#2e7d6e', Catalogue:'#4a74b5', 'Midjourney + Blender':'#c2487e', 'AI written code':'#7d7d86'};
 // Where library.json and the pictures live; a preview page can point this at its own folder.
@@ -13,7 +13,7 @@ const BASE = window.LIB_BASE || '/models/';
 const pic = u => u && BASE !== '/models/' ? u.replace('/models/', BASE) : u;
 const PASSNOTE = 'Original is the first low-poly pass. Upgrade is a later, higher-detail or restyled version (charming, upgrade, remaster, higher rounds).';
 // A link can open the shelf already filtered: /models?type=People, ?source=Meshy, ?pass=Upgrade, ?q=barn, ?study=Cafe.
-const fromUrl = () => { const q = new URLSearchParams(location.search); for (const k of ['source','type','place','status','pass']) if (q.get(k)) S[k] = q.get(k); if (q.get('study')) S.col = q.get('study'); if (q.get('q')) S.q = q.get('q'); if (q.get('stages')) S.stages = true; };
+const fromUrl = () => { const q = new URLSearchParams(location.search); for (const k of ['source','type','place','status','pass','detail','home']) if (q.get(k)) S[k] = q.get(k); if (q.get('study')) S.col = q.get('study'); if (q.get('q')) S.q = q.get('q'); if (q.get('stages')) S.stages = true; };
 let data = null, items = [], root = null, view = [];
 const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1e3)) + ' KB';
 
@@ -54,7 +54,7 @@ function draw(){
     <label class="lz">Size <input id="lz" type="range" min="110" max="320" step="10" value="${S.size}" aria-label="Picture size"></label>
     <button type="button" class="ch tog" id="lstages" aria-pressed="${S.stages}">Build stages and clips <b>${stagesN}</b></button></div></header>
   <div class="lbody"><nav class="lrail" aria-label="Studies and collections"><button type="button" class="lc${S.col ? '' : ' on'}" data-col="">All <b>${cols.reduce((s, c) => s + c[1], 0)}</b></button>${cols.map(([c, n]) => `<button type="button" class="lc${S.col === c ? ' on' : ''}" data-col="${esc(c)}">${esc(c)} <b>${n}</b></button>`).join('')}</nav>
-  <main class="lmain"><div class="lfs">${chips}${(S.col || S.place || S.source || S.type || S.status || S.pass || S.q) ? '<button type="button" class="ch clr" id="lclear">Clear filters</button>' : ''}</div>
+  <main class="lmain"><div class="lfs">${chips}${(S.col || S.place || S.source || S.type || S.status || S.pass || S.detail || S.home || S.q) ? '<button type="button" class="ch clr" id="lclear">Clear filters</button>' : ''}</div>
   ${view.length ? groups.map(([g, l]) => `<section class="lg">${g ? `<h2>${esc(S.group === 'status' ? STATUS[g] || g : g)} <b>${l.length}</b></h2>` : ''}<div class="lgrid">${l.map(tile).join('')}</div></section>`).join('') : '<p class="empty">Nothing matches. Clear a filter or search for something else.</p>'}
   </main></div><div id="lsheet" class="lsheet" hidden></div></div>`;
   if (S.sel) sheet(S.sel, true);
@@ -67,7 +67,7 @@ function sheet(key, keepScroll){
   const i = view.findIndex(x => x.key === key);
   const stage = e.glb ? `<model-viewer class="lv" src="${esc(e.glb)}" camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" camera-orbit="-35deg 68deg auto" shadow-intensity="0.8" exposure="0.9" environment-image="neutral" interaction-prompt="none" poster="${esc(pic(e.thumb) || '')}"></model-viewer>`
     : `<div class="lv still">${e.thumb ? `<img src="${pic(e.thumb)}" alt="">` : ''}<p>${e.branch ? 'This one lives on an unmerged branch' : 'This file is kept in the repo as a source'}, not on the site, so it shows as a picture.</p></div>`;
-  const rows = [['Study', e.collection], ['Place', e.place], ['Source', e.source], ['Type', e.type], ['Pass', e.pass], ['Status', STATUS[e.status]], ['Size', fmt(e.bytes)], ...(e.branch ? [['Branch', e.branch]] : []), ['Kept as', e.copies > 1 ? `${e.copies} identical copies in the repo` : 'one file'], ['File', `<code>${esc(e.file.replace('prototypes/ranch-atelier/dist/', ''))}</code>`]];
+  const rows = [['Study', e.collection], ['Place', e.place], ['Source', e.source], ['Type', e.type], ['Pass', e.pass], ['Detail', e.tris ? `${e.detail}, ${e.tris.toLocaleString()} triangles` : e.detail], ['Lives in', e.home], ['Status', STATUS[e.status]], ['Size', fmt(e.bytes)], ...(e.branch ? [['Branch', e.branch]] : []), ['Kept as', e.copies > 1 ? `${e.copies} identical copies in the repo` : 'one file'], ['File', `<code>${esc(e.file.replace('prototypes/ranch-atelier/dist/', ''))}</code>`]];
   el.innerHTML = `<div class="lback" data-close></div><aside><header><button type="button" class="pb" data-lstep="-1" ${i <= 0 ? 'disabled' : ''} aria-label="Previous">‹</button><h2>${esc(e.name)}</h2><button type="button" class="pb" data-lstep="1" ${i < 0 || i >= view.length - 1 ? 'disabled' : ''} aria-label="Next">›</button><button type="button" class="pb x" data-close aria-label="Close">×</button></header>
     ${stage}<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${k === 'File' ? v : esc(v)}</dd>`).join('')}</dl>
     <div class="lact">${e.id ? `<a class="btn" href="/models/${encodeURIComponent(e.id)}" data-desk="${esc(e.id)}">Review it on the desk</a>` : ''}${e.glb ? `<a class="btn ghost" href="${esc(e.glb)}" download>Download</a>` : ''}${e.source_info ? `<a class="btn ghost" href="${esc(e.source_info)}" target="_blank" rel="noopener">The original</a>` : ''}</div></aside>`;
@@ -83,7 +83,7 @@ function wire(){
     if (t.dataset.k){ sheet(t.dataset.k); return; }
     if (t.dataset.col !== undefined && t.classList.contains('lc')){ S.col = t.dataset.col || null; draw(); scrollTo({top:0}); return; }
     if (t.dataset.f){ S[t.dataset.f] = S[t.dataset.f] === t.dataset.v ? null : t.dataset.v; draw(); return; }
-    if (t.id === 'lclear'){ Object.assign(S, {q:'', col:null, place:null, source:null, type:null, status:null, pass:null}); draw(); return; }
+    if (t.id === 'lclear'){ Object.assign(S, {q:'', col:null, place:null, source:null, type:null, status:null, pass:null, detail:null, home:null}); draw(); return; }
     if (t.id === 'lstages'){ S.stages = !S.stages; save(); draw(); return; }
     if ('close' in t.dataset) return close();
     if (t.dataset.lstep){ const n = view[view.findIndex(x => x.key === S.sel) + +t.dataset.lstep]; if (n) sheet(n.key); return; }

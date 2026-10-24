@@ -335,7 +335,8 @@
     "covers": "townsfolk stand at their places on the board"
    },
    "mounts": [
-    "abbietown/townsfolk.mjs"
+    "abbietown/townsfolk.mjs",
+    "abbietown/quest-guide.mjs"
    ]
   },
   {

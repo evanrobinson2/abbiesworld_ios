@@ -26,3 +26,7 @@ assert.ok(last > first + .1, 'learning lifts the hot dog rate'); assert.ok(last 
 // 3. Replaying the same votes gives the same learner.
 { const g = new Generator(items, new Learner(items)), ds = g.batch(10, 5); const A = new Learner(items), B = new Learner(items); ds.forEach((d, i) => { A.vote(d.keys, i % 2 === 0); B.vote(d.keys, i % 2 === 0); }); assert.equal(A.predict(ds[0].keys), B.predict(ds[0].keys)); }
 console.log('diorama-swipe: ok');
+// 4. The preview's copies of the game's modules match their sources.
+for (const [a, b] of [['preview/diorama-swipe/first-person.mjs', 'prototypes/ranch-atelier/dist/simulations/first-person.mjs'], ['preview/diorama-swipe/tile-chat/contract.mjs', 'prototypes/ranch-atelier/dist/simulations/tile-chat/contract.mjs']])
+  assert.equal(fs.readFileSync(new URL('../../' + a, import.meta.url), 'utf8'), fs.readFileSync(new URL('../../' + b, import.meta.url), 'utf8'), a + ' is stale: run tools/diorama-swipe/build_page.py');
+console.log('diorama-swipe shared modules in sync');

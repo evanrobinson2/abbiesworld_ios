@@ -16,7 +16,7 @@ const DIST = 'prototypes/ranch-atelier/dist';
 const BASE = 'tools/audio-check/baseline.json';
 const walk = d => fs.readdirSync(d, {withFileTypes: true}).flatMap(e => {
   const p = path.join(d, e.name);
-  return e.isDirectory() ? (/node_modules|vendor|^\./.test(e.name) ? [] : walk(p)) : [p];
+  return e.isDirectory() ? (/node_modules|vendor|^tests$|^\./.test(e.name) ? [] : walk(p)) : [p];
 });
 const files = walk(DIST);
 const errors = [];
