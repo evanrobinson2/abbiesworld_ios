@@ -286,7 +286,7 @@ button{font:inherit;cursor:pointer}
  <div class="head"><div class="eyebrow">Question 4 · hand-off to the demo</div><h2>The mission board</h2></div>
  <div class="cards">
   <div class="opt rec"><span class="tag">Recommended · the demo builds this</span><h3>A · Town noticeboard</h3><div id="mA"></div>
-   <p>A cork board in a painted-wood frame with a brass plate, standing in the town square by the school. Each mission is a die-cut card (the Cards v3 face) pinned with a red pin: a little picture of the place, one sentence, and the charm stamp it pays. Locked: greyed, with a "needs the Moon tile" tag. Done: green tag. The big card at the bottom is the Moon Mission. Diegetic: a noticeboard characters read too.</p></div>
+   <p>A cork board in a painted-wood frame with a brass plate, standing in the town square by the school. Each mission is a die-cut card (the Cards v3 face) pinned with a red pin: a little picture of the place, one sentence, and the charm stamp it pays. Locked: greyed, with a "needs the Moon tile" tag. Done: green tag. The big card at the bottom is the Moon Mission. Diegetic: a noticeboard characters read too. <b>The board only lists and points.</b> Tapping a card flies to that mission's gold medallion; the medallion is where the mission starts (Evan's rule).</p></div>
   <div class="opt"><span class="tag">Alternative</span><h3>B · A hand of cards on the table</h3><div id="mB"></div>
    <p>The same cards fanned like the card hand. Quicker to read, and it is an overlay across the lower third of the board. It fails the "nothing masks the world" check at phone width.</p></div>
   <div class="opt"><span class="tag">Echo, always on</span><h3>C · Pennants on the places</h3><svg class="board mini-board" id="mC" viewBox="0 0 900 640"></svg>
@@ -294,7 +294,7 @@ button{font:inherit;cursor:pointer}
  </div>
  <h3>The transition: zoom into the board, smoke and mirrors</h3>
  <div class="tl">
-  <div><b>0.0 – 0.9 s</b>Tap a card. The camera dollies toward that place on the board (the stage above does it; tap the noticeboard).</div>
+  <div><b>0.0 – 0.9 s</b>Step into a gold medallion (tap one on the stage above). The camera dollies toward that place on the board. Medallions are the only mission entry points; the noticeboard just flies you to the right one.</div>
   <div><b>0.5 – 1.3 s</b>A cartoon smoke puff blooms on the place only (under a quarter of the screen). The old board and the new scene swap behind it, just as the paint-world splash hid its swap.</div>
   <div><b>1.3 s</b>The puff clears on the mission's own opening shot, in the place's dialect (café basement, lab, Moon base). No fade to white, no full-screen cover.</div>
   <div><b>Return</b>Finish or leave: the reverse puff on the board, and the charm drops into the chest if it was earned.</div>
@@ -307,7 +307,7 @@ button{font:inherit;cursor:pointer}
   <li><b>Board.</b> Start on the seven-tile Winchester board: three zones plus the high school at the centre, no minimap logo there. Downtown, Ani's side and Abbie and Daddy's side each get a minimap logo (this page's glyphs: cup, waves, rocket and star).</li>
   <li><b>Tile bag.</b> Moon and Ranch tiles as two tokens bottom right. A placed tile snaps to the nearest open edge and takes the height of the neighbour's edge, then slopes off, so contour lines run straight across the seam (the stage shows the seam flash). Real game: the Moon token is the prize of the Moon Mission; the demo may start with it in the bag.</li>
   <li><b>Chest.</b> Bottom-left object as styled here; opens the earn map (A/B/C above). Reads <code>earnedCharms()</code>; slots are the eleven in the table; the chest reads <code>CHARMS</code>, so a new charm is a new slot.</li>
-  <li><b>Mission board.</b> Option A above, in the town square. Cards in order: Coffee shop basement, Science lab, Moon base mining (locked until a Moon tile is on the board), then the large Moon Mission card. Finishing the Moon Mission earns the rocket and the moon-key charms and gives the Moon token.</li>
+  <li><b>Mission board and medallions.</b> Missions start at their gold medallion, and medallions are the only entry points (Evan). The noticeboard in the town square only lists missions and flies to the right medallion. Cards: Coffee shop basement, School jump, Toy-car coaster, Moon base mining (card greyed and medallion absent until a Moon tile is on the board), then the large Moon Mission card. The science lab card is gone (parked). Finishing the Moon Mission earns the rocket and Moon base charms and gives the Moon token.</li>
   <li><b>Zoom.</b> Use the timeline above; the puff is a sprite on the place, not a full-screen mask. The game-feel world-cover check must still pass.</li>
   <li><b>Tour.</b> The kids' tour (Abbie and Ani) should name the chest in one line: "Everything you find on a mission lands in your charm chest." Tour decision for the chest and the mission board: <b>yes</b>.</li>
  </ol></div>
@@ -479,10 +479,21 @@ function boardSVG(el, o = {}) {
  [['downtown', 0, 1], ['ani', -1, 1], ['abbie', 1, -1]].forEach(([z, q, r]) => { const [x, y] = ctr(q, r); s += `<g transform="translate(${x - 8},${y - 8}) scale(.67)">${glyph(z)}</g>`; });
  m.innerHTML = s; })();
 
+const MED = [{at:'cellar', k:'floppy', mission:'basement', beam:'#7fd1ff', dx:0, dy:-8, g:'<rect x="-9" y="-9" width="18" height="18" rx="2" fill="#5a7fd1"/><rect x="-5" y="-9" width="10" height="7" fill="#e8ecf5"/><rect x="-5" y="2" width="10" height="7" fill="#2a3a6a"/>'},
+ {at:'truck', k:'rocket', mission:'moon', beam:'#ffb74a', dx:0, dy:-6, g:'<path d="M0-11c4 4 5 9 3 14h-6c-2-5-1-10 3-14z" fill="#e8ecf5"/><circle cx="0" cy="-3" r="2.2" fill="#5ab0e8"/><path d="M-5 3l-4 5 6-2M5 3l4 5-6-2" fill="#e5392d"/>'},
+ {at:'school', k:'jump', mission:'jump', beam:'#ff7aa8', dx:34, dy:-30, g:'<path d="M-9 8h18M-6 8V-2h12V8M-3-2v-6h6v6" fill="none" stroke="#e5739c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0" cy="-11" r="2.4" fill="#e5739c"/>'},
+ {at:'coaster', k:'coaster', mission:'coaster', beam:'#7dff9b', dx:0, dy:-6, g:'<path d="M-10 6Q-6-10 0 0T10-8" fill="none" stroke="#ff7a1a" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="-8" r="2.6" fill="#e5392d"/>'}];
+MED.push({at:'outpost', k:'mining', mission:'mining', moon:true, beam:'#d8dcec', dx:0, dy:-6, g:'<path d="M-8 6L8-8M-3-8h11v11" fill="none" stroke="#8a93b3" stroke-width="3" stroke-linecap="round"/>'});
+
+function medalsSVG(tiles) { let md = '';
+MED.filter(m => !m.moon || tiles.moon).forEach((m, i) => { const p = place(m.at), x = p.x + m.dx, y = p.y + m.dy - 44;
+ md += `<g data-med="${m.k}" data-mission="${m.mission}" style="cursor:pointer"><polygon points="${x - 7},${y} ${x + 7},${y} ${x + 3},-20 ${x - 3},-20" fill="${m.beam}" opacity=".55" class="glow" style="animation-delay:${i * .4}s"/><polygon points="${x - 2.5},${y} ${x + 2.5},${y} ${x + 1},-20 ${x - 1},-20" fill="#fff" opacity=".9"/><ellipse cx="${x}" cy="${y + 40}" rx="16" ry="5" fill="${m.beam}" opacity=".5" class="glow"/><g transform="translate(${x},${y})"><g class="glint" style="animation-delay:${i * .3}s"><circle r="17" fill="#ffd96a" stroke="#a87820" stroke-width="3"/><circle r="13" fill="#fffaf0" stroke="#e0a528" stroke-width="1.5"/>${m.g}</g></g></g>`; });
+ return md; }
+
 // ---------- state ----------
 const state = {earned: new Set(), tiles: {}, open: false, focus: null, mode: 'none', rules: 'demo', moonDone: false, missions: new Set(), seen: new Set()};
 const main = $('#main');
-function renderMain(extra = {}) { boardSVG(main, {tiles: state.tiles, earned: state.earned, mode: state.mode, focus: state.focus, lock: state.lock, ...extra}); wireMarks(); }
+function renderMain(extra = {}) { boardSVG(main, {tiles: state.tiles, earned: state.earned, mode: state.mode, focus: state.focus, lock: state.lock, ...extra}); main.insertAdjacentHTML('beforeend', medalsSVG(state.tiles)); main.querySelectorAll('[data-mission]').forEach(n => n.onclick = e => { e.stopPropagation(); const m = MISS.find(x => x.id === n.dataset.mission); if (m) goMission(m); }); wireMarks(); }
 function wireMarks() { main.querySelectorAll('[data-charm]').forEach(n => n.addEventListener('click', () => { say(byId[n.dataset.charm].quest); })); main.querySelectorAll('g').forEach(() => 0); }
 const say = t => { const h = $('#hint'); h.textContent = t; h.classList.add('on'); clearTimeout(say.t); say.t = setTimeout(() => h.classList.remove('on'), 4200); };
 
@@ -520,21 +531,24 @@ $('#lcDemo').innerHTML = lcHTML(byId.tardigrade);
 // ---------- noticeboard + zoom ----------
 const MISS = [
  {id:'basement', t:'The café basement', p:'Find the ten memories hiding below the coffee shop.', at:'cellar', bg:'#f0dcc0', ch:'basement', scene:['#3a2a22','The café basement','Grace\'s basement game starts here']},
- {id:'lab', t:'The science lab', p:"Something green is alive by the lab. Can you win?", at:'lab', bg:'#d6efe0', ch:'tardigrade', scene:['#1f5b45','The science lab','Abbie\'s science adventure starts here']},
+ {id:'jump', t:'The school jump', p:'Climb onto the school roof and find young Daddy\'s memory.', at:'school', bg:'#f9d9e3', ch:'school-roof', scene:['#7a3a4e','The school jump','The school game starts here']},
+ {id:'coaster', t:'The toy-car coaster', p:'Race down the track and grab ten of the sixteen stars.', at:'coaster', bg:'#dff5dc', ch:'toy-car', scene:['#2c5f3a','The toy-car coaster','The coaster starts here']},
  {id:'mining', t:'Moon base mining', p:'Dig moon rocks for cheese. Three cheeses make a charm.', at:'outpost', bg:'#d8dcec', ch:'moon-cheese', moon:true, scene:['#2b2f48','The Moon outpost','Mining starts here']},
  {id:'moon', t:'The Moon Mission', p:'Ride the black truck all the way to the Moon base, and come back.', at:'truck', bg:'#cfe0f5', ch:'rocket', big:true, scene:['#101524','The Moon Mission','The full mission loop starts here']}
 ];
 const picSVG = {
  basement:`<svg viewBox="0 0 120 74"><rect width="120" height="74" fill="#f0dcc0"/><path d="M20 74V30l40-14 40 14v44z" fill="#a8683a"/><path d="M44 74l8-24h16l8 24z" fill="#2a2420"/><path d="M46 70l10-16" stroke="#ffe27a" stroke-width="3"/><rect x="82" y="38" width="10" height="12" fill="#ffd9a0"/></svg>`,
+ jump:`<svg viewBox="0 0 120 74"><rect width="120" height="74" fill="#f9d9e3"/><rect x="26" y="28" width="68" height="40" fill="#b8523a"/><path d="M20 28L60 8l40 20z" fill="#6d3a2a"/><circle cx="60" cy="22" r="7" fill="#fff"/><path d="M96 8l8 8" stroke="#e5739c" stroke-width="3"/></svg>`,
+ coaster:`<svg viewBox="0 0 120 74"><rect width="120" height="74" fill="#dff5dc"/><path d="M8 62Q30 4 54 44T112 14" fill="none" stroke="#ff7a1a" stroke-width="6" stroke-linecap="round"/><circle cx="54" cy="44" r="7" fill="#e5392d"/></svg>`,
  lab:`<svg viewBox="0 0 120 74"><rect width="120" height="74" fill="#d6efe0"/><path d="M45 12h30M52 12v22L36 62q-4 8 6 8h36q10 0 6-8L68 34V12" fill="#9be0b8" stroke="#3e8a5a" stroke-width="4" stroke-linejoin="round"/><circle cx="58" cy="52" r="5" fill="#fff" opacity=".7"/><circle cx="68" cy="44" r="3" fill="#fff" opacity=".7"/></svg>`,
  mining:`<svg viewBox="0 0 120 74"><rect width="120" height="74" fill="#2b2f48"/><circle cx="96" cy="16" r="9" fill="#e8ecf5"/><path d="M0 74V56q30-14 60-4t60-2v22z" fill="#8a93b3"/><g transform="translate(34,26) scale(.55)">${cheese.replace('<svg ','<svg width="64" height="64" ')}</g><path d="M80 56l16-16 6 6-16 16z" fill="#c9a14a"/></svg>`,
  moon:`<svg viewBox="0 0 120 74"><rect width="120" height="74" fill="#101524"/><circle cx="90" cy="54" r="26" fill="#cfd5e6"/><path d="M30 60c4-18 8-30 14-40 6 10 10 22 14 40z" fill="#fff"/><path d="M44 20c0-8 2-12 0-16" stroke="#ffb74a" stroke-width="5" stroke-linecap="round"/><g fill="#fff"><circle cx="12" cy="10" r="1.5"/><circle cx="70" cy="14" r="1.5"/><circle cx="106" cy="14" r="1.5"/></g></svg>`
 };
-const pinHTML = (m, st, i) => `<button class="pin ${m.big ? 'big' : ''} ${st}" style="--r:${[-1.6, 1.4, -1, 1.2][i]}deg;--bgc:${m.bg}" data-m="${m.id}" aria-label="${m.t}${st === 'locked' ? ', needs the Moon tile' : ''}"><div class="pic">${picSVG[m.id]}</div><h4>${m.t}</h4><p>${m.p}</p><div class="stamp">${picHTML(m.ch)}</div></button>`;
+const pinHTML = (m, st, i) => `<button class="pin ${m.big ? 'big' : ''} ${st}" style="--r:${[-1.6, 1.4, -1, 1.2, -.8][i]}deg;--bgc:${m.bg}" data-m="${m.id}" aria-label="${m.t}${st === 'locked' ? ', needs the Moon tile' : ''}"><div class="pic">${picSVG[m.id]}</div><h4>${m.t}</h4><p>${m.p}</p><div class="stamp">${picHTML(m.ch)}</div></button>`;
 function missionState(m) { if (state.missions.has(m.id)) return 'done'; if (m.moon && !state.tiles.moon) return 'locked'; return ''; }
 function boardHTML() { return `<div class="cork"><div class="plate">TOWN NOTICES</div>${MISS.map((m, i) => pinHTML(m, missionState(m), i)).join('')}</div>`; }
 $('#mA').innerHTML = boardHTML();
-$('#mB').innerHTML = `<div class="hand">${MISS.map((m, i) => pinHTML({...m, big: false}, '', i).replace('class="pin ', `style="--y:${[10, 0, 0, 10][i]}px" class="pin `)).join('')}</div>`;
+$('#mB').innerHTML = `<div class="hand">${MISS.map((m, i) => pinHTML({...m, big: false}, '', i).replace('class="pin ', `style="--y:${[10, 0, 0, 10, 0][i]}px" class="pin `)).join('')}</div>`;
 document.querySelectorAll('#mB .pin,#mA .pin').forEach(b => { b.style.cursor = 'default'; });
 // the in-stage noticeboard opens a floating board (a world object, not a screen panel)
 let stageBoard = null;
@@ -542,9 +556,11 @@ function openBoard() {
  if (stageBoard) return closeBoard();
  const z = $('#stage'); stageBoard = document.createElement('div'); stageBoard.style.cssText = 'position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,calc(100% - 24px));max-height:92%;overflow:auto;border-radius:8px;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)';
  stageBoard.innerHTML = boardHTML(); z.appendChild(stageBoard);
- stageBoard.querySelectorAll('.pin').forEach(b => b.onclick = () => { const m = MISS.find(x => x.id === b.dataset.m); if (b.classList.contains('locked')) { say('Place a Moon tile first.'); return; } closeBoard(); goMission(m); });
+ stageBoard.querySelectorAll('.pin').forEach(b => b.onclick = () => { const m = MISS.find(x => x.id === b.dataset.m); if (b.classList.contains('locked')) { say('Place a Moon tile first.'); return; } closeBoard(); locate(m); });
 }
 function closeBoard() { stageBoard?.remove(); stageBoard = null; }
+function locate(m) { // the noticeboard only points: the medallion is the entry point
+ const p = place(m.at); main.style.transformOrigin = `${p.x / 900 * 100}% ${p.y / 640 * 100}%`; main.style.transform = 'scale(1.7)'; setTimeout(() => main.style.transform = 'none', 2600); say('Step into the gold medallion to start: ' + m.t + '.'); }
 function goMission(m) {
  const p = place(m.at), svg = main; const sc = $('#scene');
  const ox = p.x / 900 * 100, oy = p.y / 640 * 100; svg.style.transformOrigin = `${ox}% ${oy}%`; svg.style.transform = 'scale(2.6)';
@@ -573,7 +589,7 @@ const mC = $('#mC'); boardSVG(mC, {mode:'pennants', earned:new Set(['moon-key','
 $('#chestDemo').innerHTML = `<div style="width:min(300px,90%)">${chestSVG(true, 4)}</div><div class="panel on" style="position:static;width:100%;max-width:340px;display:block"><div class="slots" id="slots2"></div></div>`;
 $('#slots2').innerHTML = CH.map((c, i) => `<div class="slot ${i < 4 ? '' : 'empty'}">${picHTML(c.id)}</div>`).join('');
 // ---------- table ----------
-const PL = {lab:'Science lab, Downtown', cellar:'Café cellar door, Downtown', cafe:'Coffee shop, Downtown', school:'High school, the centre', yard:"Abbie's yard, Abbie and Daddy's side", truck:'Black truck at the café curb', outpost:'Moon outpost (needs the Moon tile)', coaster:'Toy-car coaster, Abbie and Daddy\'s side (placeholder spot)', everywhere:'Comes by itself, no place'};
+const PL = {lab:'Science lab, Downtown', cellar:'Café cellar door, Downtown', cafe:'Coffee shop, Downtown', school:'High school, the centre', yard:"Abbie's yard, Abbie and Daddy's side", truck:'Black truck at the bakery curb', outpost:'Moon outpost (needs the Moon tile)', coaster:'Toy-car coaster, Abbie and Daddy\'s side (placeholder spot)', everywhere:'Comes by itself, no place'};
 function renderTable() { $('#ctable').innerHTML = CH.map((c, i) => `<tr><td>${i + 1}</td><td>${c.name}${state.earned.has(c.id) ? ' ✓' : ''}</td><td>${c.how}</td><td>${PL[c.at]}</td></tr>`).join(''); }
 // ---------- jewellery box ----------
 const hung = [];
@@ -610,14 +626,8 @@ function renderFloat() {
  let h = '';
  CH.filter(c => !state.earned.has(c.id) && c.at !== 'everywhere' && !(c.moon && !state.tiles.moon)).forEach((c, i) => { const p = place(c.at), o = FOFF[c.id] || [0, 0], x = p.x + o[0], y = p.y + o[1] - 18;
   h += `<g transform="translate(${x},${y})" data-f="${c.id}" style="cursor:pointer"><ellipse cx="0" cy="${26}" rx="14" ry="4" fill="rgba(0,0,0,.28)" class="glow"/><g class="glint" style="animation-delay:${i * .2}s"><circle r="22" fill="rgba(255,226,122,.45)" class="glow"/><g class="spin" style="animation-delay:${i * .3}s"><foreignObject x="-17" y="-17" width="34" height="34"><div xmlns="http://www.w3.org/1999/xhtml" style="width:34px;height:34px;display:grid;place-items:center">${picHTML(c.id).replace('<img ', '<img style="width:34px;height:34px;object-fit:contain" ').replace('<svg ', '<svg style="width:34px;height:34px" ')}</div></foreignObject></g></g></g>`; });
- const MED = [{at:'cellar', k:'floppy', beam:'#7fd1ff', dx:0, dy:-8, g:'<rect x="-9" y="-9" width="18" height="18" rx="2" fill="#5a7fd1"/><rect x="-5" y="-9" width="10" height="7" fill="#e8ecf5"/><rect x="-5" y="2" width="10" height="7" fill="#2a3a6a"/>'},
- {at:'truck', k:'rocket', beam:'#ffb74a', dx:0, dy:-6, g:'<path d="M0-11c4 4 5 9 3 14h-6c-2-5-1-10 3-14z" fill="#e8ecf5"/><circle cx="0" cy="-3" r="2.2" fill="#5ab0e8"/><path d="M-5 3l-4 5 6-2M5 3l4 5-6-2" fill="#e5392d"/>'},
- {at:'school', k:'jump', beam:'#ff7aa8', dx:34, dy:-30, g:'<path d="M-9 8h18M-6 8V-2h12V8M-3-2v-6h6v6" fill="none" stroke="#e5739c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="0" cy="-11" r="2.4" fill="#e5739c"/>'},
- {at:'coaster', k:'coaster', beam:'#7dff9b', dx:0, dy:-6, g:'<path d="M-10 6Q-6-10 0 0T10-8" fill="none" stroke="#ff7a1a" stroke-width="3" stroke-linecap="round"/><circle cx="8" cy="-8" r="2.6" fill="#e5392d"/>'}];
-let md = '';
-MED.forEach((m, i) => { const p = place(m.at), x = p.x + m.dx, y = p.y + m.dy - 44;
- md += `<g data-med="${m.k}"><polygon points="${x - 7},${y} ${x + 7},${y} ${x + 3},-20 ${x - 3},-20" fill="${m.beam}" opacity=".55" class="glow" style="animation-delay:${i * .4}s"/><polygon points="${x - 2.5},${y} ${x + 2.5},${y} ${x + 1},-20 ${x - 1},-20" fill="#fff" opacity=".9"/><ellipse cx="${x}" cy="${y + 40}" rx="16" ry="5" fill="${m.beam}" opacity=".5" class="glow"/><g transform="translate(${x},${y})"><g class="glint" style="animation-delay:${i * .3}s"><circle r="17" fill="#ffd96a" stroke="#a87820" stroke-width="3"/><circle r="13" fill="#fffaf0" stroke="#e0a528" stroke-width="1.5"/>${m.g}</g></g></g>`; });
-fl.insertAdjacentHTML('beforeend', md + h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
+ const md = medalsSVG(state.tiles);
+ fl.insertAdjacentHTML('beforeend', md + h + '<circle id="flRing" r="0" fill="none" stroke="#ffd45a" stroke-width="3" opacity="0"/>');
  fl.querySelectorAll('[data-f]').forEach(n => n.onclick = e => { e.stopPropagation(); earn(n.dataset.f); });
  $('#flCnt').textContent = state.earned.size + ' of ' + CH.length + ' in the chest';
 }
