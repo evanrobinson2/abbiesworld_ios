@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>World Browser: Low-Fidelity Study</title>
+<style>
+:root{--bg:#f4f2ee;--ink:#222;--card:#fff;--line:#bbb;--soft:#666;--acc:#444}
+@media (prefers-color-scheme:dark){:root{--bg:#191919;--ink:#eee;--card:#262626;--line:#555;--soft:#aaa;--acc:#ddd}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:14px 16px 48px}h1{font-size:22px;margin:0 0 4px}h2{font-size:17px;margin:0 0 6px}
+.soft,small{color:var(--soft)}
+.tag{display:inline-block;font-size:12px;border:1px dashed var(--line);border-radius:4px;padding:1px 7px;margin-right:4px}
+.tag.mock{background:#ffe9a8;color:#4a3300;border:1px solid #d9b95a}.tag.na{background:#e3e3e3;color:#444;border:1px solid #aaa}
+@media (prefers-color-scheme:dark){.tag.na{background:#444;color:#ddd}}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.steps button,.btn{font:inherit;color:var(--ink);background:var(--card);border:2px solid var(--line);border-radius:6px;padding:8px 12px;cursor:pointer}
+.steps button[aria-selected=true],.btn.go{border-color:var(--ink);font-weight:700}
+.btn[disabled]{opacity:.5;cursor:not-allowed;border-style:dashed}
+.frame{border:2px solid var(--line);border-radius:10px;background:var(--card);padding:14px;min-height:340px}
+.wire{background:repeating-linear-gradient(45deg,#ddd,#ddd 6px,#e9e9e9 6px,#e9e9e9 12px);border:1px solid var(--line);border-radius:8px;display:grid;place-items:center;color:#555;font-size:13px}
+@media (prefers-color-scheme:dark){.wire{background:repeating-linear-gradient(45deg,#333,#333 6px,#3a3a3a 6px,#3a3a3a 12px);color:#bbb}}
+.world{height:200px;position:relative}.door{position:absolute;right:14px;bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:10px}
+.item{border:2px solid var(--line);border-radius:8px;padding:8px;background:var(--card);text-align:left;font:inherit;color:inherit;cursor:pointer}
+.item:hover{border-color:var(--ink)}.item .wire{height:90px;margin-bottom:6px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}.chip{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font:inherit;font-size:14px;background:var(--card);color:var(--ink);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media(max-width:600px){.two{grid-template-columns:1fr}}
+.note{border-left:4px solid var(--ink);padding:6px 10px;margin:10px 0;background:rgba(128,128,128,.12)}
+.opt{display:block;border:2px solid var(--line);border-radius:8px;padding:10px;margin:8px 0;cursor:pointer}
+.opt input{margin-right:8px}.opt.off{opacity:.55;border-style:dashed;cursor:not-allowed}
+.lock{font-size:13px}
+.q{border:1px solid var(--line);border-radius:8px;padding:10px;margin:8px 0;background:var(--card)}
+</style></head><body><main>
+<h1>World Browser: low-fidelity study</h1>
+<p class="soft">Round 1 of 3 for #617: <b>low fidelity</b> now, high fidelity and game-ready only after Evan's feedback. Everything is a grey-box mock with sample content. <span class="tag mock">mock</span> sample data or a picture of an idea · <span class="tag na">not available</span> behaviour that does not exist yet. Nothing here shares, bills or changes any privacy setting. <a href="/study/">Winchester flow study</a> · <a href="/studies/">All studies</a></p>
+
+<div class="steps" role="tablist" id="steps"></div>
+<div class="frame" id="frame"></div>
+
+<h2 style="margin-top:22px">What is mocked</h2>
+<ul class="soft"><li>All creations, creators, biomes and descriptions are invented samples; grey boxes stand for the 3D preview.</li>
+<li>"Add to my world" only changes this page's state. Nothing is saved or published.</li>
+<li>Private (paid) creation is shown as a choice only; no pricing, billing or privacy behaviour exists.</li>
+<li>Biome filter is one choice at a time. Faceted multi-select is left for a later round, on purpose.</li>
+<li>Quality tiers (Study, Indie, Pro) and Capture phases appear only as a source line on a creation. They are Capture's tiers, not this study's low, high, game-ready stages.</li></ul>
+
+<h2>Questions for Evan</h2>
+<div class="q"><b>1. Entry.</b> The browser opens from a door in the world (shown). Alternative: a card or a menu item. Which feels right?</div>
+<div class="q"><b>2. Shared by default, said before accepting.</b> The add step states plainly that the creation joins your world and the shared world, with private as a paid option. Is a checkbox-style choice right, or should the sentence alone do it?</div>
+<div class="q"><b>3. "Add" meaning.</b> Here, adding someone else's creation places a copy in your world and keeps credit to its creator. Should the creator's original stay linked, so updates can flow?</div>
+<div class="q"><b>4. Raw capture media.</b> Shown as never part of a creation's page, only the accepted derived creation. Should the browser ever show the inspiration (a photo, say) next to a creation, if the creator allows it?</div>
+<div class="q"><b>5. Owner view.</b> Private creations appear only in "My creations" with a lock, never in discovery. Enough, or do you want a visible "private" count to others?</div>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const STEPS=[['world','1 · Default world'],['browse','2 · Browse'],['preview','3 · Preview'],['add','4 · Add to my world'],['mine','5 · My creations (owner)']];
+const BIOMES=['Meadow','Forest','Desert','Coast','Snow','Moon'];
+const ITEMS=[
+{id:1,n:'Windmill Hill',b:'Meadow',by:'Sample creator A',q:'Study',d:'Sheep wander up to the hill at dusk. The windmill spins faster when wind picks up, and a bell rings at sunset.'},
+{id:2,n:'Pine Hollow',b:'Forest',by:'Sample creator B',q:'Indie',d:'Deer graze at the edge and hide when you run. Trees can be climbed; fireflies appear after dark.'},
+{id:3,n:'Dune Market',b:'Desert',by:'Sample creator C',q:'Study',d:'A market stall you can trade at. Heat shimmer slows walking at noon; shade tents restore energy.'},
+{id:4,n:'Tide Pool Dock',b:'Coast',by:'Sample creator D',q:'Pro',d:'A dock with fishing spots. Tide rises and falls with the day; crabs gather on the rocks.'},
+{id:5,n:'Igloo Row',b:'Snow',by:'Sample creator E',q:'Study',d:'Snowfall builds up on roofs. Characters head indoors when the storm bell rings.'},
+{id:6,n:'Crater Garden',b:'Moon',by:'Sample creator F',q:'Indie',d:'Low gravity makes jumps long. Plants glow when the radio tower is on.'}];
+const S={step:'world',filter:'All',sel:null,mine:[{n:'My Barn Study',b:'Meadow',v:'shared'}],shared:true,added:false,tried:false};
+function nav(){$('#steps').innerHTML=STEPS.map(([k,l])=>`<button role="tab" data-s="${k}" aria-selected="${S.step===k}">${l}</button>`).join('')}
+const wire=(t,h)=>`<div class="wire" style="height:${h||90}px">${t}</div>`;
+function view(){nav();const f=$('#frame');
+if(S.step==='world'){f.innerHTML=`<h2>Your default world <span class="tag mock">mock</span></h2><p class="soft">You start at home. A door in the world opens the World Browser; no words on the screen.</p>
+<div class="wire world">3D view of your world (grey box)<button class="btn go door" data-go="browse">🚪 World Browser</button></div>`}
+if(S.step==='browse'){const L=ITEMS.filter(i=>S.filter==='All'||i.b===S.filter);
+f.innerHTML=`<h2>Shared creations <span class="tag mock">sample data</span></h2><p class="soft">Creations other people accepted into the shared world.</p>
+<div class="chips" id="chips">${['All',...BIOMES].map(b=>`<button class="chip" data-f="${b}" aria-pressed="${S.filter===b}">${b}</button>`).join('')}</div>
+<small class="soft">Biome only, one at a time. <span class="tag na">not available</span> combining several facets (later).</small>
+<div class="grid">${L.map(i=>`<button class="item" data-p="${i.id}">${wire('preview',90)}<b>${i.n}</b><br><small>${i.b} · by ${i.by}</small></button>`).join('')||'<p class="soft">Nothing in this biome yet.</p>'}</div>
+<p><button class="btn" data-go="world">← Back to my world</button></p>`}
+if(S.step==='preview'){const i=ITEMS.find(x=>x.id===S.sel)||ITEMS[0];
+f.innerHTML=`<h2>${i.n} <span class="tag mock">sample</span></h2><div class="two"><div>${wire('interactive 3D preview (grey box)<br>try it: tap to spin',230)}<small class="soft">Preview runs separately; it does not touch your world.</small></div>
+<div><p><b>Biome:</b> ${i.b}</p><p><b>How it behaves in the game</b><br>${i.d}</p><p class="soft"><small>Made by ${i.by} with Capture, ${i.q} tier. Normalized for the game: biome and behaviour above. The original photo or text is not shown or shared.</small></p>
+<p><button class="btn go" data-go="add">Add to my world</button> <button class="btn" data-go="browse">← Back</button></p></div></div>`}
+if(S.step==='add'){const i=ITEMS.find(x=>x.id===S.sel)||ITEMS[0];
+f.innerHTML=`<h2>Add ${i.n} to my world</h2>
+${S.added?`<div class="note"><b>Added (mock).</b> A copy now sits in your world, credited to ${i.by}. Nothing was really saved.</div><p><button class="btn" data-go="browse">Keep browsing</button> <button class="btn" data-go="mine">See My creations</button></p>`:`<p>It will appear in your world, next to what you already have.</p>
+<div class="note"><b>Before you accept:</b> your own creations join your world <b>and the shared world</b> by default. Private is a paid option.</div>
+<label class="opt"><input type="radio" name="vis" ${S.shared?'checked':''} data-v="shared"><b>Shared (default)</b><br><small>Others can find it in the World Browser.</small></label>
+<label class="opt off"><input type="radio" name="vis" disabled data-v="private"><b>Private, owner only <span class="tag na">not available</span></b><br><small>Paid option. Only you see it; it never appears in discovery. No pricing exists yet.</small></label>
+<p><small class="soft">This choice matters for what you make with Capture. Adding a creation made by someone else only places it in your world.</small></p>
+<p><button class="btn go" data-act="add">Add to my world</button> <button class="btn" data-go="preview">← Back</button></p>`}`}
+if(S.step==='mine'){f.innerHTML=`<h2>My creations (owner view) <span class="tag mock">mock</span></h2><p class="soft">Only you see this page.</p>
+<div class="grid">${S.mine.map(m=>`<div class="item">${wire('preview',90)}<b>${m.n}</b><br><small>${m.b} · ${m.v==='private'?'🔒 Private, owner only':'Shared'}</small></div>`).join('')}
+${S.added?`<div class="item">${wire('preview',90)}<b>${(ITEMS.find(x=>x.id===S.sel)||ITEMS[0]).n}</b><br><small>Added from the shared world</small></div>`:''}
+<div class="item" style="opacity:.6;border-style:dashed">${wire('preview',90)}<b>Example private creation</b><br><small>🔒 Private, owner only · <span class="tag na">not available</span> paid option</small></div></div>
+<div class="note">Private creations show here with a lock and never in "Shared creations". Raw capture media (photos, audio) is separate from the accepted creation and is not listed here.</div>
+<p><button class="btn" data-go="world">← Back to my world</button></p>`}}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-s],[data-go],[data-f],[data-p],[data-act]');if(!t)return;
+if(t.dataset.s||t.dataset.go){S.step=t.dataset.s||t.dataset.go;if(S.step==='add')S.added=false}
+if(t.dataset.f)S.filter=t.dataset.f;if(t.dataset.p){S.sel=+t.dataset.p;S.step='preview'}if(t.dataset.act==='add')S.added=true;view()});
+view();
+</script></body></html>
