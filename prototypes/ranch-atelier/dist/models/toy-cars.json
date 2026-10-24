@@ -27,6 +27,27 @@
       "glb": "/models/stl-car-sedan/model.glb",
       "credit": "Jibraan Ahmed, CC BY 4.0, https://www.printables.com/model/834935-low-poly-car",
       "yaw": 0
+    },
+    {
+      "id": "stl-car-bus",
+      "name": "Camper bus",
+      "glb": "/models/stl-car-bus/model.glb",
+      "credit": "ChelsCCT (Chelsey Creates Things), CC BY 4.0, https://www.printables.com/model/13466-volkswagen-bus-1970s",
+      "yaw": 0
+    },
+    {
+      "id": "stl-car-cage-kart",
+      "name": "Roll-cage buggy",
+      "glb": "/models/stl-car-cage-kart/model.glb",
+      "credit": "Joe Naab, CC0, https://www.printables.com/model/597582-go-kart-model",
+      "yaw": 0
+    },
+    {
+      "id": "stl-car-small-truck",
+      "name": "Truck cab",
+      "glb": "/models/stl-car-small-truck/model.glb",
+      "credit": "Pusesis productions, CC0, https://www.printables.com/model/1081809-small-truck-toy",
+      "yaw": 0
     }
   ]
 }

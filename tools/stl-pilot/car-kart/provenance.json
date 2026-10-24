@@ -1,0 +1,23 @@
+{
+  "slug": "car-kart",
+  "title": "Thing ico Go-Kart with Driver",
+  "model_url": "https://www.printables.com/model/440954-thing-ico-go-kart-with-driver",
+  "author": "palamut0815",
+  "author_url": "https://www.printables.com/@palamut0815_295594",
+  "licence": "Creative Commons Zero / Public Domain (CC0 1.0)",
+  "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "category": "toy car",
+  "origin": "remix of 'Go-Kart with Driver' by tjans (thingiverse.com); the Printables page says it carries a track logo",
+  "attribution_required": false,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "c70522380f47b42547bfaf5a338214b9486b1cbf1ebd2c1001710f32ab27999d",
+      "bytes": 18696588
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

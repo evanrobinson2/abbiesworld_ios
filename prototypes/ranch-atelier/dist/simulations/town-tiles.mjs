@@ -1,13 +1,11 @@
 // The town's tile cards, made real (AW-STUDY-0025 Tile pull and print; Evan 2026-10-23: "a beautiful card designer card
-// designed here ... leveraging those beautiful 3d hexes"). Two things, both presentation layer only:
-//  1. cardArt(hex): the hex's own face, a still from above drawn by the town renderer, cut to the hex's shape. It replaces
-//     the drawn stand-in on the card in the bottom hand (town-hand.mjs).
-//  2. inspectHex(hex): tap a Winchester card and the card flips into the designer with that hex live in 3D, turning slowly
+// designed here ... leveraging those beautiful 3d hexes"). Presentation layer only.
+// inspectHex(hex): tap a Winchester card and the card flips into the designer with that hex live in 3D, turning slowly
 //     and draggable. Inspect only: Winchester's contents belong to the hex city thread, so there is no Accept here.
 // Nothing is added to the scene. A separate camera renders into a render target, and the player's view is untouched.
 import * as T from 'three';
 import {openCustomizer, installTilePullStyle} from './tile-pull.mjs?v=7';
-import {ZONES} from './town-hand.mjs?v=2';
+import {ZONES} from './town-hand.mjs?v=3';
 
 const R3 = Math.sqrt(3), EL = 48 * Math.PI / 180, FOV = 32;
 const T_ = () => window.AbbieTown;
@@ -32,11 +30,6 @@ function shoot(hex, yaw, size, out) {
   x.save(); x.beginPath(); corners(c, R).forEach((p, i) => { p.project(cam); const px = (p.x * .5 + .5) * size, py = (1 - (p.y * .5 + .5)) * size; i ? x.lineTo(px, py) : x.moveTo(px, py); }); x.closePath(); x.clip();
   x.translate(0, size); x.scale(1, -1); x.drawImage(tmp, 0, 0); x.restore();
   return cv;
-}
-
-// The card's art: a still of the hex, drawn once the town has something to show.
-export function cardArt(hex) {
-  try { const cv = shoot(hex, Math.PI * .08, 384); return cv ? cv.toDataURL('image/png') : null; } catch { return null; }
 }
 
 // The designer, opened out of the hex's card. hero = the card's button in the hand.

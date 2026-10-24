@@ -2137,7 +2137,7 @@ const town = window.AbbieTown, stage = town?.stage;
 if (document.body.classList.contains('play')) {
  mountTownHud({stage, board: town?.board});
  // the board's tiles as cards in the bottom hand (tap: fly to that hex; the Tile pull thread can take the tap over)
- Promise.all([import('/simulations/town-hand.mjs?v=2'), import('/simulations/town-tiles.mjs?v=3')]).then(([h, t]) => { t.mountTownTiles(); h.mountTownHand({board: town?.board, visit: id => town.visit('dio-' + id), faceArt: t.cardArt}); }).catch(e => console.warn('Town hand', e));
+ Promise.all([import('/simulations/town-hand.mjs?v=3'), import('/simulations/town-tiles.mjs?v=5')]).then(([m, t]) => { t.mountTownTiles(); m.mountTownHand({board: town?.board, stage, visit: id => town.visit('dio-' + id)}); }).catch(e => console.warn('Town hand', e));
 }
 const EXPO = h => 0.42 + 0.63 * Math.max(0, Math.sin(Math.PI * (h - 5) / 14)) ** 0.6; // dim from dusk to dawn, the town's own 1.05 at midday
 addEventListener('aw-world-clock', e => { if (stage?.renderer) stage.renderer.toneMappingExposure = EXPO(e.detail.hour) * (e.detail.weather === 'Rain' ? 0.82 : e.detail.weather === 'Cloudy' ? 0.92 : 1); });
