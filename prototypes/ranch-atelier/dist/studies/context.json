@@ -3188,6 +3188,67 @@
           "note": "Copyright Office declined a video game preservation exemption in 2024"
         }
       ]
+    },
+    "carwash": {
+      "recorded": "2026-10-24, while writing the study",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Kart study: the Effect Hunt driver and car mode the carwash rides on",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/kart/KART_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Music Bible: D major, 124 bpm, 3+3+2",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/music/MUSIC_BIBLE.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL.md: no words, world layer vs presentation layer",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Composer README: ElevenLabs Music API, licence check, music-takes workflow",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/composer/README.md"
+        },
+        {
+          "k": "devblog",
+          "t": "PowerWash Simulator devs on making cleaning fun (Kotaku): instant dirt reveal, no fail state, layered difficulty",
+          "href": "https://kotaku.com/powerwash-sim-devs-on-making-cleaning-fun-advanced-cro-1847319502",
+          "note": "read in full: the reveal, ongoing feedback and optional challenge mode became the pre-soak and rinse stations"
+        },
+        {
+          "k": "devblog",
+          "t": "Road to the IGF: Ghost Town Games' Overcooked (Game Developer)",
+          "href": "https://gamedeveloper.com/design/road-to-the-igf-ghost-town-games-i-overcooked-i-",
+          "note": "read in full: stations and shared pressure, restrictions added to prevent frustration; tuned by watching people play"
+        },
+        {
+          "k": "design",
+          "t": "The Develop Post-Mortem: Overcooked (MCV)",
+          "href": "https://mcvuk.com/the-develop-post-mortem-overcooked/",
+          "note": "found by search, not read in full"
+        },
+        {
+          "k": "design",
+          "t": "PowerWash Simulator 2: how FuturLab built the sequel (Xbox Wire)",
+          "href": "https://news.xbox.com/en-us/2025/10/23/powerwash-simulator-2-how-futurlab-built-a-sparking-sequel/",
+          "note": "found by search, not read in full"
+        },
+        {
+          "k": "design",
+          "t": "The Toca Boca story and its open-ended play",
+          "href": "https://collect.readwriterespond.com/toca-boca-story",
+          "note": "found by search, not read in full; the no-fail, toy-box feel"
+        },
+        {
+          "k": "research",
+          "t": "Rose Royce, Car Wash (the song the anthem is inspired by, not copied from)",
+          "href": "https://en.wikipedia.org/wiki/Car_Wash_(song)",
+          "note": "copyrighted; licensing is the route for the real one"
+        }
+      ]
     }
   }
 }
