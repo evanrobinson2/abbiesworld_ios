@@ -120,7 +120,7 @@ def pretty(p, hit):
     return s[:1].upper() + s[1:]
 
 def sort_key(p):
-    return (0 if '/models/' in p else 1 if 'sandbox2' not in p and p.startswith(DIST) else 2, len(p))
+    return (0 if p.startswith(DIST + '/models/') else 1 if '/models/' in p else 2 if 'sandbox2' not in p and p.startswith(DIST) else 3, len(p))
 
 out = []
 for h, paths in by_hash.items():
