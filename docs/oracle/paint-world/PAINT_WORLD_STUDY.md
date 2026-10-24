@@ -80,3 +80,9 @@ The Paint card is no longer a card in the hand. Evan: effect cards that did not 
 - Superseded 2026-10-24 (Evan, issue #529: freeform sandbox): no cooldown and no running out. The tray holds `FULL` (8) balls at all times, each its own colour and size (`rollBall`), refills as you throw, and the slot machine can be pulled whenever you like to reshuffle the whole tray; a win deals only big and giant balls. `SPIN_COOLDOWN_MS` is 0.
 - Placement is a guess under the top bar (right edge); the Design lead owns the overall layout, so the position is two CSS lines in `paint-hud.mjs`.
 - The god-view deck's `paint-rain` event still grants a full handful with no spin.
+
+## Water balloons that carry their type (Evan, 2026-10-24)
+Evan: the balls should look like water balloons, and the balls matching the effect cards should carry those types' characteristics.
+- `paint-world/balloon.mjs`: a translucent skin, knotted neck, water sloshing inside, a resting wobble, squash and stretch along the motion while held, and a pop of droplets when it is let go. Types: paint (colour of the paint), fireball (ember glow, flickering flames), waterball (cool blue, rising bubbles), cats-dogs (fur tan, ears, paw print), tie-dye (a turning swirl). The ids are the world effect cards' own ids, so a card and its balloon are one thing.
+- About one ball in four is a special balloon (`SPECIAL_ODDS`). Throwing one lands its effect where it was thrown instead of painting: `ranch:play-event` with `{id, at: {x, z}}`; `world-effects.mjs` `play(id, at)` places the effect there (otherwise where the player is looking).
+- Preview: `preview/paint-balloons/index.html`.

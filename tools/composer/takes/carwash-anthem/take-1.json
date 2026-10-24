@@ -1,0 +1,113 @@
+{
+ "id": "carwash-anthem",
+ "take": 1,
+ "title": "Wash Day Anthem (carwash, 4 minutes)",
+ "kind": "bed",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "briefs": "briefs-carwash.json",
+ "song_id": "H41bdiq7JwDonPuyZqz2",
+ "request": {
+  "prompt": "polished 1970s-inspired funk production, live band feel, warm analog sound, wonder, warmth, optimism and a little mischief, syncopated 3+3+2 rhythm in 4/4, instrumental, D major, 124 bpm, 1970s disco-funk, handclaps, wah guitar, funky bass, brass stabs, clavinet, congas, string swoops. Pull in: vinyl-warm intro, handclaps count in, bass walks up to the one. Pre-soak: tight funk groove, wah guitar chicks on the offbeat, water-drip percussion. Foam: bubbly Rhodes and clavinet, bouncing bass, shaker, playful horn stabs answer each other. Brushes: full groove, driving drums, big brass riff in 3+3+2, handclaps on 2 and 4, string swoops. Rinse: breakdown, bass and congas, filtered sweep, tension rising. Wax and dry: groove returns smooth and shiny, wah guitar solo, hi-hat shimmer. Detailing: sparkling vibraphone and glockenspiel, light and proud, bass keeps the groove. Finale: big brass hit, final riff, rings out on a clean D major chord. No humming, no 8-bit, no chiptune, no retro video-game music, no cheesy, no kazoo, no horror, no aggressive, no distorted guitar, no dubstep, no vocals, no lyrics, no singing, no MIDI, no sequenced",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 239940
+ },
+ "date": "2026-10-24",
+ "sha256": "a02baa99a399522b5b8931c9e6a711927c35cacbf0ca6fb4cbd39e9f36facb9f",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "trace": {
+  "identity": "abbies-world-theme",
+  "bible": "docs/music/MUSIC_BIBLE.md",
+  "source_motif": "hook-late",
+  "motif_reference": "tools/composer/motifs/hook-late.mid",
+  "permitted_reuse": "Abbie's World game, trailers and soundtrack (ElevenLabs paid-plan terms, indie game under $500k revenue); not for film, TV or radio",
+  "family": "score",
+  "world": "town",
+  "place": "the carwash in Winchester",
+  "situation": "minigame",
+  "mode": "base",
+  "key": "D major",
+  "bpm": 124,
+  "meter": "4/4, 3+3+2",
+  "instrumentation": "handclaps, wah guitar, funky bass, clavinet, Rhodes, brass stabs, congas, strings",
+  "mood": "sunny, proud, a little cheeky",
+  "intensity": 0.8,
+  "structure": "one section per station, 124 bars (about 4:00)",
+  "loop": false,
+  "original_work": "original 1970s-style disco funk; inspired by the feel of carwash anthems, not a cover or imitation of any song",
+  "briefs_about": "Carwash anthem (AW-STUDY-0060). One take is a whole run: each section is one station of the carwash, so the music and the stage change together. Instrumental, real produced audio (no MIDI); original, not a cover.",
+  "styles": [
+   "D major",
+   "124 bpm",
+   "1970s disco-funk",
+   "handclaps",
+   "wah guitar",
+   "funky bass",
+   "brass stabs",
+   "clavinet",
+   "congas",
+   "string swoops"
+  ],
+  "sections": [
+   [
+    "Pull in",
+    [
+     "vinyl-warm intro, handclaps count in, bass walks up to the one"
+    ],
+    15480
+   ],
+   [
+    "Pre-soak",
+    [
+     "tight funk groove, wah guitar chicks on the offbeat, water-drip percussion"
+    ],
+    30960
+   ],
+   [
+    "Foam",
+    [
+     "bubbly Rhodes and clavinet, bouncing bass, shaker, playful horn stabs answer each other"
+    ],
+    30960
+   ],
+   [
+    "Brushes",
+    [
+     "full groove, driving drums, big brass riff in 3+3+2, handclaps on 2 and 4, string swoops"
+    ],
+    46440
+   ],
+   [
+    "Rinse",
+    [
+     "breakdown, bass and congas, filtered sweep, tension rising"
+    ],
+    30960
+   ],
+   [
+    "Wax and dry",
+    [
+     "groove returns smooth and shiny, wah guitar solo, hi-hat shimmer"
+    ],
+    30960
+   ],
+   [
+    "Detailing",
+    [
+     "sparkling vibraphone and glockenspiel, light and proud, bass keeps the groove"
+    ],
+    30960
+   ],
+   [
+    "Finale",
+    [
+     "big brass hit, final riff, rings out on a clean D major chord"
+    ],
+    23220
+   ]
+  ],
+  "duration_ms": 239940
+ },
+ "master": "take-1.master.mp3"
+}

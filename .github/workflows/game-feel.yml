@@ -1,6 +1,7 @@
 # Game feel PR check: CLAUDE.md "How Abbie's World shows information", enforced.
 # 1. lint: no engine helpers, world masks, unfiltered perception or web vocabulary in new player-facing code.
 # 2. cover: the Ranch /sandbox may not hide more of the world than it did before the change (phone and desktop).
+#    Same job, then the town HUD check: /town keeps ONE top glass bar and never shows the old bottom bar (issue #544).
 name: game-feel
 on:
   pull_request:
@@ -39,3 +40,9 @@ jobs:
       - if: always() && steps.scope.outputs.run
         uses: actions/upload-artifact@v4
         with: {name: world-cover, path: 'tools/game-feel-check/*.png'}
+      - if: steps.scope.outputs.run
+        working-directory: tools/game-feel-check
+        run: SHOT_PREFIX=town node town-hud-check.mjs ../../prototypes/ranch-atelier/dist town-hud
+      - if: always() && steps.scope.outputs.run
+        uses: actions/upload-artifact@v4
+        with: {name: town-hud, path: 'tools/game-feel-check/town-hud-*.png'}

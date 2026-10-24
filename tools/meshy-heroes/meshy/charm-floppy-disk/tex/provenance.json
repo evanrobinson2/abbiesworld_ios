@@ -1,0 +1,17 @@
+{
+ "job": "charm-floppy-disk-tex",
+ "tasks": [
+  {
+   "stage": "retexture",
+   "task_id": "01a16b56-3998-7074-8ce9-2c78c93706f1",
+   "credits": 10,
+   "params": {
+    "input_task_id": "01a16a97-0511-7577-8309-9e59be80de0c",
+    "enable_original_uv": true,
+    "enable_pbr": true
+   },
+   "image_style": "tools/meshy-heroes/refs/charm-floppy-disk/pick.png"
+  }
+ ],
+ "credits": 10
+}
