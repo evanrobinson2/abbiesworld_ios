@@ -141,6 +141,17 @@ export function targets() {
  }
  return out;
 }
+// The favour a backpack item belongs to: the object she is carrying for an open favour (with where she must go next), or the
+// reward of a finished one (no next place). Null for anything else. For the "help me" close-up: show it, say it again, point the way.
+export function forItem(itemId) {
+ const v = read();
+ for (const [id, s] of Object.entries(v.taken)) {
+  const t = tpl(id); if (!t) continue;
+  if (t.item?.id === itemId && !s.doneAt) { const st = t.steps[s.stepsDone]; return {quest: view(t, s), next: st ? {at: st.at, do: st.do, say: st.say} : null}; }
+  if (t.reward.id === itemId && s.doneAt) return {quest: view(t, s), next: null};
+ }
+ return null;
+}
 async function reward(q) {
  try {
   const p = pack() || (await import('./inventory.mjs')).inventory();

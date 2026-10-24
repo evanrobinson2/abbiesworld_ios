@@ -6,7 +6,7 @@
 // World layer: the people are small low-poly figures standing by their place, so the town's own characters can see them.
 // Presentation layer: the ask is a speech bubble on the person (spatial), with a little mark over anyone who has an ask.
 // Visits: when the camera settles close over one of the quest places, report({did: 'visit', at}) ticks off matching steps.
-import {GIVERS, TEMPLATES, offer, accept, decline, report} from '../quests.mjs?v=1';
+import {GIVERS, TEMPLATES, offer, accept, decline, report} from '../quests.mjs?v=2';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 
 // finished library characters in place of the stand-ins (Evan, 2026-10-24: "so why isn't that in the game?"). A giver without a model keeps its stand-in.
@@ -104,7 +104,8 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
   if (talking) { const s = toScreen(talking, 5.5); if (!s || (shutAt && performance.now() > shutAt)) hush(); else { bubble.style.left = s[0] + 'px'; bubble.style.top = s[1] + 'px'; } }
  })();
  // the quest places she is sent to light up (quest-guide.mjs); the lights follow the favours she has taken on
- import('./quest-guide.mjs').then(m => { town.questGuide = m.mountQuestGuide({THREE: T, scene: town.scene, camera, spots: Object.fromEntries(Object.keys(SPOT).map(at => [at, spotOf(at)?.g]).filter(([, g]) => g))}); }).catch(e => console.warn('quest guide', e));
+ import('./quest-guide.mjs?v=2').then(m => { town.questGuide ||= m.mountQuestGuide({THREE: T, scene: town.scene, camera, canvas, spots: at => spotOf(at)?.g, fallback: at => { const p = people.find(x => GIVERS[x.userData.giver]?.at === at); return p ? p.getWorldPosition(new T.Vector3()) : null; }, fly: (p, o) => town.stage.flyTo(p, o)}); }).catch(e => console.warn('quest guide', e));
+ import('./quest-help.mjs?v=1').then(m => m.mountHelper(town)).catch(e => console.warn('quest help', e)); // taking her object out of the backpack: close-up, the message again, the camera on its way
  return {people, talk};
 }
 
