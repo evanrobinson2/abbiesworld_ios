@@ -1770,6 +1770,30 @@
           "t": "Frank Thomas and Ollie Johnston, the 12 principles of animation (The Illusion of Life)",
           "href": "https://en.wikipedia.org/wiki/Twelve_basic_principles_of_animation",
           "note": "Weight, anticipation, follow-through and arcs are four of the six scores"
+        },
+        {
+          "k": "research",
+          "t": "Blender 5.2 LTS release page",
+          "href": "https://www.blender.org/download/releases/5-2/",
+          "note": "Issue #321: pins the biped recipe to 5.2 LTS (supported to July 2028)"
+        },
+        {
+          "k": "research",
+          "t": "glTF 2.0 specification: skins, JOINTS_n and WEIGHTS_n",
+          "href": "https://registry.khronos.org/glTF/specs/2.0/glTF-2.0.html",
+          "note": "Why four influences per vertex is a hard rule"
+        },
+        {
+          "k": "research",
+          "t": "UniRig (arXiv 2504.12451) and MPFB 2",
+          "href": "https://arxiv.org/abs/2504.12451",
+          "note": "Auto-rigging and parametric humans, kept as hypotheses and references, not adopted"
+        },
+        {
+          "k": "canon",
+          "t": "Character modeling research and Character Builder plan (issue #321)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/research/character-modeling-2026.md",
+          "note": "Budgets are targets until profiled on a device"
         }
       ],
       "recorded": "2026-10-23, by the study as it was made"
