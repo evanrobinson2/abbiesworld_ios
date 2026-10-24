@@ -59,7 +59,7 @@ body:not(.tucked) #back{top:calc(max(12px,env(safe-area-inset-top)) + 84px)}
 import * as T from 'three';
 import {buildTrack, TRACK_30S, trackMeshes, poseAt, postFX} from '/simulations/coaster-kit.mjs';
 import {CARS, buildCar} from '/simulations/coaster-cars.mjs';
-import {coasterAudio} from '/simulations/coaster-audio.mjs';
+import {coasterAudio} from '/simulations/coaster-audio.mjs?v=3';
 import {buildWorld, buildGates, HEX_C} from './coaster-world.mjs';
 import {TOON_LOOKS, toonify} from '/simulations/toon-kit.mjs';
 const opt = async p => { try { return await import(p); } catch { return {}; } };
