@@ -33,10 +33,10 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   // the strip's controls drive the ride's world: night, then rain
   await p.click('#v2-chrono .ch-dial').catch(() => {}); await p.waitForTimeout(800); await shot('14-strip-open');
   await p.evaluate(() => { const b = id => document.getElementById(id)?.click(); b('scene-clock-control'); b('scene-clock-control'); b('scene-weather-control'); b('scene-weather-control'); }); await p.waitForTimeout(4000); await shot('15-night-rain');
+  const fin = await p.evaluate(() => ({mode: coaster.S.mode})); if (fin.mode !== 'end') throw new Error('the ride did not reach its finish: ' + fin.mode);
+  console.log(JSON.stringify(await p.evaluate(() => ({score: coaster.SC.total, medal: coaster.SC.medal(), stars: coaster.S.stars, mode: coaster.S.mode, won: coaster.S.won, car: coaster.car.userData.def.id, photo: !!coaster.S.photo}))));
   // ride again: the run is on the scoreboard and the garage comes back
   await p.click('#again'); await until(() => coaster.S.mode === 'zoom'); await p.waitForTimeout(2500); await shot('16-again');
   console.log(JSON.stringify(await p.evaluate(() => ({board: coaster.SB.rows().length, score: coaster.SC.total}))));
-  const fin = await p.evaluate(() => ({mode: coaster.S.mode})); if (fin.mode !== 'end') throw new Error('the ride did not reach its finish: ' + fin.mode);
-  console.log(JSON.stringify(await p.evaluate(() => ({score: coaster.SC.total, medal: coaster.SC.medal(), stars: coaster.S.stars, mode: coaster.S.mode, won: coaster.S.won, car: coaster.car.userData.def.id, photo: !!coaster.S.photo}))));
   await b.close(); console.log('GAME-TEST PASS coaster');
 })();
