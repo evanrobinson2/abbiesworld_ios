@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<title>AW-STUDY-0066 - Skate-Park Rail Racer</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="Stage 1, low fidelity: the toy-car coaster reimagined as a complete arcade rail racer. Pick a car, race the clock, earn an achievement, unwrap a prize, unbox a collectible car and drive it next time.">
+<style>
+:root{--bg:#fff6e5;--paper:#fffdf7;--ink:#26323f;--muted:#5d6b7a;--line:#ead9bd;--accent:#e85d04;--teal:#0e8fa1;--display:ui-rounded,"SF Pro Rounded",system-ui,sans-serif;--mono:ui-monospace,Menlo,monospace;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#16222c;--paper:#1d2d3a;--ink:#f4efe4;--muted:#a9b8c6;--line:#2f4457;--accent:#ff9a4a;--teal:#5fd3e3;color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:20px max(16px,env(safe-area-inset-right,0px)) 64px max(16px,env(safe-area-inset-left,0px))}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:44px;min-width:0}
+h1,h2{font-family:var(--display);margin:0;text-wrap:balance} h1{font-size:clamp(40px,7vw,68px);line-height:.95;color:var(--accent)} h2{font-size:28px}
+p{margin:0;max-width:68ch} .muted{color:var(--muted)} section,header{display:grid;gap:14px}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.cta{display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:0 28px;border-radius:999px;background:linear-gradient(180deg,#ffb24a,#ff7a14);color:#fff;font:800 20px var(--display);text-decoration:none;justify-self:start;box-shadow:0 8px 22px rgba(255,122,20,.4)}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+figure{margin:0;display:grid;gap:6px;min-width:0;align-content:start}
+figure img{width:100%;aspect-ratio:1/2;object-fit:cover;border-radius:14px;display:block;background:#000;border:1px solid var(--line)}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)} figcaption b{color:var(--ink)}
+.card{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;font-size:14px} td,th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top} th{font:600 11px/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--teal)}
+ol,ul{margin:0;padding-left:20px;display:grid;gap:6px;max-width:72ch}
+code{font:12.5px var(--mono)} .tag{display:inline-block;font:800 11px var(--mono);letter-spacing:.1em;padding:3px 7px;border-radius:6px;background:#ffcf3a;color:#3a2a00}
+</style>
+<div class="wrap">
+ <header>
+  <div class="eyebrow">AW-STUDY-0066 · Stage 1 · low fidelity</div>
+  <h1>Skate-Park Rail Racer</h1>
+  <p class="muted">Evan, 2026-10-24: reimagine the toy-car coaster at Winchester's skate park as a complete arcade rail-racing game. Players pick a car, race, earn achievements (including race times), win a wrapped prize, unwrap it, unbox a new car, and later use it. This is the whole arcade loop, not a bare ride: it is built for a phone first.</p>
+  <a class="cta" href="play.html">▶ Play the study</a>
+  <p class="muted">Feedback first, then hi-fi, then game-ready. Nothing here is live in the town: it is experimental (<code>arcade-racer</code> in the game registry).</p>
+ </header>
+
+ <section>
+  <h2>The whole loop, as played</h2>
+  <div class="shots">
+   <figure><img src="img/1-attract.jpg" alt="The attract screen: a neon sign RAIL RACER over the orbiting skate-park track and a big PLAY button"><figcaption><b>1. Attract.</b> The track turns slowly behind the sign. One big button.</figcaption></figure>
+   <figure><img src="img/2-ask.jpg" alt="The question: Ready to set your first time? with Race the clock, Practice and Garage"><figcaption><b>2. The question.</b> "Ready to beat your best?" One sentence of rules, a read-aloud button (mock), Practice or race.</figcaption></figure>
+   <figure><img src="img/3-garage.jpg" alt="The garage: Sunny Buggy on a turntable, paint swatches, locked cars with their achievements, the next goal"><figcaption><b>3. Garage.</b> Owned versus earnable, a turntable you can drag, paint, honk, and the next achievement with its bar.</figcaption></figure>
+   <figure><img src="img/4-race.jpg" alt="First-person race: timer, progress line, an orb and a cone ahead, hint line"><figcaption><b>4. Race.</b> Tap left or right to change lane. Orbs speed you up, cones slow you. Practice adds a hint line.</figcaption></figure>
+   <figure><img src="img/5-results.jpg" alt="Results: finish time, personal best, achievement earned, next goal, this-device board and a mock town board"><figcaption><b>5. Results.</b> Time, best, improvement, achievement, next goal. Local board is real; the town board is a labelled mock.</figcaption></figure>
+   <figure><img src="img/6-wrapped.jpg" alt="A purple wrapped gift box with a gold ribbon and bow on a showroom turntable"><figcaption><b>6. Wrapped prize.</b> Hold to pull the ribbon, or tap.</figcaption></figure>
+   <figure><img src="img/7-boxed.jpg" alt="The toy packaging: a card box headed COMET with the car on its tray"><figcaption><b>7. The box.</b> A collectible toy in its packaging. Tap to tear it open.</figcaption></figure>
+   <figure><img src="img/8-hero.jpg" alt="The purple Comet toy car on the turntable after unboxing"><figcaption><b>8. Hero reveal.</b> Flash, lift, turntable. "Add to garage".</figcaption></figure>
+   <figure><img src="img/9-comet.jpg" alt="The garage with the Comet selected after a reload"><figcaption><b>9. Next run.</b> Reloaded: the Comet is still in the garage and is the car you race.</figcaption></figure>
+  </div>
+ </section>
+
+ <section>
+  <h2>What is playable, and what is a mock</h2>
+  <div class="card"><table>
+   <tr><th>Part</th><th>Status</th></tr>
+   <tr><td>Rail race with lane choice, orbs, cones and launch timing, on a real clock</td><td><b>Playable.</b> A short run (about 9 to 13 s). Not tuned by human play: it does not validate racing feel.</td></tr>
+   <tr><td>Practice, garage, paint, results, retry, back to town</td><td>Playable</td></tr>
+   <tr><td>Prize: wrap, ribbon pull, box, tear, hero, add to garage, try it now</td><td>Playable, primitives only</td></tr>
+   <tr><td>Saving cars and times</td><td><span class="tag">MOCK</span> this device only (<code>localStorage</code>); production plan in the study doc</td></tr>
+   <tr><td>Town board</td><td><span class="tag">MOCK</span> fixed rows, labelled "not real players"</td></tr>
+   <tr><td>Read-aloud</td><td><span class="tag">MOCK</span> highlights the words; the ElevenLabs voice is Stage 2</td></tr>
+  </table></div>
+ </section>
+
+ <section>
+  <h2>Meaningful racing, an honest clock</h2>
+  <ul>
+   <li><b>No more 30.0 s.</b> The coaster stretched every ride to exactly 30 seconds, so a time meant nothing. Timed mode uses the track's own speed plus what you earn.</li>
+   <li><b>Two skills, nothing else.</b> Lane choice (orbs and cones) and the launch tap (in the first 0.45 s after GO; early floods the engine). Steering stays on rails.</li>
+   <li><b>Race clock versus show.</b> The clock counts fixed 1/60 s steps. Camera kick, shake and the slow-motion swing-out after the line are on a separate clock, so they cannot change a score.</li>
+   <li><b>What skill is worth</b> (a bot on the real model): all-middle 12.03 s, a smart bot 9.04 s with a perfect launch, 9.75 s without. Lane choice is worth about 3 s, the launch about 0.7 s.</li>
+   <li><b>Fair boards.</b> Records are keyed by track version, mode and class (<code>sprint-v1/timed/cosmetic</code>). Practice never counts. Every car handles the same.</li>
+  </ul>
+ </section>
+
+ <section>
+  <h2>Five achievements, five cars</h2>
+  <div class="card"><table>
+   <tr><th>Achievement</th><th>How</th><th>Car</th></tr>
+   <tr><td>First chequered flag</td><td>Finish a timed race</td><td>Comet</td></tr>
+   <tr><td>Orb grabber</td><td>6 orbs in one race</td><td>Rocket Wagon</td></tr>
+   <tr><td>Under 10.5 seconds</td><td>Finish in under 10.5 s</td><td>Shark</td></tr>
+   <tr><td>Clean and quick</td><td>Perfect launch, no cones</td><td>Monster Mini</td></tr>
+   <tr><td>Beat your own best, 3 times</td><td>Three improvements</td><td>Shopping Cart</td></tr>
+  </table></div>
+  <p class="muted">You start with the Sunny Buggy. One achievement pays per race, so each prize is an event. Cars are cosmetic: the same handling for all.</p>
+ </section>
+
+ <section>
+  <h2>Design card: how it shows information</h2>
+  <ul>
+   <li><b>Arcade means a place.</b> The attract sign and the question are the machine's own; the HUD is the race's timer numeral, a thin progress line and one icon button (an overlay, precise information only).</li>
+   <li><b>Spatial:</b> orbs glow and cones stand in the lanes themselves; the finish arch is a chequered banner in the world.</li>
+   <li><b>Meta:</b> field of view and shake follow speed; reduced motion turns them and the prize spin off.</li>
+   <li><b>Tiles, cards, HUD, FPS:</b> this is the FPS way of acting (you are the driver); the garage is the HUD and app layer.</li>
+   <li><b>Sound:</b> only catalogue sounds (<code>catalog-sfx</code>). No MIDI, no oscillators, no browser speech.</li>
+  </ul>
+ </section>
+
+ <section>
+  <h2>Questions for Evan before hi-fi</h2>
+  <ol>
+   <li>Does the race feel like an arcade game with just lane taps and the launch, or does it want a third input?</li>
+   <li>Is a 10 to 12 s run right, or should timed mode be longer?</li>
+   <li>Which prize beat do you like most: the ribbon pull, the box tear or the hero turntable?</li>
+   <li>Should the first prize car become the Toy car charm in the backpack?</li>
+   <li>Shall the pink retro convertible, the pink boxy off-roader and the dark armoured car become original garage cars? (The reference photos live on your PC; this cloud thread could not open them.)</li>
+  </ol>
+  <p class="muted">The full study, the candidate "arcade inside the world" contract, the persistence plan and the speed review are in <code>docs/oracle/arcade-racer/ARCADE_RACER_STUDY.md</code>.</p>
+ </section>
+</div>
+<aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i>1</i></summary>
+   <ul><li><span>Game Oracle consult() run on Evan&#39;s PC (source: studies, no model)</span><small>Useful: small clear objective, icon and read-aloud support, explicit setup/play/payoff, the world responds to actions. Retrieval was off-topic for racing (Spore, Cartel Tycoon and others) and generic; none of it is used as racing research. Evidence quality for racing: none. This cloud thread could not reach the Oracle.</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>2</i></summary>
+   <ul><li><a href="https://critpoints.net/2016/11/24/feeling-of-speed/" target="_blank" rel="noopener">Feeling of Speed (Critical Points)</a><small>Field of view widening, shake and dense nearby detail sell speed; kept in the race view, and kept on the presentation clock so the time cannot be bent (cited from prior knowledge, not re-read this round)</small></li><li><a href="https://gafferongames.com/post/fix_your_timestep/" target="_blank" rel="noopener">Fix Your Timestep (Gaffer On Games)</a><small>The race clock is fixed 1/60 s simulation steps; rendering and slow motion are separate, so a score is repeatable (cited from prior knowledge, not re-read this round)</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i>1</i></summary>
+   <ul><li><a href="https://gameaccessibilityguidelines.com/" target="_blank" rel="noopener">Accessible game design: reduced motion, read-aloud and large touch targets (Game Accessibility Guidelines)</a><small>Reduced-motion switch, skip on the prize, 48 px and larger touch targets, one clear objective (cited from prior knowledge, not re-read this round)</small></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>2</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/coaster/COASTER_STUDY.md" target="_blank" rel="noopener">Toy-car coaster study AW-STUDY-0054</a><small>The track recipe, six cars and skate-park entrance reused; its 30.0 s normalisation is the thing timed mode replaces</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD and information study; interaction grammar</a><small>Race HUD is a timer numeral, a progress line and icons; words live on the screens between races</small></li></ul></details><details class="ctx-kind" open><summary><b>References</b><i>1</i></summary>
+   <ul><li><span>Evan&#39;s eight reference photos (pink retro convertible, pink boxy off-roader, dark armoured toy, orange creature in packaging, toy demo)</span><small>Not inspected: the files are on Evan&#39;s PC and this cloud thread had no PC agent. The grounded descriptions in the issue were used for packaging and silhouettes; cars are the existing original garage</small></li></ul></details>
+  <p class="ctx-foot"><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#arcade-racer">Live study page</a></p></aside>
+
+</html>

@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-arcade-racer-stage1",
+      "date": "2026-10-24",
+      "title": "Skate-park rail racer: Stage 1 study",
+      "line": "Race the clock on a toy-car track, earn an achievement, unwrap a prize and unbox a new collectible car. A low-fidelity study for your feedback; saves are a mock. Experimental, not in the town yet.",
+      "image": "/whats-new/2026-10-24-arcade-racer-stage1.png",
+      "thread": "cmsg_01MthUeDQC4PVJETdeFHLquG",
+      "threadTitle": "Arcade rail racer (issue 621)",
+      "tour": false
+    },
+    {
       "id": "2026-10-24-town-place-garden",
       "date": "2026-10-24",
       "title": "Drop a Garden tile onto the board",
