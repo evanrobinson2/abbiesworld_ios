@@ -830,6 +830,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/charged_spell_cast.glb"
    ]
+  },
+  "298": {
+   "task_id": "01a16ef5-3d82-718d-beec-86d985cdda08",
+   "credits": 3,
+   "name": "Cheer with Both Hands Up",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_both_hands_up.glb"
+   ]
+  },
+  "56": {
+   "task_id": "01a16ef5-3da1-77d4-87f2-239ce36d9b14",
+   "credits": 3,
+   "name": "Stand and Chat",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/stand_and_chat.glb"
+   ]
+  },
+  "290": {
+   "task_id": "01a16ef5-3d9f-7630-970b-ca1823815c79",
+   "credits": 3,
+   "name": "Wave One Hand",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/wave_one_hand.glb"
+   ]
+  },
+  "285": {
+   "task_id": "01a16ef5-3d83-75cc-9113-913fae9cab28",
+   "credits": 3,
+   "name": "Open Door",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/open_door.glb"
+   ]
+  },
+  "41": {
+   "task_id": "01a16ef5-3d83-7592-be29-92bb8e0eb412",
+   "credits": 3,
+   "name": "Formal Bow",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/formal_bow.glb"
+   ]
+  },
+  "301": {
+   "task_id": "01a16ef5-959c-77f2-ab61-246158da3b92",
+   "credits": 3,
+   "name": "Cheer with Both Hands 1",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_both_hands_1.glb"
+   ]
+  },
+  "303": {
+   "task_id": "01a16ef5-9620-72c4-9e96-f92d7768cf6e",
+   "credits": 3,
+   "name": "Cheer with Both Hands",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_both_hands.glb"
+   ]
+  },
+  "306": {
+   "task_id": "01a16ef5-962e-7107-b5f5-4c1aeb418e43",
+   "credits": 3,
+   "name": "Cheer with One Hand Up",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_one_hand_up.glb"
+   ]
+  },
+  "313": {
+   "task_id": "01a16ef5-ba6e-7674-b7f2-4b5453f65aed",
+   "credits": 3,
+   "name": "Talk with Hands Open",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/talk_with_hands_open.glb"
+   ]
+  },
+  "308": {
+   "task_id": "01a16ef5-9662-762a-83de-2841bf8f4764",
+   "credits": 3,
+   "name": "Talk Passionately",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/talk_passionately.glb"
+   ]
   }
  }
 }
