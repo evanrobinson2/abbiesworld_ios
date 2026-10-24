@@ -1,0 +1,77 @@
+{
+  "slug": "car-cage-kart",
+  "stages": {
+    "import": {
+      "seconds": 0.02,
+      "tris": 91651,
+      "files": [
+        "source_body.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.5,
+      "tris": 90942,
+      "open_edges_before": 66,
+      "open_edges_after": 66,
+      "dust_shells_removed": 1
+    },
+    "orient_and_wheels": {
+      "seconds": 0.08,
+      "tris": 90942,
+      "wheels": 4,
+      "body_dims_mm": [
+        107.0,
+        58.3,
+        41.0
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.03,
+      "tris": 90942,
+      "final_size_m_wh_l": [
+        1.531,
+        1.118,
+        2.6
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 9.23,
+      "tris": 4997,
+      "parts": {
+        "body": {
+          "before": 54119,
+          "after": 4119
+        },
+        "wheel": {
+          "before": 9335,
+          "after": 219
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.24,
+      "tris": 5010,
+      "glb": "car-cage-kart.glb",
+      "bytes": 417708
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 5000,
+  "pipeline": "stl_cars.py",
+  "wheel_shells_found": 4,
+  "scale_to_metres": {
+    "factor": 0.024299065420560748,
+    "final_size_m": [
+      1.531,
+      1.118,
+      2.6
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 5010,
+  "high_poly_tris": 54119,
+  "wheel_count": 4,
+  "script_total_s": 10.48,
+  "process_wall_s": 11.41
+}

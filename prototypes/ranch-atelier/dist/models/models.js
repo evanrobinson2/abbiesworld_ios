@@ -129,7 +129,7 @@ function plainNote(note){
 // Models that come from outside (Printables and the like) always show where they came from, who made them and the licence.
 const sourceLine = m => { const s = m.source; if (!s || !s.url) return '';
   const by = s.authorUrl ? `<a href="${esc(s.authorUrl)}" target="_blank" rel="noopener">${esc(s.author)}</a>` : esc(s.author);
-  return `<p class="srcline"><b>Source</b> ${esc(s.site)} · by ${by} · ${esc(s.licence)} · <a href="${esc(s.url)}" target="_blank" rel="noopener">View the original</a>${s.credit ? `<span>${esc(s.credit)}</span>` : ''}</p>`; };
+  return `<p class="srcline"><b>Source</b> ${esc(s.site)}${s.title ? ` · “${esc(s.title)}”` : ''} · by ${by} · ${esc(s.licence)} · <a href="${esc(s.url)}" target="_blank" rel="noopener">View the original</a>${s.credit ? `<span>${esc(s.credit)}</span>` : ''}</p>`; };
 const plainList = xs => (xs || []).map(plainNote).filter(Boolean);
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
