@@ -82,6 +82,12 @@ struct WorldMapView: View {
                 snapHintOverlay
                 editorOverlay(aspectRatio: aspectRatio)
             }
+            .background(
+                World2MapKeyboardPan(isActive: allowsLookAround) { direction, dt in
+                    keyboardPan(direction, dt: dt, fitted: baseRect, in: geometry.size)
+                }
+                .allowsHitTesting(false)
+            )
             .gesture(
                 lookAroundGesture(fitted: baseRect, in: geometry.size),
                 including: allowsLookAround ? .gesture : .subviews
@@ -184,6 +190,14 @@ struct WorldMapView: View {
                     lookPan = clampedPan(fitted: fitted, in: viewSize)
                 }
         )
+    }
+
+    /// W/A/S/D move the camera, so the plate slides the opposite way. Speed is in screen points per second.
+    private func keyboardPan(_ direction: CGVector, dt: TimeInterval, fitted: CGRect, in viewSize: CGSize) {
+        let speed: CGFloat = 520
+        lookPan.width -= direction.dx * speed * CGFloat(dt)
+        lookPan.height -= direction.dy * speed * CGFloat(dt)
+        lookPan = clampedPan(fitted: fitted, in: viewSize)
     }
 
     private func clampedPan(fitted: CGRect, in viewSize: CGSize) -> CGSize {

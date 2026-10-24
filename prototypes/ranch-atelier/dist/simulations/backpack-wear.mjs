@@ -10,7 +10,7 @@
 // The backpack and its charms are in the world: other characters can see them ("Ooh, a tardigrade!"). The jingle is
 // diegetic sound, a little bell in the world, not a UI tick. It follows aw-backpack-change, so a charm she earns or
 // moves to the jewellery box shows up (or comes off) without the game doing anything.
-import {three, buildBackpack, loadCharmModels, look as savedLook, keychain} from './backpack.mjs?v=11';
+import {three, buildBackpack, loadCharmModels, look as savedLook, keychain} from './backpack.mjs?v=13';
 
 let shared = null;
 function audio() {
