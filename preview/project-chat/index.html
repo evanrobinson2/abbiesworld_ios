@@ -23,5 +23,5 @@ const fake = async (url, init = {}) => {
   const comments = t > 6 ? [{at: 'a', text: 'Picked up. Planning the hex now.'}] : []; if (t >= 14) comments.push({at: 'b', text: 'Done (pretend): the change is merged and will be in the next deploy.'});
   return ok({status, comments});
 };
-mountProjectChat({fetcher: fake, poll: 1500}).then(c => c?.open.click());
+mountProjectChat({fetcher: (u, i) => String(u).endsWith('models.json') ? fetch(u) : fake(u, i), poll: 1500, library: '../diorama-swipe/models.json', thumbBase: 'https://ranch.abbies.world'}).then(c => c?.open.click());
 </script></body></html>

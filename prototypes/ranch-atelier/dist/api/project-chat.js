@@ -44,8 +44,10 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account}=
    const at=now();for(const [k,v]of hits)if(at-v.at>3600000)hits.delete(k);const h=hits.get('o')||{at,n:0};if(h.n>=30)return json(res,429,{error:'That is a lot of messages. Try again in a bit.'});h.n++;hits.set('o',h);
    const hex=body.hex&&typeof body.hex==='object'?{id:String(body.hex.id||'').slice(0,40),label:String(body.hex.label||'').slice(0,60)}:null;
    const page=String(body.page||'').replace(/[^\w/.\-?=&]/g,'').slice(0,120);
+   const names=v=>Array.isArray(v)?v.slice(0,20).map(x=>String(x).replace(/[^\w ().,&'-]/g,'').slice(0,50)).filter(Boolean):[];
+   const packs=body.packs&&typeof body.packs==='object'&&(names(body.packs.include).length||names(body.packs.exclude).length)?{include:names(body.packs.include),exclude:names(body.packs.exclude),allowed:Number(body.packs.allowed)||0,of:Number(body.packs.of)||0}:null;
    const first=message.replace(/\s+/g,' ').slice(0,60);
-   const text=`<!-- abbies-game-chat:v1 ${JSON.stringify({hex,page})} -->\nFrom the in-game chat (Evan, signed in).${hex?`\nSelected hex: ${hex.label||hex.id} (${hex.id})`:''}${page?`\nPage: ${page}`:''}\n\n${message}\n\n(Build it on a branch, merge to main, comment the result here, and do not deploy.)`;
+   const text=`<!-- abbies-game-chat:v1 ${JSON.stringify({hex,page})} -->\nFrom the in-game chat (Evan, signed in).${hex?`\nSelected hex: ${hex.label||hex.id} (${hex.id})`:''}${page?`\nPage: ${page}`:''}${packs?`\nAsset packs (use only these): include ${packs.include.join(', ')||'everything'}; exclude ${packs.exclude.join(', ')||'nothing'} (${packs.allowed} of ${packs.of} models allowed)`:''}\n\n${message}\n\n(Build it on a branch, merge to main, comment the result here, and do not deploy.)`;
    const r=await gh(`/repos/${REPO}/issues`,{method:'POST',body:JSON.stringify({title:`[game-chat] ${first}`,body:text,labels:[LABEL]})});
    if(!r.ok)return json(res,502,{error:'Could not reach the project. Try again.'});
    return json(res,200,{ok:true,issue:(await r.json()).number});

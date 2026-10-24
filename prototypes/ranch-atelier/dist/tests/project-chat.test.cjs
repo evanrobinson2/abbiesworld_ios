@@ -38,3 +38,8 @@ test('status walks sent, received, working, result, and only game-chat issues ca
  assert.equal((await get({...base,state:'closed'},[shake])).body.status,'result');
  assert.equal((await get({number:7,state:'open',title:'t',labels:[{name:'bug'}]},[])).status,404);
 });
+test('the chosen asset packs ride along as context, cleaned',async()=>{
+ const f=gh(),h=createHandler({fetcher:f,env:ENV,who:()=>OWNER});
+ await call(h,{body:{message:'Build a farm diorama',packs:{include:['Ranch','Cafe<script>'],exclude:['Zombie survival gear'],allowed:300,of:668}}});
+ const b=JSON.parse(f.calls[0].init.body).body;assert.match(b,/include Ranch, Cafescript; exclude Zombie survival gear \(300 of 668/);
+});
