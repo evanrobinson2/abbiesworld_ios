@@ -13,12 +13,12 @@
 //        start(): opens the mission; available(): false greys it out (the basement needs the café key)
 //   M.fly(id) -> Promise     camera to the charm          M.enter(id)   the tap: dolly, puff, start
 //   M.setVisible(false)      hide them all (a mission is playing)
-// Behind a flag until it has been played in the live game: ?medallions, or localStorage aw-medallions=1.
+// Live (game registry): tools/game-registry/moon-mission-flow.cjs taps the rocket charm and plays the mission. ?medallions=off hides them.
 
 const COLOURS = {basement: '#7fd1ff', moon: '#ffb74a', jump: '#ff7aa8', coaster: '#7dff9b', mining: '#d8dcec'};
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
-export const medallionsOn = () => { try { return /[?&]medallions\b/.test(location.search) || localStorage.getItem('aw-medallions') === '1'; } catch { return false; } };
+export const medallionsOn = () => { try { return !/[?&]medallions=(off|0)\b/.test(location.search) && localStorage.getItem('aw-medallions') !== '0'; } catch { return true; } }; // on for everyone once the registry has it live (simulations/game-registry.json); ?medallions=off for the old starts only
 
 // The charm's own hero art from the backpack (the same model the keychain shows); an icon sprite if it can't load.
 async function charmObject(T, charm) {
@@ -84,13 +84,13 @@ export function mountMedallions(AT = window.AbbieTown) {
    const stop = st.frame(dt => { life += dt; s.position.x += v[0] * dt; s.position.y += v[1] * dt; s.position.z += v[2] * dt; s.scale.setScalar(1 + life * 2); s.material.opacity = Math.max(0, .8 - life * 1.1); if (life > .8) { stop(); scene.remove(s); } });
   }
  }
- function target(m) { const p = pos(m); return p && new T.Vector3(p.x, p.y - LIFT + 6, p.z); }
+ function target(m) { const p = pos(m); return p && new T.Vector3(p.x, p.y + LIFT * .45, p.z); } // between the ground and the hovering charm, so the charm is in the frame when the camera dollies in (the old target sat below the ground and the charm fell off the top edge)
  async function fly(id, dist = 90) { const m = list.get(id), t = m && target(m); if (!t) return false; st.flyTo(t, {dist, pitch: 38, azimuth: 200}); await sleep(1700); return true; }
  async function enter(id) {
   const m = list.get(id); if (!m || busy) return false;
   if (m.available && m.available() === false) { const t0 = clock; const stop = st.frame(() => { const k = clock - t0; m.spin.rotation.z = Math.sin(k * 40) * .25 * Math.max(0, 1 - k * 2.5); if (k > .4) { m.spin.rotation.z = 0; stop(); } }); return false; }
   busy = true;
-  try { const t = target(m); if (t) st.flyTo(t, {dist: 55, pitch: 32, azimuth: 200}); await sleep(900); if (t) puff(t.clone().setY(t.y + LIFT)); await sleep(450); await m.start?.(); }
+  try { const t = target(m); if (t) st.flyTo(t, {dist: 55, pitch: 32, azimuth: 200}); await sleep(900); if (t) puff(t.clone().setY(t.y + LIFT * .55)); await sleep(450); await m.start?.(); }
   finally { setTimeout(() => { busy = false; }, 600); }
   return true;
  }
