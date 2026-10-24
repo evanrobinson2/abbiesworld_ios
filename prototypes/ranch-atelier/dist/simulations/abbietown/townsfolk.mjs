@@ -105,7 +105,7 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
  })();
  // the quest places she is sent to light up (quest-guide.mjs); the lights follow the favours she has taken on
  import('./quest-guide.mjs?v=2').then(m => { town.questGuide ||= m.mountQuestGuide({THREE: T, scene: town.scene, camera, canvas, spots: at => spotOf(at)?.g, fallback: at => { const p = people.find(x => GIVERS[x.userData.giver]?.at === at); return p ? p.getWorldPosition(new T.Vector3()) : null; }, fly: (p, o) => town.stage.flyTo(p, o)}); }).catch(e => console.warn('quest guide', e));
- import('./quest-help.mjs?v=1').then(m => m.mountHelper(town)).catch(e => console.warn('quest help', e)); // taking her object out of the backpack: close-up, the message again, the camera on its way
+ import('./quest-help.mjs?v=2').then(m => m.mountHelper(town)).catch(e => console.warn('quest help', e)); // taking her object out of the backpack: close-up, the message again, the camera on its way
  return {people, talk};
 }
 

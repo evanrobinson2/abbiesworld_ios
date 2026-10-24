@@ -7,6 +7,10 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) process
   const [,, pre = 'shots/q'] = process.argv;
   const b = await chromium.launch({args: ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader']});
   const p = await b.newPage({viewport: {width: 1000, height: 650}});
+  // the recorded voices live in R2 (/r2/ is proxied by the site, not by this test server): answer with a short silent wav and record what plays
+  const wav = Buffer.from('UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=', 'base64');
+  await p.route('**/r2/voices/**', r => r.fulfill({status: 200, contentType: 'audio/wav', body: wav}));
+  await p.addInitScript(() => { window.__played = []; const pl = HTMLMediaElement.prototype.play; HTMLMediaElement.prototype.play = function () { window.__played.push(this.src); return pl.call(this); }; window.speechSynthesis && (window.speechSynthesis.speak = () => { window.__browserVoice = true; }); });
   p.on('pageerror', e => console.log('err', e.message));
   await p.goto('http://localhost:8765/studies/abbietown/index.html?play');
   await p.waitForFunction(() => window.AbbieTown?.questGuide, null, {timeout: 120000}).catch(() => {});
@@ -25,6 +29,9 @@ const ok = (c, m) => { console.log((c ? 'PASS ' : 'FAIL ') + m); if (!c) process
   await p.evaluate(async () => { const inv = (await import('/simulations/inventory.mjs')).inventory(); inv.add({id: 'quest-sugar', name: 'Bag of sugar', icon: '🍬'}); dispatchEvent(new CustomEvent('aw-inventory-use', {detail: {item: {id: 'quest-sugar'}}})); });
   await p.waitForTimeout(4000);
   ok(await p.evaluate(() => [...document.querySelectorAll('div')].some(d => /sugar/i.test(d.textContent) && d.style.position === 'fixed' && d.style.bottom === '22px')), 'the favour is said again as a caption');
+  const played = await p.evaluate(() => window.__played.map(u => new URL(u).pathname));
+  ok(played.some(u => /\/r2\/voices\/lines\/quests\/bake-sugar-/.test(u)) && played.some(u => /\/bake-sugar-0-/.test(u)), 'the giver\'s recorded voice plays the ask and the next step: ' + played.join(' '));
+  ok(!(await p.evaluate(() => window.__browserVoice)), 'the browser voice is never used');
   const after = await p.evaluate(() => window.AbbieTown.camera.position.toArray());
   ok(Math.hypot(...after.map((v, i) => v - before[i])) > 500, 'the camera moved toward the place');
   await p.screenshot({path: pre + '2-flown.png', timeout: 120000});
