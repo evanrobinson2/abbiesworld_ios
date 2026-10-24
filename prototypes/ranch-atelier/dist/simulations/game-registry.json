@@ -130,7 +130,7 @@
    "id": "moon-mission",
    "name": "The Moon Mission",
    "kind": "minigame",
-   "status": "experimental",
+   "status": "live",
    "owner": "AW-STUDY-0036",
    "tour": false,
    "pages": [
@@ -141,10 +141,15 @@
      "town:truck",
      "town:launch"
     ],
-    "note": "the black truck at the caf\u00e9 curb and the launch pad north of home"
+    "note": "the rocket charm and the black truck at the bakery curb, and the launch pad north of home"
    },
-   "needs": [
-    "a headless-Chrome run that plays the mission from the truck to the end (only unit tests today)"
+   "test": {
+    "script": "tools/game-registry/moon-mission-flow.cjs",
+    "marker": "GAME-TEST PASS moon-mission",
+    "covers": "tap the rocket charm at the bakery curb, play every beat to Chapter 1 complete: three consoles, the lander, the Polaroid"
+   },
+   "mounts": [
+    "moonmission/town-mount.mjs"
    ]
   },
   {
@@ -425,7 +430,7 @@
    "id": "medallions",
    "name": "Mission medallions",
    "kind": "minigame",
-   "status": "experimental",
+   "status": "live",
    "owner": "Medallions thread",
    "tour": false,
    "pages": [],
@@ -433,11 +438,14 @@
     "medallions.mjs"
    ],
    "scene": {
-    "note": "mounted on the board behind ?medallions"
+    "stage": "town",
+    "note": "mission charms floating at their places on the board"
    },
-   "needs": [
-    "a headless-Chrome run that collects a medallion and starts its mission"
-   ]
+   "test": {
+    "script": "tools/game-registry/moon-mission-flow.cjs",
+    "marker": "GAME-TEST PASS moon-mission",
+    "covers": "the charms mount at their places and a tap on the rocket charm starts its mission"
+   }
   },
   {
    "id": "halloween",

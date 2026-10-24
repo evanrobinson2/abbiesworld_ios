@@ -42,8 +42,8 @@ No `speechSynthesis`, no other TTS. Checked by `tools/audio-check/check.mjs` aga
 ## Where the debt is
 None in sound or voice: `tools/audio-check/baseline.json` is empty, so any new oscillator, `.mid` or browser speech fails CI.
 Every effect plays through `simulations/catalog-sfx.mjs` (`sfx('coin-1')`), which resolves ids in the sound catalogue.
-Games: seven are experimental (`needs` in the registry says what each lacks). The registry's `scene.stage: "town"` covers
+Games: the Moon Mission and the mission charms (medallions) went live on 2026-10-24 once a bot family played the mission from the rocket charm to the Polaroid (`tools/game-registry/moon-mission-flow.cjs`); seven are experimental (`needs` in the registry says what each lacks). The registry's `scene.stage: "town"` covers
 features mounted on the Winchester board (intro, paint balls, world effects, quests, backpack); their one run is
 `tools/game-registry/town-features.cjs`.
-Known gap: the audio check sees oscillators, `.mid` files, browser speech and unknown catalogue ids. It cannot see a
-noise-buffer synth; review for that.
+The audio check sees oscillators, `.mid` files, browser speech, unknown catalogue ids and noise-buffer synths (a
+`createBuffer` filled from `Math.random`). Playing back streamed or decoded samples is fine.
