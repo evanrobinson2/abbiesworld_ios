@@ -1,0 +1,10 @@
+{
+ "source": "tools/meshy-heroes/meshy/charm-toy-car/charm-toy-car.glb",
+ "out": "prototypes/ranch-atelier/dist/simulations/assets/backpack/charms/toy-car.glb",
+ "tris_before": 7608,
+ "tris": 7608,
+ "largest_side": 1.0,
+ "textured": true,
+ "bytes": 584712,
+ "tool": "Blender 5.2.3 LTS (bpy), tools/meshy-heroes/charm_cleanup.py"
+}
