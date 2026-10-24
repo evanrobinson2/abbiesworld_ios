@@ -2,6 +2,7 @@
 // pet, a tie-dye swirl and a fire wheel, greyed out until charged, full colour when ready. One small shared WebGL renderer draws
 // them all into plain 2D canvases, so five icons cost one context.
 //   const icons = createEffectIcons(THREE);  icons.mount(buttonEl, 'fireball');  icons.setCharged('fireball', true);
+// The driving pads (rocket = jet, bolt = boost) are built here too, so no control in the HUD is an emoji: icons.mount(b, 'rocket', {size: 56}).
 const SIZE = 64;
 
 export function createEffectIcons(T) {
@@ -38,6 +39,20 @@ export function createEffectIcons(T) {
     'tie-dye'() {
       const g = new T.Group(); g.add(new T.Mesh(new T.SphereGeometry(0.55, 24, 16), new T.MeshStandardMaterial({map: swirlTexture(), roughness: 0.5}))); return g;
     },
+    rocket() { // the jet pad: a little white rocket with a red nose, a porthole and fins, tipped as if it is taking off
+      const g = new T.Group(), tilt = new T.Group(), white = mat(0xf4f1ea, {roughness: 0.35}), red = mat(0xe0432e, {roughness: 0.4});
+      const nose = new T.Mesh(new T.ConeGeometry(0.24, 0.45, 18), red); nose.position.set(0, 0.65, 0);
+      tilt.add(new T.Mesh(new T.CylinderGeometry(0.24, 0.28, 0.85, 18), white), nose);
+      const win = new T.Mesh(new T.SphereGeometry(0.11, 12, 10), mat(0x58b8ff, {emissive: 0x1d6fb8, emissiveIntensity: 0.5, roughness: 0.15})); win.position.set(0, 0.12, 0.22); tilt.add(win);
+      for (let i = 0; i < 3; i++) { const f = new T.Mesh(new T.BoxGeometry(0.06, 0.34, 0.26), red); const a = i * 2.094; f.position.set(Math.sin(a) * 0.3, -0.34, Math.cos(a) * 0.3); f.rotation.y = a; tilt.add(f); }
+      const flame = cone(mat(0xffb824, {emissive: 0xff8a00, emissiveIntensity: 1}), 0.18, 0.5, 0, -0.68, 0, Math.PI); tilt.add(flame);
+      tilt.rotation.z = -0.65; g.add(tilt); g.scale.setScalar(0.95); return g;
+    },
+    bolt() { // the boost pad: a chunky yellow lightning bolt
+      const sh = new T.Shape(); [[0.12, 0.7], [-0.32, -0.05], [-0.02, -0.05], [-0.16, -0.7], [0.34, 0.12], [0.04, 0.12], [0.3, 0.7]].forEach(([x, y], i) => i ? sh.lineTo(x, y) : sh.moveTo(x, y));
+      const geo = new T.ExtrudeGeometry(sh, {depth: 0.22, bevelEnabled: true, bevelSize: 0.05, bevelThickness: 0.05, bevelSegments: 3}); geo.center();
+      const g = new T.Group(); g.add(new T.Mesh(geo, mat(0xffd23f, {emissive: 0xffa800, emissiveIntensity: 0.55, roughness: 0.3}))); return g;
+    },
     'fire-wheels'() {
       const g = new T.Group(), tyre = new T.Mesh(new T.TorusGeometry(0.38, 0.17, 12, 24), mat(0x2e2e38));
       const hub = new T.Mesh(new T.CylinderGeometry(0.2, 0.2, 0.2, 14), mat(0xc9ccd6)); hub.rotation.x = Math.PI / 2; g.add(tyre, hub);
@@ -67,9 +82,9 @@ export function createEffectIcons(T) {
     }
   }
   return {
-    mount(button, id) {
+    mount(button, id, {size = 42} = {}) {
       if (!builders[id]) return false;
-      const canvas = document.createElement('canvas'); canvas.width = canvas.height = SIZE * dpr; canvas.style.cssText = 'width:42px;height:42px;pointer-events:none;display:block';
+      const canvas = document.createElement('canvas'); canvas.width = canvas.height = SIZE * dpr; canvas.style.cssText = `width:${size}px;height:${size}px;pointer-events:none;display:block`;
       const scene = new T.Scene(), camera = new T.PerspectiveCamera(32, 1, 0.1, 20); camera.position.set(0, 0.3, 2.8); camera.lookAt(0, 0, 0);
       scene.add(new T.AmbientLight(0xffffff, 1.1)); const key = new T.DirectionalLight(0xffffff, 2.2); key.position.set(2, 3, 3); scene.add(key);
       const model = builders[id](); scene.add(model); paint(model, false);

@@ -42,6 +42,7 @@ html.aw-town-hud #aw-hand .pw-hand{position:static;--pw-w:92px}
 #aw-hand-tab:focus-visible{outline:2px solid var(--v2-accent,#b64932);outline-offset:2px}
 #aw-hand[data-open=false]>:not(#aw-hand-tab){display:none!important}
 #aw-hand[data-open=true] #aw-hand-tab{display:none}
+html.hunt-on #aw-hand{display:none}
 @media(max-width:520px){#aw-hand{max-width:calc(100vw - 80px);left:calc(50% + 28px)}}
 @media(prefers-reduced-motion:reduce){.aw-ico.pulse{animation:none}}`;
 

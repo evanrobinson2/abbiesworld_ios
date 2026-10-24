@@ -3,6 +3,7 @@
 // that fills over the 15 second cooldown. All of it carries data-ui, so it is never picked by a ground tap, and none of it
 // exists in the world (characters and the simulation cannot see it).
 import {EFFECTS, cooldownLeft, isFound, COOLDOWN_MS} from './effects.mjs';
+import {createEffectIcons} from '../effect-icons.mjs';
 
 const CSS = `
 .hunt-ui{position:fixed;inset:auto 0 0 0;display:flex;justify-content:center;gap:clamp(4px,1.2vw,10px);padding:0 10px max(10px,env(safe-area-inset-bottom));pointer-events:none;z-index:20}
@@ -23,6 +24,9 @@ const CSS = `
 .hunt-top .group{display:flex;gap:8px}
 .hunt-top button{width:clamp(38px,9vw,46px);font-size:clamp(18px,4.5vw,22px)}
 .hunt-top button.on{box-shadow:0 0 16px #ff7eb6,inset 0 1px 3px rgba(255,255,255,.75)}
+.hunt-pads button.has3d{font-size:0;display:grid;place-items:center;padding:0}
+html.aw-town-hud .hunt-ui{display:none}
+html.aw-town-hud .hunt-top{top:calc(max(10px,env(safe-area-inset-top)) + 100px)}
 .hunt-fuel{position:fixed;left:50%;bottom:calc(max(10px,env(safe-area-inset-bottom)) + clamp(48px,11vw,66px));transform:translateX(-50%);width:min(34vw,160px);height:6px;border-radius:3px;background:rgba(255,255,255,.25);overflow:hidden;z-index:20;pointer-events:none}
 .hunt-fuel i{display:block;height:100%;background:linear-gradient(90deg,#ffb02e,#ff5a3c);width:100%}
 @media(prefers-reduced-motion:reduce){.hunt-ui .eff.pulse{animation:none}}
@@ -33,8 +37,11 @@ export function mountUi({root = document.body, onExit, onCast, onMode, onJet, on
  const tray = document.createElement('div'); tray.className = 'hunt-ui'; tray.dataset.ui = '';
  const btn = EFFECTS.map((e, i) => { const b = document.createElement('button'); b.className = 'eff locked'; b.style.setProperty('--c', e.colour); b.setAttribute('aria-label', e.name); b.dataset.ui = ''; b.innerHTML = `<span>${e.icon}</span>`; b.addEventListener('click', () => onCast(i)); tray.append(b); return b; });
  const pads = document.createElement('div'); pads.className = 'hunt-pads'; pads.dataset.ui = '';
- const mk = (txt, label, on, off) => { const b = document.createElement('button'); b.textContent = txt; b.setAttribute('aria-label', label); b.dataset.ui = ''; b.style.touchAction = 'none'; b.addEventListener('pointerdown', e => { e.preventDefault(); b.classList.add('on'); on(); }); const up = () => { b.classList.remove('on'); off?.(); }; b.addEventListener('pointerup', up); b.addEventListener('pointerleave', up); b.addEventListener('pointercancel', up); pads.append(b); return b; };
- mk('🚀', 'Jet', () => onJet(true), () => onJet(false)); mk('⚡', 'Boost', () => onBoost(true), () => onBoost(false));
+ // In the town the pads are real little 3D things (rocket, bolt) and the ten effects live on the town's top row, so the tray hides (CSS above).
+ const T3 = window.AbbieTown?.stage?.THREE, icons = T3 ? createEffectIcons(T3) : null;
+ const mk = (txt, label, on, off, model) => { const b = document.createElement('button'); b.textContent = txt; if (model && icons?.mount(b, model, {size: 56})) { icons.setCharged(model, true); b.classList.add('has3d'); } b.setAttribute('aria-label', label); b.dataset.ui = ''; b.style.touchAction = 'none'; b.addEventListener('pointerdown', e => { e.preventDefault(); b.classList.add('on'); on(); }); const up = () => { b.classList.remove('on'); off?.(); }; b.addEventListener('pointerup', up); b.addEventListener('pointerleave', up); b.addEventListener('pointercancel', up); pads.append(b); return b; };
+ mk('🚀', 'Jet', () => onJet(true), () => onJet(false), 'rocket'); mk('⚡', 'Boost', () => onBoost(true), () => onBoost(false), 'bolt');
+ document.documentElement.classList.add('hunt-on');
  const top = document.createElement('div'); top.className = 'hunt-top'; top.dataset.ui = '';
  const grp = document.createElement('div'); grp.className = 'group'; top.append(grp);
  const modeBtn = modes.map(m => { const b = document.createElement('button'); b.textContent = m.icon; b.setAttribute('aria-label', m.name); b.dataset.ui = ''; b.addEventListener('click', () => onMode(m.id)); grp.append(b); return [m.id, b]; });
@@ -49,6 +56,6 @@ export function mountUi({root = document.body, onExit, onCast, onMode, onJet, on
   },
   pulse(i) { const b = btn[i]; b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse'); },
   armed(i) { btn.forEach((b, k) => b.style.outline = k === i ? '3px solid #fff' : 'none'); },
-  dispose() { st.remove(); tray.remove(); pads.remove(); top.remove(); fuel.remove(); }
+  dispose() { document.documentElement.classList.remove('hunt-on'); icons?.dispose(); st.remove(); tray.remove(); pads.remove(); top.remove(); fuel.remove(); }
  };
 }
