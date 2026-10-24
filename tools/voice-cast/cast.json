@@ -553,7 +553,15 @@
   "georgia-young": 1,
   "georgia-now": 1,
   "abbie": 1,
-  "ani": 1
+  "ani": 1,
+  "city-baker": 1,
+  "town-teacher": 1,
+  "town-librarian": 1,
+  "town-postie": 1,
+  "town-gardener": 1,
+  "town-scientist": 1,
+  "town-neighbour": 1,
+  "town-farmer": 1
  },
  "voices": {
   "daddy-young": "CgihQ2SXCatWXGd6dIUA",
@@ -571,7 +579,15 @@
   "georgia-young": "0HtmVMQQAQmcFnF5KM2J",
   "georgia-now": "ABFwCaKGLSG9ZXQzf6HA",
   "abbie": "6v1NVkWFOx7RiSwU4UYB",
-  "ani": "jyg28xewKUsbhcdswLJR"
+  "ani": "jyg28xewKUsbhcdswLJR",
+  "city-baker": "wQN5svB5ltAdWnqhCjzq",
+  "town-teacher": "kZ8TdZIQ1B4iqkdCbSrD",
+  "town-librarian": "0RWcfkKwchB33LDNkY9v",
+  "town-postie": "Yf703ospABCR0m3n2v8Z",
+  "town-gardener": "FiCkmFju2ZrmRkOaIxMP",
+  "town-scientist": "OQgknWnZfaMFbj7UlZU7",
+  "town-neighbour": "JDMNxT8eCk7Uep7ReoAs",
+  "town-farmer": "dLss4KRL1Kvwp7LMI4cv"
  },
  "study": "AW-STUDY-0030"
 }
