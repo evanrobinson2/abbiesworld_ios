@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-24-nethack-corridors",
-  "updatedAt": "2026-10-24T03:48:47.455055+00:00",
+  "revision": "anatomy-2026-10-24-nethack-scheduling",
+  "updatedAt": "2026-10-24T06:54:45.874693+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 112,
+    "findings": 117,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 71,
+    "sourceFilesFetched": 74,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1691,12 +1691,87 @@
               1256
             ]
           }
+        },
+        {
+          "domain": "simulation",
+          "title": "Actions consume movement budget while world turns replenish it",
+          "finding": "When context.move is set, the hero loses NORMAL_SPEED movement. movemon passes run until the hero can act or no monster can move. When both budgets are exhausted, the loop applies monster distress, replenishes monster budgets, computes hero allowance and increments moves and monstermoves. Action count and world-turn count therefore need not coincide. Command-to-context.move behavior remains untraced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/allmain.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c#L93-L173",
+            "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+            "lines": [
+              93,
+              173
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Hero speed bonuses and burden affect the replenishment allowance",
+          "finding": "An actually moving mounted hero receives mcalcmove of the steed. Otherwise base allowance comes from the current monster form; Very_fast adds NORMAL_SPEED on rn2(3)!=0, while Fast adds it on rn2(3)==0. Burden then subtracts integer fractions of the allowance (one quarter, one half, three quarters or seven eighths). These are budget rules, not a measurement of real-time animation speed.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/allmain.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c#L131-L169",
+            "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+            "lines": [
+              131,
+              169
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Monster speed is randomly rounded into whole action budgets",
+          "finding": "mcalcmove adjusts base speed for slow or fast status, applies a galloping-steed branch, then removes the remainder modulo NORMAL_SPEED and restores one NORMAL_SPEED when a random draw is below that remainder. movemon skips ordinary dead or under-budget monsters and deducts NORMAL_SPEED before processing an eligible monster; remaining budget requests another pass. Full action outcomes, guard exceptions and cleanup remain outside this bounded trace.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mon.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mon.c#L639-L672",
+            "blobSha": "4f0a13d4af6a52352ff84c01b2ac330e3f01af21",
+            "lines": [
+              639,
+              672
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Command dispatch can cancel the default time charge",
+          "finding": "The main loop defaults context.move to 1 before command processing. Escape and empty/interrupted input clear it in rhack. For ordinary command-table dispatch, a zero handler result clears context.move and multi; rejected wizard-only or buried-incompatible commands use that same path. Unknown commands also clear both. Movement and occupations have distinct paths, so this is not a complete per-command cost inventory.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/cmd.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c#L4890-L4934",
+            "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
+            "lines": [
+              4890,
+              4934
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Status and hunger hooks follow world-turn replenishment",
+          "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Internal expiration, hunger and spell-aging rules have not been traced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/allmain.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c#L172-L182",
+            "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+            "lines": [
+              172,
+              182
+            ]
+          }
         }
       ],
       "coverage": {
         "mechanics": "not yet studied",
         "systems": "partial static evidence",
-        "simulation": "not yet studied",
+        "simulation": "partial static evidence",
         "procedural-generation": "partial static evidence",
         "ui": "not yet studied",
         "ux": "not yet studied",
@@ -1711,7 +1786,7 @@
         "status": "design inference; not implemented in Ranch Atelier",
         "text": "Generate connectivity and progression requirements before filling a location with incidental content."
       },
-      "nextPass": "Trace turn scheduling and failure feedback. Corridor construction is partially traced; global reachability and runtime behavior remain unexamined.",
+      "nextPass": "Trace one concrete status lifecycle. Individual command costs, timer effects, runtime scheduling and global dungeon traversability remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
