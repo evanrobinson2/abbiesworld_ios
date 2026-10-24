@@ -38,8 +38,10 @@ for (const [name, viewport] of [['desktop', {width: 1440, height: 900}], ['ipad-
     const mid = k => { const b = k.getBoundingClientRect(); return b.top + b.height / 2; };
     const off = kids.filter(k => Math.abs(mid(k) - (bb.top + bb.height / 2)) > bb.height / 2 + 2 || mid(k) > bb.bottom || mid(k) < bb.top).map(k => k.className || k.tagName);
     const rows = new Set(kids.filter(k => !k.closest('#aw-effects')).map(k => Math.round(mid(k) / 12)));
+    const powers = ['#paint-hud .ph-icon', '[data-mode=party]', '[data-mode=disco]'];
+    const clippedPowers = powers.filter(selector => { const e=bar.querySelector(selector); if(!e)return true; const r=e.getBoundingClientRect(); return r.left<bb.left || r.right>bb.right || r.top<bb.top || r.bottom>bb.bottom; });
     const others = [...document.querySelectorAll('body *')].filter(e => !bar.contains(e) && !e.closest('.pl-door') && vis(e) && getComputedStyle(e).position === 'fixed' && e.getBoundingClientRect().bottom < 90 && e.getBoundingClientRect().height < 90 && e.getBoundingClientRect().width > 30 && !e.matches('#stage,#stage *,canvas,#v2-chrono-pop')).map(e => e.id || e.className);
-    return {mounted: true, oldBar: [...document.querySelectorAll('.hud')].some(vis), barHeight: Math.round(bb.height), barRight: Math.round(bb.right), vw: innerWidth, kids: kids.length, offRow: off, rows: rows.size, others};
+    return {mounted: true, oldBar: [...document.querySelectorAll('.hud')].some(vis), barHeight: Math.round(bb.height), barRight: Math.round(bb.right), vw: innerWidth, kids: kids.length, offRow: off, rows: rows.size, others, clippedPowers};
   });
   await tab.screenshot({path: `${prefix}-${name}.png`, timeout: 240000}).catch(e => console.log(`(no screenshot for ${name}: ${e.message.split("\n")[0]})`)); // software GL is slow with the mission charms floating
   console.log(name, JSON.stringify(r));
@@ -48,6 +50,7 @@ for (const [name, viewport] of [['desktop', {width: 1440, height: 900}], ['ipad-
   if (r.mounted) {
     if (r.barHeight > 100) failures.push(`${name}: the top bar is ${r.barHeight}px tall, so it wrapped to a second row`);
     if (r.offRow.length) failures.push(`${name}: controls off the bar's row: ${r.offRow.join(', ')}`);
+    if (r.clippedPowers.length) failures.push(`${name}: throwable or celebration controls clipped: ${r.clippedPowers.join(', ')}`);
     if (r.rows > 1) failures.push(`${name}: the chronograph controls sit on ${r.rows} rows`);
     if (r.barRight > r.vw) failures.push(`${name}: the top bar runs off the screen (${r.barRight} > ${r.vw})`);
     if (r.others.length) failures.push(`${name}: other fixed controls in the top strip: ${r.others.join(', ')}`);
