@@ -3766,6 +3766,14 @@
         {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
       ],
       "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
+    },
+    "player-home": {
+      "items": [
+        {"k": "canon", "t": "Evan's #619 direction (player and signature home)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/619"},
+        {"k": "canon", "t": "Backpack study: default bunny look and the charm list", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md"},
+        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+      ],
+      "recorded": "2026-10-24, no outside sources used; the two reference photos were not readable from the cloud worker, so the issue's written description was used"
     }
   }
 }
