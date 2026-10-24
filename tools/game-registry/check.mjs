@@ -47,7 +47,7 @@ for (const e of entries) {
   for (const p of e.pages || []) if (!exists(`${DIST}/${p}`)) fail(e.id, `page ${p} does not exist`);
   if (e.status === 'live') {
     const gates = e.scene?.gates || [];
-    if (!gates.length) fail(e.id, 'live without a scene: scene.gates must name a town gate (ENTRANCES) the player can stand at.');
+    if (!gates.length && e.scene?.stage !== 'town') fail(e.id, 'live without a scene: scene.gates must name a town gate (ENTRANCES) the player can stand at, or scene.stage "town" for a feature mounted on the Winchester board.');
     for (const g of gates) { if (!ENTRANCES[g]) fail(e.id, `gate ${g} is not in ENTRANCES`); else if (!ENTRANCES[g].scene) fail(e.id, `gate ${g} has no scene id`); }
     const t = e.test;
     if (!t?.script || !t.marker) fail(e.id, 'live without a test run: test.script and test.marker are required.');
@@ -74,6 +74,5 @@ if (!/mountTownHud\s*\(/.test(boot)) fail('town-hud-boot', 'simulations/town-hud
 // report
 const live = entries.filter(e => e.status === 'live'), exp = entries.filter(e => e.status === 'experimental');
 console.log(`game registry: ${live.length} live (${live.map(e => e.id).join(', ')}), ${exp.length} experimental (${exp.map(e => e.id).join(', ')})`);
-if (reg.unregistered?.features?.length) console.log(`warning: live with no entry yet: ${reg.unregistered.features.join('; ')}`);
 if (errors.length) { console.error('\nFAILED:\n' + errors.map(m => ' - ' + m).join('\n')); process.exit(1); }
 console.log('ok');

@@ -118,26 +118,15 @@ for (let i = 0; i < 9; i++) {
  h.position.set(Math.cos(a) * 42, -3, Math.sin(a) * 36 - 6); h.scale.y = .45; scene.add(h);
 }
 
-// ---------- sound: punches thud, blocks clack, the bell rings ----------
-let AC = null;
-const audio = () => { if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch {} } if (AC && AC.state === 'suspended') AC.resume(); return AC; };
-function noise(dur, f0, f1, gain, type = 'lowpass') {
- const a = AC; if (!a) return; const n = a.createBuffer(1, a.sampleRate * dur, a.sampleRate), d = n.getChannelData(0);
- for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length) ** 2;
- const s = a.createBufferSource(); s.buffer = n; const f = a.createBiquadFilter(); f.type = type; f.frequency.setValueAtTime(f0, a.currentTime); f.frequency.exponentialRampToValueAtTime(f1, a.currentTime + dur);
- const g = a.createGain(); g.gain.value = gain; s.connect(f).connect(g).connect(a.destination); s.start();
-}
-function tone(freq, dur, gain, type = 'sine', drop = .5) {
- const a = AC; if (!a) return; const o = a.createOscillator(), g = a.createGain(); o.type = type;
- o.frequency.setValueAtTime(freq, a.currentTime); o.frequency.exponentialRampToValueAtTime(freq * drop, a.currentTime + dur);
- g.gain.setValueAtTime(gain, a.currentTime); g.gain.exponentialRampToValueAtTime(.001, a.currentTime + dur); o.connect(g).connect(a.destination); o.start(); o.stop(a.currentTime + dur);
-}
+// ---------- sound: punches thud, blocks clack, the bell rings. From the sound catalogue (INVARIANTS.md) ----------
+import {sfx as catalogSfx, sfxContext} from '/simulations/catalog-sfx.mjs';
+const audio = () => sfxContext();
 const SFX = {
- whoosh: () => noise(.18, 900, 2600, .12, 'bandpass'),
- bonk: (big) => { tone(big ? 110 : 160, big ? .35 : .2, .5, 'sine', .45); noise(.12, 1800, 300, big ? .5 : .32); tone(big ? 520 : 700, .12, .08, 'triangle', 1.6); },
- clack: () => { noise(.08, 3000, 1200, .35, 'highpass'); tone(420, .08, .12, 'square', .8); },
- thump: () => { tone(70, .4, .7, 'sine', .5); noise(.3, 600, 120, .35); },
- bell: () => { if (!AC) return; [1, 2.76, 5.4, 8.9].forEach((m, i) => tone(520 * m, 2.4 / (1 + i * .6), .16 / (1 + i), 'sine', .995)); },
+ whoosh: () => catalogSfx('whoosh-1', {gain: .4}),
+ bonk: (big) => catalogSfx(big ? 'punch-2' : 'punch-1', {gain: big ? .9 : .6}),
+ clack: () => catalogSfx('sword-clash-2', {gain: .45}),
+ thump: () => catalogSfx('rock-fall', {gain: .7}),
+ bell: () => catalogSfx('gong', {gain: .6}),
 };
 
 // ---------- effects: stars on a hit, a ring on a block, dust on landing ----------

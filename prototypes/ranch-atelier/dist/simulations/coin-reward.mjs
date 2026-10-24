@@ -1,3 +1,4 @@
+import {sfx as catalogSfx} from './catalog-sfx.mjs';
 // The gold coin reward (Evan, 2026-10-23: "a very special prize"). The coins are Daddy's core memories, so finding one is
 // a moment: the coin lifts out of the world toward you, turns over in a burst of warm light and sparkles to a chiming
 // fanfare, then flies up and away to be kept. Meta mode: it is felt, not read. No words, nothing masks the world, and
@@ -26,13 +27,8 @@ function plainCoin(T) {
  m.rotation.x = Math.PI / 2; const g = new T.Group(); g.add(m); return g;
 }
 function fanfare(ac) {
- if (!ac) return;
- const now = ac.currentTime;
- const note = (f, at, len, type = 'square', gain = .045) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = type; o.frequency.value = f; g.gain.setValueAtTime(0, now + at); g.gain.linearRampToValueAtTime(gain, now + at + .01); g.gain.exponentialRampToValueAtTime(.0001, now + at + len); o.connect(g).connect(ac.destination); o.start(now + at); o.stop(now + at + len + .05); };
- [988, 1319, 1568, 1976].forEach((f, i) => note(f, i * .07, .16)); // the coin: bright 8-bit ping
- [523, 659, 784, 1047].forEach((f, i) => note(f, .4 + i * .14, .5, 'triangle', .05)); // rising
- [523, 659, 784, 1047, 1319].forEach(f => note(f, 1.05, 1.6, 'triangle', .03)); // the held chord
- for (let i = 0; i < 10; i++) note(2000 + Math.random() * 2400, 1.1 + i * .09, .12, 'sine', .015); // sparkle
+ // the coin, a rising fanfare, then sparkle: all from the sound catalogue
+ catalogSfx('coin-2', {gain: .8}); catalogSfx('tada', {gain: .8, delay: .4}); catalogSfx('sparkle-1', {gain: .7, delay: 1.1});
 }
 
 export function coinReward(T, {scene, camera, from, coin = null, audio = null, presentation = o => o}) {

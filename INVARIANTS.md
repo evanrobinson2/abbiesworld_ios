@@ -40,6 +40,10 @@ the voice-cast workflow, unscripted lines streamed through `api/live-voice.js` a
 No `speechSynthesis`, no other TTS. Checked by `tools/audio-check/check.mjs` against the same baseline file (`browserVoice`).
 
 ## Where the debt is
-The audit lists run on every CI run. Today: five files still use browser speech, 23 still synthesize sound, seven games are
-experimental, and several live features (paint balls, quests and the notebook, town events, backpack and charms, the intro) have no
-registry entry yet (`unregistered` in the registry). Each is routed to its owner in the PR that introduced the checks.
+None in sound or voice: `tools/audio-check/baseline.json` is empty, so any new oscillator, `.mid` or browser speech fails CI.
+Every effect plays through `simulations/catalog-sfx.mjs` (`sfx('coin-1')`), which resolves ids in the sound catalogue.
+Games: seven are experimental (`needs` in the registry says what each lacks). The registry's `scene.stage: "town"` covers
+features mounted on the Winchester board (intro, paint balls, world effects, quests, backpack); their one run is
+`tools/game-registry/town-features.cjs`.
+Known gap: the audio check sees oscillators, `.mid` files, browser speech and unknown catalogue ids. It cannot see a
+noise-buffer synth; review for that.

@@ -24,7 +24,7 @@ const errors = [];
 for (const f of files) if (/\.midi?$/i.test(f)) errors.push(`${f}: a MIDI file in the game. Use a recorded or produced track from the music catalogue.`);
 
 const SYNTH = /createOscillator\s*\(|new\s+OscillatorNode\b|createPeriodicWave\s*\(|\.noteOn\s*\(/g;
-const VOICE = /new\s+SpeechSynthesisUtterance\b|speechSynthesis\??\.speak\s*\(|\bResponsiveVoice\b|\.speak\(\s*new\s+SpeechSynthesisUtterance/g;
+const VOICE = /\bspeechSynthesis\b|\bSpeechSynthesisUtterance\b|\bResponsiveVoice\b/g;
 const counts = {}, voices = {};
 for (const f of files.filter(f => /\.(m?js|html)$/.test(f))) {
   const src = fs.readFileSync(f, 'utf8');
@@ -58,6 +58,16 @@ for (const f of files.filter(f => /\.(m?js|html)$/.test(f))) {
   for (const m of src.matchAll(/\b(?:const|let)\s+(?:SAMPLES|SOUND_IDS|SFX)\s*=\s*\[([^\]]*)\]/g)) {
     for (const id of m[1].match(/['"][^'"]+['"]/g) || []) if (!known.has(id.slice(1, -1))) errors.push(`${f}: sound id ${id} is not in the sound catalogue.`);
   }
+}
+
+// every id handed to the catalogue player must exist (files that import catalog-sfx.mjs)
+for (const f of files.filter(f => /\.(m?js|html)$/.test(f))) {
+  const src = fs.readFileSync(f, 'utf8'); if (!/catalog-sfx\.mjs/.test(src) || f.endsWith('catalog-sfx.mjs')) continue;
+  const ids = new Set();
+  for (const m of src.matchAll(/\b(?:sfx|catalogSfx|S_|P|preload)\(\s*\[?\s*((?:['"][a-z0-9-]+['"]\s*,?\s*)+)/g)) for (const x of m[1].match(/['"][a-z0-9-]+['"]/g)) ids.add(x.slice(1, -1));
+  for (const m of src.matchAll(/\b(?:ONE|one)\(([^)]*)\)/g)) for (const x of m[1].match(/['"][a-z0-9-]+['"]/g) || []) ids.add(x.slice(1, -1));
+  for (const m of src.matchAll(/'(?:abbies-world-reimagined)'/g)) ids.add('abbies-world-reimagined');
+  for (const id of ids) if (!known.has(id)) errors.push(`${f}: sound id '${id}' is not in the sound catalogue.`);
 }
 
 const total = Object.values(counts).reduce((a, b) => a + b, 0);

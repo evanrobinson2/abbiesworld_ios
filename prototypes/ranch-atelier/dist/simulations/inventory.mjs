@@ -22,6 +22,7 @@
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
 import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook, UPGRADES, upgradeLevel, capacity, starsLeft, nextLevel, buyUpgrade} from './backpack.mjs?v=13';
+import {sfx as catalogSfx} from './catalog-sfx.mjs';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -246,11 +247,7 @@ function nextCharm() {
 }
 function jingle() {
   if (window.AWLook?.state?.prefs?.mute) return;
-  try {
-    const ac = new (window.AudioContext || window.webkitAudioContext)(), now = ac.currentTime;
-    [1568, 2093, 2637, 2093, 3136].forEach((f, i) => { const o = ac.createOscillator(), g = ac.createGain(); o.type = 'triangle'; o.frequency.value = f; g.gain.setValueAtTime(0, now + i * .06); g.gain.linearRampToValueAtTime(.05, now + i * .06 + .01); g.gain.exponentialRampToValueAtTime(.0001, now + i * .06 + .35); o.connect(g).connect(ac.destination); o.start(now + i * .06); o.stop(now + i * .06 + .4); });
-    setTimeout(() => ac.close(), 1200);
-  } catch {}
+  catalogSfx('sparkle-1', {gain: .8});
 }
 addEventListener('pointerdown', e => { if (pop && !pop.hidden && !e.target.closest?.('.aw-pocket,.aw-pocket-pop,.aw-bp-tag')) closePop(); }, true);
 addEventListener('keydown', e => {

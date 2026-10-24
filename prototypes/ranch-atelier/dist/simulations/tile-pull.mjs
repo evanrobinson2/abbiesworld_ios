@@ -6,6 +6,7 @@
 // player and are invisible to every perception. Only the landed tile enters the world (tile-chooser.mjs, lab.mjs).
 import {uiIcon} from './ui-icons.mjs?v=4';
 import {PLACES} from '../cards/v3/face.mjs';
+import {sfx as catalogSfx} from './catalog-sfx.mjs';
 
 const reduced = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const tri = x => { const f = x - Math.floor(x); return 4 * Math.abs(f - .5) - 1; };
@@ -157,25 +158,13 @@ export function openPrintWindow({name, at, still}) {
  };
 }
 
-// The printer's voice: a short paper-feed tick per layer and an ink-stamp thump. Synthesised, so it works offline; it
-// only ever starts from the Print press (a user gesture).
+// The printer's voice: a paper-feed tick per layer and an ink-stamp thump, from the sound catalogue. It only ever starts from
+// the Print press (a user gesture).
 function printSound() {
- let ctx = null;
- try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { ctx = null; }
- const noise = (dur, freq, gain) => {
-  if (!ctx) return; const n = Math.floor(ctx.sampleRate * dur), buf = ctx.createBuffer(1, n, ctx.sampleRate), d = buf.getChannelData(0);
-  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n) ** 2;
-  const src = ctx.createBufferSource(), f = ctx.createBiquadFilter(), g = ctx.createGain(); src.buffer = buf; f.type = 'bandpass'; f.frequency.value = freq; f.Q.value = 2.5; g.gain.value = gain;
-  src.connect(f).connect(g).connect(ctx.destination); src.start();
- };
  return {
-  layer(i) { noise(.05, 1800 + (i % 3) * 400, .12); },
-  stamp() {
-   if (!ctx) return; const t = ctx.currentTime, o = ctx.createOscillator(), g = ctx.createGain();
-   o.type = 'triangle'; o.frequency.setValueAtTime(660, t); o.frequency.exponentialRampToValueAtTime(1320, t + .12); g.gain.setValueAtTime(.18, t); g.gain.exponentialRampToValueAtTime(.001, t + .3);
-   o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + .32); noise(.05, 3200, .08);
-  },
-  dispose() { setTimeout(() => ctx?.close().catch(() => {}), 600); }
+  layer(i) { catalogSfx('tick', {gain: .5, rate: .9 + (i % 3) * .12}); },
+  stamp() { catalogSfx('press', {gain: .8}); },
+  dispose() {}
  };
 }
 

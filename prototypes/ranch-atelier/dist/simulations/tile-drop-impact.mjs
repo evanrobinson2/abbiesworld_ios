@@ -126,13 +126,9 @@ export function createImpactSound(){
  function buffer(s){if(!buffers.has(s.id))buffers.set(s.id,fetchAudio(s.urls.audio).then(b=>context.decodeAudioData(b)).catch(()=>null));return buffers.get(s.id);}
  function ensure(){if(!context){const A=window.AudioContext||window.webkitAudioContext;if(!A)return false;context=new A();master=context.createDynamicsCompressor();master.threshold.value=-10;master.ratio.value=4;const out=context.createGain();out.gain.value=.9;master.connect(out).connect(context.destination);}if(context.state==='suspended')context.resume().catch(()=>{});return true;}
  function prime(){if(!ensure())return Promise.resolve();loading??=loadCatalogue().then(c=>{catalogue=c;for(const l of LAYERS){const s=take(l.slot);if(s)buffer(s);}});return loading;}
- function sub(at,strength){const o=context.createOscillator(),g=context.createGain();o.type='sine';o.frequency.setValueAtTime(78,at);o.frequency.exponentialRampToValueAtTime(31,at+.32);g.gain.setValueAtTime(.0001,at);g.gain.exponentialRampToValueAtTime(.9*strength,at+.006);g.gain.exponentialRampToValueAtTime(.0001,at+.55);o.connect(g).connect(master);o.start(at);o.stop(at+.6);o.onended=()=>{o.disconnect();g.disconnect();};}
- function crunch(at,strength){const n=Math.floor(context.sampleRate*.45),b=context.createBuffer(1,n,context.sampleRate),d=b.getChannelData(0);let grain=0;
-  for(let i=0;i<n;i++){if(Math.random()<.004)grain=Math.random();grain*=.996;d[i]=(Math.random()*2-1)*(Math.exp(-i/(context.sampleRate*.05))*.8+grain*.5*Math.exp(-i/(context.sampleRate*.18)));}
-  const src=context.createBufferSource(),f=context.createBiquadFilter(),g=context.createGain();src.buffer=b;f.type='lowpass';f.frequency.setValueAtTime(3800,at);f.frequency.exponentialRampToValueAtTime(500,at+.4);g.gain.value=.55*strength;src.connect(f).connect(g).connect(master);src.start(at);src.onended=()=>{src.disconnect();f.disconnect();g.disconnect();};}
  async function sample(l,at,strength){const s=take(l.slot);if(!s)return;const b=await buffer(s);if(!b||at<context.currentTime-.03)return;const src=context.createBufferSource(),g=context.createGain();src.buffer=b;src.playbackRate.value=l.rate;g.gain.value=l.gain*strength;src.connect(g).connect(master);src.start(Math.max(context.currentTime,at+l.delay));src.onended=()=>{src.disconnect();g.disconnect();};}
  // Schedule the whole stack for `inSeconds` from now: the impact frame is known when the slam starts.
- function play(inSeconds=0,strength=1){if(!ensure())return;const at=context.currentTime+Math.max(0,inSeconds);sub(at,strength);crunch(at,strength);for(const l of LAYERS)sample(l,at,strength);}
+ function play(inSeconds=0,strength=1){if(!ensure())return;const at=context.currentTime+Math.max(0,inSeconds);for(const l of LAYERS)sample(l,at,strength);}
  return {prime,play,layers:LAYERS.map(l=>l.slot),get context(){return context;}};
 }
 

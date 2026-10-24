@@ -1,7 +1,7 @@
 // The inner voice, shared by every memory place: the girl's thought as a caption at the bottom of the screen in the
 // era's font, plain high-contrast white, no outline and no panel, with any choices beneath it like a terminal
 // ("> Try the switches"). It is the one text allowed in play (docs/design/INTERACTION_GRAMMAR.md rules 7-8, Evan
-// 2026-10-23 09:17Z). Her spoken voice is reserved for a recorded child's voice; {speak: true} tries the device's own.
+// 2026-10-23 09:17Z). Her spoken voice is reserved for a recorded child's voice; {speak: true} is reserved until the recorded voice exists (no browser speech).
 //
 //   const voice = innerVoice({font: 'VT323', onTouch: () => audio()});
 //   voice.say("It's dark in here...", {choices: [{label: 'Try the switches', go}], hold: ms});
@@ -25,10 +25,7 @@ export function innerVoice({font = 'VT323', size = 28, speak = false, onTouch = 
  document.head.append(style);
  const line = Object.assign(document.createElement('div'), {className: 'aw-caption'}), list = Object.assign(document.createElement('div'), {className: 'aw-choices'});
  line.setAttribute('aria-live', 'polite'); document.body.append(line, list);
- let device = null, ready = false, pending = null;
- const pick = () => { const vs = window.speechSynthesis?.getVoices?.() || [], en = vs.filter(v => /en[-_]US/i.test(v.lang));
-  device = en.find(v => /Samantha|Ava|Allison|Susan|Aria|Jenny|Google US English/i.test(v.name)) || en[0] || null; };
- try { pick(); speechSynthesis.onvoiceschanged = pick; } catch {}
+ let ready = false, pending = null;
  const talk = text => { if (!ready) { pending = text; return; } /* text only: no synthetic speech */ };
  const unlock = () => { if (ready) return; ready = true; if (pending && voice.thought) talk(pending); pending = null; };
  addEventListener('pointerdown', unlock, {capture: true}); addEventListener('keydown', unlock, {capture: true});

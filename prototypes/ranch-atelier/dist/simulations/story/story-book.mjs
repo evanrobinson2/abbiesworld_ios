@@ -1,4 +1,5 @@
 import {planStory,createStorySession} from './story-session.mjs';
+import {sfx} from '../catalog-sfx.mjs';
 // The storybook: a child talks (or a parent types) a story into a book that springs out from the
 // table edge. The book reads every line aloud, so a child who can't read can follow along.
 const FACE={human:{child:'🧒',adult:'🧑',elder:'🧓',any:'🙂'},horse:'🐴',cow:'🐮',goat:'🐐',chicken:'🐔'};
@@ -10,12 +11,10 @@ const MIC_SVG='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3.5 3
 // A damped spring (GAME_FEEL law 10): v += (target - x) * k * dt; v *= damping.
 function spring(x,k=210,d=.82){return {x,v:0,target:x,k,d,step(dt){this.v+=(this.target-this.x)*this.k*dt;this.v*=Math.pow(this.d,dt*60);this.x+=this.v*dt;return Math.abs(this.v)>.001||Math.abs(this.target-this.x)>.001;}};}
 
-// Tiny synthesized sounds, pitch-randomized ±6% (law 11). Started on the first tap.
-function createSounds(){let ctx=null;const pentatonic=[0,2,4,7,9,12,14,16];let step=0;
- const audio=()=>ctx||(ctx=new (window.AudioContext||window.webkitAudioContext)());
- const tone=(freq,len=.12,type='sine',gain=.16,when=0)=>{try{const c=audio(),t=c.currentTime+when,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.value=freq*(.94+Math.random()*.12);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(gain,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+len);o.connect(g).connect(c.destination);o.start(t);o.stop(t+len+.02);}catch{}};
- const noise=(len=.25,gain=.12,freq=1800)=>{try{const c=audio(),b=c.createBuffer(1,c.sampleRate*len,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);const s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();f.type='bandpass';f.frequency.value=freq*(.94+Math.random()*.12);g.gain.value=gain;s.buffer=b;s.connect(f).connect(g).connect(c.destination);s.start();}catch{}};
- return {page:()=>noise(.28,.14,1400),pop:()=>{tone(523*2**(pentatonic[step++%pentatonic.length]/12),.14);},resetPops:()=>{step=0;},thunk:()=>{tone(110,.18,'sine',.3);noise(.08,.12,500);},chime:()=>{tone(784,.6,'sine',.12);tone(1175,.8,'sine',.09,.08);tone(1568,.9,'sine',.06,.16);},boop:()=>tone(220,.2,'triangle',.12),tick:()=>tone(1320,.04,'square',.03)};
+// Small sounds from the sound catalogue, pitch-randomized ±6% (law 11).
+function createSounds(){const pentatonic=[0,2,4,7,9,12,14,16];let step=0;
+ const play=(id,gain,rate=1)=>sfx(id,{gain,rate:rate*(.94+Math.random()*.12)});
+ return {page:()=>play('page-turn',.6),pop:()=>{play('pop-1',.5,2**(pentatonic[step++%pentatonic.length]/12));},resetPops:()=>{step=0;},thunk:()=>play('place-wood-1',.6),chime:()=>play('magic-chime',.7),boop:()=>play('tap-2',.5),tick:()=>play('click-3',.4)};
 }
 
 function tornEdge(){const pts=['0 0'];for(let i=0;i<=40;i++){const y=i*2.5,x=100-(i%2?1.4:0)-Math.random()*1.4;pts.push(`calc(${x}% ) ${y}%`);}pts.push('0 100%');return `polygon(${pts.join(',')})`;}
@@ -111,7 +110,7 @@ export function installStoryBook(host){
   finally{controller=null;}
  }
  go.onclick=()=>{sounds.tick();tell();};
- stopButton.onclick=()=>{controller?.abort();session.clear();try{speechSynthesis.cancel();}catch{}bubble.textContent='';setMode('done');};
+ stopButton.onclick=()=>{controller?.abort();session.clear();bubble.textContent='';setMode('done');};
  again.onclick=()=>{if(!story)return;done.clear();words.value='';setMode('building');renderBeats();session.play(story).catch(e=>{foot.textContent=e.message;setMode('done');});};
  fresh.onclick=()=>{session.clear();story=null;done.clear();words.value='';title.textContent='';castRow.replaceChildren();beatsRow.replaceChildren();wishes.replaceChildren();foot.textContent='';bubble.textContent='';setMode('idle');words.focus();};
 
