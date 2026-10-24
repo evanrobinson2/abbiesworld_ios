@@ -68,6 +68,11 @@ function chips(){
     <button type="button" class="gridbtn" data-view="${view === 'grid' ? 'review' : 'grid'}">${view === 'grid' ? 'Back to reviewing' : 'See them all'}</button></div>`;
 }
 
+// The library (Evan, 2026-10-23: "give me a better way to browse"): every model we have, not only the ones on the desk.
+function library(){
+  crumb.innerHTML = '<a href="/models">Models</a>';
+  import('/models/library.js?v=4').then(l => l.mount(root));
+}
 // The browser (Evan, 04:00Z): every model as a small version of the review card, a framed print and the model standing
 // free beside it. One wordless toggle: Row shows one card at a time to swipe through, Screen shows them all as a grid.
 let browse = (() => { try { return localStorage.getItem('aw-browse') || 'screen'; } catch (e) { return 'screen'; } })();
@@ -124,7 +129,7 @@ function plainNote(note){
 // Models that come from outside (Printables and the like) always show where they came from, who made them and the licence.
 const sourceLine = m => { const s = m.source; if (!s || !s.url) return '';
   const by = s.authorUrl ? `<a href="${esc(s.authorUrl)}" target="_blank" rel="noopener">${esc(s.author)}</a>` : esc(s.author);
-  return `<p class="srcline"><b>Source</b> ${esc(s.site)} · by ${by} · ${esc(s.licence)} · <a href="${esc(s.url)}" target="_blank" rel="noopener">View the original</a>${s.credit ? `<span>${esc(s.credit)}</span>` : ''}</p>`; };
+  return `<p class="srcline"><b>Source</b> ${esc(s.site)}${s.title ? ` · “${esc(s.title)}”` : ''} · by ${by} · ${esc(s.licence)} · <a href="${esc(s.url)}" target="_blank" rel="noopener">View the original</a>${s.credit ? `<span>${esc(s.credit)}</span>` : ''}</p>`; };
 const plainList = xs => (xs || []).map(plainNote).filter(Boolean);
 const FAIR = {fair:'Fair', close:'Close', off:'Off'};
 const MOTIFS = [['default','Default'],['rome','Rome'],['efficient','Efficient']];
@@ -171,7 +176,7 @@ function topbar(m, seq, i){
       <button type="button" class="peb" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>${ico('right')}</button></div>
     <div class="tools">
       <div class="ctrs" role="group" aria-label="Which models">${counter('todo','To look at')}${counter('accept','Kept')}${counter('adjust','Notes sent')}${counter('reject','Rejected')}</div>
-      <button type="button" class="peb" data-view="grid" aria-label="See them all">${ico('grid')}</button>
+      <button type="button" class="peb" data-view="${set ? 'grid' : 'library'}" aria-label="See them all">${ico('grid')}</button>
       <button type="button" class="peb" id="gear" aria-label="Look" aria-expanded="false">${ico('gear')}</button>
       <button type="button" class="peb" id="cam" aria-label="Take a photo to make into a model">${ico('camera')}</button>
       <button type="button" class="peb" id="cart" aria-label="Request more">${ico('cart')}<span class="badge" id="badge"${orders.length ? '' : ' hidden'}>${orders.length}</span></button>
@@ -312,7 +317,7 @@ async function sendOrders(){
 }
 
 function render(push){
-  if (view === 'grid') grid(); else review();
+  if (view === 'library') library(); else if (view === 'grid') grid(); else review();
   const path = (view === 'review' && cur ? `/models/${encodeURIComponent(cur)}` : '/models') + (set ? `?set=${encodeURIComponent(set.id)}` : '');
   if (push && location.pathname + location.search !== path) history.pushState({cur, view}, '', path);
 }
@@ -498,6 +503,7 @@ function route(){
   const seg = decodeURIComponent(location.pathname.replace(/\/+$/, '').split('/').pop());
   const id = seg === 'model.html' ? new URLSearchParams(location.search).get('id') : seg === 'models' || seg === 'index.html' ? null : seg;
   view = 'review';
+  if (!id && !set && !new URLSearchParams(location.search).has('review')){ view = 'library'; cur = null; return; }
   cur = id && list.some(m => m.id === id) ? id : null;
   if (id && !cur) root.innerHTML = `<p class="empty">There is no model called “${esc(id)}”. <a href="/models">See all models</a>.</p>`;
   if (!cur){ filter = 'todo'; cur = todo()[0]?.id || null; if (!cur){ view = 'grid'; filter = 'all'; } }

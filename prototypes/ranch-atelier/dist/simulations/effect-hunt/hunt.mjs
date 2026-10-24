@@ -131,7 +131,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
  }
  setMode(mode);
  return {
-  driver, tow, fx, beam, places, frame, setMode, cast, get mode() { return cur; }, setBeacons: v => { beacons = v; beam.set(v && (cur !== 'god' || beaconCheat())); }, vehicleRoot,
+  driver, tow, fx, beam, places, frame, setMode, cast, get mode() { return cur; }, refreshVehicle() { const id = vehicleId; vehicleId = null; if (id) setVehicle(id); }, setBeacons: v => { beacons = v; beam.set(v && (cur !== 'god' || beaconCheat())); }, vehicleRoot,
   foundCount: () => found().size, dispose() { hud?.dispose(); input.dispose(); vehicleRoot.removeFromParent(); fx.root.removeFromParent(); beam.root.removeFromParent(); camera.fov = fov; camera.updateProjectionMatrix(); }
  };
 }

@@ -70,6 +70,7 @@ await kart.ready(); kart.clearScenery(standin.group); // the stand-in's houses a
 if (q.has('tiles')) await kart.setTiles(q.get('tiles').split(','));
 kart.prebuild();
 window.__hunt = hunt; window.__kart = kart; window.__world = world;
+import(S + "kart/toy-cars.mjs").then(m => m.mountCarPicker({hunt})).catch(() => {});
 
 // ---- grown-up workbench (?dev): place tiles in the slots and watch the track re-draw; the beacon cheat lives here too
 function devRefresh() {
