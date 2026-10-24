@@ -1,0 +1,147 @@
+{
+ "about": "Synthesized audio still in the game (Evan, 2026-10-24: only catalogue sounds). Replace each with sounds from sounds/manifest.json; counts may only go down.",
+ "files": {
+  "prototypes/ranch-atelier/dist/cards/table.mjs": {
+   "oscillators": 1,
+   "owner": "Design lead to route",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/explore/explore.js": {
+   "oscillators": 1,
+   "owner": "Design lead to route",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/backpack-wear.mjs": {
+   "oscillators": 1,
+   "owner": "Backpack thread (0046)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/cafe-sound.mjs": {
+   "oscillators": 1,
+   "owner": "Coffee shop (AW-STUDY-0013)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/carwash/sound.mjs": {
+   "oscillators": 3,
+   "owner": "carwash thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/coaster-audio.mjs": {
+   "oscillators": 3,
+   "owner": "coaster thread (AW-STUDY-0054)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/coin-reward.mjs": {
+   "oscillators": 1,
+   "owner": "Charms thread (0053)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/demo/chat.mjs": {
+   "oscillators": 1,
+   "owner": "Demo flow thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/effect-hunt/sound.mjs": {
+   "oscillators": 1,
+   "owner": "effect hunt thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/event-sound.mjs": {
+   "oscillators": 3,
+   "owner": "World effects thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/inventory.mjs": {
+   "oscillators": 1,
+   "owner": "Backpack thread (0046)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/ranch-sound.mjs": {
+   "oscillators": 1,
+   "owner": "Ranch (sound owner: Design lead)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/story/story-book.mjs": {
+   "oscillators": 1,
+   "owner": "story thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/tile-drop-impact.mjs": {
+   "oscillators": 1,
+   "owner": "Tile pull/print thread (0025)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/tile-pull.mjs": {
+   "oscillators": 1,
+   "owner": "Tile pull/print thread (0025)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/simulations/tile-reveal.mjs": {
+   "oscillators": 1,
+   "owner": "Tile pull/print thread (0025)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/studies/basement/play.html": {
+   "oscillators": 4,
+   "owner": "Grace's basement (AW-STUDY-0024)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/studies/brute-fight/play.html": {
+   "oscillators": 1,
+   "owner": "brute-fight thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/studies/cafe/photobooth.html": {
+   "oscillators": 1,
+   "owner": "Coffee shop (AW-STUDY-0013)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/studies/cell/play.html": {
+   "oscillators": 1,
+   "owner": "cell study (parked)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/studies/school/play.html": {
+   "oscillators": 5,
+   "owner": "School thread (AW-STUDY-0032)",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/studies/spacemail/play.html": {
+   "oscillators": 2,
+   "owner": "spacemail thread",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  },
+  "prototypes/ranch-atelier/dist/teleport/app.mjs": {
+   "oscillators": 1,
+   "owner": "Design lead to route",
+   "replaceWith": "best match from sounds/manifest.json (450 Sonniss takes)"
+  }
+ },
+ "browserVoice": {
+  "prototypes/ranch-atelier/dist/models/models.js": {
+   "calls": 1,
+   "owner": "Model library thread",
+   "replaceWith": "ElevenLabs designed voice, pre-rendered (voice-cast workflow) or api/live-voice.js"
+  },
+  "prototypes/ranch-atelier/dist/simulations/demo/chat.mjs": {
+   "calls": 1,
+   "owner": "Demo flow thread",
+   "replaceWith": "ElevenLabs designed voice, pre-rendered (voice-cast workflow) or api/live-voice.js"
+  },
+  "prototypes/ranch-atelier/dist/simulations/welcome/welcome.mjs": {
+   "calls": 4,
+   "owner": "Welcome tour (0022)",
+   "replaceWith": "ElevenLabs designed voice, pre-rendered (voice-cast workflow) or api/live-voice.js"
+  },
+  "prototypes/ranch-atelier/dist/studies/faces/index.html": {
+   "calls": 2,
+   "owner": "Character Studio (0037)",
+   "replaceWith": "ElevenLabs designed voice, pre-rendered (voice-cast workflow) or api/live-voice.js"
+  },
+  "prototypes/ranch-atelier/dist/studies/school/play.html": {
+   "calls": 1,
+   "owner": "School thread (AW-STUDY-0032)",
+   "replaceWith": "ElevenLabs designed voice, pre-rendered (voice-cast workflow) or api/live-voice.js"
+  }
+ }
+}
