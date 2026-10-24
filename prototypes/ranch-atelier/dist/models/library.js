@@ -62,11 +62,11 @@ function sheet(key, keepScroll){
   if (!e){ el.hidden = true; return; }
   S.sel = key;
   const i = view.findIndex(x => x.key === key);
-  const pic = e.glb ? `<model-viewer class="lv" src="${esc(e.glb)}" camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" camera-orbit="-35deg 68deg auto" shadow-intensity="0.8" exposure="0.9" environment-image="neutral" interaction-prompt="none" poster="${esc(pic(e.thumb) || '')}"></model-viewer>`
+  const stage = e.glb ? `<model-viewer class="lv" src="${esc(e.glb)}" camera-controls touch-action="pan-y" auto-rotate auto-rotate-delay="1500" rotation-per-second="18deg" camera-orbit="-35deg 68deg auto" shadow-intensity="0.8" exposure="0.9" environment-image="neutral" interaction-prompt="none" poster="${esc(pic(e.thumb) || '')}"></model-viewer>`
     : `<div class="lv still">${e.thumb ? `<img src="${pic(e.thumb)}" alt="">` : ''}<p>${e.branch ? 'This one lives on an unmerged branch' : 'This file is kept in the repo as a source'}, not on the site, so it shows as a picture.</p></div>`;
   const rows = [['Study', e.collection], ['Place', e.place], ['Source', e.source], ['Type', e.type], ['Status', STATUS[e.status]], ['Size', fmt(e.bytes)], ...(e.branch ? [['Branch', e.branch]] : []), ['Kept as', e.copies > 1 ? `${e.copies} identical copies in the repo` : 'one file'], ['File', `<code>${esc(e.file.replace('prototypes/ranch-atelier/dist/', ''))}</code>`]];
   el.innerHTML = `<div class="lback" data-close></div><aside><header><button type="button" class="pb" data-lstep="-1" ${i <= 0 ? 'disabled' : ''} aria-label="Previous">‹</button><h2>${esc(e.name)}</h2><button type="button" class="pb" data-lstep="1" ${i < 0 || i >= view.length - 1 ? 'disabled' : ''} aria-label="Next">›</button><button type="button" class="pb x" data-close aria-label="Close">×</button></header>
-    ${pic}<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${k === 'File' ? v : esc(v)}</dd>`).join('')}</dl>
+    ${stage}<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${k === 'File' ? v : esc(v)}</dd>`).join('')}</dl>
     <div class="lact">${e.id ? `<a class="btn" href="/models/${encodeURIComponent(e.id)}" data-desk="${esc(e.id)}">Review it on the desk</a>` : ''}${e.glb ? `<a class="btn ghost" href="${esc(e.glb)}" download>Download</a>` : ''}${e.source_info ? `<a class="btn ghost" href="${esc(e.source_info)}" target="_blank" rel="noopener">The original</a>` : ''}</div></aside>`;
   el.hidden = false;
   root.querySelectorAll('.lt.on').forEach(t => t.classList.remove('on'));
