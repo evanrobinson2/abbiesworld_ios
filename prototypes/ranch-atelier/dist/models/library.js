@@ -12,6 +12,8 @@ const SRCDOT = {Meshy:'#7a4bd1', Printables:'#d8801f', Blender:'#2e7d6e', Catalo
 const BASE = window.LIB_BASE || '/models/';
 const pic = u => u && BASE !== '/models/' ? u.replace('/models/', BASE) : u;
 const PASSNOTE = 'Original is the first low-poly pass. Upgrade is a later, higher-detail or restyled version (charming, upgrade, remaster, higher rounds).';
+// A link can open the shelf already filtered: /models?type=People, ?source=Meshy, ?pass=Upgrade, ?q=barn, ?study=Cafe.
+const fromUrl = () => { const q = new URLSearchParams(location.search); for (const k of ['source','type','place','status','pass']) if (q.get(k)) S[k] = q.get(k); if (q.get('study')) S.col = q.get('study'); if (q.get('q')) S.q = q.get('q'); if (q.get('stages')) S.stages = true; };
 let data = null, items = [], root = null, view = [];
 const fmt = n => n >= 1e6 ? (n / 1e6).toFixed(1) + ' MB' : Math.max(1, Math.round(n / 1e3)) + ' KB';
 
@@ -105,7 +107,7 @@ export async function mount(el){
     el.innerHTML = '<p class="loading">Opening the library…</p>';
     try { data = await (await fetch(BASE + 'library.json')).json(); items = data.items; } catch { el.innerHTML = '<p class="empty">The library could not load. Try again.</p>'; return; }
   }
-  if (!wired){ wire(); wired = true; }
+  if (!wired){ wire(); wired = true; fromUrl(); }
   draw();
 }
 export function unmount(){ root?.classList.remove('libwrap'); }
