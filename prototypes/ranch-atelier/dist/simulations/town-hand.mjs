@@ -12,6 +12,7 @@ export const ZONES = {
   'anis-side': {body: '#3d8f93', deep: '#2b6568', earth: '#5d6b4a', grass: '#8bb86a', air: '#dcebf0'},
   'abbie-daddy-side': {body: '#c0609a', deep: '#8e3d70', earth: '#7a4a3a', grass: '#d98a45', air: '#f6d9c8'}};
 const INK = '#2b2a26';
+const SHORT = {neighbourhood: 'Neighbourhood', 'abbie-daddy-side': 'Abbie and Daddy', 'depot-river': 'Depot and River'}; // the name must fit the ribbon
 const rnd = seed => () => (seed = (seed * 16807) % 2147483647) / 2147483647;
 
 // A hex of that zone from above: grass, a lane, a few houses and trees. Drawn from the hex's number, so each card is its own.
@@ -72,7 +73,7 @@ function captureHex(stage, id, size = 460) {
 }
 
 function deal(b, h, k, artUrl) {
-  renderFace({id: 'town-' + h.id, name: h.name, art: artUrl, edition: k + 1, set: 7, palette: ZONES[h.zone]}, {style: 'diecut', dpi: 110})
+  renderFace({id: 'town-' + h.id, name: SHORT[h.id] || h.name, art: artUrl, edition: k + 1, set: 7, palette: ZONES[h.zone]}, {style: 'diecut', dpi: 110})
     .then(({canvas}) => { let img = b.querySelector('img'); if (!img) { img = new Image(); img.alt = ''; img.draggable = false; b.append(img); } img.src = canvas.toDataURL('image/png'); }).catch(() => { if (!b.firstChild) b.textContent = h.n; });
 }
 
@@ -92,10 +93,15 @@ export function mountTownHand({board, visit, stage} = {}) {
   });
   // Then the real tiles: once the board is up, each card's art is swapped for its hex rendered from the 3D model.
   if (stage?.frame) {
-    let frames = 0, done = false;
+    let frames = 0, tries = 0, look = null, pending = new Set(hexes.map(h => h.id));
+    import('./world-look.mjs').then(m => { look = m; }).catch(() => {});
     const off = stage.frame(() => {
-      if (done || !stage.dioGroup.visible || ++frames < 12) return; done = true; off();
-      hexes.forEach((h, k) => { const url = captureHex(stage, h.id); if (url) deal(row.children[k], h, k, url); });
+      if (!stage.dioGroup.visible || ++frames < 12) return; frames = 0;
+      // Cartoon, like the sandbox's tile cards: flat bands of light and black ink round everything, for the capture only.
+      let ink = null; try { if (look && !window.worldLook) ink = look.worldLook(stage.THREE, {scene: stage.scene, renderer: stage.renderer, initial: 'comic-ink'}); } catch (e) { console.warn('Hex ink', e); }
+      hexes.forEach((h, k) => { if (!pending.has(h.id)) return; const url = captureHex(stage, h.id); if (url) { pending.delete(h.id); deal(row.children[k], h, k, url); } });
+      try { ink?.dispose(); } catch {}
+      if (!pending.size || ++tries >= 4) off(); // try again a few times if a hex was not ready
     });
   }
   return {row};
