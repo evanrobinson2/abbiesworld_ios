@@ -65,6 +65,12 @@ read the beat from the take's known bpm and offset, so the claps and the catches
 Sound effects are real recordings from the sound store (splash-big, splash-small, bubbles, faucet, fan, vacuum, washing, squeak-toy,
 clap, win-sting, magic-chime, car-horn); the old WebAudio noise bed in `sound.mjs` is retired for these.
 
+## Start point (proposal from the Charms thread, Evan's call)
+Missions start at their backpack charm. Proposed: a "Sponge" charm (id `carwash`), chunky yellow faceted sponge with blue bubbles on a gold
+ring, floating at the carwash with an aqua halo beam; tap to start, winning drops it in the chest (`docs/oracle/charms/CHARMS_STUDY.md`).
+The minigame exposes `window.__carwash.start()` so the Demo thread's shared charm start point can launch it. Until the charm exists,
+the loaner at the carwash is the start.
+
 ## Built today
 - The drive-through: loaner, conveyor, soak, earn, garage with five toy slots and themes (merged).
 - The anthem brief and a queued generation run (two takes) for review.
