@@ -139,7 +139,7 @@ function draw() {
  const li = (t, done, sub = '') => `<li class="${done ? 'done' : ''}"><i>${done ? '✓' : ''}</i><span>${esc(t)}${sub}</span></li>`;
  const group = (title, rows, extra = '') => rows.length ? `<h3>${title}</h3><ul${extra}>${rows.join('')}</ul>` : '';
  const favourRows = m.openFavours.map(q => { const next = q.steps.find(st => !st.done), n = q.steps.filter(st => st.done).length;
-  return li(next?.say || q.ask, false, ` <small>for ${who(q.giverName)}${q.steps.length > 1 ? ` · ${n} of ${q.steps.length}` : ''}</small>`); });
+  return li(next?.say || q.ask, false, ` <small>for ${who(q.giverName)}${q.steps.length > 1 ? ` · ${n} of ${q.steps.length}` : ''}${q.item?.carrying ? ` · carrying ${esc(q.item.icon)} ${esc(q.item.name.toLowerCase())}` : ''}</small>`); });
  const giftRows = m.gifts.slice().reverse().map(g => `<li class="gift"><i>${esc(g.icon && !/^(\/|https?:|data:|\.)/.test(g.icon) ? g.icon : '✦')}</i><span>${esc(g.name)} <small>from ${who(g.from)}</small></span></li>`);
  const doneRows = [...m.doneFavours.map(q => li(`Helped ${who(q.giverName)}`, true)), ...m.doneAdv.map(c => li(c.t, true))];
  nb.querySelector('.aw-nb-page').innerHTML = `<h2>My quests</h2>${m.total ? `<div class="prog" aria-label="${m.done} of ${m.total} done"><b style="width:${Math.round(m.done / m.total * 100)}%"></b><em>${m.done} / ${m.total}</em></div>` : ''}` +
