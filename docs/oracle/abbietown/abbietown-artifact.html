@@ -1319,7 +1319,7 @@ document.getElementById('hexes').onclick = e => { regionsGroup.visible = !region
  clk.onclick = () => { lapse = !lapse; clk.setAttribute('aria-pressed', lapse); bar.hidden = !lapse; if (lapse) { set(HISTORY.from); play.onclick(); } else { stop(); year = 2026; drawHouses(); } };
 }
 let charmTimer = 0;
-document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
+document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => retown(+e.target.value), 120); };
 
 // ---------- facts and the manifest ----------
 const fmt = n => Math.round(n).toLocaleString('en-US');
@@ -2084,7 +2084,8 @@ if (/[?&](mission|beat=)/.test(location.search)) setTimeout(() => window.AbbieTo
 
 
 // ---------- go ----------
-buildTown(1);
+function retown(charm) { const had = new Set(scene.children); buildTown(charm); for (const o of scene.children) if (!had.has(o)) { realLayer.push(o); if (viewDio) { o.userData.realVis = o.visible; o.visible = false; } } } // buildTown runs after the board exists, so what it adds (trees, houses, the off-map islands) joins the real-map layer and stays hidden while the board shows: no second landmass
+retown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, scene, renderer, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
@@ -2093,13 +2094,8 @@ import('/simulations/world-look.mjs').then(m => { if (m.isDeveloper()) { window.
 import('/simulations/coaster-town.mjs').then(m => m.place(window.AbbieTown)).catch(() => {}); // the toy-car coaster on the skate park pad (AW-STUDY-0054); a no-op until that module ships
 (/[?&]bare\b/.test(location.search) ? Promise.resolve(null) : import('/simulations/abbietown/library-props.mjs?v=5')).then(m => m && m.dressTown(window.AbbieTown, THREE)).then(r => console.info('Library props', r)).catch(e => console.warn('Library props', e)); // finished library models on Main Street and in the yards
 import('/simulations/carwash/index.mjs?v=1').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Carwash', e)); // the carwash on Main Street where the Moon Buggy is earned, and its left-bar button + garage (AW-STUDY-0059)
-<<<<<<< HEAD
-import('/simulations/abbietown/townsfolk.mjs?v=1').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e)); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
+import('/simulations/farm/wright-farm.mjs').then(m => m.mountFarm(window.AbbieTown)).catch(e => console.warn('Farm', e)).then(() => import('/simulations/medallions.mjs').then(m => { if (m.medallionsOn()) { m.mountMedallions(window.AbbieTown); m.registerTownMedallions(); } }).catch(() => {})).then(() => import('/simulations/abbietown/townsfolk.mjs?v=2')).then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e)); // the farm, the mission medallions (behind ?medallions), then the people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
 import('/simulations/halloween-mode/town.mjs?v=1').then(m => m.mountHalloween(window.AbbieTown, window.__town)).catch(e => console.warn('Halloween mode', e)); // Halloween mode: lanterns, costumes, trick-or-treating (experimental flag; simulations/halloween-mode/)
-=======
-import('/simulations/farm/wright-farm.mjs').then(m => m.mountFarm(window.AbbieTown)).catch(e => console.warn('Farm', e)).then(() => import('/simulations/medallions.mjs').then(m => { if (m.medallionsOn()) { m.mountMedallions(window.AbbieTown); m.registerTownMedallions(); } }).catch(() => {}); // mission starts as backpack charms floating at their place, behind ?medallions until the old starts go (medallions thread)
-import('/simulations/abbietown/townsfolk.mjs?v=2')).then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e)); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
->>>>>>> origin/main
 import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt})).catch(() => {}); // the world event cards (fireball, waterball, cats and dogs, tie-dye)
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas

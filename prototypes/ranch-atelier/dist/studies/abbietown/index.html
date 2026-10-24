@@ -1327,7 +1327,7 @@ document.getElementById('hexes').onclick = e => { regionsGroup.visible = !region
  clk.onclick = () => { lapse = !lapse; clk.setAttribute('aria-pressed', lapse); bar.hidden = !lapse; if (lapse) { set(HISTORY.from); play.onclick(); } else { stop(); year = 2026; drawHouses(); } };
 }
 let charmTimer = 0;
-document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
+document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => retown(+e.target.value), 120); };
 
 // ---------- facts and the manifest ----------
 const fmt = n => Math.round(n).toLocaleString('en-US');
@@ -2092,7 +2092,8 @@ if (/[?&](mission|beat=)/.test(location.search)) setTimeout(() => window.AbbieTo
 
 
 // ---------- go ----------
-buildTown(1);
+function retown(charm) { const had = new Set(scene.children); buildTown(charm); for (const o of scene.children) if (!had.has(o)) { realLayer.push(o); if (viewDio) { o.userData.realVis = o.visible; o.visible = false; } } } // buildTown runs after the board exists, so what it adds (trees, houses, the off-map islands) joins the real-map layer and stays hidden while the board shows: no second landmass
+retown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, scene, renderer, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
