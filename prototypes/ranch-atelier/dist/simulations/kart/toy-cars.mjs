@@ -33,3 +33,13 @@ export async function registerToyCars() {
 }
 export const pickToyCar = i => { try { localStorage.setItem(KEY, String(i)); } catch {} };
 export const toyCarList = () => cars.map(c => c.def);
+
+// A small round button, only while you are in a toy car: tap for the next one (Racer, Camper bus, Roll-cage buggy, Truck cab...). No words.
+export function mountCarPicker({hunt, doc = document, host = doc.body}) {
+  const b = doc.createElement('button'); b.type = 'button'; b.setAttribute('aria-label', 'Next toy car'); b.textContent = '🏎️';
+  b.style.cssText = 'position:fixed;left:14px;bottom:96px;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.55);background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.55),rgba(255,160,210,.28));box-shadow:0 6px 16px rgba(60,20,80,.28),inset 0 1px 2px rgba(255,255,255,.7);font-size:22px;display:none;z-index:30;cursor:pointer;touch-action:manipulation';
+  b.onclick = () => { if (!cars.length) return; let i = Number(localStorage.getItem(KEY)); i = Number.isInteger(i) && i >= 0 ? i : 0; pickToyCar((i + 1) % cars.length); hunt.refreshVehicle(); };
+  host.appendChild(b);
+  const t = setInterval(() => { b.style.display = cars.length > 1 && hunt.mode !== 'god' && hunt.vehicleRoot.children[0]?.name?.startsWith('toy-car-') ? 'block' : 'none'; }, 400);
+  return () => { clearInterval(t); b.remove(); };
+}
