@@ -465,6 +465,26 @@
     "a headless-Chrome run that trick-or-treats a door",
     "Evan's go"
    ]
+  },
+  {
+   "id": "scene-builder",
+   "name": "The Scene Builder Lab",
+   "kind": "feature",
+   "status": "experimental",
+   "owner": "AW-STUDY-0062 thread",
+   "tour": false,
+   "pages": [
+    "studies/scene-builder/index.html"
+   ],
+   "scene": {
+    "module": "simulations/scene-lab/engine.mjs",
+    "note": "standalone lab at /studies/scene-builder/?exp=scene-builder; a door in Winchester comes later"
+   },
+   "needs": [
+    "a door in the world (the new-world hex) and a real in-world scene",
+    "real models and the town renderer instead of stand-in shapes",
+    "a headless-Chrome run: choose, build, place, undo, rebuild from record, leave"
+   ]
   }
  ]
 }
