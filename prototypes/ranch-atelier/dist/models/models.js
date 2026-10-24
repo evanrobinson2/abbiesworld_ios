@@ -71,7 +71,7 @@ function chips(){
 // The library (Evan, 2026-10-23: "give me a better way to browse"): every model we have, not only the ones on the desk.
 function library(){
   crumb.innerHTML = '<a href="/models">Models</a>';
-  import('/models/library.js?v=5').then(l => l.mount(root));
+  import('/models/library.js?v=6').then(l => l.mount(root));
 }
 // The browser (Evan, 04:00Z): every model as a small version of the review card, a framed print and the model standing
 // free beside it. One wordless toggle: Row shows one card at a time to swipe through, Screen shows them all as a grid.
