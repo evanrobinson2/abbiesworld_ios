@@ -52,19 +52,20 @@ function fly(el, from, to, frames) {
 // facets: [{value,label}] (the kinds this card can be), axes: placementAxes(type) for the current kind.
 // Evan, 08:45Z: customize "needs to FLIP THE CARD and show the custom mechanics at play on a simulated tile that is
 // constantly 'printing'". The card turns over; its back holds the live tile, swept by a print head over and over.
-export function openCustomizer({hero, place, name, preview, canvas, facets, facet, axesFor, values, onPrint, onClose}) {
+export function openCustomizer({hero, place, name, preview, canvas, facets, facet, axesFor, values, onPrint, onClose, palette, total = 4, inspect = false}) {
  let draft = {facet, values: {...values}}, closed = false;
  const frame = cardFrame(), from = hero?.getBoundingClientRect();
  const root = make('section', 'tp-card tp-custom'); root.setAttribute('role', 'dialog'); root.setAttribute('aria-label', name + ': make it yours');
  // The card's own stock (cards/v3 face.mjs): its body colour behind the live hex, its earth band under the name.
- const P = PLACES[place] || PLACES.ranch; root.style.setProperty('--body', P.body); root.style.setProperty('--earth', P.earth); root.style.setProperty('--deep', P.deep); root.style.setProperty('--grass', P.grass);
+ const P = palette || PLACES[place] || PLACES.ranch; root.style.setProperty('--body', P.body); root.style.setProperty('--earth', P.earth); root.style.setProperty('--deep', P.deep); root.style.setProperty('--grass', P.grass);
  Object.assign(root.style, {left: frame.left + 'px', top: frame.top + 'px', width: frame.w + 'px', height: frame.h + 'px'});
  const plate = make('div', 'tp-plate'), sweep = make('div', 'tp-head tp-loop', '<i></i>'); if (canvas) plate.append(canvas); plate.append(sweep);
- const title = make('h2', 'tp-name'); title.textContent = name; const band = make('div', 'tp-band'); band.append(title); const no = make('span', 'tp-no'); no.textContent = String(P.no || 1).padStart(2, '0') + ' / 04'; band.append(no, make('b', 'tp-mark', 'AW'));
+ const title = make('h2', 'tp-name'); title.textContent = name; const band = make('div', 'tp-band'); band.append(title); const no = make('span', 'tp-no'); no.textContent = String(P.no || 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0'); band.append(no, make('b', 'tp-mark', 'AW'));
  const close = make('button', 'tp-close', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>'); close.type = 'button'; close.setAttribute('aria-label', 'Put it back');
  const kinds = make('div', 'tp-kinds'), dials = make('div', 'tp-dials');
  const print = make('button', 'tp-print', PRINT_ICON + '<span>Accept</span>'); print.type = 'button';
- const desk = make('div', 'tp-desk'); desk.append(kinds, dials, print); root.append(plate, close, band, desk); document.body.append(root);
+ if (inspect) { print.style.display = 'none'; sweep.style.display = 'none'; }   // inspect: a look at a tile that is not ours to change
+ const desk = make('div', 'tp-desk'); desk.append(kinds, dials, print);root.append(plate, close, band, desk); document.body.append(root);
 
  function renderKinds() {
   kinds.replaceChildren(); kinds.hidden = facets.length < 2;
@@ -95,7 +96,7 @@ export function openCustomizer({hero, place, name, preview, canvas, facets, face
  // The tile on the card's back keeps printing: the cut line climbs, the head rides it, and it starts again.
  const t0 = performance.now(); let loop = 0;
  const run = now => { if (closed) return; const t = ((now - t0) / 2600) % 1, u = Math.min(1, t / .82); if (canvas) preview?.reveal?.(t < .82 ? u : 1); sweep.style.setProperty('--y', ((1 - u) * 100).toFixed(1) + '%'); sweep.style.opacity = t < .82 ? 1 : 0; loop = requestAnimationFrame(run); };
- if (!reduced()) loop = requestAnimationFrame(run);
+ if (!reduced() && !inspect) loop = requestAnimationFrame(run);
 
  async function finish(printing) {
   if (closed) return; closed = true; cancelAnimationFrame(loop); preview?.reveal?.(1); removeEventListener('pointerdown', outside, true); removeEventListener('keydown', key);

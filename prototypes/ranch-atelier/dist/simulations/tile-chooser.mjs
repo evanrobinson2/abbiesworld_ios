@@ -1,6 +1,6 @@
 import {installTileCarryStyle,landingPulse} from './tile-placement-feedback.mjs?v=15';
 import {sharedImpactSound} from './tile-drop-impact.mjs?v=2';
-import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=5';
+import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=7';
 import {PALETTES,cityPreset,CONFIGURATIONS} from './city/city-settings.mjs';
 import {cityFootprint} from './city/city-footprint.mjs';
 import {SCIENCE_BASE_FACETS} from './moon/science-worlds.mjs';

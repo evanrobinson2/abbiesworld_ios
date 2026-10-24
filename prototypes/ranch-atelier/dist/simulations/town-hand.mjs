@@ -7,7 +7,7 @@
 // Presentation layer only: the cards are drawn for the player and are invisible to every perception.
 import {renderFace} from '../cards/v3/face.mjs';
 
-const ZONES = {
+export const ZONES = {
   'downtown': {body: '#a8603a', deep: '#7c3f22', earth: '#c4680f', grass: '#86a14f', air: '#ecd9bf'},
   'anis-side': {body: '#3d8f93', deep: '#2b6568', earth: '#5d6b4a', grass: '#8bb86a', air: '#dcebf0'},
   'abbie-daddy-side': {body: '#c0609a', deep: '#8e3d70', earth: '#7a4a3a', grass: '#d98a45', air: '#f6d9c8'}};
