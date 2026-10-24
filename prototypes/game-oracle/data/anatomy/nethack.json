@@ -427,6 +427,30 @@
       "sha256": "a43b3542e376bb6c1b5242910f4fdb37dfea86668d067799f16cb04ce26ac9bd",
       "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
       "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/allmain.c",
+      "bytes": 30401,
+      "sha256": "3a604ff5dc195d3a5ac66af146b843f0134453881e5f79b2004b98d22e12083d",
+      "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/mon.c",
+      "bytes": 147180,
+      "sha256": "8b3385090338c3b4fceff9eb2a308044c11889fbeb1baf005f39100c9fe1de9d",
+      "blobSha": "4f0a13d4af6a52352ff84c01b2ac330e3f01af21",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mon.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/cmd.c",
+      "bytes": 211684,
+      "sha256": "d5ff4e47890f23442fa02a374c30cbfff2b0c61a17a0b840ad5366b5d0563dd1",
+      "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c"
     }
   ],
   "corridorStudy": {
@@ -553,5 +577,117 @@
       ],
       "finding": "Door geometry has separate state: ordinary doors may be open, locked, closed or absent; secret doors are closed or locked. Difficulty and shop context affect traps, and some trapped-door branches can create a mimic. A successful corridor dig alone does not establish unimpeded movement."
     }
+  },
+  "schedulingStudy": {
+    "game": "nethack",
+    "commit": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "method": "static inspection of original 3.6.7 release source; no gameplay observation or decompilation",
+    "evidence": [
+      {
+        "path": "src/allmain.c",
+        "bytes": 30401,
+        "sha256": "3a604ff5dc195d3a5ac66af146b843f0134453881e5f79b2004b98d22e12083d",
+        "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c"
+      },
+      {
+        "path": "src/mon.c",
+        "bytes": 147180,
+        "sha256": "8b3385090338c3b4fceff9eb2a308044c11889fbeb1baf005f39100c9fe1de9d",
+        "blobSha": "4f0a13d4af6a52352ff84c01b2ac330e3f01af21",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mon.c"
+      },
+      {
+        "path": "src/cmd.c",
+        "bytes": 211684,
+        "sha256": "d5ff4e47890f23442fa02a374c30cbfff2b0c61a17a0b840ad5366b5d0563dd1",
+        "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Actions consume movement budget while world turns replenish it",
+        "finding": "When context.move is set, the hero loses NORMAL_SPEED movement. movemon passes run until the hero can act or no monster can move. When both budgets are exhausted, the loop applies monster distress, replenishes monster budgets, computes hero allowance and increments moves and monstermoves. Action count and world-turn count therefore need not coincide. Command-to-context.move behavior remains untraced.",
+        "path": "src/allmain.c",
+        "lines": [
+          93,
+          173
+        ]
+      },
+      {
+        "title": "Hero speed bonuses and burden affect the replenishment allowance",
+        "finding": "An actually moving mounted hero receives mcalcmove of the steed. Otherwise base allowance comes from the current monster form; Very_fast adds NORMAL_SPEED on rn2(3)!=0, while Fast adds it on rn2(3)==0. Burden then subtracts integer fractions of the allowance (one quarter, one half, three quarters or seven eighths). These are budget rules, not a measurement of real-time animation speed.",
+        "path": "src/allmain.c",
+        "lines": [
+          131,
+          169
+        ]
+      },
+      {
+        "title": "Monster speed is randomly rounded into whole action budgets",
+        "finding": "mcalcmove adjusts base speed for slow or fast status, applies a galloping-steed branch, then removes the remainder modulo NORMAL_SPEED and restores one NORMAL_SPEED when a random draw is below that remainder. movemon skips ordinary dead or under-budget monsters and deducts NORMAL_SPEED before processing an eligible monster; remaining budget requests another pass. Full action outcomes, guard exceptions and cleanup remain outside this bounded trace.",
+        "path": "src/mon.c",
+        "lines": [
+          639,
+          672
+        ],
+        "additionalEvidence": {
+          "path": "src/mon.c",
+          "lines": [
+            744,
+            779
+          ]
+        }
+      },
+      {
+        "title": "Command dispatch can cancel the default time charge",
+        "finding": "The main loop defaults context.move to 1 before command processing. Escape and empty/interrupted input clear it in rhack. For ordinary command-table dispatch, a zero handler result clears context.move and multi; rejected wizard-only or buried-incompatible commands use that same path. Unknown commands also clear both. Movement and occupations have distinct paths, so this is not a complete per-command cost inventory.",
+        "path": "src/cmd.c",
+        "lines": [
+          4890,
+          4934
+        ],
+        "additionalEvidence": [
+          {
+            "path": "src/allmain.c",
+            "lines": [
+              372,
+              374
+            ]
+          },
+          {
+            "path": "src/cmd.c",
+            "lines": [
+              4722,
+              4741
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Status and hunger hooks follow world-turn replenishment",
+        "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Internal expiration, hunger and spell-aging rules have not been traced.",
+        "path": "src/allmain.c",
+        "lines": [
+          172,
+          182
+        ],
+        "additionalEvidence": {
+          "path": "src/allmain.c",
+          "lines": [
+            275,
+            283
+          ]
+        }
+      }
+    ],
+    "coverage": {
+      "scheduling": "partial",
+      "commandTimeCost": "partial: ordinary dispatch cancellation traced; handler catalog and movement paths unexamined",
+      "runtime": "unexamined",
+      "statusTimers": "partial: call cadence traced, internal effects unexamined"
+    },
+    "next": "Publish five bounded scheduling findings after reconciling current catalog, full build and deployed API/MCP plus desktop/mobile verification. Then trace one concrete status lifecycle or another pilot subsystem."
   }
 }
