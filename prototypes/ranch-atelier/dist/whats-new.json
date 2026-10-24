@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-model-library",
+      "date": "2026-10-24",
+      "title": "Models is a proper library now",
+      "line": "Every model we have on one shelf with big pictures: search, studies down the side, and filters for source, type, place and status. Tap one to turn it around.",
+      "image": "/whats-new/2026-10-24-model-library.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9K3YJwLcfEwfvCoPXMCBhL",
+      "threadTitle": "Make all models easy to browse",
+      "tour": false,
+      "link": "/models"
+    },
+    {
       "id": "2026-10-23-car-mode-polaroid",
       "date": "2026-10-23",
       "title": "Car mode in the town, and a phone for Polaroids",
