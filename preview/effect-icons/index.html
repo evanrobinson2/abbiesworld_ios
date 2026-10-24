@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World effects as hovering things</title>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}</script>
+<style>body{margin:0;min-height:100vh;background:linear-gradient(#22304f,#10162c);color:#fff;font:15px system-ui,sans-serif;padding:16px;box-sizing:border-box}
+#row{display:inline-flex;gap:6px;padding:6px;border-radius:30px;background:linear-gradient(160deg,#ffffff55,#ffffff22);box-shadow:inset 0 0 0 1.5px #ffffff88}
+.aw-ico{all:unset;box-sizing:border-box;cursor:pointer;display:grid;place-items:center;width:42px;height:42px;border-radius:50%;flex:none;position:relative;background:linear-gradient(160deg,#ffffffb8,#ffffff48);box-shadow:inset 0 1px 0 #fff,0 1px 3px #2a201430}
+.aw-ico[data-state=ready]{background:linear-gradient(160deg,#fff6c8,#ffe27a);box-shadow:inset 0 1px 0 #fff,0 0 0 2px #ffd23f80,0 0 12px #ffd23f99}
+.aw-ico[data-fuel]::after{content:attr(data-fuel);position:absolute;right:-2px;top:-2px;min-width:16px;height:16px;border-radius:8px;background:#b64932;color:#fff;font:700 11px/16px system-ui;text-align:center}
+.aw-ico.nudge{animation:n .4s}@keyframes n{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+p{max-width:520px;opacity:.9;line-height:1.4}button.t{font:inherit;padding:8px 12px;margin:4px 6px 0 0;border-radius:10px;border:0}#log{min-height:1.4em;color:#ffd666}</style></head><body>
+<h1 style="font-size:18px;margin:0 0 10px">World effects, as things that hover</h1>
+<div id="row"></div>
+<p>Each starts greyed out. Pick up its item while driving the buggy (here, use the buttons) and tap the icon to charge it: it goes full colour. Tap again to drop it.</p>
+<div><button class="t" data-k="ember">+ ember</button><button class="t" data-k="droplet">+ droplet</button><button class="t" data-k="treat">+ pet treat</button><button class="t" data-k="dye">+ dye drop</button></div>
+<p id="log"></p>
+<script type="module">
+import * as THREE from 'three';
+import {createEffectIcons} from './effect-icons.mjs';
+import {FUEL, FUEL_NAME, fuel, isCharged, charge, spend, addFuel, onCharge} from './effect-charge.mjs';
+const icons = createEffectIcons(THREE), row = document.getElementById('row'), log = t => document.getElementById('log').textContent = t;
+const names = {fireball: 'Fireball', waterball: 'Waterball', 'cats-dogs': 'Cats and dogs', 'tie-dye': 'Tie-dye'};
+const sync = [];
+for (const id of ['fireball', 'waterball', 'cats-dogs', 'tie-dye', 'fire-wheels']) {
+  const b = document.createElement('button'); b.className = 'aw-ico'; b.title = id; icons.mount(b, id); row.append(b);
+  if (id === 'fire-wheels') { b.style.opacity = .5; continue; }
+  const s = () => { const on = isCharged(id), n = fuel(FUEL[id]); icons.setCharged(id, on); b.dataset.state = on ? 'ready' : 'grey'; if (n && !on) b.dataset.fuel = n; else delete b.dataset.fuel; }; s(); onCharge(s);
+  b.onclick = () => { if (isCharged(id)) { spend(id); log(names[id] + ' dropped! (the world does the rest)'); } else if (charge(id)) log(names[id] + ' charged up.'); else { b.classList.remove('nudge'); void b.offsetWidth; b.classList.add('nudge'); log(names[id] + ' needs ' + FUEL_NAME[FUEL[id]] + '.'); } };
+}
+document.querySelectorAll('button.t').forEach(t => t.onclick = () => { addFuel(t.dataset.k); log('Picked up ' + FUEL_NAME[t.dataset.k] + '.'); });
+</script></body></html>
