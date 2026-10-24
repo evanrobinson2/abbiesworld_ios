@@ -3305,6 +3305,53 @@
           "t": "None recorded for this draft"
         }
       ]
+    },
+    "diorama-swipe": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Model library: 1,493 distinct entries, roles and places drive the decks (dist/models/library.json)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/models/library.json"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0057 Winchester inventory: the setting and role vocabulary the dioramas borrow",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/preview/winchester-inventory/index.html"
+        },
+        {
+          "k": "canon",
+          "t": "Town tile cards (town-tiles.mjs, AW-STUDY-0025): the hex card shape the bottom tray copies",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/town-tiles.mjs"
+        },
+        {
+          "k": "canon",
+          "t": "Practice reps: attempt, score, lesson, retry, show the progression (here: hot dog rate per batch)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md"
+        },
+        {
+          "k": "research",
+          "t": "Thompson sampling for bandits (Beta posteriors per asset, group prior, pair bonus); the method behind the next batch",
+          "href": "https://en.wikipedia.org/wiki/Thompson_sampling"
+        },
+        {
+          "k": "oracle",
+          "t": "Game Oracle: Tiny Glade, Dorfromantik, Townscaper style records (not freshly consulted for this draft)",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "design",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded for this draft"
+        }
+      ]
     }
   }
 }
