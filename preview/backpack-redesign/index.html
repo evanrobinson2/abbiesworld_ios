@@ -6,7 +6,7 @@
 <title>Backpack Redesign Mock</title>
 <meta name="description" content="A clickable redesign of Abbie's backpack, charms and dressing room, for Evan's review before any rebuild.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script type="importmap">{"imports": {"three": "./vendor/three.module.js"}}</script>
 <style>
 :root{--ink:#2b2135;--soft:#6a5c74;--grape:#8a5cc8;--pink:#ef6fa6;--gold:#e7b43a;--mint:#3fb59a;--line:#2b213522;--bg:#f3ece4;--panel:#fffdf9}
@@ -86,6 +86,40 @@ h1,h2,h3{font-family:'Fredoka',system-ui,sans-serif;margin:0;line-height:1.15}
 .turntable{position:absolute;left:50%;bottom:9%;width:46%;max-width:520px;aspect-ratio:4/1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at 50% 40%,#ffffffd0,#ffffff60 60%,#ffffff20);box-shadow:inset 0 2px 0 #fff,0 18px 30px -16px #0c203080}
 .stage .dcanvas{position:absolute;left:10%;right:10%;top:2%;bottom:6%}
 .stage .dcanvas canvas{width:100%;height:100%;display:block}
+
+
+/* ---------- three looks to compare (study #537): liquid glass (default), forest wood, storybook paper ---------- */
+html[data-skin="forest"] .glass{background:linear-gradient(170deg,#9a6a3e,#7a4f2b 55%,#5e3b1f),repeating-linear-gradient(95deg,#0000 0 7px,#ffffff10 7px 9px);background-blend-mode:overlay;
+  border:2px solid #c99a5c;box-shadow:inset 0 2px 0 #e8c08a,inset 0 -6px 10px #2e1a0a80,0 14px 26px -12px #1a0f0490,0 0 0 4px #3f6b3a,0 0 0 6px #2c4a28}
+html[data-skin="forest"] .leftbar button{background:radial-gradient(circle at 40% 35%,#f6ead2,#e3cfa6);border-radius:46% 54% 50% 50%/58% 58% 42% 42%;box-shadow:inset 0 -3px 0 #b8935c,0 3px 0 #3f2a14}
+html[data-skin="forest"] .leftbar .mirror{background:radial-gradient(circle at 35% 30%,#ffffff,#e4f0e8 60%,#b9d2c0);box-shadow:inset 0 0 0 3px #6b4423,inset 0 0 0 6px #8fbf6a}
+html[data-skin="forest"] .chrono,html[data-skin="forest"] .thought,html[data-skin="forest"] .power,html[data-skin="forest"] .upchoice button{color:#fff6e2}
+html[data-skin="forest"] .thought small{color:#bfe39a}
+html[data-skin="forest"] .power b{color:#ffd77a}
+html[data-skin="forest"] .orb{color:#fff1d0;border-radius:50% 50% 46% 54%/60% 60% 40% 40%}
+html[data-skin="forest"] .stations button,html[data-skin="forest"] .who button{background:#f3e5c6}
+html[data-skin="forest"] .turntable{background:radial-gradient(ellipse at 50% 40%,#a8794a,#7a512c 60%,#5a3a1c);box-shadow:inset 0 3px 0 #d2a670,0 0 0 5px #4f7d3f,0 18px 30px -16px #1a0f0490}
+html[data-skin="forest"] .aw-lo-pip{border-radius:50% 0 50% 0;transform:translate(-50%,-50%) rotate(-45deg);background:radial-gradient(circle at 35% 28%,#d9f2b0,#7fbf4f 60%,#4c8a2e);border:2px solid #2f5a1d;box-shadow:0 4px 8px -2px #1a2a0a99}
+html[data-skin="forest"] .aw-lo-pip i{border-radius:50% 0 50% 0}
+html[data-skin="forest"] .aw-lo-pip.on{transform:translate(-50%,-50%) rotate(-45deg) scale(1.3);border-color:#ffd23f}
+html[data-skin="forest"] .aw-lo-pip:hover{transform:translate(-50%,-50%) rotate(-45deg) scale(1.15)}
+html[data-skin="forest"] .aw-lo-tray{background:linear-gradient(170deg,#9a6a3e,#6e4625);border:2px solid #c99a5c;box-shadow:inset 0 2px 0 #e8c08a,0 0 0 3px #3f6b3a,0 14px 26px -12px #1a0f0490}
+html[data-skin="forest"] .aw-lo-tray b{color:#fff1d0}
+html[data-skin="forest"] .aw-lo-opt{border-color:#f3e5c6}
+
+html[data-skin="paper"] .glass{background:#fffaf0;border:2px dashed #d9a7c0;outline:4px solid #fffaf0;box-shadow:3px 4px 0 #3a2a4a22,0 12px 22px -14px #3a2a4a80;border-radius:22px}
+html[data-skin="paper"] .leftbar button{background:#fff;border:2.5px solid #3a2a4a;box-shadow:2px 3px 0 #3a2a4a;border-radius:18px}
+html[data-skin="paper"] .leftbar button:nth-child(odd){transform:rotate(-3deg)}html[data-skin="paper"] .leftbar button:nth-child(even){transform:rotate(2.5deg)}
+html[data-skin="paper"] .leftbar .mirror{border-radius:50%;box-shadow:2px 3px 0 #3a2a4a,inset 0 0 0 3px #ffd23f}
+html[data-skin="paper"] .thought,html[data-skin="paper"] .power,html[data-skin="paper"] .chrono{font-family:'Patrick Hand','Fredoka',cursive}
+html[data-skin="paper"] .orb{border:2.5px solid #3a2a4a;box-shadow:2px 3px 0 #3a2a4a;background:#fff}
+html[data-skin="paper"] .stations button,html[data-skin="paper"] .who button{background:#fff;border:2px solid #3a2a4a}
+html[data-skin="paper"] .turntable{background:repeating-radial-gradient(ellipse at 50% 45%,#fffaf0 0 10px,#f4e7d2 10px 12px);border:2.5px solid #3a2a4a;box-shadow:3px 5px 0 #3a2a4a33}
+html[data-skin="paper"] .aw-lo-pip{background:#fff;border:2.5px solid #3a2a4a;box-shadow:2px 2px 0 #3a2a4a;animation:none}
+html[data-skin="paper"] .aw-lo-pip.on{border-color:#ef6fa6;box-shadow:2px 2px 0 #3a2a4a,0 0 0 3px #ffd23f}
+html[data-skin="paper"] .aw-lo-tray{background:#fffaf0;border:2px dashed #d9a7c0;outline:3px solid #fffaf0;box-shadow:3px 4px 0 #3a2a4a33}
+html[data-skin="paper"] .aw-lo-tray b{font-family:'Patrick Hand',cursive;font-size:13px;letter-spacing:.02em;text-transform:none;color:#3a2a4a}
+html[data-skin="paper"] .aw-lo-opt{border:2px solid #3a2a4a;box-shadow:1.5px 2px 0 #3a2a4a}
 
 /* labels for the mock (not the game): numbered hotspots */
 .mocktag{position:absolute;left:2%;top:3%;font:800 10px 'Nunito';letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#2b2135aa;padding:5px 9px;border-radius:99px;z-index:9;pointer-events:none}
@@ -171,6 +205,10 @@ h1,h2,h3{font-family:'Fredoka',system-ui,sans-serif;margin:0;line-height:1.15}
     <li><button data-go="earn"><div><b>Earn a charm</b><span>See how the bag gets bigger.</span></div></button></li>
     <li><button data-go="dress"><div><b>The mirror</b><span>One dressing room for Abbie, her backpack and her buggy. Tap a bead, pick from a short row. Swap who's playing at the top.</span></div></button></li>
   </ol>
+  <div class="choice"><h3><i>✦</i>Which look? (for study #537)</h3><div class="seg" id="skins" style="grid-template-columns:1fr 1fr 1fr">
+    <button type="button" data-skin="glass" aria-pressed="true"><small>Recommended</small>Liquid glass</button>
+    <button type="button" data-skin="forest" aria-pressed="false"><small style="color:var(--soft)">Alternative</small>Forest wood</button>
+    <button type="button" data-skin="paper" aria-pressed="false"><small style="color:var(--soft)">Alternative</small>Storybook paper</button></div></div>
   <div id="choices"></div>
   <div class="note"><b>What she has in the overland today:</b> only the left bar. Her figure isn't on the town board, so her outfit and backpack are only seen in FPS and the minigames. <b>In this redesign</b> she stands on the board wearing her look and her bag (bottom left of the mock), the trail starts from her, and when she drives she's in her buggy. Whoever is chosen in the mirror (Abbie, Ani or Daddy) is who stands there.</div>
   <p class="foot">The written briefs behind this: <a href="../backpack-briefs/index.html">backpack, charms and look briefs</a>. Drafted Friday 23 October 2026, about 10:30 PM.</p>
@@ -442,10 +480,17 @@ function applyChoices() {
 }
 applyChoices();
 
+
+// ---------- which look (study #537); ?skin=forest|paper ----------
+function setSkin(k) { if (!['glass', 'forest', 'paper'].includes(k)) k = 'glass'; document.documentElement.dataset.skin = k; document.querySelectorAll('#skins button').forEach(b => b.setAttribute('aria-pressed', b.dataset.skin === k)); }
+$('#skins').onclick = e => { const b = e.target.closest('[data-skin]'); if (b) setSkin(b.dataset.skin); };
+setSkin(new URLSearchParams(location.search).get('skin'));
+const go0 = new URLSearchParams(location.search).get('go'); if (go0) setTimeout(() => document.querySelector(`[data-go="${go0}"]`)?.click(), 400);
+
 // ---------- the guided steps ----------
 const wait = ms => new Promise(r => setTimeout(r, ms));
 $('#steps').onclick = async e => {
-  const b = e.target.closest('[data-go]'); if (!b) return; device.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'});
+  const b = e.target.closest('[data-go]'); if (!b) return; if (window === top && e.isTrusted) device.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'});
   const go = b.dataset.go;
   if (go === 'open') { closeDress(); await openBag(); }
   if (go === 'pick') { if ($('#bagStage').hidden) await openBag(); view.zip('front', true); await wait(700); view.release(); await wait(300); view.inspect('quest-sugar'); }
