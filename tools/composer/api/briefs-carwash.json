@@ -1,0 +1,129 @@
+{
+ "about": "Carwash anthem (AW-STUDY-0060). One take is a whole run: each section is one station of the carwash, so the music and the stage change together. Instrumental, real produced audio (no MIDI); original, not a cover.",
+ "identity": {
+  "identity": "abbies-world-theme",
+  "bible": "docs/music/MUSIC_BIBLE.md",
+  "source_motif": "hook-late",
+  "motif_reference": "tools/composer/motifs/hook-late.mid",
+  "permitted_reuse": "Abbie's World game, trailers and soundtrack (ElevenLabs paid-plan terms, indie game under $500k revenue); not for film, TV or radio"
+ },
+ "palette": {
+  "positive": [
+   "polished 1970s-inspired funk production, live band feel, warm analog sound",
+   "wonder, warmth, optimism and a little mischief",
+   "syncopated 3+3+2 rhythm in 4/4",
+   "instrumental"
+  ],
+  "negative": [
+   "humming",
+   "8-bit",
+   "chiptune",
+   "retro video-game music",
+   "cheesy",
+   "kazoo",
+   "horror",
+   "aggressive",
+   "distorted guitar",
+   "dubstep",
+   "vocals",
+   "lyrics",
+   "singing",
+   "MIDI",
+   "sequenced"
+  ]
+ },
+ "cues": [
+  {
+   "id": "carwash-anthem",
+   "kind": "bed",
+   "title": "Wash Day Anthem (carwash, 4 minutes)",
+   "lufs": -16,
+   "trace": {
+    "family": "score",
+    "world": "town",
+    "place": "the carwash in Winchester",
+    "situation": "minigame",
+    "mode": "base",
+    "key": "D major",
+    "bpm": 124,
+    "meter": "4/4, 3+3+2",
+    "instrumentation": "handclaps, wah guitar, funky bass, clavinet, Rhodes, brass stabs, congas, strings",
+    "mood": "sunny, proud, a little cheeky",
+    "intensity": 0.8,
+    "structure": "one section per station, 124 bars (about 4:00)",
+    "loop": false,
+    "original_work": "original 1970s-style disco funk; inspired by the feel of carwash anthems, not a cover or imitation of any song"
+   },
+   "styles": [
+    "D major",
+    "124 bpm",
+    "1970s disco-funk",
+    "handclaps",
+    "wah guitar",
+    "funky bass",
+    "brass stabs",
+    "clavinet",
+    "congas",
+    "string swoops"
+   ],
+   "sections": [
+    [
+     "Pull in",
+     [
+      "vinyl-warm intro, handclaps count in, bass walks up to the one"
+     ],
+     15480
+    ],
+    [
+     "Pre-soak",
+     [
+      "tight funk groove, wah guitar chicks on the offbeat, water-drip percussion"
+     ],
+     30960
+    ],
+    [
+     "Foam",
+     [
+      "bubbly Rhodes and clavinet, bouncing bass, shaker, playful horn stabs answer each other"
+     ],
+     30960
+    ],
+    [
+     "Brushes",
+     [
+      "full groove, driving drums, big brass riff in 3+3+2, handclaps on 2 and 4, string swoops"
+     ],
+     46440
+    ],
+    [
+     "Rinse",
+     [
+      "breakdown, bass and congas, filtered sweep, tension rising"
+     ],
+     30960
+    ],
+    [
+     "Wax and dry",
+     [
+      "groove returns smooth and shiny, wah guitar solo, hi-hat shimmer"
+     ],
+     30960
+    ],
+    [
+     "Detailing",
+     [
+      "sparkling vibraphone and glockenspiel, light and proud, bass keeps the groove"
+     ],
+     30960
+    ],
+    [
+     "Finale",
+     [
+      "big brass hit, final riff, rings out on a clean D major chord"
+     ],
+     23220
+    ]
+   ]
+  }
+ ]
+}
