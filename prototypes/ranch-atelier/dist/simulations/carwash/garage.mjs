@@ -1,13 +1,12 @@
 // The buggy's place on the left bar, and the garage where she tricks it out (AW-STUDY-0059).
 //   mountGarage(AT, carwash)   once the buggy is hers a little live buggy joins the left bar (backpack, notebook, buggy). Tap it
 //                              and she hops on, at the road nearest the camera. The brush orb opens the garage.
-// The garage is a card game, the same stock and gestures as dressing the backpack: five slots for toy animals, a hand of animal
-// cards, and a hand of colour-theme cards (Cards v3 "print" faces, each window showing the real buggy wearing that choice). Tap a
-// card or drag it onto the buggy; the five slots are small round windows showing what is on each mount. Everything redraws live
-// on a turntable buggy, and on the buggy you are driving. Presentation layer: summoned, dismissable, no words but the card names.
+// The garage dresses the buggy like the backpack and the FPS gunsmith do (Evan: no cards): a small glass bead on each of the five
+// toy mounts and one for the colour theme, riding on the turning buggy; tap one and a short strip of choices opens beside it, tap a
+// choice and it goes on at once, on the turntable and on the buggy you are driving. Presentation layer: summoned, dismissable.
 import * as T from 'three';
-import {THEMES, ANIMALS, SLOTS, buildMoonBuggy, buildAnimal, look, setLook, setSlot, earned, themeOf} from './buggy.mjs';
-import {renderFace} from '../../cards/v3/face.mjs?v=2';
+import {THEMES, ANIMALS, SLOTS, buildMoonBuggy, buildAnimal, look, setLook, setSlot, earned} from './buggy.mjs';
+import {loadout} from '../loadout.mjs';
 
 // ---------- little pictures of the real models, drawn once on a shared hidden renderer
 let off = null; const arts = new Map();
@@ -23,10 +22,6 @@ function snap(build, key, {w = 300, h = 340, yaw = .7, pitch = .32, fit = 1.0} =
 const animalArt = id => snap(() => buildAnimal(id), 'a:' + id, {w: 240, h: 260, yaw: .5, pitch: .22, fit: .9});
 const themeArt = id => snap(() => buildMoonBuggy({theme: id, withRider: false, slots: []}).group, 't:' + id, {w: 340, h: 300, yaw: .75, pitch: .3, fit: 1.0});
 const buggyArt = (l, w = 160, h = 130) => snap(() => buildMoonBuggy({theme: l.theme, slots: l.slots, withRider: false}).group, 'b:' + JSON.stringify(l) + w, {w, h, yaw: .75, pitch: .3});
-const tint = (hex, t) => { const n = parseInt(hex.slice(1), 16), r = n >> 16, g = n >> 8 & 255, b = n & 255, m = v => Math.round(v + (243 - v) * t).toString(16).padStart(2, '0'); return '#' + m(r) + m(g) + m(b); };
-const faces = new Map();
-const face = (key, name, art, colour, n) => faces.get(key) || (faces.set(key, renderFace({id: 'buggy', name, art, edition: n, palette: {air: tint(colour, .62), grass: colour, earth: colour, body: colour}}, {style: 'print', dpi: 150}).then(r => r.canvas)), faces.get(key));
-const copy = cv => { const c = document.createElement('canvas'); c.width = cv.width; c.height = cv.height; c.getContext('2d').drawImage(cv, 0, 0); return c; };
 
 // ---------- the left bar button
 function leftBar() { let bar = document.getElementById('aw-left-bar'); if (!bar) { bar = Object.assign(document.createElement('nav'), {id: 'aw-left-bar', className: 'aw-left-bar'}); bar.setAttribute('aria-label', 'What Abbie can touch'); document.body.append(bar); } return bar; }
@@ -38,24 +33,15 @@ function css() {
  .aw-left-buggy:hover{transform:translateY(-2px) scale(1.06)}.aw-left-buggy:active{transform:scale(.94)}
  .aw-left-buggy.pop{animation:awbuggypop .9s cubic-bezier(.2,1.5,.4,1)}@keyframes awbuggypop{0%{transform:scale(0) rotate(-20deg)}60%{transform:scale(1.35) rotate(6deg)}100%{transform:scale(1)}}
  .aw-left-buggy .brush{position:absolute;right:-6px;bottom:-4px;width:24px;height:24px;border-radius:50%;border:0;font-size:13px;line-height:24px;padding:0;cursor:pointer;color:#fff;background:radial-gradient(circle at 32% 26%,#ffffffcc,#ffffff30 55%,#2a103060);box-shadow:0 3px 8px #2a103055,inset 0 1px 2px #fff}
- .aw-garage{position:fixed;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translate(-50%,0);width:min(100vw - 16px,600px);z-index:60;border-radius:34px;padding:12px 12px 10px;color:#2a1a3a;
+ .aw-garage{position:fixed;left:50%;bottom:max(8px,env(safe-area-inset-bottom));transform:translate(-50%,0);width:min(100vw - 16px,560px);z-index:60;border-radius:34px;padding:12px 12px 10px;color:#2a1a3a;
   background:linear-gradient(165deg,#ffffffc8 0%,#ffffff62 40%,#ffffff40 62%,#ffffff88 100%);border:1px solid #ffffffe0;backdrop-filter:blur(14px) saturate(1.5);-webkit-backdrop-filter:blur(14px) saturate(1.5);
   box-shadow:inset 0 1.5px 0 #fff,inset 0 -12px 22px -12px #ffffffa0,0 24px 44px -14px #0c203080;animation:awgarage .45s cubic-bezier(.2,1.3,.4,1)}
  @keyframes awgarage{from{transform:translate(-50%,60px);opacity:0}}
  .aw-garage .top{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center}
- .aw-garage canvas.view{width:100%;height:190px;border-radius:24px;touch-action:none;background:radial-gradient(ellipse at 50% 80%,#ffffff70,#ffffff00 70%)}
- .aw-garage .slots{display:flex;gap:7px;justify-content:center;margin:2px 0 6px}
- .aw-garage .slot{width:46px;height:46px;border-radius:50%;border:2.5px dashed #ffffffb0;background:radial-gradient(circle at 32% 26%,#ffffffa0,#ffffff30 60%,#2a103018);padding:0;cursor:pointer;display:grid;place-items:center;overflow:hidden;transition:transform .15s}
- .aw-garage .slot img{width:100%;height:100%;object-fit:cover}.aw-garage .slot.on{border:2.5px solid #f2b632;box-shadow:0 0 0 3px #f2b63255;transform:scale(1.1)}.aw-garage .slot.over{transform:scale(1.25);border-color:#ff7eb6}
+ .aw-garage canvas.view{width:100%;height:300px;border-radius:24px;touch-action:none;background:radial-gradient(ellipse at 50% 80%,#ffffff70,#ffffff00 70%)}
  .aw-garage .orbs{display:flex;flex-direction:column;gap:7px}
  .aw-garage .orb{width:42px;height:42px;border-radius:50%;border:0;font-size:20px;cursor:pointer;color:#fff;background:radial-gradient(circle at 32% 26%,#ffffffcc,#ffffff30 55%,#2a103055);box-shadow:0 5px 12px #2a103044,inset 0 1px 3px #fff}
  .aw-garage .orb.on{box-shadow:0 0 14px #f2b632,inset 0 1px 3px #fff}
- .aw-garage .hand{display:flex;overflow-x:auto;padding:14px 8px 4px;scrollbar-width:none;touch-action:pan-x}.aw-garage .hand::-webkit-scrollbar{display:none}
- .aw-garage .card{flex:none;width:72px;aspect-ratio:63/88;margin-left:-12px;padding:0;border:0;border-radius:6px;background:#f3eee2;cursor:grab;touch-action:none;transform:rotate(calc((var(--i) - 2) * .6deg));box-shadow:0 8px 16px -8px #2a103088,0 1px 3px #0003;transition:transform .18s}
- .aw-garage .card:first-child{margin-left:0}.aw-garage .card canvas{width:100%;height:100%;display:block;border-radius:6px}
- .aw-garage .card:hover{transform:translateY(-9px);z-index:2}.aw-garage .card.on{transform:translateY(-8px);box-shadow:0 0 0 2.5px #f2b632,0 10px 18px -8px #2a103088}
- .aw-garage .none{flex:none;width:72px;aspect-ratio:63/88;margin-left:-12px;border-radius:6px;border:2px dashed #2a1a3a55;background:#ffffff40;font-size:22px;cursor:pointer;display:grid;place-items:center;padding:0}
- .aw-gghost{position:fixed;left:0;top:0;z-index:90;pointer-events:none;border-radius:6px;overflow:hidden;box-shadow:0 22px 34px -12px #2a1030aa}.aw-gghost canvas{width:100%;height:100%;display:block}
  .aw-hunt-brush{width:clamp(38px,9vw,46px);aspect-ratio:1;border-radius:50%;border:0;font-size:clamp(18px,4.5vw,22px);color:#fff;cursor:pointer;pointer-events:auto;background:radial-gradient(circle at 32% 26%,rgba(255,255,255,.6),rgba(255,255,255,.1) 55%,rgba(20,10,40,.4));box-shadow:0 8px 18px rgba(20,10,40,.4),inset 0 1px 3px rgba(255,255,255,.75)}
  @media(prefers-reduced-motion:reduce){.aw-garage{animation:none}.aw-left-buggy.pop{animation:none}}`;
  document.head.append(s);
@@ -100,64 +86,39 @@ export function mountGarage(AT, carwash) {
  addEventListener('aw-buggy-change', () => { arts.forEach((v, k) => { if (k.startsWith('b:')) arts.delete(k); }); drawBtn(); });
  if (earned()) { drawBtn(); setTimeout(keepLast, 1500); setTimeout(keepLast, 4000); }
 
- // ----- the garage
+ // ----- the garage: the buggy turns on a glass shelf with a small bead on each mount (FPS-loadout style, no cards). Tap a bead
+ // (or the part), a short strip of choices opens beside it; tap one and it goes on at once.
  function closeGarage() { if (!garage) return; garage.dispose(); garage = null; const d = window.__effectHunt?.driver; if (d) d.frozen = false; }
  async function openGarage() {
-  if (garage) return; const l0 = look(), root = document.createElement('div'); root.className = 'aw-garage'; root.dataset.ui = ''; document.body.append(root);
-  root.innerHTML = `<div class="top"><canvas class="view" aria-label="Your Moon Buggy"></canvas><div class="orbs"><button class="orb" data-h="animals" aria-label="Toy animals">🐰</button><button class="orb" data-h="themes" aria-label="Colour themes">🎨</button><button class="orb" data-x="drive" aria-label="Drive">🚙</button><button class="orb" data-x="close" aria-label="Close">✕</button></div></div><div class="slots"></div><div class="hand" role="listbox"></div>`;
-  const driving = !!window.__effectHunt; if (driving) window.__effectHunt.driver.frozen = true; else root.querySelector('[data-x=drive]').style.display = '';
-  // live turntable
+  if (garage) return; const root = document.createElement('div'); root.className = 'aw-garage'; root.dataset.ui = ''; document.body.append(root);
+  root.innerHTML = `<div class="top"><canvas class="view" aria-label="Your Moon Buggy"></canvas><div class="orbs"><button class="orb" data-x="drive" aria-label="Drive">🚙</button><button class="orb" data-x="close" aria-label="Close">✕</button></div></div>`;
+  const driving = !!window.__effectHunt; if (driving) window.__effectHunt.driver.frozen = true;
   const canvas = root.querySelector('canvas.view'), renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
   const scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 2, .1, 60); scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.5)); const key = new T.DirectionalLight('#fff1d6', 2.6); key.position.set(3, 5, 4); scene.add(key); const rim = new T.DirectionalLight('#bfe3ff', 1.2); rim.position.set(-3, 1, -3); scene.add(rim);
   const floor = new T.Mesh(new T.CircleGeometry(2.6, 28), new T.MeshBasicMaterial({color: '#000', transparent: true, opacity: .14})); floor.rotation.x = -Math.PI / 2; floor.position.y = .01; scene.add(floor);
-  let api = null, yaw = .8, drag = null, spin = true, raf = 0;
-  const rebuild = () => { if (api) { scene.remove(api.group); api.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); } const l = look(); api = buildMoonBuggy({theme: l.theme, slots: l.slots, withRider: true}); scene.add(api.group); };
+  let api = null, yaw = .8, drag = null, selected = null, raf = 0; const ring = new T.Mesh(new T.TorusGeometry(.2, .025, 6, 20), new T.MeshBasicMaterial({color: '#ffd34d'})); ring.visible = false;
+  const rebuild = () => { if (api) { scene.remove(api.group); api.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); } const l = look(); api = buildMoonBuggy({theme: l.theme, slots: l.slots, withRider: true}); scene.add(api.group); api.parts.chassis.add(ring); };
   rebuild();
-  const size = () => { const w = canvas.clientWidth || 400, h = canvas.clientHeight || 190; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); cam.position.set(0, 3.4, 6.2); cam.lookAt(0, .75, 0); }; size();
+  const size = () => { const w = canvas.clientWidth || 400, h = canvas.clientHeight || 300; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); cam.position.set(0, 3.2, 6.6); cam.lookAt(0, .85, 0); }; size();
+  // loadout beads: one per toy mount and one for the colour theme, each riding on its own empty socket
+  const host = Object.assign(document.createElement('div'), {className: 'aw-lo-host'}); Object.assign(host.style, {position: 'fixed', inset: 0, pointerEvents: 'none', zIndex: 65}); document.body.append(host);
+  const v3 = new T.Vector3(), socketOf = id => id === 'theme' ? api.parts.themeSocket : api.parts.sockets[SLOTS.findIndex(s => s.id === id)];
+  const slotsFn = () => { const l = look(); return [...SLOTS.map(s => ({id: s.id, name: s.name, options: [{id: '', name: 'Nothing', icon: '<svg viewBox="0 0 24 24" width="22" height="22"><path d="M6 6l12 12M18 6L6 18" stroke="#6a5a7a" stroke-width="3" stroke-linecap="round"/></svg>'}, ...ANIMALS.map(a => ({id: a.id, name: a.name, icon: animalArt(a.id)}))]})), {id: 'theme', name: 'Colours', options: THEMES.map(t => ({id: t.id, name: t.name, swatch: `linear-gradient(135deg,${t.swatch[0]} 0 45%,${t.swatch[1]} 45% 75%,${t.swatch[2]} 75%)`}))}]; };
+  const lo = loadout(host, {
+   slots: slotsFn, value: id => { const l = look(); return id === 'theme' ? l.theme : (l.slots[SLOTS.findIndex(s => s.id === id)] || ''); },
+   anchor: id => { const so = socketOf(id); if (!so) return null; so.getWorldPosition(v3); const wz = v3.clone(); v3.project(cam); const r = canvas.getBoundingClientRect(); return {x: r.left + (v3.x + 1) / 2 * r.width, y: r.top + (1 - v3.y) / 2 * r.height, back: wz.z < -.2}; },
+   avoid: () => { const r = canvas.getBoundingClientRect(); return {left: r.left + r.width * .2, right: r.right - r.width * .2, top: r.top, bottom: r.bottom}; },
+   onSelect: id => { selected = id; const so = id && id !== 'theme' ? socketOf(id) : null; ring.visible = !!so; if (so) ring.position.copy(so.position); },
+   onPick: (id, opt) => { if (id === 'theme') setLook({theme: opt}); else setSlot(SLOTS.findIndex(s => s.id === id), opt || null); rebuild(); drivingApi()?.setSlots(look().slots); drivingApi()?.setTheme(look().theme); drawBtn(); lo.refresh(); }
+  });
   const fake = {x: 0, z: 0, heading: 0, steer: 0, speed: 0, air: false, squash: 0, roll: 0}, flat = {heightAt: () => 0}; let t0 = performance.now();
-  const frame = now => { raf = requestAnimationFrame(frame); const dt = Math.min(.05, (now - t0) / 1000); t0 = now; if (spin && !drag) yaw += dt * .45; api.group.rotation.y = yaw; fake.speed = Math.sin(now / 900) * 2; api.update(dt, fake, flat, 1); api.wheels.forEach(w => { w.rotation.x += dt * 2; }); renderer.render(scene, cam); };
+  const frame = now => { raf = requestAnimationFrame(frame); const dt = Math.min(.05, (now - t0) / 1000); t0 = now; if (!selected && !drag) yaw += dt * .45; api.group.rotation.y = yaw; ring.rotation.x = Math.PI / 2; ring.scale.setScalar(1 + Math.sin(now / 250) * .08); fake.speed = Math.sin(now / 900) * 2; api.update(dt, fake, flat, 1); api.wheels.forEach(w => { w.rotation.x += dt * 2; }); renderer.render(scene, cam); };
   raf = requestAnimationFrame(frame);
   canvas.addEventListener('pointerdown', e => { drag = {x: e.clientX, y: yaw, id: e.pointerId}; canvas.setPointerCapture(e.pointerId); });
   canvas.addEventListener('pointermove', e => { if (drag && e.pointerId === drag.id) yaw = drag.y + (e.clientX - drag.x) * .012; }); canvas.addEventListener('pointerup', () => { drag = null; }); canvas.addEventListener('pointercancel', () => { drag = null; });
-  // slots and hands
-  let slot = 0, hand = 'animals'; const slotsEl = root.querySelector('.slots'), handEl = root.querySelector('.hand'), slotBtns = [];
-  SLOTS.forEach((s, i) => { const b = document.createElement('button'); b.className = 'slot'; b.setAttribute('aria-label', s.name); b.onclick = () => { slot = i; hand = 'animals'; draw(); }; slotsEl.append(b); slotBtns.push(b); });
-  const apply = () => { rebuild(); drivingApi()?.setSlots(look().slots); drivingApi()?.setTheme(look().theme); drawBtn(); };
-  function land(kind, value, i) { if (kind === 'animal') setSlot(i ?? slot, value); else setLook({theme: value}); apply(); draw(); }
-  async function draw() {
-   const l = look(); root.querySelectorAll('.orb[data-h]').forEach(o => o.classList.toggle('on', o.dataset.h === hand));
-   slotBtns.forEach((b, i) => { b.classList.toggle('on', i === slot && hand === 'animals'); b.innerHTML = l.slots[i] ? `<img alt="" src="${animalArt(l.slots[i])}">` : '<span style="opacity:.55;font-size:17px">＋</span>'; });
-   handEl.innerHTML = ''; const gen = draw.gen = (draw.gen || 0) + 1;
-   const cards = hand === 'animals' ? ANIMALS.map((a, i) => ({kind: 'animal', value: a.id, name: a.name, art: animalArt(a.id), colour: a.body, on: l.slots[slot] === a.id, i})) : THEMES.map((t, i) => ({kind: 'theme', value: t.id, name: t.name, art: themeArt(t.id), colour: Array.isArray(t.trim) ? t.accent : t.body, on: l.theme === t.id, i}));
-   if (hand === 'animals' && l.slots[slot]) { const n = document.createElement('button'); n.className = 'none'; n.textContent = '✕'; n.setAttribute('aria-label', 'Take it off'); n.onclick = () => land('animal', null); handEl.append(n); }
-   for (const cd of cards) {
-    const b = document.createElement('button'); b.className = 'card' + (cd.on ? ' on' : ''); b.style.setProperty('--i', cd.i); b.setAttribute('aria-label', cd.name); handEl.append(b); wire(b, cd);
-    face(cd.kind + ':' + cd.value, cd.name, cd.art, cd.colour, cd.i + 1).then(cv => { if (gen === draw.gen) b.append(copy(cv)); });
-   }
-   handEl.animate?.([{transform: 'translateY(30px)', opacity: 0}, {transform: 'none', opacity: 1}], {duration: 280, easing: 'cubic-bezier(.2,1.3,.4,1)'});
-  }
-  // tap a card to put it on; lift it and drop it on the buggy, or on a slot, to put it there
-  function wire(b, cd) {
-   let st = null, ghost = null;
-   b.addEventListener('pointerdown', e => { st = {x: e.clientX, y: e.clientY, id: e.pointerId}; });
-   b.addEventListener('pointermove', e => {
-    if (!st || e.pointerId !== st.id) return;
-    if (!ghost && Math.abs(e.clientY - st.y) > 10 && Math.abs(e.clientY - st.y) > Math.abs(e.clientX - st.x)) { b.setPointerCapture?.(e.pointerId); const r = b.getBoundingClientRect(), cv = b.querySelector('canvas'); ghost = document.createElement('div'); ghost.className = 'aw-gghost'; if (cv) ghost.append(copy(cv)); Object.assign(ghost.style, {width: r.width + 'px', height: r.height + 'px'}); ghost._dx = st.x - r.left; ghost._dy = st.y - r.top; document.body.append(ghost); b.style.opacity = .3; }
-    if (ghost) { e.preventDefault(); ghost.style.transform = `translate(${e.clientX - ghost._dx}px,${e.clientY - ghost._dy}px) scale(1.12)`; const over = slotAt(e.clientX, e.clientY); slotBtns.forEach((s, i) => s.classList.toggle('over', i === over)); }
-   });
-   const slotAt = (x, y) => slotBtns.findIndex(s => { const r = s.getBoundingClientRect(); return x >= r.left && x <= r.right && y >= r.top && y <= r.bottom; });
-   const end = e => { if (!st) return; const s0 = st; st = null; b.style.opacity = ''; slotBtns.forEach(s => s.classList.remove('over'));
-    if (!ghost) { if (e.type === 'pointerup' && Math.hypot(e.clientX - s0.x, e.clientY - s0.y) < 10) land(cd.kind, cd.value); return; }
-    const g = ghost; ghost = null; const vr = canvas.getBoundingClientRect(), onView = e.clientX >= vr.left && e.clientX <= vr.right && e.clientY >= vr.top && e.clientY <= vr.bottom, sl = slotAt(e.clientX, e.clientY);
-    const ok = e.type === 'pointerup' && (sl >= 0 || onView); g.animate(ok ? [{opacity: 1}, {transform: g.style.transform.replace(/scale\([^)]*\)/, 'scale(.15)'), opacity: 0}] : [{opacity: 1}, {opacity: 0}], {duration: 260, fill: 'forwards'}).onfinish = () => g.remove();
-    if (ok) land(cd.kind, cd.value, sl >= 0 ? sl : undefined); };
-   b.addEventListener('pointerup', end); b.addEventListener('pointercancel', end); b.addEventListener('lostpointercapture', e => { if (ghost) end({type: 'pointercancel', clientX: e.clientX, clientY: e.clientY}); });
-  }
-  root.querySelectorAll('.orb[data-h]').forEach(o => o.onclick = () => { hand = o.dataset.h; draw(); });
   root.querySelector('[data-x=close]').onclick = () => closeGarage();
   root.querySelector('[data-x=drive]').onclick = () => { closeGarage(); hopOn(); }; if (driving) root.querySelector('[data-x=drive]').style.display = 'none';
-  draw();
-  garage = {root, dispose() { cancelAnimationFrame(raf); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); document.querySelectorAll('.aw-gghost').forEach(g => g.remove()); }};
+  garage = {root, dispose() { cancelAnimationFrame(raf); lo.dispose(); host.remove(); renderer.dispose(); renderer.forceContextLoss?.(); root.remove(); }};
  }
  return {hopOn, hopOff, openGarage, closeGarage, drawBtn, get open() { return !!garage; }, get driving() { return !!hopped; }};
 }
