@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-study-publishing",
+      "date": "2026-10-24",
+      "title": "Versioned study publishing",
+      "line": "Studies can publish selected components and assets independently of the game, with exact-revision shared feedback. Rollout and live proof are tracked in AW #638.",
+      "image": "/whats-new/study-publishing.svg",
+      "thread": "01a16f34-c876-7360-9312-7ee7306dcb82",
+      "threadTitle": "Studies - Decrease Report Readiness Latency",
+      "tour": false
+    },
+    {
       "id": "toy-world-review-20261024",
       "date": "2026-10-24",
       "title": "The living toy world study room",
