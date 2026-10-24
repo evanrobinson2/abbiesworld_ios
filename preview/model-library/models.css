@@ -334,7 +334,7 @@ html.fb-off .fb{display:none}
 .lsheet aside{position:relative;width:min(520px,100%);height:100%;overflow:auto;background:var(--app-paper);padding:12px 14px calc(18px + env(safe-area-inset-bottom,0px));display:grid;align-content:start;gap:12px;box-shadow:-12px 0 40px rgba(30,22,10,.25)}
 .lsheet header{display:flex;align-items:center;gap:8px}.lsheet h2{flex:1;margin:0;font-size:18px;line-height:1.15;min-width:0}
 .pb{width:40px;height:40px;min-height:40px;flex:none;border-radius:50%;border:1px solid var(--app-border);background:var(--app-paper);color:var(--app-ink);font-size:24px;line-height:1;cursor:pointer;padding:0}.pb:disabled{opacity:.3}
-.lv{width:100%;aspect-ratio:1;border-radius:16px;display:block;background:radial-gradient(circle at 50% 38%,#fffdf6,#e6dfc6 75%);--poster-color:transparent;overflow:hidden}
+.lv{width:100%;height:min(52vh,480px);border-radius:16px;display:block;background:radial-gradient(circle at 50% 38%,#fffdf6,#e6dfc6 75%);--poster-color:transparent;overflow:hidden}
 .lv.still{display:grid;place-items:center;align-content:center;gap:8px;text-align:center;color:var(--app-muted);font-size:13px;padding:10px}.lv.still img{width:70%;border-radius:12px}
 .lsheet dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:13.5px}.lsheet dt{color:var(--app-muted)}.lsheet dd{margin:0;min-width:0;overflow-wrap:anywhere}.lsheet code{font-size:12px}
 .lact{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:999px;background:var(--app-ink);color:var(--app-paper);font-weight:700;font-size:14px;text-decoration:none}.btn.ghost{background:transparent;color:var(--app-ink);border:1px solid var(--app-border)}
@@ -343,5 +343,5 @@ html.fb-off .fb{display:none}
   .lbody{grid-template-columns:minmax(0,1fr)}
   .lrail{position:static;display:flex;overflow-x:auto;max-height:none;padding:6px;border-radius:999px;scrollbar-width:none}.lrail::-webkit-scrollbar{display:none}.lc{flex:none;white-space:nowrap;border-radius:999px}
   .lsheet{align-items:flex-end}.lsheet aside{width:100%;height:auto;max-height:88vh;border-radius:22px 22px 0 0}
-  .lv{aspect-ratio:4/3}
+  .lv{height:min(40vh,340px)}
 }
