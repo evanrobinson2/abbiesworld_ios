@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Backpack, Charms and Look</title>
+<meta name="description" content="Four briefs for review before any more building: what went wrong with the backpack, the backpack re-imagined, charms, and Abbie's look.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6efe6;--bg2:#efe3f5;--ink:#2b2135;--soft:#6a5c74;--line:#2b213522;
+  --grape:#8a5cc8;--pink:#ef6fa6;--gold:#e7b43a;--mint:#3fb59a;--sky:#4f8fe0;--red:#d9534f;
+  --glass:linear-gradient(165deg,#ffffffd6 0%,#ffffff8a 45%,#ffffff66 70%,#ffffffb0 100%);
+  --edge:#ffffffe6;--shadow:0 18px 40px -22px #2a103070,0 2px 6px #2a10301a;
+  --aw-font:'Nunito',system-ui,sans-serif;--aw-display:'Fredoka',system-ui,sans-serif;--aw-ink:var(--ink);--aw-soft:var(--soft);--aw-line:var(--line);--aw-bg:#ffffffc0;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1b1424;--bg2:#24183a;--ink:#f3ecf8;--soft:#b9a9c9;--line:#ffffff24;
+  --glass:linear-gradient(165deg,#ffffff24 0%,#ffffff12 50%,#ffffff1c 100%);--edge:#ffffff30;--shadow:0 18px 40px -22px #000,0 2px 6px #0006;--aw-bg:#ffffff10}}
+:root[data-theme="dark"]{--bg:#1b1424;--bg2:#24183a;--ink:#f3ecf8;--soft:#b9a9c9;--line:#ffffff24;
+  --glass:linear-gradient(165deg,#ffffff24 0%,#ffffff12 50%,#ffffff1c 100%);--edge:#ffffff30;--shadow:0 18px 40px -22px #000,0 2px 6px #0006;--aw-bg:#ffffff10}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:radial-gradient(1200px 700px at 85% -10%,var(--bg2),transparent 70%),var(--bg);color:var(--ink);font:16px/1.6 var(--aw-font)}
+.wrap{max-width:1160px;margin:0 auto;padding:28px 16px 80px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px}
+@media (max-width:980px){.wrap{grid-template-columns:minmax(0,1fr)}}
+main{min-width:0}
+h1,h2,h3{font-family:var(--aw-display);line-height:1.15;margin:0}
+h1{font-size:clamp(30px,5vw,46px);font-weight:700;letter-spacing:-.01em}
+h2{font-size:clamp(24px,3.4vw,32px);font-weight:700;margin-bottom:6px}
+h3{font-size:19px;font-weight:600;margin:18px 0 6px}
+p{margin:8px 0}
+.kicker{font:800 12px/1 var(--aw-font);letter-spacing:.14em;text-transform:uppercase;color:var(--grape)}
+.lead{font-size:18px;color:var(--soft);max-width:62ch}
+.glass{background:var(--glass);border:1px solid var(--edge);border-radius:22px;box-shadow:inset 0 1.5px 0 #ffffffcc,inset 0 -10px 18px -14px #ffffff90,var(--shadow);padding:20px 22px}
+section{margin-top:34px}
+.num{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;margin-right:10px;vertical-align:-6px;color:#fff;font:700 17px/1 var(--aw-display);
+  background:radial-gradient(circle at 35% 30%,#ffffff70,transparent 45%),var(--c,var(--grape));box-shadow:0 6px 14px -6px var(--c,var(--grape))}
+.status{display:inline-block;font:800 11px/1 var(--aw-font);letter-spacing:.1em;text-transform:uppercase;padding:6px 9px;border-radius:99px;background:#e7b43a33;color:#8a5b00;margin-left:8px;vertical-align:4px}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .status{color:#ffd77a}}
+.answer{margin-top:18px;font-size:17px}
+.answer strong{color:var(--grape)}
+ul,ol{padding-left:22px;margin:8px 0}
+li{margin:5px 0}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:12px}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin-top:12px}
+.tile{background:var(--aw-bg);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
+.tile h3{margin-top:0}
+.tile .tag{font:800 11px/1 var(--aw-font);letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+table{width:100%;border-collapse:collapse;font-size:14.5px}
+.tablewrap{overflow-x:auto;margin-top:12px;border-radius:16px;border:1px solid var(--line);background:var(--aw-bg)}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font:800 11px/1.2 var(--aw-font);letter-spacing:.1em;text-transform:uppercase;color:var(--soft);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td.t{white-space:nowrap;color:var(--soft);font-variant-numeric:tabular-nums}
+.pill{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;font-weight:800;white-space:nowrap}
+.p-us{background:#8a5cc82a;color:var(--grape)}.p-gpt{background:#4f8fe02a;color:var(--sky)}.p-other{background:#3fb59a2a;color:var(--mint)}
+figure{margin:14px 0 0}
+figure img{display:block;width:100%;border-radius:16px;border:1px solid var(--line)}
+figcaption{font-size:14px;color:var(--soft);margin-top:8px}
+.split{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.split{grid-template-columns:minmax(0,1fr)}}
+.cause{border-left:4px solid var(--c,var(--pink));padding:2px 0 2px 14px;margin:14px 0}
+.cause b{font-family:var(--aw-display);font-weight:600;font-size:17px}
+svg{max-width:100%;height:auto;display:block}
+.diagram{margin-top:14px;background:var(--aw-bg);border:1px solid var(--line);border-radius:18px;padding:12px}
+.diagram text{font-family:var(--aw-font);fill:var(--ink)}
+.diagram .sm{font-size:12px;fill:var(--soft)}
+.verbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:14px}
+.verb{border-radius:18px;padding:16px;background:var(--aw-bg);border:1px solid var(--line);position:relative;overflow:hidden}
+.verb::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--c)}
+.verb .where{font:800 11px/1 var(--aw-font);letter-spacing:.1em;text-transform:uppercase;color:var(--c)}
+.verb h3{margin:6px 0}
+.charmrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.charm{display:flex;align-items:center;gap:7px;padding:6px 11px 6px 7px;border-radius:99px;background:var(--aw-bg);border:1px solid var(--line);font-size:14px}
+.charm i{font-style:normal;display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffe9a8 55%,#e7b43a);box-shadow:0 3px 8px -3px #8a5b00aa}
+.charm small{color:var(--soft)}
+.decide{counter-reset:d;display:grid;gap:12px;margin-top:12px}
+.decide .tile{position:relative;padding-left:56px}
+.decide .tile::before{counter-increment:d;content:counter(d,upper-alpha);position:absolute;left:14px;top:14px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:var(--gold);color:#3a2600;font:700 16px/1 var(--aw-display)}
+.rec{color:var(--mint);font-weight:800}
+.kill{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px}
+aside.side{position:sticky;top:20px;align-self:start}
+@media (max-width:980px){aside.side{position:static}}
+.foot{margin-top:40px;font-size:13px;color:var(--soft)}
+a{color:var(--grape)}
+code{font-size:.88em;background:#8a5cc818;padding:1px 5px;border-radius:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<main>
+
+<header class="glass">
+  <div class="kicker">AW-STUDY-0046 · Backpack · Briefs for review</div>
+  <h1>Backpack, charms and Abbie's look</h1>
+  <p class="lead">Four briefs, for you to review before anything else gets built. These are drafts: nothing on this page is in the game yet.</p>
+  <div class="answer">
+    <p><strong>The short version.</strong> The backpack failed because it was being asked to be three things at once: a bag of things, a dress-up toy and an upgrade shop. On top of that, two sets of sessions built on it in the same hour without a shared plan. The fix is to give each job its own place:</p>
+    <ol>
+      <li>The backpack only <b>carries</b>. She opens it to see and use what she found.</li>
+      <li><b>Dressing</b> Abbie, her backpack and her buggy happens in one dressing room, reached from the mirror.</li>
+      <li><b>Charms</b> become the heart of it. You earn them out in the world, they jingle on the bag, and each one unlocks a small power.</li>
+    </ol>
+    <p>Four choices for you are at the bottom of the page.</p>
+  </div>
+</header>
+
+<!-- ============ 1 FAILURE ANALYSIS ============ -->
+<section class="glass" id="failures">
+  <h2><span class="num" style="--c:var(--red)">1</span>What went wrong<span class="status">Brief</span></h2>
+  <p>Nine versions of the backpack in about nine hours, from your first ask at 11:53 AM to tonight's default look at 9:00 PM. Here is each one, who built it, and why it didn't hold.</p>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>When</th><th>What was built</th><th>By</th><th>Why it didn't hold</th></tr></thead>
+    <tbody>
+      <tr><td class="t">11:53 AM</td><td><b>Half shell.</b> 10 styles and 5 facets, changed with arrows and five orbs on the open bag.</td><td><span class="pill p-us">this thread</span></td><td>Arrows and orbs were developer controls. You couldn't see what a change would look like before you made it.</td></tr>
+      <tr><td class="t">12:34 PM</td><td><b>Decorating with cards.</b> Tap a part of the bag, a hand of cards is dealt, drop one on the bag.</td><td><span class="pill p-us">this thread</span></td><td>Cards are how you act on the world as a god. Using them to dress a bag broke that rule, and a whole hand of cards took over the screen.</td></tr>
+      <tr><td class="t">2:37–7:30 PM</td><td>Higher-fidelity pass, worn in FPS, Meshy charms.</td><td><span class="pill p-us">this thread</span></td><td>These held up, and they stay. They are the good part.</td></tr>
+      <tr><td class="t">6:55 PM</td><td><b>Floating mini with card slots.</b> Seven card slots around the bag, and a hand along the bottom.</td><td><span class="pill p-us">this thread</span></td><td>Fourteen cards on screen at once, covering the world (your screenshot below). This is the one you called "NOT working at all".</td></tr>
+      <tr><td class="t">7:39 PM</td><td><b>Left bar and notebook.</b> A small real backpack on a glass bar, with the notebook under it.</td><td><span class="pill p-us">this thread</span></td><td>This held up and it stays. Opening the bag still led into the card slots, though.</td></tr>
+      <tr><td class="t">8:16 PM</td><td><b>Loadout beads.</b> A bead on each part of the bag, and a small strip of swatches beside it.</td><td><span class="pill p-us">this thread</span></td><td>It was smaller, but it still put dressing inside the inventory. Thirty minutes later it was removed by #535.</td></tr>
+      <tr><td class="t">8:50 PM</td><td><b>Upgrades instead of facets (#535).</b> Pockets and Keyring levels, bought with stars.</td><td><span class="pill p-gpt">ChatGPT dispatch</span></td><td>It was written without seeing the loadout that had just shipped. It added a shop and a currency (stars) that nothing else in the game uses.</td></tr>
+      <tr><td class="t">8:51 PM</td><td><b>Zip compartments and close-up inspection (#536).</b></td><td><span class="pill p-gpt">ChatGPT dispatch</span></td><td>A good idea that stays. It was built in parallel into the same file, on top of the upgrades.</td></tr>
+      <tr><td class="t">9:00 PM</td><td><b>Abbie's default backpack</b> (Bunny, Grape, Stripes…).</td><td><span class="pill p-us">this thread</span></td><td>Waiting to merge. It is just data, so it works with any design.</td></tr>
+      <tr><td class="t">about 9 PM</td><td><b>Wardrobe study (#537)</b>, asked to be a study first, with no build.</td><td><span class="pill p-gpt">ChatGPT dispatch</span></td><td>The right instinct. Its mockup is folded into brief 4 below.</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3>Five reasons it kept failing</h3>
+  <div class="cause" style="--c:var(--red)"><b>One object, three jobs.</b> The open backpack was asked to show what she carries, dress the bag up, sell upgrades, hold the notebook and show off charms, all in one view. Every version piled on more controls because every job needed some. No game does this. Animal Crossing's pockets don't change your clothes; you do that at home, in front of a mirror.</div>
+  <div class="cause" style="--c:var(--pink)"><b>The wrong way of acting.</b> Our grammar says cards are for acting on the world as a god. Dressing a bag is something Abbie does to her own things, which is the FPS and left-bar side of the grammar. Two of the nine versions were built on cards, and that is where it felt most wrong.</div>
+  <div class="cause" style="--c:var(--gold)"><b>Two authors, no shared brief.</b> This thread and the ChatGPT dispatch sessions (#532, #535, #536, #537) all wrote to <code>inventory.mjs</code> and <code>backpack.mjs</code> between 8 and 9 PM. Each change was reasonable on its own. Together they replaced each other within the hour.</div>
+  <div class="cause" style="--c:var(--sky)"><b>Built before designed.</b> Every round went from your words to live in under an hour, with no design card agreed first. That speed is great for a minigame. For the one object every game shares, it meant you were reviewing finished code instead of an idea.</div>
+  <div class="cause" style="--c:var(--mint)"><b>Why you still see cards: a tab from before the fix.</b> What is live right now (deployed 9:04 PM) has no cards at all; I checked the live files. Your 9:14 PM screenshot shows the 6:55 PM card slots and the old round dock along the bottom, which was removed from the town at 9:04 PM. So that tab loaded the page before those deploys and never reloaded. A reload shows the current version. Separately, the town loads the backpack code under three different addresses (<code>inventory.mjs?v=13</code>, <code>/simulations/inventory.mjs</code>, <code>./inventory.mjs</code>), and whichever copy arrives first draws the bag. That is a real hazard, and the fix is in the build order: one address, plus a small "new version" nudge when an open tab falls behind.</div>
+
+  <figure>
+    <img src="stale-tab.jpg" alt="Your 9:14 PM screenshot: fourteen backpack cards around and below the floating backpack, with the old round dock along the bottom" loading="lazy">
+    <figcaption>Your screenshot at 9:14 PM. It shows the 6:55 PM version (card slots, a hand of pattern cards, the old dock). None of this is in the live code any more, and nothing like it comes back in the new design.</figcaption>
+  </figure>
+</section>
+
+<!-- ============ 2 BACKPACK REIMAGINED ============ -->
+<section class="glass" id="backpack">
+  <h2><span class="num" style="--c:var(--grape)">2</span>The backpack, re-imagined<span class="status">Brief</span></h2>
+  <p class="lead">From first principles: how would Abbie know what she has? She carries it. So the backpack is a thing she carries, not a menu.</p>
+
+  <h3>Which way of acting is it?</h3>
+  <p>Tiles create the world, cards act on it as a god, and the HUD runs the simulation and the app. None of those is the backpack. The backpack belongs to the fourth way, <b>playing as Abbie</b>: the left bar of things her character touches, and the bag on her back in FPS. So it never deals cards, never opens a shop, and never shows a list.</p>
+
+  <h3>Three verbs, three places</h3>
+  <div class="verbs">
+    <div class="verb" style="--c:var(--mint)"><div class="where">Always, in play</div><h3>Carry</h3>
+      <p>Things she picks up fly into the bag with a soft zip and a jingle. The small bag on the left bar fills out a little. When it's full, she says "My backpack's full!" and nothing else pops up.</p></div>
+    <div class="verb" style="--c:var(--grape)"><div class="where">Tap the bag</div><h3>Open</h3>
+      <p>The bag comes to the middle and unzips. This is the 3D object from #536, and it stays. Each pocket holds one kind of thing. Tap a thing and it comes up close with one line about it, and one action: use it, give it, or put it back. Tap anywhere empty to zip it up.</p></div>
+    <div class="verb" style="--c:var(--pink)"><div class="where">The mirror</div><h3>Dress</h3>
+      <p>Not inside the backpack at all. There is one dressing room for Abbie, her backpack and her buggy, reached from the mirror on the left bar or from her bedroom at home. It uses the small FPS-style slots you asked for: tap a part, pick from a short row.</p></div>
+  </div>
+
+  <div class="diagram">
+  <svg viewBox="0 0 760 340" role="img" aria-label="The left bar holds four things: Abbie's mirror, the backpack, the notebook and the buggy. The backpack opens into four pockets. The mirror opens the one dressing room for Abbie, the backpack and the buggy.">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset="1" stop-color="#ffffff" stop-opacity=".45"/></linearGradient>
+    </defs>
+    <rect x="16" y="20" width="118" height="290" rx="26" fill="url(#g1)" stroke="#8a5cc8" stroke-opacity=".35"/>
+    <text x="75" y="44" text-anchor="middle" font-weight="800" font-size="11" letter-spacing="1.5" class="sm">LEFT BAR</text>
+    <g font-size="14" font-weight="700">
+      <circle cx="75" cy="85" r="26" fill="#ef6fa6" opacity=".9"/><text x="75" y="90" text-anchor="middle" fill="#fff">Mirror</text>
+      <circle cx="75" cy="150" r="26" fill="#8a5cc8"/><text x="75" y="155" text-anchor="middle" fill="#fff">Bag</text>
+      <circle cx="75" cy="215" r="26" fill="#e7b43a"/><text x="75" y="220" text-anchor="middle" fill="#3a2600">Book</text>
+      <circle cx="75" cy="280" r="26" fill="#4f8fe0"/><text x="75" y="285" text-anchor="middle" fill="#fff">Buggy</text>
+    </g>
+    <path d="M104 150 C 170 150, 180 130, 230 130" fill="none" stroke="#8a5cc8" stroke-width="2.5"/>
+    <rect x="232" y="70" width="250" height="150" rx="20" fill="#8a5cc81c" stroke="#8a5cc8" stroke-opacity=".5"/>
+    <text x="357" y="96" text-anchor="middle" font-weight="800" font-size="15">Open: the pockets</text>
+    <g font-size="13">
+      <text x="252" y="124">Main: what she found, quest things</text>
+      <text x="252" y="148">Front: her notebook</text>
+      <text x="252" y="172">Side: embers, drops, treats, dye</text>
+      <text x="252" y="196">Keyring: her charms (tap = close-up)</text>
+    </g>
+    <path d="M104 85 C 300 30, 470 30, 520 60" fill="none" stroke="#ef6fa6" stroke-width="2.5"/>
+    <path d="M104 280 C 300 296, 470 290, 520 262" fill="none" stroke="#4f8fe0" stroke-width="2.5" stroke-dasharray="6 5"/>
+    <rect x="508" y="60" width="236" height="200" rx="20" fill="#ef6fa61a" stroke="#ef6fa6" stroke-opacity=".55"/>
+    <text x="626" y="88" text-anchor="middle" font-weight="800" font-size="15">Dress: one dressing room</text>
+    <g font-size="13">
+      <text x="528" y="118">Abbie: hair, top, bottom, shoes</text>
+      <text x="528" y="142">Backpack: style, colour, pattern,</text>
+      <text x="528" y="160">  pocket, straps, lining, notebook</text>
+      <text x="528" y="184">Buggy: paint, wheels, toy animals</text>
+      <text x="528" y="214" class="sm">Same slots, same row of choices,</text>
+      <text x="528" y="232" class="sm">one saved look per thing</text>
+    </g>
+    <text x="226" y="332" class="sm">The buggy also opens the dressing room from the carwash.</text>
+  </svg>
+  </div>
+
+  <h3>Getting bigger: upgrades that you can see</h3>
+  <p>#535 asked for standard inventory upgrades, and that ask stands. In this design they don't get their own panel. When Abbie earns a charm milestone, the bag gets a new pocket sewn on, and you see it happen: a needle-and-thread moment, a pocket that wasn't there before, and room for more things. That is the Animal Crossing pocket upgrade, shown on the object. There are no stars to spend and no shop. Choice B below asks whether you'd rather keep a choice of upgrades.</p>
+
+  <div class="grid2">
+    <div class="tile"><div class="tag">Stays</div>
+      <ul><li>The real 3D bag, worn in every game, with charms that jingle</li><li>The left bar and the notebook</li><li>Zip pockets and the close-up of each thing (#536)</li><li>Use a thing: embers charge world effects</li><li>Abbie's default look</li><li>The loadout slots, moved to the dressing room</li></ul></div>
+    <div class="tile"><div class="tag">Goes</div>
+      <ul><li class="kill">Cards for dressing (all of them)</li><li class="kill">Slots and beads on the open backpack</li><li class="kill">The upgrades panel and stars as money</li><li class="kill">The backpack register on the chronograph</li><li class="kill">Three copies of the backpack code</li><li class="kill">Decorate mode on the old study page</li></ul></div>
+  </div>
+</section>
+
+<!-- ============ 3 CHARMS ============ -->
+<section class="glass" id="charms">
+  <h2><span class="num" style="--c:var(--gold)">3</span>Charms, front and centre<span class="status">Brief · Charms thread to co-sign</span></h2>
+  <p class="lead">Charms are the one reward in Abbie's World. They should feel like the point of playing: you see them out in the world, you go and get them, and then everyone can see you have them.</p>
+
+  <div class="charmrow" aria-label="The eleven charms">
+    <span class="charm"><i>🦠</i>Tardigrade <small>science adventure</small></span>
+    <span class="charm"><i>💾</i>Floppy disk <small>basement word game</small></span>
+    <span class="charm"><i>⭐</i>Star <small>school roof</small></span>
+    <span class="charm"><i>🗝️</i>Brass key <small>café secret</small></span>
+    <span class="charm"><i>☕</i>Coffee cup <small>first coffee</small></span>
+    <span class="charm"><i>🐕</i>Bub <small>fetch</small></span>
+    <span class="charm"><i>🌙</i>Moon <small>Moon base key</small></span>
+    <span class="charm"><i>🚀</i>Rocket <small>Moon Mission</small></span>
+    <span class="charm"><i>🏎️</i>Toy car <small>coaster stars</small></span>
+    <span class="charm"><i>🚙</i>Moon buggy <small>carwash</small></span>
+    <span class="charm"><i>💛</i>Heart <small>all the others</small></span>
+  </div>
+
+  <h3>The life of a charm</h3>
+  <div class="grid3">
+    <div class="tile"><div class="tag">1 · See it</div><p>A gold medallion floats over the place that gives it, with a column of light. It's like a GTA pickup, and you can see it from across town. Ones you haven't earned yet show as padlocks on the town board.</p></div>
+    <div class="tile"><div class="tag">2 · Earn it</div><p>Win the game there. The charm flies out of the medallion and onto her keyring with a bright jingle, the padlock springs open, and Abbie says its name.</p></div>
+    <div class="tile"><div class="tag">3 · Wear it</div><p>It hangs on her backpack and swings and clinks as she runs, drives and jumps, in every game. That is the Call of Duty and Apex weapon charm: being seen is the reward.</p></div>
+    <div class="tile"><div class="tag">4 · Use it</div><p>Every charm unlocks one small power, the way A Short Hike's feathers give you more climb. The floppy already opens the Polaroid phone, and the toy car already gives fire wheels. Proposal: every charm gets one.</p></div>
+    <div class="tile"><div class="tag">5 · Show it</div><p>Her jewellery box at home keeps the whole set, each charm under a little glass dome, with empty spots for the ones still to find. Tap one on the keyring and the camera closes in.</p></div>
+    <div class="tile"><div class="tag">6 · Make it better</div><p>Charms can be updated. Replay its game and the charm gets shinier (plain, then enamel, then gold-edged). A new model can replace an old one without anyone losing the charm they earned.</p></div>
+  </div>
+
+  <h3>Where charms show up</h3>
+  <ul>
+    <li><b>The opening:</b> charms circle under a spotlight while the world loads, then fold into the bag. This is already live.</li>
+    <li><b>The town:</b> medallions and light columns, and the "Collect the Backpack Charms" track.</li>
+    <li><b>The backpack:</b> the keyring is its own pocket when the bag is open, and the charm camera is one tap away.</li>
+    <li><b>Every game she's in:</b> the worn bag with its jingle (<code>backpack-wear.mjs</code>, already in the FPS levels).</li>
+    <li><b>The dressing room:</b> which charms hang on the bag is a slot of its own.</li>
+  </ul>
+
+  <h3>Today, and what's missing</h3>
+  <ul>
+    <li>Eleven charms are defined. Ten have Meshy models; the floppy disk and rocket got their textured versions tonight. The toy car is waiting for your OK to spend 30 Meshy credits.</li>
+    <li>Not built yet: the padlock springing open, charm powers for most charms, the shine levels, and charms on Ani's side.</li>
+    <li>How many hang on the bag at once is still open. Today it's two, and the rest stay in the jewellery box. That is choice D.</li>
+  </ul>
+</section>
+
+<!-- ============ 4 LOOK AND FEEL ============ -->
+<section class="glass" id="look">
+  <h2><span class="num" style="--c:var(--pink)">4</span>Abbie's look, and one way to dress anything<span class="status">Brief · with Character Studio</span></h2>
+  <p class="lead">Abbie's look should be hers to change, just like her backpack and her buggy, and all three should change the same way.</p>
+
+  <div class="split">
+    <div>
+      <h3>The dressing room</h3>
+      <p>Tap the mirror on the left bar, or the wardrobe in her bedroom. She steps onto a little turntable in the middle of the screen with the world still behind her; nothing is blurred or dimmed. Small glass beads sit on her slots: hair, top, bottom, shoes, backpack and charms. Tap a bead and a short row of choices opens beside her, never over her. Tap one and she's wearing it. Swipe and the turntable turns to her backpack, then her buggy, and they work the same way.</p>
+      <p>This is the loadout you asked for at 8:16 PM, the FPS gunsmith idea, in the place it belongs. The code already exists (<code>loadout.mjs</code>), and the carwash garage already uses it for the buggy.</p>
+      <h3>Rules that don't bend</h3>
+      <ul>
+        <li>Faces are designed and never redrawn, and never made from photos.</li>
+        <li>Clothes always go over the smooth fitted base layer. PG, always.</li>
+        <li>Every outfit part names its source and its licence.</li>
+      </ul>
+    </div>
+    <div class="tile">
+      <div class="tag">Today (from Character Studio)</div>
+      <ul>
+        <li>One 20-bone skeleton is shared by every hero.</li>
+        <li>An outfit is a whole baked model: suit or tee, 24 hero files in all. You can't swap a top on its own yet.</li>
+        <li>Materials are named by role (skin, suit, boots, hair), so recolouring each role works today.</li>
+        <li>The backpack already mounts on the chest bone in every game. That is the pattern for every accessory.</li>
+      </ul>
+      <div class="tag" style="margin-top:12px">What it needs</div>
+      <ul>
+        <li>Clothes as separate parts on the same 20 bones, so every move still works.</li>
+        <li>A slot list per model: each slot changes a bone part or a material role.</li>
+        <li>One small saved look per character (slot to part, plus colours), so a rebuild can replay it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>In two steps</h3>
+  <ol>
+    <li><b>Colours first.</b> Recolour hair, top, bottom and shoes by material role on today's models, in the dressing room with the backpack and buggy. This needs no new art.</li>
+    <li><b>Then parts.</b> Separate garments on the shared skeleton, a few per slot, built low poly from a recipe with their provenance like every other asset. Character Studio is writing up the parameterized base for this now.</li>
+  </ol>
+</section>
+
+<!-- ============ DECISIONS ============ -->
+<section class="glass" id="decide">
+  <h2><span class="num" style="--c:var(--mint)">✓</span>Four choices for you</h2>
+  <p>A tap on each is all I need. Nothing gets built until you've looked.</p>
+  <div class="decide">
+    <div class="tile"><b>Where does dressing happen?</b> <span class="rec">Recommended:</span> one dressing room from the mirror, for Abbie, the bag and the buggy. The alternative is keeping a small "dress" button on the open backpack.</div>
+    <div class="tile"><b>How does the bag get bigger?</b> <span class="rec">Recommended:</span> automatically, a new pocket sewn on at charm milestones. The alternative is keeping a choice of upgrades (Pockets or Keyring) bought with stars.</div>
+    <div class="tile"><b>Should every charm unlock a small power?</b> <span class="rec">Recommended:</span> yes, one each, like the floppy's Polaroid phone. The alternative is charms just for show.</div>
+    <div class="tile"><b>How many charms hang on her bag?</b> <span class="rec">Recommended:</span> all she has earned, so the bag gets jinglier as she plays. The alternative is two at a time, with the rest in the jewellery box.</div>
+  </div>
+  <h3>Build order once you've chosen</h3>
+  <ol>
+    <li>One copy of the backpack code, and a "new version" nudge for open tabs.</li>
+    <li>Strip the open backpack down to pockets, the close-up and use.</li>
+    <li>The dressing room, with the backpack first, then the buggy, then Abbie's colours.</li>
+    <li>Charm moments: the padlock pop, the keyring pocket, shine levels, then powers.</li>
+    <li>Garment parts on the shared skeleton, with Character Studio.</li>
+  </ol>
+  <p>Each step gets a preview link before it goes live. From now on, the ChatGPT dispatch asks about the backpack come through this brief, so two builds can't replace each other again.</p>
+</section>
+
+<p class="foot">Drafted by the Backpack thread, Friday 23 October 2026, about 9:30 PM. Charms brief to be co-signed by the Charms thread; look brief written with Character Studio's notes.</p>
+</main>
+
+<aside class="side glass" aria-label="Context engineering">
+<aside class="ctx-aside" ><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind" open><summary><b>Oracle consultation</b><i>6</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json" target="_blank" rel="noopener">Astroneer identity record</a><small>&quot;Backpack shows items physically ... one of the best low-HUD references&quot;: the open pack shows things in their pockets, not a list.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/a-short-hike.json" target="_blank" rel="noopener">A Short Hike identity record</a><small>Golden feathers are collectibles that also give you more climb: the model for charms that each unlock one small power.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/unpacking.json" target="_blank" rel="noopener">Unpacking identity record</a><small>&quot;Learn a life from the things you carry&quot;: what is in her pack tells her story, so items get a close-up and a line.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json" target="_blank" rel="noopener">Animal Crossing: New Horizons identity record</a><small>Pockets grow as you play, and clothes are changed at home, in front of a mirror, not from the pockets.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/game-oracle/lib/director.js" target="_blank" rel="noopener">Oracle consult (studies-only plan, no model)</a><small>Asked about a backpack, charms and restyling; it drew on A Short Hike (stamina grows with things you find) and the Spore cell editor (found parts become choices, seen at once).</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/game-oracle/data/anatomy/object-and-hud.json" target="_blank" rel="noopener">Physical objects and HUD information (Oracle design lesson)</a><small>The asset is the object; selection, hints and progress live in a separate presentation layer.</small></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i>4</i></summary>
+   <ul><li><a href="https://hollowknight.wiki/w/Charms" target="_blank" rel="noopener">Hollow Knight charms and benches (design knowledge)</a><small>Charms are found in the world, each changes how you play, and you swap them only at a bench: a place, not a menu.</small></li><li><a href="https://counter-strike.net/armory" target="_blank" rel="noopener">Weapon charms in Call of Duty, Apex Legends and Counter-Strike 2 (design knowledge)</a><small>A charm hangs on the thing you hold and swings with every move: being seen is the reward.</small></li><li><a href="https://www.fortnite.com/" target="_blank" rel="noopener">Fortnite Locker and back bling (design knowledge)</a><small>One locker dresses the character, the backpack and the glider with the same slots: one customiser for every model.</small></li><li><a href="https://bulbapedia.bulbagarden.net/wiki/Badge_Case" target="_blank" rel="noopener">Pokémon badge case (design knowledge)</a><small>An earned set looks best displayed together, with empty spots that say how many are left.</small></li></ul></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i></i></summary>
+   <p class="ctx-none">None recorded</p></details><details class="ctx-kind" open><summary><b>Research</b><i>1</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/issues/535" target="_blank" rel="noopener">Issues #532, #535, #536, #537 (ChatGPT dispatch)</a><small>The parallel asks that replaced facets with upgrades and added zips while the loadout shipped.</small></li></ul></details><details class="ctx-kind" open><summary><b>Our canon</b><i>5</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md" target="_blank" rel="noopener">Interaction grammar: tiles, cards, HUD, FPS</a><small>The backpack, her look and the buggy are things the player character touches: the left bar and FPS, never cards.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD study and GAME_FEEL</a><small>How would she know? She carries it. Nothing masks the world; the HUD has zero words.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md" target="_blank" rel="noopener">Backpack study AW-STUDY-0046, rounds 1 to 8</a><small>The source for the failure timeline.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/charms/CHARMS_STUDY.md" target="_blank" rel="noopener">Charms study AW-STUDY-0053</a><small>Earn map, padlocks, chest of eleven, jewellery box.</small></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/character-studio/CHARACTER_STUDIO.md" target="_blank" rel="noopener">Character Studio (thread notes, 2026-10-24)</a><small>20-bone rig, outfits are whole GLBs today, materials named by role, faces never redrawn.</small></li></ul></details>
+  <p class="ctx-foot"><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+<p class="ctx-foot"><a href="https://app.abbies.world/studies/#backpack-briefs">Live study page</a></p></aside>
+
+</aside>
+</div>
+</body>
+</html>
