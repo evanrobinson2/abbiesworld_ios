@@ -9,9 +9,9 @@
 import {GIVERS, TEMPLATES, offer, accept, decline, report} from '../quests.mjs?v=1';
 
 // the quest engine's place names, as the board's hero spots ('lab' is parked until the high school game, so has none)
-const SPOT = {cafe: 'cafe', school: 'highschool', common: 'common', noticeboard: 'noticeboard', bakery: 'bakery'};
+const SPOT = {cafe: 'cafe', school: 'highschool', common: 'common', noticeboard: 'noticeboard', bakery: 'bakery', farm: 'farm'};
 const LOOK = {baker: ['#f4efe6', '#8a5a3a'], teacher: ['#5b7fb8', '#3b2a22'], librarian: ['#7a5a8c', '#6b4a2a'], postie: ['#c8502c', '#2a2a2a'],
- gardener: ['#5f8f4a', '#c9a35a'], scientist: ['#f4f6f8', '#4a4a4a'], neighbour: ['#d98a45', '#5a3a2a']};
+ gardener: ['#5f8f4a', '#c9a35a'], scientist: ['#f4f6f8', '#4a4a4a'], neighbour: ['#d98a45', '#5a3a2a'], farmer: ['#b5532f', '#6b4a2a']};
 const SKIN = ['#f1c9a5', '#c68a5e', '#8d5a3b', '#e8b48f', '#a86f4a', '#f3d2b6', '#7a4a32'];
 
 function figure(T, [coat, hair], skin) {

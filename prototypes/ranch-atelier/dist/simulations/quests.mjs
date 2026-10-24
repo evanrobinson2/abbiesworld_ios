@@ -24,7 +24,8 @@ export const GIVERS = {
  postie: {name: 'The postie', at: 'common', voice: 'chirpy and in a hurry'},
  gardener: {name: 'The gardener', at: 'common', voice: 'slow and sunny'},
  scientist: {name: 'The scientist', at: 'school', voice: 'excited, a little breathless'},
- neighbour: {name: 'A neighbour', at: 'noticeboard', voice: 'friendly and chatty'}
+ neighbour: {name: 'A neighbour', at: 'noticeboard', voice: 'friendly and chatty'},
+ farmer: {name: 'The farmer', at: 'farm', voice: 'easy and cheerful, smells of hay'}
 };
 
 // A step is {do: 'visit' | 'collect' | 'bring', at?: spot, item?: id, to?: giver}. report() ticks one off when it matches.
@@ -45,7 +46,11 @@ export const TEMPLATES = [
  {id: 'neighbour-bub', giver: 'neighbour', ask: 'Have you seen a big black dog wander past? Bub does love the common.', thanks: 'There he is, wagging! Take a biscuit for the road.',
   steps: [{do: 'visit', at: 'common', say: 'Look for bub'}, {do: 'visit', at: 'noticeboard', say: 'Tell the neighbour'}], reward: {id: 'quest-biscuit', name: 'Dog biscuit', icon: '🦴', thought: 'Bub will like this.'}},
  {id: 'cafe-cup', giver: 'baker', ask: 'A cup went missing from the café window. Could you look by the noticeboard?', thanks: 'My favourite cup! Thank you.',
-  steps: [{do: 'visit', at: 'noticeboard', say: 'Look for the cup'}, {do: 'visit', at: 'cafe', say: 'Carry it back'}], reward: {id: 'quest-cup', name: 'Painted cup', icon: '☕', thought: 'It has a tiny cat on it.'}}
+  steps: [{do: 'visit', at: 'noticeboard', say: 'Look for the cup'}, {do: 'visit', at: 'cafe', say: 'Carry it back'}], reward: {id: 'quest-cup', name: 'Painted cup', icon: '☕', thought: 'It has a tiny cat on it.'}},
+ {id: 'farm-eggs', giver: 'farmer', ask: 'The hens have been busy and my basket is empty. Could you find three eggs?', thanks: 'Still warm! Have a jar of honey for the trouble.',
+  steps: [{do: 'visit', at: 'farm', say: 'Walk up to the farm'}, {do: 'collect', item: 'egg', say: 'Find an egg'}, {do: 'collect', item: 'egg', say: 'Find another'}, {do: 'collect', item: 'egg', say: 'And one more'}], reward: {id: 'quest-honey', name: 'Jar of honey', icon: '🍯', thought: 'The bees made this.'}},
+ {id: 'farm-pumpkin', giver: 'farmer', ask: 'The big orange pumpkins are ripe. Could you bring one to the baker for the pie?', thanks: 'A pie it is! A feather from the farm for you.',
+  steps: [{do: 'collect', item: 'pumpkin', say: 'Pick a pumpkin'}, {do: 'visit', at: 'cafe', say: 'Take it to the baker'}], reward: {id: 'quest-feather', name: 'Hen feather', icon: '🪶', thought: 'Soft as a cloud.'}}
 ];
 
 const tpl = id => TEMPLATES.find(t => t.id === id);
