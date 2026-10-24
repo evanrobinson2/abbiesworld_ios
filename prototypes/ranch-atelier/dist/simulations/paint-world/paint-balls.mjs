@@ -15,6 +15,12 @@ const pick = (list, weight, rand) => { let t = list.reduce((a, x) => a + weight(
 export function rollGrant(rand = Math.random) {
  return {count: pick(COUNTS, c => c[1], rand)[0], size: pick(SIZES, s => s.w, rand), colours: PAIRS[Math.floor(rand() * PAIRS.length)]};
 }
+// One ball of its own colour and size: a stocked tray mixes these so every ball is a different throw (Evan, 2026-10-24).
+export const FULL = 8;
+export function rollBall(rand = Math.random, minMult = 0) {
+ const sizes = SIZES.filter(s => s.mult >= minMult), colour = Object.keys(PAINT_COLOURS)[Math.floor(rand() * Object.keys(PAINT_COLOURS).length)], size = pick(sizes, s => s.w, rand);
+ return {count: 1, size, colours: [colour]};
+}
 const mix = (a, b, t) => { const p = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16)); const A = p(a), B = p(b); return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, '0')).join(''); };
 
 const CSS = `#paint-balls{display:flex;flex-direction:row;align-items:center;gap:5px;pointer-events:none;max-width:62vw;overflow:visible}
@@ -26,7 +32,7 @@ const CSS = `#paint-balls{display:flex;flex-direction:row;align-items:center;gap
 .pb-held{position:fixed;z-index:30;pointer-events:none;border-radius:50%;transform:translate(-50%,-50%) scale(1.15);box-shadow:0 14px 22px rgba(0,0,0,.35),inset 0 -5px 8px rgba(0,0,0,.25)}
 @media (prefers-reduced-motion:reduce){.pb-ball.new{animation:none}}`;
 
-export function createBallTray({onThrow, parent = document.body}) {
+export function createBallTray({onThrow, parent = document.body, endless = false, rand = Math.random}) {
  if (!document.getElementById('pb-css')) document.head.append(Object.assign(document.createElement('style'), {id: 'pb-css', textContent: CSS}));
  const el = document.createElement('div'); el.id = 'paint-balls'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', 'Paint balls. Drag one into the world.');
  parent.append(el);
@@ -50,11 +56,15 @@ export function createBallTray({onThrow, parent = document.body}) {
    const hr = el.getBoundingClientRect(), home = Math.hypot(vx, vy) < 200 && ev.clientY < hr.bottom + 14 && ev.clientX > hr.left - 14 && ev.clientX < hr.right + 14; // let go on the strip: put it back
    if (ev.type === 'pointercancel' || home || onThrow(b, ev.clientX, ev.clientY, Math.max(-3000, Math.min(3000, vx)), Math.max(-3000, Math.min(3000, vy))) === false) { b.node.style.visibility = ''; return; }
    balls.splice(balls.indexOf(b), 1); b.node.remove();
+   if (endless) api.fill(); // the tray never runs dry
   };
   addEventListener('pointermove', move); addEventListener('pointerup', end); addEventListener('pointercancel', end);
  }
- return {el, count: () => balls.length,
+ const api = {el, count: () => balls.length,
+  fill() { while (balls.length < FULL) { const g = rollBall(rand); addBall({colour: g.colours[0], size: g.size, R: g.size.mult}); } },
+  clear() { for (const b of balls.splice(0)) b.node.remove(); },
   grant(g) { for (let i = 0; i < g.count && balls.length < 14; i++) addBall({colour: g.colours[i % g.colours.length], size: g.size, R: g.size.mult}); return balls.length; }};
+ return api;
 }
 
 // A release at screen (x, y) px with velocity (vx, vy) px/s becomes a ground launch: where the finger is on the ground

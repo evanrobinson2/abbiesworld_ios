@@ -10,7 +10,7 @@
 // its steps ticked off as she goes) and the charm quests (backpack.mjs CHARMS). It redraws on 'aw-quests-change'.
 // Presentation layer: the notebook is drawn for the player and is invisible to every perception; directors read her
 // quests through the quests manifest, never from the DOM.
-import {CHARMS, earnedCharms, look, FACETS} from './backpack.mjs?v=9';
+import {CHARMS, earnedCharms, look, FACETS} from './backpack.mjs?v=10';
 import {list as questList} from './quests.mjs';
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -109,27 +109,43 @@ export function openNotebook() {
  css();
  if (!nb) {
   nb = Object.assign(document.createElement('div'), {className: 'aw-nb'}); nb.setAttribute('role', 'dialog'); nb.setAttribute('aria-label', "Abbie's notebook");
-  nb.innerHTML = '<div class="aw-nb-cover"></div><div class="aw-nb-page"><h2>My quests</h2><ul></ul></div>';
+  nb.innerHTML = '<div class="aw-nb-cover"></div><div class="aw-nb-page"></div>';
   document.body.append(nb);
   addEventListener('aw-quests-change', () => isNotebookOpen() && draw());
   addEventListener('aw-backpack-change', () => isNotebookOpen() && draw());
+  addEventListener('aw-inventory-change', () => isNotebookOpen() && draw());
   addEventListener('pointerdown', e => { if (isNotebookOpen() && !e.target.closest?.('.aw-nb,.aw-left-nb')) closeNotebook(); }, true);
   addEventListener('keydown', e => { if (e.key === 'Escape') closeNotebook(); });
  }
  draw(); nb.hidden = false; void nb.offsetWidth; nb.classList.add('in'); document.documentElement.classList.add('aw-nb-out');
 }
+// The quest book (Evan, 2026-10-24: the one long checklist was "sprawling and disorganized"). Four short groups, open things
+// first: Favours (townsfolk asks, next step first), Adventures (charms still to earn), Gifts (what people have given her,
+// read from the same backpack so the book and the bag always agree), and Done folded away under a count. The header shows
+// how far she is. Pure so it can be tested: draw() only puts the html on the page.
+export function bookModel({favours = [], charms = [], have = new Set(), gifts = []} = {}) {
+ const adventures = charms.filter(c => c.quest).map(c => ({t: c.quest, icon: c.icon, done: have.has(c.id)}));
+ const openFavours = favours.filter(q => q.status !== 'done'), doneFavours = favours.filter(q => q.status === 'done');
+ const doneAdv = adventures.filter(c => c.done), openAdv = adventures.filter(c => !c.done);
+ const total = favours.length + adventures.length, done = doneFavours.length + doneAdv.length;
+ return {total, done, openFavours, doneFavours, openAdv, doneAdv, gifts: gifts.filter(g => g.from)};
+}
 function draw() {
  const cover = nb.querySelector('.aw-nb-cover'); cover.innerHTML = ''; cover.append(coverCanvas(look().notebook, 300, 380));
- const have = new Set(earnedCharms());
- let favours = []; try { favours = questList(); } catch {}
+ let favours = [], gifts = []; try { favours = questList(); } catch {}
+ try { gifts = (window.AbbieInventory?.list?.() ?? JSON.parse(localStorage.getItem('aw-inventory') || '[]')) || []; } catch {}
+ const m = bookModel({favours, charms: CHARMS, have: new Set(earnedCharms()), gifts});
+ const who = n => esc(n.replace(/^The /, 'the ').replace(/^A /, 'a '));
  const li = (t, done, sub = '') => `<li class="${done ? 'done' : ''}"><i>${done ? '✓' : ''}</i><span>${esc(t)}${sub}</span></li>`;
- const charms = CHARMS.filter(c => c.quest).map(c => ({t: c.quest, done: have.has(c.id)})).sort((a, b) => a.done - b.done);
- nb.querySelector('ul').innerHTML = [
-  // A favour reads as its next step, with who asked; the steps already done are ticked under it.
-  ...favours.map(q => { const next = q.steps.find(st => !st.done), done = q.status === 'done';
-   return li(done ? `Helped ${q.giverName.replace(/^The /, 'the ')}` : (next?.say || q.ask), done, done ? '' : ` <small>for ${esc(q.giverName.replace(/^The /, 'the ').replace(/^A /, 'a '))}${q.item?.carrying ? ` · carrying ${esc(q.item.icon)} ${esc(q.item.name.toLowerCase())}` : ''}</small>`) +
-    q.steps.filter(st => st.done && !done).map(st => `<li class="done step"><i>✓</i><span>${esc(st.say || '')}</span></li>`).join(''); }),
-  ...charms.map(c => li(c.t, c.done))].join('');
+ const group = (title, rows, extra = '') => rows.length ? `<h3>${title}</h3><ul${extra}>${rows.join('')}</ul>` : '';
+ const favourRows = m.openFavours.map(q => { const next = q.steps.find(st => !st.done), n = q.steps.filter(st => st.done).length;
+  return li(next?.say || q.ask, false, ` <small>for ${who(q.giverName)}${q.steps.length > 1 ? ` · ${n} of ${q.steps.length}` : ''}${q.item?.carrying ? ` · carrying ${esc(q.item.icon)} ${esc(q.item.name.toLowerCase())}` : ''}</small>`); });
+ const giftRows = m.gifts.slice().reverse().map(g => `<li class="gift"><i>${esc(g.icon && !/^(\/|https?:|data:|\.)/.test(g.icon) ? g.icon : '✦')}</i><span>${esc(g.name)} <small>from ${who(g.from)}</small></span></li>`);
+ const doneRows = [...m.doneFavours.map(q => li(`Helped ${who(q.giverName)}`, true)), ...m.doneAdv.map(c => li(c.t, true))];
+ nb.querySelector('.aw-nb-page').innerHTML = `<h2>My quests</h2>${m.total ? `<div class="prog" aria-label="${m.done} of ${m.total} done"><b style="width:${Math.round(m.done / m.total * 100)}%"></b><em>${m.done} / ${m.total}</em></div>` : ''}` +
+  group('Favours', favourRows) + group('Adventures', m.openAdv.map(c => li(c.t, false))) + group('Gifts', giftRows) +
+  (doneRows.length ? `<details class="fin"><summary>Done <small>${doneRows.length}</small></summary><ul>${doneRows.join('')}</ul></details>` : '') +
+  (!favourRows.length && !m.openAdv.length && !giftRows.length && !doneRows.length ? '<p class="none">Nothing yet. Say hello to someone in town.</p>' : '');
 }
 
 function css() {
@@ -151,6 +167,11 @@ function css() {
  .aw-nb-page li{display:flex;gap:10px;align-items:flex-start;min-height:32px;font-size:21px;line-height:32px;text-shadow:0 0 .6px #4a4a55}
  .aw-nb-page li i{flex:none;width:18px;height:18px;margin-top:7px;border:2px solid #5a5a66;border-radius:3px 5px 3px 4px;transform:rotate(-3deg);font:400 22px/14px "AW Pencil",cursive;color:#3c8f4e;text-indent:1px}
  .aw-nb-page li.done span{text-decoration:line-through;text-decoration-thickness:1.5px;opacity:.6}
+ .aw-nb-page h3{margin:14px 0 0;font:400 22px/30px "AW Pencil",cursive;color:#7a5a8a;text-decoration:underline wavy #b48cff88;text-underline-offset:5px}
+ .aw-nb-page .prog{position:relative;height:14px;margin:6px 0 2px;border:2px solid #5a5a66;border-radius:8px 6px 8px 5px;background:#fff8}.aw-nb-page .prog b{position:absolute;inset:0 auto 0 0;background:#8be08b;border-radius:5px}.aw-nb-page .prog em{position:absolute;right:6px;top:-3px;font:400 15px/18px "AW Pencil",cursive;font-style:normal}
+ .aw-nb-page li.gift i{border:0;transform:none;font:400 20px/26px system-ui,sans-serif;margin-top:3px}
+ .aw-nb-page details.fin summary{cursor:pointer;margin-top:14px;font-size:21px;line-height:32px;list-style:none}.aw-nb-page details.fin summary::before{content:"▸ "}.aw-nb-page details.fin[open] summary::before{content:"▾ "}
+ .aw-nb-page .none{font-size:21px;line-height:32px;opacity:.7}
  .aw-nb-page small{font-size:16px;opacity:.75}
  .aw-nb-page li.step{padding-left:28px;font-size:18px}.aw-nb-page li.step i{width:14px;height:14px;margin-top:9px;font-size:18px}
  @media (max-width:520px){.aw-nb{grid-template-columns:1fr;grid-template-rows:auto 1fr;height:min(640px,84vh)}.aw-nb-cover{width:34%;justify-self:center;margin-bottom:-8%;z-index:1;transform:rotate(-4deg)}.aw-nb-page{margin-left:0}}

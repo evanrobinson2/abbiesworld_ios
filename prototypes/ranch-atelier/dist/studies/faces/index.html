@@ -272,7 +272,7 @@ $('#text').addEventListener('input', showLine); showLine();
 function say() {
  showLine(); speechSynthesis?.cancel?.(); mark(null);
  const plan = driver.say($('#text').value);
- if (useVoice && 'speechSynthesis' in window) {
+ if (false && useVoice && 'speechSynthesis' in window) { // no synthetic speech
   const u = new SpeechSynthesisUtterance(plan.text); u.pitch = 1.35; u.rate = 1;
   u.onboundary = e => driver.sync(e.charIndex); // pull the mouth back onto the voice at each word
   speechSynthesis.speak(u);
