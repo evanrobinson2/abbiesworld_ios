@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-backpack-inspect",
+      "date": "2026-10-24",
+      "title": "Unzip your backpack and look closely",
+      "line": "Spin the backpack, unzip each pocket, tap a thing to hold it up big with a note about it, then put it back.",
+      "image": "/whats-new/2026-10-24-backpack-inspect.jpg",
+      "thread": "session_01MPyekYkd3HfDuMDGbCtqFv",
+      "threadTitle": "Interactive 3D backpack (issue 536)",
+      "tour": true,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-coaster-music-backpack-fix",
       "date": "2026-10-24",
       "title": "Real music on the coaster, and a tidy backpack",
