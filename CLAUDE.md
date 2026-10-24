@@ -9,6 +9,7 @@ documents; what is built lives in the status documents. Keep these three apart.
   generator: a system that preserves creative intent, so whole experiences can be rebuilt, extended and upgraded as
   technology changes. Don't edit it to match the code; change the code toward it, or record the difference in the
   status doc.
+- `docs/design/LIVING_TOY_WORLD.md`: the consolidated product vision for arrival/unboxing, Capture, sharing, the home and arcade games.
 - `docs/MODELER_STATUS.md`: what the modeling pipeline does today against that vision, and what to build next.
 - `docs/architecture/`: the infrastructure that already exists (R2, Postgres, Vercel projects, MCP, auth, jobs).
   Read it before proposing any new service, store or deployment, and update it in the PR that changes infrastructure.

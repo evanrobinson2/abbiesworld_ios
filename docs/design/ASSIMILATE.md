@@ -1,5 +1,7 @@
 # Assimilate and the title/Create New studies (issue #612)
 
+> **Update 2026-10-24 (#622):** Assimilate is now **Capture** and Sandbox is **Design**; the first-class vision, sharing rules (shared by default, private is paid) and tiers are in `LIVING_TOY_WORLD.md`. The browser-local yard below is a draft and is superseded by those rules.
+
 Follows #608 (`REAL_WORLD_SCENES.md`) and #610/#611 (intro readiness). Status key: **Built** (in this PR, drafted), **Study** (words only, nothing drawn), **Not built**.
 
 ## Built: Assimilate prototype (experimental, `?exp=assimilate`)
