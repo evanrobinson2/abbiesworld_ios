@@ -7,7 +7,7 @@
 // Presentation layer only: the cards are drawn for the player and are invisible to every perception.
 import {renderFace} from '../cards/v3/face.mjs';
 
-const ZONES = {
+export const ZONES = {
   'downtown': {body: '#a8603a', deep: '#7c3f22', earth: '#c4680f', grass: '#86a14f', air: '#ecd9bf'},
   'anis-side': {body: '#3d8f93', deep: '#2b6568', earth: '#5d6b4a', grass: '#8bb86a', air: '#dcebf0'},
   'abbie-daddy-side': {body: '#c0609a', deep: '#8e3d70', earth: '#7a4a3a', grass: '#d98a45', air: '#f6d9c8'}};
@@ -38,7 +38,7 @@ const CSS = `#aw-hand .aw-tile-card{all:unset;box-sizing:border-box;cursor:point
 @media(max-width:520px){#aw-hand{--tc-w:46px}}
 @media(prefers-reduced-motion:reduce){#aw-hand .aw-tile-card{transition:none}}`;
 
-export function mountTownHand({board, visit} = {}) {
+export function mountTownHand({board, visit, faceArt} = {}) {
   const hexes = board?.hexes || [];
   if (!hexes.length || document.getElementById('aw-tile-cards')) return null;
   document.head.append(Object.assign(document.createElement('style'), {textContent: CSS}));
@@ -50,8 +50,9 @@ export function mountTownHand({board, visit} = {}) {
     b.style.setProperty('--fan', ((k - (n - 1) / 2) * 2).toFixed(1) + 'deg'); b.title = h.name;
     b.onclick = () => { if (dispatchEvent(new CustomEvent('aw-tile-card', {cancelable: true, detail: {id: h.id, hex: h}}))) visit?.(h.id); };
     row.append(b);
-    renderFace({id: 'town-' + h.id, name: h.name, art: art(h, k + 1), edition: k + 1, set: n, palette: ZONES[h.zone]}, {style: 'diecut', dpi: 110})
-      .then(({canvas}) => { const img = new Image(); img.alt = ''; img.draggable = false; img.src = canvas.toDataURL('image/png'); b.append(img); }).catch(() => { b.textContent = h.n; });
+    const deal = art => renderFace({id: 'town-' + h.id, name: h.name, art, edition: k + 1, set: n, palette: ZONES[h.zone]}, {style: 'diecut', dpi: 110})
+      .then(({canvas}) => { b.querySelector('img')?.remove(); const img = new Image(); img.alt = ''; img.draggable = false; img.src = canvas.toDataURL('image/png'); b.append(img); }).catch(() => { if (!b.firstChild) b.textContent = h.n; });
+    deal(art(h, k + 1)).then(() => faceArt && setTimeout(() => { const real = faceArt(h); if (real) deal(real); }, 400 * k + 1200));   // the drawn stand-in first; the hex's own face once the town can be photographed
   });
   return {row};
 }

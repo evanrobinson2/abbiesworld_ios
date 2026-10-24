@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-town-tile-cards",
+      "date": "2026-10-24",
+      "title": "Real hexes on the town's cards",
+      "line": "The tile cards in the town's hand now show each hex's own face, and tapping one flips the card open with that hex turning live in 3D. Look, don't edit: Winchester stays as it is.",
+      "image": "/whats-new/2026-10-24-town-tile-cards.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-23-car-mode-polaroid",
       "date": "2026-10-23",
       "title": "Car mode in the town, and a phone for Polaroids",
