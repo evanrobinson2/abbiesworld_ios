@@ -505,6 +505,27 @@
     "child-photo rule decided by Evan; provider retention verified; legal review of the upload notice",
     "server-side personal yard, player approval and curation before the shared world"
    ]
+  },
+  {
+   "id": "arcade-racer",
+   "name": "Skate-park rail racer (arcade)",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "AW-STUDY-0066",
+   "tour": false,
+   "pages": [
+    "studies/arcade-racer/play.html"
+   ],
+   "scene": {
+    "gates": [],
+    "note": "Stage 1 study; will stand at the skate park pad beside the coaster (town:skate-park) once reviewed"
+   },
+   "needs": [
+    "Evan's Stage 1 feedback, then hi-fi",
+    "a scene in the world: an arcade cabinet or gate at the skate park (not added in Stage 1)",
+    "account-backed ownership and records (the Stage 1 save is a labelled mock)",
+    "tools/minigame-test/arcade-racer-flow.cjs wired as the live test once the scene exists"
+   ]
   }
  ]
 }

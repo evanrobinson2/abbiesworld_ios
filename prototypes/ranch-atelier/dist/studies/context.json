@@ -3774,6 +3774,50 @@
         {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
       ],
       "recorded": "2026-10-24, no outside sources used; the two reference photos were not readable from the cloud worker, so the issue's written description was used"
+    },
+    "arcade-racer": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Game Oracle consult() run on Evan's PC (source: studies, no model)",
+          "note": "Useful: small clear objective, icon and read-aloud support, explicit setup/play/payoff, the world responds to actions. Retrieval was off-topic for racing (Spore, Cartel Tycoon and others) and generic; none of it is used as racing research. Evidence quality for racing: none. This cloud thread could not reach the Oracle."
+        },
+        {
+          "k": "devblog",
+          "t": "Feeling of Speed (Critical Points)",
+          "href": "https://critpoints.net/2016/11/24/feeling-of-speed/",
+          "note": "Field of view widening, shake and dense nearby detail sell speed; kept in the race view, and kept on the presentation clock so the time cannot be bent (cited from prior knowledge, not re-read this round)"
+        },
+        {
+          "k": "devblog",
+          "t": "Fix Your Timestep (Gaffer On Games)",
+          "href": "https://gafferongames.com/post/fix_your_timestep/",
+          "note": "The race clock is fixed 1/60 s simulation steps; rendering and slow motion are separate, so a score is repeatable (cited from prior knowledge, not re-read this round)"
+        },
+        {
+          "k": "tutorial",
+          "t": "Accessible game design: reduced motion, read-aloud and large touch targets (Game Accessibility Guidelines)",
+          "href": "https://gameaccessibilityguidelines.com/",
+          "note": "Reduced-motion switch, skip on the prize, 48 px and larger touch targets, one clear objective (cited from prior knowledge, not re-read this round)"
+        },
+        {
+          "k": "canon",
+          "t": "Toy-car coaster study AW-STUDY-0054",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/coaster/COASTER_STUDY.md",
+          "note": "The track recipe, six cars and skate-park entrance reused; its 30.0 s normalisation is the thing timed mode replaces"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study; interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "Race HUD is a timer numeral, a progress line and icons; words live on the screens between races"
+        },
+        {
+          "k": "reference",
+          "t": "Evan's eight reference photos (pink retro convertible, pink boxy off-roader, dark armoured toy, orange creature in packaging, toy demo)",
+          "note": "Not inspected: the files are on Evan's PC and this cloud thread had no PC agent. The grounded descriptions in the issue were used for packaging and silhouettes; cars are the existing original garage"
+        }
+      ]
     }
   }
 }
