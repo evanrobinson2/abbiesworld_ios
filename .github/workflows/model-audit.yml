@@ -15,7 +15,7 @@ jobs:
           curl -sS -o /tmp/catalog-all.json https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/models/catalog-all.json
           python3 - <<'P'
           import json,hashlib,subprocess,collections
-          d=json.load(open('/tmp/catalog-all.json')); l=d if isinstance(d,list) else (d.get('models') or d.get('items') or d.get('assets') or list(d.values())[-1])
+          d=json.load(open('/tmp/catalog-all.json')); l=d if isinstance(d,list) else (d.get('models') or d.get('items') or d.get('assets') or list(d.values()))
           mod=[x for x in l if x.get('kind')!='reference-image' and str(x.get('source_path','')).lower().endswith(('.glb','.gltf','.obj','.stl','.fbx'))]
           print('R2 model entries (3D files):',len(mod),' distinct sha:',len(set(x.get('sha256') for x in mod)))
           have=set()
