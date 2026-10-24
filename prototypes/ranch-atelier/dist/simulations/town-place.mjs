@@ -28,10 +28,17 @@ export function mountTownPlace(A) {
   if (!stage || !board?.slots?.length || !hand || document.querySelector('.aw-place-card')) return null;
   document.head.append(Object.assign(mk('style'), {textContent: CSS})); installTilePullStyle();
   const HEX = board.hexSide, K = HEX / SAND_R, KS = K * .1, cos = Math.cos(ROT), sin = Math.sin(ROT);
-  const card = mk('button', 'aw-place-card'); card.type = 'button'; card.dataset.generator = 'meadow'; card.dataset.layer = 'presentation';
-  card.setAttribute('aria-label', 'Meadow tile: pull it onto a glowing open hex'); card.title = 'Meadow';
-  const tiles = document.getElementById('aw-tile-cards'); if (tiles) tiles.after(card); else hand.append(card);
-  import('../cards/v3/hand.mjs?v=2').then(m => m.cardFace(card)).catch(e => console.warn('Meadow card', e));
+  // One card per kind of tile, side by side after the town's own cards. `card` is the one in hand.
+  const KINDS = [['meadow', 'Meadow'], ['moon', 'Moon']], LABEL = Object.fromEntries(KINDS);
+  let anchor = document.getElementById('aw-tile-cards');
+  const cards = KINDS.map(([kind, label]) => {
+    const c = mk('button', 'aw-place-card'); c.type = 'button'; c.dataset.generator = kind; c.dataset.layer = 'presentation';
+    c.setAttribute('aria-label', label + ' tile: pull it onto a glowing open hex'); c.title = label;
+    if (anchor) anchor.after(c); else hand.append(c); anchor = c;
+    import('../cards/v3/hand.mjs?v=2').then(m => m.cardFace(c)).catch(e => console.warn(label + ' card', e));
+    return c;
+  });
+  let card = cards[0];
 
   const isOpen = s => !s.tile && !Object.values(stage.tiles).some(t => t.group && Math.hypot(t.group.position.x - s.x, t.group.position.z + s.y) < 1);
   const ground = (x, y) => board.heightAt(x, y);
@@ -84,6 +91,17 @@ export function mountTownPlace(A) {
     const outer = new T.Group(); outer.add(inner);
     return {outer, inner, id: tile.id, floorAt: (x, z) => heightAt(x / .1, z / .1) * .1};
   }
+  // The Moon: the sandbox's moon-board adapter, on the same footing as the Meadow (render units, scaled up and turned a sixth).
+  async function buildMoon(slot) {
+    const [mb, tm] = await Promise.all([import('./moon/moon-board.mjs'), import('./tile-metrics.js')]); tm.setLabHexDiameter(SAND_R * 20);
+    const toBoard = (mx, mz) => { const x0 = mx * KS, z0 = mz * KS; return [slot.x + x0 * cos + z0 * sin, slot.y - (-x0 * sin + z0 * cos)]; };
+    const heightAt = (mx, mz) => ground(...toBoard(mx, mz)) / KS, seed = Math.floor(Math.random() * 9000) + 11;
+    const tile = {id: 'moon-' + slot.id, type: 'moon', center: {x: 0, z: 0}, rotation: 0, seed, placement: {planet: 'moon', complexity: 1}};
+    const moon = await mb.createMoonBoardTile(tile, SAND_R * 20, heightAt), inner = moon.group;
+    inner.scale.multiplyScalar(K); inner.rotation.y = ROT; inner.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    const outer = new T.Group(); outer.add(inner);
+    return {outer, inner, id: tile.id, life: moon.life, floorAt: heightAt};   // the Moon's own units are plan units, so no .1
+  }
   // A still of the new tile for the print window, drawn on the town's renderer into a target, the world untouched.
   function stillOf(outer, size = 384) {
     const r = stage.renderer, sc = new T.Scene(), cam = new T.PerspectiveCamera(32, 1, 5, 6000), rt = new T.WebGLRenderTarget(size, size, {colorSpace: T.SRGBColorSpace, samples: 4});
@@ -104,20 +122,22 @@ export function mountTownPlace(A) {
   let busy = false, drag = null, ghost = null, hint = null;
   const faceCopy = () => { const f = card.querySelector('.v2-face'), c = mk('canvas'); if (f) { c.width = f.width; c.height = f.height; c.getContext('2d').drawImage(f, 0, 0); } return c; };
 
-  async function place(slot, from) {
-    busy = true; const win = openPrintWindow({name: 'Meadow', at: from, still: faceCopy()});
+  async function place(slot, from, kind) {
+    if (kind) card = cards.find(c => c.dataset.generator === kind) || card; kind = card.dataset.generator;
+    busy = true; const win = openPrintWindow({name: LABEL[kind], at: from, still: faceCopy()});
     try {
-      const built = await buildMeadow(slot), still = stillOf(built.outer);
+      const built = await (kind === 'moon' ? buildMoon : buildMeadow)(slot), still = stillOf(built.outer);
       await win.reveal({reveal: t => { still.style.clipPath = `inset(${((1 - t) * 100).toFixed(1)}% 0 0 0)`; }}, still, 900);
       await win.stamp();
-      const placed = A.placeTile(slot.id, {id: built.id, name: 'Meadow', zone: 'board', group: built.outer});
+      const placed = A.placeTile(slot.id, {id: built.id, name: LABEL[kind], zone: 'board', group: built.outer});
       if (!placed) { win.fail('That hex is taken'); built.outer.removeFromParent(); return; }
+      if (built.life) stage.frame(dt => built.life.update(dt));   // the Moon keeps living once it is down
       win.close(card); showGlow(false);
       const where = new T.Vector3(slot.x, ground(slot.x, slot.y), -slot.y).applyMatrix4(stage.dioGroup.matrixWorld);
-      const [dust, soil] = IMPACT_DUST.meadow, landing = landTile(built.inner, {floorAt: built.floorAt, onImpact: ({radius}) => { sound.play(0, 1); fx.burst({position: where, radius, groundAt: () => where.y, dust, soil}); }});
+      const [dust, soil] = IMPACT_DUST[kind], landing = landTile(built.inner, {floorAt: built.floorAt, onImpact: ({radius}) => { sound.play(0, 1); fx.burst({position: where, radius, groundAt: () => where.y, dust, soil}); }});
       const off = stage.frame(dt => { landing.update(dt); if (landing.done) off(); });
       window.dispatchEvent(new CustomEvent('aw-tile-placed', {detail: {id: built.id, slot: slot.id}}));
-    } catch (e) { console.warn('Meadow tile', e); win.fail('Could not print it'); }
+    } catch (e) { console.warn(LABEL[kind] + ' tile', e); win.fail('Could not print it'); }
     finally { busy = false; refillCard(card); }
   }
 
@@ -138,10 +158,12 @@ export function mountTownPlace(A) {
     if (!s) { showGlow(false); blankCard(card, false); refillCard(card); return; }
     place(s, {left: from.left, top: from.top, width: from.width, height: from.height});
   }
-  card.addEventListener('pointerdown', e => { if (busy || e.button > 0) return; drag = {x: e.clientX, y: e.clientY, live: false, id: e.pointerId}; card.setPointerCapture(e.pointerId); });
-  card.addEventListener('pointermove', e => { if (!drag) return; if (!drag.live) { if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < DRAG_PX) return; drag.live = true; beginDrag(e); } else moveDrag(e); });
-  card.addEventListener('pointerup', e => { if (!drag) return; if (drag.live) endDrag(e, false); else drag = null; });
-  card.addEventListener('pointercancel', e => { if (drag?.live) endDrag(e, true); else drag = null; });
-  const api = {card, place, buildMeadow, slotAt, screenOf}; A.tilePlace = api;   // for tests and for the next card types
+  for (const c of cards) {
+    c.addEventListener('pointerdown', e => { if (busy || e.button > 0) return; card = e.currentTarget; drag = {x: e.clientX, y: e.clientY, live: false, id: e.pointerId}; c.setPointerCapture(e.pointerId); });
+    c.addEventListener('pointermove', e => { if (!drag) return; if (!drag.live) { if (Math.hypot(e.clientX - drag.x, e.clientY - drag.y) < DRAG_PX) return; drag.live = true; beginDrag(e); } else moveDrag(e); });
+    c.addEventListener('pointerup', e => { if (!drag) return; if (drag.live) endDrag(e, false); else drag = null; });
+    c.addEventListener('pointercancel', e => { if (drag?.live) endDrag(e, true); else drag = null; });
+  }
+  const api = {card: cards[0], cards, place, buildMeadow, buildMoon, slotAt, screenOf}; A.tilePlace = api;   // for tests and for the next card types
   return api;
 }
