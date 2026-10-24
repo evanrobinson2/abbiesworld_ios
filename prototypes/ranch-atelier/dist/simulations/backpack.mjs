@@ -95,8 +95,14 @@ function saved() { const v = readJSON(STORE, {}); return v && typeof v === 'obje
 function save(v) { try { localStorage.setItem(STORE, JSON.stringify(v)); } catch {} dispatchEvent(new CustomEvent(EVENT, {detail: v})); }
 export const styleOf = id => STYLES.find(s => s.id === id) || STYLES[0];
 export const option = (facet, id) => { const f = FACETS.find(x => x.id === facet); return f.options.find(o => o.id === id) || f.options[0]; };
-// The whole look: {style, colour, pattern, pocket, trim, lining}. A style brings its own facets until she changes them.
+// Abbie's own backpack, the one every new player starts with and the one she wears everywhere until she changes it
+// (Evan, 2026-10-24 01:00Z: "this is abbie's default backpack"): the bunny in grape stripes, a heart pocket, pink and
+// gold straps, a rainbow lining and the rainbow bear notebook.
+export const DEFAULT_LOOK = {style: 'bunny', colour: 'grape', pattern: 'stripes', pocket: 'heart', trim: 'pink-gold', lining: 'rainbow', notebook: 'rainbow-bear'};
+// The whole look: {style, colour, pattern, pocket, trim, lining, notebook}. A style brings its own facets until she
+// changes them; with nothing saved it is her default.
 export function look(v = saved()) {
+ if (!v.style) v = {...DEFAULT_LOOK, ...v};
  const st = styleOf(v.style), out = {style: st.id};
  for (const f of FACETS) out[f.id] = option(f.id, v[f.id] ?? st.look[f.id]).id;
  return out;

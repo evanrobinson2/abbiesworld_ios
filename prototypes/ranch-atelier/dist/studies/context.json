@@ -3305,6 +3305,106 @@
           "t": "None recorded for this draft"
         }
       ]
+    },
+    "backpack-briefs": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Astroneer identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json",
+          "note": "\"Backpack shows items physically ... one of the best low-HUD references\": the open pack shows things in their pockets, not a list."
+        },
+        {
+          "k": "oracle",
+          "t": "A Short Hike identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/a-short-hike.json",
+          "note": "Golden feathers are collectibles that also give you more climb: the model for charms that each unlock one small power."
+        },
+        {
+          "k": "oracle",
+          "t": "Unpacking identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/unpacking.json",
+          "note": "\"Learn a life from the things you carry\": what is in her pack tells her story, so items get a close-up and a line."
+        },
+        {
+          "k": "oracle",
+          "t": "Animal Crossing: New Horizons identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json",
+          "note": "Pockets grow as you play, and clothes are changed at home, in front of a mirror, not from the pockets."
+        },
+        {
+          "k": "oracle",
+          "t": "Oracle consult (studies-only plan, no model)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/game-oracle/lib/director.js",
+          "note": "Asked about a backpack, charms and restyling; it drew on A Short Hike (stamina grows with things you find) and the Spore cell editor (found parts become choices, seen at once)."
+        },
+        {
+          "k": "oracle",
+          "t": "Physical objects and HUD information (Oracle design lesson)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/game-oracle/data/anatomy/object-and-hud.json",
+          "note": "The asset is the object; selection, hints and progress live in a separate presentation layer."
+        },
+        {
+          "k": "design",
+          "t": "Hollow Knight charms and benches (design knowledge)",
+          "href": "https://hollowknight.wiki/w/Charms",
+          "note": "Charms are found in the world, each changes how you play, and you swap them only at a bench: a place, not a menu."
+        },
+        {
+          "k": "design",
+          "t": "Weapon charms in Call of Duty, Apex Legends and Counter-Strike 2 (design knowledge)",
+          "href": "https://counter-strike.net/armory",
+          "note": "A charm hangs on the thing you hold and swings with every move: being seen is the reward."
+        },
+        {
+          "k": "design",
+          "t": "Fortnite Locker and back bling (design knowledge)",
+          "href": "https://www.fortnite.com/",
+          "note": "One locker dresses the character, the backpack and the glider with the same slots: one customiser for every model."
+        },
+        {
+          "k": "design",
+          "t": "Pokémon badge case (design knowledge)",
+          "href": "https://bulbapedia.bulbagarden.net/wiki/Badge_Case",
+          "note": "An earned set looks best displayed together, with empty spots that say how many are left."
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar: tiles, cards, HUD, FPS",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md",
+          "note": "The backpack, her look and the buggy are things the player character touches: the left bar and FPS, never cards."
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "How would she know? She carries it. Nothing masks the world; the HUD has zero words."
+        },
+        {
+          "k": "canon",
+          "t": "Backpack study AW-STUDY-0046, rounds 1 to 8",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md",
+          "note": "The source for the failure timeline."
+        },
+        {
+          "k": "canon",
+          "t": "Charms study AW-STUDY-0053",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/charms/CHARMS_STUDY.md",
+          "note": "Earn map, padlocks, chest of eleven, jewellery box."
+        },
+        {
+          "k": "canon",
+          "t": "Character Studio (thread notes, 2026-10-24)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/character-studio/CHARACTER_STUDIO.md",
+          "note": "20-bone rig, outfits are whole GLBs today, materials named by role, faces never redrawn."
+        },
+        {
+          "k": "research",
+          "t": "Issues #532, #535, #536, #537 (ChatGPT dispatch)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/535",
+          "note": "The parallel asks that replaced facets with upgrades and added zips while the loadout shipped."
+        }
+      ]
     }
   }
 }
