@@ -1,0 +1,19 @@
+{
+ "rig_task_id": "01a16a9d-de81-7778-b81c-d1e1ba82e0f2",
+ "clips": {
+  "0": {
+   "task_id": "01a16b54-2a2d-73a8-8253-5b93b0bdd534",
+   "credits": 3,
+   "files": [
+    "0_animation_glb.glb"
+   ]
+  },
+  "1": {
+   "task_id": "01a16b54-2a25-70b5-b398-e48098ed960e",
+   "credits": 3,
+   "files": [
+    "1_animation_glb.glb"
+   ]
+  }
+ }
+}
