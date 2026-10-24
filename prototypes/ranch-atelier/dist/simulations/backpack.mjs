@@ -82,6 +82,7 @@ export const CHARMS = [
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
  {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
  {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster'},
+ {id: 'moon-buggy', name: 'Moon buggy', icon: '🚙', quest: 'Roll the Moon Buggy through the carwash and get soaked'},
  // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
  {id: 'moon-cheese', name: 'Moon cheese', icon: '🧀', quest: 'Mine three moon cheeses at the Moon kiosk', repeat: true, hang: 2}
 ];
@@ -441,6 +442,12 @@ function charmMesh(id, m) {
   for (const z of [-1, 1]) add(new T.BoxGeometry(.036, .016, .002), glass, 'car window', -.006, .019, z * .0205);
   for (const x of [-.03, .03]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.013, .013, .01, 10), tyre, 'car wheel', x, -.02, z * .024).rotation.x = Math.PI / 2;
   for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .006, .008), gold, 'car headlight', .046, -.002, z * .013);
+ } else if (id === 'moon-buggy') { // a little Moon Buggy: big lugged tyres, a split nose, tall bars
+  const body = M('enamel buggy slate', '#4a6a8a', {roughness: .3}), tyre = M('rubber tyre', '#1d1b20', {roughness: .7}), lamp = M('enamel buggy lamp', '#e8f6ff', {roughness: .2, emissive: '#bfeaff', emissiveIntensity: .6});
+  add(new T.BoxGeometry(.07, .02, .04), body, 'buggy frame', 0, -.004, 0); add(new T.BoxGeometry(.03, .024, .036), body, 'buggy nose', .026, .008, 0); add(new T.BoxGeometry(.028, .01, .03), M('enamel buggy seat', '#1e2128', {roughness: .8}), 'buggy seat', -.012, .012, 0);
+  for (const x of [-.026, .026]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.014, .014, .012, 10), tyre, 'buggy wheel', x, -.016, z * .026).rotation.x = Math.PI / 2;
+  for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .005, .006), lamp, 'buggy headlight', .044, .006, z * .01);
+  add(new T.CylinderGeometry(.002, .002, .03, 5), M('buggy bar', '#9fb3c8'), 'buggy bars', .016, .02, 0).rotation.z = .3;
  } else if (id === 'rocket') { // the red rocket with a porthole
   const red = M('enamel rocket red', '#d9393a', {roughness: .25}), cream = M('enamel rocket cream', '#f4ece0', {roughness: .3});
   add(new T.CylinderGeometry(.024, .026, .07, 8), cream, 'rocket body');
