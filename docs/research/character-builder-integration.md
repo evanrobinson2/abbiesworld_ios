@@ -118,7 +118,7 @@ M2 shows that the current heroes' weights are the real problem, or if D1 chooses
 | D2 | Add a child build to the canon (`human-canon.json` v1.2)? | Yes / No | Yes, it blocks Abbie and Ani |
 | D3 | Add an optional hand/face bone layer beyond the 20-bone core? | None / hands only / hands + face | Hands + face only after M7 passes; keep 20-bone core unchanged |
 | D4 | Blender version for the pipeline | 4.2 / 5.2 LTS | 5.2 LTS (supported to July 2028) |
-| D5 | Is any AI model (Hunyuan3D, UniRig) allowed in a shipped asset? | No / concept and props only / yes after licence review | Concept art and props only until a licence is read and logged |
+| D5 | Which AI generators may make a shipped asset, and how? | Concept and props only / two-stage (a generator makes the low-poly mesh, then an upgrade pass) / yes after licence review | Two-stage, per Evan's 2026-10-24 01:15Z conclusion that ChatGPT is the better modeler and the two-stage process is best. The generator's output is the low-poly stage; the upgrade pass (cleanup, weights, validator) is ours. Log the tool and licence in `provenance.json` for each asset. Open: whether this also covers the main cast (D1) |
 | D6 | Which topology reference do we cite and train against? | Polycount / Blender Studio / our own sheet | Make our own one-page edge-flow sheet from the first base mesh, cite both |
 | D7 | Budget numbers | Keep 10k / lower after M1 | Decide after M1 measures it |
 
