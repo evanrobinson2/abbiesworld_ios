@@ -5,15 +5,21 @@
    "task_id": "01a16b54-2a2d-73a8-8253-5b93b0bdd534",
    "credits": 3,
    "files": [
-    "0_animation_glb.glb"
-   ]
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle.glb"
+   ],
+   "name": "Idle",
+   "category": "DailyActions",
+   "sub_category": "Idle"
   },
   "1": {
    "task_id": "01a16b54-2a25-70b5-b398-e48098ed960e",
    "credits": 3,
    "files": [
-    "1_animation_glb.glb"
-   ]
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walking_woman.glb"
+   ],
+   "name": "Walking Woman",
+   "category": "WalkAndRun",
+   "sub_category": "Walking"
   }
  }
 }
