@@ -70,11 +70,16 @@ export function createBallTray({onThrow, parent = document.body, endless = false
 // A release at screen (x, y) px with velocity (vx, vy) px/s becomes a ground launch: where the finger is on the ground
 // plane at the camera target's height, and the flick mapped onto the ground by the camera's right and forward.
 // Units follow the scene (the caller's world units per second). Returns null when the finger is above the horizon.
-export function groundThrow(T, camera, canvas, target, x, y, vx, vy) {
+// With heightAt (the world's ground height at x, z, NaN off the board) the release point is where the finger's ray meets the real
+// ground, not the flat plane at the camera target's height: on a tilted camera that plane misses the ground you see by
+// (height difference / tan of the view angle), which was the half-hex jump on release (#548).
+export function groundThrow(T, camera, canvas, target, x, y, vx, vy, heightAt) {
  const r = canvas.getBoundingClientRect(), ray = new T.Raycaster();
  ray.setFromCamera(new T.Vector2((x - r.left) / r.width * 2 - 1, -((y - r.top) / r.height * 2 - 1)), camera);
  const t = (target.y - ray.ray.origin.y) / ray.ray.direction.y; if (!(t > 0)) return null;
- const P = ray.ray.at(t, new T.Vector3()), f = new T.Vector3(); camera.getWorldDirection(f); f.y = 0; f.normalize();
+ const P = ray.ray.at(t, new T.Vector3());
+ if (heightAt) for (let i = 0; i < 8; i++) { const h = heightAt(P.x, P.z); if (!Number.isFinite(h)) break; const u = (h - ray.ray.origin.y) / ray.ray.direction.y; if (!(u > 0)) break; const Q = ray.ray.at(u, new T.Vector3()); const moved = Math.hypot(Q.x - P.x, Q.z - P.z); P.copy(Q); if (moved < 1e-4) break; }
+ const f = new T.Vector3(); camera.getWorldDirection(f); f.y = 0; f.normalize();
  const rt = new T.Vector3().crossVectors(f, new T.Vector3(0, 1, 0)).normalize();
  const k = 2 * camera.position.distanceTo(target) * Math.tan(camera.fov * Math.PI / 360) / r.height * .5;
  return {x: P.x, z: P.z, vx: (rt.x * vx - f.x * vy) * k, vz: (rt.z * vx - f.z * vy) * k};
