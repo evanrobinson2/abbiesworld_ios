@@ -86,3 +86,9 @@ the chest and the beam goes dark. Open question: replaying a mission after its c
 place keeps a dim, beamless charm ghost to replay). Bub, coffee cup and brass key have no beam: they are found, not played.
 Spec for the floating pickup: spin about a vertical axis every 2.4 s, bob 6 px every 2.2 s, soft gold glow, breathing ground
 shadow; beam in the game's colour (floppy blue, rocket amber, star pink, toy car green, cheese grey-blue).
+
+## Proposal: a charm for the carwash (2026-10-24, Evan's call)
+The carwash had no backpack charm, so under "missions start at their charm" it had no start point. Proposal: **Sponge**, id
+`carwash`, chunky faceted yellow sponge with pale-blue soap bubbles and a gold jump ring (look: `studies/charms/img/sponge-proposal.svg`;
+hero art still to be made in the charm sheet style). Quest: "Finish the carwash". Beam colour aqua `#6fe3ff`. It floats at the carwash
+and starts the carwash game; winning puts it in the chest. Adding it makes the chest twelve. Not added to `CHARMS` or the study page yet.
