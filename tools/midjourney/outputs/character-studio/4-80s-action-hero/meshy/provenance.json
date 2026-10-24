@@ -1,0 +1,36 @@
+{
+ "job": "cs-4-80s-action-hero",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/multi-image-to-3d",
+   "task_id": "01a16a9c-1ba2-7689-b164-97a6d6fc3e97",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 30000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "view0.jpg",
+    "view1.jpg",
+    "view2.jpg",
+    "view3.jpg"
+   ]
+  },
+  {
+   "stage": "rig",
+   "task_id": "01a16a9d-de81-7778-b81c-d1e1ba82e0f2",
+   "credits": 5,
+   "params": {
+    "input_task_id": "01a16a9c-1ba2-7689-b164-97a6d6fc3e97",
+    "height_meters": 1.7
+   }
+  }
+ ],
+ "credits": 35
+}

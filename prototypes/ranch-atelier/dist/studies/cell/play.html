@@ -45,6 +45,8 @@ html,body{margin:0;height:100%;background:#0b2a24;overflow:hidden;touch-action:n
 #win .slide i{position:absolute;left:30%;top:-6px;width:28%;height:12px;border-radius:50%;background:#9cf06a;opacity:.8}
 #win .bear{position:absolute;left:50%;bottom:calc(34% - 4px);width:min(30vw,170px);animation:walk 2.4s ease-out forwards}
 #win .bear svg{width:100%;height:auto;display:block}
+#win .bear svg.pk{position:absolute;width:48%;left:4%;top:-14%;overflow:visible}
+#win .bear .swing{animation:jingle 1.1s ease-in-out infinite;transform-origin:76px 54px}@keyframes jingle{50%{transform:rotate(16deg)}}
 @keyframes walk{from{transform:translate(-20%,0)}to{transform:translate(60%,30px)}}
 .phud .bead{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.25);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7);position:relative;overflow:hidden}
 #huds .bead.done{background:radial-gradient(circle at 35% 30%,#fff,#ff8fd0 45%,#c93c95)}
@@ -219,48 +221,31 @@ const angDiff = (a, b) => { let d = (b - a) % TAU; if (d > Math.PI) d -= TAU; if
 let W = innerWidth, H = innerHeight;
 addEventListener('resize', () => { W = innerWidth; H = innerHeight; pond.resize(); });
 
-// ---- sound: all synthesised, on the same 2x2 as the picture -------------------------------------------------------
-// diegetic: plops, crunches, pops and the pond's hum. meta: Abbie's heartbeat when she's hurt. The music follows
-// the same mood signal as the light.
+// ---- sound: from the sound catalogue (INVARIANTS.md), on the same 2x2 as the picture ------------------------------------
+// diegetic: plops, crunches, pops and the pond's hum. meta: Abbie's heartbeat when she's hurt. The music is the produced
+// Abbie's World track, which follows the same mood signal as the light.
+import {sfx as catalogSfx, sfxContext, preload} from '/simulations/catalog-sfx.mjs';
 const sound = (() => {
- let ac = null, master, hum, humF, nextBeat = 0, step = 0;
+ let started = false, hum = null, theme = null, beatAt = 0;
+ const P = (id, gain = .5, rate = 1, delay = 0) => { if (!S.muted) catalogSfx(id, {gain, rate, delay}); };
  const S = {
+  muted: false,
   unlock() {
-   if (ac) { ac.resume?.(); return; }
-   try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { return; }
-   master = ac.createGain(); master.gain.value = S.muted ? 0 : .5; master.connect(ac.destination);
-   const len = ac.sampleRate * 2, buf = ac.createBuffer(1, len, ac.sampleRate), d = buf.getChannelData(0); let last = 0;
-   for (let i = 0; i < len; i++) { last = (last + .02 * (Math.random() * 2 - 1)) / 1.02; d[i] = last * 3.5; }
-   hum = ac.createBufferSource(); hum.buffer = buf; hum.loop = true; humF = ac.createBiquadFilter(); humF.type = 'lowpass'; humF.frequency.value = 380;
-   const hg = ac.createGain(); hg.gain.value = .35; hum.connect(humF).connect(hg).connect(master); hum.start();
+   if (started) { sfxContext(); return; } if (!sfxContext()) return; started = true;
+   preload(['splash-small-1', 'crunch-1', 'pop-1', 'bonk', 'heartbeat', 'coin-1', 'success-1']);
+   hum = catalogSfx('underwater', {gain: S.muted ? 0 : .35, loop: true}); theme = catalogSfx('abbies-world-reimagined', {gain: 0, loop: true});
   },
-  tone(f, dur = .15, {type = 'sine', vol = .2, to = null, at = 0} = {}) {
-   if (!ac) return; const t = ac.currentTime + at, o = ac.createOscillator(), g = ac.createGain();
-   o.type = type; o.frequency.setValueAtTime(f, t); if (to) o.frequency.exponentialRampToValueAtTime(to, t + dur);
-   g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(vol, t + .01); g.gain.exponentialRampToValueAtTime(.001, t + dur);
-   o.connect(g).connect(master); o.start(t); o.stop(t + dur + .02);
-  },
-  noise(dur = .12, {vol = .25, f = 1200} = {}) {
-   if (!ac) return; const t = ac.currentTime, b = ac.createBuffer(1, ac.sampleRate * dur, ac.sampleRate), d = b.getChannelData(0);
-   for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length);
-   const s = ac.createBufferSource(), fl = ac.createBiquadFilter(), g = ac.createGain(); s.buffer = b; fl.type = 'bandpass'; fl.frequency.value = f; g.gain.value = vol;
-   s.connect(fl).connect(g).connect(master); s.start(t);
-  },
-  plop() { S.tone(rnd(520, 700), .14, {to: 180, vol: .22}); },
-  crunch() { S.noise(.1, {vol: .3, f: 1800}); S.tone(160, .08, {type: 'square', vol: .05}); },
-  pop() { S.tone(900, .1, {to: 1500, vol: .15}); S.noise(.15, {vol: .2, f: 3000}); },
-  hurt() { S.tone(140, .2, {type: 'triangle', to: 70, vol: .3}); },
-  grow() { [523, 659, 784, 1046].forEach((f, i) => S.tone(f, .35, {type: 'triangle', vol: .16, at: i * .09})); },
-  mute(m) { S.muted = m; if (master) master.gain.value = m ? 0 : .5; },
-  coin() { [988, 1319, 1976].forEach((f, i) => S.tone(f, .18, {type: 'square', vol: .07, at: i * .08})); },
-  // the music: soft pentatonic plinks; danger speeds them up, drops them low and minor
+  plop() { P('splash-small-1', .5, .9 + Math.random() * .3); },
+  crunch() { P('crunch-1', .6); },
+  pop() { P('pop-1', .5); },
+  hurt() { P('bonk', .5, .8); },
+  grow() { P('success-1', .5); },
+  mute(m) { S.muted = m; hum?.set(m ? 0 : .35); if (m) theme?.set(0); },
+  coin() { P('coin-1', .5); },
+  // the music: the theme under the pond; danger lifts it, and Abbie's heartbeat (meta) comes in when she's hurt
   music(mood, hp) {
-   if (!ac) return; const t = ac.currentTime; humF.frequency.value = 380 - 180 * mood;
-   if (t < nextBeat) return; const bpm = 76 + 50 * mood; nextBeat = t + 60 / bpm / 2; step++;
-   const calm = [0, 2, 4, 7, 9, 12, 14], tense = [0, 3, 5, 7, 10, 12, 15], sc = mood > .45 ? tense : calm;
-   if (Math.random() < .55 + .3 * mood) S.tone(330 * 2 ** ((sc[Math.floor(Math.random() * sc.length)] - (mood > .45 ? 12 : 0)) / 12), .5, {type: 'sine', vol: .06});
-   if (step % 4 === 0) S.tone(mood > .45 ? 98 : 131, .5, {type: 'triangle', vol: .07});
-   if (hp < .35 && step % 2 === 0) { S.tone(60, .12, {vol: .35}); S.tone(55, .12, {vol: .25, at: .14}); } // heartbeat (meta)
+   if (!started) return; const t = performance.now() / 1000; theme?.set(S.muted ? 0 : .12 + .12 * mood);
+   if (hp < .35 && t > beatAt) { beatAt = t + .9; P('heartbeat', .5); }
   },
  };
  return S;
@@ -704,12 +689,14 @@ function win(P) {
 function winScene(P) {
  // the lens closes back down to the bench, and the little water bear is out on the lab table
  const W2 = $('#win'); W2.querySelector('.bear').innerHTML = TARDIGRADE_ICON.replace(/#ff8fd0/g, LOOKS[P.look].body);
+ // the water bear walks off wearing Abbie's little backpack, the new charm jingling from its zip (the figure's own pack, backpack-wear.mjs, is for 3D characters)
+ W2.querySelector('.bear').insertAdjacentHTML('beforeend', `<svg class="pk" viewBox="0 0 100 100" aria-hidden="true"><path d="M30 10a14 14 0 0 1 28 0" fill="none" stroke="#6b3a1f" stroke-width="4" stroke-linecap="round"/><rect x="18" y="14" width="52" height="56" rx="18" fill="${LOOKS[P.look].deep}" stroke="#2b1d0e" stroke-opacity=".6" stroke-width="2.5"/><rect x="28" y="44" width="32" height="18" rx="7" fill="${LOOKS[P.look].body}" stroke="#2b1d0e" stroke-opacity=".5" stroke-width="2"/><path d="M62 30q16 6 14 26" fill="none" stroke="#fff" stroke-width="2" stroke-dasharray="3 3"/><g class="swing"><circle cx="76" cy="66" r="9" fill="#cdb6ff" stroke="#fff" stroke-width="2.5"/><ellipse cx="76" cy="66" rx="5" ry="3" fill="#7a5ad6"/></g></svg>`);
  W2.querySelector('.charm').innerHTML = TARDIGRADE_ICON.replace(/#ff8fd0/g, LOOKS[P.look].body);
  const secs = time - runStart, rec = saveClear(level5, secs);
  W2.querySelector('.stats').innerHTML = `<b>${mmss(secs)}</b><b>★ ${level5}</b>` + (rec.wins > 1 ? `<b>♛ ${mmss(rec.best)}</b>` : '');
  W2.classList.add('on');
  for (let k = 0; k < 14; k++) setTimeout(() => sparks(0, 0, 200, ['#ffd84a', '#fff', LOOKS[P.look].body][k % 3], 14, 1.2), 900 + k * 220);
- import('/simulations/backpack.mjs?v=5').then(m => m.earnCharm?.('tardigrade')).catch(() => {});
+ import('/simulations/backpack.mjs?v=7').then(m => m.earnCharm?.('tardigrade')).catch(() => {});
  let first = false; try { first = giveMemoryCoin('science-lab:off-the-slide', 'The science lab'); } catch {}
  setTimeout(() => voice.say((first ? "A gold coin too, one of Daddy's core memories! He showed me pond water under a microscope once. " : '') + 'And a tardigrade charm for my backpack!',
   {choices: [{label: 'Again', go: () => { location.search = `?level=${level5}&again=1${again()}`; }}, ...(level5 < 5 ? [{label: 'Harder goo', go: () => { location.search = `?level=${level5 + 1}&again=1${again()}`; }}] : []), {label: 'Back to town', go: () => leave()}]}), 900);

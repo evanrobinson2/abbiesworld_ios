@@ -50,6 +50,22 @@ matters): the pull took 24 s to lift and the landing 185 s to settle, and the ti
 - "first one should not be selected by default": no card looks picked. "this shouldn't happen": the frame round the Ranch
   card was its focus ring doubled by the selected glow; a card in the hand shows focus by lifting.
 
+## Round 3 (Evan, 12:47Z to 21:35Z): the reveals in the game
+
+- Picks: brick drop (E) and laser print (B); tape burst (A) was studied but is not in the game. "all of these should take
+  1.5 seconds tops", "maybe it's only 2 phases for each".
+- **Landing** (`simulations/tile-reveal.mjs`, `landTile`): the bare slab rolls in (`rollTile`), then every standing piece
+  (asset groups, tree crowns, trunks, props; read from the drawn tile, at most 150) drops from the air with plain
+  gravity, bounces, tumbles and settles inside the hex (phase 1, at most 0.62 s of settling). Then each piece in a
+  shuffled rapid order hovers, wobbles upright and shoots home with a click (phase 2). Ground cover grows in under it.
+  Every node is put back on its exact stored transform at the end (checked: hash of all transforms equal, done at or
+  before 1.5 s at 60 fps). A tile with fewer than three loose pieces (city, moon) just grows in. Reduced motion skips it.
+- **Print** (`tile-pull.mjs`, `openPrintWindow`): no arm and no carriage. A beam from above traces the cut line, the
+  layers just made glow hot, sparks at the spot; the reveal itself is 0.9 s, then the laser draws the ring and tick and
+  it cools to ink. The old tile still loops under the beam while the new one is really made.
+- Not built: the powder blow-off of the laser study (the card shows the live tile, which the powder would hide), and the tape burst.
+- Shader precompile and the DOS-computer intro belong to the performance thread.
+
 ## Design card
 
 - What the player feels: "the tile is right there on the card; I can grab it and drop it." And "if I put it back, I
@@ -60,7 +76,7 @@ matters): the pull took 24 s to lift and the landing 185 s to settle, and the ti
   new tile in it). The print stamp is meta (felt: the thump).
 - Who it's for: player.
 - Presentation layer: everything in `tile-pull.mjs`. World layer: only the committed tile.
-- Tour: yes. A stop "Pull it off the card." in `welcome/tour-stops.mjs`.
+- Tour: yes. A stop "Pull it off the card." in `welcome/tour-stops.mjs`. The reveals are part of that stop's feature: no new stop (whats-new `tour: false`).
 
 ## Next
 

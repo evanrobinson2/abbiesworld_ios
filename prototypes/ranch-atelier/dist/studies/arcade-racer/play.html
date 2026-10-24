@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Skate-Park Rail Racer (Stage 1)</title>
+<style>
+/* AW-STUDY-0066, Stage 1 (low fidelity): the whole arcade loop in one page. enter -> invitation -> choose -> learn/countdown ->
+   race -> results -> prize -> collection -> replay/return. Screens are layers over one 3D canvas; body[data-screen] picks one.
+   The race HUD is numerals and icons only (a precise overlay); words live on the screens between races. */
+:root{--ink:#16233a;--glass:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.16));--hot:#ff7a14;--teal:#1fb6c9;--gold:#ffcf3a;--font:ui-rounded,"SF Pro Rounded",system-ui,sans-serif}
+html,body{margin:0;height:100%;background:#8fd0ee;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;font-family:var(--font);color:#fff}
+canvas{position:fixed;inset:0;width:100vw;height:100dvh;display:block}
+.scr{position:fixed;inset:0;display:none;flex-direction:column;justify-content:flex-end;align-items:center;gap:12px;padding:max(14px,env(safe-area-inset-top)) 16px max(18px,env(safe-area-inset-bottom));box-sizing:border-box;pointer-events:none}
+.scr>*{pointer-events:auto}
+body[data-screen=attract] #attract,body[data-screen=ask] #ask,body[data-screen=garage] #garage,body[data-screen=race] #race,body[data-screen=results] #results,body[data-screen=prize] #prize{display:flex}
+h1,h2,p{margin:0;text-shadow:0 2px 6px rgba(10,30,60,.55)}
+.sign{font:900 clamp(34px,10vw,64px)/.95 var(--font);text-align:center;letter-spacing:.02em;color:#fff;text-shadow:0 0 18px #ff7a14,0 3px 0 #e85d04,0 6px 14px rgba(0,0,0,.5)}
+.sign small{display:block;font:800 14px/1.4 var(--font);letter-spacing:.3em;color:#ffe08a;text-shadow:0 2px 6px rgba(0,0,0,.6)}
+.btn{min-height:56px;min-width:56px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.7);background:var(--glass);color:#fff;font:800 19px/1 var(--font);display:inline-flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;
+ box-shadow:0 10px 26px rgba(20,60,90,.35),inset 0 1px 0 rgba(255,255,255,.75),inset 0 -8px 16px rgba(30,110,160,.25);text-shadow:0 1px 3px rgba(10,30,60,.6)}
+.btn.hot{background:linear-gradient(180deg,#ffb24a,#ff7a14);box-shadow:0 10px 30px rgba(255,122,20,.55),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -8px 16px rgba(180,60,0,.35)}
+.btn.small{min-height:48px;padding:0 16px;font-size:16px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:100%;max-width:560px}
+.card{width:100%;max-width:560px;box-sizing:border-box;border-radius:22px;padding:14px 16px;background:linear-gradient(180deg,rgba(18,40,72,.62),rgba(18,40,72,.42));border:1px solid rgba(255,255,255,.35);box-shadow:0 12px 34px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.35)}
+.card h2{font:900 24px/1.1 var(--font)} .card p{font:600 16px/1.4 var(--font);color:#e8f2ff}
+.mock{display:inline-block;font:800 11px/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;padding:4px 7px;border-radius:6px;background:#ffcf3a;color:#3a2a00;text-shadow:none}
+#back{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));z-index:5;width:48px;min-height:48px;padding:0;text-decoration:none}
+#tools{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));z-index:5;display:flex;gap:8px}
+#tools .btn{min-width:48px;min-height:48px;padding:0 12px;font-size:14px}
+/* ask */
+.ask q{display:block}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.45);font:800 14px/1 var(--font)}
+.read{font:inherit;cursor:pointer} .read.on{background:#ffe08a;color:#3a2a00;border-radius:6px;padding:0 4px;text-shadow:none}
+/* garage */
+#cars{display:flex;gap:8px;overflow-x:auto;width:100%;max-width:560px;padding:4px 2px;scrollbar-width:none;touch-action:pan-x}
+#cars::-webkit-scrollbar{display:none}
+.car{flex:0 0 auto;min-width:92px;min-height:64px;border-radius:16px;padding:8px 10px;box-sizing:border-box;background:rgba(18,40,72,.55);border:2px solid rgba(255,255,255,.3);color:#fff;font:800 14px/1.2 var(--font);text-align:left;cursor:pointer}
+.car.sel{border-color:#ffcf3a;box-shadow:0 0 0 3px rgba(255,207,58,.35)} .car.locked{opacity:.7;border-style:dashed}
+.car small{display:block;font:600 11px/1.3 var(--font);color:#bcd}
+.sw{display:flex;gap:8px;justify-content:center}
+.sw i{width:36px;height:36px;border-radius:50%;border:3px solid #fff8;cursor:pointer;box-sizing:border-box} .sw i.sel{border-color:#fff;box-shadow:0 0 0 3px #ffcf3a}
+.bar{height:10px;border-radius:99px;background:rgba(255,255,255,.22);overflow:hidden;margin-top:8px} .bar b{display:block;height:100%;background:linear-gradient(90deg,#ffcf3a,#ff7a14);width:0;transition:width .5s}
+/* race */
+#timer{position:fixed;left:50%;top:max(12px,env(safe-area-inset-top));translate:-50% 0;min-width:130px;height:46px;padding:0 18px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,.6);font:900 28px/1 var(--font);font-variant-numeric:tabular-nums;z-index:4;text-shadow:0 2px 4px rgba(10,30,60,.7)}
+#prog{position:fixed;left:50%;top:calc(max(12px,env(safe-area-inset-top)) + 54px);translate:-50% 0;width:min(60vw,320px);height:8px;border-radius:99px;background:rgba(255,255,255,.35);overflow:hidden;z-index:4}
+#prog b{display:block;height:100%;width:0;background:#ffcf3a}
+#lamps{position:fixed;left:50%;top:34%;translate:-50% -50%;font:900 min(34vw,190px)/1 var(--font);color:#fff;text-shadow:0 0 30px #ff7a14,0 8px 0 #e85d04,0 12px 24px rgba(0,0,0,.45);z-index:4;pointer-events:none;transition:transform .2s}
+#lamps.pop{animation:pop .5s ease-out}
+@keyframes pop{0%{transform:scale(1.5);opacity:0}100%{transform:scale(1);opacity:1}}
+#nitro{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));translate:-50% 0;width:104px;height:104px;border-radius:50%;z-index:4;display:none;align-items:center;justify-content:center;pointer-events:auto}
+#nitro.show{display:flex;animation:breathe 1.2s ease-in-out infinite}
+@keyframes breathe{50%{transform:scale(1.08)}}
+#zoneL,#zoneR{position:fixed;top:0;bottom:0;width:50%;z-index:2}#zoneL{left:0}#zoneR{right:0}
+.hint{position:fixed;bottom:max(140px,calc(env(safe-area-inset-bottom) + 130px));left:50%;translate:-50% 0;z-index:4;text-align:center;pointer-events:none;font:800 18px/1.3 var(--font);text-shadow:0 2px 6px rgba(0,0,0,.7)}
+#tags{position:fixed;inset:0;pointer-events:none;z-index:3}
+.tag{position:absolute;translate:-50% -50%;font:900 30px/1 var(--font);text-shadow:0 0 12px #000a;animation:rise .9s ease-out forwards}
+@keyframes rise{to{transform:translateY(-70px);opacity:0}}
+/* results */
+.big{font:900 clamp(54px,16vw,88px)/1 var(--font);font-variant-numeric:tabular-nums;text-align:center}
+table{border-collapse:collapse;width:100%;font:700 15px var(--font);font-variant-numeric:tabular-nums} td{padding:4px 6px;border-bottom:1px solid rgba(255,255,255,.18)} tr.me td{color:#ffe08a}
+.ach{display:flex;gap:12px;align-items:center}.ach .ic{font-size:34px}
+/* prize */
+#pcap{text-align:center;max-width:520px}
+#pcap h2{font:900 28px/1.1 var(--font)} #pcap p{font:700 17px/1.4 var(--font);margin-top:4px}
+#flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:6}
+</style>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+</head>
+<body data-screen="attract">
+<canvas id="gl"></canvas>
+<a id="back" class="btn" href="/studies/abbietown/?at=town:skate-park" aria-label="Back to the skate park"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
+<div id="tools"><button class="btn" id="mute" aria-label="Sound on or off" aria-pressed="true">🔊</button><button class="btn" id="calm" aria-label="Reduced motion" aria-pressed="false">🐢</button></div>
+
+<section class="scr" id="attract">
+ <div class="sign"><small>SKATE PARK ARCADE</small>RAIL<br>RACER</div>
+ <p class="chip">Stage 1 study · low fidelity</p>
+ <button class="btn hot" id="play" style="min-width:220px;min-height:72px;font-size:26px">▶ PLAY</button>
+</section>
+
+<section class="scr ask" id="ask">
+ <div class="card"><h2 id="askq">Ready to beat your best?</h2>
+  <p id="asks"><span class="chip" id="bestchip">No best yet · set one!</span></p>
+  <p style="margin-top:10px"><span class="read" id="rd">Grab the glowing orbs. Dodge the cones. Tap the rocket the moment the light goes green.</span> <button class="btn small" id="speak" aria-label="Read it to me" style="min-height:44px;padding:0 12px">🔈</button></p>
+  <p style="margin-top:8px"><span class="mock">MOCK</span> <span style="font-size:13px">Read-aloud lights up the words only; the spoken voice is a Stage 2 ElevenLabs line.</span></p></div>
+ <div class="row"><button class="btn hot" id="race" style="flex:1 1 220px;min-height:68px;font-size:23px">⏱ Race the clock</button>
+  <button class="btn" id="practice" style="flex:1 1 150px">Practice</button><button class="btn" id="togarage" style="flex:1 1 150px">Garage</button></div>
+</section>
+
+<section class="scr" id="garage">
+ <div class="card" id="gprize" hidden></div>
+ <div class="card"><h2 id="gname">Sunny Buggy</h2><p id="gsub"></p><div class="sw" id="sw" style="margin-top:10px"></div></div>
+ <div id="cars"></div>
+ <div class="card" id="gnext"></div>
+ <div class="row"><button class="btn" id="honk" aria-label="Honk">📯</button><button class="btn hot" id="gorace" style="flex:1 1 200px;min-height:64px;font-size:22px">Race this car</button><button class="btn" id="gback">Back</button></div>
+</section>
+
+<section class="scr" id="race">
+ <div id="zoneL"></div><div id="zoneR"></div>
+ <div id="timer">0.00</div><div id="prog"><b></b></div>
+ <div id="lamps"></div><div class="hint" id="hint"></div><div id="tags"></div>
+ <button class="btn hot" id="nitro" aria-label="Launch boost">🚀</button>
+</section>
+
+<section class="scr" id="results">
+ <div class="sign" id="rtitle" style="font-size:clamp(28px,8vw,44px)">FINISH!</div>
+ <div class="big" id="rtime">0.00</div>
+ <div class="card"><p id="rline"></p>
+  <div class="ach" id="rach" hidden><span class="ic">🏆</span><div><h2 id="rachn"></h2><p id="rachs"></p></div></div>
+  <p id="rnext" style="margin-top:8px"></p></div>
+ <div class="card"><h2 style="font-size:17px">This device <span class="mock">MOCK STORAGE</span></h2><table id="rboard"></table>
+  <p style="font-size:12px;margin-top:6px;color:#bcd">Compared only with runs on <b id="rkey"></b>. A new track version starts a new board.</p></div>
+ <div class="card" style="padding:10px 16px"><h2 style="font-size:15px">Town board <span class="mock">MOCK · NOT REAL PLAYERS</span></h2><table id="rtown"></table></div>
+ <div class="row"><button class="btn hot" id="rprize" hidden style="flex:1 1 100%;min-height:64px;font-size:22px">🎁 Open your prize</button>
+  <button class="btn hot" id="again" style="flex:1 1 150px">Race again</button><button class="btn" id="rchange" style="flex:1 1 150px">Change car</button><a class="btn" id="rtown2" href="/studies/abbietown/?at=town:skate-park" style="flex:1 1 150px;text-decoration:none">Back to town</a></div>
+</section>
+
+<section class="scr" id="prize">
+ <div id="pcap"><h2 id="ph"></h2><p id="pp"></p></div>
+ <div class="row"><button class="btn small" id="pskip">Skip ⏭</button><button class="btn hot" id="pnext" style="flex:1 1 200px;min-height:60px">Tap to unwrap</button></div>
+</section>
+<div id="flash"></div>
+
+<script type="module">
+import * as T from 'three';
+import {buildTrack, trackMeshes} from '/simulations/coaster-kit.mjs';
+import {CARS, buildCar} from '/simulations/coaster-cars.mjs';
+import {sfx, preload} from '/simulations/catalog-sfx.mjs';
+import {SPRINT, PADS, TRACK_ID, BOARD_KEY, LANE_X, STEP, makeModel, simulate} from './race-model.mjs';
+import {earnedCharms} from '/simulations/backpack.mjs';
+
+const TEST = /[?&]test/.test(location.search), $ = id => document.getElementById(id);
+const q = new URLSearchParams(location.search);
+const MOCK_KEY = 'aw-arcade-racer-mock-v1';   // MOCK storage: this device only. Production: ownership on the account (Postgres), see the study doc.
+
+// ---------- what you can earn ----------
+const START_CAR = 'buggy';
+const ACH = [
+  {id: 'first-flag', car: 'comet', icon: '🏁', name: 'First chequered flag', goal: 'Finish a timed race', test: r => true, prog: st => [Math.min(1, st.runs), 1]},
+  {id: 'orb-grabber', car: 'rocket', icon: '🔮', name: 'Orb grabber', goal: 'Grab 6 orbs in one race', test: r => r.orbs >= 6, prog: st => [st.bestOrbs, 6]},
+  {id: 'quick-lap', car: 'shark', icon: '⏱', name: 'Under 10.5 seconds', goal: 'Finish in under 10.5 s', test: r => r.time < 10.5, prog: st => [st.best ? Math.max(0, Math.min(1, (12.5 - st.best) / 2)) * 2 : 0, 2]},
+  {id: 'clean-start', car: 'monster', icon: '🧼', name: 'Clean and quick', goal: 'A perfect launch and no cones', test: r => r.launch === 'perfect' && r.cones === 0, prog: st => [st.bestClean ? 1 : 0, 1]},
+  {id: 'own-record', car: 'cart', icon: '📈', name: 'Beat your own best, 3 times', goal: 'Beat your personal best 3 times', test: (r, st) => st.improved >= 3, prog: st => [Math.min(3, st.improved), 3]},
+];
+const CAR = Object.fromEntries(CARS.map(c => [c.id, c]));
+const PAINTS = ['#ffcf3a', '#ff4f6d', '#2bbfd0', '#8be04a', '#9b6bff', '#ff8a2a'];
+
+// ---------- the mock save ----------
+const blank = () => ({v: 1, owned: [START_CAR], pick: START_CAR, paint: {}, boards: {}, ach: {}, prizes: [], stats: {runs: 0, bestOrbs: 0, bestClean: false, improved: 0}});
+let SAVE; try { SAVE = JSON.parse(localStorage.getItem(MOCK_KEY)) || blank(); } catch { SAVE = blank(); }
+if (q.has('fresh')) SAVE = blank();
+const save = () => { try { localStorage.setItem(MOCK_KEY, JSON.stringify(SAVE)); } catch {} };
+const board = () => (SAVE.boards[BOARD_KEY] ||= {best: null, runs: []});
+const fmt = t => t == null ? '--' : t.toFixed(2);
+
+// ---------- 3D ----------
+const renderer = new T.WebGLRenderer({canvas: $('gl'), antialias: true}); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = false;
+renderer.toneMapping = T.ACESFilmicToneMapping; renderer.outputColorSpace = T.SRGBColorSpace;
+const scene = new T.Scene(), cam = new T.PerspectiveCamera(60, 1, .1, 600);
+scene.add(new T.HemisphereLight('#dff3ff', '#b9a37a', 1.1)); const sun = new T.DirectionalLight('#fff0d0', 2.2); sun.position.set(40, 80, 30); scene.add(sun);
+const trk = buildTrack(T, SPRINT);
+const world = new T.Group(); world.name = 'skate park (race world)'; scene.add(world);
+world.add(trackMeshes(T, trk));
+const ground = new T.Mesh(new T.PlaneGeometry(500, 500), new T.MeshStandardMaterial({color: '#cdbf9e', roughness: .95, flatShading: true})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.05; ground.name = 'skate park concrete'; world.add(ground);
+const poseAtS = (s, out = {}) => { const S = trk.S; let lo = 0, hi = S.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (S[m].s <= s) lo = m; else hi = m; } const f = Math.min(1, Math.max(0, (s - S[lo].s) / ((S[hi].s - S[lo].s) || 1)));
+  out.p ||= new T.Vector3(); out.q ||= new T.Quaternion(); out.p.lerpVectors(S[lo].p, S[hi].p, f); out.q.slerpQuaternions(S[lo].q, S[hi].q, f); return out; };
+const lanePoint = (s, laneX, up = 0, out = new T.Vector3()) => { const o = poseAtS(s, {}); return out.set(laneX, up, 0).applyQuaternion(o.q).add(o.p); };
+// finish arch + start gate (the world's own signage; the race line is the arch)
+{ const line = trk.marks.finish.s0 + 2; const o = poseAtS(line); const arch = new T.Group(); arch.name = 'finish arch'; arch.position.copy(o.p); arch.quaternion.copy(o.q);
+  const m1 = new T.MeshStandardMaterial({color: '#fff', roughness: .5, flatShading: true}), m2 = new T.MeshStandardMaterial({color: '#16233a', roughness: .5, flatShading: true});
+  for (const sx of [-1, 1]) { const p = new T.Mesh(new T.CylinderGeometry(.12, .12, 3.4, 8), m1); p.position.set(sx * 1.25, 1.7, 0); arch.add(p); }
+  for (let i = 0; i < 12; i++) { const b = new T.Mesh(new T.BoxGeometry(.21, .5, .18), i % 2 ? m1 : m2); b.position.set(-1.25 + 0.1 + i * .21, 3.3, 0); arch.add(b); }
+  world.add(arch);
+  const floor = new T.Mesh(new T.PlaneGeometry(1.7, .35), new T.MeshBasicMaterial({color: '#fff'})); floor.rotation.x = -Math.PI / 2; floor.position.set(0, .02, 0); arch.add(floor); }
+// pads
+const padMesh = [];
+{ const orbM = new T.MeshStandardMaterial({color: '#7df0ff', emissive: '#27c8ff', emissiveIntensity: 1.6, roughness: .2, flatShading: true}), ringM = new T.MeshBasicMaterial({color: '#fff', transparent: true, opacity: .6, side: T.DoubleSide});
+  const coneM = new T.MeshStandardMaterial({color: '#ff6a1a', roughness: .5, flatShading: true}), bandM = new T.MeshStandardMaterial({color: '#fff', roughness: .5, flatShading: true});
+  for (const [tag, off, lane, kind] of PADS) { const s = trk.marks[tag].s0 + off; const o = poseAtS(s); const g = new T.Group(); g.name = kind === 'orb' ? 'boost orb' : 'traffic cone';
+    g.position.copy(lanePoint(s, lane * LANE_X)); g.quaternion.copy(o.q);
+    if (kind === 'orb') { const b = new T.Mesh(new T.IcosahedronGeometry(.28, 1), orbM); b.position.y = .55; g.add(b); const r = new T.Mesh(new T.TorusGeometry(.42, .03, 6, 20), ringM); r.position.y = .55; r.rotation.x = Math.PI / 2; g.add(r); g.userData.bob = b; }
+    else { const c = new T.Mesh(new T.ConeGeometry(.28, .7, 10), coneM); c.position.y = .35; g.add(c); const b = new T.Mesh(new T.CylinderGeometry(.19, .23, .12, 10), bandM); b.position.y = .36; g.add(b); const base = new T.Mesh(new T.BoxGeometry(.6, .05, .6), coneM); base.position.y = .03; g.add(base); }
+    world.add(g); padMesh.push(g); } }
+// the garage / prize stage, far from the track
+const stage = new T.Group(); stage.name = 'showroom'; stage.position.set(300, 0, 0); scene.add(stage);
+const disc = new T.Mesh(new T.CylinderGeometry(2.6, 2.8, .25, 36), new T.MeshStandardMaterial({color: '#2b3a5c', roughness: .3, metalness: .4})); disc.position.y = -.13; stage.add(disc);
+const ring = new T.Mesh(new T.TorusGeometry(2.55, .06, 6, 48), new T.MeshBasicMaterial({color: '#ffcf3a'})); ring.rotation.x = Math.PI / 2; ring.position.y = .0; stage.add(ring);
+const spot = new T.SpotLight('#ffffff', 90, 30, .6, .5); spot.position.set(2, 9, 5); spot.target.position.set(0, 0, 0); stage.add(spot, spot.target);
+const turn = new T.Group(); stage.add(turn);
+const cars = {}; for (const d of CARS) { cars[d.id] = buildCar(T, d); }
+const paintOf = id => SAVE.paint[id] || CAR[id].body;
+for (const id in cars) cars[id].userData.paint(paintOf(id));
+const showCar = id => { turn.clear?.(); for (const c of Object.values(cars)) if (c.parent) c.parent.remove(c); const c = cars[id]; c.userData.inCar(false); c.position.set(0, 0, 0); c.rotation.set(0, 0, 0); c.scale.setScalar(1.35); turn.add(c); return c; };
+const driver = {car: null};
+
+// ---------- sound (catalogue only) ----------
+let muted = false; const snd = (id, o) => { if (!muted) try { return sfx(id, o); } catch {} };
+preload(['click-1', 'beep-1', 'beep-2', 'coin-1', 'pop-1', 'success-1', 'paper', 'magic-chime', 'sparkle-1', 'whoosh-2', 'car-start', 'car-horn', 'cheer', 'popup']).catch(() => {});
+$('mute').onclick = e => { muted = !muted; e.currentTarget.textContent = muted ? '🔇' : '🔊'; e.currentTarget.setAttribute('aria-pressed', String(!muted)); };
+let calm = matchMedia('(prefers-reduced-motion: reduce)').matches; const setCalm = v => { calm = v; $('calm').setAttribute('aria-pressed', String(calm)); $('calm').style.outline = calm ? '3px solid #ffcf3a' : ''; }; setCalm(calm);
+$('calm').onclick = () => setCalm(!calm);
+
+// ---------- screens ----------
+const S = {screen: 'attract', mode: 'timed', model: null, phase: 'idle', tick: 0, lane: 0, last: null, acc: 0, pres: 0, practice: false, orbit: 0, slowmo: 0};
+const bgSky = new T.Color('#8fd0ee'), bgShow = new T.Color('#15213d');
+function go(name) { S.screen = name; document.body.dataset.screen = name; scene.background = (name === 'garage' || name === 'prize') ? bgShow : bgSky; $('back').style.display = (name === 'race') ? 'none' : ''; $('tools').style.display = name === 'race' ? 'none' : 'flex'; if (name === 'garage') renderGarage(); if (name === 'ask') renderAsk(); }
+const nextAch = () => ACH.find(a => !SAVE.ach[a.id]);
+$('play').onclick = () => { snd('click-1'); go('ask'); };
+function renderAsk() {
+  const b = board().best; $('bestchip').textContent = b == null ? 'No best yet · set one!' : '🏆 Your best ' + fmt(b) + ' s';
+  $('askq').textContent = b == null ? 'Ready to set your first time?' : 'Ready to beat your best?';
+}
+$('speak').onclick = () => { snd('popup'); const r = $('rd'); r.classList.add('on'); setTimeout(() => r.classList.remove('on'), 4200); };
+$('togarage').onclick = () => { snd('click-1'); go('garage'); };
+$('gback').onclick = () => { snd('click-1'); go('ask'); };
+$('race').onclick = () => startRace(false);
+$('practice').onclick = () => startRace(true);
+$('gorace').onclick = () => startRace(false);
+$('again').onclick = () => startRace(false);
+$('rchange').onclick = () => go('garage');
+
+// ---------- garage ----------
+function renderGarage() {
+  const id = SAVE.pick, d = CAR[id]; driver.car = showCar(id); S.spin = 0;
+  $('gname').textContent = d.name;
+  const earnedBy = ACH.find(a => a.car === id);
+  $('gsub').textContent = SAVE.owned.includes(id) ? (id === START_CAR ? 'Your starter. Every car handles the same: cars are for show, records are for skill.' : 'Earned: ' + earnedBy.name + '. Same handling as every car.') : 'Locked. Earn it: ' + earnedBy.goal;
+  $('sw').innerHTML = PAINTS.map(c => `<i style="background:${c}" data-c="${c}" role="button" aria-label="Paint ${c}" class="${paintOf(id).toLowerCase() === c ? 'sel' : ''}"></i>`).join('');
+  $('sw').style.display = SAVE.owned.includes(id) ? 'flex' : 'none';
+  $('cars').innerHTML = CARS.map(c => { const own = SAVE.owned.includes(c.id), a = ACH.find(x => x.car === c.id); return `<button class="car ${c.id === id ? 'sel' : ''} ${own ? '' : 'locked'}" data-id="${c.id}">${own ? '' : '🔒 '}${c.name}<small>${own ? (c.id === START_CAR ? 'starter' : 'yours') : a.icon + ' ' + a.name}</small></button>`; }).join('');
+  const n = nextAch(); if (n) { const [a, b] = n.prog(SAVE.stats); $('gnext').innerHTML = `<h2 style="font-size:17px">Next: ${n.icon} ${n.name}</h2><p>${n.goal} → unlocks the ${CAR[n.car].name}</p><div class="bar"><b style="width:${Math.round(100 * Math.min(1, a / b))}%"></b></div>`; }
+  else $('gnext').innerHTML = '<h2 style="font-size:17px">All five cars are yours 🎉</h2><p>Chase a new best time. More achievements arrive in later stages.</p>';
+  const pend = SAVE.prizes[0]; $('gprize').hidden = !pend;
+  if (pend) { $('gprize').innerHTML = `<h2 style="font-size:17px">🎁 A wrapped prize is waiting</h2><p>${ACH.find(a => a.id === pend.ach).name}. <button class="btn small hot" id="gopen" style="margin-left:6px">Open it</button></p>`; $('gopen').onclick = () => openPrize(); }
+  let ch = ''; try { if (earnedCharms().includes('toy-car')) ch = ' You also hold the Toy car charm from the coaster.'; } catch {}
+  if (ch) $('gsub').textContent += ch;
+  const goBtn = $('gorace'); goBtn.disabled = !SAVE.owned.includes(id); goBtn.textContent = SAVE.owned.includes(id) ? 'Race this car' : 'Earn it to race it';
+}
+$('cars').onclick = e => { const b = e.target.closest('.car'); if (!b) return; SAVE.pick = b.dataset.id; if (SAVE.owned.includes(b.dataset.id)) save(); snd('click-1'); renderGarage(); };
+$('sw').onclick = e => { const c = e.target.dataset?.c; if (!c) return; SAVE.paint[SAVE.pick] = c; cars[SAVE.pick].userData.paint(c); save(); snd('click-1'); renderGarage(); };
+$('honk').onclick = () => snd('car-horn');
+// drag to turn the car
+{ let down = null; addEventListener('pointerdown', e => { if ((S.screen === 'garage' || S.screen === 'prize') && !e.target.closest('.btn,.car,.sw,.card')) down = e.clientX; }); addEventListener('pointermove', e => { if (down != null) { S.spin = (S.spin || 0) + (e.clientX - down) * .012; down = e.clientX; } }); addEventListener('pointerup', () => down = null); }
+
+// ---------- the race ----------
+function startRace(practice) {
+  if (!SAVE.owned.includes(SAVE.pick)) SAVE.pick = START_CAR;
+  S.practice = practice; S.model = makeModel(trk); S.phase = 'count'; S.tick = 0; S.lane = 0; S.acc = 0; S.last = null; S.launchShown = false; S.slowmo = 0;
+  const c = cars[SAVE.pick]; if (c.parent) c.parent.remove(c); c.scale.setScalar(1); c.userData.inCar(true); world.add(c); driver.car = c; driver.hist = {boost: 0};
+  $('timer').textContent = '0.00'; $('prog').firstElementChild.style.width = '0'; $('nitro').classList.remove('show'); $('lamps').textContent = ''; $('tags').innerHTML = '';
+  $('hint').textContent = practice ? 'PRACTICE · tap the left or right side to change lane' : '';
+  padMesh.forEach(g => g.visible = true);
+  go('race'); snd('car-start');
+}
+// the countdown is in simulation ticks too, so the whole run is deterministic
+const COUNT = [48, 96, 144], GO_AT = 192;
+function raceTick() {
+  const m = S.model;
+  if (S.phase === 'count') {
+    S.tick++;
+    const n = S.tick <= COUNT[0] ? 3 : S.tick <= COUNT[1] ? 2 : S.tick <= COUNT[2] ? 1 : 0;
+    const lamps = $('lamps'); if (S.tick === 1 || S.tick === COUNT[0] + 1 || S.tick === COUNT[1] + 1 || S.tick === COUNT[2] + 1) { lamps.textContent = n ? n : 'GO!'; lamps.classList.remove('pop'); void lamps.offsetWidth; lamps.classList.add('pop'); snd(n ? 'beep-1' : 'beep-2'); }
+    if (S.tick === 1) $('nitro').classList.add('show');
+    if (S.tick > COUNT[2]) { S.phase = 'race'; S.tick = 0; $('hint').textContent = S.practice ? 'PRACTICE · glowing orbs speed you up, cones slow you' : ''; }
+    return;
+  }
+  if (S.phase !== 'race') return;
+  const before = m.events.length; m.step(STEP, S.lane);
+  if (m.t > 0.6 && !S.launchShown) { S.launchShown = true; $('nitro').classList.remove('show'); setTimeout(() => $('lamps').textContent = '', 300); }
+  for (let i = before; i < m.events.length; i++) { const e = m.events[i];
+    if (e === 'orb') { snd('coin-1'); tag('+', '#7df0ff'); } else if (e === 'cone') { snd('pop-1'); tag('✕', '#ff6a1a'); } else if (e === 'perfect') { snd('whoosh-2'); tag('PERFECT!', '#ffe08a'); } }
+  if (m.done) finishRace();
+}
+function tag(t, c) { const el = document.createElement('div'); el.className = 'tag'; el.textContent = t; el.style.color = c; el.style.left = '50%'; el.style.top = '62%'; $('tags').appendChild(el); setTimeout(() => el.remove(), 1000); }
+function setLane(l) { if (S.phase === 'count' || S.phase === 'race') S.lane = Math.max(-1, Math.min(1, l)); }
+$('zoneL').addEventListener('pointerdown', () => setLane(S.lane - 1)); $('zoneR').addEventListener('pointerdown', () => setLane(S.lane + 1));
+addEventListener('keydown', e => { if (e.key === 'ArrowLeft' || e.key === 'a') setLane(S.lane - 1); if (e.key === 'ArrowRight' || e.key === 'd') setLane(S.lane + 1); if ((e.key === ' ' || e.key === 'ArrowUp') && S.screen === 'race') nitro(); });
+function nitro() {
+  const m = S.model; if (!m || S.screen !== 'race') return;
+  if (S.phase === 'count') { m.flood(); $('nitro').classList.remove('show'); tag('FLOODED', '#ff6a1a'); snd('pop-1'); }
+  else if (S.phase === 'race') m.launchTap();
+}
+$('nitro').addEventListener('pointerdown', e => { e.stopPropagation(); nitro(); });
+// go-time: the green light is the first tick of 'race'; a tap while the lamp shows 1 floods, so a tap at the instant of GO is perfect.
+function finishRace() {
+  const m = S.model; S.phase = 'finish'; S.finishAt = S.pres; snd('cheer');
+  const res = {time: m.time, orbs: m.orbs, cones: m.cones, launch: m.launch, car: SAVE.pick, practice: S.practice};
+  S.result = res;
+  setTimeout(() => showResults(res), TEST ? 300 : (calm ? 600 : 2600));
+}
+function showResults(res) {
+  go('results'); const b = board(), prev = b.best; const st = SAVE.stats;
+  $('rtime').textContent = fmt(res.time); $('rkey').textContent = BOARD_KEY;
+  const newAch = [];
+  if (res.practice) { $('rtitle').textContent = 'PRACTICE DONE'; $('rline').textContent = 'Practice never counts: no records, no prizes. Ready to race for real?'; $('rach').hidden = true; $('rnext').textContent = ''; $('rprize').hidden = SAVE.prizes.length === 0; boards(); return; }
+  st.runs++; st.bestOrbs = Math.max(st.bestOrbs, res.orbs); if (res.launch === 'perfect' && res.cones === 0) st.bestClean = true;
+  const improved = prev != null && res.time < prev - 1e-9; if (improved) st.improved++;
+  b.runs.unshift({time: res.time, orbs: res.orbs, cones: res.cones, launch: res.launch, car: res.car, at: Date.now()}); b.runs.length = Math.min(b.runs.length, 12);
+  const isBest = prev == null || res.time < prev; if (isBest) b.best = res.time; st.best = b.best;
+  // one achievement per race, in list order: a prize stays an event. Anything else you qualified for pays on a later qualifying race.
+  const won = ACH.find(a => !SAVE.ach[a.id] && a.test(res, st)); if (won) { SAVE.ach[won.id] = {at: Date.now()}; SAVE.prizes.push({ach: won.id, car: won.car, stage: 'wrapped'}); newAch.push(won); }
+  save();
+  $('rtitle').textContent = isBest && prev != null ? 'NEW BEST!' : 'FINISH!';
+  const delta = prev == null ? 'First time on the board.' : isBest ? `${(prev - res.time).toFixed(2)} s faster than your best.` : `${(res.time - prev).toFixed(2)} s off your best of ${fmt(prev)}.`;
+  $('rline').textContent = `${delta} Orbs ${res.orbs}, cones hit ${res.cones}, launch ${res.launch === 'perfect' ? 'perfect' : res.launch === 'flooded' ? 'flooded' : 'late'}.`;
+  const a = newAch[0]; $('rach').hidden = !a; if (a) { $('rachn').textContent = a.icon + ' ' + a.name; $('rachs').textContent = 'Achievement earned! Your prize is wrapped and waiting.'; snd('success-1'); }
+  const nx = nextAch(); $('rnext').textContent = nx ? `Next goal: ${nx.goal} (unlocks the ${CAR[nx.car].name}).` : 'All five cars earned. Chase your record!';
+  $('rprize').hidden = SAVE.prizes.length === 0; boards();
+}
+function boards() {
+  const b = board(); $('rboard').innerHTML = b.runs.slice(0, 5).map((r, i) => `<tr class="${r.time === b.best ? 'me' : ''}"><td>${i === 0 ? 'latest' : '#' + (i + 1)}</td><td>${fmt(r.time)} s</td><td>${CAR[r.car]?.name || ''}</td></tr>`).join('') || '<tr><td>No races yet</td></tr>';
+  $('rtown').innerHTML = [['Pip (mock)', 9.4], ['Maple (mock)', 10.1], ['Gus (mock)', 10.9], ['Rue (mock)', 11.6]].map(([n, t]) => `<tr><td>${n}</td><td>${t.toFixed(2)} s</td></tr>`).join('');
+}
+$('rprize').onclick = () => openPrize();
+
+// ---------- the prize: achievement -> wrapped -> unwrap -> boxed -> open -> hero -> garage -> try it ----------
+const P = {obj: null, stage: 'none', prog: 0, hold: false, t: 0, group: new T.Group()};
+stage.add(P.group);
+const PAPER = {comet: '#7a4dff', rocket: '#ff4f4f', shark: '#16b8b0', monster: '#9be84c', cart: '#ff5d8f'};
+const mats = {};
+function buildPrize(prize) {
+  P.group.clear(); const id = prize.car, col = PAPER[id] || '#ff7a14';
+  const mat = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .55, flatShading: true, ...o});
+  // the toy box (what's inside the paper): a card box with a window, a header and the car on a blister base
+  const box = new T.Group(); box.name = 'toy box'; P.group.add(box);
+  const W = 3.4, H = 2.2, D = 1.9; const card = mat('#f6efe0');
+  const body = new T.Mesh(new T.BoxGeometry(W, H, D), card); body.position.y = H / 2; box.add(body);
+  const lab = document.createElement('canvas'); lab.width = 512; lab.height = 160; const g = lab.getContext('2d'); g.fillStyle = col; g.fillRect(0, 0, 512, 160); g.fillStyle = '#fff'; g.font = '900 64px ui-rounded,system-ui,sans-serif'; g.textAlign = 'center'; g.fillText(CAR[id].name.toUpperCase(), 256, 84); g.font = '700 26px system-ui'; g.fillText('ABBIE\'S WORLD · RAIL RACER', 256, 130);
+  const lt = new T.CanvasTexture(lab); lt.colorSpace = T.SRGBColorSpace; const label = new T.Mesh(new T.PlaneGeometry(W, .85), new T.MeshBasicMaterial({map: lt})); label.position.set(0, H - .43, D / 2 + .01); box.add(label);
+  const tray = new T.Mesh(new T.BoxGeometry(W - .3, .12, 1.7), mat(col)); tray.position.set(0, .06, D / 2 + .85); tray.name = 'blister tray'; box.add(tray);
+  const lid = new T.Group(); lid.position.set(0, H, -D / 2); box.add(lid); const flap = new T.Mesh(new T.BoxGeometry(W, .08, D), card); flap.position.set(0, 0, D / 2); lid.add(flap);
+  const car = cars[id]; if (car.parent) car.parent.remove(car); car.userData.inCar(false); car.scale.setScalar(.85); car.rotation.set(0, -.6, 0); car.position.set(0, .12, D / 2 + .85); box.add(car);
+  // the wrapping paper: six panels + a ribbon cross + bow, a little larger than the box
+  const wrap = new T.Group(); wrap.name = 'wrapping'; P.group.add(wrap); const pm = mat(col, {roughness: .4}), rm = mat('#ffe08a', {roughness: .3, metalness: .2});
+  const k = 1.08, panels = [], PI = Math.PI;
+  for (const [x, y, z, ry, rx, w, h, dx, dy, dz] of [[0, H / 2, D / 2, 0, 0, W, H, 0, .1, 1], [0, H / 2, -D / 2, PI, 0, W, H, 0, .1, -1], [W / 2, H / 2, 0, PI / 2, 0, D, H, 1, .1, 0], [-W / 2, H / 2, 0, -PI / 2, 0, D, H, -1, .1, 0], [0, H, 0, 0, -PI / 2, W, D, 0, 1, 0]]) {
+    const p = new T.Mesh(new T.PlaneGeometry(w * k, h * k), new T.MeshStandardMaterial({color: col, roughness: .4, side: T.DoubleSide, flatShading: true})); p.name = 'wrapping paper';
+    p.position.set(x * k, H / 2 + (y - H / 2) * k, z * k); p.rotation.set(rx, ry, 0); p.userData.dir = new T.Vector3(dx, dy, dz); p.userData.home = p.position.clone(); p.userData.homeRot = p.rotation.clone(); wrap.add(p); panels.push(p); }
+  const rib = new T.Group(); wrap.add(rib);
+  const r1 = new T.Mesh(new T.BoxGeometry(.3, H * k + .02, D * k + .06), rm); r1.position.y = H / 2; rib.add(r1);
+  const r2 = new T.Mesh(new T.BoxGeometry(W * k + .06, H * k + .02, .3), rm); r2.position.y = H / 2; rib.add(r2);
+  const bow = new T.Group(); bow.position.y = H * k + .1; for (const s of [-1, 1]) { const loop = new T.Mesh(new T.TorusGeometry(.42, .1, 6, 14), rm); loop.position.x = s * .42; loop.rotation.y = Math.PI / 2 * 0; loop.rotation.x = Math.PI / 2 - .5; bow.add(loop); } const knot = new T.Mesh(new T.SphereGeometry(.2, 8, 6), rm); bow.add(knot); rib.add(bow);
+  P.box = box; P.lid = lid; P.wrap = wrap; P.panels = panels; P.rib = rib; P.car = car; P.id = id; P.W = W; P.H = H;
+  box.visible = true; wrap.visible = true; box.scale.setScalar(1); lid.rotation.x = 0; car.parent === box || box.add(car); car.position.set(0, .12, D / 2 + .85);
+  for (const p of panels) { p.position.copy(p.userData.home); p.rotation.copy(p.userData.homeRot); p.scale.setScalar(1); p.visible = true; } rib.position.set(0, 0, 0); rib.scale.setScalar(1); rib.visible = true;
+}
+const CAPS = {
+  wrapped: ['You won a prize!', 'Press and hold to pull the ribbon, or tap to unwrap.', 'Hold to unwrap'],
+  boxed: ['A collectible toy car, still in its box!', 'Tap to tear open the box.', 'Tap to open the box'],
+  revealed: ['', '', 'Add to garage'],
+  claimed: ['In your garage!', 'It is yours now. Same handling as every car; its looks are all yours.', 'Try it now'],
+};
+function openPrize() {
+  const pr = SAVE.prizes[0]; if (!pr) return; P.cur = pr; buildPrize(pr); P.stage = pr.stage; P.prog = pr.stage === 'wrapped' ? 0 : 1; P.t = 0; applyStage(); go('prize'); snd('popup');
+}
+function setStage(st) { P.stage = st; P.cur.stage = st; P.t = 0; save(); applyStage(); }
+function applyStage() {
+  const st = P.stage, d = CAR[P.cur.car], c = CAPS[st];
+  P.wrap.visible = st === 'wrapped'; P.box.visible = st === 'wrapped' || st === 'boxed'; P.lid.rotation.x = 0; P.opening = false;
+  $('ph').textContent = st === 'revealed' ? d.name : c[0]; $('pp').textContent = st === 'revealed' ? 'A brand new toy car. Looks only: it handles like every other car.' : c[1];
+  $('pnext').textContent = c[2]; $('pskip').style.display = (st === 'wrapped' || st === 'boxed') ? '' : 'none'; $('pnext').disabled = false;
+  if (st === 'revealed' || st === 'claimed') { P.box.visible = false; if (P.car.parent !== turn) { P.car.parent?.remove(P.car); turn.add(P.car); } P.car.scale.setScalar(1.35); P.car.position.set(0, 0, 0); P.car.rotation.set(0, 0, 0); }
+}
+$('pnext').onclick = () => {
+  const st = P.stage;
+  if (st === 'wrapped') { P.prog = 1; flashIt(.0); setStage('boxed'); snd('paper'); }
+  else if (st === 'boxed') { if (calm) { setStage('revealed'); snd('sparkle-1'); } else { P.opening = true; P.t = 0; $('pnext').disabled = true; snd('paper'); } }
+  else if (st === 'revealed') { claim(); }
+  else if (st === 'claimed') { SAVE.pick = P.cur.car; save(); startRace(false); }
+};
+$('pskip').onclick = () => { snd('click-1'); if (P.stage === 'wrapped' || P.stage === 'boxed') { setStage('revealed'); } };
+function claim() {
+  const pr = P.cur; if (!SAVE.owned.includes(pr.car)) SAVE.owned.push(pr.car); SAVE.pick = pr.car; SAVE.prizes = SAVE.prizes.filter(p => p !== pr && p.ach !== pr.ach); save(); snd('success-1');
+  P.stage = 'claimed'; P.t = 0; applyStage();
+  if (SAVE.prizes.length) { /* more waiting: the garage banner shows them */ }
+}
+function flashIt(a) { if (calm || a <= 0) return; const f = $('flash'); f.style.transition = 'none'; f.style.opacity = a; requestAnimationFrame(() => { f.style.transition = 'opacity .6s'; f.style.opacity = 0; }); }
+// hold anywhere on the prize to pull the ribbon
+addEventListener('pointerdown', e => { if (S.screen === 'prize' && P.stage === 'wrapped' && !e.target.closest('.btn')) P.hold = true; }); addEventListener('pointerup', () => P.hold = false);
+
+// ---------- frame ----------
+const eyeV = new T.Vector3(), tmp = new T.Vector3(), pose = {}, bbox = new T.Box3().setFromPoints(trk.S.map(x => x.p)), ctr = bbox.getCenter(new T.Vector3());
+function frame(now) {
+  requestAnimationFrame(frame);
+  const w = innerWidth, h = innerHeight; if (renderer.domElement.width !== Math.round(w * renderer.getPixelRatio())) { renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  const dt = S.last == null ? 0 : Math.min(.1, (now - S.last) / 1000); S.last = now;
+  S.pres += dt;                                   // presentation clock: the only clock slow motion and camera work may bend
+  if (S.screen === 'race') {
+    if (TEST) for (let i = 0; i < 6; i++) raceTick(); else { S.acc += dt; let n = 0; while (S.acc >= STEP && n++ < 8) { S.acc -= STEP; raceTick(); } if (n >= 8) S.acc = 0; }
+    raceView(dt);
+  } else if (S.screen === 'attract' || S.screen === 'ask' || S.screen === 'results') {
+    S.orbit += dt * (calm ? 0 : .12); const R = innerWidth < innerHeight ? 120 : 80; cam.position.set(ctr.x + Math.cos(S.orbit + 2) * R, 46, ctr.z + Math.sin(S.orbit + 2) * R); cam.lookAt(ctr.x, 4, ctr.z); cam.fov = 50; cam.updateProjectionMatrix();
+    for (const g of padMesh) if (g.userData.bob) g.userData.bob.position.y = .55 + Math.sin(now / 400) * .08;
+  } else {
+    const wob = calm ? 0 : Math.sin(now / 900) * .05; stage.updateMatrixWorld();
+    turn.rotation.y += (calm ? 0 : dt * .5) + ((S.spin || 0) * .5); S.spin = (S.spin || 0) * .5;
+    if (S.screen === 'prize') prizeView(dt);
+    cam.fov = 45; cam.updateProjectionMatrix(); cam.position.set(stage.position.x, S.screen === 'prize' ? 3.4 : 3.2, (S.screen === 'prize' ? 11 : 9.5) + wob); cam.lookAt(stage.position.x, S.screen === 'prize' ? .2 : -.3, 0);
+  }
+  renderer.render(scene, cam);
+}
+function raceView(dt) {
+  const m = S.model; if (!m) return; const car = driver.car; const s = m.s; poseAtS(s, pose);
+  const lx = m.laneX; tmp.set(lx, 0, 0).applyQuaternion(pose.q).add(pose.p); car.position.copy(tmp); car.quaternion.copy(pose.q);
+  for (const wl of car.userData.wheels) wl.rotation.x -= m.v * dt / .21;
+  // camera in the seat; fov and shake follow speed, which is the view's business only
+  const eye = car.userData.eye; eyeV.copy(eye).applyQuaternion(pose.q).add(tmp);
+  const look = lanePoint(s + 8, lx * .8, eye.y * .9); cam.position.copy(eyeV); cam.up.set(0, 1, 0).applyQuaternion(pose.q); cam.lookAt(look);
+  const speed = m.v; cam.fov += ((62 + Math.min(18, speed * .7) + (m.boost > 0 ? 8 : 0)) - cam.fov) * .1; cam.updateProjectionMatrix();
+  if (!calm && S.phase === 'race') { cam.position.x += (Math.random() - .5) * .006 * speed; cam.position.y += (Math.random() - .5) * .006 * speed; }
+  if (S.phase === 'finish') {  // slow-motion swing out to the car: presentation only, the time is already frozen
+    const u = Math.min(1, (S.pres - S.finishAt) / (calm ? .1 : 2.4)); const rr = calm ? 0 : 1 - (1 - u) * (1 - u);
+    tmp.set(5 * rr, 2.2 * rr, -4 * rr).applyQuaternion(pose.q); cam.position.copy(car.position).add(tmp).add(new T.Vector3(0, 1, 2)); cam.lookAt(car.position);
+  }
+  $('timer').textContent = S.phase === 'count' ? '0.00' : (m.done ? m.time : m.t).toFixed(2);
+  $('prog').firstElementChild.style.width = Math.round(100 * Math.min(1, m.s / m.line)) + '%';
+  for (const g of padMesh) if (g.userData.bob) { g.userData.bob.position.y = .55 + Math.sin(S.pres * 4 + g.position.x) * .08; g.userData.bob.rotation.y += dt * 2; }
+  padMesh.forEach((g, i) => { if (m.pads[i].hit) g.visible = false; });
+  // practice: the lane to take glows brighter in the hint line
+  if (S.practice && S.phase === 'race') { const nx = m.pads.find(p => !p.hit && p.s > m.s + 1); if (nx) $('hint').textContent = 'PRACTICE · ' + (nx.kind === 'orb' ? 'orb ahead: ' : 'cone ahead: avoid ') + (nx.lane < 0 ? '⬅ left' : nx.lane > 0 ? 'right ➡' : 'middle'); }
+}
+function prizeView(dt) {
+  P.t += dt; const st = P.stage;
+  if (st === 'wrapped') {
+    if (P.hold && !calm) P.prog = Math.min(1, P.prog + dt * .45);
+    const u = P.prog; P.rib.position.y = u * 4; P.rib.scale.setScalar(Math.max(.001, 1 - u * 1.2)); P.rib.visible = u < .84;
+    for (const p of P.panels) { const k = Math.max(0, (u - .3) / .7); p.position.copy(p.userData.home).addScaledVector(p.userData.dir, k * 3.2); p.position.y -= k * k * 1.5; p.rotation.x = p.userData.homeRot.x + k * 1.4; p.scale.setScalar(Math.max(.01, 1 - k * .8)); }
+    if (u >= 1) { snd('paper'); setStage('boxed'); }
+    P.box.rotation.y = Math.sin(P.t * 3) * (P.hold ? .08 : 0);
+  } else if (st === 'boxed') {
+    P.wrap.visible = false; P.box.rotation.y = 0;
+    if (P.opening) { const u = Math.min(1, P.t / .8), e = u * u * (3 - 2 * u); P.lid.rotation.x = -2.5 * e; P.car.position.y = .12 + e * 1.4; if (u >= 1) { snd('magic-chime'); flashIt(.7); snd('sparkle-1'); setStage('revealed'); } }
+  } else if (st === 'revealed') {
+    const u = calm ? 1 : Math.min(1, P.t / 1.1); const e = 1 - (1 - u) * (1 - u); P.car.position.y = 0 + (1 - e) * -.3;
+    if (P.t < 1.1 && !calm) P.car.scale.setScalar(1.35 * (.8 + .2 * e));
+  }
+}
+// no engine artifacts: the garage stage and prize props are scenery of the showroom, so they are flagged presentation for the perception layer
+stage.traverse(o => { o.userData.presentation = true; });
+requestAnimationFrame(frame);
+
+// ---------- hooks for the headless run and the study page ----------
+window.arcade = {S, SAVE, ACH, get model() { return S.model; }, go, startRace, setLane, nitro, openPrize, showResults, claim, board, simulate: (p, o) => simulate(trk, p, o), trk, BOARD_KEY, TRACK_ID,
+  reset() { SAVE = blank(); window.arcade.SAVE = SAVE; save(); }, get save() { return SAVE; },
+  // bots drive the real race through the real inputs, one decision per tick
+  autoplay(policy = 'greedy') { const iv = setInterval(() => { const m = S.model; if (S.screen !== 'race' || !m || S.phase === 'finish') return; if (S.phase === 'race' && m.launch === 'none' && m.t < .3) nitro(); if (policy === 'center') return; const want = (() => { let best = 0, bs = -1e9; for (const lane of [-1, 0, 1]) { let sc = lane === m.lane ? .05 : 0; for (const p of m.pads) { const d = p.s - m.s; if (p.hit || d < 1.5 || d > 11) continue; if (p.lane === lane) sc += (p.kind === 'orb' ? 1 : -3) / (1 + d * .1); } if (sc > bs) { bs = sc; best = lane; } } return best; })(); if (want !== S.lane) setLane(want); }, 4); return () => clearInterval(iv); },
+};
+go(q.get('skip') === 'ask' ? 'ask' : 'attract');
+</script>
+</body>
+</html>

@@ -6,7 +6,7 @@ name: meshy-run
 on:
   workflow_dispatch:
     inputs:
-      jobs: { description: 'Job ids from meshy-queue.json, space separated', required: true }
+      jobs: { description: 'Job ids from meshy-queue.json, space separated; "check" only tests the key (free balance call)', required: true }
       rig_only: { description: 'Only remesh + rig heroes whose model already exists', type: boolean, default: false }
 permissions:
   contents: write
@@ -17,15 +17,30 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.13' }
       - name: Run Meshy jobs
         env:
           MESHY_API_KEY: ${{ secrets.MESHY_API_KEY }}
+          GH_TOKEN: ${{ github.token }}
           JOBS: ${{ inputs.jobs }}
           RIG_ONLY: ${{ inputs.rig_only }}
+          MESHY_BRANCH: ${{ github.ref_name }}
         run: |
           set -eu
-          if [ -z "$MESHY_API_KEY" ]; then echo "MESHY_API_KEY secret is not set"; exit 1; fi
+          if [ -z "$MESHY_API_KEY" ]; then
+            echo "The repository secret MESHY_API_KEY did not reach this job."
+            echo "Repository environments (a secret saved inside one of these is not visible here):"
+            gh api "repos/$GITHUB_REPOSITORY/environments" -q '.environments[].name' || true
+            exit 1
+          fi
+          echo "key length ${#MESHY_API_KEY}, starts with msy_: $([ "${MESHY_API_KEY#msy_}" != "$MESHY_API_KEY" ] && echo yes || echo no)"
+          code=$(curl -s -o /tmp/bal.json -w '%{http_code}' -H "Authorization: Bearer $MESHY_API_KEY" https://api.meshy.ai/openapi/v1/balance)
+          echo "Meshy balance call: HTTP $code $(cat /tmp/bal.json)"
+          if [ "$code" != 200 ]; then exit 1; fi
+          if [ "$JOBS" = "check" ]; then exit 0; fi
           pip install -q pillow numpy
+          case "$JOBS" in --anims*) pip install -q bpy ;; esac  # Blender as a module, to cut each clip down to the hero rig
           git config user.name "meshy-run"; git config user.email "meshy-run@users.noreply.github.com"
           if [ "$RIG_ONLY" = "true" ]; then set -- --rig-only $JOBS; else set -- $JOBS; fi
           python3 tools/meshy-heroes/meshy_run.py "$@" | tee /tmp/meshy.log

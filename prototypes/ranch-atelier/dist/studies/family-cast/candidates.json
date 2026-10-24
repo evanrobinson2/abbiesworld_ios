@@ -863,8 +863,440 @@
     }
    ],
    "errors": []
+  },
+  "city-baker": {
+   "name": "A baker (hex city)",
+   "group": "town",
+   "sample": "The ovens are hot and the bread is rising! Come and get it while it's warm, everyone! Fresh buns, warm loaves, and a smile for every single one of you.",
+   "descriptions": [
+    "A cheerful, round-voiced baker in her forties, warm laugh in her voice, up before dawn and happy about it. Animated family film, close microphone.",
+    "A jolly, booming baker man with flour on his apron, big-hearted and quick to laugh. Clean studio recording."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "wQN5svB5ltAdWnqhCjzq",
+     "url": "/r2/voices/cast/city-baker/202610240230-1.mp3",
+     "seconds": 12.0
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "UdM2s704Twz8bWQ4QQsh",
+     "url": "/r2/voices/cast/city-baker/202610240230-2.mp3",
+     "seconds": 11.5
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "pqkQKCuUngYSbSbfNk3U",
+     "url": "/r2/voices/cast/city-baker/202610240230-3.mp3",
+     "seconds": 11.9
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "3rgWyZuXHLS5Zw9tcwnz",
+     "url": "/r2/voices/cast/city-baker/202610240230-4.mp3",
+     "seconds": 14.0
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "GUt8g8tD959DGoAf49og",
+     "url": "/r2/voices/cast/city-baker/202610240230-5.mp3",
+     "seconds": 13.6
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "y8ZBeyiWYrEUC1kcnPyy",
+     "url": "/r2/voices/cast/city-baker/202610240230-6.mp3",
+     "seconds": 13.9
+    }
+   ],
+   "errors": []
+  },
+  "town-teacher": {
+   "name": "The teacher (Winchester)",
+   "group": "town",
+   "sample": "We have run out of chalk! Would you carry a box over from the noticeboard? Everyone has a colourful job today, and yours is the most important one of all.",
+   "descriptions": [
+    "A bright, patient primary-school teacher in her thirties, clear and kind, always encouraging, like a favourite teacher in an animated family film. Clean studio recording.",
+    "A warm, upbeat young teacher with a melodic voice who makes everything sound like an adventure. Close microphone."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "kZ8TdZIQ1B4iqkdCbSrD",
+     "url": "/r2/voices/cast/town-teacher/202610240230-1.mp3",
+     "seconds": 12.2
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "IoXOyJ2MLUVUABdy2Pr2",
+     "url": "/r2/voices/cast/town-teacher/202610240230-2.mp3",
+     "seconds": 10.8
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "FfdnFbjTGMawNmIAsHEG",
+     "url": "/r2/voices/cast/town-teacher/202610240230-3.mp3",
+     "seconds": 12.1
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "Ew3IgZNs96tQTeYuYt8x",
+     "url": "/r2/voices/cast/town-teacher/202610240230-4.mp3",
+     "seconds": 11.4
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "jlq5dTUUXk2VYcZvQQsa",
+     "url": "/r2/voices/cast/town-teacher/202610240230-5.mp3",
+     "seconds": 11.9
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "FoQitOaBwLNJlpwxU3qT",
+     "url": "/r2/voices/cast/town-teacher/202610240230-6.mp3",
+     "seconds": 12.0
+    }
+   ],
+   "errors": []
+  },
+  "town-librarian": {
+   "name": "The librarian (Winchester)",
+   "group": "town",
+   "sample": "Someone left a book on a bench by the school. Could you bring it back before it rains? Take your time, there is no hurry, and every good story will wait for you.",
+   "descriptions": [
+    "A soft, gentle librarian in her sixties, hushed and kind, speaking as if in a quiet library, with a smile in the voice. Clean studio recording, animated family film.",
+    "A calm, bookish older man with a low, soothing voice who loves stories. Close microphone."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "0RWcfkKwchB33LDNkY9v",
+     "url": "/r2/voices/cast/town-librarian/202610240230-1.mp3",
+     "seconds": 14.8
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "AHdARKNrMLdzlOEki27r",
+     "url": "/r2/voices/cast/town-librarian/202610240230-2.mp3",
+     "seconds": 13.1
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "tU0lRwN3l3dAMRq5ouqU",
+     "url": "/r2/voices/cast/town-librarian/202610240230-3.mp3",
+     "seconds": 12.9
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "lM6lTM9lhbic0T2v8qLI",
+     "url": "/r2/voices/cast/town-librarian/202610240230-4.mp3",
+     "seconds": 12.3
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "r8UulxMji43uSqQzo60Q",
+     "url": "/r2/voices/cast/town-librarian/202610240230-5.mp3",
+     "seconds": 12.4
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "6jguvzkexAzPz0Pkna4L",
+     "url": "/r2/voices/cast/town-librarian/202610240230-6.mp3",
+     "seconds": 12.9
+    }
+   ],
+   "errors": []
+  },
+  "town-postie": {
+   "name": "The postie (Winchester)",
+   "group": "town",
+   "sample": "I'm late! Please take this letter to the café for me? Every letter has a home, and you are the fastest helper I have ever met today!",
+   "descriptions": [
+    "A chirpy, quick-talking letter carrier in his twenties, always in a hurry but friendly, bouncy and bright. Animated family film, close microphone.",
+    "A cheerful young woman postie, fast and sunny, whistling between sentences. Clean studio recording."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "Yf703ospABCR0m3n2v8Z",
+     "url": "/r2/voices/cast/town-postie/202610240230-1.mp3",
+     "seconds": 5.8
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "6G4f4AUM4Fg4CSf1mWIZ",
+     "url": "/r2/voices/cast/town-postie/202610240230-2.mp3",
+     "seconds": 6.9
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "YmJesil39hE3oek8Qp0O",
+     "url": "/r2/voices/cast/town-postie/202610240230-3.mp3",
+     "seconds": 5.9
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "zXgHdUJFLIBEswYhTE6f",
+     "url": "/r2/voices/cast/town-postie/202610240230-4.mp3",
+     "seconds": 7.9
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "J3wY1TOwfTjjIJWGKjkF",
+     "url": "/r2/voices/cast/town-postie/202610240230-5.mp3",
+     "seconds": 8.6
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "U5fvTA0wQ469wDCEzx9a",
+     "url": "/r2/voices/cast/town-postie/202610240230-6.mp3",
+     "seconds": 8.3
+    }
+   ],
+   "errors": []
+  },
+  "town-gardener": {
+   "name": "The gardener (Winchester)",
+   "group": "town",
+   "sample": "The sunflowers need seeds. The school has a jar. Could you ask for it? The sun is warm and the soil is soft, so there is plenty of time to grow things.",
+   "descriptions": [
+    "A slow, sunny gardener in her fifties, relaxed and earthy, patient as a tomato plant, humming between words. Animated family film, close microphone.",
+    "A gentle, sun-warmed older man who loves flowers, easygoing drawl, kind. Clean studio recording."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "FiCkmFju2ZrmRkOaIxMP",
+     "url": "/r2/voices/cast/town-gardener/202610240230-1.mp3",
+     "seconds": 15.1
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "Zkw0XFXa2GoFm33qlPz8",
+     "url": "/r2/voices/cast/town-gardener/202610240230-2.mp3",
+     "seconds": 14.4
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "LkOM0cUsRNDeJ5u1gqlC",
+     "url": "/r2/voices/cast/town-gardener/202610240230-3.mp3",
+     "seconds": 16.2
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "hCpgcgoX1tq0Xeno66lQ",
+     "url": "/r2/voices/cast/town-gardener/202610240230-4.mp3",
+     "seconds": 14.7
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "K3Hb5cw9f49LHlM3yV2z",
+     "url": "/r2/voices/cast/town-gardener/202610240230-5.mp3",
+     "seconds": 13.5
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "HSvizkuvmoUYZPQ6EoBh",
+     "url": "/r2/voices/cast/town-gardener/202610240230-6.mp3",
+     "seconds": 16.4
+    }
+   ],
+   "errors": []
+  },
+  "town-scientist": {
+   "name": "The scientist (Winchester)",
+   "group": "town",
+   "sample": "I lost my lucky magnifier! I think it is by the noticeboard. Can you look? Nobody has ever found it before, and I think we are very close to a discovery!",
+   "descriptions": [
+    "An excited, slightly breathless scientist in her forties, curious and kind, speaking quickly about discoveries, a friendly cartoon professor. Clean studio recording, animated family film.",
+    "A bright, enthusiastic woman inventor with a quick laugh and an inquisitive tone. Close microphone."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "OQgknWnZfaMFbj7UlZU7",
+     "url": "/r2/voices/cast/town-scientist/202610240230-1.mp3",
+     "seconds": 11.3
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "qpUT6KeGXASgzkhv1nll",
+     "url": "/r2/voices/cast/town-scientist/202610240230-2.mp3",
+     "seconds": 9.5
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "e6zz3pfAhTHSHDu47b3v",
+     "url": "/r2/voices/cast/town-scientist/202610240230-3.mp3",
+     "seconds": 11.0
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "ptBds2H9vilmsz2PQ9iG",
+     "url": "/r2/voices/cast/town-scientist/202610240230-4.mp3",
+     "seconds": 9.7
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "fcREEaZCQmsJ47qNMNrN",
+     "url": "/r2/voices/cast/town-scientist/202610240230-5.mp3",
+     "seconds": 10.0
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "6rINTFknSyv2bhSWp7CU",
+     "url": "/r2/voices/cast/town-scientist/202610240230-6.mp3",
+     "seconds": 9.9
+    }
+   ],
+   "errors": []
+  },
+  "town-neighbour": {
+   "name": "A neighbour (Winchester)",
+   "group": "town",
+   "sample": "Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him? He always finds the happiest spot on the common, wagging all the way there.",
+   "descriptions": [
+    "A friendly, chatty neighbour in his forties, easygoing and warm, leaning over the fence for a talk. Animated family film, close microphone.",
+    "A cheerful, talkative woman neighbour with a big smile in her voice. Clean studio recording."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "JDMNxT8eCk7Uep7ReoAs",
+     "url": "/r2/voices/cast/town-neighbour/202610240230-1.mp3",
+     "seconds": 9.9
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "aD9yNz2miKH5iCTkeCkO",
+     "url": "/r2/voices/cast/town-neighbour/202610240230-2.mp3",
+     "seconds": 9.3
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "ZXBQSfl68OVIvvbvTSFE",
+     "url": "/r2/voices/cast/town-neighbour/202610240230-3.mp3",
+     "seconds": 11.7
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "ZkvfPgZoC0CXJH08JWjY",
+     "url": "/r2/voices/cast/town-neighbour/202610240230-4.mp3",
+     "seconds": 10.1
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "rJU5du9wHeQxxr0tmVvo",
+     "url": "/r2/voices/cast/town-neighbour/202610240230-5.mp3",
+     "seconds": 11.2
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "9y9kDa9lvV2wiDEqQ1Er",
+     "url": "/r2/voices/cast/town-neighbour/202610240230-6.mp3",
+     "seconds": 12.7
+    }
+   ],
+   "errors": []
+  },
+  "town-farmer": {
+   "name": "The farmer (Winchester)",
+   "group": "town",
+   "sample": "The hens have been busy and the baker is out of eggs. Could you find a warm one and take it to the café?",
+   "descriptions": [
+    "An easy, cheerful farmer in his fifties, calm and friendly, a voice that smells of hay and sunshine. Animated family film, close microphone.",
+    "A warm, hearty farmer woman with a gentle country lilt, kind and unhurried. Clean studio recording."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "dLss4KRL1Kvwp7LMI4cv",
+     "url": "/r2/voices/cast/town-farmer/202610240225-1.mp3",
+     "seconds": 6.4
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "HJMDO827nz6fjcBTo30m",
+     "url": "/r2/voices/cast/town-farmer/202610240225-2.mp3",
+     "seconds": 6.8
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "CV091ZgnLBk2rfTFjgsi",
+     "url": "/r2/voices/cast/town-farmer/202610240225-3.mp3",
+     "seconds": 5.7
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "M1LDqrLZBOrD9fSz3LMy",
+     "url": "/r2/voices/cast/town-farmer/202610240225-4.mp3",
+     "seconds": 7.7
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "BnR98rj8jcN7gdaM7A7U",
+     "url": "/r2/voices/cast/town-farmer/202610240225-5.mp3",
+     "seconds": 7.6
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "yO0JDGgpKJzH9UDFqpWM",
+     "url": "/r2/voices/cast/town-farmer/202610240225-6.mp3",
+     "seconds": 7.2
+    }
+   ],
+   "errors": []
   }
  },
  "model": "eleven_ttv_v3",
- "rendered": "2026-10-23T10:09:26Z"
+ "rendered": "2026-10-24T02:32:27Z"
 }

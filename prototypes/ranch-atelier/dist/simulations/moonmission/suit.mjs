@@ -75,7 +75,8 @@ export function suit(id, {trim = 0xff7eb6, skin = 0xe0b08c, h = 1.8, childHead =
   kn.add(limb(m, .36, .085, .07, false), mesh(cyl(.088, .088, .03, 10), m.trim, 0, -.1, 0));
   const boot = new THREE.Group(); boot.position.y = -.36; kn.add(boot); boot.add(mesh(ring(.075, .018), m.metal), mesh(box(.14, .1, .26), m.fabric, 0, -.06, .04), mesh(box(.15, .05, .27), m.dark, 0, -.115, .04), mesh(box(.145, .02, .27), m.trim, 0, -.085, .04));
  });
+ const chest = new THREE.Group(); chest.name = 'chest'; chest.position.set(0, 1.25, 0); body.add(chest); // mount point (backpack, patches)
  body.position.y = -.02; root.scale.setScalar(k);
- root.userData.parts = {body, head, pack}; return root;
+ root.userData.parts = {body, head, pack, chest}; return root;
 }
 export const SUIT_TRIM = {daddy: 0x6f9bff, abbie: 0xff7eb6, ani: 0xb18cff};

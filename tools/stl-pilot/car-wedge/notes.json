@@ -1,0 +1,73 @@
+{
+  "slug": "car-wedge",
+  "stages": {
+    "import": {
+      "seconds": 0.0,
+      "tris": 6292,
+      "files": [
+        "source_body.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.22,
+      "tris": 6292,
+      "open_edges_before": 0,
+      "open_edges_after": 0,
+      "dust_shells_removed": 0
+    },
+    "orient_and_wheels": {
+      "seconds": 0.01,
+      "tris": 6292,
+      "wheels": 0,
+      "body_dims_mm": [
+        72.5,
+        36.0,
+        24.5
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.0,
+      "tris": 6292,
+      "final_size_m_wh_l": [
+        2.086,
+        1.419,
+        4.2
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 2.54,
+      "tris": 4500,
+      "parts": {
+        "body": {
+          "before": 6292,
+          "after": 4500
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.14,
+      "tris": 4500,
+      "glb": "car-wedge.glb",
+      "bytes": 256508
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 4500,
+  "pipeline": "stl_cars.py",
+  "wheel_shells_found": 0,
+  "scale_to_metres": {
+    "factor": 0.057931034482758624,
+    "final_size_m": [
+      2.086,
+      1.419,
+      4.2
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 4500,
+  "high_poly_tris": 6292,
+  "wheel_count": 0,
+  "script_total_s": 3.26,
+  "process_wall_s": 4.16
+}

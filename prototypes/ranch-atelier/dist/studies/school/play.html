@@ -38,7 +38,7 @@ body.pixel canvas{image-rendering:pixelated}
 </head>
 <body>
 <a id="back" class="glass" href="./" aria-label="Back to the study"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
-<div id="hud" class="glass" aria-label="Score"><span><i class="ib"></i><b id="nb">0</b></span><span><i class="ic"></i><b id="nc">0</b></span><span><i class="is"></i><b id="ns">0</b></span></div>
+<div id="hud" class="glass" aria-label="Score"><span><i class="ib"></i><b id="nb">0</b></span><span><i class="is"></i><b id="ns">0</b></span></div>
 <div id="hang" class="glass" aria-hidden="true"><div id="zone"></div><i id="dot"></i></div>
 <div id="ring" class="glass" aria-hidden="true"><svg viewBox="-34 -34 68 68"><path id="ringTrack" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="4" stroke-linecap="round"/><path id="ringZone" fill="none" stroke="#ffc85a" stroke-width="8" stroke-linecap="round" style="filter:drop-shadow(0 0 5px #ffcf5a)"/><circle id="ringDot" r="5" fill="#f2f6ff" stroke="#8fb4ff" stroke-width="1.5"/></svg></div>
 <div id="go" class="glass" role="button" aria-label="Play"><svg width="34" height="34" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></div>
@@ -53,7 +53,7 @@ import {TOON_LOOKS, toonify, inkHulls} from '/simulations/toon-kit.mjs';
 
 // Shared pieces from the basement and the presentation layer; the page still runs on its own if they are missing.
 const opt = async (path) => { try { return await import(path); } catch { return {}; } };
-const [PL, GB, MC, CR] = await Promise.all([opt('/simulations/presentation-layer.mjs'), opt('/simulations/grace-basement.mjs'), opt('/simulations/memory-coins.mjs'), opt('/simulations/coin-reward.mjs')]);
+const [PL] = await Promise.all([opt('/simulations/presentation-layer.mjs')]);
 const presentation = PL.presentation || ((o) => o);
 const playerCamera = PL.playerCamera || ((c) => c);
 const Q = new URLSearchParams(location.search), TEST = Q.has('test'), PIXEL = Q.has('pixel');
@@ -211,10 +211,6 @@ for (const [lvl, n] of [['low', 20], ['gym', 5], ['canopy', 5]]) {
 // the dog's ball: in your hand for the walk; the third throw makes it ball 31, up on the roof
 const dogBall = new T.Mesh(new T.SphereGeometry(.09, 12, 8), M.ball); dogBall.name = 'tennis ball'; dogBall.castShadow = true; scene.add(dogBall);
 const TOTAL = 31;
-const memoryCoin = GB.createCoin ? GB.createCoin(.16) : new T.Mesh(new T.CylinderGeometry(.16, .16, .03, 16), new T.MeshStandardMaterial({color: '#ffcc33', metalness: .8, roughness: .3, name: 'coin gold'}));
-if (!GB.createCoin) memoryCoin.rotation.x = Math.PI / 2;
-memoryCoin.name = 'gold memory coin'; memoryCoin.position.set(6.9, CANOPY + .35, -.3); scene.add(memoryCoin);
-if (MC.has?.('school-jump:canopy')) memoryCoin.visible = false;
 
 // Where to go next on each level: a soft marker on the spot, for the player only.
 const SPOTS = {gymWall: {lvl: 'low', at: v3(2.5, H, 2.75)}, hang: {lvl: 'gym', at: v3(6.2, GYM, 4.0)}, smallWall: {lvl: 'canopy', at: v3(5.6, CANOPY, 1.2)}, home: {lvl: 'low', at: v3(-6.5, H, 1.6)}, throw: {lvl: 'yard', at: v3(-10.4, 0, 1.2)}};
@@ -247,85 +243,69 @@ const cars = [makeCar(0), makeCar(1)];
 // two parked cars in the lot, for the street to feel lived in
 for (const [z, c] of [[7.4, '#3d5a7a']]) { const p = makeWagon(T, c); p.group.position.set(-12.4, 0, z); p.group.rotation.y = Math.PI; p.lampMat.emissiveIntensity = 0; p.tailMat.emissiveIntensity = 0; scene.add(p.group); }
 
-// ---------- Sound: synthesised. The street, the dog and the climb are in the world; the heartbeat and the dread are meta. ----------
+// ---------- Sound: from the sound catalogue (INVARIANTS.md). The street, the dog and the climb are in the world; the heartbeat and the dread are meta. ----------
+import {sfx as catalogSfx, sfxContext, preload} from '/simulations/catalog-sfx.mjs';
 let ac = null;
-function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
-function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = false, lp = 0, delay = 0} = {}) {
- const a = audio(); if (!a) return; const now = a.currentTime + delay, out = a.createGain(); out.gain.setValueAtTime(g, now); out.gain.exponentialRampToValueAtTime(.0001, now + t);
- let src; if (noise) { const b = a.createBuffer(1, Math.max(1, a.sampleRate * t), a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; src = a.createBufferSource(); src.buffer = b; }
- else { src = a.createOscillator(); src.type = type; src.frequency.setValueAtTime(f, now); if (slide) src.frequency.exponentialRampToValueAtTime(Math.max(20, f + slide), now + t); }
- let node = src; if (lp) { const fl = a.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = lp; src.connect(fl); node = fl; }
- node.connect(out).connect(a.destination); src.start(now); src.stop(now + t + .02);
-}
+function audio() { ac = ac || sfxContext(); return ac; }
+const one = (...ids) => ids[Math.floor(Math.random() * ids.length)];
+const S_ = (id, gain = .6, rate = 1, delay = 0) => catalogSfx(id, {gain, rate, delay});
 const buzz = ms => { try { navigator.vibrate?.(ms); } catch {} }; // meta: a tap in your hand on a grab, a jolt when busted
 const SFX = {
- grab: () => { blip({f: 140, t: .07, type: 'triangle', g: .14}); blip({noise: true, t: .03, g: .06, lp: 2400}); buzz(8); },
- metal: () => blip({f: 900, t: .1, type: 'triangle', g: .05, slide: -300}),
- release: () => blip({f: 520, t: .06, type: 'triangle', g: .05, slide: 200}),
- slip: () => { blip({noise: true, t: .22, g: .1, lp: 1400}); blip({f: 300, t: .2, type: 'sawtooth', g: .02, slide: -200, lp: 900}); },
- nope: () => { blip({f: 220, t: .09, type: 'square', g: .04}); blip({f: 180, t: .12, type: 'square', g: .04, delay: .1}); },
- rattle: () => { for (let i = 0; i < 4; i++) blip({f: 1400 + i * 90, t: .03, type: 'square', g: .03, delay: i * .05}); },
- breath: (k = 1) => blip({noise: true, t: .35 + .1 * k, g: .02 + .02 * k, lp: 700}),
- haul: () => [330, 392, 523].forEach((f, i) => blip({f, t: .12, type: 'square', g: .04, delay: i * .09})),
- step: () => blip({noise: true, t: .04, g: .04, lp: 900}),
- pick: () => { blip({f: 660, t: .08, type: 'square', g: .04, slide: 300}); blip({f: 990, t: .06, type: 'square', g: .03, delay: .07}); },
- full: () => blip({f: 200, t: .08, type: 'square', g: .03}),
- throwIt: () => blip({noise: true, t: .12, g: .06, lp: 2200}),
- bounce: () => blip({f: 180, t: .09, type: 'sine', g: .12, slide: -60}),
- thwack: () => { blip({f: 120, t: .08, type: 'sine', g: .2}); blip({noise: true, t: .05, g: .1, lp: 1800}); },
- bark: () => { blip({f: 520, t: .09, type: 'square', g: .05, slide: -220, lp: 1600}); blip({f: 480, t: .1, type: 'square', g: .05, slide: -200, lp: 1600, delay: .16}); bub.bark(); },
- beat: (k) => { blip({f: 58, t: .12, type: 'sine', g: .2 + .2 * k}); blip({f: 52, t: .1, type: 'sine', g: .14 + .14 * k, delay: .16}); },
- horn: () => { blip({f: 392, t: .6, type: 'sawtooth', g: .06, lp: 1400}); blip({f: 466, t: .6, type: 'sawtooth', g: .05, lp: 1400}); },
- whine: () => { blip({f: 900, t: .5, type: 'sine', g: .05, slide: -380}); blip({f: 820, t: .6, type: 'sine', g: .04, slide: -300, delay: .55}); },
- screech: () => blip({f: 1800, t: .5, type: 'sawtooth', g: .02, slide: -900, lp: 3000}),
- sting: () => [196, 233, 277].forEach((f, i) => blip({f, t: .5, type: 'sawtooth', g: .025, lp: 900, delay: i * .02})),
- coin: () => [988, 1319, 1568, 1976].forEach((f, i) => blip({f, t: .14, type: 'square', g: .035, delay: i * .08})),
- tick: () => blip({f: 1600, t: .02, type: 'square', g: .015}),
- win: () => [523, 659, 784, 1047, 784, 1047].forEach((f, i) => blip({f, t: .16, type: 'square', g: .04, delay: i * .12})),
+ grab: () => { S_('tap-1', .5); buzz(8); },
+ metal: () => S_('step-metal-1', .35),
+ release: () => S_('click-3', .3),
+ slip: () => S_('cloth', .6),
+ nope: () => S_('cancel', .25),
+ rattle: () => S_('chain', .35),
+ breath: (k = 1) => S_('gust-1', .12 + .12 * k),
+ haul: () => S_('pickup-1', .5),
+ step: () => S_(one('step-concrete-1', 'step-concrete-2', 'step-concrete-3', 'step-concrete-4'), .35),
+ pick: () => S_('pickup-2', .5),
+ full: () => S_('cancel', .2),
+ throwIt: () => S_('swipe', .5),
+ bounce: () => S_('drop-1', .5),
+ thwack: () => S_('punch-1', .6),
+ bark: () => { S_(one('dog-bark-1', 'dog-bark-2'), .6); bub.bark(); },
+ beat: (k) => S_('heartbeat', .35 + .35 * k),
+ horn: () => S_('car-horn', .4),
+ whine: () => S_('dog-whine', .4),
+ screech: () => S_('squeak-toy', .3),
+ sting: () => S_('lose-sting', .4),
+ coin: () => S_('coin-1', .6),
+ tick: () => S_('click-3', .12),
+ win: () => S_('win-sting', .7),
 };
+preload(['tap-1', 'click-3', 'heartbeat', 'win-sting', 'coin-1']);
+// the car on the street and the dread under the roof are two looping catalogue beds that follow the game's levels
 let engine = null;
 function engineUpdate(level, pitch, dread, burn = 0) {
- const a = ac; if (!a) return;
- if (!engine) {
-  const o = a.createOscillator(), f = a.createBiquadFilter(), g = a.createGain(); o.type = 'sawtooth'; f.type = 'lowpass'; f.frequency.value = 380; g.gain.value = 0; o.connect(f).connect(g).connect(a.destination); o.start();
-  const d = a.createOscillator(), d2 = a.createOscillator(), dg = a.createGain(), df = a.createBiquadFilter(); d.type = d2.type = 'sawtooth'; d.frequency.value = 55; d2.frequency.value = 58.3; df.type = 'lowpass'; df.frequency.value = 240; dg.gain.value = 0; d.connect(df); d2.connect(df); df.connect(dg).connect(a.destination); d.start(); d2.start();
-  const wv = a.createOscillator(), wg = a.createGain(); wv.type = 'sine'; wv.frequency.value = 2900; wg.gain.value = 0; wv.connect(wg).connect(a.destination); wv.start();
-  engine = {o, g, dg, wg, wv};
- }
- engine.g.gain.setTargetAtTime(level * .07, a.currentTime, .08); engine.o.frequency.setTargetAtTime(50 + pitch * 50, a.currentTime, .15);
- engine.dg.gain.setTargetAtTime(dread * .05, a.currentTime, .3);
- engine.wg.gain.setTargetAtTime(burn * .018, a.currentTime, .15); engine.wv.frequency.setTargetAtTime(2600 + burn * 900, a.currentTime, .2);
+ if (!engine) engine = {car: catalogSfx('traffic', {gain: 0, loop: true}), dread: catalogSfx('energy-hum', {gain: 0, loop: true})};
+ engine.car.set(level * .5); engine.dread.set(dread * .6);
 }
 // The little inner voice (and the grown-ups). Spoken, never written on screen. Recorded hi-fi lines from the family cast
-// (ElevenLabs designed voices, tools/voice-cast) play by their text; the browser's own voice only speaks a line nobody
-// has recorded yet.
+// (ElevenLabs designed voices, tools/voice-cast) play by their text; a line nobody has recorded yet stays silent.
 const VOICED = {}; let voiceEl = null;
 fetch('/studies/family-cast/lines-school-jump.json').then(r => r.ok ? r.json() : null).then(m => { for (const l of Object.values(m?.lines || {})) VOICED[l.text] = l.url; }).catch(() => {});
 function say(text, opts = {}) {
  if (TEST) return;
  const url = VOICED[text];
  if (!url) return speak(text, opts);
- try { speechSynthesis?.cancel(); voiceEl?.pause(); voiceEl = new Audio(url); voiceEl.volume = .95; voiceEl.play().catch(() => speak(text, opts)); } catch { speak(text, opts); }
+ try { voiceEl?.pause(); voiceEl = new Audio(url); voiceEl.volume = .95; voiceEl.play().catch(() => speak(text, opts)); } catch { speak(text, opts); }
 }
-function speak(text, {grownUp = false, narrator = false} = {}) {
- try { voiceEl?.pause(); const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
-  u.pitch = grownUp ? .6 : narrator ? .85 : 1.7; u.rate = grownUp ? 1.05 : narrator ? .95 : 1.08; u.volume = .9;
-  const vs = s.getVoices(), en = vs.filter(v => /^en/i.test(v.lang)); u.voice = en.find(v => /child|junior|samantha|karen|female/i.test(v.name)) || en[0] || null;
-  s.speak(u); } catch {}
-}
+function speak() {} // no synthetic speech: a line nobody has recorded with an ElevenLabs designed voice stays silent
 const LINES = {
  walk: 'Come on, bub. To the wall.', further1: 'Oh, you want it further, do ya bub?', further2: 'Further? Okay, bub. Hang on.', onRoof: 'Uh oh.', getIt: 'Stay, bub. I\'ll get it.',
  hold: 'Whoa! Hold on!', cross: 'Nope, hands don\'t cross.', far: ['Too far.', 'Can\'t reach that.', 'Closer one.'],
  wrong: ['Oops.', 'Breathe. Find the shiny one.', 'Arms getting wobbly...', 'You can do it. One more good grab.'],
  loose: 'Whoa, that one wiggles!', tired: 'Whew. Noodle arms. Let\'s try again.', top: 'Made it!', firstBall: 'There\'s one!', full: 'My hands are full. Throw some to bub.', dog: ['Good dog!', 'Catch, bub!', 'Go get it!', 'Good catch!'],
  busted: 'Hey! You! Down off that roof!', afterBust: 'Oops. Watch the cars next time.', gym: 'The gym roof. Higher.', notYet: 'Not yet. There are still balls up here.',
- hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'A gold coin! One of Daddy\'s memories.', done: 'Best day ever, bub.',
+ hang: 'Wait for it...', home: 'Now home. Same way down.', allBalls: 'Thirty-one! That\'s all of them!', missDrop: 'Not yet... pull back up.', drop: 'Yes!', coin: 'Made it onto the canopy! I\'m keeping this one forever.', done: 'Best day ever, bub.',
  softer: ['Too hard. Softer.', 'Whoa, easy.', 'A little softer.'], harder: ['Too soft. Harder!', 'Bit harder.', 'Put some arm into it!'],
  bigJump: 'That seems like a big jump. Maybe I shouldn\'t do it.', listened: 'Maybe next time, bub. Let\'s go home.',
  janitor: 'Hey! What are you doing up there? Get down! I\'m calling the police!', jump: 'Uh oh. Gotta go!', ankle: 'Ow, ow, ow! My ankle!',
  hurry: 'Bub\'s waiting. Better get moving.',
  // grown-up Daddy, years later, closing the memory: the little voice was right too
- outroHollywood: 'I never told anyone about that coin. Don\'t try this at home, okay?', outroListened: 'That little voice was right. It was a big jump.',
+ outroHollywood: 'I never told anyone about that star on the roof. Don\'t try this at home, okay?', outroListened: 'That little voice was right. It was a big jump.',
  outroJanitor: 'I nearly broke my ankle that night. That\'s why you never, ever try this at home.',
 };
 let lineN = 0; const pickLine = arr => arr[lineN++ % arr.length];
@@ -338,7 +318,7 @@ const PIX = PIXEL ? .45 : 1; // ?pixel brings back the basement's chunky 8-bit l
 let time = 0, pixK = PIX;
 const hud = document.getElementById('hud');
 function addScore(n, at) {
- S.score += n; document.getElementById('ns').textContent = S.score; document.getElementById('nb').textContent = S.thrown; document.getElementById('nc').textContent = S.coins;
+ S.score += n; document.getElementById('ns').textContent = S.score; document.getElementById('nb').textContent = S.thrown;
  if (!at) return;
  const p = at.clone().project(camera); const el = document.createElement('div'); el.className = 'pop'; el.textContent = '+' + n;
  el.style.left = (p.x * .5 + .5) * innerWidth + 'px'; el.style.top = (-p.y * .5 + .5) * innerHeight + 'px'; document.body.append(el);
@@ -419,6 +399,7 @@ function topOut() {
  const spot = w.at(.5, 0, -.7); spot.y = standY; S.onWall = false; S.hands = [null, null];
  fly(kid, kid.position.clone(), spot, standY + .7, .7, () => {
   kid.rotation.y = Math.atan2(-w.n.x, -w.n.z); S.lvl = c === CLIMB2 ? 'gym' : 'low'; S.stam = 1; hud.style.display = 'flex';
+  if (c !== CLIMB2) import('/simulations/backpack.mjs?v=7').then(b => b.earnCharm('school-roof')).catch(() => {}); // every reward is a backpack charm now: the Star, for getting onto the roof
   tweenCamera(isoView(), 1.8, () => { S.mode = 'roof'; }, PIX);
  });
 }
@@ -775,12 +756,8 @@ function frame(now) {
    b.state = 'pickup'; S.carry++; SFX.pick(); if (!S.said.ball) { S.said.ball = 1; say(LINES.firstBall); }
    fly(b.m, b.m.position.clone(), kid.position.clone().add(v3(0, 1, 0)), kid.position.y + 1.4, .25, () => { b.m.visible = false; if (b.state === 'pickup') b.state = 'carried'; });
   }
-  if (S.lvl === 'canopy' && memoryCoin.visible && kid.position.distanceTo(v3(6.9, CANOPY, -.3)) < .7) {
-   memoryCoin.visible = false; S.coinDone = true; S.coins++; MC.give?.('school-jump:canopy', 'The school roof'); S.dogHop = 1; SFX.bark(); addScore(1000, null);
-   if (CR.coinReward) { S.reward = CR.coinReward(T, {scene, camera, from: memoryCoin.position.clone(), coin: memoryCoin, audio: audio(), presentation}); setTimeout(() => say(LINES.coin), 1200); }
-   else { SFX.coin(); say(LINES.coin); }
-  }
-  if (S.lvl === 'canopy' && !memoryCoin.visible && !S.coinDone) S.coinDone = true;
+  // no coin any more (every reward is a backpack charm): the memory is getting onto the canopy, and the Star charm was won on the roof
+  if (S.lvl === 'canopy' && S.mode === 'roof' && !S.coinDone) { S.coinDone = true; S.dogHop = 1; SFX.bark(); addScore(1000, null); say(LINES.coin); }
   if (S.lvl === 'canopy' && S.coinDone) { S.dawdle = (S.dawdle || 0) + dt; if (S.dawdle > 9 && !S.said.hurry) { S.said.hurry = 1; say(LINES.hurry); } if (S.dawdle > 20) janitorEnding(); }
  }
  for (const b of balls) if (b.state === 'roof') b.m.position.y = b.home.y + Math.abs(Math.sin(time * 2 + b.bob)) * .04;
@@ -833,8 +810,6 @@ function frame(now) {
  ring.visible = k > .02 && !S.onWall; ring.position.copy(kid.position).add(v3(0, .03, 0));
  ring.geometry.dispose(); ring.geometry = new T.RingGeometry(.5, .72, 40, 1, Math.PI / 2, Math.max(.01, k * Math.PI * 2)); ringMat.color.setHSL(.12 - .12 * k, .95, .6);
  for (const f of [...flying]) { f.t = Math.min(1, f.t + dt / f.dur); const e = f.t; f.obj.position.lerpVectors(f.from, f.to, e); f.obj.position.y = (1 - e) * (1 - e) * f.from.y + 2 * (1 - e) * e * f.peak + e * e * f.to.y; if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done?.(); } }
- if (memoryCoin.visible) memoryCoin.rotation.z += dt * 2;
- if (S.reward && !S.reward.update(rdt)) S.reward = null;
  // the light: dusk deepens over four minutes; windows, the wall lamp and streetlamps come up as it does
  const night = Math.min(1, time / 240); sky.uniforms.night.value = night * .85;
  sun.intensity = 3.7 - 2.5 * night; sun.color.setRGB(1, .54 - .15 * night, .3 - .1 * night); scene.environmentIntensity = .42 - .27 * night;

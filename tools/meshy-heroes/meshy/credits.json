@@ -1,0 +1,956 @@
+{
+ "cap": 2400,
+ "total": 2394,
+ "log": [
+  {
+   "what": "A1-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:32:47Z"
+  },
+  {
+   "what": "A3-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:26Z"
+  },
+  {
+   "what": "A1-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:26Z"
+  },
+  {
+   "what": "A3-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:36Z"
+  },
+  {
+   "what": "A2-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:37Z"
+  },
+  {
+   "what": "A1-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:35:57Z"
+  },
+  {
+   "what": "A2-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:35:57Z"
+  },
+  {
+   "what": "A1-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:13Z"
+  },
+  {
+   "what": "A4-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:15Z"
+  },
+  {
+   "what": "A2-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:37Z"
+  },
+  {
+   "what": "A4-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:38Z"
+  },
+  {
+   "what": "A2-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:37:41Z"
+  },
+  {
+   "what": "A5-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:37:41Z"
+  },
+  {
+   "what": "A4-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:22Z"
+  },
+  {
+   "what": "A5-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:23Z"
+  },
+  {
+   "what": "A4-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:35Z"
+  },
+  {
+   "what": "A6-clay-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:35Z"
+  },
+  {
+   "what": "A5-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:39:38Z"
+  },
+  {
+   "what": "A6-paint-suit 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:39:38Z"
+  },
+  {
+   "what": "A6-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:42:33Z"
+  },
+  {
+   "what": "A6-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:42:47Z"
+  },
+  {
+   "what": "A5-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T19:43:03Z"
+  },
+  {
+   "what": "charm-tardigrade 3d",
+   "credits": 30,
+   "at": "2026-10-23T19:49:28Z"
+  },
+  {
+   "what": "A3-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:15:32Z"
+  },
+  {
+   "what": "A3-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:15:32Z"
+  },
+  {
+   "what": "A3-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:18:18Z"
+  },
+  {
+   "what": "A3-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:18:18Z"
+  },
+  {
+   "what": "A1-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:21:12Z"
+  },
+  {
+   "what": "A1-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:21:12Z"
+  },
+  {
+   "what": "A1-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:24:06Z"
+  },
+  {
+   "what": "A1-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:24:06Z"
+  },
+  {
+   "what": "A2-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:27:00Z"
+  },
+  {
+   "what": "A2-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:27:00Z"
+  },
+  {
+   "what": "A2-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:30:05Z"
+  },
+  {
+   "what": "A2-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:30:05Z"
+  },
+  {
+   "what": "A4-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:32:50Z"
+  },
+  {
+   "what": "A4-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:32:50Z"
+  },
+  {
+   "what": "A4-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:35:35Z"
+  },
+  {
+   "what": "A4-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:35:35Z"
+  },
+  {
+   "what": "A5-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:38:30Z"
+  },
+  {
+   "what": "A5-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:38:30Z"
+  },
+  {
+   "what": "A5-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:41:15Z"
+  },
+  {
+   "what": "A5-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:41:15Z"
+  },
+  {
+   "what": "A6-clay-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:44:32Z"
+  },
+  {
+   "what": "A6-clay-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:44:32Z"
+  },
+  {
+   "what": "A6-paint-suit rig",
+   "credits": 5,
+   "at": "2026-10-23T20:47:26Z"
+  },
+  {
+   "what": "A6-paint-suit remesh",
+   "credits": 5,
+   "at": "2026-10-23T20:47:26Z"
+  },
+  {
+   "what": "charm-brass-key 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-coffee-cup 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-bub 3d (run 8; model made, push failed; recover from Meshy)",
+   "credits": 20,
+   "at": "2026-10-23T20:53:00Z"
+  },
+  {
+   "what": "charm-floppy-disk 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-heart 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-moon 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:24Z"
+  },
+  {
+   "what": "charm-rocket 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:59Z"
+  },
+  {
+   "what": "charm-star 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:07:59Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-base retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:08Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-flair retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:32Z"
+  },
+  {
+   "what": "A3-paint-suit-paint-clay retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:08:43Z"
+  },
+  {
+   "what": "brute1-retexture retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:09:21Z"
+  },
+  {
+   "what": "brute2-retexture retexture",
+   "credits": 10,
+   "at": "2026-10-23T21:09:59Z"
+  },
+  {
+   "what": "cs-1-claymation-adventurer 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:12Z"
+  },
+  {
+   "what": "cs-2-plasticine-inventor 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:12Z"
+  },
+  {
+   "what": "cs-3-stick-man 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:10:48Z"
+  },
+  {
+   "what": "cs-1-claymation-adventurer rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:07Z"
+  },
+  {
+   "what": "cs-2-plasticine-inventor rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:39Z"
+  },
+  {
+   "what": "cs-3-stick-man rig",
+   "credits": 5,
+   "at": "2026-10-23T21:12:44Z"
+  },
+  {
+   "what": "cs-4-80s-action-hero 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:12:57Z"
+  },
+  {
+   "what": "A3-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:12:58Z"
+  },
+  {
+   "what": "A3-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:13:31Z"
+  },
+  {
+   "what": "A3-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:14:43Z"
+  },
+  {
+   "what": "cs-4-80s-action-hero rig",
+   "credits": 5,
+   "at": "2026-10-23T21:14:53Z"
+  },
+  {
+   "what": "A3-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:15:06Z"
+  },
+  {
+   "what": "A1-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:15:37Z"
+  },
+  {
+   "what": "A1-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:15:38Z"
+  },
+  {
+   "what": "A2-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:15:46Z"
+  },
+  {
+   "what": "A1-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:17:13Z"
+  },
+  {
+   "what": "A1-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:17:22Z"
+  },
+  {
+   "what": "A2-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:17:42Z"
+  },
+  {
+   "what": "A2-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:17:53Z"
+  },
+  {
+   "what": "A4-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:18:13Z"
+  },
+  {
+   "what": "A4-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:18:32Z"
+  },
+  {
+   "what": "A2-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:19:38Z"
+  },
+  {
+   "what": "A4-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:19:48Z"
+  },
+  {
+   "what": "A4-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:20:07Z"
+  },
+  {
+   "what": "A5-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:20:34Z"
+  },
+  {
+   "what": "A5-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:20:35Z"
+  },
+  {
+   "what": "A6-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:20:51Z"
+  },
+  {
+   "what": "A5-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:22:40Z"
+  },
+  {
+   "what": "A5-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:22:40Z"
+  },
+  {
+   "what": "A6-clay-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:22:47Z"
+  },
+  {
+   "what": "A6-paint-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:23:19Z"
+  },
+  {
+   "what": "A6-paint-tee rig",
+   "credits": 5,
+   "at": "2026-10-23T21:25:25Z"
+  },
+  {
+   "what": "aurora_1_0 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:32:53Z"
+  },
+  {
+   "what": "aurora_1_1 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:32:53Z"
+  },
+  {
+   "what": "aurora_1_2 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:32:53Z"
+  },
+  {
+   "what": "aurora_1_3 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:34:08Z"
+  },
+  {
+   "what": "aurora_2_0 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:34:59Z"
+  },
+  {
+   "what": "aurora_2_1 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:35:40Z"
+  },
+  {
+   "what": "aurora_2_2 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:36:24Z"
+  },
+  {
+   "what": "aurora_2_3 3d",
+   "credits": 20,
+   "at": "2026-10-23T21:36:44Z"
+  },
+  {
+   "what": "reconcile: other threads (spaceship shapes, other runs) per live Meshy balance 459 at 21:55Z vs 2,134 at 20:13Z (less the 160 Aurora runs itemised below)",
+   "credits": 625,
+   "at": "2026-10-23T21:55:19Z"
+  },
+  {
+   "what": "anim 0",
+   "credits": 3,
+   "at": "2026-10-24T00:34:00Z"
+  },
+  {
+   "what": "anim 1",
+   "credits": 3,
+   "at": "2026-10-24T00:34:00Z"
+  },
+  {
+   "what": "charm-floppy-disk-tex retexture",
+   "credits": 10,
+   "at": "2026-10-24T00:36:15Z"
+  },
+  {
+   "what": "charm-rocket-tex retexture",
+   "credits": 10,
+   "at": "2026-10-24T00:36:15Z"
+  },
+  {
+   "what": "anim 20",
+   "credits": 3,
+   "at": "2026-10-24T00:44:48Z"
+  },
+  {
+   "what": "anim 30",
+   "credits": 3,
+   "at": "2026-10-24T00:44:48Z"
+  },
+  {
+   "what": "anim 21",
+   "credits": 3,
+   "at": "2026-10-24T00:44:48Z"
+  },
+  {
+   "what": "anim 55",
+   "credits": 3,
+   "at": "2026-10-24T00:44:48Z"
+  },
+  {
+   "what": "anim 106",
+   "credits": 3,
+   "at": "2026-10-24T00:44:48Z"
+  },
+  {
+   "what": "anim 5",
+   "credits": 3,
+   "at": "2026-10-24T00:45:11Z"
+  },
+  {
+   "what": "anim 6",
+   "credits": 3,
+   "at": "2026-10-24T00:45:11Z"
+  },
+  {
+   "what": "anim 13",
+   "credits": 3,
+   "at": "2026-10-24T00:45:11Z"
+  },
+  {
+   "what": "anim 14",
+   "credits": 3,
+   "at": "2026-10-24T00:45:11Z"
+  },
+  {
+   "what": "anim 15",
+   "credits": 3,
+   "at": "2026-10-24T00:45:11Z"
+  },
+  {
+   "what": "anim 16",
+   "credits": 3,
+   "at": "2026-10-24T00:45:36Z"
+  },
+  {
+   "what": "anim 523",
+   "credits": 3,
+   "at": "2026-10-24T00:45:36Z"
+  },
+  {
+   "what": "anim 524",
+   "credits": 3,
+   "at": "2026-10-24T00:45:36Z"
+  },
+  {
+   "what": "anim 525",
+   "credits": 3,
+   "at": "2026-10-24T00:45:36Z"
+  },
+  {
+   "what": "anim 571",
+   "credits": 3,
+   "at": "2026-10-24T00:45:36Z"
+  },
+  {
+   "what": "anim 572",
+   "credits": 3,
+   "at": "2026-10-24T00:45:48Z"
+  },
+  {
+   "what": "anim 575",
+   "credits": 3,
+   "at": "2026-10-24T00:45:59Z"
+  },
+  {
+   "what": "anim 576",
+   "credits": 3,
+   "at": "2026-10-24T00:45:59Z"
+  },
+  {
+   "what": "anim 568",
+   "credits": 3,
+   "at": "2026-10-24T00:45:59Z"
+  },
+  {
+   "what": "anim 569",
+   "credits": 3,
+   "at": "2026-10-24T00:45:59Z"
+  },
+  {
+   "what": "anim 570",
+   "credits": 3,
+   "at": "2026-10-24T00:46:23Z"
+  },
+  {
+   "what": "anim 11",
+   "credits": 3,
+   "at": "2026-10-24T00:46:23Z"
+  },
+  {
+   "what": "anim 12",
+   "credits": 3,
+   "at": "2026-10-24T00:46:23Z"
+  },
+  {
+   "what": "anim 32",
+   "credits": 3,
+   "at": "2026-10-24T00:46:23Z"
+  },
+  {
+   "what": "anim 33",
+   "credits": 3,
+   "at": "2026-10-24T00:46:23Z"
+  },
+  {
+   "what": "anim 25",
+   "credits": 3,
+   "at": "2026-10-24T00:46:45Z"
+  },
+  {
+   "what": "anim 26",
+   "credits": 3,
+   "at": "2026-10-24T00:46:45Z"
+  },
+  {
+   "what": "anim 28",
+   "credits": 3,
+   "at": "2026-10-24T00:46:45Z"
+  },
+  {
+   "what": "anim 34",
+   "credits": 3,
+   "at": "2026-10-24T00:46:55Z"
+  },
+  {
+   "what": "anim 37",
+   "credits": 3,
+   "at": "2026-10-24T00:46:55Z"
+  },
+  {
+   "what": "anim 47",
+   "credits": 3,
+   "at": "2026-10-24T00:47:30Z"
+  },
+  {
+   "what": "anim 49",
+   "credits": 3,
+   "at": "2026-10-24T00:47:30Z"
+  },
+  {
+   "what": "anim 50",
+   "credits": 3,
+   "at": "2026-10-24T00:47:30Z"
+  },
+  {
+   "what": "anim 2",
+   "credits": 3,
+   "at": "2026-10-24T00:47:30Z"
+  },
+  {
+   "what": "anim 3",
+   "credits": 3,
+   "at": "2026-10-24T00:47:30Z"
+  },
+  {
+   "what": "anim 333",
+   "credits": 3,
+   "at": "2026-10-24T00:47:52Z"
+  },
+  {
+   "what": "anim 273",
+   "credits": 3,
+   "at": "2026-10-24T00:47:52Z"
+  },
+  {
+   "what": "anim 274",
+   "credits": 3,
+   "at": "2026-10-24T00:48:02Z"
+  },
+  {
+   "what": "anim 275",
+   "credits": 3,
+   "at": "2026-10-24T00:48:02Z"
+  },
+  {
+   "what": "anim 276",
+   "credits": 3,
+   "at": "2026-10-24T00:48:02Z"
+  },
+  {
+   "what": "anim 259",
+   "credits": 3,
+   "at": "2026-10-24T00:48:36Z"
+  },
+  {
+   "what": "anim 261",
+   "credits": 3,
+   "at": "2026-10-24T00:48:36Z"
+  },
+  {
+   "what": "anim 260",
+   "credits": 3,
+   "at": "2026-10-24T00:48:36Z"
+  },
+  {
+   "what": "anim 266",
+   "credits": 3,
+   "at": "2026-10-24T00:48:36Z"
+  },
+  {
+   "what": "anim 263",
+   "credits": 3,
+   "at": "2026-10-24T00:48:36Z"
+  },
+  {
+   "what": "anim 52",
+   "credits": 3,
+   "at": "2026-10-24T00:48:59Z"
+  },
+  {
+   "what": "anim 53",
+   "credits": 3,
+   "at": "2026-10-24T00:48:59Z"
+  },
+  {
+   "what": "anim 57",
+   "credits": 3,
+   "at": "2026-10-24T00:48:59Z"
+  },
+  {
+   "what": "anim 58",
+   "credits": 3,
+   "at": "2026-10-24T00:49:09Z"
+  },
+  {
+   "what": "anim 60",
+   "credits": 3,
+   "at": "2026-10-24T00:49:19Z"
+  },
+  {
+   "what": "anim 342",
+   "credits": 3,
+   "at": "2026-10-24T00:49:43Z"
+  },
+  {
+   "what": "anim 436",
+   "credits": 3,
+   "at": "2026-10-24T00:49:43Z"
+  },
+  {
+   "what": "anim 434",
+   "credits": 3,
+   "at": "2026-10-24T00:49:43Z"
+  },
+  {
+   "what": "anim 435",
+   "credits": 3,
+   "at": "2026-10-24T00:49:43Z"
+  },
+  {
+   "what": "anim 319",
+   "credits": 3,
+   "at": "2026-10-24T00:49:43Z"
+  },
+  {
+   "what": "anim 437",
+   "credits": 3,
+   "at": "2026-10-24T00:49:55Z"
+  },
+  {
+   "what": "anim 438",
+   "credits": 3,
+   "at": "2026-10-24T00:50:05Z"
+  },
+  {
+   "what": "anim 487",
+   "credits": 3,
+   "at": "2026-10-24T00:50:06Z"
+  },
+  {
+   "what": "anim 488",
+   "credits": 3,
+   "at": "2026-10-24T00:50:06Z"
+  },
+  {
+   "what": "anim 473",
+   "credits": 3,
+   "at": "2026-10-24T00:50:16Z"
+  },
+  {
+   "what": "anim 474",
+   "credits": 3,
+   "at": "2026-10-24T00:50:39Z"
+  },
+  {
+   "what": "anim 475",
+   "credits": 3,
+   "at": "2026-10-24T00:50:39Z"
+  },
+  {
+   "what": "anim 460",
+   "credits": 3,
+   "at": "2026-10-24T00:50:39Z"
+  },
+  {
+   "what": "anim 461",
+   "credits": 3,
+   "at": "2026-10-24T00:50:39Z"
+  },
+  {
+   "what": "anim 462",
+   "credits": 3,
+   "at": "2026-10-24T00:50:39Z"
+  },
+  {
+   "what": "anim 463",
+   "credits": 3,
+   "at": "2026-10-24T00:51:02Z"
+  },
+  {
+   "what": "anim 450",
+   "credits": 3,
+   "at": "2026-10-24T00:51:02Z"
+  },
+  {
+   "what": "anim 426",
+   "credits": 3,
+   "at": "2026-10-24T00:51:02Z"
+  },
+  {
+   "what": "anim 427",
+   "credits": 3,
+   "at": "2026-10-24T00:51:02Z"
+  },
+  {
+   "what": "note: anim 464 refused by Meshy (no longer in the library), not charged",
+   "credits": 0,
+   "at": "2026-10-24T00:51:02Z"
+  },
+  {
+   "what": "anim 27",
+   "credits": 3,
+   "at": "2026-10-24T00:51:27Z"
+  },
+  {
+   "what": "anim 22",
+   "credits": 3,
+   "at": "2026-10-24T00:51:27Z"
+  },
+  {
+   "what": "anim 31",
+   "credits": 3,
+   "at": "2026-10-24T00:51:27Z"
+  },
+  {
+   "what": "anim 29",
+   "credits": 3,
+   "at": "2026-10-24T00:51:27Z"
+  },
+  {
+   "what": "anim 23",
+   "credits": 3,
+   "at": "2026-10-24T00:51:27Z"
+  },
+  {
+   "what": "anim 24",
+   "credits": 3,
+   "at": "2026-10-24T00:51:49Z"
+  },
+  {
+   "what": "anim 87",
+   "credits": 3,
+   "at": "2026-10-24T00:51:49Z"
+  },
+  {
+   "what": "anim 90",
+   "credits": 3,
+   "at": "2026-10-24T00:51:49Z"
+  },
+  {
+   "what": "anim 138",
+   "credits": 3,
+   "at": "2026-10-24T00:51:49Z"
+  },
+  {
+   "what": "anim 7",
+   "credits": 3,
+   "at": "2026-10-24T00:51:59Z"
+  },
+  {
+   "what": "anim 174",
+   "credits": 3,
+   "at": "2026-10-24T00:52:22Z"
+  },
+  {
+   "what": "anim 125",
+   "credits": 3,
+   "at": "2026-10-24T00:52:22Z"
+  }
+ ],
+ "live_balance": {
+  "credits": 459,
+  "at": "2026-10-23T21:55:19Z"
+ },
+ "cap_note": "Evan raised the cap from 2,000 to 2,400 (decision 2026-10-24 00:31Z) for 84 core animations + 2 charm retextures"
+}

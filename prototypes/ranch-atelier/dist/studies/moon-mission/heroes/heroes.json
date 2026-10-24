@@ -1,0 +1,439 @@
+{
+ "about": "Meshy astronaut heroes (AW-STUDY-0043), cleaned by tools/meshy-heroes/cleanup.py: Character Studio's 20-bone rig, metres, Y up, facing +Z, A-pose, <=4 weights, ~10k tris, materials skin/suit/boots/hair sharing one 1024px texture. No animation clips: the shared Meshy animation library is retargeted onto these bone names.",
+ "order": "Daddy, Abbie, Ani, Commander, Engineer, alien crewmate",
+ "abbie_backpack": "wearBackpack(chestBone,{height:.42,offset:[0,0,-.16]}) from /simulations/backpack-wear.mjs",
+ "heroes": [
+  {
+   "id": "A3-clay-suit",
+   "name": "Daddy",
+   "look": "plasticine",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A3-clay-suit.glb",
+   "tris": 10000,
+   "height_m": 1.8,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A3-clay-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A3-clay-suit/"
+  },
+  {
+   "id": "A3-paint-suit",
+   "name": "Daddy",
+   "look": "painterly",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A3-paint-suit.glb",
+   "tris": 10000,
+   "height_m": 1.803,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A3-paint-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A3-paint-suit/"
+  },
+  {
+   "id": "A3-clay-tee",
+   "name": "Daddy",
+   "look": "plasticine",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A3-clay-tee.glb",
+   "tris": 10000,
+   "height_m": 1.801,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A3-clay-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A3-clay-tee/"
+  },
+  {
+   "id": "A3-paint-tee",
+   "name": "Daddy",
+   "look": "painterly",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A3-paint-tee.glb",
+   "tris": 10000,
+   "height_m": 1.807,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A3-paint-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A3-paint-tee/"
+  },
+  {
+   "id": "A1-clay-suit",
+   "name": "Abbie",
+   "look": "plasticine",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A1-clay-suit.glb",
+   "tris": 10000,
+   "height_m": 1.202,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A1-clay-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A1-clay-suit/"
+  },
+  {
+   "id": "A1-paint-suit",
+   "name": "Abbie",
+   "look": "painterly",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A1-paint-suit.glb",
+   "tris": 10000,
+   "height_m": 1.201,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A1-paint-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A1-paint-suit/"
+  },
+  {
+   "id": "A1-clay-tee",
+   "name": "Abbie",
+   "look": "plasticine",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A1-clay-tee.glb",
+   "tris": 9999,
+   "height_m": 1.2,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A1-clay-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A1-clay-tee/"
+  },
+  {
+   "id": "A1-paint-tee",
+   "name": "Abbie",
+   "look": "painterly",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A1-paint-tee.glb",
+   "tris": 10000,
+   "height_m": 1.201,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A1-paint-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A1-paint-tee/"
+  },
+  {
+   "id": "A2-clay-suit",
+   "name": "Ani",
+   "look": "plasticine",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A2-clay-suit.glb",
+   "tris": 10000,
+   "height_m": 1.206,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A2-clay-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A2-clay-suit/"
+  },
+  {
+   "id": "A2-paint-suit",
+   "name": "Ani",
+   "look": "painterly",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A2-paint-suit.glb",
+   "tris": 10000,
+   "height_m": 1.201,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A2-paint-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A2-paint-suit/"
+  },
+  {
+   "id": "A2-clay-tee",
+   "name": "Ani",
+   "look": "plasticine",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A2-clay-tee.glb",
+   "tris": 10000,
+   "height_m": 1.199,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A2-clay-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A2-clay-tee/"
+  },
+  {
+   "id": "A2-paint-tee",
+   "name": "Ani",
+   "look": "painterly",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A2-paint-tee.glb",
+   "tris": 10000,
+   "height_m": 1.205,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A2-paint-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A2-paint-tee/"
+  },
+  {
+   "id": "A4-clay-suit",
+   "name": "Commander",
+   "look": "plasticine",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A4-clay-suit.glb",
+   "tris": 10000,
+   "height_m": 1.801,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A4-clay-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A4-clay-suit/"
+  },
+  {
+   "id": "A4-paint-suit",
+   "name": "Commander",
+   "look": "painterly",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A4-paint-suit.glb",
+   "tris": 10000,
+   "height_m": 1.804,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A4-paint-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A4-paint-suit/"
+  },
+  {
+   "id": "A4-clay-tee",
+   "name": "Commander",
+   "look": "plasticine",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A4-clay-tee.glb",
+   "tris": 10000,
+   "height_m": 1.8,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A4-clay-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A4-clay-tee/"
+  },
+  {
+   "id": "A4-paint-tee",
+   "name": "Commander",
+   "look": "painterly",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A4-paint-tee.glb",
+   "tris": 10000,
+   "height_m": 1.802,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A4-paint-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A4-paint-tee/"
+  },
+  {
+   "id": "A5-clay-suit",
+   "name": "Engineer",
+   "look": "plasticine",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A5-clay-suit.glb",
+   "tris": 10000,
+   "height_m": 1.801,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A5-clay-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A5-clay-suit/"
+  },
+  {
+   "id": "A5-paint-suit",
+   "name": "Engineer",
+   "look": "painterly",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A5-paint-suit.glb",
+   "tris": 10000,
+   "height_m": 1.806,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A5-paint-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A5-paint-suit/"
+  },
+  {
+   "id": "A5-clay-tee",
+   "name": "Engineer",
+   "look": "plasticine",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A5-clay-tee.glb",
+   "tris": 9999,
+   "height_m": 1.8,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A5-clay-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A5-clay-tee/"
+  },
+  {
+   "id": "A5-paint-tee",
+   "name": "Engineer",
+   "look": "painterly",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A5-paint-tee.glb",
+   "tris": 10000,
+   "height_m": 1.804,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A5-paint-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A5-paint-tee/"
+  },
+  {
+   "id": "A6-clay-suit",
+   "name": "Alien crewmate",
+   "look": "plasticine",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A6-clay-suit.glb",
+   "tris": 10000,
+   "height_m": 1.0,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A6-clay-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A6-clay-suit/"
+  },
+  {
+   "id": "A6-paint-suit",
+   "name": "Alien crewmate",
+   "look": "painterly",
+   "outfit": "suit",
+   "glb": "/studies/moon-mission/heroes/A6-paint-suit.glb",
+   "tris": 10000,
+   "height_m": 1.0,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A6-paint-suit/pick.png",
+   "history": "tools/meshy-heroes/meshy/A6-paint-suit/"
+  },
+  {
+   "id": "A6-clay-tee",
+   "name": "Alien crewmate",
+   "look": "plasticine",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A6-clay-tee.glb",
+   "tris": 10000,
+   "height_m": 1.0,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A6-clay-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A6-clay-tee/"
+  },
+  {
+   "id": "A6-paint-tee",
+   "name": "Alien crewmate",
+   "look": "painterly",
+   "outfit": "snug tee and shorts (under-suit layer)",
+   "glb": "/studies/moon-mission/heroes/A6-paint-tee.glb",
+   "tris": 10000,
+   "height_m": 1.0,
+   "bones": 20,
+   "materials": [
+    "skin",
+    "suit",
+    "boots",
+    "hair"
+   ],
+   "ref": "tools/meshy-heroes/refs/A6-paint-tee/pick.png",
+   "history": "tools/meshy-heroes/meshy/A6-paint-tee/"
+  }
+ ]
+}

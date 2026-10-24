@@ -1,0 +1,166 @@
+{
+ "car-racer": {
+  "status": "good",
+  "name": "Toy racer",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Chunky, friendly racer with a clear nose, cockpit bump and big tyres.",
+   "Four separate wheels, each named wheel, with the axle running side to side so they can spin.",
+   "Sits on the ground facing forward, at about car size."
+  ],
+  "off": [
+   "Wheel positions were placed by eye from the body shape, so they may sit a little off the real axles.",
+   "One plain tan colour, with no number plate or stripes."
+  ]
+ },
+ "car-toddler": {
+  "status": "partial",
+  "name": "Chunky toddler car",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Soft, rounded toy shape that suits a storybook garage.",
+   "Four separate wheels that can spin."
+  ],
+  "off": [
+   "The body is a flat slab with a window hole, more of a toy block than a car.",
+   "Wheels are huge for the body and were placed by eye."
+  ]
+ },
+ "car-pickup": {
+  "status": "partial",
+  "name": "Toy pickup truck",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Reads clearly as a pickup, with a cab and an open bed.",
+   "Four separate wheels that can spin."
+  ],
+  "off": [
+   "The wheels are tiny compared with the body, so it looks like it is gliding.",
+   "Wheel positions were placed by eye.",
+   "The original has a print-in-place tailgate that is not kept."
+  ]
+ },
+ "car-sedan": {
+  "status": "partial",
+  "name": "Red sedan",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Plain, readable family car shape.",
+   "Wheels were found inside the file automatically, so they sit exactly right and can spin."
+  ],
+  "off": [
+   "Very simple flat panels with no real detail.",
+   "Lighter than the usual size for a car, so it can take more detail."
+  ]
+ },
+ "car-wedge": {
+  "status": "weak",
+  "name": "Wedge toy car",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Great retro wedge silhouette."
+  ],
+  "off": [
+   "The wheels are fused to the body, so they cannot spin and the car cannot be used for driving as it is.",
+   "To use it, the wheels would need to be cut out and rebuilt."
+  ]
+ },
+ "car-concept": {
+  "status": "weak",
+  "name": "Concept sports car",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "The most detailed and exciting shape of the set."
+  ],
+  "off": [
+   "The wheels are fused to the body, so they cannot spin.",
+   "The source is very heavy and was shrunk a long way, which softens the detail.",
+   "The Printables picture is marked as AI-generated, so treat the design as inspiration."
+  ]
+ },
+ "car-bus": {
+  "status": "partial",
+  "name": "Camper bus",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Instantly readable 1970s-style camper bus with its split windscreen, bumper and roof.",
+   "Four separate wheels that can spin.",
+   "The raised badge on the nose and the lettering on the rear plate were sanded flat, so no brand mark is left."
+  ],
+  "off": [
+   "The window frames and roof edge come out soft and lumpy at this size.",
+   "Wheel positions were placed by eye from the body shape.",
+   "The model is still the shape of a famous real van, so check it is generic enough before shipping."
+  ]
+ },
+ "car-cage-kart": {
+  "status": "good",
+  "name": "Roll-cage buggy",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Clean open roll-cage buggy with seat, steering wheel and big tyres.",
+   "Four wheels were found as separate pieces in the file, so they sit exactly right and can spin.",
+   "Light and open, so it reads well from far away."
+  ],
+  "off": [
+   "The thin cage bars are chunky at this size.",
+   "One plain gold colour, with no stripes or number."
+  ]
+ },
+ "car-small-truck": {
+  "status": "partial",
+  "name": "Truck cab",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Strong, simple lorry cab with a good silhouette.",
+   "Three wheel sets, each with its own axle, that can spin."
+  ],
+  "off": [
+   "It is just the cab with no trailer.",
+   "Each wheel set joins a left and right wheel on one axle, so they turn together (fine for rolling, not for steering).",
+   "A bit tall and square for a toy."
+  ]
+ },
+ "car-box-truck": {
+  "status": "weak",
+  "name": "Box truck",
+  "orbit": [
+   -35,
+   70
+  ],
+  "good": [
+   "Friendly chunky box truck with a rounded cab."
+  ],
+  "off": [
+   "Only one axle has wheels that can spin; the front wheels are fused to the body.",
+   "So it cannot be used for driving as it is."
+  ]
+ }
+}

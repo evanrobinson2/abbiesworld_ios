@@ -1,10 +1,10 @@
 import {installTileCarryStyle,landingPulse} from './tile-placement-feedback.mjs?v=15';
 import {sharedImpactSound} from './tile-drop-impact.mjs?v=2';
-import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=4';
+import {blankCard,aimAtCard,refillCard,openCustomizer,openPrintWindow,installTilePullStyle} from './tile-pull.mjs?v=7';
 import {PALETTES,cityPreset,CONFIGURATIONS} from './city/city-settings.mjs';
 import {cityFootprint} from './city/city-footprint.mjs';
 import {SCIENCE_BASE_FACETS} from './moon/science-worlds.mjs';
-import {createLiveTrayPreview} from './live-tray-preview.mjs?v=2';
+import {createLiveTrayPreview} from './live-tray-preview.mjs?v=4';
 import {attachTrayTooltips} from './tray-tooltips.mjs';
 import {placementSettings,placementAxes} from './placement-settings.mjs';
 import {uiIcon} from './ui-icons.mjs?v=4';
@@ -12,10 +12,11 @@ import {gardenSettings} from './garden-facets.mjs';
 import * as T from './vendor/three.module.js';
 import {cameraOwnsPointer} from './vendor/sandbox-camera.mjs';
 import {dragScroll} from './drag-scroll.mjs';
+import {warmScene} from './build-progress.mjs';
 import {designDrawer} from './tile-drawer.mjs';
 import {TILE_CHOICES,SCENE_GENERATORS,multiHexIcon,tileCenter,frontier} from './tile-expansion.mjs';
 const descriptions={ai:'Blank construction site · describe what to build after placing it.',city:'Futurama · DIORAMA. Configurable retro-future scenery; traffic is decorative, not a city economy.',moon:'Moonbase · colonists, science missions, water, power and food production.',ranch:'Ranch · household, animals and daily farm life.',paddock:'Paddock · livestock enclosures and shelter.','sugar-shack':'Maple sugar shack · sightseeing and a leisure bonus for neighboring tiles.',crop:'Garden · cultivated growing beds and working paths.',meadow:'Meadow · open habitat and vegetation.'};
-export function createTileChooser({preview,allowed,scene,camera,orbit,canvas,getBoard}){
+export function createTileChooser({preview,allowed,scene,camera,orbit,canvas,getBoard,renderer=null}){
  installTileCarryStyle();installTilePullStyle();
  const launch=document.createElement('button');launch.id='tile-chooser-toggle';launch.ariaLabel=launch.title='Choose scene type';launch.setAttribute('aria-expanded','false');launch.innerHTML=uiIcon('tiles');
  const panel=document.createElement('section');panel.id='tile-chooser';panel.hidden=true;panel.ariaLabel='Expand this world';panel.innerHTML='<div class="tile-expand-heading"><span>Choose an empty hex</span><button aria-label="Close scene tray">×</button></div><div class="tile-options" hidden></div><p class="tile-preview-status" role="status">Click an outlined hex in the world.</p><button class="add-tile" hidden>Place here</button>';
@@ -86,12 +87,33 @@ const options=panel.querySelector('.tile-options'),status=panel.querySelector('[
   entry.promise=preview(id,bestSlot(),{...settingsFor(id)},{trayOnly:true,stale:()=>!live()}).then(a=>{if(!live()){a.dispose();return null;}entry.asset=a;return a;}).catch(()=>{if(premade.get(g.id)===entry)premade.delete(g.id);return null;});
   premade.set(g.id,entry);return entry;}
  let premadeBoard='',premaking=false;
- function premakeTick(){if(premaking||document.hidden||!allowed()||drag||loading||printing)return;const key=boardKey();if(key!==premadeBoard){premadeBoard=key;for(const id of [...premade.keys()])dropPremade(id);}
-  const g=SCENE_GENERATORS.find(g=>!premade.has(g.id)&&!(opened&&asset&&generator===g));if(!g)return;premaking=true;premake(g).promise.finally(()=>{premaking=false;});}
+ // Only the scene on the hero card is printed ahead, and only once the board has been quiet for a moment.
+ // Printing every generator in the background rebuilt four tiles (models, shaders, uploads) right after
+ // each placement, on the same thread the player is watching: that was the lag after placing a tile.
+ const PREMAKE_QUIET=4000;let boardChanged=0;
+ function premakeTick(){if(premaking||document.hidden||!allowed()||drag||loading||printing)return;const key=boardKey();if(key!==premadeBoard){premadeBoard=key;boardChanged=performance.now();for(const id of [...premade.keys()])dropPremade(id);return;}
+  if(performance.now()-boardChanged<PREMAKE_QUIET)return;
+  const g=generator&&!premade.has(generator.id)&&!(opened&&asset)?generator:null;if(!g)return;premaking=true;const start=()=>premake(g).promise.finally(()=>{premaking=false;});if(window.requestIdleCallback)requestIdleCallback(start,{timeout:2000});else start();}
+ // Startup warm-up: print each tile type once, unseen, so every shader program it needs is compiled and kept
+ // (build-progress.mjs keeps them) before the player's first placement. Browsers cannot ship compiled
+ // shaders, so this runs once per session behind the loading card. Returns false when it had to stop early.
+ const WARM_TYPES=['ranch','paddock','sugar-shack','crop','meadow'];
+ async function warm(onStep,{decorate=null}={}){
+  premaking=true;let done=0;
+  try{for(const id of WARM_TYPES){if(disposedChooser||!allowed())return false;onStep?.(done,WARM_TYPES.length,id);
+   try{const a=await preview(id,bestSlot(),{...settingsFor(id)},{trayOnly:true});
+    // A placed tile plays its arrival effect on cloned materials, which are programs of their own: compile those too.
+    if(a?.group)await (livePreview??=createLiveTrayPreview({renderer})).compile(a);
+    const undo=a?.group&&decorate?.(a.group);try{if(undo)await warmScene(renderer,a.group,camera,scene);}finally{undo?.();}a?.dispose?.();}catch(error){console.warn('Warm-up skipped '+id+': '+error.message);}
+   done++;await new Promise(r=>requestAnimationFrame(r));}
+   onStep?.(done,WARM_TYPES.length);return true;}
+  finally{premaking=false;boardChanged=performance.now();}
+ }
+ let disposedChooser=false;
  const premakeTimer=setInterval(premakeTick,1200);
  function adoptPremade(id){const e=premade.get(generator.id);if(!e||e.type!==id||e.key!==premadeKey(id))return null;e.adopted=true;premade.delete(generator.id);return e.promise;}
  function preferredSlot(){camera.updateMatrixWorld();let best=0,score=Infinity;slots.forEach((s,i)=>{const p=new T.Vector3().fromBufferAttribute(s.surface.geometry.attributes.position,0).project(camera),cost=Math.abs(p.x)+Math.abs(p.y)*1.3+(p.z>1?100:0);if(cost<score){best=i;score=cost;}});return best;}
- async function showPreview(next,id){livePreview??=createLiveTrayPreview();const card=options.querySelector('[data-type="'+id+'"]');return livePreview.set(next,card);}
+ async function showPreview(next,id){livePreview??=createLiveTrayPreview({renderer});const card=options.querySelector('[data-type="'+id+'"]');return livePreview.set(next,card);}
  let footprintOutline=null,footprintKey='';function clearFootprint(){if(footprintOutline){scene.remove(footprintOutline);footprintOutline.geometry.dispose();footprintOutline.material.dispose();footprintOutline=null;}}
  function highlight(i){canvas.dataset.tileTarget=String(i);slots.forEach((s,j)=>{s.line.material.color.set(j===i?'#e6ad38':'#b4b88b');s.surface.material.color.set(j===i?'#ffd36b':'#e9e2c8');s.surface.material.opacity=j===i?.52:.14;s.surface.material.depthTest=j!==i;s.surface.renderOrder=j===i?18:0;});const key=type+':'+i+':'+settings()?.layout;if(key===footprintKey)return;footprintKey=key;clearFootprint();if(type!=='city'||i<0)return;const {tiles,diameter,heightAt}=getBoard(),f=cityFootprint(tiles,diameter,slots[i].cell,settings().layout);if(!f)return;const points=[];for(const cell of f.cells){const c=tileCenter(cell.q,cell.r,diameter);for(let k=0;k<6;k++)for(const j of [k,k+1]){const a=j*Math.PI/3,x=c.x+Math.sin(a)*diameter/2,z=c.z+Math.cos(a)*diameter/2;points.push(x*.1,heightAt(x,z)*.1+.08,z*.1);}}footprintOutline=new T.LineSegments(new T.BufferGeometry().setAttribute('position',new T.Float32BufferAttribute(points,3)),new T.LineBasicMaterial({color:'#b84931',depthTest:false}));footprintOutline.raycast=()=>{};footprintOutline.renderOrder=20;scene.add(footprintOutline);}
 
@@ -132,7 +154,7 @@ const options=panel.querySelector('.tile-options'),status=panel.querySelector('[
   chosenType[g.id]=id;settingsByType[id]=placementSettings(id,base);if(id==='crop')garden=settingsByType[id];dropPremade(g.id);generator=g;rerollSeed=null;generatorRevision++;
   const win=openPrintWindow({name:g.label,at:draft.frame,still:draft.still}),t0=performance.now();
   try{if(!opened)open();cancelDrag();const ok=await load(id,preferredSlot());if(!ok||!asset)throw Error(status.textContent||'This tile could not be printed.');
-   livePreview.setHeld(true);await win.reveal(livePreview,livePreview.canvas,Math.max(2400,5200-(performance.now()-t0)));await win.stamp();await win.close(hero);}
+   livePreview.setHeld(true);await win.reveal(livePreview,livePreview.canvas,900);await win.stamp();await win.close(hero);}
   catch(error){win.fail(error.message);}finally{printing=false;restoreCanvas();refillCard(hero);generatorRevision++;window.RanchView?.changed();}}
  async function dropAt(i){const d=drag;if(!d||d.snapping)return;d.snapping=true;sharedImpactSound().prime();if(d.pending){ghost.classList.add('is-waiting');await selectionReady.catch(()=>{});ghost.classList.remove('is-waiting');if(drag!==d)return;}cancelAnimationFrame(viewFrame);viewFrame=0;canvas.dataset.tileCarry='snapping';ghost.classList.add('is-snapping');carryLabel.textContent='A perfect fit';const ready=asset?.slot===i,pending=ready?null:retarget(i);const slot=slots[i],box=new T.Box3().setFromObject(slot.surface),radius=Math.max(1,box.getSize(new T.Vector3()).x/2),center=box.getCenter(new T.Vector3()).add(new T.Vector3(0,Math.max(3,radius*1.25),0)).project(camera),rect=canvas.getBoundingClientRect();
  const animation=ghost.animate([{left:ghost.style.left,top:ghost.style.top,transform:'translate(-50%,-86%) scale(1)'},{left:rect.left+(center.x+1)*rect.width/2+'px',top:rect.top+(1-center.y)*rect.height/2+'px',transform:'translate(-50%,-60%) scale(.62)'}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?0:170,easing:'cubic-bezier(.3,1.4,.5,1)',fill:'forwards'});
@@ -162,7 +184,7 @@ const options=panel.querySelector('.tile-options'),status=panel.querySelector('[
  const readGenerators=()=>({premade:SCENE_GENERATORS.map(g=>({id:g.id,type:premade.get(g.id)?.type||null,ready:!!premade.get(g.id)?.asset})),printing,customizing:!!customizer,revision:generatorRevision,lastPlacement,selected:generator.id,type,open:opened,toolsOpen:!document.body.classList.contains('scene-dropper-hidden'),loading,requiresPrint:requiresPrint(),ready:!!asset&&!loading&&!!livePreview?.readiness.ready,preview:livePreview?.readiness||null,carrying:!!drag,settings:type?{...settings()}:null,generators:SCENE_GENERATORS.map(g=>({id:g.id,label:g.label,tiles:g.tiles})),availableCells:slots.map(s=>s.cell),status:status.textContent});
  window.RanchView?.register('sandboxGenerators',readGenerators);
  window.RanchActions?.register('sandboxGenerators',{read:readGenerators,revision:()=>generatorRevision,unavailable:()=>!allowed()?'Board is busy or unavailable':null,actions:{select:{description:'Select a generator; Meadow and Moonbase wait for Print',schema:{type:'object',properties:{generatorId:{type:'string',enum:SCENE_GENERATORS.map(g=>g.id)}},required:['generatorId'],additionalProperties:false},run:async({generatorId})=>{const ok=await selectGenerator(SCENE_GENERATORS.find(g=>g.id===generatorId));if(!ok)throw Error(status.textContent);return {state:readGenerators()};}},print:{description:'Print the selected Meadow or Moonbase and wait for rendered animation readiness',schema:{type:'object',properties:{},additionalProperties:false},run:async()=>{if(!await printTile())throw Error(status.textContent);return {state:readGenerators()};}},place:{description:'Place the selected prepared generator in a free neighboring hex',schema:{type:'object',properties:{q:{type:'integer'},r:{type:'integer'}},required:['q','r'],additionalProperties:false},run:async({q,r})=>{if(!opened||loading||!asset||!livePreview?.readiness.ready)throw Error('Print the tile and wait until Ready to drag.');const i=slots.findIndex(s=>s.cell.q===q&&s.cell.r===r);if(i<0)throw Error('This hex is not a free neighbor.');if(!await load(type,i,true))throw Error(status.textContent);return {affectedIds:lastPlacement?.instances.map(t=>t.instanceId)||[],placement:lastPlacement,state:readGenerators()};}}}});
- return {selectCity(){throw Error('This generator is not available.');},close,get opened(){return opened;},dispose(){clearInterval(premakeTimer);for(const id of [...premade.keys()])dropPremade(id);customizer?.close();document.removeEventListener('tile-tools-visibility',toolsVisibility);close();livePreview?.dispose();resize?.disconnect();window.removeEventListener('resize',positionTitle);window.removeEventListener('pointerdown',touchDown,true);window.removeEventListener('pointerup',touchUp,true);window.removeEventListener('pointercancel',touchUp,true);window.removeEventListener('keydown',keydown);window.removeEventListener('pointerdown',carryDown,true);window.removeEventListener('pointermove',carryMove,true);window.removeEventListener('pointerup',carryUp,true);window.removeEventListener('pointercancel',carryCancel,true);window.removeEventListener('blur',carryCancel);window.removeEventListener('pointermove',heroMove,true);window.removeEventListener('pointerup',heroEnd);window.removeEventListener('pointercancel',heroEnd);window.removeEventListener('blur',heroEnd);ghost.remove();tooltips.dispose();panel.remove();launch.remove();picker.remove();sceneType.remove();drawer.remove();}};
+ return {selectCity(){throw Error('This generator is not available.');},warm,close,get opened(){return opened;},dispose(){disposedChooser=true;clearInterval(premakeTimer);for(const id of [...premade.keys()])dropPremade(id);customizer?.close();document.removeEventListener('tile-tools-visibility',toolsVisibility);close();livePreview?.dispose();resize?.disconnect();window.removeEventListener('resize',positionTitle);window.removeEventListener('pointerdown',touchDown,true);window.removeEventListener('pointerup',touchUp,true);window.removeEventListener('pointercancel',touchUp,true);window.removeEventListener('keydown',keydown);window.removeEventListener('pointerdown',carryDown,true);window.removeEventListener('pointermove',carryMove,true);window.removeEventListener('pointerup',carryUp,true);window.removeEventListener('pointercancel',carryCancel,true);window.removeEventListener('blur',carryCancel);window.removeEventListener('pointermove',heroMove,true);window.removeEventListener('pointerup',heroEnd);window.removeEventListener('pointercancel',heroEnd);window.removeEventListener('blur',heroEnd);ghost.remove();tooltips.dispose();panel.remove();launch.remove();picker.remove();sceneType.remove();drawer.remove();}};
 }
 
 const liveTrayStyle=document.createElement('style');liveTrayStyle.textContent='#tile-chooser .tile-options .live-tray-canvas{display:block;width:100%;height:100%;pointer-events:auto;touch-action:none;background:transparent;border-radius:8px}#tile-chooser .tile-options button:has(.live-tray-canvas){background:transparent!important;border-color:var(--app-border)!important}#tile-chooser .live-tray-canvas+span{display:none}#scene-drag-ghost .live-tray-canvas{width:100%;height:100%;pointer-events:none}';document.head.append(liveTrayStyle);

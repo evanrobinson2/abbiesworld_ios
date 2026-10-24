@@ -201,9 +201,9 @@
   },
   "coin": {
    "who": "daddy-young",
-   "text": "A gold coin! One of Daddy's memories.",
-   "hash": "31ec7b6e45",
-   "url": "/r2/voices/lines/school-jump/coin-31ec7b6e45.mp3"
+   "text": "Made it onto the canopy! I'm keeping this one forever.",
+   "hash": "b1fe3ffb47",
+   "url": "/r2/voices/lines/school-jump/coin-b1fe3ffb47.mp3"
   },
   "done": {
    "who": "daddy-young",
@@ -285,9 +285,9 @@
   },
   "outroHollywood": {
    "who": "daddy-now",
-   "text": "I never told anyone about that coin. Don't try this at home, okay?",
-   "hash": "5d71593ef2",
-   "url": "/r2/voices/lines/school-jump/outroHollywood-5d71593ef2.mp3"
+   "text": "I never told anyone about that star on the roof. Don't try this at home, okay?",
+   "hash": "cab52ec1d8",
+   "url": "/r2/voices/lines/school-jump/outroHollywood-cab52ec1d8.mp3"
   },
   "outroListened": {
    "who": "daddy-now",

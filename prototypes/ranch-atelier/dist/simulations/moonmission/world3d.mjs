@@ -5,7 +5,16 @@
 import * as THREE from 'three';
 import {suit} from './suit.mjs';
 
-export const HERO_URL = id => `/studies/moon-mission/heroes/${id}.glb`;
+// the Meshy heroes (hero thread, PR #430): A3 Daddy, A1 Abbie, A2 Ani, the paint-suit set, rigged (chest bone named 'chest')
+const HERO_FILE = {daddy: 'A3', abbie: 'A1', ani: 'A2'};
+export const HERO_URL = id => `/studies/moon-mission/heroes/${HERO_FILE[id] || id}-paint-suit.glb`;
+// Abbie wears her backpack with jingling charms in every scene that shows her (Backpack thread, AW-STUDY-0046)
+const PACKS = new Set();
+function wearPack(owner, parent, k = 1, offset = [0, 0, -.16], height = .42) {
+ import('/simulations/backpack-wear.mjs').then(({wearBackpack}) => wearBackpack(parent, {height: height / k, offset: offset.map(v => v / k)})).then(pack => { PACKS.add({pack, owner}); }).catch(() => {});
+}
+function inScene(o) { for (; o; o = o.parent) if (o.isScene) return true; return false; }
+function stepPacks(dt) { for (const e of PACKS) { if (!inScene(e.owner)) { try { e.pack.dispose(); } catch {} PACKS.delete(e); } else try { e.pack.update(dt); } catch {} } }
 const HEROES = {daddy: {suit: 0xffffff, trim: 0x6f9bff, skin: 0xe0b08c, h: 1.8}, abbie: {suit: 0xffffff, trim: 0xff7eb6, skin: 0xe8c0a0, h: 1.15}, ani: {suit: 0xffffff, trim: 0xb18cff, skin: 0xddb08c, h: 1.2}};
 const mat = (c, o = {}) => new THREE.MeshStandardMaterial({color: c, flatShading: true, roughness: .85, metalness: 0, ...o});
 const box = (w, h, d, c, o) => { const m = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(c, o)); m.castShadow = m.receiveShadow = true; return m; };
@@ -22,10 +31,11 @@ function label(text, w, h, bg, fg, font = 'bold 64px sans-serif') {
 export function hero(id, suited = true) {
  const s = HEROES[id], g = suit(id, {trim: s.trim, skin: s.skin, h: s.h, childHead: id === 'daddy' ? 1 : 1.12});
  if (!suited) g.traverse(o => { if (o.isMesh && o.material.name === 'suit_fabric') o.material = o.material.clone(), o.material.color.set(0x7a8aa8); });
- g.userData = {id, bob: 0}; return g;
+ g.userData = {...g.userData, id, bob: 0}; if (id === 'abbie') { const lp = g.getObjectByName('life_support'); if (lp) lp.visible = false; wearPack(g, g.userData.parts.chest || g, g.scale.x, [0, .02, -.17], .38); }
+ return g;
 }
 function swapHeroGLB(group, id) { // quiet: a missing file leaves the placeholder
- import('/vendor/loaders/GLTFLoader.js').then(({GLTFLoader}) => new GLTFLoader().load(HERO_URL(id), gl => { const m = gl.scene; const box3 = new THREE.Box3().setFromObject(m), h = box3.max.y - box3.min.y; m.scale.setScalar(HEROES[id].h / h); group.clear(); group.add(m); }, undefined, () => {})).catch(() => {});
+ import('/vendor/loaders/GLTFLoader.js').then(({GLTFLoader}) => new GLTFLoader().load(HERO_URL(id), gl => { const m = gl.scene; const box3 = new THREE.Box3().setFromObject(m), h = box3.max.y - box3.min.y; const sc = HEROES[id].h / h; m.scale.setScalar(sc); for (const e of [...PACKS]) if (e.owner === group) { try { e.pack.dispose(); } catch {} PACKS.delete(e); } group.clear(); group.add(m); if (id === 'abbie') { let chest = null; m.traverse(o => { if (o.isBone && o.name === 'chest') chest = o; }); wearPack(group, chest || m, sc); } }, undefined, () => {})).catch(() => {});
 }
 
 // the Moon base kit's GLBs (tools/moon-base-kit, served as .wasm), swapped over a procedural stand-in when they load. Quiet on failure.
@@ -212,6 +222,7 @@ export function createWorld(canvas, ZONES, host = null) {
   if (S.earth) S.earth.rotation.y += dt * .05;
   { const st = view && view.step, L = st && (st.k === 'lander' ? st.lander : st.game && st.game.name === 'landing' ? {...st.game, lights: true} : null); if (S.lander && L) { S.lander.position.set(L.x * .15, Math.max(0, L.alt) * .07, 0); S.lander.rotation.z = -L.tilt * .5; S.flame.visible = !!(st.k === 'lander' ? thrust : L.thrust > .05); S.glow.intensity = L.lights ? 60 : 0; } }
   if (S.heroes) for (const h of Object.values(S.heroes)) { if (h.userData.bob > 0) { h.userData.bob -= dt * 2.5; h.position.y = Math.max(0, Math.sin(h.userData.bob * 6) * .08); } }
+  if (PACKS.size) stepPacks(dt);
   if (S.stroke) drawBoard();
   updateGame(view && view.step && view.step.game, dt);
   if (own) {

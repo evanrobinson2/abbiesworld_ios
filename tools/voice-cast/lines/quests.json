@@ -1,0 +1,121 @@
+{
+ "about": "Every townsfolk favour in simulations/quests.mjs: the ask (<questId>) and each step (<questId>-<n>), said by the giver's designed voice. Written by tools/voice-cast/quest-lines.mjs.",
+ "lines": {
+  "bake-sugar": [
+   "city-baker",
+   "I'm out of sugar and the buns are waiting. Could you fetch some from the shop on the common?"
+  ],
+  "bake-sugar-0": [
+   "city-baker",
+   "Pick up the sugar."
+  ],
+  "bake-sugar-1": [
+   "city-baker",
+   "Take it to the baker."
+  ],
+  "teach-chalk": [
+   "town-teacher",
+   "We have run out of chalk! Would you carry a box over from the noticeboard?"
+  ],
+  "teach-chalk-0": [
+   "town-teacher",
+   "Pick up the chalk."
+  ],
+  "teach-chalk-1": [
+   "town-teacher",
+   "Bring it to the teacher."
+  ],
+  "read-book": [
+   "town-librarian",
+   "Someone left a book on a bench by the school. Could you bring it back before it rains?"
+  ],
+  "read-book-0": [
+   "town-librarian",
+   "Find the book."
+  ],
+  "read-book-1": [
+   "town-librarian",
+   "Return it to the librarian."
+  ],
+  "post-letter": [
+   "town-postie",
+   "I'm late! Please take this letter to the café for me?"
+  ],
+  "post-letter-0": [
+   "town-postie",
+   "Deliver the letter."
+  ],
+  "garden-seeds": [
+   "town-gardener",
+   "The sunflowers need seeds. The school has a jar. Could you ask for it?"
+  ],
+  "garden-seeds-0": [
+   "town-gardener",
+   "Ask for the seed jar."
+  ],
+  "garden-seeds-1": [
+   "town-gardener",
+   "Plant them with the gardener."
+  ],
+  "lab-sparkle": [
+   "town-scientist",
+   "I lost my lucky magnifier! I think it is by the noticeboard. Can you look?"
+  ],
+  "lab-sparkle-0": [
+   "town-scientist",
+   "Search by the noticeboard."
+  ],
+  "lab-sparkle-1": [
+   "town-scientist",
+   "Give it back."
+  ],
+  "neighbour-bub": [
+   "town-neighbour",
+   "Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him?"
+  ],
+  "neighbour-bub-0": [
+   "town-neighbour",
+   "Find Bub's lead."
+  ],
+  "neighbour-bub-1": [
+   "town-neighbour",
+   "Take it to the neighbour."
+  ],
+  "cafe-cup": [
+   "city-baker",
+   "A cup went missing from the café window. Could you look by the noticeboard?"
+  ],
+  "cafe-cup-0": [
+   "city-baker",
+   "Look for the cup."
+  ],
+  "cafe-cup-1": [
+   "city-baker",
+   "Carry it back."
+  ],
+  "farm-eggs": [
+   "town-farmer",
+   "The hens have been busy and the baker is out of eggs. Could you find a warm one and take it to the café?"
+  ],
+  "farm-eggs-0": [
+   "town-farmer",
+   "Find an egg on the farm."
+  ],
+  "farm-eggs-1": [
+   "town-farmer",
+   "Take it to the baker."
+  ],
+  "farm-pumpkin": [
+   "town-farmer",
+   "The big orange pumpkins are ripe. Could you bring one to the common for the autumn display?"
+  ],
+  "farm-pumpkin-0": [
+   "town-farmer",
+   "Pick a pumpkin."
+  ],
+  "farm-pumpkin-1": [
+   "town-farmer",
+   "Put it on display."
+  ]
+ }
+}

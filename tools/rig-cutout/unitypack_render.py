@@ -1,7 +1,7 @@
 """Read a .unitypackage 2D character (prefab bone hierarchy + .anim clips + sprites) and render frames, to study how a
 professional rig is built. Reads text YAML only; nothing is executed. usage: python3 unitypack_render.py <pack.unitypackage> <outdir> <clip> <prefab_name>
 Private asset: never commit the extracted art."""
-import sys, os, re, math, tarfile, json, collections, numpy as np, cv2
+import sys, os, re, math, tarfile, json, collections, functools, numpy as np, cv2
 from PIL import Image
 pack, out, clip, prefab = sys.argv[1:5]; os.makedirs(out, exist_ok=True); ex = out + "/x"
 if not os.path.isdir(ex):
@@ -41,6 +41,7 @@ for _p, _f in list(node_of.items()):  # the Animator sits on "base": clip paths 
     if _p == "base": node_of[""] = _f
     elif _p.startswith("base/"): node_of[_p[5:]] = _f
 # sprites
+@functools.lru_cache(None)
 def sprite(guid):
     d = guid; meta = open(f"{ex}/{d}/asset.meta").read(); im = Image.open(f"{ex}/{d}/asset").convert("RGBA")
     ppu = float(re.search(r"spritePixelsToUnits: ([\d.]+)", meta).group(1)); pv = re.search(r"spritePivot: \{x: ([-\d.]+), y: ([-\d.]+)\}", meta); 
@@ -75,9 +76,9 @@ def ev(ks, tm):
             m0, m1 = s(a[3]) * h, s(b[2]) * h; h00, h10, h01, h11 = 2*u**3-3*u**2+1, u**3-2*u**2+u, -2*u**3+3*u**2, u**3-u**2
             return h00*a[1] + h10*m0 + h01*b[1] + h11*m1
 S = 100.0  # px per unit at output
-def render(tm, size=(700, 800), origin=(350, 640)):
+def render(tm, size=(700, 800), origin=(350, 640), S=S, clip_curves=None):
     state = {f: dict(rot=TR[f]["rot"], pos=list(TR[f]["pos"]), sc=list(TR[f]["sc"]), active=GO[TR[f]["go"]]["active"]) for f in TR}
-    for (kind, pth, attr), ks in curves.items():
+    for (kind, pth, attr), ks in (clip_curves or curves).items():
         f = node_of.get(pth)
         if f is None: continue
         v = ev(ks, tm % length if length else tm)
@@ -101,9 +102,9 @@ def render(tm, size=(700, 800), origin=(350, 640)):
         if sr and a and sr["enabled"] and sr["guid"]: items.append((sr["order"], f, M, sr))
     for _, f, M, sr in sorted(items, key=lambda q: q[0]):
         img, ppu, pv = sprite(sr["guid"]); h, w = img.shape[:2]
-        # sprite pixel (u,v down) -> unit coords: x=(u-pv.x*w)/ppu ; y=(pv.y*h-v)/ppu  (pv.y measured from bottom)
+        # sprite pixel (u,v down) -> unit coords: x=(u-pv.x*w)/ppu ; y=((1-pv.y)*h-v)/ppu  (pivot measured from the bottom)
         sx = -1 if sr["flipx"] else 1
-        A = np.array([[sx/ppu, 0, -sx*pv[0]*w/ppu], [0, -1/ppu, pv[1]*h/ppu], [0, 0, 1]])
+        A = np.array([[sx/ppu, 0, -sx*pv[0]*w/ppu], [0, -1/ppu, (1-pv[1])*h/ppu], [0, 0, 1]])
         W = np.array([[S, 0, origin[0]], [0, -S, origin[1]], [0, 0, 1]]) @ M @ A
         wr = cv2.warpAffine(img.astype(np.float32), W[:2], size, flags=cv2.INTER_AREA if False else cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0)); a_ = wr[..., 3:4] / 255.0
         can = can * (1 - a_) + wr[..., :3][..., ::-1] * a_

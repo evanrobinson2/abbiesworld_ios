@@ -1,8 +1,28 @@
 {
   "rewrites": [
     {
-      "source": "/science-lab",
-      "destination": "/studies/cell/play.html"
+      "source": "/study",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/study/",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/study/player-home",
+      "destination": "/studies/player-home/index.html"
+    },
+    {
+      "source": "/study/world-browser",
+      "destination": "/studies/world-browser/index.html"
+    },
+    {
+      "source": "/study/:tab(intro|title|create-new)",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/classic",
+      "destination": "/simulations/index.html"
     },
     {
       "source": "/demo",
@@ -407,6 +427,24 @@
       "source": "/manifest.webmanifest"
     },
     {
+      "source": "/models/(.*)\\.(glb|jpg|png|webp)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/vendor/model-viewer.min.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
       "source": "/explore/(.*)\\.(js|css)",
       "headers": [
         {
@@ -447,6 +485,22 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/",
+      "destination": "/town",
+      "permanent": false,
+      "missing": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ]
+    },
+    {
+      "source": "/science-lab",
+      "destination": "/town",
+      "permanent": false
+    },
     {
       "source": "/billing",
       "has": [
@@ -532,37 +586,11 @@
       "has": [
         {
           "type": "host",
-          "value": "app.abbies.world"
-        }
-      ],
-      "destination": "/studies/",
-      "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
           "value": "explore.abbies.world"
         }
       ],
       "destination": "/explore",
       "permanent": false
-    },
-    {
-      "source": "/",
-      "destination": "/sandbox",
-      "permanent": false,
-      "missing": [
-        {
-          "type": "host",
-          "value": "explore.abbies.world"
-        },
-        {
-          "type": "host",
-          "value": "app.abbies.world"
-        }
-      ]
     },
     {
       "source": "/town-life",

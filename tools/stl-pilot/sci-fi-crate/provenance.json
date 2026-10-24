@@ -1,0 +1,29 @@
+{
+  "slug": "sci-fi-crate",
+  "title": "Sci Fi Crate (90mm Single Color: bottom and top)",
+  "model_url": "https://www.printables.com/model/531037-sci-fi-crate",
+  "author": "Secret Person of Secrets",
+  "author_url": "https://www.printables.com/@SecretPersono_537888",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "source_file": "Simple Sci-Fi Crate 90mm Bottom Single Color.stl",
+  "category": "sci-fi gear",
+  "origin": "author's original creation",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_bottom.stl",
+      "sha256": "9e5e61d318b7a8ad4fe5ed381cc7a0c97f59aded56d487e6ea4206cf8b0d5217",
+      "bytes": 31784
+    },
+    {
+      "file": "source_top.stl",
+      "sha256": "074effd882bce3d58d8b3904589d2a8b596b0721c959a79285cc4f99c56bdc9a",
+      "bytes": 217684
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

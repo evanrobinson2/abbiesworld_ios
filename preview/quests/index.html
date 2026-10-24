@@ -1,0 +1,56 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Townsfolk quests (drafted)</title>
+<style>
+:root{color-scheme:light}
+body{margin:0;font:16px system-ui;background:linear-gradient(#bfe6ff,#e9f7d0);min-height:100vh}
+#town{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;padding:70px 16px 20px}
+.p{width:120px;text-align:center;position:relative;cursor:pointer}
+.p .face{font-size:56px;filter:drop-shadow(0 4px 4px #0003)}
+.p small{display:block;color:#345}
+.bub{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);width:210px;background:#fff;border-radius:16px;padding:10px 12px;box-shadow:0 6px 18px #0003;font-size:14px;z-index:5}
+.bub b{display:flex;gap:6px;margin-top:8px}
+.bub button{flex:1;border:0;border-radius:10px;padding:7px;font:inherit;background:#ffd95a}
+.bub button.no{background:#eee}
+.mark{position:absolute;top:-6px;left:50%;transform:translateX(-50%);font-size:22px;animation:b 1s infinite}
+@keyframes b{50%{top:-14px}}
+#nb{max-width:340px;margin:10px auto 40px;padding:18px 22px 18px 54px;border-radius:12px;box-shadow:0 8px 22px #0004;
+ background:repeating-linear-gradient(#fff6a8 0 29px,#9cc4e8 29px 30px);background-color:#fff6a8;position:relative;font:20px/30px "Segoe Print","Bradley Hand","Comic Sans MS",cursive;color:#333;transform:rotate(-1deg)}
+#nb:before{content:"";position:absolute;left:38px;top:0;bottom:0;border-left:2px solid #e57373}
+#nb h2{margin:0;font-size:22px}#nb ul{margin:0;padding:0;list-style:none}
+.d{text-decoration:line-through;color:#888}
+#toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#fff;padding:10px 16px;border-radius:14px;box-shadow:0 6px 18px #0004;display:none}
+.go{display:inline-block;margin:2px;padding:6px 10px;border-radius:10px;background:#fff9;cursor:pointer}
+</style>
+<div id="town"></div>
+<p style="text-align:center">Go to a place to do the steps:<span id="go"></span></p>
+<div id="nb"><h2>My notebook</h2><ul id="list"></ul></div>
+<div id="toast"></div>
+<script type="module">
+import * as Q from './quests.mjs';
+Q.useStore((()=>{const m={};return{getItem:k=>m[k]??null,setItem:(k,v)=>m[k]=v}})()); // preview: nothing saved
+const faces={baker:'🧑‍🍳',teacher:'🧑‍🏫',librarian:'📚',postie:'📮',gardener:'🧑‍🌾',scientist:'🧑‍🔬',neighbour:'🙂'};
+const town=document.getElementById('town');
+function draw(){
+ town.innerHTML='';
+ for(const [id,g] of Object.entries(Q.GIVERS)){
+  const el=document.createElement('div');el.className='p';
+  const has=Q.offer(id,()=>0.5);
+  el.innerHTML=`<div class="face">${faces[id]}</div><small>${g.name}</small>${has?'<div class="mark">❗</div>':''}`;
+  el.onclick=()=>{ if(el.querySelector('.bub'))return; const q=Q.offer(id); if(!q)return;
+   const b=document.createElement('div');b.className='bub';b.innerHTML=`${q.ask}<b><button>I'll help!</button><button class="no">Not now</button></b>`;
+   b.querySelector('button').onclick=e=>{e.stopPropagation();Q.accept(q.id);draw();render();};
+   b.querySelector('.no').onclick=e=>{e.stopPropagation();Q.decline(id);draw();};
+   el.appendChild(b);};
+  town.appendChild(el);
+ }
+}
+function render(){
+ document.getElementById('list').innerHTML=Q.list().map(q=>`<li class="${q.status==='done'?'d':''}"><b>${q.giverName}:</b> ${q.ask}<ul>${q.steps.map(s=>`<li>${s.done?'✓':'○'} ${s.say}</li>`).join('')}</ul>${q.status==='done'?'Got: '+q.reward.icon+' '+q.reward.name:''}</li>`).join('')||'<li>(nothing yet. Say hi to someone.)</li>';
+}
+for(const at of ['cafe','school','common','noticeboard','lab']){
+ const s=document.createElement('span');s.className='go';s.textContent='📍 '+at;
+ s.onclick=()=>{for(const q of Q.report({did:'visit',at})){const t=document.getElementById('toast');t.textContent=`${q.giverName}: ${q.thanks}  +${q.reward.icon} ${q.reward.name}`;t.style.display='block';setTimeout(()=>t.style.display='none',3500);} draw();render();};
+ document.getElementById('go').appendChild(s);
+}
+draw();render();
+</script>

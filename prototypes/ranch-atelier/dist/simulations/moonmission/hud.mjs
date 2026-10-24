@@ -1,7 +1,7 @@
 // AW-STUDY-0036 Moon Mission couch HUD: the mission card, the clock, the caption, the choices and the per-player key panels.
 // One factory so the studies page and the Abbie's Town stage show the same thing. Words live only here and in captions.
 const CSS = `
-#mm-hud{--ink:#1b2238;--dim:#5b6785;--line:#cdd7ee;--key:#fff;--glow:#ff7eb6;--bar:rgba(255,255,255,.92);position:fixed;inset:0;pointer-events:none;color:var(--ink);font:clamp(16px,2vw,26px)/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;z-index:30}
+#mm-hud{z-index:10;--ink:#1b2238;--dim:#5b6785;--line:#cdd7ee;--key:#fff;--glow:#ff7eb6;--bar:rgba(255,255,255,.92);position:fixed;inset:0;pointer-events:none;color:var(--ink);font:clamp(16px,2vw,26px)/1.3 "Atkinson Hyperlegible",system-ui,sans-serif;z-index:30}
 #mm-hud[data-mood=dark]{--ink:#eef1fb;--dim:#9aa6c8;--line:#26304f;--key:#121a33;--bar:rgba(5,7,15,.92)}
 #mm-hud *{box-sizing:border-box}
 #mm-hud .top{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;gap:16px;padding:12px 20px 0;align-items:flex-start}
@@ -52,11 +52,11 @@ export function createHud({mission: m, world, container = document.body, quiet =
 let cursor = {daddy: 0, abbie: 0, ani: 0}, sound = !quiet, thrust = 0, tilt = 0, typing = 0;
 
 function speak(who, text) { const s = $('say'); s.className = 'say' + (arguments[2] ? ' thought' : ''); s.innerHTML = `<span class="who" style="background:${color(who)}"></span>`; s.append(text);
- if (sound && 'speechSynthesis' in window) { try { const u = new SpeechSynthesisUtterance(text), v = VOICE[who] || {}; u.pitch = v.pitch || 1; u.rate = v.rate || 1; speechSynthesis.speak(u); } catch {} } }
+ }
 function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.place}`; el.innerHTML = '<span></span><i></i>'; const [sp, ln] = [el.firstChild, el.lastChild]; clearInterval(typing); let n = 0;
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
 // three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)
-function grantCheeseCharm() { import('/simulations/backpack.mjs?v=5').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
+function grantCheeseCharm() { import('/simulations/backpack.mjs?v=7').then(b => b.earnCharm && b.earnCharm('moon-cheese')).catch(() => {}); }
 function polaroid(caption) { // the Chapter 1 ending photo: the crew on the Moon with the pink ship behind them
  const d = document.createElement('div'); d.className = 'polaroid'; const cv = document.createElement('canvas'); cv.width = 380; cv.height = 300; d.append(cv); const b = document.createElement('b'); b.textContent = caption || ''; d.append(b);
  const c = cv.getContext('2d'); c.fillStyle = '#05070f'; c.fillRect(0, 0, 380, 300); for (let i = 0; i < 50; i++) { c.fillStyle = '#fff'; c.fillRect((i * 97) % 380, (i * 53) % 170, 2, 2); }
@@ -150,6 +150,26 @@ function bot(until) { sound = false; for (let s = 0; s < 400000 && m.view().beat
  if (st.k === 'ask') for (const p of PLAYERS) m.dispatch({type: 'choose', player: p.id, index: 0}); else if (st.k === 'accept') for (const p of PLAYERS) m.dispatch({type: 'press', player: p.id, key: 'yes'});
  else if (st.k === 'jobs') for (const j of st.jobs) m.dispatch({type: 'press', player: j.owner === 'any' ? 'daddy' : j.owner, key: j.key}); else if (st.k === 'poll') for (const p of PLAYERS) m.dispatch({type: 'press', player: p.id, key: 'go'}); else if (st.k === 'game') for (const e of botMoves(st.game)) m.dispatch({type: 'game', ...e}); } sound = !quiet; }
 
+ // The headless-Chrome run (tools/game-registry/moon-mission-flow.cjs): a bot family plays the real mission through the real HUD,
+ // pressing each player's own button (act), so the town scenes, cards and consoles all draw as they do for a family. Resolves at the end.
+ const fxLog = [];
+ function autoplay({ticksPerFrame = 30} = {}) {
+  return new Promise(res => {
+   const step = () => {
+    for (let i = 0; i < ticksPerFrame && !m.view().done; i++) {
+     const es = m.dispatch({type: 'tick', dt: .1}); for (const e of es) fxLog.push({fx: e.fx, id: e.id, game: e.game}); pump(es);
+     const v = m.view(), st = v.step; if (!st) continue;
+     if (['ask', 'accept', 'poll', 'cutscene'].includes(st.k)) for (const p of PLAYERS) act(p.id);
+     else if (st.k === 'jobs') for (const p of PLAYERS) act(p.id);
+     else if (st.k === 'game') for (const e of botMoves(st.game)) send(e);
+     else if (st.k === 'lander') { const L = st.lander; act('abbie'); act('ani'); m.dispatch({type: 'fly', thrust: L.vy < -2 && L.alt < 60 ? 1 : L.vy < -5 ? .8 : 0, tilt: 0}); }
+    }
+    if (m.view().done) res(fxLog); else requestAnimationFrame(step);
+   };
+   step();
+  });
+ }
+
  pump(m.drain()); render();
- return {frame, pump, bot, act, root: rootEl, get thrust() { return thrust; }, destroy() { clearInterval(typing); for (const [ev, fn] of listeners) removeEventListener(ev, fn); rootEl.remove(); }};
+ return {frame, pump, bot, act, autoplay, fxLog, root: rootEl, get thrust() { return thrust; }, destroy() { clearInterval(typing); for (const [ev, fn] of listeners) removeEventListener(ev, fn); rootEl.remove(); }};
 }

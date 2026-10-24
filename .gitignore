@@ -125,3 +125,6 @@ experiments/meshy_actor/output/
 
 # Family Teleport: family photos, character sheets and figures stay private
 tools/family-teleport/private/
+
+# headless game-test run output (tools/game-registry/run-tests.mjs)
+game-test-shots/

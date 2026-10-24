@@ -1,0 +1,30 @@
+# INVARIANTS.md, enforced. Evan, 2026-10-24: "these are invariant contracts".
+#  static: game registry (scene + test before live), HUD boot tag, no MIDI / synthesized sound / browser voice beyond the audit.
+#  games:  every `live` registry entry is played end to end in headless Chromium and must pass.
+name: invariants
+on:
+  pull_request:
+    branches: [main]
+    paths: ['prototypes/**', 'tools/**', 'docs/oracle/abbietown/**', '.github/workflows/invariants.yml', 'INVARIANTS.md']
+jobs:
+  static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - run: node tools/game-registry/check.mjs
+      - run: node tools/audio-check/check.mjs
+  games:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - working-directory: tools/game-feel-check
+        run: npm install --no-audit --no-fund && npx playwright install --with-deps chromium
+      - run: PLAYWRIGHT="$PWD/tools/game-feel-check/node_modules/playwright" node tools/game-registry/run-tests.mjs --shots game-test-shots
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with: {name: game-test-shots, path: game-test-shots}

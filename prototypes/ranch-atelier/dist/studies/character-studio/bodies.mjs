@@ -12,7 +12,7 @@ import {CHARACTERS, buildCharacter} from './characters.mjs';
 // brutes are the Bruiser study's Meshy heroes, cleaned up and skinned by the Brute Fight study. Every other body is
 // `hidden`: still loadable by id (the Scores room's reference, old links) but never offered. The Quaternius rig (CC0,
 // animation-study-assets/) and the figure-kit children (AW-STUDY-0034) are borrowed bodies; their bones are renamed
-// onto ours. New Meshy heroes (AW-STUDY-0043) join the top of this list once they are rigged.
+// onto ours. The Meshy heroes (AW-STUDY-0043) lead the list: three Midjourney characters, then the astronauts in their suits.
 const QUATERNIUS = {'DEF-hips': 'hips', 'DEF-spine.001': 'spine', 'DEF-spine.003': 'chest', 'DEF-neck': 'neck', 'DEF-head': 'head'};
 const FIGURE = {hips: 'hips', spine: 'spine', chest: 'chest', neck: 'neck', head: 'head'};
 for (const s of ['L', 'R']) {
@@ -22,7 +22,19 @@ for (const s of ['L', 'R']) {
   [`thigh.${s}`]: `thigh_${s}`, [`shin.${s}`]: `shin_${s}`, [`foot.${s}`]: `foot_${s}`});
 }
 const QUATERNIUS_URL = '/animation-study-assets/AnimationLibrary_Godot_Standard.gltf';
+// The 12 Meshy astronaut heroes (AW-STUDY-0043), rigged to our 20 bones: the Moon Mission folder holds the one copy of each GLB.
+const HEROES = await fetch(new URL('/studies/moon-mission/heroes/heroes.json', import.meta.url)).then(r => r.json()).then(m => m.heroes).catch(() => []);
+const ORDER = ['Commander', 'Engineer', 'Daddy', 'Abbie', 'Ani', 'Alien crewmate'];
+// the four Midjourney "next characters" (cs-1 to cs-4), Meshy-made and rigged to our 20 bones; the stick man is still unrigged
+const NEXT = [
+ {id: 'cs-1', name: 'Claymation adventurer (Meshy)', short: 'Adventurer', url: 'models/heroes/cs-1-claymation-adventurer.glb', kind: 'skinned', height: 1.15},
+ {id: 'cs-2', name: 'Plasticine inventor (Meshy)', short: 'Inventor', url: 'models/heroes/cs-2-plasticine-inventor.glb', kind: 'skinned', height: 1.85},
+ {id: 'cs-4', name: '80s action hero (Meshy)', short: 'Action hero', url: 'models/heroes/cs-4-80s-action-hero.glb', kind: 'skinned', height: 1.95},
+];
+const hero = h => ({id: h.id, name: `${h.name}, ${h.look} (Meshy)`, short: `${h.name} ${h.look === 'painterly' ? 'paint' : 'clay'}`, url: h.glb, kind: 'skinned', height: h.height_m});
 export const BODIES = [
+ ...NEXT,
+ ...ORDER.flatMap(n => HEROES.filter(h => h.name === n && h.outfit === 'suit').sort((a, b) => (b.look === 'painterly') - (a.look === 'painterly')).map(hero)),
  {id: 'red', name: 'Red brute (Meshy)', short: 'Red brute', url: '../brute-fight/red/fighter.glb', kind: 'skinned'},
  {id: 'blue', name: 'Blue brute (Meshy)', short: 'Blue brute', url: '../brute-fight/blue/fighter.glb', kind: 'skinned'},
  {id: 'mannequin', name: 'Wooden mannequin', short: 'Wood', url: 'models/mannequin.glb', kind: 'rigid', hidden: true},

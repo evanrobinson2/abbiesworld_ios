@@ -1,0 +1,380 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0062 - The Scene Builder Lab</title>
+<meta name="description" content="A first-class in-game engineering lab: choose a family, season, land and style, get an auto-decorated first pass, then build freely. Clickable concept mock, architecture and phased build plan.">
+<style>
+:root{--aw-font:ui-rounded,"SF Pro Rounded",system-ui,-apple-system,"Segoe UI",sans-serif;--aw-display:var(--aw-font);--aw-ink:#2b211a;--aw-soft:#6b5d52;--aw-line:#2b211a22;--aw-bg:#fffaf2;--aw-accent:#7a4b2a;--aw-on-accent:#fff;
+ --paper:#f6efe3;--glass:rgba(255,255,255,.2);--glass-b:rgba(255,255,255,.55);--gt:#fff;--gs:rgba(255,255,255,.72);--hot:#ffb347;--pink:#ff7aa8;--sky:#7cc8ff}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:15px/1.5 var(--aw-font);background:#9bd3ff;color:var(--aw-ink);overflow:hidden;-webkit-font-smoothing:antialiased}
+body.study{overflow:auto;background:var(--paper)}
+canvas#cv{position:fixed;inset:0;display:block;touch-action:none;cursor:crosshair}
+canvas#cv[data-tool=hand]{cursor:grab}canvas#cv[data-tool=select]{cursor:default}
+button{font:inherit;color:inherit;cursor:pointer}
+svg{display:block}
+/* ---- liquid glass objects: depth from a lit top edge, a dark lower edge and a soft shadow, never a flat frosted slab ---- */
+.glass{background:linear-gradient(160deg,rgba(255,255,255,.3),rgba(60,80,130,.34) 42%,rgba(18,28,70,.5));backdrop-filter:blur(14px) saturate(1.7);-webkit-backdrop-filter:blur(14px) saturate(1.7);border:1px solid rgba(255,255,255,.5);border-bottom-color:rgba(0,0,0,.18);border-radius:22px;box-shadow:0 1px 0 rgba(255,255,255,.7) inset,0 -10px 18px rgba(0,0,40,.12) inset,0 14px 34px rgba(10,20,50,.28);color:#fff;text-shadow:0 1px 2px rgba(0,0,40,.35)}
+body.study .lab-only{display:none!important}
+body.study canvas#cv{display:none}
+body:not(.study) .study-only{display:none!important}
+/* mode switch */
+#modeb{position:fixed;left:14px;top:14px;z-index:30;display:flex;padding:4px;gap:2px;border-radius:16px}
+#modeb button{border:0;background:transparent;padding:7px 12px;border-radius:12px;font-weight:600;font-size:13px;opacity:.85}
+#modeb button.on{background:rgba(255,255,255,.88);color:#2b211a;text-shadow:none;opacity:1;box-shadow:0 2px 8px rgba(0,0,40,.25)}
+body.study #modeb{background:#fff;box-shadow:0 4px 18px #0002;color:var(--aw-ink);text-shadow:none;border:1px solid var(--aw-line)}
+body.study #modeb button.on{background:var(--aw-accent);color:#fff}
+/* stepper: choose, first pass, yours */
+#stepper{position:fixed;left:14px;top:66px;z-index:20;margin:0;padding:10px 14px;list-style:none;display:grid;gap:8px;border-radius:18px;font-size:12px;font-weight:600}
+#stepper li{display:flex;align-items:center;gap:8px;opacity:.55;transition:opacity .3s}
+#stepper li i{width:10px;height:10px;border-radius:50%;border:2px solid #fff;display:block}
+#stepper li.on{opacity:1}#stepper li.on i{background:var(--hot);border-color:#fff;box-shadow:0 0 10px var(--hot)}
+#stepper li.done{opacity:.9}#stepper li.done i{background:#fff}
+/* overlay toolbar */
+#toolbar{position:fixed;left:calc(50% - 150px);top:14px;transform:translateX(-50%);z-index:20;display:flex;align-items:center;gap:2px;padding:6px;border-radius:24px;max-width:calc(100vw - 420px);overflow-x:auto;scrollbar-width:none}
+.tbtn{width:42px;height:42px;border:0;border-radius:16px;background:transparent;display:grid;place-items:center;flex:none;transition:transform .12s,background .15s}
+.tbtn:hover{background:rgba(255,255,255,.22);transform:translateY(-1px)}
+.tbtn:active{transform:scale(.92)}
+.tbtn.on{background:linear-gradient(180deg,#fff,#ffe9bf);color:#5a3a12;text-shadow:none;box-shadow:0 2px 10px rgba(255,170,60,.55),0 0 0 1px #fff inset}
+.tbtn.dim{opacity:.4}.sep{width:1px;height:26px;background:rgba(255,255,255,.4);margin:0 5px;flex:none}
+/* right panel + rail */
+#panel{position:fixed;right:14px;top:14px;bottom:14px;width:352px;z-index:20;display:flex;border-radius:26px;overflow:hidden}
+#rail{width:58px;flex:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 0;border-right:1px solid rgba(255,255,255,.28);background:rgba(10,20,50,.16)}
+.rbtn{width:44px;height:44px;border:0;border-radius:15px;background:transparent;display:grid;place-items:center;transition:background .15s,transform .12s}
+.rbtn:hover{background:rgba(255,255,255,.2)}.rbtn.on{background:rgba(255,255,255,.88);color:#2b211a;text-shadow:none;box-shadow:0 2px 8px rgba(0,0,40,.25)}
+.rsep{width:26px;height:1px;background:rgba(255,255,255,.35);margin:4px 0}
+.bench{display:flex;flex-direction:column;gap:4px;max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.3,1.4,.5,1)}.bench.open{max-height:240px}
+.rbtn.flask{margin-top:auto;color:#ffe9bf}.rbtn.flask:not(.on){animation:pulse 3.2s ease-in-out infinite}
+.rbtn.flask.on{background:linear-gradient(180deg,#fff,#ffe9bf);color:#5a3a12}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgba(255,200,120,.16)}}
+#pbody{flex:1;overflow:auto;padding:16px 16px 22px;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.5) transparent}
+#pbody h2{margin:2px 0 4px;font:700 20px/1.2 var(--aw-display)}
+#pbody h3{margin:16px 0 8px;font:700 11px/1 var(--aw-font);letter-spacing:.09em;text-transform:uppercase;opacity:.82}
+.lede{margin:0 0 4px;font-size:13px;opacity:.92}.foot{font-size:11.5px;line-height:1.45;opacity:.78;margin:12px 0 0}
+.foot code,.lede code{font-size:10.5px;background:rgba(0,0,0,.22);padding:1px 5px;border-radius:5px}
+.fams{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fam{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);border-radius:16px;padding:8px;text-align:left;display:grid;gap:2px;transition:transform .15s,background .15s}
+.fam:hover{transform:translateY(-2px)}.fam.on{background:rgba(255,255,255,.9);color:#2b211a;text-shadow:none;box-shadow:0 0 0 2px var(--hot),0 6px 18px rgba(0,0,40,.25)}
+.fam .thumbs{display:flex;height:44px;gap:3px;margin-bottom:4px}.fam .thumbs img{flex:1;min-width:0;width:100%;object-fit:cover;border-radius:9px;background:rgba(255,255,255,.35)}
+.fam .thumbs:empty{background:linear-gradient(90deg,rgba(255,255,255,.2),rgba(255,255,255,.05));border-radius:9px}
+.fam b{font-size:14px}.fam small{font-size:11px;opacity:.75}
+.seasons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.season{border:0;background:transparent;display:grid;justify-items:center;gap:5px;padding:2px}
+.season i{width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff9,transparent 42%),var(--c);box-shadow:0 5px 12px rgba(0,0,40,.3),0 -4px 8px rgba(0,0,0,.18) inset;border:2px solid transparent;transition:transform .15s}
+.season:hover i{transform:scale(1.08)}.season.on i{border-color:#fff;box-shadow:0 0 0 3px var(--hot),0 5px 12px rgba(0,0,40,.3)}
+.season b{font-size:11.5px;text-transform:capitalize;font-weight:600}.seasons.small i{width:34px;height:34px}
+.topos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.topo{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);border-radius:14px;padding:6px 4px 7px;display:grid;justify-items:center;gap:2px}
+.topo svg{width:100%;height:30px;fill:rgba(255,255,255,.22);stroke:#fff;stroke-width:2.4;stroke-linejoin:round}
+.topo b{font-size:11px;font-weight:600}.topo.on{background:rgba(255,255,255,.9);color:#2b211a;text-shadow:none;box-shadow:0 0 0 2px var(--hot)}.topo.on svg{stroke:#7a4b2a;fill:#f1c98a55}
+.styles{display:grid;gap:7px}
+.style{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.12);border-radius:14px;padding:8px 12px;text-align:left;display:grid;gap:1px}.style b{font-size:13.5px}.style small{font-size:11.5px;opacity:.78}
+.style.on{background:rgba(255,255,255,.9);color:#2b211a;text-shadow:none;box-shadow:0 0 0 2px var(--hot)}
+.go{margin-top:18px;width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;border:0;border-radius:20px;font-weight:700;font-size:16px;color:#4a2c0c;text-shadow:none;background:linear-gradient(180deg,#fff2c9,#ffb347 60%,#ff9a2e);box-shadow:0 1px 0 #fff inset,0 -6px 12px rgba(160,70,0,.28) inset,0 10px 22px rgba(255,140,30,.5);transition:transform .12s}
+.go:hover{transform:translateY(-2px)}.go:active{transform:scale(.97)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:600;text-transform:capitalize}
+.chip.on{background:rgba(255,255,255,.92);color:#2b211a;text-shadow:none}.chip:hover{background:rgba(255,255,255,.3)}.chip.on:hover{background:#fff}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 8px;margin:12px 0 0;font-size:13px}.row output{font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}.row input{grid-column:1/-1}
+input[type=range]{-webkit-appearance:none;appearance:none;height:26px;background:transparent;width:100%}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:6px;background:linear-gradient(180deg,rgba(0,0,40,.28),rgba(255,255,255,.28))}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:24px;height:24px;margin-top:-8px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffe1a8 55%,#ffb347);box-shadow:0 3px 8px rgba(0,0,40,.4)}
+input[type=range]::-moz-range-track{height:8px;border-radius:6px;background:rgba(0,0,40,.25)}input[type=range]::-moz-range-thumb{width:22px;height:22px;border:0;border-radius:50%;background:#ffd58a}
+.tgl{display:flex;gap:10px;align-items:center;margin:14px 0 0;font-size:13px}.tgl input{width:18px;height:18px;accent-color:#ffb347}
+.row2{display:flex;gap:8px;margin-top:14px;align-items:end}.seed{flex:1;display:grid;gap:3px;font-size:12px}.seed input,#chati{background:rgba(0,0,40,.25);border:1px solid rgba(255,255,255,.35);border-radius:12px;color:#fff;padding:9px 11px;font:inherit;min-width:0;width:100%}
+.btn{border:1px solid rgba(255,255,255,.5);background:rgba(255,255,255,.18);border-radius:14px;padding:9px 14px;font-weight:600;font-size:13px;display:inline-flex;gap:7px;align-items:center;flex:none}.btn:hover{background:rgba(255,255,255,.32)}.btn.big{flex:1;justify-content:center;background:linear-gradient(180deg,#fff2c9,#ffb347);color:#4a2c0c;text-shadow:none;border-color:#fff}
+.mgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.mgrid .m{aspect-ratio:1;border-radius:9px;overflow:hidden;background:rgba(255,255,255,.25)}.mgrid img{width:100%;height:100%;object-fit:cover;display:block}
+.chat{display:grid;gap:8px;max-height:calc(100vh - 330px);overflow:auto;margin-bottom:10px}.msg{padding:9px 12px;border-radius:16px;font-size:13px;max-width:92%}.msg.bot{background:rgba(255,255,255,.2);border-top-left-radius:5px;justify-self:start}.msg.me{background:rgba(255,255,255,.92);color:#2b211a;text-shadow:none;border-top-right-radius:5px;justify-self:end}
+.sug{margin:6px 0 10px}#chatf{display:flex;gap:6px}#chatf button{border:0;border-radius:12px;width:42px;background:linear-gradient(180deg,#fff2c9,#ffb347);color:#4a2c0c;display:grid;place-items:center;flex:none}.lnk{border:0;background:none;text-decoration:underline;padding:0;color:#ffe9bf;font-weight:700}
+.ops{display:grid;gap:5px;max-height:calc(100vh - 360px);overflow:auto}.op{display:flex;gap:8px;padding:7px 10px;border-radius:11px;background:rgba(255,255,255,.14);font-size:12.5px}.op i{font-style:normal;opacity:.7;min-width:22px}
+/* card tray: real 3D hex cards in the game; stand-in drawings here */
+#tray{position:fixed;left:calc(50% - 176px);bottom:12px;transform:translateX(-50%);z-index:20;display:flex;gap:10px;padding:12px 18px 8px;align-items:flex-end;max-width:calc(100vw - 440px);overflow-x:auto;scrollbar-width:none}
+#tray.muted .card:not(.on){opacity:.82}
+.card{position:relative;width:76px;height:84px;flex:none;border:0;padding:0;background:linear-gradient(170deg,rgba(255,255,255,.62),rgba(255,255,255,.2) 55%,rgba(20,40,90,.28));clip-path:polygon(50% 0,100% 22%,100% 78%,50% 100%,0 78%,0 22%);transition:transform .18s cubic-bezier(.3,1.5,.5,1);filter:drop-shadow(0 8px 10px rgba(0,0,40,.4))}
+.card:hover{transform:translateY(-10px) rotate(calc((var(--i) - 3) * 1.2deg))}.card.on{transform:translateY(-16px) scale(1.1);background:linear-gradient(170deg,#fff,#ffe9bf 60%,#ffc66e)}
+.card canvas{position:absolute;inset:6px;width:calc(100% - 12px);height:calc(100% - 12px)}
+.card b{position:absolute;right:15px;bottom:11px;font-size:11px;color:#2b211a;text-shadow:none}.card kbd{position:absolute;left:14px;bottom:11px;font:600 10px var(--aw-font);color:#2b211a99}
+.card.dice{display:grid;place-items:center;color:#fff;text-shadow:none;background:linear-gradient(170deg,rgba(255,200,120,.75),rgba(255,140,40,.55))}
+#bubble{position:fixed;z-index:25;transform:translate(-50%,-100%);display:none;gap:2px;padding:4px;border-radius:18px}#bubble.on{display:flex}
+#bubble button{width:36px;height:36px;border:0;border-radius:13px;background:transparent;display:grid;place-items:center}#bubble button:hover{background:rgba(255,255,255,.3)}#bubble button.on{background:#fff;color:#5a3a12}
+#toast{position:fixed;left:50%;bottom:132px;transform:translate(-50%,20px);opacity:0;z-index:40;pointer-events:none;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:600;transition:all .25s;max-width:80vw;text-align:center}#toast.on{opacity:1;transform:translate(-50%,0)}
+#cover{position:fixed;left:14px;bottom:14px;z-index:20;font-size:11px;padding:6px 11px;border-radius:12px;opacity:.9}
+#exitplay{position:fixed;right:14px;top:14px;z-index:35;width:46px;height:46px;border-radius:50%;display:none;place-items:center;border:1px solid rgba(255,255,255,.5)}
+body.play #toolbar,body.play #panel,body.play #tray,body.play #stepper,body.play #modeb{display:none}body.play #exitplay{display:grid}
+/* ---- study view ---- */
+#study{display:none;max-width:1160px;margin:0 auto;padding:78px 20px 80px;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start}
+body.study #study{display:grid}
+#study article{min-width:0;max-width:760px}
+#study h1{font:800 clamp(30px,5vw,46px)/1.05 var(--aw-display);margin:0 0 10px;letter-spacing:-.02em}
+#study h2{font:750 26px/1.15 var(--aw-display);margin:54px 0 10px;letter-spacing:-.01em}#study h3{font:700 17px/1.3 var(--aw-display);margin:26px 0 6px}
+#study p,#study li{color:#3a2e26}.kick{font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--aw-accent)}
+.status{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid var(--aw-line);border-radius:999px;padding:5px 12px;font-size:13px;font-weight:600;margin:4px 0 10px}.status b{color:#b36a14}
+#study code{background:#00000010;padding:1px 6px;border-radius:6px;font-size:.88em}
+.lead{font-size:19px;line-height:1.5;color:#2b211a}
+.callout{background:#fff;border:1px solid var(--aw-line);border-left:5px solid var(--hot);border-radius:14px;padding:14px 18px;margin:18px 0}.callout p{margin:6px 0}
+.shots{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin:16px 0}.shots figure{margin:0;background:#fff;border-radius:16px;overflow:hidden;border:1px solid var(--aw-line);box-shadow:0 8px 24px #0001}.shots img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}.shots figcaption{padding:9px 13px;font-size:13px;color:var(--aw-soft)}
+.shots a.open{display:inline-block;margin:0 0 14px}
+table{border-collapse:collapse;width:100%;font-size:13.5px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--aw-line)}th,td{text-align:left;padding:8px 11px;border-bottom:1px solid #2b211a14;vertical-align:top}th{background:#f1e7d6;font-size:12px;letter-spacing:.04em;text-transform:uppercase}tr:last-child td{border-bottom:0}
+.tw{overflow-x:auto;margin:12px 0}
+.fig{background:#fff;border:1px solid var(--aw-line);border-radius:16px;padding:12px;margin:16px 0;overflow-x:auto}.fig svg{width:100%;height:auto;min-width:560px}.fig text{font-family:var(--aw-font)}
+.phase{display:grid;grid-template-columns:54px 1fr;gap:4px 14px;background:#fff;border:1px solid var(--aw-line);border-radius:16px;padding:14px 16px;margin:12px 0}.phase .n{grid-row:span 3;width:46px;height:46px;border-radius:15px;background:linear-gradient(180deg,#fff2c9,#ffb347);display:grid;place-items:center;font-weight:800;font-size:18px;color:#4a2c0c}.phase h3{margin:0}.phase p{margin:0}.phase .exit{font-size:13px;color:var(--aw-soft)}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;background:#f1e7d6;color:#6b4a2a;margin-left:6px;vertical-align:middle}
+#ctxcol{position:sticky;top:76px;max-height:calc(100vh - 96px);overflow:auto}
+#ctxcol .ctx-aside{margin:0!important;max-width:none!important}
+.ctx-card{background:#fff;border:1px solid var(--aw-line);border-radius:18px;padding:14px;box-shadow:0 8px 24px #0001}
+@media (max-width:1000px){#study{grid-template-columns:1fr}#ctxcol{position:static;max-height:none}}
+@media (max-width:760px){
+ #panel{left:10px;right:10px;top:auto;bottom:10px;width:auto;height:46vh}
+ #toolbar{left:50%;max-width:calc(100vw - 20px);top:62px}#stepper{display:none}#tray{display:none}#cover{display:none}
+ #modeb{left:10px;top:10px}#toast{bottom:calc(46vh + 20px)}
+}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div id="modeb" class="glass ui"><button data-m="lab" class="on">Lab</button><button data-m="study">Study</button></div>
+<ol id="stepper" class="glass ui lab-only"><li><i></i>Choose</li><li><i></i>First pass</li><li><i></i>Yours</li></ol>
+<div id="toolbar" class="glass ui lab-only" role="toolbar" aria-label="Tools"></div>
+<aside id="panel" class="glass ui lab-only"><nav id="rail"></nav><div id="pbody"></div></aside>
+<div id="tray" class="glass ui lab-only" aria-label="Cards for this family"></div>
+<div id="bubble" class="glass lab-only"></div>
+<div id="toast" class="glass"></div>
+<div id="cover" class="glass lab-only"></div>
+<button id="exitplay" class="glass" aria-label="Back to the lab"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+
+<main id="study" class="study-only">
+<article>
+ <div class="kick">AW-STUDY-0062</div>
+ <h1>The Scene Builder Lab</h1>
+ <div class="status">Status: <b>drafted</b> · concept study and clickable mock, not in the game</div>
+ <p class="lead">A place inside Abbie's World where you choose an asset family, a season, a land shape and how alive it should be, watch the game decorate a first pass, then take over and build freely. Behind a flask button sits a real engineering bench for weather, physics and topology, so the lab can grow into a serious tool without ever greeting a six-year-old with a wall of sliders.</p>
+ <p>The mock on the <b>Lab</b> tab is playable: everything you see is driven by a small scene document, so undo, "rebuild from record" and the scene file you can copy are real. The pictures are stand-in shapes; the real build draws the model library.</p>
+ <div class="shots" id="shots"></div>
+
+ <h2 id="why">1. What Evan asked for, in one list</h2>
+ <ul>
+  <li>A scene editor where you <b>mix and match elements</b> and the game <b>generates the world dynamically</b>, with free build on top.</li>
+  <li>A <b>right panel with all the tools</b> and an <b>overlay toolbar</b>.</li>
+  <li>A <b>major build</b>, a first-class in-game engineering lab; not a proof of concept.</li>
+  <li>Experiments with <b>weather, physics, topology, simulation parameters like gravity</b>, without overwhelming anyone.</li>
+  <li>The default path: <b>pick asset family, season, topology, simulation style; first pass auto; second pass the user</b>.</li>
+ </ul>
+
+ <h2 id="flow">2. The default experience: four choices, then your hands</h2>
+ <div class="fig"><svg viewBox="0 0 760 190" role="img" aria-label="Choose four things, the game decorates, then you build">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a4b2a"/></marker></defs>
+  <g font-size="14" fill="#2b211a">
+   <rect x="8" y="20" width="220" height="150" rx="20" fill="#fff6e2" stroke="#e2c690"/><text x="26" y="48" font-weight="700" font-size="15">1 · Choose (10 seconds)</text>
+   <text x="26" y="76">Asset family · Ranch, Moon base…</text><text x="26" y="98">Season · spring to winter</text><text x="26" y="120">Land shape · hills, island, crater…</text><text x="26" y="142">How alive · still, cozy, lively, wild</text>
+   <rect x="268" y="20" width="220" height="150" rx="20" fill="#e9f6ee" stroke="#a9d3b6"/><text x="286" y="48" font-weight="700" font-size="15">2 · First pass (the game)</text>
+   <text x="286" y="76">Land grows from the shape</text><text x="286" y="98">Heroes, then clusters, then scatter</text><text x="286" y="120">Creatures move in, light settles</text><text x="286" y="142">Props drop in under your gravity</text>
+   <rect x="528" y="20" width="224" height="150" rx="20" fill="#eaf1fb" stroke="#a9c3e8"/><text x="546" y="48" font-weight="700" font-size="15">3 · Yours (free build)</text>
+   <text x="546" y="76">Place, erase, paint the land</text><text x="546" y="98">Pin what you love, re-roll the rest</text><text x="546" y="120">Ask the helper in plain words</text><text x="546" y="142">Open the flask for the deep tools</text>
+  </g>
+  <path d="M232 95H262" stroke="#7a4b2a" stroke-width="3" marker-end="url(#ar)"/><path d="M492 95H522" stroke="#7a4b2a" stroke-width="3" marker-end="url(#ar)"/>
+ </svg></div>
+ <p>The three dots at the top left of the lab show where you are. Changing a choice after you have started never throws your work away: the first pass is re-run around the things you placed or pinned. <b>Build my world</b> and the dice card re-roll only the part the game made.</p>
+ <h3>Why this order</h3>
+ <p>Townscaper has one palette and nothing else; Tiny Glade has a tools tray; both let the machine do the tedious detail so the child does the choosing. The first pass is the machine's half of that deal. The second pass is what makes it the child's world, and every edit we let them make is recorded so the machine can keep learning what they like.</p>
+
+ <h2 id="screen">3. Anatomy of the screen</h2>
+ <table><thead><tr><th>Part</th><th>What is in it</th><th>Why it is shaped this way</th></tr></thead><tbody>
+  <tr><td><b>Overlay toolbar</b> (top, floating glass pill)</td><td>Select, place, erase, raise, lower, smooth, pick, move view · undo, redo · turn, hex glow · run, step in, play</td><td>Verbs of the hands. Icon only, with names on hover. It is the same "tools tray" size Tiny Glade uses. Every tool has a key.</td></tr>
+  <tr><td><b>Right panel</b> (glass, with an icon rail)</td><td>Make a world · Assets · Ask · and behind the flask: Land · Sky and weather · Physics and life · Scene record</td><td>The all-tools home Evan asked for. It is a workbench, so it may hold words; the rail keeps it to one thing at a time.</td></tr>
+  <tr><td><b>Card tray</b> (bottom, hex cards)</td><td>The family's things as 3D hex cards with counts; the dice card re-rolls the first pass</td><td>Matches the UI layout canon (bottom = real 3D hex cards) and the Minecraft hotbar habit: keys 1 to 9.</td></tr>
+  <tr><td><b>Selection bubble</b> (on the thing)</td><td>Smaller, bigger, pin, remove</td><td>Controls live on the thing you touch (the loadout rule), not in a list.</td></tr>
+  <tr><td><b>Stepper</b> (top left)</td><td>Choose · First pass · Yours</td><td>Tells a new player where they are without a tutorial.</td></tr>
+  <tr><td><b>Play mode</b> (screen icon, or P)</td><td>Everything folds away, one close button remains</td><td>The cover test: the lab shows its own interface percentage bottom left (about a third of a laptop screen with everything open, because it is a workbench); Play mode drops it to under 1%.</td></tr>
+ </tbody></table>
+ <div class="callout"><b>Two layers that never mix.</b> The hex glow, hover ring, selection ring, brush ghost and every panel are presentation layer: characters, creatures and the AI directors cannot see them. Only things you placed exist in the world. There are no axes, gizmos or debug boxes; the grid is glowing hex lines, which the town already uses, and raw numbers show only in developer mode.</div>
+ <div class="callout"><b>Where this sits among the four ways of acting.</b> The lab is "tiles create the world" at full strength, plus a workbench for the grown-up. It is not the god cards (those stay for play: weather and events as cards on the board) and it is not FPS (Step in only lends you eye height to check your work). The lab's right panel is allowed because it is a mode you enter and leave; the play HUD stays at 8% with zero words.</div>
+
+ <h2 id="ladder">4. Never overwhelming: the disclosure ladder</h2>
+ <div class="fig"><svg viewBox="0 0 760 250" role="img" aria-label="Four levels from the default to developer mode">
+  <g font-size="14" fill="#2b211a">
+   <rect x="20" y="14" width="720" height="48" rx="14" fill="#fff6e2" stroke="#e2c690"/><text x="36" y="36" font-weight="700">Level 0 · Choose</text><text x="36" y="54" font-size="13">Four choices and one button. This is the whole lab for most children.</text>
+   <rect x="60" y="72" width="640" height="48" rx="14" fill="#e9f6ee" stroke="#a9d3b6"/><text x="76" y="94" font-weight="700">Level 1 · Build</text><text x="76" y="112" font-size="13">Toolbar, cards, bubble, helper chat, asset kinds. Visible from the start, learned by touching.</text>
+   <rect x="100" y="130" width="560" height="48" rx="14" fill="#eaf1fb" stroke="#a9c3e8"/><text x="116" y="152" font-weight="700">Level 2 · Bench (the flask)</text><text x="116" y="170" font-size="13">Land, Sky and weather, Physics and life, Scene record. One tap to open, remembered.</text>
+   <rect x="140" y="188" width="480" height="48" rx="14" fill="#f3e8f7" stroke="#cfb0dc"/><text x="156" y="210" font-weight="700">Level 3 · Developer mode</text><text x="156" y="228" font-size="13">Raw parameter registry, op log editing, profiler, experiment runner.</text>
+  </g></svg></div>
+ <ul>
+  <li><b>Nothing from a deeper level appears unless asked.</b> The flask pulses gently on the rail; that is its only invitation.</li>
+  <li><b>Every bench value has a plain-language preset first</b> (Earth, Mars, Moon, Jupiter before the gravity number), a unit, a range and a reset.</li>
+  <li><b>Defaults come from the four choices.</b> Picking the Moon family nudges gravity to lunar unless you set it yourself. The helper explains any change it makes.</li>
+  <li><b>Values belong to the scene, not the device</b>, so a world shared with a friend behaves the same.</li>
+ </ul>
+ <h3>The parameter catalogue (what the bench edits)</h3>
+ <div class="tw"><table><thead><tr><th>Parameter</th><th>Default</th><th>Range</th><th>Level</th><th>Existing owner in the repo</th></tr></thead><tbody>
+  <tr><td>Asset family, allowed kinds</td><td>Ranch</td><td>packs</td><td>0 / 1</td><td>model library, project-chat <code>packs.mjs</code></td></tr>
+  <tr><td>Season</td><td>summer</td><td>4</td><td>0</td><td><code>ranch-seasons-state.mjs</code></td></tr>
+  <tr><td>Land shape</td><td>rolling hills</td><td>6 shapes</td><td>0</td><td><code>terrain-presets.js</code>, <code>board-terrain.mjs</code></td></tr>
+  <tr><td>Simulation style</td><td>cozy</td><td>still · cozy · lively · wild</td><td>0</td><td>pace, <code>simulation-pace.mjs</code>, weather chance, life count</td></tr>
+  <tr><td>Relief, feature size, world size, water level, seed</td><td>1, 1, 5 rings, auto, random</td><td>.25–2, .6–1.8, 3–7, −1–5</td><td>2</td><td><code>landscape-parameters.mjs</code> (already "generator parameters, not user-facing controls")</td></tr>
+  <tr><td>Time of day, real clock</td><td>2 PM, off</td><td>0–24 h</td><td>2</td><td><code>world-clock.mjs</code> ("always today and now")</td></tr>
+  <tr><td>Weather, wind</td><td>follow the season, .3</td><td>7 weathers, 0–1</td><td>2</td><td><code>weather-state.mjs</code>, <code>weather-control.mjs</code>, <code>ranch-weather.mjs</code></td></tr>
+  <tr><td>Gravity</td><td>9.81 m/s²</td><td>.5–30</td><td>2</td><td><code>planet-gravity.mjs</code> (earth, moon, mars already there)</td></tr>
+  <tr><td>Time scale, bounciness</td><td>1×, .35</td><td>0–4, 0–.9</td><td>2</td><td><code>tile-physics/world.mjs</code>, <code>rigid-world.mjs</code></td></tr>
+  <tr><td>Creatures</td><td>1×</td><td>0–3</td><td>2</td><td><code>ranch-ecology-core.mjs</code>, <code>wildlife/</code>, <code>town-life/</code></td></tr>
+  <tr><td>Fog, tide, wind shear, soil, fire, rivers, tectonics</td><td>off</td><td>per param</td><td>3</td><td>to be added through the same registry (section 6)</td></tr>
+ </tbody></table></div>
+
+ <h2 id="arch">5. How it is built: a scene is a recipe, not a picture</h2>
+ <p>This is the part that makes the lab a first-class tool and not a toy. Following the modeler vision (preserve creative intent so whole experiences can be rebuilt and upgraded), a scene is saved as <b>a base recipe plus an ordered list of edits</b>, never as a pile of meshes. The mock does exactly this: undo is "drop the last edit and replay", "Rebuild from record" proves the replay gives the same checksum, and the Scene tab shows the record.</p>
+ <div class="fig"><svg viewBox="0 0 760 330" role="img" aria-label="Layers of the lab">
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#7a4b2a"/></marker></defs>
+  <g font-size="13.5" fill="#2b211a">
+   <rect x="10" y="10" width="740" height="52" rx="14" fill="#fff6e2" stroke="#e2c690"/><text x="26" y="33" font-weight="700">Lab UI (presentation layer)</text><text x="26" y="52" font-size="12.5">toolbar · right panel · card tray · bubble · helper chat · play mode · developer mode</text>
+   <rect x="10" y="76" width="740" height="52" rx="14" fill="#e9f6ee" stroke="#a9d3b6"/><text x="26" y="99" font-weight="700">Scene document  <tspan font-weight="400">aw-scene v1</tspan></text><text x="26" y="118" font-size="12.5">base recipe (family, season, shape, style, seed) · ordered ops (place, erase, height, env…) · checksum · provenance</text>
+   <rect x="10" y="142" width="360" height="86" rx="14" fill="#eaf1fb" stroke="#a9c3e8"/><text x="26" y="165" font-weight="700">Generators (pure, seeded)</text><text x="26" y="185" font-size="12.5">terrain from shape · auto-decorator (heroes, clusters,</text><text x="26" y="203" font-size="12.5">scatter, life) · taste prior from votes · pack allow-list</text>
+   <rect x="390" y="142" width="360" height="86" rx="14" fill="#f3e8f7" stroke="#cfb0dc"/><text x="406" y="165" font-weight="700">Simulation (already in the repo)</text><text x="406" y="185" font-size="12.5">clock, seasons, weather fronts · ecology and creatures</text><text x="406" y="203" font-size="12.5">· tile-physics · gravity · headless runner</text>
+   <rect x="10" y="242" width="740" height="52" rx="14" fill="#fdeee6" stroke="#e8b99f"/><text x="26" y="265" font-weight="700">Renderers</text><text x="26" y="284" font-size="12.5">town / board three.js with the world look · mini card thumbnails · viewer for sharing · future engines rebuild the same record</text>
+   <path d="M380 62V76" stroke="#7a4b2a" stroke-width="2.5" marker-end="url(#ar2)"/><path d="M190 128V142" stroke="#7a4b2a" stroke-width="2.5" marker-end="url(#ar2)"/><path d="M570 128V142" stroke="#7a4b2a" stroke-width="2.5" marker-end="url(#ar2)"/><path d="M380 228V242" stroke="#7a4b2a" stroke-width="2.5" marker-end="url(#ar2)"/>
+  </g></svg></div>
+ <h3>Rules the document keeps</h3>
+ <ul>
+  <li><b>Determinism.</b> The same recipe and ops give the same world (the mock checks this with a checksum). That is what makes undo, sharing, testing and "rebuild on the new engine" possible.</li>
+  <li><b>Ownership.</b> Each thing is either the game's (<code>a:</code>, re-rolled with a new first pass) or yours (<code>u:</code>, placed or pinned, kept). The pin button flips it.</li>
+  <li><b>Intent is recorded.</b> The auto-decorator records <i>why</i> it placed a thing (hero, forest cluster, shore, near-hero) so the helper can answer "why is that there?" and the taste learner can tell a rule from a roll.</li>
+  <li><b>Presentation never leaks.</b> The scene file holds world things and settings only; hover, selection and tool state are not saved.</li>
+ </ul>
+ <h3>The auto-decorator (first pass) in plain words</h3>
+ <ol>
+  <li><b>Read the land.</b> Slope, height and water for every hex.</li>
+  <li><b>Heroes.</b> The family's anchors (barn and house, dome and solar field, tent and wreck) go on the flattest, most central hexes, spaced apart.</li>
+  <li><b>Clusters.</b> Trees follow a second noise field so they form woods; fences, haybales and lamps gather near heroes; shore things hug the water.</li>
+  <li><b>Scatter.</b> Rocks climb, bushes fill, nothing stands on a slope a building would slide off.</li>
+  <li><b>Life.</b> Creatures appear in numbers set by the simulation style and wander only where they can walk.</li>
+  <li><b>Polish.</b> The things drop in from the centre outward under the scene's own gravity (on the Moon they float down slowly) with a little dust.</li>
+ </ol>
+ <p>The mock uses hand-written rules like these. The build replaces the placement step with a <b>constraint solver in the wave-function-collapse family</b> (the idea behind Townscaper and many diorama generators), fed with the library's role tags so a "house" can be any of the library's houses and fits its neighbours. The pack allow-list from the project chat (AW-STUDY-0061) decides which models are eligible, and the swipe study's taste learner (AW-STUDY-0060) becomes a ranking prior, so a child's earlier choices tilt the next first pass without a swipe game.</p>
+
+ <h2 id="physics">6. The engineering bench</h2>
+ <p>Behind the flask the lab becomes an instrument. The principle: <b>every knob is a registry entry</b> with a name, unit, range, default, level, owner module and a one-line plain explanation. The panels are drawn from the registry, the helper chat is allowed to set only what the registry lists, the scene record stores the values, and developer mode shows the raw table. Adding "fog density" later is one entry, not a new screen.</p>
+ <div class="tw"><table><thead><tr><th>Bench tab</th><th>In the mock</th><th>In the build</th></tr></thead><tbody>
+  <tr><td><b>Land</b> (topology)</td><td>Relief, feature size, world size, water level, seed, brush size; raise, lower and smooth on the toolbar</td><td>Rivers, erosion pass, terraces, caves and overhangs; stamp shapes (crater, mesa); height import; slope analysis overlay</td></tr>
+  <tr><td><b>Sky and weather</b></td><td>Time, real clock, 7 weathers, wind, season; light, sky and particles follow one signal</td><td>Fronts on a seeded chain, tides, fog density, aurora, storms that feed back into crops and creatures; "Always today and now"</td></tr>
+  <tr><td><b>Physics and life</b></td><td>Gravity presets and slider, time scale, bounciness, creature count; a <b>drop test</b> where balls fall at your gravity and roll downhill so the land decides where they end</td><td>Rigid bodies via the existing tile-physics, per-prop mass and friction from the model's material roles, wind on trees and cloth, a wake-up budget so big worlds stay smooth</td></tr>
+  <tr><td><b>Scene record</b></td><td>Edit log, copy the scene file, rebuild from record with a checksum</td><td>Branch and compare scenes, restore a step, import a friend's scene, "upgrade" an old scene to the new renderer</td></tr>
+ </tbody></table></div>
+ <h3>Experiments (the part that makes it a lab)</h3>
+ <p>A bench value can be turned into an <b>experiment</b>: choose one or two parameters and a few settings, the lab runs the world forward headless for a number of in-game days (the repo already has <code>ranch-headless.mjs</code>), and shows the outcomes side by side as small diorama cards with a few honest numbers, such as how many creatures thrived, how much grew, how often it stormed. "What if the Moon had rain?" and "What if it was Mars in autumn?" become a tap. Findings can be saved into the scene as notes. This is the same loop as Besiege and Bricktales (build, test, watch, adjust), applied to the world instead of a machine.</p>
+
+ <h2 id="chat">7. The helper in the lab (ChatGPT in game)</h2>
+ <p>Evan recently said he does not want the swipe diorama tile game, but does want ChatGPT in the game. The lab is where that fits best: it is a place where plain words really are the fastest tool. The mock's <b>Ask</b> tab understands things like "make it winter", "add 3 trees", "remove the rocks", "moon gravity", "steeper hills", "a storm at night" and "undo", and always says what it did, with an Undo.</p>
+ <ul>
+  <li><b>Same verbs, swappable brain.</b> The helper speaks only registry and edit verbs (move, swap, add, remove, rotate, scale, restyle from the tile-chat contract, plus season, weather, time, gravity, shape). The mock does that with a free pattern matcher. The build sends the same verbs to a model: the AI Gateway today, or ChatGPT as the provider if Evan prefers, behind the wallet caps ($1 a person) and the PG screen. The model returns words for the verbs, never code or asset keys.</li>
+  <li><b>Everything it does is an edit in the record</b>, so it is undoable, replayable and visible in the Scene tab.</li>
+  <li><b>The project chat is different.</b> AW-STUDY-0061 passes a request to the project so work gets built. If the helper cannot do something with its verbs (a new kind of tree), it offers "Ask the project to make it", which hands off to that route instead of pretending.</li>
+  <li><b>Voice later.</b> The helper can speak through an ElevenLabs designed voice; no browser speech, per the invariants.</li>
+ </ul>
+
+ <h2 id="oracle">8. What the Oracle's records say</h2>
+ <p>Fourteen records from the Game Oracle snapshot in the repo informed the shape of the lab. The point is the pattern: the builders children love keep the interface at or under about a tenth of the screen, and the deep simulators that bury you in panels sit at a fifth or more.</p>
+ <div class="tw"><table><thead><tr><th>Game</th><th>Interface share</th><th>What we take</th></tr></thead><tbody>
+  <tr><td>Townscaper</td><td>4%</td><td>One palette, the world does the rest. The first pass should feel like this.</td></tr>
+  <tr><td>Astroneer</td><td>4%</td><td>Terrain tool with physical, in-world feedback; the backpack shows its items.</td></tr>
+  <tr><td>Dorfromantik</td><td>6%</td><td>Soft, tactile hex placement; count as the only overlay.</td></tr>
+  <tr><td>Bad North</td><td>6%</td><td>A whole toy island, almost no numbers.</td></tr>
+  <tr><td>Tiny Glade</td><td>8%</td><td>Gridless chemistry: procedural detail around what you draw. A tools tray only.</td></tr>
+  <tr><td>Besiege</td><td>8%</td><td>The thing is the readout. Honest physics, funny failures, build then test.</td></tr>
+  <tr><td>Minecraft</td><td>9%</td><td>A hotbar of blocks is the right shape for the card tray.</td></tr>
+  <tr><td>LEGO Bricktales, Garry's Mod</td><td>10%</td><td>Test run shows success in the world; a spawn menu that grows is the risk.</td></tr>
+  <tr><td>Cities: Skylines</td><td>14%</td><td>Info views that recolour the whole world are a good model for Sky and Land overlays.</td></tr>
+  <tr><td>Kerbal Space Program</td><td>18%</td><td>Precise overlays only where precision pays; it teaches by crashing.</td></tr>
+  <tr><td>Planet Zoo, RimWorld</td><td>20% and 22%</td><td>The depth we want behind the flask but never in front of it.</td></tr>
+  <tr><td>Spore</td><td>8%</td><td>The editor reshapes itself per stage and parts show what they do.</td></tr>
+ </tbody></table></div>
+ <p>Super Mario Maker and Dreams (design reading in the context card) agree on a second point: creation tools win when the first thing you make is fun in seconds, and when you can play what you made immediately. That is why "Step in" and the running world are in the toolbar, not hidden in a menu.</p>
+
+ <h2 id="reuse">9. What we reuse, so this is not a second engine</h2>
+ <div class="tw"><table><thead><tr><th>Need</th><th>Already exists</th></tr></thead><tbody>
+  <tr><td>Models and roles</td><td>Model library (668 usable models), project-chat packs (<code>packs.mjs</code>)</td></tr>
+  <tr><td>Slot-style customising</td><td><code>loadout.mjs</code>, <code>facet-picker.mjs</code> (the bubble and tray follow the same click-the-slot rule)</td></tr>
+  <tr><td>Placement and feel</td><td><code>tile-placement-feedback.mjs</code>, <code>tile-drop-impact.mjs</code>, <code>scene-picking.mjs</code>, <code>hex-glow.mjs</code></td></tr>
+  <tr><td>Terrain</td><td><code>procedural-engine.js</code>, <code>terrain-presets.js</code>, <code>landscape-parameters.mjs</code>, <code>board-terrain.mjs</code></td></tr>
+  <tr><td>Sky, season, weather, clock</td><td><code>ranch-sky.mjs</code>, <code>ranch-seasons-state.mjs</code>, <code>weather-state.mjs</code>, <code>world-clock.mjs</code></td></tr>
+  <tr><td>Physics and gravity</td><td><code>planet-gravity.mjs</code>, <code>tile-physics/</code></td></tr>
+  <tr><td>World effects (god cards)</td><td><code>world-effects.mjs</code>, <code>event-hand.mjs</code>: unchanged, still the play-time tool</td></tr>
+  <tr><td>Worlds and boards</td><td><code>worlds/boards.mjs</code>: a finished scene becomes a board, or an orb to carry</td></tr>
+  <tr><td>Helper</td><td><code>tile-chat/contract.mjs</code> verbs, the AI Gateway with wallet and PG screen, the project chat hand-off</td></tr>
+  <tr><td>Taste</td><td>swipe study's learner and portable vote file (<code>aw-diorama-votes</code>)</td></tr>
+ </tbody></table></div>
+
+ <h2 id="plan">10. The build plan (six phases, each ends in a passing run)</h2>
+ <p>Sizes are relative effort for one focused thread: S small, M medium, L large. Per the invariants nothing is reachable from abbies.world until it has a real scene and a headless-Chrome run that plays it end to end; until then it lives behind <code>?exp=scene-builder</code>.</p>
+ <div class="phase"><div class="n">0</div><h3>Scene document and parameter registry <span class="pill">M</span></h3><p>Promote this mock's engine into <code>simulations/scene-lab/</code>: <code>aw-scene</code> v1, ops, deterministic fold, checksum, and the parameter registry with units, ranges, levels and owners. Node tests for determinism, undo and migration.</p><p class="exit">Exit: replay of a 200-edit record is bit-identical; registry covers every parameter in section 4.</p></div>
+ <div class="phase"><div class="n">1</div><h3>Recipe to world on real models <span class="pill">L</span></h3><p>Four choices generate real terrain through the existing terrain code and an auto-decorator over library roles and the pack allow-list. Rendered with the town's three.js and world look. Registry entry <code>scene-builder</code>, experimental.</p><p class="exit">Exit: headless run picks each family, builds, screenshots six worlds, and checks no engine artifacts (game-feel lint).</p></div>
+ <div class="phase"><div class="n">2</div><h3>Free build <span class="pill">L</span></h3><p>Toolbar, brushes, card tray, bubble, undo and redo, turn, hex glow, placement feel and drop-in with dust, catalogue sounds for every touch (wood, stone, grass), pick and move view, Step in using the existing first-person module.</p><p class="exit">Exit: a run places, erases, raises, undoes and rebuilds from record; 20 dead-click test passes.</p></div>
+ <div class="phase"><div class="n">3</div><h3>The bench <span class="pill">L</span></h3><p>Land, Sky and weather, Physics and life, Scene record on the registry. Drop test on tile-physics. Experiment runner on the headless sim with side-by-side result cards. Profiler and wake-up budget so a 300-hex world holds frame rate on an iPhone.</p><p class="exit">Exit: moon versus earth experiment runs headless and the cards agree with a hand calculation; frame-time budget met.</p></div>
+ <div class="phase"><div class="n">4</div><h3>Helper and taste <span class="pill">M</span></h3><p>Extend the tile-chat contract with registry verbs, free matcher first, model behind the wallet and PG screen second, "Ask the project" hand-off, taste prior from votes.</p><p class="exit">Exit: 30 scripted phrases produce the expected edits; a refused phrase never changes the scene; spend cap test.</p></div>
+ <div class="phase"><div class="n">5</div><h3>Door, share and upgrade <span class="pill">M</span></h3><p>The way in from Winchester, saving a scene as a board or carrying it as an orb, import and export, "upgrade my old worlds" when the renderer improves. Registry flip to live with the end-to-end test; tour decision made with Evan.</p><p class="exit">Exit: from the town, enter, build, leave, reload and find the world; a v1 scene opens on the newest renderer.</p></div>
+
+ <h2 id="risks">11. Risks and what is deliberately not promised</h2>
+ <ul>
+  <li><b>Scope.</b> The bench can swallow the project. Rule: nothing joins the lab without a registry entry, a default, and a test.</li>
+  <li><b>Performance.</b> Auto-decoration plus physics plus weather on a phone is the real budget. Phase 3 owns it with a profiler, not a hope.</li>
+  <li><b>Taste of the first pass.</b> Hand-written rules look samey. The solver and the taste prior exist to fix that; phase 1 judges by screenshots shown to Evan.</li>
+  <li><b>Right-panel drift.</b> A side panel tempts website habits. The card-wall ban applies: facets are slots, lists stay short, the play HUD stays at 8%.</li>
+  <li><b>Not in this mock:</b> sound (the build uses only catalogue sounds, one per material), real models (stand-in shapes here), real physics engine (a simple fall, bounce and roll here), real AI (pattern matcher here), save to the server.</li>
+ </ul>
+
+ <h2 id="ask">12. Three calls for Evan</h2>
+ <ol>
+  <li><b>The door.</b> Recommended: the dashed "new world" hex in the board of boards (it already exists in the Changing Worlds study), plus any blank hex. Alternative: a physical workbench in Winchester. Which?</li>
+  <li><b>Helper brain.</b> Recommended: the AI Gateway under the wallet caps now, ChatGPT swappable as provider. Or ChatGPT first?</li>
+  <li><b>First families.</b> Recommended: Ranch, Woodland and Moon base for phase 1 (richest models), the rest follow. Others first?</li>
+ </ol>
+ <p><b>Tour:</b> not yet (a study, not reachable from the game). <b>Sounds:</b> none in the mock. <b>Not a minigame story</b>, so no speed review is owed; the numbers to beat are in the phases above.</p>
+ <h2 id="try">Try it</h2>
+ <p>Switch to the <b>Lab</b> tab. Press <b>Build my world</b>, pick the Moon family and the crater shape, open the flask, then <b>Drop test</b>. Switch to Earth gravity and drop again. Keys: 1 to 9 cards · Z undo · Q E turn · G hex glow · Space run · F step in · P play · B bench · R new first pass.</p>
+</article>
+<div id="ctxcol"><aside class="ctx-aside" style="max-width:340px;margin:24px 0 24px auto"><style>/* The context engineering card (look/context-card.mjs). Uses the --aw-* tokens from theme/boot.js. */
+.ctx-card{display:grid;gap:10px;font:14px/1.45 var(--aw-font,system-ui,sans-serif);color:var(--aw-ink,#2b211a)}
+.ctx-card h3{margin:0;font:600 17px/1.2 var(--aw-display,inherit)}
+.ctx-lead{margin:0;color:var(--aw-soft,#6b5d52)}
+.ctx-kind{border:1px solid var(--aw-line,#0002);border-radius:14px;background:var(--aw-bg,#fff);padding:0 12px}
+.ctx-kind summary{display:flex;align-items:center;gap:8px;min-height:40px;cursor:pointer;list-style:none}
+.ctx-kind summary::-webkit-details-marker{display:none}
+.ctx-kind summary::after{content:'';margin-left:auto;width:7px;height:7px;border:solid var(--aw-soft,#6b5d52);border-width:0 2px 2px 0;transform:rotate(45deg);transition:transform .15s}
+.ctx-kind[open] summary::after{transform:rotate(-135deg)}
+.ctx-kind summary b{font-weight:600}
+.ctx-kind summary i{font-style:normal;font-size:11px;padding:1px 7px;border-radius:9px;background:var(--aw-accent,#7a4b2a);color:var(--aw-on-accent,#fff)}
+.ctx-kind summary i:empty{display:none}
+.ctx-kind ul{list-style:none;margin:0 0 10px;padding:0;display:grid;gap:8px}
+.ctx-kind li{display:grid;gap:1px}
+.ctx-kind a{color:var(--aw-ink,#2b211a);text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 30%,transparent);text-underline-offset:2px}
+.ctx-kind a:hover{text-decoration-color:currentColor}
+.ctx-kind small{color:var(--aw-soft,#6b5d52);font-size:12px}
+.ctx-none{margin:0 0 10px;color:var(--aw-soft,#6b5d52);font-style:italic}
+.ctx-foot{margin:0;font-size:12px;color:var(--aw-soft,#6b5d52)}
+.ctx-foot a{color:inherit}
+</style><section class="ctx-card" aria-label="Context engineering"><h3>Context engineering</h3>
+  <p class="ctx-lead">What this study drew on.</p>
+  <details class="ctx-kind"><summary><b>Oracle consultation</b><i>15</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/townscaper.json" target="_blank" rel="noopener">Townscaper: click to place, a town grows itself; no HUD but a colour palette (4% of the screen). The model for &quot;auto first pass, then you&quot;</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/tiny-glade.json" target="_blank" rel="noopener">Tiny Glade: gridless building with procedural detail added around what you draw; a tools tray only (8%)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json" target="_blank" rel="noopener">Dorfromantik: tile placement with soft, tactile feedback (6%); what a hex edit should feel like</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/besiege.json" target="_blank" rel="noopener">Besiege: the machine is the readout and physics is honest; failure is funny (8%). Sets the bar for the Physics bench</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/lego-bricktales.json" target="_blank" rel="noopener">LEGO Bricktales: build, then a test run shows success in the world (10%)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/spore.json" target="_blank" rel="noopener">Spore: creature, tribe, city and space editors that reshape themselves per stage; parts show what they do</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/garrys-mod.json" target="_blank" rel="noopener">Garry&#39;s Mod: spawn menu and tool gun over a physics sandbox (10%); the cost of too many tools</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/planet-zoo.json" target="_blank" rel="noopener">Planet Zoo: deep freeform building with welfare panels (20%); the &quot;fiddly&quot; end we avoid by default</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/cities-skylines.json" target="_blank" rel="noopener">Cities: Skylines: info views recolour the whole city; a model for the Sky and Physics overlays</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json" target="_blank" rel="noopener">Astroneer: terrain tool with a backpack that shows items physically (4%)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/bad-north.json" target="_blank" rel="noopener">Bad North: a whole battle on a toy island, almost no numbers (6%)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/kerbal-space-program.json" target="_blank" rel="noopener">Kerbal Space Program: build, launch, learn from physics; precise overlays only where needed (18%)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/minecraft.json" target="_blank" rel="noopener">Minecraft: hotbar of blocks and an endless sandbox (9%); the tray of cards is its cousin</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/rimworld.json" target="_blank" rel="noopener">RimWorld: deep sim parameters behind tabs (22%); what the Lab bench must not become</a></li><li><span>The live Oracle consult call was not made (this cloud session cannot reach *.vercel.app); the records above are the repo&#39;s Oracle snapshot</span></li></ul></details><details class="ctx-kind" open><summary><b>Game dev blogs</b><i>4</i></summary>
+   <ul><li><a href="https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making" target="_blank" rel="noopener">How Townscaper works: a story four games in the making (Oskar Stalberg, Game Developer)</a></li><li><a href="https://80.lv/articles/exclusive-tiny-glade-developers-discuss-bevy-proceduralism-publishers-cozy-games/" target="_blank" rel="noopener">Tiny Glade developers on Bevy, proceduralism and cozy games (80.lv)</a></li><li><a href="https://80.lv/articles/a-look-at-procedural-tower-roofs-in-tiny-glade/" target="_blank" rel="noopener">A look at procedural tower roofs in Tiny Glade (80.lv)</a></li><li><a href="https://www.mcvuk.com/business-news/when-we-made-townscaper/" target="_blank" rel="noopener">Townscaper: the game which isn&#39;t a game (MCV)</a></li></ul></details><details class="ctx-kind" open><summary><b>Game design blogs</b><i>4</i></summary>
+   <ul><li><a href="https://etao.blog/2020/10/13/podcast-94/" target="_blank" rel="noopener">Math and Art, with Oskar Stalberg (interview on constraint-driven generation and toy design)</a></li><li><a href="https://xraispotlight.substack.com/p/how-to-make-procedural-generation" target="_blank" rel="noopener">How to make procedural generation look good and fun</a></li><li><a href="https://www.laptopmag.com/features/dreams-vs-super-mario-maker-2" target="_blank" rel="noopener">Dreams vs. Super Mario Maker 2: how much freedom a creation tool can offer before it overwhelms</a></li><li><a href="https://www.thesixthaxis.com/?p=224063" target="_blank" rel="noopener">Mario Maker: remixing the play, create, share genre</a></li></ul></details><details class="ctx-kind" open><summary><b>Game design tutorials</b><i>2</i></summary>
+   <ul><li><a href="https://www.boristhebrave.com/2020/04" target="_blank" rel="noopener">Wave Function Collapse explained (Boris the Brave): the constraint idea behind the auto-decorator</a></li><li><a href="https://80.lv/articles/using-wave-function-collapse-algorithm-for-dioramas" target="_blank" rel="noopener">Using the wave function collapse algorithm for dioramas (80.lv)</a></li></ul></details><details class="ctx-kind"><summary><b>Our canon</b><i>9</i></summary>
+   <ul><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md" target="_blank" rel="noopener">Interaction grammar: touch the thing, nothing fails, close-ups (docs/design/INTERACTION_GRAMMAR.md)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/game-feel-check" target="_blank" rel="noopener">Game Feel laws and the banned web vocabulary (project file GAME_FEEL.md) and its checks (tools/game-feel-check)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md" target="_blank" rel="noopener">HUD study: two layers that never mix, 8% budget (docs/oracle/hud/HUD_STUDY.md)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/MODELER_VISION.md" target="_blank" rel="noopener">Modeler vision: preserve creative intent so scenes can be rebuilt (docs/MODELER_VISION.md)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/INVARIANTS.md" target="_blank" rel="noopener">Invariant contracts: scene plus passing test before live (INVARIANTS.md)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md" target="_blank" rel="noopener">AW-STUDY-0060 swipe diorama: taste file and learner we reuse as a ranking prior (docs/oracle/diorama-swipe/DIORAMA_STUDY.md)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/project-chat/PROJECT_CHAT_STUDY.md" target="_blank" rel="noopener">AW-STUDY-0061 project chat and asset packs: the allowed-set we reuse (docs/oracle/project-chat/PROJECT_CHAT_STUDY.md)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/tile-chat/contract.mjs" target="_blank" rel="noopener">Tile chat verbs contract the in-lab helper extends (simulations/tile-chat/contract.mjs)</a></li><li><a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/" target="_blank" rel="noopener">Existing modules the lab edits: planet-gravity, landscape-parameters, world-clock, ranch-weather, ranch-seasons-state, tile-physics, loadout</a></li></ul></details>
+  <p class="ctx-foot">Recorded 2026-10-24. <a href="https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/context.json" target="_blank" rel="noopener">Sources file</a></p></section>
+</aside>
+</div>
+</main>
+<script type="module">
+import {live} from '/simulations/experimental.mjs';
+import * as E from '/simulations/scene-lab/engine.mjs';
+if (!live('scene-builder')) {
+  document.body.classList.add('study'); document.getElementById('study').innerHTML = '<article><div class="kick">Experimental</div><h1>The Scene Builder Lab is not open yet</h1><p>It is still being built. Open it with <code>?exp=scene-builder</code>. The concept study is at <a href="https://app.abbies.world/r2/previews/scene-builder-study/index.html">the preview</a>.</p></article>';
+} else {
+  window.SceneEngine = E;
+  for (const src of ['render.js', 'app.js']) await new Promise((ok, no) => { const s = document.createElement('script'); s.src = src; s.onload = ok; s.onerror = no; document.body.append(s); });
+}
+</script>
+<script>
+// gallery for the study view (screenshots made by headless Chrome from this page)
+const SH=[['shots/ranch-summer.jpg','Ranch · summer · rolling hills · cozy: the first pass, untouched'],['shots/moon-crater.jpg','Moon base · crater · black sky, lunar gravity'],['shots/winter-woodland.jpg','Woodland · winter · island · snow falling'],['shots/coast-spring.jpg','Coast · spring · island at dawn'],['shots/bench-physics.jpg','The flask open: Physics and life, drop test rolling downhill'],['shots/play-mode.jpg','Play mode: the interface folds to under 1%']];
+const el=document.getElementById('shots');el.innerHTML=SH.map(s=>`<figure><a href="${s[0]}"><img loading="lazy" src="${s[0]}" alt="${s[1]}" onerror="this.closest('figure').remove()"></a><figcaption>${s[1]}</figcaption></figure>`).join('');
+</script>
+</body>
+</html>

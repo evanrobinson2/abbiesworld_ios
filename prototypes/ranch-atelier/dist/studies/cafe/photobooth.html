@@ -70,14 +70,11 @@ const key = new T.PointLight('#ffd9b0', 2.2, 4, 1.6); scene.add(key);
 const roof = new T.PointLight('#ffb3d6', 1.2, 3, 1.5); scene.add(roof);
 const flash = new T.PointLight('#ffffff', 0, 5, 1.2); scene.add(flash);
 
-// ---------- sound: the booth's own beeps and the flash pop (diegetic) ----------
-let ac = null;
-function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
-function beep(f = 880, t = .09, g = .07, type = 'sine') {
- const a = audio(); if (!a) return; const o = a.createOscillator(), v = a.createGain(), n = a.currentTime;
- o.type = type; o.frequency.value = f; v.gain.setValueAtTime(g, n); v.gain.exponentialRampToValueAtTime(.0001, n + t); o.connect(v).connect(a.destination); o.start(n); o.stop(n + t + .02);
-}
-function pop() { beep(1800, .05, .09, 'square'); setTimeout(() => beep(240, .18, .06, 'triangle'), 30); }
+// ---------- sound: the booth's own beeps and the flash pop (diegetic). From the sound catalogue (INVARIANTS.md) ----------
+import {sfx as catalogSfx, sfxContext} from '/simulations/catalog-sfx.mjs';
+const audio = () => sfxContext();
+function beep(f = 880, t = .09, g = .07) { catalogSfx('beep-1', {gain: Math.min(1, g * 6), rate: Math.max(.5, Math.min(2.2, f / 880))}); }
+function pop() { catalogSfx('camera', {gain: .7}); }
 
 // ---------- the booth and the kids ----------
 const loader = new GLTFLoader();

@@ -31,6 +31,10 @@ Grown-up information is real and welcome, but it never appears in play. Example 
 income statement; Abbie never sees it, she feels the morning rush. Evan reads in the grown-up view that she spent $5K
 on a new espresso machine.
 
+Before the card, pick the way of acting (Evan, 2026-10-23): tiles create the world, cards interact with it as a god, HUD and
+overlay hold simulation controls and the app, FPS is playing as Evan, Abbie or Ani. Never explain it to players
+(`docs/design/INTERACTION_GRAMMAR.md`).
+
 ## 2. While you build: two layers in code
 
 Ranch Atelier code uses `prototypes/ranch-atelier/dist/simulations/presentation-layer.mjs`:
@@ -85,3 +89,8 @@ node tools/game-feel-check/lint.mjs origin/<base-branch>
 Briefs that carry the design card: `docs/design/briefs/`. The full HUD study: `docs/oracle/hud/HUD_STUDY.md`.
 Game feel laws and banned web patterns: `GAME_FEEL.md` in the project files (`/mnt/project-files/game-feel/`; section 2b
 has the same principles).
+
+## 4. Invariants (INVARIANTS.md)
+Before you call anything shipped: it has a scene in the world and a passing headless-Chrome run (else it stays experimental,
+`?exp=<id>`); the town HUD tag is intact; every sound comes from the catalogue (no MIDI, no oscillators); every voice is
+ElevenLabs. Run `node tools/game-registry/check.mjs` and `node tools/audio-check/check.mjs`.

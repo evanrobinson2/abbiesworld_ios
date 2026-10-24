@@ -299,16 +299,12 @@ function missionLight(center, radius, color) {
   g.traverse(o => o.layers.set(1)); g.userData.mat = mat; scene.add(g); return g;
 }
 
-// ---------- audio (synth; D major pentatonic) ----------
-let ac; function audio() { if (!ac) try { ac = new AudioContext(); } catch (e) {} return ac; }
-function tone(f, d = 0.18, type = 'triangle', v = 0.12, when = 0) {
-  const a = audio(); if (!a) return; const t = a.currentTime + when, o = a.createOscillator(), g = a.createGain();
-  o.type = type; o.frequency.setValueAtTime(f, t); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(v, t + 0.01); g.gain.exponentialRampToValueAtTime(0.001, t + d);
-  o.connect(g).connect(a.destination); o.start(t); o.stop(t + d + 0.05);
-}
-function whoosh(up = true) { const a = audio(); if (!a) return; const t = a.currentTime, o = a.createOscillator(), g = a.createGain(); o.type = 'sine';
-  o.frequency.setValueAtTime(up ? 180 : 320, t); o.frequency.exponentialRampToValueAtTime(up ? 520 : 90, t + 0.25); g.gain.setValueAtTime(0.06, t); g.gain.exponentialRampToValueAtTime(0.001, t + 0.3); o.connect(g).connect(a.destination); o.start(t); o.stop(t + 0.32); }
-function horn() { [146.83, 220, 293.66].forEach((f, i) => tone(f, 1.4, 'sawtooth', 0.04, i * 0.02)); }
+// ---------- audio (from the sound catalogue, INVARIANTS.md) ----------
+import {sfx as catalogSfx, sfxContext} from '/simulations/catalog-sfx.mjs';
+const audio = () => sfxContext();
+function tone(f, d = 0.18, type = 'triangle', v = 0.12, when = 0) { catalogSfx('pop-1', {gain: Math.min(1, v * 5), rate: Math.max(.5, Math.min(2.4, f / 600)), delay: when}); }
+function whoosh(up = true) { catalogSfx('whoosh-1', {gain: .4, rate: up ? 1.2 : .8}); }
+function horn() { catalogSfx('horn-call', {gain: .5}); }
 
 // ---------- input: gamepad first, touch and keys too ----------
 const input = { mx: 0, mz: 0, jump: false, jumpHeld: false, dash: false, ping: false, ok: false, back: false, camX: 0 };

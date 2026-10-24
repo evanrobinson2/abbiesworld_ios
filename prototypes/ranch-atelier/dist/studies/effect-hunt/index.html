@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0057 - The Effect Hunt</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f6f1ff;--plate:#fff;--ink:#241b3a;--soft:#62597c;--line:#ddd3f0;--teal:#0f9d92;--display:"Fredoka",ui-rounded,system-ui,sans-serif;--body:"Nunito",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f24;--plate:#21193a;--ink:#f1ecff;--soft:#b2a8d0;--line:#3a2f5c;--teal:#4fe0d2;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--body);padding:0 max(16px,env(safe-area-inset-right)) 80px max(16px,env(safe-area-inset-left))}
+main{max-width:1000px;margin:0 auto}h1,h2{font-family:var(--display);font-weight:600;line-height:1.1;margin:0;text-wrap:balance}
+header{padding:28px 0 8px}.id{font:700 12px var(--body);letter-spacing:.12em;color:var(--soft);text-transform:uppercase}h1{font-size:clamp(2rem,6vw,3.2rem)}
+header p,.lede{max-width:64ch;color:var(--soft)}h2{font-size:1.5rem;margin:34px 0 10px}
+.go{display:inline-block;margin:14px 10px 0 0;padding:12px 22px;border-radius:999px;background:linear-gradient(135deg,#ff7eb6,#7fe4ff);color:#241b3a;font:700 17px var(--display);text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.shots img{width:100%;border-radius:16px;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{background:var(--plate);border:1px solid var(--line);border-radius:18px;padding:14px;border-top:5px solid var(--c)}
+.card b{font:600 18px var(--display)}.card small{display:block;color:var(--soft)}.card .i{font-size:30px}.tag{display:inline-block;font-size:12px;font-weight:800;padding:2px 8px;border-radius:99px;background:var(--line)}
+ul{padding-left:1.2em;max-width:70ch}li{margin:.3em 0}
+</style>
+</head>
+<body><main>
+<header><div class="id">AW-STUDY-0057 · Round 1</div><h1>The Effect Hunt and the Jet Cart</h1>
+<p>Ten collectible world effects hide around Winchester. Pick the hunt in the notebook, follow the laser beams, and drive Abbie, Ani and Daddy in a jetpack shopping cart. Find an effect once and it is yours forever, on a 15 second cooldown.</p>
+<a class="go" href="play.html">Play the hunt</a><a class="go" href="/demo">Real town: notebook, then the cart</a></header>
+<h2>What it looks like</h2>
+<div class="shots"><img src="img/jet.jpg" alt="The jet cart hovering over the board"><img src="img/god.jpg" alt="Overhead mode with two beacons"><img src="img/tow.jpg" alt="Nubbin the tow critter pulling the cart back to the tiles"></div>
+<h2>The ten effects</h2><div class="grid" id="grid"></div>
+<h2>Rules</h2>
+<ul><li><b>Beacons.</b> Selecting the hunt in the notebook shoots a laser beam into the sky over every effect not yet found. Drive into the ring to collect.</li>
+<li><b>Use forever.</b> Each found effect lives in a tray of ten round buttons (keys 1 to 0). 15 seconds of real time between casts, even across a reload.</li>
+<li><b>Vehicles.</b> Jet cart, Moon buggy, toy-car coaster car (stand-ins until those threads add theirs), or overhead god mode: tap to send the cart, tap an armed effect to throw it.</li>
+<li><b>Wacky.</b> Loose grip, squashy landings, boing mushrooms, floaty bubbles, slippery snow, a jet tank that refills on the ground, bonk-and-bounce props.</li>
+<li><b>Leave the tiles.</b> Slow down; after 5 seconds Nubbin, a friendly original critter, runs in and tows you back.</li>
+<li><b>Inspired by, not borrowed.</b> Kart-racer feel and GTA-style free roaming only. No other studio's characters, names, art or sounds.</li>
+<li><b>Tour:</b> yes.</li></ul>
+<h2>Still to build</h2><p class="lede">Effects 7 to 10 (grow spray, rainbow arc, disco floor, moon hop), real cart and Nubbin models from concept art, house and tree collisions in the real town, and a charm for finishing the hunt. The full study is <code>docs/oracle/effect-hunt/EFFECT_HUNT_STUDY.md</code>.</p>
+<script type="module">
+import {EFFECTS} from '../../simulations/effect-hunt/effects.mjs';
+document.getElementById('grid').innerHTML = EFFECTS.map((e, i) => `<div class="card" style="--c:${e.colour}"><div class="i">${e.icon}</div><b>${i + 1}. ${e.name}</b><small>${e.line}</small><small>Hidden: ${e.hint}</small><span class="tag">${e.built === 'paint-world' ? 'paint (live)' : e.built === 'fx' ? 'built' : e.built === 'demo' ? 'in the demo' : 'to build'}</span></div>`).join('');
+</script>
+<script type="module" src="/look/context-card.mjs" data-context-study="effect-hunt"></script>
+</main></body></html>
