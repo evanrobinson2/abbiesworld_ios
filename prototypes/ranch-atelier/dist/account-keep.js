@@ -8,7 +8,7 @@
  const join=(a,b)=>({...obj(a),...obj(b)}); // coins and charms are keyed by id: either side's wins are kept
  const merge=(here,cloud)=>{
   const h=obj(here),c=obj(cloud);
-  return {...c,...h,charms:join(c.charms,h.charms),seen:[...new Set([...(c.seen||[]),...(h.seen||[])])]};
+  return {...c,...h,charms:join(c.charms,h.charms),seen:[...new Set([...(c.seen||[]),...(h.seen||[])])],taught:join(c.taught,h.taught)};
  };
  // cleared beakers: the most wins and the best (shortest) time per level, from either side
  const joinClears=(a,b)=>{const o={...obj(b)};for(const [k,v] of Object.entries(obj(a)))o[k]=o[k]?{wins:Math.max(o[k].wins||0,v.wins||0),best:Math.min(o[k].best||1e9,v.best||1e9)}:v;return o;};

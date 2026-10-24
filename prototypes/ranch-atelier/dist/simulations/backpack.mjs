@@ -16,6 +16,7 @@
 // you like an open clamshell. Parts and materials are named by what they are (fabric, lining, trim, metal, glass).
 // Three.js loads only when a backpack is first drawn, so pages that just show the glyph pay nothing.
 
+import {ENTRANCES, backUrl} from './abbietown/entrances.mjs';
 const STORE = 'aw-backpack', EVENT = 'aw-backpack-change';
 
 // ---------- the five facets ----------
@@ -71,17 +72,17 @@ export const CHARMS = [
  {id: 'tardigrade', name: 'Tardigrade', icon: '🦠', quest: "Win Abbie's science adventure"},
  // Every reward is a backpack charm (Evan, 20:51Z): no gold coin charm. The floppy disk is won by beating the word game
  // in Grace's basement, two minutes of play in all; the basement game calls earnCharm('basement').
- {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Beat the word game in Grace's basement (two minutes of play)"},
+ {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Beat the word game in Grace's basement (two minutes of play)", replay: 'town:cafe-door'},
  // Coins are scrapped (Evan, 20:51Z), so no charm unlocks from them any more: the school game calls earnCharm('school-roof')
  // when she climbs onto the roof, and the heart crowns the set.
- {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Climb onto the school roof'},
+ {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Climb onto the school roof', replay: 'town:school-door'},
  {id: 'brass-key', name: 'Brass key', icon: '🗝️', quest: "Find the café's secret key", when: s => s.items.includes('cafe-basement-key')},
  {id: 'moon-key', name: 'Moon', icon: '🌙', quest: 'Earn the key to the Moon base', when: s => s.items.some(i => /moon/i.test(i))},
  {id: 'all-memories', name: 'Heart', icon: '💛', quest: 'Earn every other charm', crown: true},
  {id: 'bub', name: 'Bub', icon: '🐕', quest: 'Play fetch with bub'},
- {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
+ {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café', replay: 'town:cafe-door'},
  {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
- {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster'},
+ {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster', replay: 'town:skate-park'},
  {id: 'moon-buggy', name: 'Moon buggy', icon: '🚙', quest: 'Roll the Moon Buggy through the carwash and get soaked'},
  // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
  // Halloween (experimental): knock on five doors in one night. Seasonal, so it never counts toward 'all-memories'.
@@ -89,6 +90,15 @@ export const CHARMS = [
  {id: 'moon-cheese', name: 'Moon cheese', icon: '🧀', quest: 'Mine three moon cheeses at the Moon kiosk', repeat: true, hang: 2}
 ];
 
+// ---------- replaying from a charm (AW-112) ----------
+// A charm is the keepsake of a mini game, so using one takes her back to it: the charm's `replay` is the town gate of the
+// game that awarded it (simulations/abbietown/entrances.mjs; the registry's game ids are in game-registry.json). A charm
+// with no `replay` (no live game behind it yet) just tells its story. She is sent back to where she was, via ?from.
+export function charmReplay(id, from = '') {
+ const c = CHARMS.find(x => x.id === id), e = c?.replay && ENTRANCES[c.replay]; if (!e?.url) return null;
+ const url = e.url.includes('from=') ? e.url.replace(/from=[^&]*/, 'from=' + encodeURIComponent(from || backUrl(c.replay))) : e.url + (e.url.includes('?') ? '&' : '?') + 'from=' + encodeURIComponent(from || backUrl(c.replay));
+ return {gate: c.replay, name: e.name, url};
+}
 // ---------- saved look and charms ----------
 const readJSON = (k, f) => { try { const v = JSON.parse(localStorage.getItem(k) || 'null'); return v ?? f; } catch { return f; } };
 function saved() { const v = readJSON(STORE, {}); return v && typeof v === 'object' ? v : {}; }
@@ -131,6 +141,10 @@ export function earnedCharms() {
  return CHARMS.filter(c => has.has(c.id) || (c.crown && (given[c.id] || all))).map(c => c.id);
 }
 export const coinCount = () => progress().coins;
+// What she has been taught about her charms (Deep Personalization: onboarding is remembered per player, in the same saved
+// record the account keeps, so it is never repeated for another charm, another session or another device).
+export const taught = lesson => !!saved().taught?.[lesson];
+export function markTaught(lesson) { const v = saved(); if (v.taught?.[lesson]) return false; v.taught = {...(v.taught || {}), [lesson]: new Date().toISOString()}; save(v); return true; }
 // How many of a charm she owns (0 or 1, or the count for a repeatable one).
 export function charmCount(id) { const v = saved(), c = CHARMS.find(x => x.id === id); if (!c) return 0; if (c.repeat) return v.counts?.[id] || (v.charms?.[id] ? 1 : 0); return earnedCharms().includes(id) ? 1 : 0; }
 // She keeps each charm on her backpack or in her jewellery box (Evan, 20:51Z). A new charm goes on the backpack.
@@ -758,7 +772,7 @@ function itemTexture(icon, px = 128) {
 // What the callout says about an item: its own words, who gave it, or a plain line.
 const aboutOf = it => it.about || it.thought || (it.id === 'coins' ? 'Coins that hold Daddy\'s core memories.' : it.from ? `Given to Abbie by ${it.from}.` : 'Something Abbie picked up on her adventures.');
 // el: a positioned element the canvas fills. items: [{id, name, icon}], coins: a number, charms: charm ids.
-export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null, onPart = null, onUse = null} = {}) {
+export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null, onPart = null, onUse = null, onReplay = null} = {}) {
  await three();
  const canvas = document.createElement('canvas'); canvas.className = 'aw-bp-canvas';
  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'none', cursor: 'pointer'});
@@ -856,7 +870,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
    if (hit) { let o = hit.object; while (o && !o.userData.item && !o.userData.zip) o = o.parent; if (o?.userData.zip) { api.zip(o.userData.zip); return; } if (o) { inspect(o.userData.item, o); return; } }
   }
   const ch = r.intersectObjects(bp.charms.map(p => p.mesh), true)[0];
-  if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { api.focusCharm(i); return; } }
+  if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { if (i === focus && charmReplay(bp.charms[i].id)) { onReplay?.(bp.charms[i].id, charmReplay(bp.charms[i].id)); return; } api.focusCharm(i); return; } }
   if (focus != null) { api.unfocus(); return; }
   if (deck) { const f = hitPart(e.clientX, e.clientY), g = f && f !== 'charm' ? f : 'style'; deck.show(g); onDeal?.(g); highlight(g !== 'style' ? g : null); return; }
   // The loadout (loadout.mjs): a tap on a part selects that slot; a tap on nothing lets it go. Opening is the host's.
@@ -1043,7 +1057,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
    const n = bp.charms.length; if (!n) { say('No charms yet: finish a quest to earn one.'); return; }
    const was = focus; if (was != null && bp.charms[was]) { bp.charms[was].mesh.children[1].quaternion.identity(); hop = 1; }
    focus = ((i % n) + n) % n; const p = bp.charms[focus], c = CHARMS.find(x => x.id === p.id);
-   p.vx += 3; if (c) say(`${c.name}: ${c.quest}`, null, 3200); onFocus?.(focus);
+   p.vx += 3; if (c) say(`${c.name}: ${c.quest}` + (charmReplay(p.id) ? ' (tap again to play it again)' : ''), null, 3200); onFocus?.(focus);
   },
   unfocus() { if (focus == null) return; const p = bp.charms[focus]; if (p) p.mesh.children[1].quaternion.identity(); focus = null; onFocus?.(null); },
   get focused() { return focus; },
