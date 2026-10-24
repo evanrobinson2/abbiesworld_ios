@@ -501,7 +501,7 @@
    "needs": [
     "a headless-Chrome run: upload a photo, get a themed tile, see a rejection",
     "real tile meshes for props instead of flat stand-ins; rebuilding the shown object (modeler)",
-    "video and audio intake (no cloud service exists)",
+    "video and audio: API drafted (docs/design/CAPTURE_MEDIA.md); browser frame sampler, page buttons and a live speech-model check are not built",
     "child-photo rule decided by Evan; provider retention verified; legal review of the upload notice",
     "server-side personal yard, player approval and curation before the shared world"
    ]
