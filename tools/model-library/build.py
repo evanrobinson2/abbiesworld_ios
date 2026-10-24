@@ -91,6 +91,7 @@ TYPES = [
     ('Furniture', r'bench|table|chair|stool|bed\b|shelf|counter|bar-|beanbag|couch|sofa|desk|cabinet|rack|crate|barrel|bucket|jar|pot\b|lamp|booth|stage|box|chest|bin\b|sign|fence'),
     ('Machine and tech', r'computer|terminal|boombox|crt|battery|machine|radio|screen|pod\b|bulkhead|panel|generator|antenna|robot|drone|console|register|blender|jukebox|disco|laser|dj'),
 ]
+UPG = re.compile(r'upgrade|charming|remaster|whimsical|[-_/]high\b|hi-?poly|rounds?/r[2-9]|-r[2-9]\b|_v[2-9]', re.I)
 def kind(text):
     t = text.lower()
     for name, rx in TYPES:
@@ -138,7 +139,7 @@ for h, paths in by_hash.items():
     key = h[:12]
     e = {
         'key': key, 'name': name, 'collection': col, 'place': place, 'source': src,
-        'type': kind(name + ' ' + rel), 'bytes': size,
+        'type': kind(name + ' ' + rel), 'pass': 'Upgrade' if UPG.search(rel + ' ' + name) else 'Original', 'bytes': size,
         'level': 'stage' if stage else 'model',
         'status': 'reviewed' if m else 'unreviewed',
         'glb': ('/' + rel) if served else None,
@@ -182,7 +183,7 @@ for blob, (b, path) in found.items():
     elif path.startswith('experiments/'):
         col, place, src = 'Rooftop experiments', 'Town', 'Meshy'
     nm = pretty(path, h)
-    it = {'key': h[:12], 'name': nm, 'collection': col, 'place': place, 'source': src, 'type': kind(nm + ' ' + path), 'bytes': len(data),
+    it = {'key': h[:12], 'name': nm, 'collection': col, 'place': place, 'source': src, 'type': kind(nm + ' ' + path), 'pass': 'Upgrade' if UPG.search(path + ' ' + nm) else 'Original', 'bytes': len(data),
         'level': 'stage' if STAGE.search('/' + path) and not path.startswith('UE5/') else 'model', 'status': 'branch', 'glb': None, 'file': path,
         'branch': b.replace('origin/', ''), 'copies': 1}
     if os.path.exists(f'{THUMBS}/{h[:12]}.png'): it['thumb'] = f'/models/library/t/{h[:12]}.webp'
