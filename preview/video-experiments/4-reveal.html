@@ -1,0 +1,36 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Experiment 4: the party reveal</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#bfe6ff;touch-action:none;-webkit-user-select:none;user-select:none}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+#back{position:fixed;left:max(12px,env(safe-area-inset-left));top:max(12px,env(safe-area-inset-top));width:64px;height:64px;border-radius:50%;background:#ffffffc8;font-size:32px;box-shadow:0 4px 12px #0003;text-decoration:none;display:flex;align-items:center;justify-content:center}
+</style></head><body>
+<canvas id="c"></canvas><a id="back" href="1-paint.html" aria-label="paint again">🖌️</a>
+<script type="module">
+import {$, store, fit, devPanel, hash, drawFriend} from './common.js';
+const cv = $('#c'); let {c, w, h} = fit(cv);
+const url = store.get('suit'), suit = new Image(); let ready = !url; if (url) { suit.onload = () => ready = true; suit.src = url; }
+const t0 = performance.now(); let tapped = 0, loads = (+store.get('reveals') || 0) + 1; store.set('reveals', loads);
+// the reveal: the friend hops in from the left, stops under the party lights, and spins once so the painted suit is seen
+// from every side; the rest of the party hops for her. Controls stay put (one brush button, always in the same corner).
+const ease = t => 1 - (1 - t) ** 3, clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const guests = [{x: .2, col: '#ffd0e0'}, {x: .78, col: '#d0f0ff'}, {x: .9, col: '#e0ffd0'}];
+function frame(now) {
+ const t = (now - t0) / 1000;
+ const sky = c.createLinearGradient(0, 0, 0, h); sky.addColorStop(0, '#8fd0ff'); sky.addColorStop(.6, '#ffe9c8'); c.fillStyle = sky; c.fillRect(0, 0, w, h);
+ c.fillStyle = '#9be37a'; c.fillRect(0, h * .62, w, h); c.fillStyle = '#5ec9f0'; c.beginPath(); c.ellipse(w * .5, h * .8, w * .42, h * .08, 0, 0, 7); c.fill(); // the pool
+ for (let i = 0; i < 9; i++) { c.fillStyle = ['#ff5fa2', '#ffcf33', '#3fc6e8', '#7bd95b'][i % 4]; const bx = w * (i + .5) / 9; c.beginPath(); c.moveTo(bx - 16, 0); c.lineTo(bx + 16, 0); c.lineTo(bx, 34 + Math.sin(t * 2 + i) * 4); c.fill(); } // bunting
+ guests.forEach((g, i) => { const u = (t * 2 + i * 1.3) % 3; drawFriend(c, w * g.x, h * .66, .42, {bounce: t * 6 + i, plain: g.col, wave: t * 5}); });
+ const a = ease(clamp(t / 1.2)), x = -60 + (w * .5 + 60) * a, spin = ease(clamp((t - 1.3) / .9));
+ const L = c.createRadialGradient(w / 2, h * .66, 10, w / 2, h * .66, w * .5); L.addColorStop(0, `rgba(255,240,170,${.55 * clamp(t - 1)})`); L.addColorStop(1, 'rgba(255,240,170,0)'); c.fillStyle = L; c.fillRect(0, 0, w, h);
+ c.save(); c.translate(x, 0); const k = Math.cos(spin * Math.PI * 2); // one turn: squash across the width, never leave the screen
+ c.translate(w * 0, h * .66); c.scale(Math.max(.15, Math.abs(k) ** .3), 1); c.translate(0, -h * .66);
+ if (ready) drawFriend(c, 0, h * .66, Math.min(w / 260, 1.05), {suit: url ? suit : null, bounce: t < 1.2 ? t * 9 : 0, wave: t * 6});
+ c.restore();
+ requestAnimationFrame(frame);
+}
+cv.addEventListener('pointerdown', e => { tapped++; if (Math.abs(e.clientX - w / 2) < w * .2) location.href = '1-paint.html'; }); // tap the friend: back to the easel, painting intact
+addEventListener('resize', () => ({c, w, h} = fit(cv)));
+const dev = devPanel(() => ['EXP 4 success checks', 'painted suit present: ' + (url ? 'yes' : 'NO (paint one first)'), 'cloth hash: ' + (url ? hash(url) : '-'), 'reveals seen: ' + loads, 'taps: ' + tapped, 'time to reveal end: 2.2s']);
+(function loop() { dev(); requestAnimationFrame(loop); })(); requestAnimationFrame(frame);
+</script></body></html>

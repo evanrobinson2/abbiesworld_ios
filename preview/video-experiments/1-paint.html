@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Experiment 1: paint the party suit</title>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#ffe9f3;touch-action:none;-webkit-user-select:none;user-select:none;font-family:ui-rounded,system-ui,sans-serif}
+#c{position:fixed;inset:0;width:100%;height:100%;display:block}
+#tray{max-width:96vw;box-sizing:border-box;position:fixed;left:50%;bottom:max(10px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:6px;padding:8px 10px;border-radius:30px;background:#ffffffa8;border:1px solid #fff;box-shadow:0 8px 24px #7a3ad633;transition:transform .25s cubic-bezier(.3,1.4,.5,1),opacity .25s}
+#tray.away{transform:translate(-50%,62%);opacity:.55}
+#tray button{width:min(62px,10.6vw);height:min(62px,10.6vw);flex:none;border-radius:50%;border:4px solid #fff;padding:0;box-shadow:0 3px 8px #0003;transition:transform .12s}
+#tray button.on{transform:scale(1.18);border-color:#3b2d4a}
+#party{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));width:64px;height:64px;border-radius:50%;border:0;background:#ffffffc8;font-size:34px;box-shadow:0 4px 12px #0003;text-decoration:none;display:flex;align-items:center;justify-content:center}
+</style></head><body>
+<canvas id="c"></canvas><div id="tray"></div><a id="party" href="4-reveal.html" aria-label="party">🎉</a>
+<script type="module">
+import {$, store, fit, devPanel, hash, drawFriend, SUIT} from './common.js';
+const cv = $('#c'); let {c, w, h} = fit(cv);
+const paint = document.createElement('canvas'); paint.width = 80 * 6; paint.height = 90 * 6; // the suit's cloth, 6x so strokes stay crisp
+const pc = paint.getContext('2d'); pc.fillStyle = '#fff'; pc.fillRect(0, 0, paint.width, paint.height);
+const saved = store.get('suit'); if (saved) { const im = new Image(); im.onload = () => { pc.drawImage(im, 0, 0); draw(); }; im.src = saved; }
+// ---- the tray: illustrated swatches, big targets, solid colours and three patterns (never colour alone)
+const pat = (f) => { const t = document.createElement('canvas'); t.width = t.height = 48; const x = t.getContext('2d'); f(x); return pc.createPattern(t, 'repeat'); };
+const SW = [
+ {css: '#ff5fa2', fill: () => '#ff5fa2'}, {css: '#ffcf33', fill: () => '#ffcf33'}, {css: '#3fc6e8', fill: () => '#3fc6e8'}, {css: '#7bd95b', fill: () => '#7bd95b'},
+ {css: 'repeating-linear-gradient(45deg,#fff 0 8px,#ff7a3d 8px 16px)', fill: () => pat(x => { x.fillStyle = '#fff'; x.fillRect(0, 0, 48, 48); x.strokeStyle = '#ff7a3d'; x.lineWidth = 12; for (let i = -48; i < 96; i += 24) { x.beginPath(); x.moveTo(i, 48); x.lineTo(i + 48, 0); x.stroke(); } })},
+ {css: 'radial-gradient(circle at 50% 50%,#7a3ad6 0 6px,#ffe58a 7px)', fill: () => pat(x => { x.fillStyle = '#ffe58a'; x.fillRect(0, 0, 48, 48); x.fillStyle = '#7a3ad6'; for (const [a, b] of [[12, 12], [36, 36]]) { x.beginPath(); x.arc(a, b, 8, 0, 7); x.fill(); } })},
+ {css: 'linear-gradient(135deg,#3fc6e8,#7a3ad6)', fill: () => pat(x => { x.fillStyle = '#3fc6e8'; x.fillRect(0, 0, 48, 48); x.fillStyle = '#fff'; x.font = '30px sans-serif'; x.textAlign = 'center'; x.fillText('★', 24, 34); })}
+];
+let cur = 0, picks = 0, wrong = 0, strokes = 0, firstAt = null, loadedAt = performance.now(), lastWasPick = false, trips = +store.get('trips') || 0;
+const tray = $('#tray');
+SW.forEach((s, i) => { const b = document.createElement('button'); b.style.background = s.css; b.setAttribute('aria-label', 'swatch ' + (i + 1)); b.onclick = () => { if (lastWasPick) wrong++; lastWasPick = true; cur = i; picks++; [...tray.children].forEach((o, j) => o.classList.toggle('on', j === i)); }; tray.append(b); });
+tray.children[0].classList.add('on');
+// ---- layout: the easel (suit, big) sits above the tray, whatever the screen
+const lay = () => { const s = Math.min(w / 120, (h - 190) / 130); return {s, x: w / 2, y: h * .5 + 10, fy: h - 130}; };
+function toCloth(px, py) { const L = lay(); return [((px - L.x) / L.s + 40) * 6, ((py - L.y) / L.s + 58) * 6]; }
+function draw() {
+ c.clearRect(0, 0, w, h);
+ const g = c.createLinearGradient(0, 0, 0, h); g.addColorStop(0, '#ffe9f3'); g.addColorStop(1, '#e6f3ff'); c.fillStyle = g; c.fillRect(0, 0, w, h);
+ const L = lay();
+ // the friend peeks beside the easel so the reason for painting stays in view
+ drawFriend(c, 58, h - 130, .62, {wave: performance.now() / 300});
+ c.save(); c.translate(L.x, L.y); c.scale(L.s, L.s);
+ c.shadowColor = '#7a3ad655'; c.shadowBlur = 24; c.fillStyle = '#fff'; c.fill(SUIT); c.shadowBlur = 0;
+ c.save(); c.clip(SUIT); c.drawImage(paint, -40, -58, 80, 90); c.restore();
+ c.lineWidth = 2; c.strokeStyle = '#3b2d4a'; c.stroke(SUIT); c.restore();
+}
+let down = false, last = null;
+cv.addEventListener('pointerdown', e => { down = true; last = null; cv.setPointerCapture(e.pointerId); lastWasPick = false; tray.classList.add('away'); if (firstAt == null) firstAt = performance.now() - loadedAt; stroke(e); });
+cv.addEventListener('pointermove', e => { if (down) stroke(e); });
+const up = () => { if (!down) return; down = false; tray.classList.remove('away'); strokes++; store.set('suit', paint.toDataURL('image/png')); };
+cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', up);
+function stroke(e) { // broad strokes on the cloth; the suit outline clips what shows, so a wide finger never spills past the edge
+ const [x, y] = toCloth(e.clientX, e.clientY);
+ pc.save(); pc.scale(6, 6); pc.lineCap = pc.lineJoin = 'round'; pc.lineWidth = 11; pc.strokeStyle = pc.fillStyle = SW[cur].fill();
+ const a = last || [x, y]; pc.beginPath(); pc.moveTo(a[0] / 6, a[1] / 6); pc.lineTo(x / 6, y / 6); pc.stroke(); pc.restore(); last = [x, y]; draw();
+}
+addEventListener('resize', () => { ({c, w, h} = fit(cv)); draw(); });
+store.set('trips', trips + (document.referrer.includes('4-reveal') ? 1 : 0));
+const dev = devPanel(() => ['EXP 1 success checks', 'time to first stroke: ' + (firstAt == null ? '-' : (firstAt / 1000).toFixed(1) + 's'), 'strokes: ' + strokes + '  picks: ' + picks + '  wrong picks: ' + wrong, 'return-from-party trips: ' + store.get('trips'), 'cloth hash: ' + hash(paint.toDataURL())]);
+(function loop() { dev(); requestAnimationFrame(loop); })(); draw();
+setInterval(draw, 200); // keeps the friend's wave moving
+</script></body></html>
