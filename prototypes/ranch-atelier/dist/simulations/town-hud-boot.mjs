@@ -17,4 +17,4 @@ if (document.body.classList.contains('play') && stage) {
 // The world answers taps (houses, trees, places, ducks, bub, the car): its own file, started here so it also survives a regenerated page.
 if (document.body.classList.contains('play') && stage) import('./abbietown/interactions.mjs?v=1').then(m => m.mountInteractions(town)).catch(e => console.warn('Town interactions', e));
 // Pull a tile off its card and drop it on an open slot (the Tile pull thread). Behind ?exp until it has a scene and a test run.
-if (document.body.classList.contains('play') && stage && new URLSearchParams(location.search).has('exp')) setTimeout(() => import('./town-place.mjs?v=8').then(m => m.mountTownPlace(town)).catch(e => console.warn('Town place', e)), 1500);
+if (document.body.classList.contains('play') && stage && new URLSearchParams(location.search).has('exp')) setTimeout(() => import('./town-place.mjs?v=10').then(m => m.mountTownPlace(town)).catch(e => console.warn('Town place', e)), 1500);
