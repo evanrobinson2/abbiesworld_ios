@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Backpack Redesign Mock</title>
+<meta name="description" content="A clickable redesign of Abbie's backpack, charms and dressing room, for Evan's review before any rebuild.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Patrick+Hand&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script type="importmap">{"imports": {"three": "./vendor/three.module.js"}}</script>
+<style>
+:root{--ink:#2b2135;--soft:#6a5c74;--grape:#8a5cc8;--pink:#ef6fa6;--gold:#e7b43a;--mint:#3fb59a;--line:#2b213522;--bg:#f3ece4;--panel:#fffdf9}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#f3ecf8;--soft:#b9a9c9;--line:#ffffff26;--bg:#18121f;--panel:#231a2d}}
+:root[data-theme="dark"]{--ink:#f3ecf8;--soft:#b9a9c9;--line:#ffffff26;--bg:#18121f;--panel:#231a2d}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.5 'Nunito',system-ui,sans-serif}
+.page{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;padding:16px;max-width:1500px;margin:0 auto;align-items:start}
+@media (max-width:1000px){.page{grid-template-columns:minmax(0,1fr)}}
+h1,h2,h3{font-family:'Fredoka',system-ui,sans-serif;margin:0;line-height:1.15}
+
+/* ---------- the game screen ---------- */
+.device{position:relative;aspect-ratio:16/10;width:100%;border-radius:26px;overflow:hidden;background:#cdbfa8;box-shadow:0 30px 60px -30px #2a103090,0 0 0 1px #0000001a;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+@media (max-width:700px){.device{aspect-ratio:9/15}}
+.world{position:absolute;inset:0;transform-origin:50% 50%;transition:transform 1.4s cubic-bezier(.4,0,.2,1)}
+.world img.town{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.beacon{position:absolute;width:0;height:0;pointer-events:none}
+.beacon .beam{position:absolute;left:-14px;bottom:0;width:28px;height:190px;border-radius:14px 14px 0 0;background:linear-gradient(#fff6c400,#fff3b0aa 70%,#ffe27a);-webkit-mask-image:linear-gradient(90deg,transparent,#000 35%,#000 65%,transparent);mask-image:linear-gradient(90deg,transparent,#000 35%,#000 65%,transparent);filter:drop-shadow(0 0 10px #ffe9a0);opacity:.75;transform-origin:50% 100%;animation:beam 2.6s ease-in-out infinite}
+.beacon .ring{position:absolute;left:-34px;top:-14px;width:68px;height:28px;border-radius:50%;border:3px solid #ffe07acc;box-shadow:0 0 14px #ffe07a;animation:ring 2.6s ease-out infinite}
+.beacon .medal{position:absolute;left:-17px;bottom:150px;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#ffe9a8 45%,#e7b43a 75%,#a8741c);box-shadow:0 4px 12px #8a5b0099;display:grid;place-items:center;font-size:17px;animation:bob 2.6s ease-in-out infinite}
+.beacon.spot .beam{height:240px;width:44px;left:-22px;opacity:1}
+.beacon.spot .ring{left:-60px;width:120px;height:46px;top:-23px;border-width:4px}
+@keyframes beam{50%{transform:scaleY(1.06);opacity:.9}}
+@keyframes ring{0%{transform:scale(.6);opacity:1}100%{transform:scale(1.4);opacity:0}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+.trail path{vector-effect:non-scaling-stroke;fill:none;stroke:#fff7d6;stroke-width:5;stroke-linecap:round;stroke-dasharray:2 16;filter:drop-shadow(0 0 4px #ffe07a);opacity:0;transition:opacity .4s}
+.trail.on path{opacity:1;animation:march 1s linear infinite}
+@keyframes march{to{stroke-dashoffset:-18}}
+.me{position:absolute;width:9%;aspect-ratio:1;transform:translate(-50%,-92%);pointer-events:none;filter:drop-shadow(0 6px 6px #0004)}
+.me img{width:100%;height:100%;object-fit:contain}
+
+/* liquid glass, as objects with depth: highlights and edges, never blur */
+.glass{background:linear-gradient(165deg,#ffffffd0 0%,#ffffff62 42%,#ffffff3c 66%,#ffffff8c 100%);border:1px solid #ffffffe0;
+  box-shadow:inset 0 1.5px 0 #fff,inset 0 -10px 16px -12px #ffffffb0,0 16px 30px -14px #0c203070,0 2px 6px #0c20301f}
+.leftbar{position:absolute;left:1.6%;top:50%;transform:translateY(-50%);display:grid;gap:8px;padding:9px;border-radius:30px;z-index:4}
+.leftbar button{width:clamp(44px,6.4vw,74px);aspect-ratio:1;border-radius:22px;border:0;padding:3px;background:#ffffff50;cursor:pointer;display:grid;place-items:center;position:relative;transition:transform .18s cubic-bezier(.2,1.4,.4,1)}
+.leftbar button:hover{transform:scale(1.07)}.leftbar button:active{transform:scale(.94)}
+.leftbar button img{width:100%;height:100%;object-fit:contain;pointer-events:none}
+.leftbar .mirror{border-radius:50%;background:radial-gradient(circle at 35% 30%,#ffffff,#e9f4ff 60%,#c4d6ea);box-shadow:inset 0 0 0 3px #e7b43a,inset 0 0 0 5px #fff6}
+.leftbar .mirror img{border-radius:50%}
+.leftbar .book{background:none}
+.leftbar button.on{box-shadow:0 0 0 3px #ffd23f}
+.chrono{position:absolute;right:2%;top:3%;padding:6px 12px 6px 6px;border-radius:99px;display:flex;align-items:center;gap:8px;font:700 15px 'Fredoka';color:#3a2a4a;z-index:4}
+.chrono i{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 50% 70%,#ffd27a 0 30%,#8fd3ff 32% 60%,#5b8fd6);box-shadow:inset 0 0 0 2px #fff}
+
+.thought{position:absolute;left:calc(1.6% + clamp(44px,6.4vw,74px) + 34px);top:16%;max-width:min(330px,60%);padding:11px 15px;border-radius:20px 20px 20px 6px;font:600 15px/1.35 'Fredoka';color:#3a2a4a;z-index:7;opacity:0;transform:translateY(6px) scale(.96);transition:.25s;pointer-events:none}
+.thought.on{opacity:1;transform:none}
+.thought small{display:block;font:700 10px 'Nunito';letter-spacing:.1em;text-transform:uppercase;color:#8a5cc8;margin-bottom:2px}
+
+.stage{position:absolute;inset:0;z-index:5}
+.stage[hidden]{display:none}
+.stage .canvas{position:absolute;left:12%;right:12%;top:4%;bottom:4%}
+.orbs{position:absolute;right:2.5%;top:50%;transform:translateY(-50%);display:grid;gap:10px;z-index:6}
+.orb{width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;display:grid;place-items:center;color:#5a3c7a}
+.orb svg{width:24px;height:24px}
+.orb[hidden]{display:none}
+.power{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);padding:9px 14px;border-radius:18px;text-align:center;font:600 14px/1.35 'Fredoka';color:#3a2a4a;z-index:7;max-width:min(420px,80%)}
+.power[hidden]{display:none}
+.power b{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#a8741c}
+.power em{font-style:normal;font:700 10px 'Nunito';letter-spacing:.08em;text-transform:uppercase;color:#3fb59a;display:block;margin-top:3px}
+.upchoice{position:absolute;left:50%;top:6%;transform:translateX(-50%);display:flex;gap:10px;z-index:7}
+.upchoice[hidden]{display:none}
+.upchoice button{border:0;border-radius:18px;padding:10px 14px;font:600 14px 'Fredoka';color:#3a2a4a;cursor:pointer}
+.sew{position:absolute;left:calc(1.6% + 9px);top:50%;width:clamp(44px,6.4vw,74px);height:8px;z-index:8;pointer-events:none}
+.sew i{position:absolute;font-style:normal;font-size:22px;animation:sew 1.6s ease-in-out forwards}
+@keyframes sew{0%{transform:translate(-10px,-30px) rotate(-30deg);opacity:0}20%{opacity:1}100%{transform:translate(60px,10px) rotate(20deg);opacity:0}}
+
+/* the dressing room */
+.stations{position:absolute;left:50%;bottom:3%;transform:translateX(-50%);display:flex;gap:10px;padding:7px;border-radius:99px;z-index:7}
+.stations button,.who button{width:50px;height:50px;border-radius:50%;border:0;padding:3px;background:#ffffff60;cursor:pointer;display:grid;place-items:center}
+.stations button img,.who button img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.stations button[aria-pressed="true"],.who button[aria-pressed="true"]{box-shadow:0 0 0 3px #ffd23f}
+.who{position:absolute;right:13%;bottom:3%;display:flex;gap:8px;padding:6px;border-radius:99px;z-index:7}
+.who[hidden]{display:none}
+.turntable{position:absolute;left:50%;bottom:9%;width:46%;max-width:520px;aspect-ratio:4/1;transform:translateX(-50%);border-radius:50%;background:radial-gradient(ellipse at 50% 40%,#ffffffd0,#ffffff60 60%,#ffffff20);box-shadow:inset 0 2px 0 #fff,0 18px 30px -16px #0c203080}
+.stage .dcanvas{position:absolute;left:10%;right:10%;top:2%;bottom:6%}
+.stage .dcanvas canvas{width:100%;height:100%;display:block}
+
+
+/* ---------- three looks to compare (study #537): liquid glass (default), forest wood, storybook paper ---------- */
+html[data-skin="forest"] .glass{background:linear-gradient(170deg,#9a6a3e,#7a4f2b 55%,#5e3b1f),repeating-linear-gradient(95deg,#0000 0 7px,#ffffff10 7px 9px);background-blend-mode:overlay;
+  border:2px solid #c99a5c;box-shadow:inset 0 2px 0 #e8c08a,inset 0 -6px 10px #2e1a0a80,0 14px 26px -12px #1a0f0490,0 0 0 4px #3f6b3a,0 0 0 6px #2c4a28}
+html[data-skin="forest"] .leftbar button{background:radial-gradient(circle at 40% 35%,#f6ead2,#e3cfa6);border-radius:46% 54% 50% 50%/58% 58% 42% 42%;box-shadow:inset 0 -3px 0 #b8935c,0 3px 0 #3f2a14}
+html[data-skin="forest"] .leftbar .mirror{background:radial-gradient(circle at 35% 30%,#ffffff,#e4f0e8 60%,#b9d2c0);box-shadow:inset 0 0 0 3px #6b4423,inset 0 0 0 6px #8fbf6a}
+html[data-skin="forest"] .chrono,html[data-skin="forest"] .thought,html[data-skin="forest"] .power,html[data-skin="forest"] .upchoice button{color:#fff6e2}
+html[data-skin="forest"] .thought small{color:#bfe39a}
+html[data-skin="forest"] .power b{color:#ffd77a}
+html[data-skin="forest"] .orb{color:#fff1d0;border-radius:50% 50% 46% 54%/60% 60% 40% 40%}
+html[data-skin="forest"] .stations button,html[data-skin="forest"] .who button{background:#f3e5c6}
+html[data-skin="forest"] .turntable{background:radial-gradient(ellipse at 50% 40%,#a8794a,#7a512c 60%,#5a3a1c);box-shadow:inset 0 3px 0 #d2a670,0 0 0 5px #4f7d3f,0 18px 30px -16px #1a0f0490}
+html[data-skin="forest"] .aw-lo-pip{border-radius:50% 0 50% 0;transform:translate(-50%,-50%) rotate(-45deg);background:radial-gradient(circle at 35% 28%,#d9f2b0,#7fbf4f 60%,#4c8a2e);border:2px solid #2f5a1d;box-shadow:0 4px 8px -2px #1a2a0a99}
+html[data-skin="forest"] .aw-lo-pip i{border-radius:50% 0 50% 0}
+html[data-skin="forest"] .aw-lo-pip.on{transform:translate(-50%,-50%) rotate(-45deg) scale(1.3);border-color:#ffd23f}
+html[data-skin="forest"] .aw-lo-pip:hover{transform:translate(-50%,-50%) rotate(-45deg) scale(1.15)}
+html[data-skin="forest"] .aw-lo-tray{background:linear-gradient(170deg,#9a6a3e,#6e4625);border:2px solid #c99a5c;box-shadow:inset 0 2px 0 #e8c08a,0 0 0 3px #3f6b3a,0 14px 26px -12px #1a0f0490}
+html[data-skin="forest"] .aw-lo-tray b{color:#fff1d0}
+html[data-skin="forest"] .aw-lo-opt{border-color:#f3e5c6}
+
+html[data-skin="paper"] .glass{background:#fffaf0;border:2px dashed #d9a7c0;outline:4px solid #fffaf0;box-shadow:3px 4px 0 #3a2a4a22,0 12px 22px -14px #3a2a4a80;border-radius:22px}
+html[data-skin="paper"] .leftbar button{background:#fff;border:2.5px solid #3a2a4a;box-shadow:2px 3px 0 #3a2a4a;border-radius:18px}
+html[data-skin="paper"] .leftbar button:nth-child(odd){transform:rotate(-3deg)}html[data-skin="paper"] .leftbar button:nth-child(even){transform:rotate(2.5deg)}
+html[data-skin="paper"] .leftbar .mirror{border-radius:50%;box-shadow:2px 3px 0 #3a2a4a,inset 0 0 0 3px #ffd23f}
+html[data-skin="paper"] .thought,html[data-skin="paper"] .power,html[data-skin="paper"] .chrono{font-family:'Patrick Hand','Fredoka',cursive}
+html[data-skin="paper"] .orb{border:2.5px solid #3a2a4a;box-shadow:2px 3px 0 #3a2a4a;background:#fff}
+html[data-skin="paper"] .stations button,html[data-skin="paper"] .who button{background:#fff;border:2px solid #3a2a4a}
+html[data-skin="paper"] .turntable{background:repeating-radial-gradient(ellipse at 50% 45%,#fffaf0 0 10px,#f4e7d2 10px 12px);border:2.5px solid #3a2a4a;box-shadow:3px 5px 0 #3a2a4a33}
+html[data-skin="paper"] .aw-lo-pip{background:#fff;border:2.5px solid #3a2a4a;box-shadow:2px 2px 0 #3a2a4a;animation:none}
+html[data-skin="paper"] .aw-lo-pip.on{border-color:#ef6fa6;box-shadow:2px 2px 0 #3a2a4a,0 0 0 3px #ffd23f}
+html[data-skin="paper"] .aw-lo-tray{background:#fffaf0;border:2px dashed #d9a7c0;outline:3px solid #fffaf0;box-shadow:3px 4px 0 #3a2a4a33}
+html[data-skin="paper"] .aw-lo-tray b{font-family:'Patrick Hand',cursive;font-size:13px;letter-spacing:.02em;text-transform:none;color:#3a2a4a}
+html[data-skin="paper"] .aw-lo-opt{border:2px solid #3a2a4a;box-shadow:1.5px 2px 0 #3a2a4a}
+
+/* labels for the mock (not the game): numbered hotspots */
+.mocktag{position:absolute;left:2%;top:3%;font:800 10px 'Nunito';letter-spacing:.12em;text-transform:uppercase;color:#fff;background:#2b2135aa;padding:5px 9px;border-radius:99px;z-index:9;pointer-events:none}
+
+/* ---------- the panel ---------- */
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:18px;display:grid;gap:16px;position:sticky;top:16px}
+@media (max-width:1000px){.panel{position:static}}
+.kicker{font:800 11px/1 'Nunito';letter-spacing:.14em;text-transform:uppercase;color:var(--grape)}
+.panel h1{font-size:24px;margin-top:6px}
+.panel p{margin:6px 0 0;color:var(--soft)}
+.steps{display:grid;gap:6px;margin:0;padding:0;list-style:none;counter-reset:s}
+.steps button{width:100%;text-align:left;display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:14px;padding:9px 11px;font:inherit;cursor:pointer}
+.steps button:hover{border-color:var(--grape)}
+.steps button::before{counter-increment:s;content:counter(s);flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--grape);color:#fff;font:700 12px 'Fredoka'}
+.steps b{display:block}
+.steps span{font-size:13px;color:var(--soft)}
+.choice{border:1px solid var(--line);border-radius:16px;padding:11px 12px}
+.choice h3{font-size:15px;display:flex;gap:8px;align-items:center}
+.choice h3 i{font-style:normal;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#3a2600;font:700 12px 'Fredoka';flex:none}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
+.seg button{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:12px;padding:7px 8px;font:600 13px/1.25 'Nunito';cursor:pointer;text-align:left}
+.seg button[aria-pressed="true"]{border-color:var(--mint);background:#3fb59a1f}
+.seg button small{display:block;font:800 10px 'Nunito';letter-spacing:.08em;text-transform:uppercase;color:var(--mint)}
+.note{font-size:13px;color:var(--soft);border-left:3px solid var(--pink);padding-left:10px}
+.panel a{color:var(--grape)}
+.foot{font-size:12px;color:var(--soft)}
+</style>
+</head>
+<body>
+<div class="page">
+<div>
+<div class="device" id="device">
+  <div class="world" id="world">
+    <img class="town" src="town.jpg" alt="Winchester, the town board">
+    <div class="me" id="me" style="left:20%;top:78%"><img alt=""></div>
+    <svg class="trail" id="trail" viewBox="0 0 100 100" preserveAspectRatio="none"><path id="trailPath" d=""/></svg>
+    <div class="beacon" id="beacon" style="left:64%;top:46%"><div class="beam"></div><div class="ring"></div><div class="medal">🥐</div></div>
+  </div>
+  <div class="chrono glass"><i></i><span>7:04</span></div>
+  <nav class="leftbar glass" aria-label="What Abbie can touch">
+    <button class="mirror" id="bMirror" aria-label="Mirror: dress up and choose who plays"><img alt=""></button>
+    <button id="bBag" aria-label="Backpack"><img alt=""></button>
+    <button class="book" id="bBook" aria-label="Notebook"><img alt=""></button>
+    <button id="bBuggy" aria-label="Buggy"><img alt=""></button>
+  </nav>
+  <div class="thought glass" id="thought"><small>Abbie</small><span></span></div>
+
+  <div class="stage" id="bagStage" hidden>
+    <div class="canvas" id="bagCanvas"></div>
+    <div class="orbs">
+      <button class="orb glass" id="oCharms" aria-label="Look at my charms"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg></button>
+      <button class="orb glass" id="oDress" aria-label="Dress up the backpack" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 4l6 6-9 9H5v-6z"/><path d="M12 6l6 6"/></svg></button>
+      <button class="orb glass" id="oClose" aria-label="Zip it up"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+    <div class="power glass" id="power" hidden></div>
+    <div class="upchoice" id="upchoice" hidden></div>
+  </div>
+
+  <div class="stage" id="dressStage" hidden>
+    <div class="turntable"></div>
+    <div class="dcanvas" id="dressCanvas"></div>
+    <div class="dcanvas" id="dressBag" style="left:24%;right:24%;top:10%;bottom:16%" hidden></div>
+    <div class="who glass" id="who" aria-label="Who is playing"></div>
+    <div class="stations glass" id="stations" aria-label="What to dress"></div>
+    <div class="orbs"><button class="orb glass" id="dClose" aria-label="Done"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M5 12l5 5L19 7"/></svg></button></div>
+  </div>
+  <div class="sew" id="sew"></div>
+  <div class="mocktag">Redesign mock</div>
+</div>
+</div>
+
+<aside class="panel">
+  <div>
+    <div class="kicker">AW-STUDY-0046 · Redesign for review</div>
+    <h1>Abbie's backpack, redesigned</h1>
+    <p>This is a clickable mock. Nothing here is in the game, and nothing gets rebuilt until you approve it. The bag, the charms, the buggy and the little models are real; the town is a still picture.</p>
+  </div>
+  <ol class="steps" id="steps">
+    <li><button data-go="open"><div><b>Open the bag</b><span>Tap the backpack on the left. It comes to the middle and unzips.</span></div></button></li>
+    <li><button data-go="pick"><div><b>Take something out</b><span>Tap a zip, then a thing. It comes out close up as the real object, and she says her line again.</span></div></button></li>
+    <li><button data-go="where"><div><b>"Show me where"</b><span>The camera flies to where it goes, a light beam marks the spot, and a trail leads from Abbie.</span></div></button></li>
+    <li><button data-go="charms"><div><b>Her charms</b><span>The star shows each charm up close: what it was for, and what it lets her do.</span></div></button></li>
+    <li><button data-go="earn"><div><b>Earn a charm</b><span>See how the bag gets bigger.</span></div></button></li>
+    <li><button data-go="dress"><div><b>The mirror</b><span>One dressing room for Abbie, her backpack and her buggy. Tap a bead, pick from a short row. Swap who's playing at the top.</span></div></button></li>
+  </ol>
+  <div class="choice"><h3><i>✦</i>Which look? (for study #537)</h3><div class="seg" id="skins" style="grid-template-columns:1fr 1fr 1fr">
+    <button type="button" data-skin="glass" aria-pressed="true"><small>Recommended</small>Liquid glass</button>
+    <button type="button" data-skin="forest" aria-pressed="false"><small style="color:var(--soft)">Alternative</small>Forest wood</button>
+    <button type="button" data-skin="paper" aria-pressed="false"><small style="color:var(--soft)">Alternative</small>Storybook paper</button></div></div>
+  <div id="choices"></div>
+  <div class="note"><b>What she has in the overland today:</b> only the left bar. Her figure isn't on the town board, so her outfit and backpack are only seen in FPS and the minigames. <b>In this redesign</b> she stands on the board wearing her look and her bag (bottom left of the mock), the trail starts from her, and when she drives she's in her buggy. Whoever is chosen in the mirror (Abbie, Ani or Daddy) is who stands there.</div>
+  <p class="foot">The written briefs behind this: <a href="../backpack-briefs/index.html">backpack, charms and look briefs</a>. Drafted Friday 23 October 2026, about 10:30 PM.</p>
+</aside>
+</div>
+
+<script type="module">
+import {three, backpackView, buildBackpack, FACETS, STYLES, CHARMS, swatch, option, pocketSvg, look as defaultLook} from './simulations/backpack.mjs';
+import {loadout} from './simulations/loadout.mjs';
+import {itemModel} from './simulations/item-models.mjs';
+import {buildMoonBuggy, THEMES, SLOTS as BUGGY_SLOTS, ANIMALS} from './simulations/carwash/buggy.mjs';
+const T = await three();
+const $ = s => document.querySelector(s), device = $('#device'), reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- the four choices, each a switch on the mock (recommended first) ----------
+const CHOICES = [
+  {id: 'A', q: 'Where does dressing happen?', opts: [['room', 'One dressing room, from the mirror', true], ['bag', 'Also a dress button on the open bag']]},
+  {id: 'B', q: 'How does the bag get bigger?', opts: [['auto', 'A pocket is sewn on at charm milestones', true], ['choose', 'She picks an upgrade each time']]},
+  {id: 'C', q: 'Does every charm unlock a small power?', opts: [['yes', 'Yes, one each', true], ['no', 'No, charms are just for show']]},
+  {id: 'D', q: 'How many charms hang on her bag?', opts: [['all', 'All she has earned', true], ['two', 'Two, the rest in her jewellery box']]},
+];
+const pick = {A: 'room', B: 'auto', C: 'yes', D: 'all'};
+$('#choices').innerHTML = CHOICES.map(c => `<div class="choice"><h3><i>${c.id}</i>${c.q}</h3><div class="seg" data-c="${c.id}">${c.opts.map(([v, t, rec]) =>
+  `<button type="button" data-v="${v}" aria-pressed="${pick[c.id] === v}">${rec ? '<small>Recommended</small>' : '<small style="color:var(--soft)">Alternative</small>'}${t}</button>`).join('')}</div></div>`).join('');
+$('#choices').addEventListener('click', e => { const b = e.target.closest('button[data-v]'); if (!b) return; const seg = b.parentElement; pick[seg.dataset.c] = b.dataset.v; seg.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); applyChoices(); });
+
+// ---------- what she carries, and her charms (mock data) ----------
+const ITEMS = [
+  {id: 'quest-sugar', name: 'Bag of sugar', icon: '🍬', thought: 'Careful, it might spill.', goal: {who: 'Mrs. Crumb', place: 'the bakery', at: [64, 46], line: 'Mrs. Crumb needs this sugar for her croissants. The bakery is this way!'}},
+  {id: 'quest-book', name: 'Library book', icon: '📖', thought: 'Somebody was halfway through this.', goal: {who: 'the librarian', place: 'the library', at: [44, 30], line: 'This goes back to the library. Follow the light!'}},
+  {id: 'quest-seed-jar', name: 'Jar of seeds', icon: '🫙', thought: 'It rattles.', goal: {who: 'the gardener', place: 'the farm', at: [80, 62], line: 'The gardener wants these seeds at the farm.'}},
+  {id: 'cafe-basement-key', name: 'Brass key', icon: '🗝️', thought: 'Interesting... this key will come in handy.', goal: {who: 'the café', place: 'the café cellar door', at: [52, 58], line: 'The key opens the cellar door under the café!'}},
+  {id: 'quest-lost-cup', name: 'Lost cup', icon: '🫖', thought: 'It has a tiny cat on it.', goal: {who: 'the café', place: 'the café', at: [52, 58], line: 'Someone at the café lost this cup.'}},
+  {id: 'fuel:ember', fuel: 'ember', name: '3 embers', icon: '🔥', about: 'Fuel for the fireball. Use it to charge it up.'},
+  {id: 'fuel:droplet', fuel: 'droplet', name: '2 droplets', icon: '💧', about: 'Fuel for the waterball.'},
+];
+// Powers: the two marked "in the game" exist today; the rest are proposals for the Charms thread.
+const POWER = {
+  tardigrade: ['Shrink down and see tiny things, like the cell game', false], basement: ['Opens the little phone for Polaroids while driving', true],
+  'school-roof': ['Climb onto roofs to look around the town', false], 'brass-key': ['Opens the café cellar any time', false],
+  'moon-key': ['Go to the Moon base from the black truck', false], 'all-memories': ['The crown of the set: her bag glows softly', false],
+  bub: ['Bub trots beside her and sniffs out hidden things', false], barista: ['Order a treat at the café that charges a world effect', false],
+  rocket: ['Launch the Moon Mission again any time', false], 'toy-car': ['Fire wheels for the buggy', true], 'moon-buggy': ['Drive the Moon Buggy around town', false],
+};
+let earned = ['tardigrade', 'basement', 'school-roof', 'brass-key', 'barista', 'toy-car'];
+const hanging = () => pick.D === 'all' ? earned : earned.slice(0, 2);
+let pockets = 8 + Math.floor(earned.length / 3) * 4;
+
+// ---------- one small renderer for portraits (the left bar, the stations, who's playing) ----------
+const snapR = new T.WebGLRenderer({antialias: true, alpha: true, preserveDrawingBuffer: true}); snapR.setSize(256, 256); snapR.outputColorSpace = T.SRGBColorSpace; snapR.toneMapping = T.ACESFilmicToneMapping;
+function snap(obj, {at = [0, .6, 0], dist = 2.4, yaw = -.5, h = .25, fov = 30} = {}) {
+  const s = new T.Scene(); s.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.4)); const d = new T.DirectionalLight('#fff1d6', 2.4); d.position.set(1.5, 3, 2.5); s.add(d); s.add(obj);
+  const c = new T.PerspectiveCamera(fov, 1, .05, 50); c.position.set(at[0] + Math.sin(yaw) * dist, at[1] + h * dist, at[2] + Math.cos(yaw) * dist); c.lookAt(...at);
+  snapR.render(s, c); s.remove(obj); return snapR.domElement.toDataURL();
+}
+
+// ---------- who's playing, and what they wear (the Abbie placeholder from the wardrobe study, AW-STUDY-0059) ----------
+const mat = (name, color, o = {}) => new T.MeshStandardMaterial({name, color, roughness: .75, metalness: 0, flatShading: true, ...o});
+const HEROES = {
+  abbie: {name: 'Abbie', skin: '#f2c6a0', hair: '#6b4227', style: 'pigtails', wear: {head: 'bow', top: 'tee-pink', bottom: 'skirt', feet: 'sneaker-pink', extra: 'none'}},
+  ani: {name: 'Ani', skin: '#a8714f', hair: '#4a2c1c', style: 'bun', wear: {head: 'band', top: 'hoodie', bottom: 'leggings', feet: 'sneaker', extra: 'none'}},
+  daddy: {name: 'Daddy', skin: '#efc19d', hair: null, beard: '#8f8a86', style: 'bald', wear: {head: 'none', top: 'overalls', bottom: 'jeans', feet: 'boot', extra: 'glasses'}},
+};
+let who = 'abbie';
+const OUTFIT = [
+  {id: 'head', name: 'Head', options: [['bow', 'Big bow', '#ff4fa3'], ['band', 'Headband', '#a98bff'], ['sunhat', 'Sun hat', '#f2c15a'], ['helmet', 'Space helmet', '#cfe6ff'], ['none', 'Nothing', '#e8e2d8']]},
+  {id: 'top', name: 'Top', options: [['tee-pink', 'Pink tee', '#ff7fb0'], ['hoodie', 'Lilac hoodie', '#b79cf0'], ['overalls', 'Overalls', '#5b7fd1'], ['dress', 'Sunny dress', '#ffd23f'], ['tee-mint', 'Mint tee', '#6fd3bf']]},
+  {id: 'bottom', name: 'Bottoms', options: [['skirt', 'Twirly skirt', '#8c5bc7'], ['shorts', 'Shorts', '#5fb7ff'], ['jeans', 'Jeans', '#3f5fa8'], ['leggings', 'Leggings', '#2e3760']]},
+  {id: 'feet', name: 'Shoes', options: [['sneaker', 'Sneakers', '#ffffff'], ['sneaker-pink', 'Pink sneakers', '#ff7fb0'], ['boot', 'Ranch boots', '#8a5a3c'], ['rain', 'Rain boots', '#ffd23f'], ['moon', 'Moon boots', '#dfe5ec']]},
+  {id: 'extra', name: 'Extra', options: [['none', 'Nothing', '#e8e2d8'], ['scarf', 'Scarf', '#e2533b'], ['glasses', 'Sunglasses', '#2b2b33'], ['necklace', 'Heart necklace', '#ffd23f']]},
+];
+const oc = (slot, id) => { const s = OUTFIT.find(x => x.id === slot); return s.options.find(o => o[0] === id) || s.options[0]; };
+let bagLook = defaultLook();
+function figure(h = HEROES[who], withBag = true) {
+  const w = h.wear, g = new T.Group(), SKIN = mat('skin', h.skin), HAIR = h.hair && mat('hair', h.hair);
+  const add = (geo, m, x, y, z, slot, name) => { const o = new T.Mesh(geo, m); o.position.set(x, y, z); o.name = name; o.userData.slot = slot; g.add(o); return o; };
+  const TOP = mat('top', oc('top', w.top)[2]), BOT = mat('bottoms', oc('bottom', w.bottom)[2]), SHOE = mat('shoes', oc('feet', w.feet)[2]);
+  const tall = h === HEROES.daddy ? 1.18 : 1;
+  for (const s of [-1, 1]) {
+    add(new T.CapsuleGeometry(.045, .38 * tall, 4, 8), w.bottom === 'leggings' || w.bottom === 'jeans' ? BOT : SKIN, s * .065, .1 + .19 * tall + .03, 0, 'bottom', 'leg');
+    const t2 = w.feet === 'boot' || w.feet === 'rain' || w.feet === 'moon'; add(new T.BoxGeometry(.09, t2 ? .16 : .07, .16), SHOE, s * .065, t2 ? .08 : .035, .025, 'feet', 'shoe');
+  }
+  const y0 = (tall - 1) * .38;
+  if (w.bottom === 'skirt') add(new T.CylinderGeometry(.13, .22, .2, 10, 1, true), BOT, 0, .52 + y0, 0, 'bottom', 'skirt').material.side = T.DoubleSide;
+  else add(new T.CylinderGeometry(.14, .16, .14, 10), BOT, 0, .55 + y0, 0, 'bottom', 'hips');
+  add(new T.CylinderGeometry(.13, .15, .3, 10), TOP, 0, .76 + y0, 0, 'top', 'torso');
+  if (w.top === 'dress') add(new T.CylinderGeometry(.15, .25, .28, 12, 1, true), TOP, 0, .52 + y0, 0, 'top', 'dress skirt').material.side = T.DoubleSide;
+  if (w.top === 'overalls') add(new T.BoxGeometry(.16, .14, .02), TOP, 0, .8 + y0, .14, 'top', 'bib');
+  for (const s of [-1, 1]) { const arm = add(new T.CapsuleGeometry(.04, .3, 4, 8), w.top === 'hoodie' ? TOP : SKIN, s * .19, .76 + y0, 0, 'top', 'arm'); arm.rotation.z = s * .3; }
+  add(new T.CylinderGeometry(.04, .045, .06, 8), SKIN, 0, .94 + y0, 0, null, 'neck');
+  add(new T.IcosahedronGeometry(.13, 2), SKIN, 0, 1.06 + y0, 0, null, 'head'); // no face: kids' faces are never drawn
+  if (HAIR) {
+    add(new T.SphereGeometry(.14, 14, 10, 0, Math.PI * 2, 0, Math.PI * .58), HAIR, 0, 1.075 + y0, -.012, null, 'hair');
+    if (h.style === 'pigtails') for (const s of [-1, 1]) add(new T.SphereGeometry(.05, 8, 6), HAIR, s * .14, 1.08 + y0, -.05, null, 'pigtail');
+    if (h.style === 'bun') add(new T.SphereGeometry(.07, 8, 6), HAIR, 0, 1.2 + y0, -.06, null, 'bun');
+  }
+  if (h.beard) add(new T.SphereGeometry(.11, 10, 8, 0, Math.PI * 2, Math.PI * .5, Math.PI * .5), mat('beard', h.beard), 0, 1.04 + y0, .02, null, 'beard');
+  const HD = mat('head thing', oc('head', w.head)[2]);
+  if (w.head === 'bow') for (const s of [-1, 1]) add(new T.ConeGeometry(.05, .09, 4), HD, s * .05, 1.21 + y0, -.02, 'head', 'bow').rotation.z = s * Math.PI / 2;
+  if (w.head === 'band') add(new T.TorusGeometry(.135, .016, 6, 18, Math.PI), HD, 0, 1.08 + y0, .01, 'head', 'headband').rotation.y = Math.PI / 2;
+  if (w.head === 'sunhat') add(new T.CylinderGeometry(.25, .25, .015, 18), HD, 0, 1.15 + y0, 0, 'head', 'hat brim');
+  if (w.head === 'helmet') add(new T.SphereGeometry(.21, 16, 12), new T.MeshPhysicalMaterial({name: 'helmet glass', color: '#dff1ff', transparent: true, opacity: .35, roughness: .05}), 0, 1.06 + y0, 0, 'head', 'helmet');
+  if (w.head === 'none') add(new T.SphereGeometry(.02, 4, 3), mat('none', '#000', {visible: false}), 0, 1.22 + y0, 0, 'head', 'head slot');
+  const EX = mat('extra', oc('extra', w.extra)[2]);
+  if (w.extra === 'scarf') add(new T.TorusGeometry(.085, .035, 6, 14), EX, 0, .93 + y0, 0, 'extra', 'scarf').rotation.x = Math.PI / 2;
+  if (w.extra === 'glasses') for (const s of [-1, 1]) add(new T.TorusGeometry(.035, .01, 5, 12), EX, s * .045, 1.07 + y0, .125, 'extra', 'sunglasses');
+  if (w.extra === 'necklace') add(new T.TorusGeometry(.07, .008, 4, 16), EX, 0, .9 + y0, .03, 'extra', 'necklace').rotation.x = Math.PI / 2.4;
+  if (w.extra === 'none') add(new T.SphereGeometry(.02, 4, 3), mat('none', '#000', {visible: false}), .07, .94 + y0, .12, 'extra', 'extra slot');
+  if (withBag) { const bp = buildBackpack(bagLook, {charms: hanging()}), k = .36 / bp.H; bp.group.scale.setScalar(k); bp.group.position.set(0, .6 + y0, -.14 - bp.D * k * .5); bp.group.rotation.y = Math.PI; bp.group.traverse(o => { if (o.isMesh) o.userData.slot = 'pack'; }); g.add(bp.group); }
+  g.userData.y0 = y0; return g;
+}
+
+// ---------- the left bar: real models, drawn small ----------
+let buggyLook = {theme: 'bubblegum', slots: ['bunny', null, 'bub', null, null]};
+function bookArt() { const c = Object.assign(document.createElement('canvas'), {width: 120, height: 150}), g = c.getContext('2d');
+  const cols = ['#ff6b6b', '#ffb347', '#ffe066', '#7bd389', '#5fb7ff', '#a98bff']; g.beginPath(); g.roundRect(10, 6, 100, 138, 18); g.save(); g.clip(); cols.forEach((cc, i) => { g.fillStyle = cc; g.fillRect(0, 6 + i * 23, 120, 24); }); g.restore();
+  g.fillStyle = '#fff'; g.beginPath(); g.arc(60, 70, 22, 0, 7); g.fill(); g.fillStyle = '#3a2a4a'; g.beginPath(); g.arc(52, 66, 3, 0, 7); g.arc(68, 66, 3, 0, 7); g.fill(); g.fillStyle = '#ffd23f'; g.beginPath(); g.moveTo(44, 46); g.lineTo(50, 36); g.lineTo(56, 44); g.lineTo(60, 34); g.lineTo(64, 44); g.lineTo(70, 36); g.lineTo(76, 46); g.fill();
+  return c.toDataURL(); }
+function drawBar() {
+  $('#bMirror img').src = snap(figure(HEROES[who], false), {at: [0, 1.0 + figure(HEROES[who], false).userData.y0, 0], dist: 1.1, yaw: -.3, h: .05});
+  const bp = buildBackpack(bagLook, {charms: hanging()}); $('#bBag img').src = snap(bp.group, {at: [0, bp.H * .5, 0], dist: bp.H * 3.2, yaw: -.55, h: .2});
+  $('#bBook img').src = bookArt();
+  const bug = buildMoonBuggy({...buggyLook, withRider: false}); $('#bBuggy img').src = snap(bug.group || bug, {at: [0, .8, 0], dist: 5.6, yaw: .9, h: .3});
+  $('#me img').src = snap(figure(), {at: [0, .6, 0], dist: 2.6, yaw: .5, h: .12});
+}
+drawBar();
+
+// ---------- Abbie's voice: a thought bubble on the left (diegetic: her inner voice) ----------
+let thoughtT = 0;
+function think(text, ms = 3600) { const t = $('#thought'); t.querySelector('small').textContent = HEROES[who].name; t.querySelector('span').textContent = text; t.classList.add('on'); clearTimeout(thoughtT); thoughtT = setTimeout(() => t.classList.remove('on'), ms); }
+
+// ---------- 1. open the bag ----------
+let view = null;
+const itemOf = id => ITEMS.find(i => i.id === id);
+async function openBag() {
+  closeDress(); resetWorld(); const st = $('#bagStage'); st.hidden = false; $('#bBag').classList.add('on');
+  if (!reduced) $('#bagCanvas').animate([{transform: 'translate(-38%,0) scale(.2)', opacity: .4}, {transform: 'none', opacity: 1}], {duration: 460, easing: 'cubic-bezier(.2,1.25,.4,1)'});
+  if (!view) {
+    view = await backpackView($('#bagCanvas'), {look: bagLook, items: ITEMS, charms: hanging(), spin: false, float: true,
+      onUse: it => { think(it.fuel ? `The ${it.fuel === 'ember' ? 'fireball' : 'waterball'} is charged!` : `I'll use the ${it.name.toLowerCase()} when I get there.`); view.release(); },
+      actions: it => it.goal ? [{label: 'Show me where', cls: 'use', fn: showWhere}] : [],
+      onFocus: f => {
+        if (typeof f === 'string' && f.startsWith('item:')) { const it = itemOf(f.slice(5)); if (it) think(it.goal ? `${it.thought} ${it.goal.line}` : it.about || it.thought, 5200); $('#power').hidden = true; }
+        else if (typeof f === 'number') showPower(f); else $('#power').hidden = true;
+      }});
+  } else { view.setLook(bagLook); view.setContents({items: ITEMS, charms: hanging()}); }
+  view.open();
+}
+function closeBag() { if ($('#bagStage').hidden) return; view?.close(); $('#power').hidden = true; $('#upchoice').hidden = true; $('#bagStage').hidden = true; $('#bBag').classList.remove('on'); }
+$('#bBag').onclick = () => $('#bagStage').hidden ? openBag() : closeBag();
+$('#oClose').onclick = closeBag;
+
+// ---------- 2 and 3. take it out, then "show me where" ----------
+function showWhere(it) {
+  closeBag(); const [x, y] = it.goal.at, b = $('#beacon'); b.style.left = x + '%'; b.style.top = y + '%'; b.classList.add('spot');
+  const me = $('#me'), mx = parseFloat(me.style.left), my = parseFloat(me.style.top);
+  $('#trailPath').setAttribute('d', `M${mx} ${my} C ${mx + (x - mx) * .3} ${my + 8}, ${x - (x - mx) * .3} ${y + 14}, ${x} ${y}`); $('#trail').classList.add('on');
+  const w = $('#world'), k = 1.35, cx = (mx + x) / 2, cy = (my + y) / 2 - 10; w.style.transformOrigin = '50% 50%'; w.style.transform = `scale(${k}) translate(${50 - cx}%, ${50 - cy}%)`;
+  think(it.goal.line, 5600);
+}
+function resetWorld() { const w = $('#world'); w.style.transform = ''; $('#trail').classList.remove('on'); $('#beacon').classList.remove('spot'); }
+$('#world').addEventListener('click', () => { if ($('#bagStage').hidden && $('#dressStage').hidden) resetWorld(); });
+
+// ---------- 4. charms up close, with their power ----------
+function showPower(i) {
+  const id = hanging()[i], c = CHARMS.find(x => x.id === id), p = POWER[id], el = $('#power'); if (!c) return;
+  el.innerHTML = `<b>${c.name}</b>${c.quest}.` + (pick.C === 'yes' && p ? `<br>Lets her: ${p[0]}.<em>${p[1] ? 'In the game today' : 'Proposed'}</em>` : '');
+  el.hidden = false;
+}
+let charmI = 0;
+$('#oCharms').onclick = () => { if (!view) return; if (view.focused != null) { charmI++; } view.open(); view.focusCharm(charmI); };
+
+// ---------- 5. earn a charm: the bag gets bigger ----------
+function earnNext() {
+  const next = CHARMS.map(c => c.id).find(id => !earned.includes(id) && id !== 'all-memories'); if (!next) { think('I have every charm!'); return; }
+  earned = [...earned, next]; const c = CHARMS.find(x => x.id === next); drawBar();
+  if (view) view.setContents({items: ITEMS, charms: hanging()});
+  think(`A ${c.name.toLowerCase()} charm for my backpack!`, 3000);
+  const milestone = earned.length % 3 === 0;
+  setTimeout(() => {
+    if (pick.B === 'auto') { if (milestone || true) { pockets += 4; const s = $('#sew'); s.innerHTML = '<i>🪡</i>'; think(`Ooh, a new pocket! Now I can carry ${pockets} things.`, 3600); view?.bounce?.(); } }
+    else { openBag().then(() => { const u = $('#upchoice'); u.hidden = false; u.innerHTML = '<button class="glass" data-u="pocket">🎒 A bigger pocket</button><button class="glass" data-u="ring">🔑 A longer keyring</button>'; }); }
+  }, 1400);
+}
+$('#upchoice').onclick = e => { const b = e.target.closest('[data-u]'); if (!b) return; $('#upchoice').hidden = true; if (b.dataset.u === 'pocket') { pockets += 4; think(`A bigger pocket! ${pockets} things now.`); } else think('My keyring is longer now!'); view?.bounce?.(); };
+
+// ---------- 6. the dressing room: one turntable, three things on it ----------
+const dr = new T.WebGLRenderer({antialias: true, alpha: true}); dr.setPixelRatio(Math.min(2, devicePixelRatio)); dr.outputColorSpace = T.SRGBColorSpace; dr.toneMapping = T.ACESFilmicToneMapping;
+$('#dressCanvas').append(dr.domElement);
+const ds = new T.Scene(), dc = new T.PerspectiveCamera(30, 1, .05, 60); ds.add(new T.HemisphereLight('#fff6e6', '#6f7a5a', 1.3)); const dsun = new T.DirectionalLight('#fff1d6', 2.3); dsun.position.set(1.5, 3, 2.2); ds.add(dsun);
+const holder = new T.Group(); ds.add(holder);
+let station = 'abbie-look', model = null, lo = null, bagView = null, yaw = -.35, yawWant = -.35, drag = null, dressOn = false, hop = 0;
+const STATIONS = [['abbie-look', 'Her look'], ['bag', 'Backpack'], ['buggy', 'Buggy']];
+function stationArt(id) { return id === 'bag' ? $('#bBag img').src : id === 'buggy' ? $('#bBuggy img').src : $('#bMirror img').src; }
+function drawStations() {
+  $('#stations').innerHTML = STATIONS.map(([id, n]) => `<button type="button" data-s="${id}" aria-label="${n}" aria-pressed="${station === id}"><img src="${stationArt(id)}" alt=""></button>`).join('');
+  $('#who').hidden = station !== 'abbie-look';
+  $('#who').innerHTML = Object.entries(HEROES).map(([id, h]) => `<button type="button" data-w="${id}" aria-label="${h.name}" aria-pressed="${who === id}"><img src="${snap(figure(h, false), {at: [0, 1.0 + (h === HEROES.daddy ? .07 : 0), 0], dist: 1.1, yaw: -.3, h: .05})}" alt=""></button>`).join('');
+}
+$('#stations').onclick = e => { const b = e.target.closest('[data-s]'); if (b) setStation(b.dataset.s); };
+$('#who').onclick = e => { const b = e.target.closest('[data-w]'); if (!b) return; who = b.dataset.w; rebuildModel(); drawBar(); drawStations(); hop = 1; think(`${HEROES[who].name} is playing now.`, 2200); };
+const ANCH = {head: [0, 1.24, .02], top: [-.06, .8, .15], bottom: [.07, .5, .2], feet: [.07, .06, .12], extra: [.07, .94, .1]};
+function rebuildModel() {
+  if (model) { holder.remove(model); model.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); model = null; }
+  if (station === 'abbie-look') model = figure(); else if (station === 'buggy') { const b = buildMoonBuggy({...buggyLook, withRider: false}); model = b.group || b; }
+  if (model) holder.add(model);
+}
+const v3 = new T.Vector3();
+function project(p) { const r = dr.domElement.getBoundingClientRect(); v3.set(...p); holder.localToWorld(v3); const n = v3.project(dc); return {x: r.left + (n.x + 1) / 2 * r.width, y: r.top + (1 - n.y) / 2 * r.height}; }
+async function setStation(id) {
+  station = id; lo?.dispose(); lo = null; drawStations();
+  const isBag = id === 'bag'; $('#dressBag').hidden = !isBag; $('#dressCanvas').hidden = isBag;
+  if (isBag) {
+    if (!bagView) bagView = await backpackView($('#dressBag'), {look: bagLook, items: [], charms: hanging(), spin: false, float: true, onPart: f => lo?.select(f || null),
+      onChange: l => { bagLook = l; lo?.refresh(); drawBar(); drawStations(); }});
+    else { bagView.setLook(bagLook); bagView.setContents({items: [], charms: hanging()}); }
+    const opt = (f, map) => FACETS.find(x => x.id === f).options.map(o => ({id: o.id, name: o.name, ...map(o)}));
+    lo = loadout(device, {slots: () => [
+        {id: 'style', name: 'Style', options: STYLES.map(s => ({id: s.id, name: s.name, icon: `./simulations/assets/backpack/style-${s.id}.png`}))},
+        {id: 'colour', name: 'Colour', options: opt('colour', o => ({swatch: o.c}))},
+        {id: 'pattern', name: 'Pattern', options: opt('pattern', o => ({swatch: swatch('pattern', {...bagLook, pattern: o.id})}))},
+        {id: 'pocket', name: 'Pocket', options: opt('pocket', o => ({swatch: option('colour', bagLook.colour).c, icon: pocketSvg(o.id)}))},
+        {id: 'trim', name: 'Straps', options: opt('trim', o => ({swatch: swatch('trim', {...bagLook, trim: o.id})}))},
+        {id: 'lining', name: 'Lining', options: opt('lining', o => ({swatch: swatch('lining', {...bagLook, lining: o.id})}))},
+      ], value: f => bagLook[f], anchor: f => dressOn && station === 'bag' ? bagView.anchors()[f] || null : null,
+      avoid: () => bagView.bounds, onSelect: f => bagView.select(f), onPick: (f, val) => bagView.pick(f, val)});
+    return;
+  }
+  rebuildModel(); yawWant = id === 'buggy' ? .7 : -.35;
+  const slots = id === 'abbie-look'
+    ? OUTFIT.map(s => ({id: s.id, name: s.name, options: s.options.map(([oid, n, c]) => ({id: oid, name: n, swatch: c}))}))
+    : [{id: 'theme', name: 'Paint', options: THEMES.map(t => ({id: t.id, name: t.name, swatch: `linear-gradient(135deg,${t.swatch.join(',')})`}))},
+       ...BUGGY_SLOTS.map((s, i) => ({id: 'slot' + i, name: s.name, options: [{id: 'empty', name: 'Nothing', swatch: '#e8e2d8'}, ...ANIMALS.map(a => ({id: a.id, name: a.name, swatch: a.body, icon: `<span style="font-size:20px;line-height:1">${a.icon}</span>`}))]}))];
+  lo = loadout(device, {slots, value: s => id === 'abbie-look' ? HEROES[who].wear[s] : s === 'theme' ? buggyLook.theme : buggyLook.slots[+s.slice(4)] || 'empty',
+    anchor: s => { if (!dressOn || station !== id || !model) return null; if (id === 'abbie-look') { const a = ANCH[s]; return a && project([a[0], a[1] + (model.userData.y0 || 0), a[2]]); }
+      if (s === 'theme') return project([0, 1.3, -.2]); const m = BUGGY_SLOTS[+s.slice(4)]; return m && project(m.at); },
+    avoid: () => { const r = dr.domElement.getBoundingClientRect(), m = r.width * .25; return {left: r.left + m, right: r.right - m, top: r.top + r.height * .05, bottom: r.bottom - r.height * .05}; },
+    onPick: (s, o) => { if (id === 'abbie-look') HEROES[who].wear[s] = o; else if (s === 'theme') buggyLook.theme = o; else { buggyLook.slots = [...buggyLook.slots]; buggyLook.slots[+s.slice(4)] = o === 'empty' ? null : o; }
+      rebuildModel(); hop = 1; drawBar(); }});
+}
+function openDress(at = 'abbie-look') { closeBag(); resetWorld(); $('#dressStage').hidden = false; dressOn = true; $('#bMirror').classList.add('on'); fitDress(); setStation(at); if (!reduced) $('#dressStage').animate([{opacity: 0}, {opacity: 1}], {duration: 260}); }
+function closeDress() { if ($('#dressStage').hidden) return; dressOn = false; lo?.dispose(); lo = null; $('#dressStage').hidden = true; $('#bMirror').classList.remove('on'); drawBar(); if (view) view.setLook(bagLook); }
+$('#bMirror').onclick = () => $('#dressStage').hidden ? openDress() : closeDress();
+$('#dClose').onclick = closeDress;
+$('#bBuggy').onclick = () => openDress('buggy');
+$('#oDress').onclick = () => openDress('bag');
+$('#bBook').onclick = () => think('My notebook has my quests in it. (The notebook stays as it is today.)');
+function fitDress() { const r = $('#dressCanvas').getBoundingClientRect(); if (!r.width) return; dr.setSize(r.width, r.height, false); dc.aspect = r.width / r.height; dc.updateProjectionMatrix(); }
+new ResizeObserver(fitDress).observe($('#dressStage'));
+const cv = dr.domElement, ray = new T.Raycaster(), ndc = new T.Vector2();
+cv.addEventListener('pointerdown', e => { drag = {x: e.clientX, yaw: yawWant, moved: false}; cv.setPointerCapture(e.pointerId); });
+cv.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) drag.moved = true; yawWant = drag.yaw + dx * .01; });
+cv.addEventListener('pointerup', e => { const d = drag; drag = null; if (!d || d.moved || !model || station !== 'abbie-look') return; const r = cv.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, dc);
+  const h = ray.intersectObject(model, true).find(x => x.object.userData.slot && x.object.userData.slot !== 'pack'); if (h) lo?.select(h.object.userData.slot); else lo?.select(null); });
+let prev = performance.now();
+(function frame(now) {
+  requestAnimationFrame(frame); const dt = Math.min(.05, (now - prev) / 1000); prev = now; if (!dressOn || station === 'bag') return;
+  if (!drag && !lo?.selected && !reduced) yawWant += dt * .15;
+  yaw += (yawWant - yaw) * Math.min(1, dt * 6); holder.rotation.y = yaw; hop = Math.max(0, hop - dt * 3); holder.position.y = Math.sin(hop * Math.PI) * .05;
+  if (station === 'buggy') { dc.position.set(0, 2.6, 7.4 / Math.min(1, dc.aspect)); dc.lookAt(0, .7, 0); } else { dc.position.set(0, .8, 4.4 / Math.min(1, dc.aspect * 1.2)); dc.lookAt(0, .66 + (model?.userData.y0 || 0) * .5, 0); }
+  dr.render(ds, dc);
+})(prev);
+
+// ---------- choices change the mock ----------
+function applyChoices() {
+  $('#oDress').hidden = pick.A !== 'bag'; drawBar();
+  if (view) view.setContents({items: ITEMS, charms: hanging()}); if (bagView) bagView.setContents({items: [], charms: hanging()});
+  if (view?.focused != null) showPower(view.focused);
+}
+applyChoices();
+
+
+// ---------- which look (study #537); ?skin=forest|paper ----------
+function setSkin(k) { if (!['glass', 'forest', 'paper'].includes(k)) k = 'glass'; document.documentElement.dataset.skin = k; document.querySelectorAll('#skins button').forEach(b => b.setAttribute('aria-pressed', b.dataset.skin === k)); }
+$('#skins').onclick = e => { const b = e.target.closest('[data-skin]'); if (b) setSkin(b.dataset.skin); };
+setSkin(new URLSearchParams(location.search).get('skin'));
+const go0 = new URLSearchParams(location.search).get('go'); if (go0) setTimeout(() => document.querySelector(`[data-go="${go0}"]`)?.click(), 400);
+
+// ---------- the guided steps ----------
+const wait = ms => new Promise(r => setTimeout(r, ms));
+$('#steps').onclick = async e => {
+  const b = e.target.closest('[data-go]'); if (!b) return; if (window === top && e.isTrusted) device.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: 'center'});
+  const go = b.dataset.go;
+  if (go === 'open') { closeDress(); await openBag(); }
+  if (go === 'pick') { if ($('#bagStage').hidden) await openBag(); view.zip('front', true); await wait(700); view.release(); await wait(300); view.inspect('quest-sugar'); }
+  if (go === 'where') { if ($('#bagStage').hidden) await openBag(); if (!view.inspecting) { view.zip('front', true); await wait(700); view.inspect('quest-sugar'); await wait(1500); } showWhere(itemOf(view.inspecting?.id || 'quest-sugar')); }
+  if (go === 'charms') { if ($('#bagStage').hidden) await openBag(); view.release(); view.focusCharm(charmI); }
+  if (go === 'earn') earnNext();
+  if (go === 'dress') openDress();
+};
+</script>
+</body>
+</html>

@@ -234,6 +234,88 @@
     }
   },
   "studies": {
+    "wardrobe-study": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Zelda: Breath of the Wild identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/zelda-breath-of-the-wild.json",
+          "note": "Link wears the outfit while you browse it, so every choice is previewed on him; armour upgrades happen at a Great Fairy, a separate place, so looks and power never share a menu."
+        },
+        {
+          "k": "oracle",
+          "t": "Animal Crossing: New Horizons identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/animal-crossing-new-horizons.json",
+          "note": "Pockets grow as you play, and clothes are changed at home, in front of a mirror, not from the pockets."
+        },
+        {
+          "k": "oracle",
+          "t": "A Short Hike identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/a-short-hike.json",
+          "note": "Golden feathers are collectibles that also give you more climb: the model for charms that each unlock one small power."
+        },
+        {
+          "k": "oracle",
+          "t": "Tiny Glade identity record",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/tiny-glade.json",
+          "note": "Soft, toy-like, almost no UI: the reference for how quiet the forest and paper looks have to stay."
+        },
+        {
+          "k": "oracle",
+          "t": "Physical objects and HUD information (Oracle design lesson)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/game-oracle/data/anatomy/object-and-hud.json",
+          "note": "The asset is the object; selection, hints and progress live in a separate presentation layer."
+        },
+        {
+          "k": "design",
+          "t": "Fortnite Locker and back bling (design knowledge)",
+          "href": "https://www.fortnite.com/",
+          "note": "One locker dresses the character, the backpack and the glider with the same slots: one customiser for every model."
+        },
+        {
+          "k": "design",
+          "t": "Apple Human Interface Guidelines: touch targets",
+          "href": "https://developer.apple.com/design/human-interface-guidelines/accessibility",
+          "note": "At least 44 by 44 points for anything a finger taps; the beads keep a 44-point hit ring even when they look smaller."
+        },
+        {
+          "k": "tutorial",
+          "t": "Hotspot callouts on a 3D model (three.js: Vector3.project)",
+          "href": "https://threejs.org/docs/#api/en/math/Vector3.project",
+          "note": "Projecting a point on the model to the screen every frame keeps each bead stuck to its body part as the figure turns."
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar: tiles, cards, HUD, FPS",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md",
+          "note": "The backpack, her look and the buggy are things the player character touches: the left bar and FPS, never cards."
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "How would she know? She carries it. Nothing masks the world; the HUD has zero words."
+        },
+        {
+          "k": "canon",
+          "t": "Backpack study AW-STUDY-0046, rounds 1 to 8",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md",
+          "note": "The source for the failure timeline."
+        },
+        {
+          "k": "canon",
+          "t": "Character Studio (thread notes, 2026-10-24)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/character-studio/CHARACTER_STUDIO.md",
+          "note": "20-bone rig, outfits are whole GLBs today, materials named by role, faces never redrawn."
+        },
+        {
+          "k": "reference",
+          "t": "Issues #535, #536, #537 (ChatGPT dispatch)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/537",
+          "note": "#537 asks for this study; #535 is why there are no facet menus; #536 keeps the open, zip and close-up of the bag."
+        }
+      ]
+    },
     "school-jump": {
       "items": [
         {
