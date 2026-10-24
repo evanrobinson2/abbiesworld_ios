@@ -1230,6 +1230,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_jump_f.glb"
    ]
+  },
+  "403": {
+   "task_id": "01a16ef9-7b5a-7578-b6f5-6437b364e742",
+   "credits": 3,
+   "name": "Victory Fist Pump",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/victory_fist_pump.glb"
+   ]
+  },
+  "62": {
+   "task_id": "01a16ef9-7b55-7218-acb3-d3a1dd343e62",
+   "credits": 3,
+   "name": "Penguin Walk",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/penguin_walk.glb"
+   ]
+  },
+  "59": {
+   "task_id": "01a16ef9-7b56-750d-862a-88c91280e6f3",
+   "credits": 3,
+   "name": "Victory Cheer",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/victory_cheer.glb"
+   ]
+  },
+  "46": {
+   "task_id": "01a16ef9-7b5c-7062-9ea6-a7348e5e9563",
+   "credits": 3,
+   "name": "Jump Rope",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jump_rope.glb"
+   ]
+  },
+  "61": {
+   "task_id": "01a16ef9-7b5a-7358-9de6-1d4f3a43ab28",
+   "credits": 3,
+   "name": "Happy Jump Male",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_jump_m.glb"
+   ]
+  },
+  "410": {
+   "task_id": "01a16ef9-cfc0-736e-9347-b05d12218dc8",
+   "credits": 3,
+   "name": "Kick a Soccer Ball",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/kick_a_soccer_ball.glb"
+   ]
+  },
+  "408": {
+   "task_id": "01a16ef9-cf7e-70a6-b847-d375fe014aa3",
+   "credits": 3,
+   "name": "Jazz Hands",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jazz_hands.glb"
+   ]
+  },
+  "417": {
+   "task_id": "01a16ef9-fa25-7666-b786-94f61116c067",
+   "credits": 3,
+   "name": "Hop with Arms Raised",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/hop_with_arms_raised.glb"
+   ]
+  },
+  "412": {
+   "task_id": "01a16ef9-f8ea-74f8-a177-4c78506d5b9c",
+   "credits": 3,
+   "name": "Victory",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/victory.glb"
+   ]
+  },
+  "415": {
+   "task_id": "01a16ef9-f9ea-74e0-8054-52d8248ab9ae",
+   "credits": 3,
+   "name": "Happy Sway Standing",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_sway_standing.glb"
+   ]
   }
  }
 }
