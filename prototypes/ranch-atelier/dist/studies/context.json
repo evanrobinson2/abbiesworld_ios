@@ -3523,6 +3523,37 @@
           "t": "None recorded for this draft"
         }
       ]
+    },
+    "project-chat": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Dispatch bridge and issue intake (docs/dispatch/ISSUE_INTAKE.md): the route the chat rides",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/dispatch/ISSUE_INTAKE.md"
+        },
+        {
+          "k": "canon",
+          "t": "Information grammar: the chat is presentation layer only, never in the world (HUD study, Game Feel)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "oracle",
+          "t": "None consulted for this draft"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "design",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded for this draft"
+        }
+      ]
     }
   }
 }
