@@ -420,6 +420,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_crouch_pick_up_place_side.glb"
    ]
+  },
+  "260": {
+   "task_id": "01a16b61-8a8d-7491-a1d3-5ca9ec33287f",
+   "credits": 3,
+   "name": "Push Forward and Stop",
+   "category": "DailyActions",
+   "sub_category": "Pushing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/push_forward_and_stop.glb"
+   ]
+  },
+  "259": {
+   "task_id": "01a16b61-8a92-767c-a0ea-67722cc98677",
+   "credits": 3,
+   "name": "Step Forward and Push",
+   "category": "DailyActions",
+   "sub_category": "Pushing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/step_forward_and_push.glb"
+   ]
+  },
+  "266": {
+   "task_id": "01a16b61-8a8e-7403-bfae-c430c996c64d",
+   "credits": 3,
+   "name": "Lie Down, Hands Spread",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/lie_down_hands_spread.glb"
+   ]
+  },
+  "261": {
+   "task_id": "01a16b61-8a8d-702c-b569-bec21c27b763",
+   "credits": 3,
+   "name": "Push and Walk Forward",
+   "category": "DailyActions",
+   "sub_category": "Pushing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/push_and_walk_forward.glb"
+   ]
+  },
+  "263": {
+   "task_id": "01a16b61-8a8d-758f-a1c2-7181455a1ead",
+   "credits": 3,
+   "name": "Sleep on Desk",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sleep_on_desk.glb"
+   ]
+  },
+  "57": {
+   "task_id": "01a16b61-e1c3-76ec-857c-1dbe106730d4",
+   "credits": 3,
+   "name": "Stand to Sit Transition Male",
+   "category": "DailyActions",
+   "sub_category": "Transitioning",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/stand_to_sit_transition_m.glb"
+   ]
+  },
+  "52": {
+   "task_id": "01a16b61-e129-7447-b2d5-5babb3747039",
+   "credits": 3,
+   "name": "Sit to Stand Transition Female",
+   "category": "DailyActions",
+   "sub_category": "Transitioning",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_to_stand_transition_f.glb"
+   ]
+  },
+  "53": {
+   "task_id": "01a16b61-e13f-71d5-afa1-00bc2c5a6d3b",
+   "credits": 3,
+   "name": "Sit to Stand Transition Male",
+   "category": "DailyActions",
+   "sub_category": "Transitioning",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_to_stand_transition_m.glb"
+   ]
+  },
+  "58": {
+   "task_id": "01a16b62-0880-747f-bf5e-8b3d70142a2c",
+   "credits": 3,
+   "name": "Step to Sit Transition",
+   "category": "DailyActions",
+   "sub_category": "Transitioning",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/step_to_sit_transition.glb"
+   ]
+  },
+  "60": {
+   "task_id": "01a16b62-3248-7702-8c51-24cefe66fb56",
+   "credits": 3,
+   "name": "Walk to Sit",
+   "category": "DailyActions",
+   "sub_category": "Transitioning",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_to_sit.glb"
+   ]
   }
  }
 }
