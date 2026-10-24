@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-car-picker-inspect",
+      "date": "2026-10-24",
+      "title": "Pick up a toy car and turn it around",
+      "line": "The garage now frames every car. Hold one to lift it, turn it with a finger, then put it back or choose it.",
+      "image": "/whats-new/2026-10-24-car-picker-inspect.png",
+      "thread": "issue-539",
+      "threadTitle": "Car picker camera and inspection",
+      "tour": false,
+      "link": "/studies/coaster/play.html"
+    },
+    {
       "id": "2026-10-24-backpack-inspect",
       "date": "2026-10-24",
       "title": "Unzip your backpack and look closely",
