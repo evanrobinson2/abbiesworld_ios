@@ -1,0 +1,179 @@
+{
+ "game": "quests",
+ "lines": {
+  "bake-sugar": {
+   "who": "city-baker",
+   "text": "I'm out of sugar and the buns are waiting. Could you fetch some from the shop on the common?",
+   "hash": "446d826392",
+   "url": "/r2/voices/lines/quests/bake-sugar-446d826392.mp3"
+  },
+  "bake-sugar-0": {
+   "who": "city-baker",
+   "text": "Pick up the sugar.",
+   "hash": "5104319e1a",
+   "url": "/r2/voices/lines/quests/bake-sugar-0-5104319e1a.mp3"
+  },
+  "bake-sugar-1": {
+   "who": "city-baker",
+   "text": "Take it to the baker.",
+   "hash": "f4a2717a0f",
+   "url": "/r2/voices/lines/quests/bake-sugar-1-f4a2717a0f.mp3"
+  },
+  "teach-chalk": {
+   "who": "town-teacher",
+   "text": "We have run out of chalk! Would you carry a box over from the noticeboard?",
+   "hash": "5040832ed2",
+   "url": "/r2/voices/lines/quests/teach-chalk-5040832ed2.mp3"
+  },
+  "teach-chalk-0": {
+   "who": "town-teacher",
+   "text": "Pick up the chalk.",
+   "hash": "bf93bdac7f",
+   "url": "/r2/voices/lines/quests/teach-chalk-0-bf93bdac7f.mp3"
+  },
+  "teach-chalk-1": {
+   "who": "town-teacher",
+   "text": "Bring it to the teacher.",
+   "hash": "41a1d2b2c2",
+   "url": "/r2/voices/lines/quests/teach-chalk-1-41a1d2b2c2.mp3"
+  },
+  "read-book": {
+   "who": "town-librarian",
+   "text": "Someone left a book on a bench by the school. Could you bring it back before it rains?",
+   "hash": "e987ef8c24",
+   "url": "/r2/voices/lines/quests/read-book-e987ef8c24.mp3"
+  },
+  "read-book-0": {
+   "who": "town-librarian",
+   "text": "Find the book.",
+   "hash": "5f5b69dc1c",
+   "url": "/r2/voices/lines/quests/read-book-0-5f5b69dc1c.mp3"
+  },
+  "read-book-1": {
+   "who": "town-librarian",
+   "text": "Return it to the librarian.",
+   "hash": "6c363e74bc",
+   "url": "/r2/voices/lines/quests/read-book-1-6c363e74bc.mp3"
+  },
+  "post-letter": {
+   "who": "town-postie",
+   "text": "I'm late! Please take this letter to the café for me?",
+   "hash": "b61d28005e",
+   "url": "/r2/voices/lines/quests/post-letter-b61d28005e.mp3"
+  },
+  "post-letter-0": {
+   "who": "town-postie",
+   "text": "Deliver the letter.",
+   "hash": "6aabecfb7a",
+   "url": "/r2/voices/lines/quests/post-letter-0-6aabecfb7a.mp3"
+  },
+  "garden-seeds": {
+   "who": "town-gardener",
+   "text": "The sunflowers need seeds. The school has a jar. Could you ask for it?",
+   "hash": "10c42896c8",
+   "url": "/r2/voices/lines/quests/garden-seeds-10c42896c8.mp3"
+  },
+  "garden-seeds-0": {
+   "who": "town-gardener",
+   "text": "Ask for the seed jar.",
+   "hash": "8ba4a56452",
+   "url": "/r2/voices/lines/quests/garden-seeds-0-8ba4a56452.mp3"
+  },
+  "garden-seeds-1": {
+   "who": "town-gardener",
+   "text": "Plant them with the gardener.",
+   "hash": "f68242a281",
+   "url": "/r2/voices/lines/quests/garden-seeds-1-f68242a281.mp3"
+  },
+  "lab-sparkle": {
+   "who": "town-scientist",
+   "text": "I lost my lucky magnifier! I think it is by the noticeboard. Can you look?",
+   "hash": "6a2da5e735",
+   "url": "/r2/voices/lines/quests/lab-sparkle-6a2da5e735.mp3"
+  },
+  "lab-sparkle-0": {
+   "who": "town-scientist",
+   "text": "Search by the noticeboard.",
+   "hash": "122c566e0d",
+   "url": "/r2/voices/lines/quests/lab-sparkle-0-122c566e0d.mp3"
+  },
+  "lab-sparkle-1": {
+   "who": "town-scientist",
+   "text": "Give it back.",
+   "hash": "41b7c15020",
+   "url": "/r2/voices/lines/quests/lab-sparkle-1-41b7c15020.mp3"
+  },
+  "neighbour-bub": {
+   "who": "town-neighbour",
+   "text": "Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him?",
+   "hash": "2ad2e9de11",
+   "url": "/r2/voices/lines/quests/neighbour-bub-2ad2e9de11.mp3"
+  },
+  "neighbour-bub-0": {
+   "who": "town-neighbour",
+   "text": "Find Bub's lead.",
+   "hash": "18c0e0b7a0",
+   "url": "/r2/voices/lines/quests/neighbour-bub-0-18c0e0b7a0.mp3"
+  },
+  "neighbour-bub-1": {
+   "who": "town-neighbour",
+   "text": "Take it to the neighbour.",
+   "hash": "3afc2983cf",
+   "url": "/r2/voices/lines/quests/neighbour-bub-1-3afc2983cf.mp3"
+  },
+  "cafe-cup": {
+   "who": "city-baker",
+   "text": "A cup went missing from the café window. Could you look by the noticeboard?",
+   "hash": "c1024fbaa0",
+   "url": "/r2/voices/lines/quests/cafe-cup-c1024fbaa0.mp3"
+  },
+  "cafe-cup-0": {
+   "who": "city-baker",
+   "text": "Look for the cup.",
+   "hash": "9ea155aa2b",
+   "url": "/r2/voices/lines/quests/cafe-cup-0-9ea155aa2b.mp3"
+  },
+  "cafe-cup-1": {
+   "who": "city-baker",
+   "text": "Carry it back.",
+   "hash": "155fba9418",
+   "url": "/r2/voices/lines/quests/cafe-cup-1-155fba9418.mp3"
+  },
+  "farm-eggs": {
+   "who": "town-farmer",
+   "text": "The hens have been busy and the baker is out of eggs. Could you find a warm one and take it to the café?",
+   "hash": "9b31a8dc9e",
+   "url": "/r2/voices/lines/quests/farm-eggs-9b31a8dc9e.mp3"
+  },
+  "farm-eggs-0": {
+   "who": "town-farmer",
+   "text": "Find an egg on the farm.",
+   "hash": "a21b1bfa25",
+   "url": "/r2/voices/lines/quests/farm-eggs-0-a21b1bfa25.mp3"
+  },
+  "farm-eggs-1": {
+   "who": "town-farmer",
+   "text": "Take it to the baker.",
+   "hash": "eff8117df0",
+   "url": "/r2/voices/lines/quests/farm-eggs-1-eff8117df0.mp3"
+  },
+  "farm-pumpkin": {
+   "who": "town-farmer",
+   "text": "The big orange pumpkins are ripe. Could you bring one to the common for the autumn display?",
+   "hash": "25b151b530",
+   "url": "/r2/voices/lines/quests/farm-pumpkin-25b151b530.mp3"
+  },
+  "farm-pumpkin-0": {
+   "who": "town-farmer",
+   "text": "Pick a pumpkin.",
+   "hash": "76f64c80d6",
+   "url": "/r2/voices/lines/quests/farm-pumpkin-0-76f64c80d6.mp3"
+  },
+  "farm-pumpkin-1": {
+   "who": "town-farmer",
+   "text": "Put it on display.",
+   "hash": "0dade13302",
+   "url": "/r2/voices/lines/quests/farm-pumpkin-1-0dade13302.mp3"
+  }
+ }
+}
