@@ -12,12 +12,12 @@ const PER_M = 4.2 / 1.8; // the town's grown-up townsfolk stand 4.2 units tall, 
 // at: the board's hero spot they stand by; turn: where round it, from the back (about 3.1 is the door side, where the
 // townsfolk stand nearer in); out: how far from its edge; idle, and the odd gesture
 export const HEROES = [
- {id: 'abbie', name: 'Abbie', glb: 'A1-clay-tee', at: 'common', turn: 3.5, out: 13, idle: 'idle', moves: ['big_wave_hello', 'funnydancing_01', 'look_around_dumbfounded']},
- {id: 'daddy', name: 'Daddy', glb: 'A3-clay-tee', at: 'common', turn: 3.25, out: 13, idle: 'idle_03', moves: ['stand_and_drink', 'big_wave_hello']},
- {id: 'ani', name: 'Ani', glb: 'A2-clay-tee', at: 'common', turn: 3.38, out: 13, idle: 'idle', moves: ['big_wave_hello', 'funnydancing_01', 'look_around_dumbfounded']},
- {id: 'commander', name: 'Commander', glb: 'A4-clay-suit', at: 'launch', turn: 2.3, idle: 'idle_03', moves: ['look_around_dumbfounded', 'big_wave_hello']},
+ {id: 'abbie', name: 'Abbie', glb: 'A1-clay-tee', at: 'common', turn: 3.5, out: 13, idle: 'idle', moves: ['big_wave_hello', 'funnydancing_01', 'happy_jump_f', 'jump_rope', 'cheer_with_both_hands_up']},
+ {id: 'daddy', name: 'Daddy', glb: 'A3-clay-tee', at: 'common', turn: 3.25, out: 13, idle: 'idle_03', moves: ['stand_and_drink', 'big_wave_hello', 'talk_with_hands_open', 'shrug']},
+ {id: 'ani', name: 'Ani', glb: 'A2-clay-tee', at: 'common', turn: 3.38, out: 13, idle: 'idle', moves: ['big_wave_hello', 'bubble_dance', 'hop_with_arms_raised', 'happy_sway_standing']},
+ {id: 'commander', name: 'Commander', glb: 'A4-clay-suit', at: 'launch', turn: 2.3, idle: 'idle_03', moves: ['look_around_dumbfounded', 'big_wave_hello', 'formal_bow']},
  {id: 'engineer', name: 'Engineer', glb: 'A5-clay-suit', at: 'launch', turn: 2.55, idle: 'idle', moves: ['stand_and_drink', 'catching_breath']},
- {id: 'crewmate', name: 'Crewmate', glb: 'A6-clay-suit', at: 'launch', turn: 2.8, idle: 'idle_02', moves: ['funnydancing_01', 'big_wave_hello']},
+ {id: 'crewmate', name: 'Crewmate', glb: 'A6-clay-suit', at: 'launch', turn: 2.8, idle: 'idle_02', moves: ['funnydancing_01', 'big_wave_hello', 'jazz_hands', 'victory_cheer']},
 ];
 
 export function mountHeroes(town, {THREE: T} = {}) {

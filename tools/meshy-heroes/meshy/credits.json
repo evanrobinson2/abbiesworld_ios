@@ -1,6 +1,6 @@
 {
- "cap": 2400,
- "total": 2394,
+ "cap": 1000000,
+ "total": 2574,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -946,11 +946,266 @@
    "what": "anim 125",
    "credits": 3,
    "at": "2026-10-24T00:52:22Z"
+  },
+  {
+   "what": "charm-toy-car 3d",
+   "credits": 30,
+   "at": "2026-10-24T17:17:03Z"
+  },
+  {
+   "what": "anim 41",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 285",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 298",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 56",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 290",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 301",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 303",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 306",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 308",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 313",
+   "credits": 3,
+   "at": "2026-10-24T17:29:20Z"
+  },
+  {
+   "what": "anim 317",
+   "credits": 3,
+   "at": "2026-10-24T17:29:45Z"
+  },
+  {
+   "what": "anim 243",
+   "credits": 3,
+   "at": "2026-10-24T17:29:45Z"
+  },
+  {
+   "what": "anim 48",
+   "credits": 3,
+   "at": "2026-10-24T17:29:45Z"
+  },
+  {
+   "what": "anim 36",
+   "credits": 3,
+   "at": "2026-10-24T17:29:45Z"
+  },
+  {
+   "what": "anim 244",
+   "credits": 3,
+   "at": "2026-10-24T17:29:45Z"
+  },
+  {
+   "what": "anim 245",
+   "credits": 3,
+   "at": "2026-10-24T17:30:06Z"
+  },
+  {
+   "what": "anim 599",
+   "credits": 3,
+   "at": "2026-10-24T17:30:17Z"
+  },
+  {
+   "what": "anim 63",
+   "credits": 3,
+   "at": "2026-10-24T17:30:17Z"
+  },
+  {
+   "what": "anim 66",
+   "credits": 3,
+   "at": "2026-10-24T17:30:17Z"
+  },
+  {
+   "what": "anim 67",
+   "credits": 3,
+   "at": "2026-10-24T17:30:27Z"
+  },
+  {
+   "what": "anim 78",
+   "credits": 3,
+   "at": "2026-10-24T17:31:01Z"
+  },
+  {
+   "what": "anim 596",
+   "credits": 3,
+   "at": "2026-10-24T17:31:01Z"
+  },
+  {
+   "what": "anim 591",
+   "credits": 3,
+   "at": "2026-10-24T17:31:01Z"
+  },
+  {
+   "what": "anim 336",
+   "credits": 3,
+   "at": "2026-10-24T17:31:01Z"
+  },
+  {
+   "what": "anim 341",
+   "credits": 3,
+   "at": "2026-10-24T17:31:01Z"
+  },
+  {
+   "what": "anim 278",
+   "credits": 3,
+   "at": "2026-10-24T17:31:23Z"
+  },
+  {
+   "what": "anim 281",
+   "credits": 3,
+   "at": "2026-10-24T17:31:23Z"
+  },
+  {
+   "what": "anim 283",
+   "credits": 3,
+   "at": "2026-10-24T17:31:23Z"
+  },
+  {
+   "what": "anim 284",
+   "credits": 3,
+   "at": "2026-10-24T17:31:33Z"
+  },
+  {
+   "what": "anim 268",
+   "credits": 3,
+   "at": "2026-10-24T17:31:44Z"
+  },
+  {
+   "what": "anim 269",
+   "credits": 3,
+   "at": "2026-10-24T17:32:29Z"
+  },
+  {
+   "what": "anim 271",
+   "credits": 3,
+   "at": "2026-10-24T17:32:29Z"
+  },
+  {
+   "what": "anim 466",
+   "credits": 3,
+   "at": "2026-10-24T17:32:29Z"
+  },
+  {
+   "what": "anim 470",
+   "credits": 3,
+   "at": "2026-10-24T17:32:29Z"
+  },
+  {
+   "what": "anim 441",
+   "credits": 3,
+   "at": "2026-10-24T17:32:29Z"
+  },
+  {
+   "what": "anim 449",
+   "credits": 3,
+   "at": "2026-10-24T17:32:51Z"
+  },
+  {
+   "what": "anim 343",
+   "credits": 3,
+   "at": "2026-10-24T17:32:51Z"
+  },
+  {
+   "what": "anim 262",
+   "credits": 3,
+   "at": "2026-10-24T17:32:51Z"
+  },
+  {
+   "what": "anim 39",
+   "credits": 3,
+   "at": "2026-10-24T17:32:51Z"
+  },
+  {
+   "what": "anim 44",
+   "credits": 3,
+   "at": "2026-10-24T17:32:51Z"
+  },
+  {
+   "what": "anim 46",
+   "credits": 3,
+   "at": "2026-10-24T17:33:26Z"
+  },
+  {
+   "what": "anim 59",
+   "credits": 3,
+   "at": "2026-10-24T17:33:26Z"
+  },
+  {
+   "what": "anim 61",
+   "credits": 3,
+   "at": "2026-10-24T17:33:26Z"
+  },
+  {
+   "what": "anim 62",
+   "credits": 3,
+   "at": "2026-10-24T17:33:26Z"
+  },
+  {
+   "what": "anim 403",
+   "credits": 3,
+   "at": "2026-10-24T17:33:26Z"
+  },
+  {
+   "what": "anim 408",
+   "credits": 3,
+   "at": "2026-10-24T17:33:47Z"
+  },
+  {
+   "what": "anim 410",
+   "credits": 3,
+   "at": "2026-10-24T17:33:47Z"
+  },
+  {
+   "what": "anim 412",
+   "credits": 3,
+   "at": "2026-10-24T17:33:58Z"
+  },
+  {
+   "what": "anim 415",
+   "credits": 3,
+   "at": "2026-10-24T17:33:58Z"
+  },
+  {
+   "what": "anim 417",
+   "credits": 3,
+   "at": "2026-10-24T17:33:58Z"
   }
  ],
  "live_balance": {
   "credits": 459,
   "at": "2026-10-23T21:55:19Z"
  },
- "cap_note": "Evan raised the cap from 2,000 to 2,400 (decision 2026-10-24 00:31Z) for 84 core animations + 2 charm retextures"
+ "cap_note": "Evan 2026-10-24 17:12Z: use all Meshy credits (cap lifted; Meshy's balance is the limit)"
 }

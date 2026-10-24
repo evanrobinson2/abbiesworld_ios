@@ -1,6 +1,6 @@
 import {GLTFLoader} from '/sandbox2-runtime/vendor/loaders/GLTFLoader.js';
 
-// The Meshy animation set (AW-STUDY-0043) on any hero: 83 clips cut to the hero rig's 20 bone names, listed in
+// The Meshy animation set (AW-STUDY-0043) on any hero: 133 clips cut to the hero rig's 20 bone names, listed in
 // /studies/moon-mission/heroes/anims/index.json. The clips were made on an adult reference rig, so only their joint
 // turns are kept: their bone positions (adult limb lengths) would stretch a child, and the hips' travel is scaled to
 // this hero's own hip height, or a child floats a third of a metre up.

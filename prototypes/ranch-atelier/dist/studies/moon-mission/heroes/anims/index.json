@@ -748,6 +748,456 @@
    "clip": "confident_walk",
    "file": "/studies/moon-mission/heroes/anims/confident_walk.glb",
    "seconds": 5.75
+  },
+  {
+   "action_id": 298,
+   "name": "Cheer with Both Hands Up",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "cheer_with_both_hands_up",
+   "file": "/studies/moon-mission/heroes/anims/cheer_with_both_hands_up.glb",
+   "seconds": 1.88
+  },
+  {
+   "action_id": 56,
+   "name": "Stand and Chat",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "stand_and_chat",
+   "file": "/studies/moon-mission/heroes/anims/stand_and_chat.glb",
+   "seconds": 5.17
+  },
+  {
+   "action_id": 290,
+   "name": "Wave One Hand",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "wave_one_hand",
+   "file": "/studies/moon-mission/heroes/anims/wave_one_hand.glb",
+   "seconds": 4.12
+  },
+  {
+   "action_id": 285,
+   "name": "Open Door",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "open_door",
+   "file": "/studies/moon-mission/heroes/anims/open_door.glb",
+   "seconds": 5.21
+  },
+  {
+   "action_id": 41,
+   "name": "Formal Bow",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "formal_bow",
+   "file": "/studies/moon-mission/heroes/anims/formal_bow.glb",
+   "seconds": 7.67
+  },
+  {
+   "action_id": 301,
+   "name": "Cheer with Both Hands 1",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "cheer_with_both_hands_1",
+   "file": "/studies/moon-mission/heroes/anims/cheer_with_both_hands_1.glb",
+   "seconds": 2.17
+  },
+  {
+   "action_id": 303,
+   "name": "Cheer with Both Hands",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "cheer_with_both_hands",
+   "file": "/studies/moon-mission/heroes/anims/cheer_with_both_hands.glb",
+   "seconds": 2.96
+  },
+  {
+   "action_id": 306,
+   "name": "Cheer with One Hand Up",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "cheer_with_one_hand_up",
+   "file": "/studies/moon-mission/heroes/anims/cheer_with_one_hand_up.glb",
+   "seconds": 1.67
+  },
+  {
+   "action_id": 313,
+   "name": "Talk with Hands Open",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "talk_with_hands_open",
+   "file": "/studies/moon-mission/heroes/anims/talk_with_hands_open.glb",
+   "seconds": 4
+  },
+  {
+   "action_id": 308,
+   "name": "Talk Passionately",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "talk_passionately",
+   "file": "/studies/moon-mission/heroes/anims/talk_passionately.glb",
+   "seconds": 10.29
+  },
+  {
+   "action_id": 317,
+   "name": "Shrug",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "clip": "shrug",
+   "file": "/studies/moon-mission/heroes/anims/shrug.glb",
+   "seconds": 2
+  },
+  {
+   "action_id": 36,
+   "name": "Confused Scratch",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "clip": "confused_scratch",
+   "file": "/studies/moon-mission/heroes/anims/confused_scratch.glb",
+   "seconds": 11.5
+  },
+  {
+   "action_id": 243,
+   "name": "Idle 3",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "clip": "idle_3",
+   "file": "/studies/moon-mission/heroes/anims/idle_3.glb",
+   "seconds": 10
+  },
+  {
+   "action_id": 48,
+   "name": "Mirror Viewing",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "clip": "mirror_viewing",
+   "file": "/studies/moon-mission/heroes/anims/mirror_viewing.glb",
+   "seconds": 7.33
+  },
+  {
+   "action_id": 244,
+   "name": "Idle 4",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "clip": "idle_4",
+   "file": "/studies/moon-mission/heroes/anims/idle_4.glb",
+   "seconds": 14
+  },
+  {
+   "action_id": 245,
+   "name": "Idle 5",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "clip": "idle_5",
+   "file": "/studies/moon-mission/heroes/anims/idle_5.glb",
+   "seconds": 1.83
+  },
+  {
+   "action_id": 599,
+   "name": "Idle 15",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "clip": "idle_15",
+   "file": "/studies/moon-mission/heroes/anims/idle_15.glb",
+   "seconds": 7
+  },
+  {
+   "action_id": 66,
+   "name": "Boom Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "clip": "boom_dance",
+   "file": "/studies/moon-mission/heroes/anims/boom_dance.glb",
+   "seconds": 7.17
+  },
+  {
+   "action_id": 63,
+   "name": "Arm Circle Shuffle",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "clip": "arm_circle_shuffle",
+   "file": "/studies/moon-mission/heroes/anims/arm_circle_shuffle.glb",
+   "seconds": 9.67
+  },
+  {
+   "action_id": 67,
+   "name": "Bubble Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "clip": "bubble_dance",
+   "file": "/studies/moon-mission/heroes/anims/bubble_dance.glb",
+   "seconds": 8.04
+  },
+  {
+   "action_id": 596,
+   "name": "Ymca Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "clip": "ymca_dance",
+   "file": "/studies/moon-mission/heroes/anims/ymca_dance.glb",
+   "seconds": 4.5
+  },
+  {
+   "action_id": 591,
+   "name": "Hip Hop Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "clip": "hip_hop_dance",
+   "file": "/studies/moon-mission/heroes/anims/hip_hop_dance.glb",
+   "seconds": 3.33
+  },
+  {
+   "action_id": 78,
+   "name": "Rhythmic Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "clip": "rhythmic_dance",
+   "file": "/studies/moon-mission/heroes/anims/rhythmic_dance.glb",
+   "seconds": 7
+  },
+  {
+   "action_id": 336,
+   "name": "Long Breathe and Look Around",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "clip": "long_breathe_and_look_around",
+   "file": "/studies/moon-mission/heroes/anims/long_breathe_and_look_around.glb",
+   "seconds": 11.29
+  },
+  {
+   "action_id": 281,
+   "name": "Female Bend Over Pick Up Inspect",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "clip": "female_bend_over_pick_up_inspect",
+   "file": "/studies/moon-mission/heroes/anims/female_bend_over_pick_up_inspect.glb",
+   "seconds": 3.83
+  },
+  {
+   "action_id": 278,
+   "name": "Female Stand Pick Fruit Basket",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "clip": "female_stand_pick_fruit_basket",
+   "file": "/studies/moon-mission/heroes/anims/female_stand_pick_fruit_basket.glb",
+   "seconds": 6.17
+  },
+  {
+   "action_id": 283,
+   "name": "Pull Radish",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "clip": "pull_radish",
+   "file": "/studies/moon-mission/heroes/anims/pull_radish.glb",
+   "seconds": 4.71
+  },
+  {
+   "action_id": 341,
+   "name": "Walk Slowly and Look Around",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "clip": "walk_slowly_and_look_around",
+   "file": "/studies/moon-mission/heroes/anims/walk_slowly_and_look_around.glb",
+   "seconds": 23.83
+  },
+  {
+   "action_id": 284,
+   "name": "Collect Object",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "clip": "collect_object",
+   "file": "/studies/moon-mission/heroes/anims/collect_object.glb",
+   "seconds": 6
+  },
+  {
+   "action_id": 268,
+   "name": "Sit and Doze Off",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "clip": "sit_and_doze_off",
+   "file": "/studies/moon-mission/heroes/anims/sit_and_doze_off.glb",
+   "seconds": 17.29
+  },
+  {
+   "action_id": 271,
+   "name": "Wake Up and Look Up",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "clip": "wake_up_and_look_up",
+   "file": "/studies/moon-mission/heroes/anims/wake_up_and_look_up.glb",
+   "seconds": 3.5
+  },
+  {
+   "action_id": 466,
+   "name": "Regular Jump",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "clip": "regular_jump",
+   "file": "/studies/moon-mission/heroes/anims/regular_jump.glb",
+   "seconds": 1.88
+  },
+  {
+   "action_id": 441,
+   "name": "Climb Stairs",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "clip": "climb_stairs",
+   "file": "/studies/moon-mission/heroes/anims/climb_stairs.glb",
+   "seconds": 2.96
+  },
+  {
+   "action_id": 269,
+   "name": "Sleep",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "clip": "sleep",
+   "file": "/studies/moon-mission/heroes/anims/sleep.glb",
+   "seconds": 5.71
+  },
+  {
+   "action_id": 470,
+   "name": "Jumping Down",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "clip": "jumping_down",
+   "file": "/studies/moon-mission/heroes/anims/jumping_down.glb",
+   "seconds": 3.29
+  },
+  {
+   "action_id": 449,
+   "name": "Climb Up Rope",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "clip": "climb_up_rope",
+   "file": "/studies/moon-mission/heroes/anims/climb_up_rope.glb",
+   "seconds": 2.58
+  },
+  {
+   "action_id": 262,
+   "name": "Crouch and Push Forward",
+   "category": "DailyActions",
+   "sub_category": "Pushing",
+   "clip": "crouch_and_push_forward",
+   "file": "/studies/moon-mission/heroes/anims/crouch_and_push_forward.glb",
+   "seconds": 3.67
+  },
+  {
+   "action_id": 343,
+   "name": "Sit and Drink",
+   "category": "DailyActions",
+   "sub_category": "Drinking",
+   "clip": "sit_and_drink",
+   "file": "/studies/moon-mission/heroes/anims/sit_and_drink.glb",
+   "seconds": 11.17
+  },
+  {
+   "action_id": 39,
+   "name": "Excited Walk Female",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "excited_walk_f",
+   "file": "/studies/moon-mission/heroes/anims/excited_walk_f.glb",
+   "seconds": 9.75
+  },
+  {
+   "action_id": 44,
+   "name": "Happy Jump Female",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "happy_jump_f",
+   "file": "/studies/moon-mission/heroes/anims/happy_jump_f.glb",
+   "seconds": 9.83
+  },
+  {
+   "action_id": 403,
+   "name": "Victory Fist Pump",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "victory_fist_pump",
+   "file": "/studies/moon-mission/heroes/anims/victory_fist_pump.glb",
+   "seconds": 1.5
+  },
+  {
+   "action_id": 62,
+   "name": "Penguin Walk",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "penguin_walk",
+   "file": "/studies/moon-mission/heroes/anims/penguin_walk.glb",
+   "seconds": 2
+  },
+  {
+   "action_id": 59,
+   "name": "Victory Cheer",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "victory_cheer",
+   "file": "/studies/moon-mission/heroes/anims/victory_cheer.glb",
+   "seconds": 9.33
+  },
+  {
+   "action_id": 46,
+   "name": "Jump Rope",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "jump_rope",
+   "file": "/studies/moon-mission/heroes/anims/jump_rope.glb",
+   "seconds": 8.54
+  },
+  {
+   "action_id": 61,
+   "name": "Happy Jump Male",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "happy_jump_m",
+   "file": "/studies/moon-mission/heroes/anims/happy_jump_m.glb",
+   "seconds": 9.83
+  },
+  {
+   "action_id": 410,
+   "name": "Kick a Soccer Ball",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "kick_a_soccer_ball",
+   "file": "/studies/moon-mission/heroes/anims/kick_a_soccer_ball.glb",
+   "seconds": 1.67
+  },
+  {
+   "action_id": 408,
+   "name": "Jazz Hands",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "jazz_hands",
+   "file": "/studies/moon-mission/heroes/anims/jazz_hands.glb",
+   "seconds": 2.75
+  },
+  {
+   "action_id": 417,
+   "name": "Hop with Arms Raised",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "hop_with_arms_raised",
+   "file": "/studies/moon-mission/heroes/anims/hop_with_arms_raised.glb",
+   "seconds": 2.33
+  },
+  {
+   "action_id": 412,
+   "name": "Victory",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "victory",
+   "file": "/studies/moon-mission/heroes/anims/victory.glb",
+   "seconds": 8.54
+  },
+  {
+   "action_id": 415,
+   "name": "Happy Sway Standing",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "clip": "happy_sway_standing",
+   "file": "/studies/moon-mission/heroes/anims/happy_sway_standing.glb",
+   "seconds": 10
   }
  ],
  "loader": "/simulations/hero-anims.mjs"

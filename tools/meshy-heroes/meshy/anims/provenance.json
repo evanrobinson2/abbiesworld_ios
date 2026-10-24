@@ -830,6 +830,506 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/charged_spell_cast.glb"
    ]
+  },
+  "298": {
+   "task_id": "01a16ef5-3d82-718d-beec-86d985cdda08",
+   "credits": 3,
+   "name": "Cheer with Both Hands Up",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_both_hands_up.glb"
+   ]
+  },
+  "56": {
+   "task_id": "01a16ef5-3da1-77d4-87f2-239ce36d9b14",
+   "credits": 3,
+   "name": "Stand and Chat",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/stand_and_chat.glb"
+   ]
+  },
+  "290": {
+   "task_id": "01a16ef5-3d9f-7630-970b-ca1823815c79",
+   "credits": 3,
+   "name": "Wave One Hand",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/wave_one_hand.glb"
+   ]
+  },
+  "285": {
+   "task_id": "01a16ef5-3d83-75cc-9113-913fae9cab28",
+   "credits": 3,
+   "name": "Open Door",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/open_door.glb"
+   ]
+  },
+  "41": {
+   "task_id": "01a16ef5-3d83-7592-be29-92bb8e0eb412",
+   "credits": 3,
+   "name": "Formal Bow",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/formal_bow.glb"
+   ]
+  },
+  "301": {
+   "task_id": "01a16ef5-959c-77f2-ab61-246158da3b92",
+   "credits": 3,
+   "name": "Cheer with Both Hands 1",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_both_hands_1.glb"
+   ]
+  },
+  "303": {
+   "task_id": "01a16ef5-9620-72c4-9e96-f92d7768cf6e",
+   "credits": 3,
+   "name": "Cheer with Both Hands",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_both_hands.glb"
+   ]
+  },
+  "306": {
+   "task_id": "01a16ef5-962e-7107-b5f5-4c1aeb418e43",
+   "credits": 3,
+   "name": "Cheer with One Hand Up",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cheer_with_one_hand_up.glb"
+   ]
+  },
+  "313": {
+   "task_id": "01a16ef5-ba6e-7674-b7f2-4b5453f65aed",
+   "credits": 3,
+   "name": "Talk with Hands Open",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/talk_with_hands_open.glb"
+   ]
+  },
+  "308": {
+   "task_id": "01a16ef5-9662-762a-83de-2841bf8f4764",
+   "credits": 3,
+   "name": "Talk Passionately",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/talk_passionately.glb"
+   ]
+  },
+  "317": {
+   "task_id": "01a16ef6-1b63-7105-89ae-a7e6bbe526a4",
+   "credits": 3,
+   "name": "Shrug",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/shrug.glb"
+   ]
+  },
+  "36": {
+   "task_id": "01a16ef6-1b68-72e5-8451-f2884210cc7c",
+   "credits": 3,
+   "name": "Confused Scratch",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/confused_scratch.glb"
+   ]
+  },
+  "243": {
+   "task_id": "01a16ef6-1b68-72e7-976f-c425c0dfab80",
+   "credits": 3,
+   "name": "Idle 3",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_3.glb"
+   ]
+  },
+  "48": {
+   "task_id": "01a16ef6-1b64-7744-ac22-8bfae91dfa60",
+   "credits": 3,
+   "name": "Mirror Viewing",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/mirror_viewing.glb"
+   ]
+  },
+  "244": {
+   "task_id": "01a16ef6-1b68-70e1-8518-db40ebadf355",
+   "credits": 3,
+   "name": "Idle 4",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_4.glb"
+   ]
+  },
+  "245": {
+   "task_id": "01a16ef6-6f58-7082-b429-92f1a9b24fdd",
+   "credits": 3,
+   "name": "Idle 5",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_5.glb"
+   ]
+  },
+  "599": {
+   "task_id": "01a16ef6-9953-76a7-a1bf-29984337b361",
+   "credits": 3,
+   "name": "Idle 15",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_15.glb"
+   ]
+  },
+  "66": {
+   "task_id": "01a16ef6-9a87-7141-88ca-371c7079fa3e",
+   "credits": 3,
+   "name": "Boom Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/boom_dance.glb"
+   ]
+  },
+  "63": {
+   "task_id": "01a16ef6-9a30-7415-b596-7897a3b3eb96",
+   "credits": 3,
+   "name": "Arm Circle Shuffle",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/arm_circle_shuffle.glb"
+   ]
+  },
+  "67": {
+   "task_id": "01a16ef6-c050-7169-bdd7-9e091ea6a6d4",
+   "credits": 3,
+   "name": "Bubble Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/bubble_dance.glb"
+   ]
+  },
+  "596": {
+   "task_id": "01a16ef7-4495-757a-a28d-f02f2b85cabc",
+   "credits": 3,
+   "name": "Ymca Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/ymca_dance.glb"
+   ]
+  },
+  "591": {
+   "task_id": "01a16ef7-4490-74ff-b19a-18a52f71f4f0",
+   "credits": 3,
+   "name": "Hip Hop Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/hip_hop_dance.glb"
+   ]
+  },
+  "78": {
+   "task_id": "01a16ef7-4491-725d-96c5-84e5d3f37309",
+   "credits": 3,
+   "name": "Rhythmic Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/rhythmic_dance.glb"
+   ]
+  },
+  "336": {
+   "task_id": "01a16ef7-4497-713e-9739-a3079ed3f87c",
+   "credits": 3,
+   "name": "Long Breathe and Look Around",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/long_breathe_and_look_around.glb"
+   ]
+  },
+  "281": {
+   "task_id": "01a16ef7-9ad9-775d-b013-df8a63827728",
+   "credits": 3,
+   "name": "Female Bend Over Pick Up Inspect",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_bend_over_pick_up_inspect.glb"
+   ]
+  },
+  "278": {
+   "task_id": "01a16ef7-9aa0-77ff-9bb3-3824d272f8d5",
+   "credits": 3,
+   "name": "Female Stand Pick Fruit Basket",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_stand_pick_fruit_basket.glb"
+   ]
+  },
+  "283": {
+   "task_id": "01a16ef7-9b2f-7425-8676-5d036a9e8d3c",
+   "credits": 3,
+   "name": "Pull Radish",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/pull_radish.glb"
+   ]
+  },
+  "341": {
+   "task_id": "01a16ef7-4494-779a-a3af-10aad4996a98",
+   "credits": 3,
+   "name": "Walk Slowly and Look Around",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_slowly_and_look_around.glb"
+   ]
+  },
+  "284": {
+   "task_id": "01a16ef7-c159-76d7-bf89-9c0ac84af1a0",
+   "credits": 3,
+   "name": "Collect Object",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/collect_object.glb"
+   ]
+  },
+  "268": {
+   "task_id": "01a16ef7-ef76-7742-9767-4e2624e85904",
+   "credits": 3,
+   "name": "Sit and Doze Off",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_and_doze_off.glb"
+   ]
+  },
+  "271": {
+   "task_id": "01a16ef8-9c55-7326-9634-ceeddae089fa",
+   "credits": 3,
+   "name": "Wake Up and Look Up",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/wake_up_and_look_up.glb"
+   ]
+  },
+  "466": {
+   "task_id": "01a16ef8-9c5b-7082-9496-cf05230c3b98",
+   "credits": 3,
+   "name": "Regular Jump",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/regular_jump.glb"
+   ]
+  },
+  "441": {
+   "task_id": "01a16ef8-9c5b-70f2-9d2e-9488d5b532ec",
+   "credits": 3,
+   "name": "Climb Stairs",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/climb_stairs.glb"
+   ]
+  },
+  "269": {
+   "task_id": "01a16ef8-9c5d-76c2-a837-e9f23e221d65",
+   "credits": 3,
+   "name": "Sleep",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sleep.glb"
+   ]
+  },
+  "470": {
+   "task_id": "01a16ef8-9c59-7150-ad3d-dd401beafad5",
+   "credits": 3,
+   "name": "Jumping Down",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jumping_down.glb"
+   ]
+  },
+  "449": {
+   "task_id": "01a16ef8-f402-724b-ba60-b130d0042078",
+   "credits": 3,
+   "name": "Climb Up Rope",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/climb_up_rope.glb"
+   ]
+  },
+  "262": {
+   "task_id": "01a16ef8-f4b1-7514-8017-5428b2bed3c2",
+   "credits": 3,
+   "name": "Crouch and Push Forward",
+   "category": "DailyActions",
+   "sub_category": "Pushing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/crouch_and_push_forward.glb"
+   ]
+  },
+  "343": {
+   "task_id": "01a16ef8-f404-77ba-adc7-dd91719824a9",
+   "credits": 3,
+   "name": "Sit and Drink",
+   "category": "DailyActions",
+   "sub_category": "Drinking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_and_drink.glb"
+   ]
+  },
+  "39": {
+   "task_id": "01a16ef8-f526-72ee-a5b1-147f872abc38",
+   "credits": 3,
+   "name": "Excited Walk Female",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/excited_walk_f.glb"
+   ]
+  },
+  "44": {
+   "task_id": "01a16ef8-f52c-70f5-bcb2-cb800962230a",
+   "credits": 3,
+   "name": "Happy Jump Female",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_jump_f.glb"
+   ]
+  },
+  "403": {
+   "task_id": "01a16ef9-7b5a-7578-b6f5-6437b364e742",
+   "credits": 3,
+   "name": "Victory Fist Pump",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/victory_fist_pump.glb"
+   ]
+  },
+  "62": {
+   "task_id": "01a16ef9-7b55-7218-acb3-d3a1dd343e62",
+   "credits": 3,
+   "name": "Penguin Walk",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/penguin_walk.glb"
+   ]
+  },
+  "59": {
+   "task_id": "01a16ef9-7b56-750d-862a-88c91280e6f3",
+   "credits": 3,
+   "name": "Victory Cheer",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/victory_cheer.glb"
+   ]
+  },
+  "46": {
+   "task_id": "01a16ef9-7b5c-7062-9ea6-a7348e5e9563",
+   "credits": 3,
+   "name": "Jump Rope",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jump_rope.glb"
+   ]
+  },
+  "61": {
+   "task_id": "01a16ef9-7b5a-7358-9de6-1d4f3a43ab28",
+   "credits": 3,
+   "name": "Happy Jump Male",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_jump_m.glb"
+   ]
+  },
+  "410": {
+   "task_id": "01a16ef9-cfc0-736e-9347-b05d12218dc8",
+   "credits": 3,
+   "name": "Kick a Soccer Ball",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/kick_a_soccer_ball.glb"
+   ]
+  },
+  "408": {
+   "task_id": "01a16ef9-cf7e-70a6-b847-d375fe014aa3",
+   "credits": 3,
+   "name": "Jazz Hands",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jazz_hands.glb"
+   ]
+  },
+  "417": {
+   "task_id": "01a16ef9-fa25-7666-b786-94f61116c067",
+   "credits": 3,
+   "name": "Hop with Arms Raised",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/hop_with_arms_raised.glb"
+   ]
+  },
+  "412": {
+   "task_id": "01a16ef9-f8ea-74f8-a177-4c78506d5b9c",
+   "credits": 3,
+   "name": "Victory",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/victory.glb"
+   ]
+  },
+  "415": {
+   "task_id": "01a16ef9-f9ea-74e0-8054-52d8248ab9ae",
+   "credits": 3,
+   "name": "Happy Sway Standing",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_sway_standing.glb"
+   ]
   }
  }
 }

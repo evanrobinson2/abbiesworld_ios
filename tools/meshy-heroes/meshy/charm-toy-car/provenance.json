@@ -1,0 +1,24 @@
+{
+ "job": "charm-toy-car",
+ "tasks": [
+  {
+   "stage": "3d",
+   "endpoint": "/v1/image-to-3d",
+   "task_id": "01a16eea-7ebc-74e3-9162-eaf2ad1eb907",
+   "credits": 30,
+   "params": {
+    "ai_model": "latest",
+    "should_texture": true,
+    "enable_pbr": true,
+    "should_remesh": true,
+    "topology": "triangle",
+    "target_polycount": 8000,
+    "symmetry_mode": "auto"
+   },
+   "views": [
+    "pick.png"
+   ]
+  }
+ ],
+ "credits": 30
+}
