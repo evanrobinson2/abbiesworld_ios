@@ -3728,6 +3728,59 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/"
         }
       ]
+    },
+    "research-lab": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Tiny Glade and Townscaper: a place you wander with almost no HUD; details appear on the thing",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/tiny-glade.json"
+        },
+        {
+          "k": "oracle",
+          "t": "LEGO Bricktales: dioramas you walk up to, not menus",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/lego-bricktales.json"
+        },
+        {
+          "k": "oracle",
+          "t": "The live Oracle consult was not made (cloud session cannot reach *.vercel.app); records are the repo snapshot"
+        },
+        {
+          "k": "devblog",
+          "t": "How Townscaper works (Game Developer): the toy teaches itself by being touched",
+          "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making"
+        },
+        {
+          "k": "design",
+          "t": "Dreams vs. Super Mario Maker 2: how much a creation space can offer before it overwhelms",
+          "href": "https://www.laptopmag.com/features/dreams-vs-super-mario-maker-2"
+        },
+        {
+          "k": "tutorial",
+          "t": "None used; the walk and tap-to-inspect come from our own kit"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar: touch the thing, close-ups",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study: two layers, 8% budget, no words on the play HUD",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Invariant contracts: no feature live without a real scene and a passing run",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/INVARIANTS.md"
+        },
+        {
+          "k": "canon",
+          "t": "Scene Builder Lab (AW-STUDY-0062): the workshop room beside the shelves",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/scene-builder/SCENE_BUILDER_STUDY.md"
+        }
+      ]
     }
   }
 }
