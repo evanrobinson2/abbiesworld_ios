@@ -21,7 +21,7 @@ export function start(AT) {
  world.warm(renderer, camera);
  let clock = {day: 1, hour: 9};
  let hud = null;
- const mountHud = () => { hud = createPaintHud({host: window.AWHud?.balloons || null, onThrow: (ball, x, y, vx, vy) => {
+ const mountHud = () => { hud = createPaintHud({surface: renderer.domElement, host: window.AWHud?.balloons || null, onThrow: (ball, x, y, vx, vy) => {
   if (!dioGroup.visible) return false;
   const g = groundThrow(T, camera, renderer.domElement, controls.target, x, y, vx, vy, heightAt); if (!g) return false;
   if (ball.kind && ball.kind !== 'paint') { dispatchEvent(new CustomEvent('ranch:play-event', {detail: {id: ball.kind, at: {x: g.x + g.vx * .5, z: g.z + g.vz * .5}}})); return true; } // a world effect's own balloon: the effect lands where it was thrown

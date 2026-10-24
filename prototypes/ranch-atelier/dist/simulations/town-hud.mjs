@@ -37,7 +37,8 @@ html.aw-town-hud #v2-chrono .ch-tiles{display:none}
 #aw-hand{position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 10px);display:flex;align-items:flex-end;justify-content:center;gap:10px;pointer-events:none;max-width:calc(100vw - 96px)}
 #aw-hand>*{pointer-events:auto}
 html.aw-town-hud #aw-hand .pw-hand{position:static;--pw-w:92px}
-@media(max-width:520px){#aw-hand{max-width:calc(100vw - 80px);left:calc(50% + 28px)}}
+@media(max-width:520px){#aw-hand{max-width:calc(100vw - 80px);left:calc(50% + 28px)}
+#aw-top{gap:4px}#aw-top .aw-sep{display:none}#aw-effects{gap:2px}#aw-balloons:not(:empty){margin-left:0;padding-left:0;border-left:0}}
 @media(prefers-reduced-motion:reduce){.aw-ico.pulse{animation:none}}`;
 
 const HEX = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><path d="M8 3l3.2 1.8v3.6L8 10.2 4.8 8.4V4.8z"/><path d="M16 3l3.2 1.8v3.6L16 10.2l-3.2-1.8V4.8z"/><path d="M12 11l3.2 1.8v3.6L12 18.2l-3.2-1.8v-3.6z"/></svg>`;

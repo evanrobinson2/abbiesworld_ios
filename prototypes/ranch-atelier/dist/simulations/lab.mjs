@@ -154,7 +154,7 @@ function paintWorldReady(){
  if(family!=='ranch'||!active)return;
  if(!paintWorld){
   paintWorld=createPaintWorld({scene,camera,unit:.1,heightAt:(x,z)=>active?.heightAt?.(x,z)??0});paintWorld.warm(renderer,camera);
-  paintHand=createPaintHud({onThrow:throwPaintBall});paintTray=paintHand.tray;
+  paintHand=createPaintHud({onThrow:throwPaintBall,surface:renderer.domElement});paintTray=paintHand.tray;
  }
  if(paintSeed!==sceneSeed){paintSeed=sceneSeed;paintWorld.load('ranch-'+sceneSeed)||paintWorld.clear();}
 }
