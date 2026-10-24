@@ -30,13 +30,14 @@ pre{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);bor
 <p class="sub">People, places, things and animals that make Abbie's Winchester feel like a real town, checked against the model library and what the town already places. This is the single merged list: it folds in the library thread's 292-item review (duplicates removed, its build method and its marks kept where they differ). Plus Saturday's drone shot list and a brief for ChatGPT to model what's missing (low-poly first, then an upgrade pass).</p>
 <div class="stats" id="stats"></div>
 <h2>1 · The inventory</h2>
+<p class="sub"><b>Builder and diorama: start with the green, blue and amber rows.</b> Tap <b>Use first</b> to see only them.</p>
 <p class="sub"><b>In game</b> is already built into the town (as code-made low-poly shapes, so it still wants a real model). <b>Library</b> is a finished model that fits. <b>Adapt</b> is a close cousin we can recolour or rework. <b>Missing</b> has nothing yet. Matching was done by name against the library and then read by eye, so treat "library" as a strong hint, not a promise. <span class="real">◎ verify on drone day</span> marks a real landmark whose look should come from Saturday's photos.</p>
 <div class="ctl" id="ctl"></div>
 <table><thead><tr><th>#</th><th>Thing</th><th class="sz">Size</th><th class="pr">Pri</th><th>Status and library match</th></tr></thead><tbody id="rows"></tbody></table>
 <h2>2 · Saturday: drone and photo checklist</h2>
 <div id="rules"></div><div id="hex"></div>
-<h2>3 · Pipeline request for ChatGPT</h2>
-<p class="sub">Self-contained, in the same format as the 2,000-model plan (charming then upgrade, same acceptance checks, ids WI-001 up) so these become priority batches, not a second pipeline. It covers <b id="nn"></b> items (missing and adapt) in batches of 50, P1 first, with scale, floor pivot, GLB, materials, triangle caps, the two stages and the hand-back.</p>
+<h2>3 · Optional: ChatGPT request for the gaps</h2>
+<p class="sub"><b>Not the plan.</b> Evan decided to build from what is already in the library first. Use the <b>In game</b>, <b>Library</b> and <b>Adapt</b> rows above, and only reach for this request if a gap still hurts after that. It is self-contained and in the 2,000-model plan's format, so it can be sent as is. It covers <b id="nn"></b> items (everything marked missing or adapt, so trim the adapt ones you have already covered).</p>
 <p><button class="copy" id="cp">Copy the whole request</button> <span id="cpd" class="sub"></span></p>
 <pre id="pipe"></pre>
 <h2>4 · Context engineering</h2><div class="ctxcard" id="ctx"></div>
@@ -48,12 +49,12 @@ const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&'
 const tot=D.tot,N=D.rows.length;
 $('#stats').innerHTML=`<div class="stat"><b>${N}</b>entries</div>`+CAT.map(c=>{const r=D.rows.filter(x=>x.cat==c),n=r.length,f=s=>r.filter(x=>x.status==s).length;
  return `<div class="stat"><b>${n}</b>${c.toLowerCase()}<div class="bar">${['ingame','have','adapt','missing'].map(s=>`<i class="${s}" style="width:${f(s)/n*100}%" title="${L[s]} ${f(s)}"></i>`).join('')}</div></div>`}).join('')
- +`<div class="stat"><b>${tot.missing}</b>missing · ${tot.adapt} to adapt<br><span class="note">${tot.have} in library · ${tot.ingame} in game</span></div>`;
-let cat='ALL',st='ALL',q='',pr='ALL';
+ +`<div class="stat"><b>${tot.have+tot.adapt+tot.ingame}</b>use first<br><span class="note">${tot.ingame} in game · ${tot.have} library · ${tot.adapt} adapt</span></div><div class="stat"><b>${tot.missing}</b>truly missing</div>`;
+let cat='ALL',st='ALL',q='',pr='ALL';const ST_OPTS=['ALL','USE','ingame','have','adapt','missing'];
 function ctl(){const opt=(a,v)=>a.map(x=>`<button data-k="${v}" data-v="${x}" class="${(v=='cat'?cat:v=='st'?st:pr)==x?'on':''}">${x=='ALL'?'All':(L[x]||x)}</button>`).join('');
- $('#ctl').innerHTML=opt(['ALL',...CAT],'cat')+opt(['ALL','ingame','have','adapt','missing'],'st')+opt(['ALL','1','2','3'],'pr').replace(/>(\d)</g,'>P$1<')+`<input id="q" placeholder="search" value="${esc(q)}">`;
+ $('#ctl').innerHTML=opt(['ALL',...CAT],'cat')+opt(ST_OPTS,'st')+opt(['ALL','1','2','3'],'pr').replace(/>(\d)</g,'>P$1<')+`<input id="q" placeholder="search" value="${esc(q)}">`;
  $('#q').oninput=e=>{q=e.target.value;rows(true)};$('#ctl').querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=b.dataset.k,v=b.dataset.v;if(k=='cat')cat=v;else if(k=='st')st=v;else pr=v;ctl();rows()})}
-function rows(keep){const ql=q.toLowerCase();const r=D.rows.filter(x=>(cat=='ALL'||x.cat==cat)&&(st=='ALL'||x.status==st)&&(pr=='ALL'||x.pri==pr)&&(!ql||(x.name+x.grp+x.note).toLowerCase().includes(ql)));
+function rows(keep){const ql=q.toLowerCase();const r=D.rows.filter(x=>(cat=='ALL'||x.cat==cat)&&(st=='ALL'||(st=='USE'?x.status!='missing':x.status==st))&&(pr=='ALL'||x.pri==pr)&&(!ql||(x.name+x.grp+x.note).toLowerCase().includes(ql)));
  $('#rows').innerHTML=r.map(x=>`<tr><td class="note">${x.id}</td><td><b>${esc(x.name)}</b>${x.real?' <span class="real">◎</span>':''}<div class="note">${esc(x.cat.toLowerCase())} · ${esc(x.grp)}${x.note?' · '+esc(x.note):''}${x.build?' · build: '+esc(x.build):''}${x.lib?' · <i>'+esc(x.lib.length<12?'library review marked it '+x.lib:x.lib)+'</i>':''}</div></td><td class="sz note">${x.size} m</td><td class="pr note">P${x.pri}</td>
  <td><span class="pill ${x.status}">${L[x.status]}</span> ${x.matches.map(m=>`<span class="m"><img loading="lazy" src="https://ranch.abbies.world/models/library/t/${m.k}.webp" onerror="this.style.display='none'" alt="">${esc(m.n)}</span>`).join('')}</td></tr>`).join('')||'<tr><td colspan=5 class="note">Nothing matches.</td></tr>';
  if(keep){$('#q').focus()}}

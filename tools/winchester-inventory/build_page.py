@@ -54,7 +54,11 @@ for i,r in enumerate(need,1):
     tag='ADAPT a library model' if r['status']=='adapt' else 'NEW'
     lines.append(f"{r['wi']} | batch {r['batch']} | {k} | {r['name']} | {tag} | longest side {r['size']} m | tris aim {t} cap {m} | from {r['id']}"+(f" | note: {r['note']}" if r['note'] else ''))
 nb=(len(need)-1)//50+1
-PIPE=f"""# ChatGPT brief: Abbie's World, Winchester priority batches
+PIPE=f"""# OPTIONAL: ChatGPT brief for Winchester gaps (not the plan: build from the library first)
+
+Evan decided to use what is already in the model library first. Send this only for gaps that still hurt after that. ADAPT items already have a close library model, so they may not need sending at all.
+
+# ChatGPT brief: Abbie's World, Winchester gap batches
 
 You are the modeler for Abbie's World, a kids' game (PG, friendly, never scary): a toy-table version of Winchester, Massachusetts, a New England town of brick shops, white clapboard houses, maples, a lake and a commuter train. This request is {len(need)} items in {nb} batches of up to 50 (WI-001 to WI-{len(need):03d}), most important first. They are the Winchester slice of the wider model plan and use the same format, so the same intake check reads them. Do batch 1 completely, deliver it, then wait for the go on batch 2.
 
