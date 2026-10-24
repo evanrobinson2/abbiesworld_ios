@@ -520,6 +520,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_to_sit.glb"
    ]
+  },
+  "434": {
+   "task_id": "01a16b62-903c-71c9-8b27-e8dfa2666eff",
+   "credits": 3,
+   "name": "Fast Ladder Climb",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/fast_ladder_climb.glb"
+   ]
+  },
+  "319": {
+   "task_id": "01a16b62-9042-725f-8934-7aacc8a6c6cd",
+   "credits": 3,
+   "name": "Air Squat",
+   "category": "DailyActions",
+   "sub_category": "WorkingOut",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/air_squat.glb"
+   ]
+  },
+  "436": {
+   "task_id": "01a16b62-903c-7688-9729-641ff8a7f5fc",
+   "credits": 3,
+   "name": "Ladder Mount Start",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/ladder_mount_start.glb"
+   ]
+  },
+  "435": {
+   "task_id": "01a16b62-9042-7261-856c-169bd960cd28",
+   "credits": 3,
+   "name": "Ladder Climb Finish",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/ladder_climb_finish.glb"
+   ]
+  },
+  "342": {
+   "task_id": "01a16b62-903b-70de-be3c-06c679bb269e",
+   "credits": 3,
+   "name": "Stand and Drink",
+   "category": "DailyActions",
+   "sub_category": "Drinking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/stand_and_drink.glb"
+   ]
+  },
+  "437": {
+   "task_id": "01a16b62-bd8f-7391-a3cb-bb475e8ef4c4",
+   "credits": 3,
+   "name": "Slow Ladder Climb",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/slow_ladder_climb.glb"
+   ]
+  },
+  "488": {
+   "task_id": "01a16b62-e7a8-70f6-acc5-0188a787be9d",
+   "credits": 3,
+   "name": "Climb Attempt and Fall 4",
+   "category": "BodyMovements",
+   "sub_category": "FallingFreely",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/climb_attempt_and_fall_4.glb"
+   ]
+  },
+  "438": {
+   "task_id": "01a16b62-e63f-7756-914a-790808a3c79e",
+   "credits": 3,
+   "name": "Ladder Climb Loop",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/ladder_climb_loop.glb"
+   ]
+  },
+  "487": {
+   "task_id": "01a16b62-e6ff-7200-bf2a-246af6f2d4fd",
+   "credits": 3,
+   "name": "Climb Attempt and Fall 3",
+   "category": "BodyMovements",
+   "sub_category": "FallingFreely",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/climb_attempt_and_fall_3.glb"
+   ]
+  },
+  "473": {
+   "task_id": "01a16b63-0e38-7726-bc6b-b38da2a23c60",
+   "credits": 3,
+   "name": "Quad Jump Left",
+   "category": "BodyMovements",
+   "sub_category": "HangingfromLedge",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/quad_jump_left.glb"
+   ]
   }
  }
 }
