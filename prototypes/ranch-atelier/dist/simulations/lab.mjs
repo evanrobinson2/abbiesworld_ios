@@ -40,7 +40,7 @@ import {createMoonBoardTile,joinMoonRuntimes} from './moon/moon-board.mjs';
 import {restoreTerrain} from './board-terrain.mjs';
 import {retainEstablishedLayout,exposedEdges} from './expansion-layout.mjs';
 import {createImpactEffects,sharedImpactSound,IMPACT_DUST} from './tile-drop-impact.mjs?v=2';
-import {landTile as dropTile} from './tile-reveal.mjs?v=1';
+import {landTile as dropTile} from './tile-reveal.mjs?v=2';
 import {createTileChooser} from './tile-chooser.mjs?v=26';
 import {createWarmUpCard} from './warm-up-card.mjs';
 import {createLightBudget} from './light-budget.mjs';

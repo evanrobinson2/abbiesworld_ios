@@ -170,7 +170,7 @@ export function landTile(group, {reducedMotion = false, onImpact, lift, floorAt}
  let sets = null;
  try { if (!reducedMotion) sets = collect(group); } catch { sets = null; }
  const bare = sets && (sets.parts.length >= 3 || sets.cover.length >= 3);
- let hexRadius = 4; try { const g = new T.Box3().setFromObject(group), s = g.getSize(new T.Vector3()); hexRadius = Math.max(1, Math.min(s.x, s.z) / 2); } catch { /* keep default */ }
+ let hexRadius = 4; try { const g = new T.Box3().setFromObject(group), s = g.getSize(new T.Vector3()), ws = group.getWorldScale(new T.Vector3()); hexRadius = Math.max(1, Math.min(s.x, s.z) / 2 / Math.max(1e-6, ws.x)); } catch { /* keep default */ }   // in the group's own units, so a scaled tile (the town's) reveals the same way
  const surface = floorAt ? (x, z) => floorAt(x, z) : () => Math.min(...(sets?.parts.map(p => p.c.y - p.half.y) || [0]));
  if (bare) { for (const pt of sets.parts) pt.node.visible = false; for (const pt of sets.cover) pt.node.visible = false; }   // the bare slab is what rolls
  const roll = rollTile(group, {reducedMotion, onImpact, lift});
