@@ -136,6 +136,8 @@ export function buildMoonBuggy({theme = 'moon-dust', slots = [], dirt = 0, wet =
   corners.forEach((k, i) => { if (Array.isArray(th.trim)) k.fender.material = k.fender.userData.mat ||= MAT('buggy-fender-' + i, th.trim[i % th.trim.length]); else if (k.fender.userData.mat) { k.fender.material = i < 2 ? mats.trim : mats.body; k.fender.userData.mat = null; } if (k.fender.userData.mat) { k.fender.userData.mat.color.set(Array.isArray(th.trim) ? th.trim[i % th.trim.length] : th.trim).lerp(col('#7a6648'), d * .55); k.fender.material.side = T.DoubleSide; } });
   if (abbie) abbie.traverse(o => { if (!o.isMesh) return; o.userData.dry ??= o.material.color.clone(); o.material.color.copy(o.userData.dry).lerp(col('#2a3350'), wetK * .45); });
  }
+ const sockets = SLOTS.map((sl, i) => { const o = new T.Object3D(); o.name = 'socket ' + sl.id; o.position.set(...sl.at); o.position.y += .15; chassis.add(o); return o; }); // empty points a loadout bead can sit on
+ const themeSocket = new T.Object3D(); themeSocket.name = 'socket theme'; themeSocket.position.set(.5, .9, .1); chassis.add(themeSocket);
  setSlots(slots); paint();
  // ---- alive: springs follow the ground, the nose dives under braking, the toys wobble, the bars turn with the wheels
  let prevSpeed = 0, dive = 0, t = 0;
@@ -158,7 +160,7 @@ export function buildMoonBuggy({theme = 'moon-dust', slots = [], dirt = 0, wet =
   for (const a of toys) if (a) { const p = a.userData.phase; a.rotation.z = Math.sin(t * 6 + p) * (.04 + Math.min(.16, Math.abs(s.speed) * .006)) - s.roll * .6; a.position.y = SLOTS[toys.indexOf(a)].at[1] + Math.abs(Math.sin(t * 9 + p)) * (s.air ? .08 : .02 * Math.min(1, Math.abs(s.speed) / 10)); }
   if (abbie) { abbie.rotation.z = -s.steer * .15; abbie.position.y = seats[0].y + Math.sin(t * 9) * .02 * Math.min(1, Math.abs(s.speed) / 12) + (s.air ? .08 : 0); }
  }
- const api = {group, parts: {riders: [], wheels, chassis, bars, corners, toys, abbie}, seats, wheels, name: 'Moon buggy', size: 1.4, update, setTheme(id) { st.theme = id; paint(); }, setSlots, setDirt(v) { st.dirt = v; paint(); }, setWet(v) { st.wet = v; paint(); }, get state() { return st; }};
+ const api = {group, parts: {riders: [], wheels, chassis, bars, corners, toys, abbie, sockets, themeSocket}, seats, wheels, name: 'Moon buggy', size: 1.4, update, setTheme(id) { st.theme = id; paint(); }, setSlots, setDirt(v) { st.dirt = v; paint(); }, setWet(v) { st.wet = v; paint(); }, get state() { return st; }};
  group.userData.buggy = api; // so the garage can recolour the one that is driving
  return api;
 }

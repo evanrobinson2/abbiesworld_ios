@@ -271,7 +271,8 @@ export async function mountFarm(AT, {camera, canvas, controls} = {}) {
  const stand = PLACES.find(p => p.id === 'stand'), standSpot = {x: stand.x, z: -stand.y, y: farm.hf(stand.x, stand.y), facing: 0, g: farm.spots.farm || new THREE.Group()};
  if (!farm.spots.farm) { const ph = new THREE.Group(); ph.add(new THREE.Mesh(new THREE.BoxGeometry(9, 5, 9), new THREE.MeshBasicMaterial({visible: false}))); ph.position.set(stand.x, farm.hf(stand.x, stand.y), -stand.y); group.add(ph); standSpot.g = ph; }
  tiles.farm = {hf: (px, py) => farm.hf(px, py), group, centre: center.clone(), spots: {farm: standSpot, barn: {x: -32, z: -12, y: farm.hf(-32, 12), facing: 0, g: farm.spots.barn || standSpot.g}}, houses: []};
- let report = ev => { import('../quests.mjs?v=1').then(q => q.report(ev)).catch(() => {}); };
+ const FOOD = {egg: ['Fresh egg', '🥚', 'Still warm.'], pumpkin: ['Pumpkin', '🎃', 'Heavy and round.'], apple: ['Apple', '🍎', 'Crunchy.'], honey: ['Jar of honey', '🍯', 'The bees made this.']};
+ let report = ev => { if (ev.did === 'collect') { const f = FOOD[ev.item]; if (f) window.AbbieInventory?.add({id: ev.item, name: f[0], icon: f[1], from: 'The Farm', thought: f[2]}); ev = {...ev, at: 'farm'}; } import('../quests.mjs?v=1').then(q => q.report(ev)).catch(() => {}); };
  // a place to go: the farm's own scene, and a card in the hand
  const look = {bg: '#dcecc8', sun: '#fff0cf', sunI: 2.5, sunDir: [-520, 700, 540], sky: '#e6f3ff', gnd: '#6a7a46', hemiI: 1.15, grass: ['#86ad52', '#a9bd62'], soil: '#6b5a3a', fov: 40, dist: 200, azimuth: 205, lowPitch: 28, highPitch: 62, mood: 'a bright morning on the farm, bells and bleating', wash: 'anis-side'};
  try { AT.registerScene?.({id: 'dio-farm', region: 'farm', anchor: [0, 0], look, bounds: R}); } catch (e) { console.warn('farm scene', e); }

@@ -5,9 +5,11 @@
 //   createPaintHud({onThrow, now?, rand?}) -> {el, tray, spin(), grant(g), ready(), setVisible(on), cooldownLeft()}
 // With `host` (the town's AWHud.balloons slot) it sits inline at the end of the top row, beside the effect icons.
 // The strip is the one overlay: it holds what you own, never world things. Only digits show, no words.
-import {createBallTray, rollGrant} from './paint-balls.mjs';
+import {createBallTray, rollGrant, rollBall, FULL} from './paint-balls.mjs';
 
-export const SPIN_COOLDOWN_MS = 60000;
+// Freeform sandbox (Evan, 2026-10-24): no cooldown and no running out. The tray is always full, refills as you throw, and the
+// slot machine can be pulled whenever you like to reshuffle it into a fresh mix of colours and sizes.
+export const SPIN_COOLDOWN_MS = 0;
 export const WIN_ODDS = 1 / 3;
 // Eight things from the game, each drawn in the box below. The win is decided first (one in three) and the reels land on it,
 // so the odds are exactly a third whatever the object set; the set is only for looks, and a miss never lands three alike.
@@ -52,13 +54,12 @@ export function createPaintHud({onThrow, host = null, now = () => Date.now(), ra
  const icon = document.createElement('button'); icon.type = 'button'; icon.className = 'ph-icon'; icon.setAttribute('aria-label', 'Paint balls. Press to spin for more.');
  icon.innerHTML = FIREBALL + '<span class="ph-n">0</span><span class="ph-t"></span>';
  el.append(icon);
- const tray = createBallTray({onThrow, parent: el});
+ const tray = createBallTray({onThrow, parent: el, endless: true, rand});
  const slot = document.createElement('div'); slot.className = 'ph-slot' + (host ? ' inline' : ''); slot.dataset.layer = 'presentation';
  const reels = [0, 1, 2].map(() => { const r = document.createElement('div'); r.className = 'ph-reel'; r.innerHTML = sym(OBJECTS[Math.floor(rand() * OBJECTS.length)]); slot.append(r); return r; });
  (host || document.body).append(el); document.body.append(slot);
  const nEl = icon.querySelector('.ph-n'), tEl = icon.querySelector('.ph-t');
- let nextAt = 0; try { nextAt = +localStorage.getItem('pw-next-spin') || 0; } catch (e) {}
- const left = () => Math.max(0, nextAt - now());
+ const left = () => 0;
  const refresh = () => {
   nEl.textContent = tray.count(); const l = left(), wait = l > 0 || spinning;
   icon.classList.toggle('wait', wait); tEl.textContent = l > 0 ? Math.floor(Math.ceil(l / 1000) / 60) + ':' + String(Math.ceil(l / 1000) % 60).padStart(2, '0') : '';
@@ -75,7 +76,7 @@ export function createPaintHud({onThrow, host = null, now = () => Date.now(), ra
  }
  function spin() {
   if (spinning || left() > 0) return null;
-  spinning = true; nextAt = now() + SPIN_COOLDOWN_MS; try { localStorage.setItem('pw-next-spin', String(nextAt)); } catch (e) {}
+  spinning = true;
   const out = outcome(), quick = matchMedia('(prefers-reduced-motion: reduce)').matches;
   clearTimeout(closeT); place(); slot.classList.add('open'); refresh();
   reels.forEach((r, i) => { r.classList.remove('win'); r.classList.add('spin'); });
@@ -84,9 +85,11 @@ export function createPaintHud({onThrow, host = null, now = () => Date.now(), ra
   const done = (quick ? 150 : 800) + 2 * (quick ? 100 : 450) + 200;
   setTimeout(() => {
    clearInterval(cycle); spinning = false;
-   const g = out.win ? rollGrant(rand) : {count: 1, size: {id: 'regular', mult: 1}, colours: [['pink', 'teal', 'lime', 'violet', 'sun'][Math.floor(rand() * 5)]]};
+   tray.clear(); // a fresh full tray: every ball its own colour and size; a win deals only big ones
+   for (let i = 0; i < FULL; i++) tray.grant(rollBall(rand, out.win ? 1.35 : 0));
+   const g = {count: FULL};
    if (out.win) reels.forEach(r => r.classList.add('win'));
-   grant(g); icon.dataset.lastSpin = JSON.stringify({win: out.win, count: g.count});
+   refresh(); icon.dataset.lastSpin = JSON.stringify({win: out.win, count: g.count});
    closeT = setTimeout(() => slot.classList.remove('open'), out.win ? 1800 : 1100);
   }, done);
   return out;
@@ -95,7 +98,7 @@ export function createPaintHud({onThrow, host = null, now = () => Date.now(), ra
  icon.addEventListener('click', () => { spin(); });
  const tick = setInterval(refresh, 500); // the countdown; stops with the page
  addEventListener('pagehide', () => clearInterval(tick));
- refresh();
+ tray.fill?.(); refresh();
  return {el, tray, spin, grant, ready: () => left() === 0 && !spinning, cooldownLeft: left,
   setVisible(on) { el.style.display = on ? '' : 'none'; if (!on) slot.classList.remove('open'); },
   refresh};

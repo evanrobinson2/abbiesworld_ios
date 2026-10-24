@@ -11,7 +11,7 @@ import {createKart} from '../kart/kart.mjs'; // kart mode (AW-STUDY-0058): a rac
 // Beacons only (the notebook line is selected, nobody is driving yet): a laser over every effect still hidden.
 export function showBeacons({stage, board = window.AbbieTown.board}) {
  const world = fromBoard(board), scene = stage.dioGroup;
- const b = createBeacons({scene, effects: EFFECTS, place: e => { const s = spotOf(e, board), p = world.toScene(s.x, s.y); return {x: p.x, y: world.heightAt(p.x, p.z), z: p.z}; }});
+ const b = createBeacons({scene, camera: stage.camera, effects: EFFECTS, place: e => { const s = spotOf(e, board), p = world.toScene(s.x, s.y); return {x: p.x, y: world.heightAt(p.x, p.z), z: p.z}; }});
  b.restore(found());
  const st0 = start || world.roadStart?.(0, -40) || {x: 0, z: 40}; stage.flyTo({x: stage.dioGroup.position.x + st0.x, y: world.heightAt(st0.x, st0.z) + stage.dioGroup.position.y + 3, z: stage.dioGroup.position.z + st0.z}, {dist: 40, pitch: 30, azimuth: ((st0.heading ?? Math.PI) * 180 / Math.PI + 180)}); // the host's own camera glides to the spawn, then the chase camera takes over
  const off = stage.frame((dt) => b.update(Math.min(dt || .016, .05)));

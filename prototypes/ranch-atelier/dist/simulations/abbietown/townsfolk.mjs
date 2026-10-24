@@ -64,7 +64,7 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
   const q = offer(id);
   if (!q) return say(p, `<b>${giver.name}</b>Thank you for all your help today!`, 3500);
   say(p, `<b>${giver.name}</b>${q.ask}<div class="row"><button class="yes">I'll help</button><button class="no">Not now</button></div>`);
-  bubble.querySelector('.yes').onclick = () => { accept(q.id); say(p, `<b>${giver.name}</b>Thank you! It's in your notebook.`, 3000); };
+  bubble.querySelector('.yes').onclick = () => { accept(q.id); say(p, `<b>${giver.name}</b>Thank you! ${q.item ? (q.item.given ? `Here, carry the ${q.item.icon} ${q.item.name.toLowerCase()} to the green light.` : `Follow the golden light to find the ${q.item.icon} ${q.item.name.toLowerCase()}.`) : ''} It's in your notebook.`, 4200); };
   bubble.querySelector('.no').onclick = () => { decline(id); hush(); };
  }
 
@@ -90,6 +90,8 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
    marks[i].hidden = !s; if (s) { marks[i].style.left = s[0] + 'px'; marks[i].style.top = s[1] + 'px'; } });
   if (talking) { const s = toScreen(talking, 5.5); if (!s || (shutAt && performance.now() > shutAt)) hush(); else { bubble.style.left = s[0] + 'px'; bubble.style.top = s[1] + 'px'; } }
  })();
+ // the quest places she is sent to light up (quest-guide.mjs); the lights follow the favours she has taken on
+ import('./quest-guide.mjs').then(m => { town.questGuide = m.mountQuestGuide({THREE: T, scene: town.scene, camera, spots: Object.fromEntries(Object.keys(SPOT).map(at => [at, spotOf(at)?.g]).filter(([, g]) => g))}); }).catch(e => console.warn('quest guide', e));
  return {people, talk};
 }
 
