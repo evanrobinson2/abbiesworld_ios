@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-floppy-charm",
+      "date": "2026-10-23",
+      "title": "Floppy disk charm",
+      "line": "No more coins in Grace's basement. Play the word game on her computer for two minutes in all and you win a floppy disk charm for your backpack; Daddy calls you up after.",
+      "image": "/whats-new/2026-10-23-floppy-charm.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
       "id": "2026-10-24-arcade-racer-stage1",
       "date": "2026-10-24",
       "title": "Skate-park rail racer: Stage 1 study",

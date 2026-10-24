@@ -35,7 +35,6 @@ export const DISKS = [
  {id: 'keystorm', label: 'KEYSTORM', color: '#c0392b'},
  {id: 'recipes', label: 'RECIPES', color: '#2d6cb0'},
  {id: 'blank', label: '', color: '#f2efe6'},
- {id: 'coin', label: '', color: '#e0b030', coin: true},
  {id: 'blocks', label: 'BLOCKS', color: '#3a9d5d'},
  {id: 'duskblade', label: 'DUSK', color: '#6a3fa0'},
 ];
