@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Swappable Hero Brief</title>
+<style>
+:root{--bg:#14121c;--ink:#f4f0ff;--mut:#b9b2cf;--card:#211d30;--line:#3a3452;--pink:#ff7eb6;--purple:#b18cff;--blue:#6f9bff;--gold:#ffd166;--ok:#7be0a8;--warn:#ffb86b}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){--bg:#faf7ff;--ink:#241d38;--mut:#5f567a;--card:#fff;--line:#ddd5f0}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+h1{font-size:30px;margin:.2em 0}h2{font-size:21px;margin:1.8em 0 .4em}h3{font-size:16px;margin:0 0 .3em}
+.eyebrow{color:var(--mut);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.lead{font-size:18px;color:var(--mut)}
+.pill{display:inline-block;border-radius:99px;padding:1px 10px;font-size:12px;font-weight:600;border:1px solid var(--line)}
+.ok{color:var(--ok)}.warn{color:var(--warn)}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--card);border-radius:12px;overflow:hidden}
+th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px}
+.screens{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));align-items:start}
+.screen{position:relative;aspect-ratio:9/16;border-radius:22px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(#9ed0ff 0 38%,#a8d08d 38% 100%)}
+.screen .hill{position:absolute;left:-10%;right:-10%;top:30%;height:30%;background:#8fbf78;border-radius:50% 50% 0 0}
+.screen .house{position:absolute;left:58%;top:36%;width:20%;height:14%;background:#e9d9b8;border:2px solid #c9b48a;border-radius:3px}
+.cap{font-size:13px;color:var(--mut);margin:8px 2px 0}
+.bar{position:absolute;left:8px;top:14%;display:flex;flex-direction:column;gap:9px;padding:8px;border-radius:22px;background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.6);box-shadow:0 6px 18px rgba(40,20,80,.25),inset 0 1px 0 rgba(255,255,255,.7)}
+.bead{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:#fff center/cover;box-shadow:0 3px 8px rgba(40,20,80,.3);position:relative}
+.bead.you{outline:3px solid var(--pink)}
+.bead.ghost{filter:grayscale(1) brightness(1.5);opacity:.55;background:#d9d4e8}
+.bead.ghost::after{content:"";position:absolute;inset:10px 14px 4px;border-radius:50% 50% 40% 40%;background:#9d96b5}
+.bead.icon{display:grid;place-items:center;font-size:19px}
+.fan{position:absolute;left:66px;top:14%;display:flex;flex-direction:column;gap:9px;padding:8px;border-radius:22px;background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.6);box-shadow:0 6px 18px rgba(40,20,80,.25)}
+.stand{position:absolute;left:50%;bottom:6%;width:34%;height:6%;transform:translateX(-50%);border-radius:50%;background:rgba(255,255,255,.55);box-shadow:0 8px 14px rgba(40,20,80,.25)}
+.fig{position:absolute;left:50%;bottom:10%;width:34%;transform:translateX(-50%);aspect-ratio:1;border-radius:14px;background:center/cover;box-shadow:0 10px 18px rgba(40,20,80,.3)}
+.row{position:absolute;left:50%;bottom:19%;transform:translateX(-50%) translateX(-95px);display:none}
+.slots{position:absolute;right:8px;top:24%;display:flex;flex-direction:column;gap:9px}
+.slot{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.8);display:grid;place-items:center;font-size:16px}
+.fam{position:absolute;left:8px;right:8px;bottom:2.5%;display:flex;justify-content:center;gap:8px;padding:7px;border-radius:22px;background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.6)}
+.fam .bead{width:36px;height:36px}
+.pop{position:absolute;left:50%;top:44%;width:30%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%);background:radial-gradient(#fff9,#fff0 70%)}
+code{background:var(--card);padding:1px 6px;border-radius:6px;font-size:13px}
+.choice{border-left:4px solid var(--purple);padding:8px 12px;background:var(--card);border-radius:0 12px 12px 0;margin:10px 0}
+</style></head><body><main>
+<div class="eyebrow">Character Studio · design brief · drafted, nothing built</div>
+<h1>Swappable hero</h1>
+<p class="lead">Redesign first, rebuild after (Evan, 02:03Z). This page answers "who is she in the overland town today?" and drafts how the player becomes Abbie, Ani, Daddy or anyone in the family with one small tap, sharing the dressing room with the backpack and the buggy. No code has changed.</p>
+
+<h2>1. Who she is today</h2>
+<p>I read the code on <code>main</code>. In the town, on the hex board, I found <b>no player body at all</b>: you look down on the tiles, and the people are townsfolk stand-ins. Abbie only has a body in car mode and in the games.</p>
+<table><thead><tr><th>Where</th><th>Who Abbie is there</th><th>Who the others are</th></tr></thead><tbody>
+<tr><td>Winchester town (board)</td><td>Nobody. The camera is the player.</td><td>Townsfolk are small low-poly stand-ins; three (baker, gardener, neighbour) are library models, not rigged to our 20 bones. They are quest givers, not family.</td></tr>
+<tr><td>Car mode in town</td><td>A tiny home-made rider built from nine blocks (<code>toy-cars.mjs</code>): pink jacket, pink helmet, orange backpack, gold charm. It is not the Meshy Abbie.</td><td>No one rides with her.</td></tr>
+<tr><td>Moon Mission, basement, FPS levels</td><td><b>Meshy hero A1</b>, rigged on the 20-bone skeleton, 1.15 m, with her backpack and charms on the chest bone.</td><td>Ani is Meshy A2, Daddy is Meshy A3. Same rig, same 83 shared animation clips.</td></tr>
+<tr><td>Everyone else (Mommy, Auntie Lexi, Uncle Jeff, Georgia, Pearl, young Daddy)</td><td>—</td><td>Written looks and designed voices only (<code>studies/family-cast</code>). <b>No 3D model exists</b> for them yet; young Daddy has a home-made figure.</td></tr>
+</tbody></table>
+<p class="cap">So today "making her swappable" really starts with: put the real Meshy Abbie in the town and car mode, then add Ani and Daddy, then the rest as their models arrive.</p>
+
+<h2>2. The flow (three taps at most, none over the world)</h2>
+<div class="screens">
+ <div><div class="screen"><div class="hill"></div><div class="house"></div>
+  <div class="bar"><div class="bead you" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead icon">👜</div><div class="bead icon">📓</div><div class="bead icon">🚙</div></div></div>
+  <p class="cap"><b>A. Playing.</b> The top bead on the left bar is the person you are right now, a small 3D head-and-shoulders. It replaces the separate mirror bead. Nothing else changes; the play HUD stays under 8%.</p></div>
+ <div><div class="screen"><div class="hill"></div><div class="house"></div>
+  <div class="bar"><div class="bead you" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead icon">👜</div><div class="bead icon">📓</div><div class="bead icon">🚙</div></div>
+  <div class="fan"><div class="bead" style="background-image:url(img/body-A2-paint-suit.jpg)"></div><div class="bead" style="background-image:url(img/body-A3-paint-suit.jpg)"></div><div class="bead ghost"></div><div class="bead ghost"></div><div class="bead ghost"></div></div></div>
+  <p class="cap"><b>B. Tap your own bead.</b> The family fans out beside it. People who have a model are in colour. People who don't yet are grey silhouettes (the same "greyed-out until it exists" language as the world effects). Tap a person and a soft pop swaps them in, standing exactly where you were.</p></div>
+ <div><div class="screen" style="background:linear-gradient(#cdbcff 0 45%,#a8d08d 45% 100%)"><div class="pop"></div>
+  <div class="fig" style="background-image:url(img/body-A1-clay-suit.jpg)"></div><div class="stand"></div>
+  <div class="slots"><div class="slot">💇</div><div class="slot">👕</div><div class="slot">👖</div><div class="slot">👟</div><div class="slot">🎒</div><div class="slot">🔔</div></div>
+  <div class="fam"><div class="bead you" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead" style="background-image:url(img/body-A2-paint-suit.jpg)"></div><div class="bead" style="background-image:url(img/body-A3-paint-suit.jpg)"></div><div class="bead ghost"></div><div class="bead ghost"></div><div class="bead ghost"></div></div></div>
+  <p class="cap"><b>C. Hold your bead: the dressing room.</b> The one room from the backpack brief (turntable, world still behind, nothing blurred). The family row along the bottom swaps who is on the turntable. The slot beads are hair, top, bottom, shoes, backpack, charms. Swipe turns to the backpack, then the buggy.</p></div>
+</div>
+<p class="cap">Stand-in drawings: the figure pictures are the real Meshy hero thumbnails; everything else on the screens is a mock-up, not game art.</p>
+
+<h2>3. What each person is made of</h2>
+<table><thead><tr><th>Person</th><th>Model that fills the slot</th><th>Height</th><th>State</th><th>What is needed</th></tr></thead><tbody>
+<tr><td>Abbie</td><td>Meshy A1 (painterly and clay; suit, and the snug tee that is her fitted base layer)</td><td>1.15 m</td><td><span class="pill ok">have</span></td><td>Everyday clothes. Today her only outfit is the astronaut suit, so first step is recolouring the tee by role.</td></tr>
+<tr><td>Ani</td><td>Meshy A2</td><td>child</td><td><span class="pill ok">have</span></td><td>Same as Abbie. Her look keeps the purple, brown eyes and hair, darker skin.</td></tr>
+<tr><td>Daddy (Evan)</td><td>Meshy A3, grown-up</td><td>1.8 m</td><td><span class="pill ok">have</span></td><td>Bald, salt-and-pepper beard, as in the cast sheet. I am reading "Evan" as Daddy-now: please confirm.</td></tr>
+<tr><td>Young Daddy</td><td>none (home-made procedural figure only)</td><td>child</td><td><span class="pill warn">no model</span></td><td>Blond mop, never a hat. A Meshy run, if he should be playable.</td></tr>
+<tr><td>Mommy, Auntie Lexi, Uncle Jeff</td><td>none</td><td>grown-ups</td><td><span class="pill warn">no model</span></td><td>Written looks exist. A Meshy run each, then cleanup to the 20-bone spec.</td></tr>
+<tr><td>Georgia (teen), Pearl (adolescent)</td><td>none</td><td>in between</td><td><span class="pill warn">no model</span></td><td>Same.</td></tr>
+</tbody></table>
+<p>Meshy credits are tight (about 2,125 of the 2,400 cap are spent, and a painterly hero costs about 50 with the untextured pass). Five more people is roughly 250, almost all of what is left, and the animation library is still waiting on Evan's answer. So I recommend <b>no stand-ins and no new Meshy work until he decides</b>: people without a model show as grey silhouettes.</p>
+
+<h2>4. Keeping each person's look</h2>
+<ul>
+<li>One small saved look per person, <code>aw-look-&lt;id&gt;</code>: slot to part, plus colours by material role (hair, top, bottom, shoes). Swapping loads that person's look; nothing is lost by switching back.</li>
+<li>Colours first, parts later. Today's models are whole baked files, so recolouring by role works now; separate garments on the shared 20 bones come later (the parameterized base in <code>docs/research/</code>).</li>
+<li>The fitted base layer is always under any clothing. PG, always.</li>
+<li>Faces are designed once and never redrawn, never made from photos. A swap never touches a face; only the hair, clothes and colours move.</li>
+<li>Every move works for everyone: all heroes share the 20 bones, and <code>hero-anims.mjs</code> re-fits the 83 clips to each person's height, so a child does not float.</li>
+</ul>
+
+<h2>5. What a swap changes (the whole game adapts)</h2>
+<div class="grid">
+<div class="card"><h3>Body</h3><p>Height and stride change, so the camera height and walking speed follow the person (Daddy sees from higher up than Abbie).</p></div>
+<div class="card"><h3>Voice and lines</h3><p>Each person has a designed voice. Townsfolk greet whoever you are ("Hello, Ani!") through the same quest givers.</p></div>
+<div class="card"><h3>Car mode</h3><p>The rider on the toy car becomes the chosen hero in place of the nine-block Abbie.</p></div>
+<div class="card"><h3>The bag</h3><p>The backpack is worn by whoever you are, in their colours, using the existing chest-bone mount.</p></div>
+</div>
+
+<h2>6. Design card</h2>
+<table><tbody>
+<tr><td><b>Player needs to feel</b></td><td>"I get to be Ani now, and she still looks like Ani."</td></tr>
+<tr><td><b>How would the character know?</b></td><td>It is the player character: the left bar is "things she touches". The swap is a soft pop on the spot, and townsfolk say her name.</td></tr>
+<tr><td><b>Mode</b></td><td>Playing as Evan, Abbie or Ani (the left bar), not tiles, cards or the HUD. No words. Overlay only for the three small beads.</td></tr>
+<tr><td><b>Who it is for</b></td><td>Player (the child).</td></tr>
+<tr><td><b>The whole game adapts</b></td><td>Camera height, stride, voice, who townsfolk greet, which look the bag is shown in.</td></tr>
+</tbody></table>
+
+<h2>7. Choices for Evan (nothing built until you decide)</h2>
+<div class="choice"><b>a. How to swap.</b> Recommended: tap your own bead and pick from the fan (two taps, you can see who you will become). Alternative: one tap cycles to the next person with no picker.</div>
+<div class="choice"><b>b. What is shared.</b> Recommended: the notebook, quests, charms and backpack contents are shared by the whole family, and only the look, voice and greetings change per person. Alternative: each person has their own bag and notebook.</div>
+<div class="choice"><b>c. People without a model.</b> Recommended: grey silhouettes until their Meshy model exists, no stand-ins. Alternative: spend the remaining credits on Mommy, Lexi and Jeff first.</div>
+<div class="choice"><b>d. Who is "Evan"?</b> Recommended: Evan plays as Daddy-now (A3). Alternative: a separate Evan model.</div>
+<div class="choice"><b>e. Order once approved.</b> (1) Meshy Abbie replaces the nine-block rider in car mode, (2) Abbie walks the town as her real hero, (3) the swap fan with Abbie, Ani and Daddy, (4) colours in the dressing room, (5) garments as parts, (6) the rest of the family as models arrive.</div>
+
+<p class="cap">Drafted by Character Studio with the Backpack thread's dressing-room brief. Sources: <code>simulations/kart/toy-cars.mjs</code>, <code>simulations/abbietown/townsfolk.mjs</code>, <code>simulations/moonmission/world3d.mjs</code>, <code>studies/moon-mission/heroes/heroes.json</code>, <code>studies/family-cast/cast.json</code>, <code>simulations/hero-anims.mjs</code>, <code>preview/backpack-briefs</code>.</p>
+</main></body></html>
