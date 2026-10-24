@@ -125,10 +125,12 @@ def pack(study, sha):
     html = re.sub(r'(<body\b[^>]*>)', r'\1' + bridge, html, count=1, flags=re.I)
     html = re.sub(r'</body>', f'<script type="module" src="{relative}_review/review.mjs"></script></body>', html, count=1, flags=re.I)
     files[entry] = html.encode()
+    publisher_sha = git('rev-parse', 'HEAD').decode().strip()
     for name in ['review.mjs', 'review.css']:
-        files['_review/' + name] = (Path(__file__).parent / name).read_bytes()
+        # Read Git bytes, not OS checkout line endings, for reproducible bundles.
+        files['_review/' + name] = blob(publisher_sha, 'tools/study-publish/' + name)
     require(len(files) <= 500 and sum(map(len, files.values())) <= 50 * 1024 * 1024, 'Bundle limit: 500 files / 50 MiB; put large shared assets in the existing asset store')
-    manifest = {**spec, 'context': context, 'sourceSha': sha, 'publisherSha': git('rev-parse', 'HEAD').decode().strip(), 'files': {n: {'sha256': digest(b), 'bytes': len(b)} for n, b in sorted(files.items())}}
+    manifest = {**spec, 'context': context, 'sourceSha': sha, 'publisherSha': publisher_sha, 'files': {n: {'sha256': digest(b), 'bytes': len(b)} for n, b in sorted(files.items())}}
     revision = digest(canonical(manifest))
     manifest['revision'] = revision
     files['study-release.json'] = canonical(manifest)
