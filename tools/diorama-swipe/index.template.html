@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>AW-STUDY-0060 Hot dog, not hot dog</title>
+<style>
+:root{--ink:#fff8ee;--soft:#d9cbe8;--like:#5ee08a;--hate:#ff6b6b;--bg1:#2a1f4a;--bg2:#120c24;--glass:rgba(255,255,255,.12);--line:rgba(255,255,255,.28)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:radial-gradient(120% 90% at 50% 0,var(--bg1),var(--bg2));color:var(--ink);font:600 15px ui-rounded,system-ui,sans-serif;-webkit-user-select:none;user-select:none;overscroll-behavior:none}
+#stage{position:fixed;inset:0 0 150px 0;touch-action:none;cursor:grab}
+#stage canvas{display:block;width:100%;height:100%}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:18px;backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);box-shadow:0 8px 28px #0006,inset 0 1px 0 #fff4}
+/* legend: always on screen, one tap flips it */
+.side{position:fixed;top:50%;transform:translateY(-50%);width:min(23vw,150px);text-align:center;pointer-events:none;font-weight:800;letter-spacing:.02em;transition:transform .15s,opacity .15s}
+.side b{display:block;font-size:min(9vw,54px);line-height:1}
+.side span{display:block;font-size:13px;opacity:.85;margin-top:6px}
+.side.L{left:10px}.side.R{right:10px}
+.side.like{color:var(--like)}.side.hate{color:var(--hate)}
+.side b{filter:drop-shadow(0 4px 12px #0008)}
+#top{position:fixed;left:50%;transform:translateX(-50%);top:max(10px,env(safe-area-inset-top));display:flex;gap:8px;align-items:center;padding:6px 8px;z-index:5;max-width:96vw}
+#top button,.btn{font:inherit;color:var(--ink);background:#ffffff1c;border:1px solid var(--line);border-radius:12px;padding:8px 12px;cursor:pointer}
+#top button.on,.btn.on{background:#ffffff40}
+#top .t{padding:0 8px;font-weight:800}
+#info{position:fixed;left:50%;transform:translateX(-50%);bottom:158px;text-align:center;padding:8px 16px;z-index:4;pointer-events:none;max-width:92vw}
+#info small{display:block;color:var(--soft);font-weight:600}
+#vote{position:fixed;left:50%;transform:translateX(-50%);bottom:208px;display:flex;gap:14px;z-index:5}
+#vote button{font:800 16px ui-rounded,system-ui;border-radius:40px;padding:12px 20px;border:2px solid;background:#0006;color:#fff;cursor:pointer}
+#vote .like{border-color:var(--like)}#vote .hate{border-color:var(--hate)}
+#stamp{position:fixed;left:50%;top:38%;transform:translate(-50%,-50%) rotate(-8deg);font:900 clamp(34px,10vw,84px)/1 ui-rounded,system-ui;border:6px solid;border-radius:18px;padding:6px 18px;opacity:0;pointer-events:none;z-index:6}
+/* bottom row: hex tile cards */
+#tray{position:fixed;left:0;right:0;bottom:0;height:150px;display:flex;align-items:flex-end;gap:2px;padding:0 12px max(10px,env(safe-area-inset-bottom));overflow-x:auto;overflow-y:hidden;z-index:4;perspective:700px;background:linear-gradient(#0000,#0008 60%)}
+.tile{flex:none;width:112px;height:128px;position:relative;cursor:pointer;transform-style:preserve-3d;transition:transform .25s;transform:rotateX(18deg)}
+.tile:hover{transform:rotateX(0) translateY(-8px)}
+.tile i,.tile img{position:absolute;inset:0;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);width:100%;height:100%}
+.tile i{background:#0007;transform:translateY(7px)}
+.tile img{object-fit:cover;background:#3b2d63}
+.tile.on i{background:var(--like)}
+.tile.on::after{content:"on the board";position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-size:11px;font-weight:800;color:var(--like)}
+.tile:not(.on)::after{content:"tap to place";position:absolute;left:0;right:0;bottom:-2px;text-align:center;font-size:11px;color:var(--soft);opacity:0;transition:.2s}
+.tile:hover::after{opacity:1}
+#empty{align-self:center;color:var(--soft);padding:0 8px}
+/* drawer */
+#drawer{position:fixed;right:10px;top:64px;width:min(340px,92vw);max-height:calc(100vh - 230px);overflow:auto;padding:14px;z-index:7;display:none}
+#drawer.open{display:block}
+#drawer h3{margin:12px 0 6px;font-size:14px;color:var(--soft);text-transform:uppercase;letter-spacing:.06em}
+#drawer h3:first-child{margin-top:0}
+.bars{display:flex;align-items:flex-end;gap:4px;height:70px;border-bottom:1px solid var(--line)}
+.bars div{flex:1;min-width:6px;background:var(--like);border-radius:4px 4px 0 0;position:relative}
+.bars div i{position:absolute;left:-1px;right:-1px;height:2px;background:#fff}
+.lov{display:flex;flex-wrap:wrap;gap:6px}
+.lov span{display:flex;align-items:center;gap:6px;background:#ffffff18;border-radius:10px;padding:3px 8px 3px 3px;font-size:12px;font-weight:600}
+.lov img{width:28px;height:28px;border-radius:8px;object-fit:cover}
+#drawer p{margin:4px 0;color:var(--soft);font-weight:500;font-size:13px}
+#drawer .btn{margin:4px 4px 0 0;font-size:13px}
+#demo svg{width:100%;height:80px;background:#0003;border-radius:10px}
+#ctxwrap{margin-top:12px;font-weight:500}
+#ctxwrap .ctx-aside{margin:0!important;max-width:none!important;background:#fff;color:#2b211a;border-radius:14px;padding:8px}
+#boot{position:fixed;inset:0;display:grid;place-items:center;font-size:20px;background:#120c24;z-index:20;transition:opacity .4s}
+</style>
+</head>
+<body>
+<div id="boot">Warming up the hot dog stand…</div>
+<div id="stage"></div>
+<div class="side L like" id="sideL"><b>←</b><b id="wL">HOT DOG</b><span id="hL">arrow left or swipe left: I like it</span></div>
+<div class="side R hate" id="sideR"><b>→</b><b id="wR">NOT</b><span id="hR">arrow right or swipe right: I hate it</span></div>
+<div id="stamp"></div>
+<div id="top" class="glass">
+  <span class="t" id="count">0 votes</span>
+  <button id="flip" title="Swap which side means like">⇄ left = like</button>
+  <button id="boardBtn">My world (0)</button>
+  <button id="drawerBtn">Taste</button>
+</div>
+<div id="info" class="glass"><span id="label"></span><small id="guess"></small></div>
+<div id="tray"></div>
+<div id="vote"><button class="like" id="bL">← Hot dog</button><button class="hate" id="bR">Not hot dog →</button></div>
+<aside id="drawer" class="glass">
+  <h3>Hot dog rate, every 10 votes</h3><div class="bars" id="bars"></div><p id="barNote">White tick = what the generator guessed you would do.</p>
+  <h3>It has learned you love</h3><div class="lov" id="loves"></div>
+  <h3>and you hate</h3><div class="lov" id="hates"></div>
+  <h3>By kind of thing</h3><p id="kinds"></p>
+  <h3>Watch it learn</h3><div id="demo"><button class="btn" id="demoBtn">Run a pretend human (300 votes)</button><p id="demoNote"></p></div>
+  <h3>Your votes</h3><p>Saved on this device only (not synced yet). One portable file: a list of "liked" / "hated" with the asset keys.</p>
+  <button class="btn" id="exp">Download votes.json</button><button class="btn" id="copy">Copy</button><label class="btn">Import<input id="imp" type="file" accept=".json" hidden></label><button class="btn" id="reset">Start over</button>
+  <div id="ctxwrap"><!--CONTEXT--></div>
+</aside>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as T from 'three';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {Learner, Generator, DECKS, summarize, mulberry32, SIZE} from './engine.mjs';
+
+const Q = new URLSearchParams(location.search);
+const BASE = Q.get('base') ?? 'https://ranch.abbies.world';        // where model files and thumbnails live
+const OFFLINE = Q.has('offline');                                  // stand-in shapes only (tests, no network)
+const STORE = 'aw-diorama-swipe-v1';
+const $ = id => document.getElementById(id);
+const items = (await (await fetch('./models.json')).json()).items, by = new Map(items.map(i => [i.key, i]));
+
+// ---- vote store: a plain portable file. Votes say liked / hated, never left / right. -----------------------------------
+let doc; try { doc = JSON.parse(localStorage.getItem(STORE)) } catch { doc = null }
+doc ||= {format: 'aw-diorama-votes', version: 1, study: 'AW-STUDY-0060', direction: 'left-is-like', votes: [], board: []};
+const save = () => { try { localStorage.setItem(STORE, JSON.stringify(doc)); } catch {} };
+const learner = () => { const L = new Learner(items); for (const v of doc.votes) { L.vote(v.keys.filter(k => by.has(k)), v.vote === 'liked'); if (v.placed) L.pick(v.keys.filter(k => by.has(k))); } return L; };
+let L = learner(), G = new Generator(items, L);
+let queue = [], current = null;
+
+// ---- direction legend and setting ----------------------------------------------------------------------------------
+function legend() {
+  const likeLeft = doc.direction !== 'left-is-hate';
+  const [l, r] = likeLeft ? ['like', 'hate'] : ['hate', 'like'];
+  const word = k => k === 'like' ? 'HOT DOG' : 'NOT';
+  for (const [side, kind] of [['L', l], ['R', r]]) { const el = $('side' + side); el.className = 'side ' + side + ' ' + kind; $('w' + side).textContent = word(kind); $('h' + side).textContent = `arrow ${side === 'L' ? 'left' : 'right'} or swipe ${side === 'L' ? 'left' : 'right'}: I ${kind === 'like' ? 'like' : 'hate'} it`; }
+  $('bL').className = l; $('bR').className = r; $('bL').textContent = '← ' + (l === 'like' ? 'Hot dog' : 'Not hot dog'); $('bR').textContent = (r === 'like' ? 'Hot dog' : 'Not hot dog') + ' →';
+  $('flip').textContent = likeLeft ? '⇄ left = like' : '⇄ right = like';
+}
+$('flip').onclick = () => { doc.direction = doc.direction === 'left-is-hate' ? 'left-is-like' : 'left-is-hate'; save(); legend(); };
+const dirVote = side => (side === 'L') === (doc.direction !== 'left-is-hate') ? 'liked' : 'hated';
+
+// ---- 3D -------------------------------------------------------------------------------------------------------------
+const stageEl = $('stage'), renderer = new T.WebGLRenderer({antialias: true, alpha: true}); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.shadowMap.enabled = true; stageEl.append(renderer.domElement);
+const scene = new T.Scene(), cam = new T.PerspectiveCamera(36, 1, .1, 200);
+scene.add(new T.HemisphereLight(0xfff2dd, 0x4a3a7a, 1.1)); const sun = new T.DirectionalLight(0xfff0d0, 2.2); sun.position.set(3, 6, 2.5); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); Object.assign(sun.shadow.camera, {left: -3, right: 3, top: 3, bottom: -3, near: 1, far: 20}); scene.add(sun);
+const world = new T.Group(); scene.add(world);
+function resize() { const w = stageEl.clientWidth, h = stageEl.clientHeight; renderer.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); frameCam(); }
+let mode = 'swipe', boardTiles = [];
+function frameCam() { if (mode === 'swipe') { const d = cam.aspect < 1 ? 5.2 / cam.aspect * .75 : 4.4; cam.position.set(0, d * .62, d * .78); cam.lookAt(0, .1, 0); } else { const n = Math.max(1, doc.board.length), rad = Math.min(14, 1.1 + Math.sqrt(n) * 1.5); const d = rad / Math.tan(cam.fov * Math.PI / 360) / Math.min(1, cam.aspect * 1.2) * 1.05; cam.position.set(0, d * .8, d * .6); cam.lookAt(0, 0, 0); } }
+addEventListener('resize', resize);
+
+const hue = s => { let h = 0; for (const c of s) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+const loader = new GLTFLoader(), cache = new Map();
+function loadModel(i) { if (OFFLINE) return Promise.reject(); if (!cache.has(i.key)) cache.set(i.key, new Promise((res, rej) => loader.load(BASE + i.glb, g => res(g.scene), undefined, rej))); return cache.get(i.key); }
+function proxy(i, role) { // the stand-in shown instantly, and kept if a file will not load
+  const m = new T.MeshStandardMaterial({color: new T.Color().setHSL(hue(i.key) / 360, .55, .6), roughness: .8}), g = new T.Group(), add = (geo, y, mat = m) => { const o = new T.Mesh(geo, mat); o.position.y = y; o.castShadow = true; g.add(o); return o; };
+  if (role === 'Building') { add(new T.BoxGeometry(1, .6, .8), .3); add(new T.ConeGeometry(.8, .45, 4).rotateY(Math.PI / 4), .82, new T.MeshStandardMaterial({color: 0xb85c4a})); }
+  else if (role === 'Vehicle') { add(new T.BoxGeometry(1, .3, .5), .25); add(new T.CylinderGeometry(.15, .15, .6, 12).rotateX(Math.PI / 2), .12); }
+  else if (role === 'Animal') { add(new T.SphereGeometry(.4, 14, 10).scale(1.3, .9, .9), .4); add(new T.SphereGeometry(.2, 12, 8), .65).position.x = .45; }
+  else if (role === 'People') { add(new T.CylinderGeometry(.18, .26, .6, 12), .3); add(new T.SphereGeometry(.17, 12, 8), .76); }
+  else if (role === 'Plant') { add(new T.CylinderGeometry(.06, .08, .3, 8), .15, new T.MeshStandardMaterial({color: 0x7a5232})); add(new T.SphereGeometry(.4, 12, 9), .6, new T.MeshStandardMaterial({color: 0x4fa65a, roughness: .9})); }
+  else if (role === 'Machine') add(new T.CylinderGeometry(.35, .45, .8, 8), .4);
+  else if (role === 'Charm') add(new T.TorusGeometry(.3, .09, 8, 16), .4);
+  else add(new T.BoxGeometry(.6, .5, .6), .25);
+  return g;
+}
+function fit(obj, size, role) { // normalise any model: footprint to `size`, feet on the ground, centred
+  const b = new T.Box3().setFromObject(obj), s = b.getSize(new T.Vector3()), foot = Math.max(s.x, s.z, 1e-3), k = Math.min(size / foot, size * 1.7 / Math.max(s.y, 1e-3)), c = b.getCenter(new T.Vector3());
+  const w = new T.Group(); obj.position.set(-c.x, -b.min.y, -c.z); w.add(obj); w.scale.setScalar(k); return w;
+}
+const slabMat = new Map();
+function slab(place) { const m = slabMat.get(place) || new T.MeshStandardMaterial({color: new T.Color().setHSL(hue(place) / 360, .38, .55), roughness: .95}); slabMat.set(place, m);
+  const g = new T.Group(), top = new T.Mesh(new T.CylinderGeometry(1.02, 1.02, .16, 6).rotateY(Math.PI / 6), m), rim = new T.Mesh(new T.CylinderGeometry(1.02, .98, .22, 6).rotateY(Math.PI / 6), new T.MeshStandardMaterial({color: 0x3b2a22, roughness: 1}));
+  top.position.y = -.08; rim.position.y = -.27; top.receiveShadow = true; g.add(top, rim); return g; }
+function build(d) {
+  const g = new T.Group(); g.add(slab(d.place || d.label)); const alive = {v: true}; g.userData.alive = alive;
+  for (const p of d.layout) { const it = by.get(p.key); if (!it) continue; const slot = new T.Group(); slot.position.set(p.x, 0, p.z); slot.rotation.y = p.rot; g.add(slot);
+    slot.add(fit(proxy(it, p.role), p.size, p.role));
+    loadModel(it).then(src => { if (!alive.v) return; const o = fit(src.clone(true), p.size, p.role); o.traverse(m => { if (m.isMesh) { m.castShadow = true; m.receiveShadow = false; } }); slot.clear(); slot.add(o); }).catch(() => {}); }
+  return g;
+}
+function show(d) { while (world.children.length) { const c = world.children.pop(); if (c.userData.alive) c.userData.alive.v = false; } boardTiles = []; if (d) { const g = build(d); g.userData.dio = d; world.add(g); } }
+
+// ---- board: liked tiles laid on a hex grid --------------------------------------------------------------------------
+const spiral = n => { const out = [[0, 0]], dirs = [[1, 0], [1, -1], [0, -1], [-1, 0], [-1, 1], [0, 1]]; for (let ring = 1; out.length < n; ring++) { let q = -ring, r = ring; for (const [dq, dr] of dirs.map((_, i) => dirs[(i + 4) % 6])) for (let s = 0; s < ring && out.length < n; s++) { out.push([q, r]); q += dq; r += dr; } } return out.slice(0, n); };
+function showBoard() { while (world.children.length) { const c = world.children.pop(); if (c.userData.alive) c.userData.alive.v = false; } boardTiles = [];
+  const ids = doc.board.map(id => doc.votes.find(v => v.id === id)).filter(Boolean), pos = spiral(ids.length);
+  ids.forEach((v, n) => { const [q, r] = pos[n], g = build(v.dio); g.position.set(1.55 * q * 1.12, 0, Math.sqrt(3) * (r + q / 2) * 1.12 * 1.0); g.userData.id = v.id; world.add(g); boardTiles.push(g); }); frameCam(); }
+
+// ---- flow ----------------------------------------------------------------------------------------------------------------
+function counts() { $('count').textContent = doc.votes.length + (doc.votes.length === 1 ? ' vote' : ' votes'); $('boardBtn').textContent = (mode === 'board' ? '← Back to swiping' : 'My world (' + doc.board.length + ')'); }
+function next() {
+  if (!queue.length) { L = learner(); G = new Generator(items, L); queue = G.batch(5, doc.votes.length * 131 + Math.floor(Math.random() * 1e6)); }
+  current = queue.shift(); $('label').textContent = current.label + ' · ' + DECKS[current.deck].t; $('guess').textContent = `${DECKS[current.deck].line} · generator thinks you'll like it ${Math.round(current.guess * 100)}%`;
+  show(current); anim = {t0: performance.now(), kind: 'in'}; world.position.set(0, 0, 0); world.rotation.set(0, 0, 0);
+}
+function snapshot() { renderer.render(scene, cam); const c = document.createElement('canvas'); c.width = c.height = 224; const s = Math.min(renderer.domElement.width, renderer.domElement.height) * .8, W = renderer.domElement; c.getContext('2d').drawImage(W, (W.width - s) / 2, (W.height - s) / 2 - s * .05, s, s, 0, 0, 224, 224); return c.toDataURL('image/jpeg', .82); }
+let anim = null;
+function vote(kind) {
+  if (!current || mode !== 'swipe' || anim?.kind === 'out') return;
+  const d = current, side = (kind === 'liked') === (doc.direction !== 'left-is-hate') ? -1 : 1;
+  const rec = {id: d.id, deck: d.deck, label: d.label, keys: d.keys, guess: +d.guess.toFixed(3), vote: kind, t: new Date().toISOString(), batch: Math.floor(doc.votes.length / 10)};
+  if (kind === 'liked') { rec.dio = d; rec.thumb = snapshot(); }
+  doc.votes.push(rec); save(); L.vote(d.keys, kind === 'liked');
+  stamp(kind, 1); anim = {t0: performance.now(), kind: 'out', side, done: () => { stamp(null); next(); renderTray(); renderDrawer(); counts(); }};
+}
+function undo() { const v = doc.votes.pop(); if (!v) return; doc.board = doc.board.filter(i => i !== v.id); save(); L = learner(); G = new Generator(items, L); queue = []; current = v.dio || null; if (v.dio) { v.dio.guess = v.guess; show(v.dio); $('label').textContent = v.label; } else { next(); } renderTray(); renderDrawer(); counts(); if (mode === 'board') showBoard(); }
+function stamp(kind, o = 0) { const s = $('stamp'); if (!kind) { s.style.opacity = 0; return; } const like = kind === 'liked'; s.textContent = like ? 'HOT DOG' : 'NOT HOT DOG'; s.style.color = s.style.borderColor = like ? 'var(--like)' : 'var(--hate)'; s.style.opacity = o; }
+function toggleBoard(id) { const v = doc.votes.find(x => x.id === id); if (!v) return; const on = doc.board.includes(id); if (on) doc.board = doc.board.filter(i => i !== id); else { doc.board.push(id); if (!v.placed) { v.placed = true; L.pick(v.keys); } } save(); renderTray(); counts(); if (mode === 'board') showBoard(); }
+function renderTray() { const t = $('tray'); t.innerHTML = ''; const likes = doc.votes.filter(v => v.vote === 'liked' && v.thumb).reverse(); if (!likes.length) { t.innerHTML = '<div id="empty">Tiles you like land here as cards. Tap one to put it on your board.</div>'; return; }
+  for (const v of likes) { const e = document.createElement('div'); e.className = 'tile' + (doc.board.includes(v.id) ? ' on' : ''); e.innerHTML = `<i></i><img alt="${v.label}" src="${v.thumb}">`; e.title = v.label; e.onclick = () => toggleBoard(v.id); t.append(e); } }
+function renderDrawer() {
+  const s = summarize(doc.votes, 10), bars = $('bars'); bars.innerHTML = s.map(b => `<div style="height:${Math.max(4, b.rate * 100)}%;opacity:${b.n < 10 ? .5 : 1}" title="${Math.round(b.rate * 100)}% liked"><i style="bottom:${b.guess * 100}%"></i></div>`).join('') || ''; $('barNote').textContent = s.length ? 'Bars are your hot dog rate per 10 votes. White tick = what the generator guessed.' : 'Vote on a few and the bars appear.';
+  const chip = x => `<span><img src="${BASE + (x.item.thumb || '')}" alt="" onerror="this.remove()">${x.item.name}</span>`; $('loves').innerHTML = L.top(6, true).map(chip).join('') || '<p>nothing yet</p>'; $('hates').innerHTML = L.top(6, false).map(chip).join('') || '<p>nothing yet</p>';
+  $('kinds').textContent = L.groups('t:', 9).filter(x => x.n).map(x => `${x.k} ${Math.round(x.s * 100)}%`).join(' · ') || 'nothing yet';
+}
+$('drawerBtn').onclick = () => { $('drawer').classList.toggle('open'); renderDrawer(); };
+$('boardBtn').onclick = () => { if (mode === 'swipe') { mode = 'board'; $('vote').style.display = 'none'; document.querySelectorAll('.side').forEach(e => e.style.display = 'none'); $('info').style.display = 'none'; showBoard(); } else { mode = 'swipe'; $('vote').style.display = ''; document.querySelectorAll('.side').forEach(e => e.style.display = ''); $('info').style.display = ''; frameCam(); show(current); } counts(); };
+$('bL').onclick = () => vote(dirVote('L')); $('bR').onclick = () => vote(dirVote('R'));
+addEventListener('keydown', e => { if (e.key === 'ArrowLeft') vote(dirVote('L')); else if (e.key === 'ArrowRight') vote(dirVote('R')); else if (e.key === 'z' || e.key === 'Z') undo(); else if (e.key === 'b' || e.key === 'B') $('boardBtn').click(); });
+// swipe
+let drag = null; const THRESH = 90;
+stageEl.addEventListener('pointerdown', e => { if (mode === 'swipe') { drag = {x: e.clientX, dx: 0}; stageEl.setPointerCapture(e.pointerId); } else { const r = stageEl.getBoundingClientRect(), m = new T.Vector2((e.clientX - r.left) / r.width * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1), rc = new T.Raycaster(); rc.setFromCamera(m, cam); const hit = rc.intersectObjects(boardTiles, true)[0]; if (hit) { let o = hit.object; while (o && !o.userData.id) o = o.parent; if (o) toggleBoard(o.userData.id); } } });
+stageEl.addEventListener('pointermove', e => { if (!drag) return; drag.dx = e.clientX - drag.x; const side = drag.dx < 0 ? 'L' : 'R'; stamp(dirVote(side), Math.min(1, Math.abs(drag.dx) / THRESH)); });
+const endDrag = () => { if (!drag) return; const dx = drag.dx; drag = null; if (Math.abs(dx) > THRESH) vote(dirVote(dx < 0 ? 'L' : 'R')); else stamp(null); };
+stageEl.addEventListener('pointerup', endDrag); stageEl.addEventListener('pointercancel', endDrag);
+// export / import / reset
+const blob = () => JSON.stringify({...doc, votes: doc.votes.map(({thumb, ...v}) => v)}, null, 1);
+$('exp').onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([blob()], {type: 'application/json'})); a.download = 'aw-diorama-votes.json'; a.click(); };
+$('copy').onclick = async () => { try { await navigator.clipboard.writeText(blob()); $('copy').textContent = 'Copied'; } catch { $('copy').textContent = 'Use Download'; } };
+$('imp').onchange = async e => { const f = e.target.files[0]; if (!f) return; try { const j = JSON.parse(await f.text()); const have = new Set(doc.votes.map(v => v.id + v.t)); for (const v of j.votes || []) if (v.keys && (v.vote === 'liked' || v.vote === 'hated') && !have.has(v.id + v.t)) doc.votes.push(v); save(); L = learner(); queue = []; renderTray(); renderDrawer(); counts(); } catch { alert('That file is not a votes file.'); } };
+$('reset').onclick = () => { if (confirm('Forget every vote on this device?')) { doc.votes = []; doc.board = []; save(); L = learner(); queue = []; renderTray(); renderDrawer(); counts(); next(); } };
+// the pretend human
+$('demoBtn').onclick = () => {
+  const human = keys => keys.reduce((s, k) => { const i = by.get(k); return s + (i.type === 'Animal' ? 1.2 : 0) + (i.place === 'Ranch' ? .8 : 0) + (i.place === 'Cafe' ? .5 : 0) - (i.type === 'Machine and tech' ? 1.2 : 0) - (i.place === 'Moon base' ? 1 : 0) - (i.place === 'Wasteland' ? 1 : 0); }, 0) / keys.length > .35;
+  const run = learn => { const l = new Learner(items), g = new Generator(items, l), log = []; let b = 0; while (log.length < 300) for (const d of g.batch(10, 777 * ++b)) { const like = human(d.keys); log.push({vote: like ? 'liked' : 'hated', guess: d.guess}); if (learn) l.vote(d.keys, like); if (log.length >= 300) break; } return summarize(log, 20); };
+  const a = run(true), c = run(false), pts = r => r.map((p, i) => `${i * 100 / (r.length - 1)},${78 - p.rate * 74}`).join(' ');
+  $('demoNote').insertAdjacentHTML('beforebegin', `<svg viewBox="0 0 100 80" preserveAspectRatio="none"><polyline points="${pts(c)}" fill="none" stroke="#ff6b6b" stroke-width="1.5"/><polyline points="${pts(a)}" fill="none" stroke="#5ee08a" stroke-width="2"/></svg>`);
+  $('demoNote').textContent = `Green: with learning, ${Math.round(a[0].rate * 100)}% → ${Math.round(a.at(-1).rate * 100)}% hot dogs. Red: same human, no learning, ${Math.round(c.at(-1).rate * 100)}%. A made-up human who loves animals and the Ranch.`; };
+
+// ---- loop ---------------------------------------------------------------------------------------------------------------
+function frame(now) {
+  requestAnimationFrame(frame);
+  if (mode === 'swipe') {
+    if (anim?.kind === 'in') { const k = Math.min(1, (now - anim.t0) / 350); world.position.y = (1 - k) * 2.2 * (1 - k); world.scale.setScalar(.7 + .3 * k); if (k === 1) anim = null; }
+    else if (anim?.kind === 'out') { const k = Math.min(1, (now - anim.t0) / 260); world.position.x = anim.side * k * 6; world.rotation.z = -anim.side * k * .5; if (k === 1) { const f = anim.done; anim = null; f?.(); world.scale.setScalar(1); } }
+    else if (drag) { world.position.x = drag.dx / 120; world.rotation.z = -drag.dx / 600; }
+    else { world.position.x *= .85; world.rotation.z *= .85; }
+    if (!anim) world.children[0] && (world.children[0].rotation.y = now * .00018);
+  } else { world.position.set(0, 0, 0); world.rotation.set(0, 0, 0); world.scale.setScalar(1); }
+  renderer.render(scene, cam);
+}
+legend(); renderTray(); renderDrawer(); counts(); resize(); next(); requestAnimationFrame(frame);
+$('boot').style.opacity = 0; setTimeout(() => $('boot').remove(), 500);
+window.__aw = {doc, get current() { return current; }, vote: k => vote(k), G: () => G};
+</script>
+</body>
+</html>
