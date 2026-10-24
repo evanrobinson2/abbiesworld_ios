@@ -16,6 +16,7 @@ const PRICES={
  realtimeOutputMinute:0.40,  // gpt-realtime audio out (list about $0.24/min), counted on every byte relayed back
  realtimeOpen:0.01,          // each session start
  guardCall:0.001,            // one short gpt-6-luna judgement
+ transcribeClip:0.02,        // one speech-to-text clip of up to 30 s (api/assimilate.js)
  composeCall:0.02,           // one tile plan
  inventCall:0.02,            // one Make design (api/invent.js); a wish already in the shared cache is free
  photoCheck:0.005,           // one PG look at a photo sent with a model order
