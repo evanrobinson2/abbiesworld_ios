@@ -390,7 +390,7 @@
     "A cheerful, round-voiced baker in her forties, warm laugh in her voice, up before dawn and happy about it. Animated family film, close microphone.",
     "A jolly, booming baker man with flour on his apron, big-hearted and quick to laugh. Clean studio recording."
    ],
-   "sample": "The ovens are hot and the bread is rising! Come and get it while it's warm, everyone!",
+   "sample": "The ovens are hot and the bread is rising! Come and get it while it's warm, everyone! Fresh buns, warm loaves, and a smile for every single one of you.",
    "looks": {
     "color": "#d98b55",
     "evan": []
@@ -446,7 +446,7 @@
     "A bright, patient primary-school teacher in her thirties, clear and kind, always encouraging, like a favourite teacher in an animated family film. Clean studio recording.",
     "A warm, upbeat young teacher with a melodic voice who makes everything sound like an adventure. Close microphone."
    ],
-   "sample": "We have run out of chalk! Would you carry a box over from the noticeboard?",
+   "sample": "We have run out of chalk! Would you carry a box over from the noticeboard? Everyone has a colourful job today, and yours is the most important one of all.",
    "looks": {
     "color": "#5b7fb8",
     "evan": []
@@ -460,7 +460,7 @@
     "A soft, gentle librarian in her sixties, hushed and kind, speaking as if in a quiet library, with a smile in the voice. Clean studio recording, animated family film.",
     "A calm, bookish older man with a low, soothing voice who loves stories. Close microphone."
    ],
-   "sample": "Someone left a book on a bench by the school. Could you bring it back before it rains?",
+   "sample": "Someone left a book on a bench by the school. Could you bring it back before it rains? Take your time, there is no hurry, and every good story will wait for you.",
    "looks": {
     "color": "#7a5a8c",
     "evan": []
@@ -474,7 +474,7 @@
     "A chirpy, quick-talking letter carrier in his twenties, always in a hurry but friendly, bouncy and bright. Animated family film, close microphone.",
     "A cheerful young woman postie, fast and sunny, whistling between sentences. Clean studio recording."
    ],
-   "sample": "I'm late! Please take this letter to the café for me?",
+   "sample": "I'm late! Please take this letter to the café for me? Every letter has a home, and you are the fastest helper I have ever met today!",
    "looks": {
     "color": "#c8502c",
     "evan": []
@@ -488,7 +488,7 @@
     "A slow, sunny gardener in her fifties, relaxed and earthy, patient as a tomato plant, humming between words. Animated family film, close microphone.",
     "A gentle, sun-warmed older man who loves flowers, easygoing drawl, kind. Clean studio recording."
    ],
-   "sample": "The sunflowers need seeds. The school has a jar. Could you ask for it?",
+   "sample": "The sunflowers need seeds. The school has a jar. Could you ask for it? The sun is warm and the soil is soft, so there is plenty of time to grow things.",
    "looks": {
     "color": "#5f8f4a",
     "evan": []
@@ -502,7 +502,7 @@
     "An excited, slightly breathless scientist in her forties, curious and kind, speaking quickly about discoveries, a friendly cartoon professor. Clean studio recording, animated family film.",
     "A bright, enthusiastic woman inventor with a quick laugh and an inquisitive tone. Close microphone."
    ],
-   "sample": "I lost my lucky magnifier! I think it is by the noticeboard. Can you look?",
+   "sample": "I lost my lucky magnifier! I think it is by the noticeboard. Can you look? Nobody has ever found it before, and I think we are very close to a discovery!",
    "looks": {
     "color": "#f4f6f8",
     "evan": []
@@ -516,7 +516,7 @@
     "A friendly, chatty neighbour in his forties, easygoing and warm, leaning over the fence for a talk. Animated family film, close microphone.",
     "A cheerful, talkative woman neighbour with a big smile in her voice. Clean studio recording."
    ],
-   "sample": "Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him?",
+   "sample": "Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him? He always finds the happiest spot on the common, wagging all the way there.",
    "looks": {
     "color": "#d98a45",
     "evan": []
