@@ -20,6 +20,106 @@
    "name": "Walking Woman",
    "category": "WalkAndRun",
    "sub_category": "Walking"
+  },
+  "30": {
+   "task_id": "01a16b5e-0e08-73c6-8c2f-6add8e907ffe",
+   "credits": 3,
+   "name": "Casual Walk",
+   "category": "WalkAndRun",
+   "sub_category": "Walking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/casual_walk.glb"
+   ]
+  },
+  "106": {
+   "task_id": "01a16b5e-0e08-73c7-a327-4b98c2bc9517",
+   "credits": 3,
+   "name": "Hot walk",
+   "category": "WalkAndRun",
+   "sub_category": "Walking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/confident_walk.glb"
+   ]
+  },
+  "55": {
+   "task_id": "01a16b5e-0e0d-73d9-bd19-7fff5044079a",
+   "credits": 3,
+   "name": "Stage Walk",
+   "category": "WalkAndRun",
+   "sub_category": "Walking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/stage_walk.glb"
+   ]
+  },
+  "21": {
+   "task_id": "01a16b5e-0e0a-75c0-b5e6-9382f602db75",
+   "credits": 3,
+   "name": "Walk Fight Forward",
+   "category": "WalkAndRun",
+   "sub_category": "Walking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_fight_forward.glb"
+   ]
+  },
+  "20": {
+   "task_id": "01a16b5e-0e08-7444-9d42-d582da69f2a4",
+   "credits": 3,
+   "name": "Walk Fight Back",
+   "category": "WalkAndRun",
+   "sub_category": "Walking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_fight_back.glb"
+   ]
+  },
+  "5": {
+   "task_id": "01a16b5e-6768-7090-a143-a3e7c577cb5e",
+   "credits": 3,
+   "name": "BackLeft Run",
+   "category": "WalkAndRun",
+   "sub_category": "Running",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/backleft_run.glb"
+   ]
+  },
+  "6": {
+   "task_id": "01a16b5e-6807-7266-a451-ff4cf59fb95c",
+   "credits": 3,
+   "name": "BackRight Run",
+   "category": "WalkAndRun",
+   "sub_category": "Running",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/backright_run.glb"
+   ]
+  },
+  "14": {
+   "task_id": "01a16b5e-6850-70c7-acff-b17e7140c92c",
+   "credits": 3,
+   "name": "Run 2",
+   "category": "WalkAndRun",
+   "sub_category": "Running",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/run_02.glb"
+   ]
+  },
+  "15": {
+   "task_id": "01a16b5e-684c-71b2-ae58-1b79b3ab8739",
+   "credits": 3,
+   "name": "Run 3",
+   "category": "WalkAndRun",
+   "sub_category": "Running",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/run_03.glb"
+   ]
+  },
+  "13": {
+   "task_id": "01a16b5e-6813-7036-9109-84181100c27c",
+   "credits": 3,
+   "name": "Jump Run",
+   "category": "WalkAndRun",
+   "sub_category": "Running",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jump_run.glb"
+   ]
   }
  }
 }
