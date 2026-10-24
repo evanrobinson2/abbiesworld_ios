@@ -38,7 +38,45 @@ const CSS = `#aw-hand .aw-tile-card{all:unset;box-sizing:border-box;cursor:point
 @media(max-width:520px){#aw-hand{--tc-w:46px}}
 @media(prefers-reduced-motion:reduce){#aw-hand .aw-tile-card{transition:none}}`;
 
-export function mountTownHand({board, visit} = {}) {
+// The real tile, from above: the hex's own 3D model rendered once through a small orthographic camera into a corner of the
+// town's canvas, on a flat key colour that is cut out afterwards, so the card's art is the tile itself (Evan, 23:59Z: "the
+// main hex tiles need to come back"). Runs inside the stage's frame loop so the canvas is still readable.
+const KEY = [255, 0, 255];
+function captureHex(stage, id, size = 460) {
+  const {THREE: T, scene, renderer, dioGroup, tiles} = stage, tile = tiles[id]; if (!tile) return null;
+  const cam = new T.OrthographicCamera(-122, 122, 122, -122, 1, 3000), az = 205 * Math.PI / 180, pitch = 52 * Math.PI / 180, c = tile.centre;
+  cam.position.set(c.x + Math.sin(az) * Math.cos(pitch) * 700, c.y + Math.sin(pitch) * 700, c.z - Math.cos(az) * Math.cos(pitch) * 700); cam.lookAt(c.x, c.y - 6, c.z); cam.updateMatrixWorld();
+  const hidden = [];
+  const hide = o => { if (o.visible) { o.visible = false; hidden.push(o); } };
+  for (const o of scene.children) if (o !== dioGroup && !o.isLight && !o.isCamera && !(o.target)) hide(o);
+  for (const t of Object.values(tiles)) if (t !== tile) hide(t.group);
+  const bg = scene.background, fog = scene.fog, ex = renderer.toneMappingExposure, cc = renderer.getClearColor(new T.Color()), ca = renderer.getClearAlpha(), vp = renderer.getViewport(new T.Vector4()), st = renderer.getScissorTest(), pr = renderer.getPixelRatio();
+  let out = null;
+  try {
+    scene.background = null; scene.fog = null; renderer.toneMappingExposure = 1.05;
+    renderer.setScissorTest(true); renderer.setViewport(0, 0, size, size); renderer.setScissor(0, 0, size, size); renderer.setClearColor(0xff00ff, 1); renderer.clear(); renderer.render(scene, cam);
+    const src = renderer.domElement, d = Math.round(size * pr), cv = document.createElement('canvas'); cv.width = cv.height = size;
+    const x = cv.getContext('2d', {willReadFrequently: true}); x.drawImage(src, 0, src.height - d, d, d, 0, 0, size, size);
+    const im = x.getImageData(0, 0, size, size), p = im.data; let solid = 0;
+    for (let i = 0; i < p.length; i += 4) {
+      const dist = Math.hypot(p[i] - KEY[0], p[i + 1] - KEY[1], p[i + 2] - KEY[2]), a = Math.max(0, Math.min(1, (dist - 40) / 90));
+      if (a === 0) { p[i + 3] = 0; continue; }
+      if (a < 1) for (let k = 0; k < 3; k++) p[i + k] = Math.max(0, Math.min(255, (p[i + k] - KEY[k] * (1 - a)) / a));
+      p[i + 3] = Math.round(a * 255); solid++;
+    }
+    x.putImageData(im, 0, 0); if (solid > size * size * .08) out = cv.toDataURL('image/png');
+  } catch (e) { console.warn('Hex capture', e); }
+  scene.background = bg; scene.fog = fog; renderer.toneMappingExposure = ex; renderer.setClearColor(cc, ca); renderer.setViewport(vp); renderer.setScissorTest(st);
+  for (const o of hidden) o.visible = true;
+  return out;
+}
+
+function deal(b, h, k, artUrl) {
+  renderFace({id: 'town-' + h.id, name: h.name, art: artUrl, edition: k + 1, set: 7, palette: ZONES[h.zone]}, {style: 'diecut', dpi: 110})
+    .then(({canvas}) => { let img = b.querySelector('img'); if (!img) { img = new Image(); img.alt = ''; img.draggable = false; b.append(img); } img.src = canvas.toDataURL('image/png'); }).catch(() => { if (!b.firstChild) b.textContent = h.n; });
+}
+
+export function mountTownHand({board, visit, stage} = {}) {
   const hexes = board?.hexes || [];
   if (!hexes.length || document.getElementById('aw-tile-cards')) return null;
   document.head.append(Object.assign(document.createElement('style'), {textContent: CSS}));
@@ -50,8 +88,15 @@ export function mountTownHand({board, visit} = {}) {
     b.style.setProperty('--fan', ((k - (n - 1) / 2) * 2).toFixed(1) + 'deg'); b.title = h.name;
     b.onclick = () => { if (dispatchEvent(new CustomEvent('aw-tile-card', {cancelable: true, detail: {id: h.id, hex: h}}))) visit?.(h.id); };
     row.append(b);
-    renderFace({id: 'town-' + h.id, name: h.name, art: art(h, k + 1), edition: k + 1, set: n, palette: ZONES[h.zone]}, {style: 'diecut', dpi: 110})
-      .then(({canvas}) => { const img = new Image(); img.alt = ''; img.draggable = false; img.src = canvas.toDataURL('image/png'); b.append(img); }).catch(() => { b.textContent = h.n; });
+    deal(b, h, k, art(h, k + 1));
   });
+  // Then the real tiles: once the board is up, each card's art is swapped for its hex rendered from the 3D model.
+  if (stage?.frame) {
+    let frames = 0, done = false;
+    const off = stage.frame(() => {
+      if (done || !stage.dioGroup.visible || ++frames < 12) return; done = true; off();
+      hexes.forEach((h, k) => { const url = captureHex(stage, h.id); if (url) deal(row.children[k], h, k, url); });
+    });
+  }
   return {row};
 }
