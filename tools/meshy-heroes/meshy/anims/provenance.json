@@ -320,6 +320,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/discuss_while_moving.glb"
    ]
+  },
+  "3": {
+   "task_id": "01a16b60-85e3-7556-bfe5-946ef5444754",
+   "credits": 3,
+   "name": "Arise",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/arise.glb"
+   ]
+  },
+  "2": {
+   "task_id": "01a16b60-85e0-7113-9170-7398721cf22c",
+   "credits": 3,
+   "name": "Alert",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/alert.glb"
+   ]
+  },
+  "47": {
+   "task_id": "01a16b60-85e7-7349-9c71-6dcb73480206",
+   "credits": 3,
+   "name": "Listening Gesture",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/listening_gesture.glb"
+   ]
+  },
+  "49": {
+   "task_id": "01a16b60-85e0-709a-91bf-1eff15454314",
+   "credits": 3,
+   "name": "Motivational Cheer",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/motivational_cheer.glb"
+   ]
+  },
+  "50": {
+   "task_id": "01a16b60-85e0-70a0-905d-a6d1a96aded9",
+   "credits": 3,
+   "name": "Phone Call Gesture",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/phone_call_gesture.glb"
+   ]
+  },
+  "273": {
+   "task_id": "01a16b60-dca0-7020-8b63-c80bd82a8c00",
+   "credits": 3,
+   "name": "Male Run Forward Pick Up Left",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/male_run_forward_pick_up_left.glb"
+   ]
+  },
+  "333": {
+   "task_id": "01a16b60-db5d-76a6-a3e5-d18aaa6e85a6",
+   "credits": 3,
+   "name": "Look Around Dumbfounded",
+   "category": "DailyActions",
+   "sub_category": "LookingAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/look_around_dumbfounded.glb"
+   ]
+  },
+  "275": {
+   "task_id": "01a16b61-05b9-70a4-a1a2-f4ae8d4e535e",
+   "credits": 3,
+   "name": "Female Run Forward Pick Up Right",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_run_forward_pick_up_right.glb"
+   ]
+  },
+  "276": {
+   "task_id": "01a16b61-05b9-70a2-b19b-125d38b66664",
+   "credits": 3,
+   "name": "Male Bend Over Pick Up",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/male_bend_over_pick_up.glb"
+   ]
+  },
+  "274": {
+   "task_id": "01a16b61-0509-7258-8808-51d64478d841",
+   "credits": 3,
+   "name": "Female Crouch Pick Up Place Side",
+   "category": "DailyActions",
+   "sub_category": "PickingUpItem",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/female_crouch_pick_up_place_side.glb"
+   ]
   }
  }
 }
