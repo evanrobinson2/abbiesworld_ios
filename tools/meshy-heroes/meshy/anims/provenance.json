@@ -220,6 +220,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/swim_forward.glb"
    ]
+  },
+  "11": {
+   "task_id": "01a16b5f-81bf-73b6-a7ad-380d8adfd2fc",
+   "credits": 3,
+   "name": "Idle 1",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_02.glb"
+   ]
+  },
+  "12": {
+   "task_id": "01a16b5f-81c2-7036-9f91-2305e33b1951",
+   "credits": 3,
+   "name": "Idle 2",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_03.glb"
+   ]
+  },
+  "570": {
+   "task_id": "01a16b5f-81c8-710c-a7ae-f2665c400e22",
+   "credits": 3,
+   "name": "Swimming to Edge",
+   "category": "WalkAndRun",
+   "sub_category": "Swimming",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/swimming_to_edge.glb"
+   ]
+  },
+  "33": {
+   "task_id": "01a16b5f-81c3-767a-ae0c-e0963439ea32",
+   "credits": 3,
+   "name": "Chair Sit Idle Male",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/chair_sit_idle_m.glb"
+   ]
+  },
+  "32": {
+   "task_id": "01a16b5f-81c1-745c-b5da-e34d6da6deb8",
+   "credits": 3,
+   "name": "Chair Sit Idle Female",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/chair_sit_idle_f.glb"
+   ]
+  },
+  "28": {
+   "task_id": "01a16b5f-d8fd-7752-8b48-ad30e786ca5b",
+   "credits": 3,
+   "name": "Big Wave Hello",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/big_wave_hello.glb"
+   ]
+  },
+  "26": {
+   "task_id": "01a16b5f-d8ca-72cb-8f77-028094147b32",
+   "credits": 3,
+   "name": "Angry Stomp",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/angry_stomp.glb"
+   ]
+  },
+  "25": {
+   "task_id": "01a16b5f-d6f9-7285-b168-2a067b3e782f",
+   "credits": 3,
+   "name": "Agree Gesture",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/agree_gesture.glb"
+   ]
+  },
+  "34": {
+   "task_id": "01a16b60-0009-70bc-b70f-66b12f12cad7",
+   "credits": 3,
+   "name": "Checkout Gesture",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/checkout_gesture.glb"
+   ]
+  },
+  "37": {
+   "task_id": "01a16b60-0038-7616-83cd-a29c0e6391fd",
+   "credits": 3,
+   "name": "Discuss While Moving",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/discuss_while_moving.glb"
+   ]
   }
  }
 }
