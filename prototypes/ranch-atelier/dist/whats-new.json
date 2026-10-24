@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-abbie-default-backpack",
+      "date": "2026-10-24",
+      "title": "Abbie's own backpack",
+      "line": "Everyone now starts with Abbie's backpack: the bunny in grape stripes with a heart pocket, pink and gold straps, a rainbow lining and the rainbow bear notebook. She wears it everywhere.",
+      "image": "/whats-new/2026-10-24-abbie-default-backpack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-carwash-moon-buggy",
       "date": "2026-10-24",
       "title": "The carwash and your Moon Buggy",
@@ -33,17 +44,17 @@
       "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
       "tour": false
     },
-   {
-     "id": "2026-10-24-effect-icons",
-     "date": "2026-10-24",
-     "title": "World effects hover, and charge up",
-     "line": "The effect icons are little 3D things now, greyed out until you charge them with an item from your backpack. Then they glow, and you can drop them on the world.",
-     "image": "/whats-new/2026-10-24-effect-icons.png",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
-     "threadTitle": "World event cards",
-     "tour": false,
-     "link": "/town"
-   },
+    {
+      "id": "2026-10-24-effect-icons",
+      "date": "2026-10-24",
+      "title": "World effects hover, and charge up",
+      "line": "The effect icons are little 3D things now, greyed out until you charge them with an item from your backpack. Then they glow, and you can drop them on the world.",
+      "image": "/whats-new/2026-10-24-effect-icons.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+      "threadTitle": "World event cards",
+      "tour": false,
+      "link": "/town"
+    },
     {
       "id": "2026-10-24-backpack-loadout",
       "date": "2026-10-24",

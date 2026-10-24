@@ -10,7 +10,7 @@
 // its steps ticked off as she goes) and the charm quests (backpack.mjs CHARMS). It redraws on 'aw-quests-change'.
 // Presentation layer: the notebook is drawn for the player and is invisible to every perception; directors read her
 // quests through the quests manifest, never from the DOM.
-import {CHARMS, earnedCharms, look, FACETS} from './backpack.mjs?v=10';
+import {CHARMS, earnedCharms, look, FACETS} from './backpack.mjs?v=11';
 import {list as questList} from './quests.mjs';
 
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
