@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Water balloons</title>
+<style>:root{color-scheme:light dark;--bg:#e9eee6;--ink:#2b2a26}@media(prefers-color-scheme:dark){:root{--bg:#1d2420;--ink:#f1efe8}}
+body{margin:0;background:radial-gradient(120% 90% at 30% 0,#cfe6cf,var(--bg));color:var(--ink);font:16px/1.4 system-ui,sans-serif;padding:20px 16px 48px}
+h1{font-size:22px;margin:0 0 4px}p{margin:0 0 16px;max-width:60ch;opacity:.8}
+.row{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:22px}.cell{display:grid;justify-items:center;gap:6px;min-width:84px;padding:12px 8px;border-radius:20px;background:#ffffff66;box-shadow:inset 0 1px 0 #fff,0 2px 8px #0002}
+.cell b{font-size:13px}.big .cell{min-width:120px}</style></head><body>
+<h1>Water balloons</h1><p>Every ball in the tray is now a water balloon: thin skin, knotted neck, water sloshing inside, a little wobble. Drag one to feel it squash and stretch; letting go pops it. Four of them carry a world effect, and the rest are paint.</p>
+<div class="row big" id="kinds"></div><div class="row" id="paint"></div>
+<p>Drag any balloon around.</p>
+<script type="module">
+import {balloonHTML,injectBalloonCSS,jiggle,pop} from './balloon.mjs';
+injectBalloonCSS();
+const kinds=[['fireball','Fireball'],['waterball','Water'],['cats-dogs','Cats and dogs'],['tie-dye','Tie-dye']];
+const put=(root,kind,colour,px,label)=>{const c=document.createElement('div');c.className='cell';c.innerHTML=balloonHTML({kind,colour,px})+'<b>'+label+'</b>';root.append(c);
+ const svg=c.firstChild;c.style.touchAction='none';
+ c.addEventListener('pointerdown',e=>{e.preventDefault();const h=document.createElement('div');h.style.cssText='position:fixed;z-index:9;pointer-events:none;transform:translate(-50%,-62%) scale(1.15)';h.innerHTML=balloonHTML({kind,colour,px});const s=h.firstChild;s.classList.add('bw-held');document.body.append(h);
+  let last={x:e.clientX,y:e.clientY,t:performance.now()};const pos=(x,y)=>{h.style.left=x+'px';h.style.top=y+'px'};pos(e.clientX,e.clientY);
+  const mv=ev=>{const t=performance.now(),dt=Math.max(.016,(t-last.t)/1000);jiggle(s,(ev.clientX-last.x)/dt,(ev.clientY-last.y)/dt);last={x:ev.clientX,y:ev.clientY,t};pos(ev.clientX,ev.clientY)};
+  const up=ev=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up);h.remove();pop(ev.clientX,ev.clientY,kind,colour)};
+  addEventListener('pointermove',mv);addEventListener('pointerup',up)});};
+for(const [k,l] of kinds)put(document.getElementById('kinds'),k,'pink',84,l);
+for(const c of ['pink','teal','lime','violet','sun'])put(document.getElementById('paint'),'paint',c,56,c==='sun'?'Sun paint':c[0].toUpperCase()+c.slice(1)+' paint');
+</script></body></html>
