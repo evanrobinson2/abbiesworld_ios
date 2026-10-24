@@ -587,7 +587,7 @@ function frame(now) {
  // Seated at the desk the camera is her eyes, so she steps out of her own view.
  kid.visible = !(me.state === 'seated' && ['desk', 'screen', 'close'].includes(cam.mode));
  voice.tick(now);
- tickPlay(dt);
+ tickPlay(rdt);
  U.gameboy.step(dt, cam.close === 'gameboy' || cam.mode === 'desk');
  gbLamp.intensity += ((cam.close === 'gameboy' ? .4 : 0) - gbLamp.intensity) * Math.min(1, dt * 3);
  if (!skip && !opened && time > 3.6) { opened = true; opening(); }

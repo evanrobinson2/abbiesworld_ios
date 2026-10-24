@@ -45,7 +45,7 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
     for (const k of ['G', 'O', 'Enter']) await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), k);
   // The word game: put 110 of the 120 seconds in already, then play a little (any keys; the title wants one first).
   await p.waitForTimeout(3000); await p.evaluate(() => basement.playGame(110));
-  for (let i = 0; i < 60 && !(await p.evaluate(() => basement.ending.pending || basement.ending.called)); i++) { await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), 'ASDFJKL'[i % 7]); await p.waitForTimeout(400); }
+  for (let i = 0; i < 200 && !(await p.evaluate(() => basement.ending.pending || basement.ending.called)); i++) { await p.evaluate(k => window.dispatchEvent(new KeyboardEvent('keydown', {key: k})), 'ASDFJKL'[i % 7]); await p.waitForTimeout(400); }
   });
   await step('the ending: Daddy calls', async () => {
     await until(() => basement.ending.called && document.querySelector('.aw-choice')); await shot('5-ending'); await p.getByText('Coming, Daddy!').click();
