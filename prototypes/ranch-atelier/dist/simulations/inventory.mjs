@@ -21,7 +21,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=11';
+import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook, UPGRADES, upgradeLevel, capacity, starsLeft, nextLevel, buyUpgrade} from './backpack.mjs?v=12';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -54,6 +54,8 @@ export function inventory() {
     has: id => read().some(i => i.id === id),
     add({id, name = '', icon = '', from = '', thought = ''} = {}) {
       if (!id || api.has(id)) return false;
+      // Full pockets turn away plain pickups; anything given to her (a quest reward, a gift: it has a giver or a thought) always fits.
+      if (!from && !thought && read().length >= capacity()) { fullSay(); return false; }
       const item = {id: String(id), name: String(name || id), icon: String(icon || ''), from: String(from || ''), at: Date.now()};
       write([...read(), item]);
       if (thought) pickUp(item, thought); else drawPocket(true);
@@ -111,7 +113,7 @@ function drawNotebookMini() {
 let mini = null;
 async function miniPack(canvas) {
   try {
-    const B = await import('./backpack.mjs?v=11'), T = await B.three();
+    const B = await import('./backpack.mjs?v=12'), T = await B.three();
     const renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); renderer.setPixelRatio(1); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
     const scene = new T.Scene(), cam = new T.PerspectiveCamera(26, canvas.width / canvas.height, .05, 20);
     scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.3)); const key = new T.DirectionalLight('#fff1d6', 2.6); key.position.set(1.4, 2.4, 2.6); scene.add(key);
@@ -142,27 +144,27 @@ function drawPocket(bump = false) {
 }
 // Tapping the backpack brings it out as a floating mini (Evan, 22:55Z: "I like back pack as a stand alone ... floating
 // mini's just idly floating around waiting to be interacted with ... bring back pack to center"). It flies from the left
-// bar to the middle of the screen and idles there in the air. It is dressed by its own parts, FPS-loadout style (Evan,
-// 2026-10-24 00:16Z, after the card slots: "treat the facets like they are slots on the model ... click the facet to
-// enable selection then pick from a small and unobtrusive list of options"): a small bead sits on each slot of the
-// model (the style above it, colour and pattern on the shell, the pocket, the straps, the lining at the opening, the
-// notebook peeking out), tap a bead or the part and a short strip of swatches opens beside it. loadout.mjs, shared.
+// bar to the middle of the screen and idles there in the air. It is made better with plain upgrades (Evan, 2026-10-24
+// 00:51Z, after the facet beads: "unusable ... a standard, straightforward inventory upgrade system"): the star button opens
+// a short list (Pockets, Keyring), each with its level, what the next level gives and its price in stars; tap Upgrade.
+// The look she already chose stays as it is. Upgrades are in backpack.mjs.
 // The open orb opens it half shell on what she carries. Nothing behind it is dimmed, blurred or masked.
-let view = null, lo = null;
-const styleArt = id => new URL(`./assets/backpack/style-${id}.png`, import.meta.url).href;
-const covers = new Map();
-function slotDefs(B, cover) {
-  const l = bagLook(), opt = (f, map) => B.FACETS.find(x => x.id === f).options.map(o => ({id: o.id, name: o.name, ...map(o)}));
-  return [
-    {id: 'style', name: 'Style', options: B.STYLES.map(s => ({id: s.id, name: s.name, icon: styleArt(s.id)}))},
-    {id: 'colour', name: 'Colour', options: opt('colour', o => ({swatch: o.c}))},
-    {id: 'pattern', name: 'Pattern', options: opt('pattern', o => ({swatch: B.swatch('pattern', {...l, pattern: o.id})}))},
-    {id: 'pocket', name: 'Pocket', options: opt('pocket', o => ({swatch: B.option('colour', l.colour).c, icon: B.pocketSvg(o.id)}))},
-    {id: 'trim', name: 'Straps', options: opt('trim', o => ({swatch: B.swatch('trim', {...l, trim: o.id})}))},
-    {id: 'lining', name: 'Lining', options: opt('lining', o => ({swatch: B.swatch('lining', {...l, lining: o.id})}))},
-    {id: 'notebook', name: 'Notebook', options: opt('notebook', o => ({icon: covers.get(o.id) || covers.set(o.id, cover(o.id, 64, 80).toDataURL()).get(o.id)}))}
-  ];
+let view = null, upPanel = null;
+// The upgrade list: what each upgrade is now, what the next level gives, what it costs, and the stars she has.
+function drawUpgrades() {
+  if (!upPanel) return;
+  const stars = starsLeft(), used = read().length, cap = capacity();
+  pop.querySelector('.aw-bp-upbtn i').textContent = stars > 0 ? String(stars) : '';
+  upPanel.innerHTML = `<p class="aw-up-head"><b>Upgrades</b><span>${stars} ${stars === 1 ? 'star' : 'stars'}</span></p><p class="aw-up-cap">Carrying ${used} of ${cap}</p>` +
+    Object.entries(UPGRADES).map(([id, u]) => {
+      const lv = upgradeLevel(id), next = nextLevel(id), now = u.levels[lv];
+      return `<div class="aw-up-row"><span class="aw-up-ic">${u.icon}</span><div><b>${esc(u.name)} <small>level ${lv + 1} of ${u.levels.length}</small></b><em>${esc(next ? next.says : 'All done: ' + now.says)}</em></div>` +
+        (next ? `<button type="button" data-up="${id}"${next.cost > stars ? ' disabled' : ''}>Upgrade<small>${next.cost} ★</small></button>` : '<span class="aw-up-max">Full</span>') + '</div>';
+    }).join('');
 }
+// A plain pickup with no room: her inner voice says so (text only), the world carries on.
+let fullAt = 0;
+function fullSay() { if (Date.now() - fullAt < 3000) return; fullAt = Date.now(); const p = mountPocket(); const b = Object.assign(document.createElement('div'), {className: 'aw-thought', textContent: 'My backpack is full. Maybe it needs an upgrade.'}); const r = p.getBoundingClientRect(); b.style.left = r.right + 8 + 'px'; b.style.top = r.top + 'px'; document.body.append(b); setTimeout(() => b.remove(), 2600); }
 function drawPeek() {
   const l = bagLook(), peek = pop?.querySelector('.aw-bp-peek');
   if (peek && peek.dataset.nb !== l.notebook) { peek.dataset.nb = l.notebook; import('./notebook.mjs?v=1').then(({coverCanvas}) => peek.replaceChildren(coverCanvas(l.notebook, 120, 152))).catch(() => {}); }
@@ -183,8 +185,17 @@ async function openPop() {
     const peek = Object.assign(document.createElement('button'), {type: 'button', className: 'aw-bp-peek'}); peek.setAttribute('aria-label', 'My notebook');
     peek.onclick = e => { e.stopPropagation(); closePop(); import('./notebook.mjs?v=1').then(n => n.openNotebook()); };
     pop.querySelector('.aw-bp-stage').append(peek);
-    pop.querySelector('.aw-bp-charmcam').onclick = e => { e.stopPropagation(); if (!view) return; if (view.focused != null) view.unfocus(); else { lo?.select(null); view.open(); view.focusCharm(0); } };
-    pop.querySelector('.aw-bp-openbtn').onclick = e => { e.stopPropagation(); if (!view) return; view.unfocus(); if (view.isOpen && !lo?.selected) view.close(); else { lo?.select(null); view.open(); } };
+    pop.querySelector('.aw-bp-charmcam').onclick = e => { e.stopPropagation(); if (!view) return; if (view.focused != null) view.unfocus(); else { view.open(); view.focusCharm(0); } };
+    pop.querySelector('.aw-bp-openbtn').onclick = e => { e.stopPropagation(); if (!view) return; view.unfocus(); if (view.isOpen) view.close(); else view.open(); };
+    const upBtn = Object.assign(document.createElement('button'), {type: 'button', className: 'aw-bp-brush aw-bp-upbtn'});
+    upBtn.setAttribute('aria-label', 'Upgrades'); upBtn.title = 'Upgrades'; upBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg><i></i>';
+    upPanel = Object.assign(document.createElement('div'), {className: 'aw-bp-up'}); upPanel.hidden = true; upPanel.setAttribute('role', 'group'); upPanel.setAttribute('aria-label', 'Backpack upgrades');
+    upBtn.onclick = e => { e.stopPropagation(); drawUpgrades(); upPanel.hidden = !upPanel.hidden; };
+    upPanel.onclick = e => {
+      e.stopPropagation(); const b = e.target.closest('[data-up]'); if (!b || b.disabled) return;
+      if (buyUpgrade(b.dataset.up)) { jingle(); view?.bounce?.(); view?.say?.('Upgraded!', 1600); drawUpgrades(); drawPocket(); if (view) view.setContents({items: carried(), coins: coinCount(), charms: keychain()}); }
+    };
+    pop.querySelector('.aw-bp-stage').append(upBtn, upPanel);
     addEventListener('resize', layout);
   }
   document.body.append(pop); pop.hidden = false; layout(); drawPeek(); document.documentElement.classList.add('aw-bp-out');
@@ -197,18 +208,11 @@ async function openPop() {
   pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const [B, {loadout}, {coverCanvas}] = await Promise.all([import('./backpack.mjs?v=11'), import('./loadout.mjs?v=1'), import('./notebook.mjs?v=1')]);
-      view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onPart: f => lo?.select(f || null), onTap: useItem,
-        onChange: l => { setLook(l); drawPeek(); lo?.refresh(); }});
-      const peek = pop.querySelector('.aw-bp-peek');
-      lo = loadout(pop, {slots: () => slotDefs(B, coverCanvas), value: f => bagLook()[f],
-        anchor: f => {
-          if (pop.hidden || !view || view.focused != null || (view.isOpen && lo?.selected !== 'lining')) return null;
-          if (f === 'notebook') { const r = peek.getBoundingClientRect(); return r.width ? {x: r.left + r.width * .72, y: r.top + r.height * .2} : null; }
-          return view.anchors()[f] || null;
-        },
-        avoid: () => view.bounds, onSelect: f => view.select(f), onPick: (f, v) => view.pick(f, v)});
-    } else { view.setLook(bagLook()); view.setContents(contents); lo?.refresh(); }
+      const B = await import('./backpack.mjs?v=12');
+      view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onTap: useItem,
+        onChange: l => { setLook(l); drawPeek(); }});
+    } else { view.setLook(bagLook()); view.setContents(contents); }
+    drawUpgrades();
   } catch {
     // No WebGL: the list still says what she carries.
     pop.classList.add('flat');
@@ -217,7 +221,7 @@ async function openPop() {
 }
 function closePop() {
   document.querySelectorAll('.aw-bp-ghost').forEach(g => g.remove()); if (!pop || pop.hidden) return;
-  lo?.select(null); view?.close();
+  upPanel?.setAttribute('hidden', ''); view?.close();
   const st = pop.querySelector('.aw-bp-stage'), to = pocket?.isConnected ? pocket.getBoundingClientRect() : null, sr = st.getBoundingClientRect();
   const done = () => { if (pop) pop.hidden = true; document.documentElement.classList.remove('aw-bp-out'); };
   if (!to || matchMedia('(prefers-reduced-motion: reduce)').matches) return void setTimeout(done, 120);
@@ -302,6 +306,11 @@ function style() {
   .aw-bp-float.flat{left:50%;top:20%;width:min(300px,90vw);height:auto;transform:translateX(-50%);pointer-events:auto}
   .aw-bp-brush{position:absolute;right:6px;top:6px;z-index:4;width:40px;height:40px;border-radius:50%;border:1.5px solid #ffffffe0;display:grid;place-items:center;cursor:pointer;color:#3a2a4a;
     background:linear-gradient(160deg,#ffffffe8,#ffffff90);box-shadow:inset 0 2px 0 #fff,inset 0 -6px 10px #0000001f,0 8px 18px -6px #2a103066}
+  .aw-bp-upbtn{top:98px}.aw-bp-upbtn i{position:absolute;right:-4px;top:-4px;min-width:16px;height:16px;border-radius:8px;background:#ffd23f;color:#3a2a4a;font:700 10px/16px var(--app-font,system-ui);text-align:center;font-style:normal}.aw-bp-upbtn i:empty{display:none}.aw-bp-pop.flat .aw-bp-upbtn{display:none}
+  .aw-bp-up{position:absolute;right:54px;top:6px;z-index:5;width:min(260px,calc(100vw - 90px));padding:10px;border-radius:18px;background:linear-gradient(165deg,#fffffff2,#fff8f0e6);border:1px solid #ffffffd8;box-shadow:inset 0 1.5px 0 #fff,0 16px 30px -12px #0c203070;color:#3a2a4a;font:600 12px/1.25 var(--app-font,system-ui)}
+  .aw-bp-up[hidden]{display:none}.aw-up-head{display:flex;justify-content:space-between;margin:0 0 2px;font-size:13px}.aw-up-cap{margin:0 0 8px;opacity:.75}
+  .aw-up-row{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;padding:6px 0;border-top:1px solid #3a2a4a18}.aw-up-ic{font-size:20px;text-align:center}.aw-up-row small{font-weight:500;opacity:.7}.aw-up-row em{display:block;font-style:normal;opacity:.8}
+  .aw-up-row button{border:0;border-radius:12px;padding:6px 10px;font:700 12px/1.1 var(--app-font,system-ui);background:linear-gradient(160deg,#fff6c8,#ffd23f);color:#3a2a4a;cursor:pointer;touch-action:manipulation}.aw-up-row button small{display:block}.aw-up-row button:disabled{opacity:.45;cursor:default}.aw-up-max{opacity:.6}
   .aw-bp-brush svg{width:22px;height:22px}.aw-bp-charmcam{top:52px}.aw-bp-pop.flat .aw-bp-openbtn{display:none}.aw-bp-brush[hidden]{display:none}.aw-bp-pop.dressing .aw-bp-brush:not(.aw-bp-charmcam){background:linear-gradient(160deg,#fff6c8,#ffd23f)}.aw-bp-pop.flat .aw-bp-brush{display:none}
   .aw-pocket-pop strong{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.7;margin-bottom:6px}
   .aw-pocket-pop ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:8px}

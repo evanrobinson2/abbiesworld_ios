@@ -21,7 +21,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  const toScene = (x, y) => world.toScene(x, y);
  const fromScene = (x, z) => [(x - world.origin.x) / world.scale, -(z - world.origin.z) / world.scale];
  const root = new T.Group(); root.name = 'kart track'; scene.add(root);
- const origOnBoard = world.onBoard, origNear = world.nearObstacles, baseMax = driver.K.maxSpeed, baseSlope = driver.K.slopeSlow;
+ const origOnBoard = world.onBoard, origNear = world.nearObstacles, baseMax = driver.K.maxSpeed, baseSlope = driver.K.slopeSlow, baseSteer = driver.K.steerRate;
  let L = layoutOf(board, extraIds, {width}), track = null, building = false, queued = null, attached = false, towKey = '';
  const cache = new Map(), obstacles = createObstacles({scene, world, toScene, fromScene, base: origNear, onBump: (o, power) => { if (power < 4) return; state.crashes++; puff({x: o.x, y: world.heightAt(o.x, o.z) + 1, z: o.z}, '#ffe9b0', 10, 4); onEvent({t: 'crash', kind: o.kind, power}); }, onSmash: (o, speed) => { state.smashes++; pop(); puff(o.obj.position, '#ffffff', 14, 5); onEvent({t: 'smash', kind: o.kind, speed}); }});
  const state = {lap: 0, laps, gate: 0, gateCount: 0, lapT: 0, best: null, surface: 'road', rebuilding: false, waiting: true, lastBuild: 0, tiles: [...extraIds], crashes: 0, smashes: 0};
@@ -153,6 +153,11 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
     if (r.pad) { s.boostT = Math.max(s.boostT, 1.3); pipPip(); EV('pad'); } else { driver.impulse(13 + Math.min(8, Math.abs(s.speed) * .22)); boing(); EV('jump'); }
    }
   }
+  if (s.boostT > 0) { // turbo: flames out the back, and the wheel is steadied so a blast can't spin you out or throw you off the road
+   if (!state._turbo) { state._turbo = true; boing(); EV('turbo'); }
+   if (!s.air && Math.random() < dt * 45) puff({x: s.x - Math.sin(s.heading) * 3.2, y: s.y, z: s.z - Math.cos(s.heading) * 3.2}, Math.random() < .5 ? '#ffb347' : '#fff3b0', 1, 4);
+   K.steerRate += (baseSteer * .72 - K.steerRate) * Math.min(1, dt * 10);
+  } else { state._turbo = false; K.steerRate += (baseSteer - K.steerRate) * Math.min(1, dt * 4); }
   pickups.update(dt, bx, by);
   const pud = obstacles.puddleAt(s.x, s.z); if (pud && !s.air) { s.vx *= 1 - dt * 1.6; s.vz *= 1 - dt * 1.6; if (!state._wet) { state._wet = true; puff({x: s.x, y: s.y, z: s.z}, '#9fd8ff', 16, 5); EV('splash'); } } else state._wet = false;
   // laps: gates in order; the shortcut joins the first and the fourth hex
@@ -170,5 +175,5 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   return state;
  }
  return {root, state, attach, frame, clearScenery, cleared, setTiles, prebuild, mount, obstacles, puff, get track() { return track; }, get layout() { return L; }, ready: async ({atStart = true} = {}) => { mount(await buildFor(L)); attach(); if (atStart) { state.waiting = true; const q = toScene(track.start.x, track.start.y); driver.place(q.x, q.z, Math.atan2(track.start.tx, -track.start.ty)); } return track; }, toScene, fromScene,
-  dispose() { polaroid?.dispose(); fire?.object.removeFromParent(); world.onBoard = origOnBoard; world.nearObstacles = origNear; driver.K.maxSpeed = baseMax; driver.K.slopeSlow = baseSlope; root.removeFromParent(); pickups.dispose(); obstacles.dispose(); }};
+  dispose() { polaroid?.dispose(); fire?.object.removeFromParent(); world.onBoard = origOnBoard; world.nearObstacles = origNear; driver.K.maxSpeed = baseMax; driver.K.slopeSlow = baseSlope; driver.K.steerRate = baseSteer; root.removeFromParent(); pickups.dispose(); obstacles.dispose(); }};
 }

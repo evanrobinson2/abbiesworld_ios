@@ -13,6 +13,17 @@
       "link": "/studies/coaster/play.html"
     },
     {
+      "id": "2026-10-24-backpack-upgrades",
+      "date": "2026-10-24",
+      "title": "Backpack upgrades and a place browser",
+      "line": "The backpack now upgrades with stars: more pockets, a bigger keyring. The cards along the bottom of the town are replaced by arrows that browse the places.",
+      "image": "/whats-new/2026-10-24-backpack-upgrades.jpg",
+      "thread": "issue-535",
+      "threadTitle": "Backpack upgrades, POI browser",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-carwash-moon-buggy",
       "date": "2026-10-24",
       "title": "The carwash and your Moon Buggy",

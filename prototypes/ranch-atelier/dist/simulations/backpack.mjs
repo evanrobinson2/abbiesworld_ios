@@ -129,7 +129,27 @@ export function charmCount(id) { const v = saved(), c = CHARMS.find(x => x.id ==
 export const inBox = id => !!saved().boxed?.[id];
 export function putInBox(id, yes = true) { const v = saved(); v.boxed = {...(v.boxed || {})}; if (yes) v.boxed[id] = true; else delete v.boxed[id]; save(v); }
 // What hangs on the backpack: each charm she has and hasn't put away, a repeatable one up to its hang limit (moon cheese: two).
-export function keychain() { const boxed = saved().boxed || {}; return earnedCharms().filter(id => !boxed[id]).flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), c.hang || 1))).fill(id); }); }
+export function keychain() { const boxed = saved().boxed || {}, extra = UPGRADES.keyring.levels[upgradeLevel('keyring')].extra; return earnedCharms().filter(id => !boxed[id]).flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), (c.hang || 1) + (c.repeat ? extra : 0)))).fill(id); }); }
+
+// ---------- upgrades: the plain way to make the backpack better (Evan, 2026-10-24: "a standard, straightforward inventory
+// upgrade system"). Each upgrade has a few levels; a level costs stars, and she has one star for every memory coin and every
+// charm she has earned. Stars are only ever spent on upgrades, so what she has earned is never taken away.
+export const UPGRADES = {
+ pockets: {name: 'Pockets', icon: '🎒', blurb: 'Room for more things', levels: [
+  {cap: 8, cost: 0, says: 'Carries 8 things'}, {cap: 12, cost: 2, says: 'Carries 12 things'}, {cap: 16, cost: 3, says: 'Carries 16 things'}, {cap: 24, cost: 4, says: 'Carries 24 things'}]},
+ keyring: {name: 'Keyring', icon: '🔑', blurb: 'More of the same charm on the ring', levels: [
+  {extra: 0, cost: 0, says: 'Repeat charms hang as usual'}, {extra: 1, cost: 2, says: 'One more of each repeat charm hangs'}, {extra: 2, cost: 3, says: 'Two more of each repeat charm hang'}]}
+};
+export const upgradeLevel = id => Math.max(0, Math.min(UPGRADES[id].levels.length - 1, (saved().up || {})[id] | 0));
+export const capacity = () => UPGRADES.pockets.levels[upgradeLevel('pockets')].cap;
+export const starsSpent = () => Object.keys(UPGRADES).reduce((n, id) => n + UPGRADES[id].levels.slice(1, upgradeLevel(id) + 1).reduce((a, l) => a + l.cost, 0), 0);
+export const starsLeft = () => Math.max(0, coinCount() + earnedCharms().length - starsSpent());
+// The next level of an upgrade, or null at the top.
+export const nextLevel = id => UPGRADES[id].levels[upgradeLevel(id) + 1] || null;
+export function buyUpgrade(id) {
+ const next = UPGRADES[id] && nextLevel(id); if (!next || next.cost > starsLeft()) return false;
+ const v = saved(); save({...v, up: {...(v.up || {}), [id]: upgradeLevel(id) + 1}}); return true;
+}
 // A charm she can win again (repeat: true) counts up instead; earnCharm then returns how many she has.
 export function earnCharm(id) {
  const c = CHARMS.find(x => x.id === id); if (!c) return false;
