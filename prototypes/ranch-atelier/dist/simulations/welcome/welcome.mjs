@@ -65,6 +65,7 @@ function say(stop,muted){
  const file=voiced?.[stop.id];
  if(file&&audio){audio.src='welcome/voice/'+file;return new Promise(res=>{const done=()=>{audio.onended=audio.onerror=null;res();};audio.onended=done;audio.onerror=done;audio.play().catch(done);});}
  try{
+  return Promise.resolve(); // no synthetic speech
   if(!('speechSynthesis' in window))return Promise.resolve();
   const u=new SpeechSynthesisUtterance(stop.line),voices=speechSynthesis.getVoices();
   u.voice=voices.find(v=>/Samantha|Google UK English Female|Serena|Moira|Karen|Aria|Jenny/i.test(v.name))||voices.find(v=>/^en/i.test(v.lang))||null;u.rate=.98;u.pitch=1.06;

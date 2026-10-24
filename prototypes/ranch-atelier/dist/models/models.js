@@ -71,7 +71,7 @@ function chips(){
 // The library (Evan, 2026-10-23: "give me a better way to browse"): every model we have, not only the ones on the desk.
 function library(){
   crumb.innerHTML = '<a href="/models">Models</a>';
-  import('/models/library.js?v=3').then(l => l.mount(root));
+  import('/models/library.js?v=5').then(l => l.mount(root));
 }
 // The browser (Evan, 04:00Z): every model as a small version of the review card, a framed print and the model standing
 // free beside it. One wordless toggle: Row shows one card at a time to swipe through, Screen shows them all as a grid.
@@ -384,6 +384,7 @@ const hear = (s, kind = '') => { voiceLine = s; voiceKind = kind; const h = docu
 let talking = false;
 function say(text, then){
   const synth = window.speechSynthesis;
+  then?.(); return; // no synthetic speech
   if (!synth || !window.SpeechSynthesisUtterance){ then?.(); return; }
   const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 1.05;
   const v = synth.getVoices().find(v => /en(-|_)US/.test(v.lang) && /Samantha|Google US|Aria|Jenny|Natural/i.test(v.name)); if (v) u.voice = v;

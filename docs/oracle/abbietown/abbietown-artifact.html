@@ -203,7 +203,7 @@ if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
  <section>
   <h2>How it shows</h2>
   <div class="grid2">
-   <div class="card"><h3>In the world, the characters know (diegetic)</h3><p>The church steeple marks the centre, the train comes through, the café turns pink when it becomes Abbie's, coins glint over the places that hold a memory. October colours on every tree.</p></div>
+   <div class="card"><h3>In the world, the characters know (diegetic)</h3><p>The church steeple marks the centre, the train comes through, the café turns pink when it becomes Abbie's, the places that hold a memory keep it to themselves, with nothing floating over them. October colours on every tree.</p></div>
    <div class="card"><h3>In the world, only you know (spatial)</h3><p>A glass pin over each place you can visit, and a bubble on the place when you arrive: its name and one line.</p></div>
    <div class="card"><h3>On the screen, the characters know (meta)</h3><p>Next: the school bell from Muraco at three o'clock, the train's horn, the music of the centre growing as you walk in.</p></div>
    <div class="card"><h3>On the screen, only you know (overlay)</h3><p>One glass bar, no words: the whole town, the previous and next place, the charm slider, and Abbie signing in. About 5% of the stage.</p></div>
@@ -1148,7 +1148,8 @@ function drape(g, s, w, d, c, ox = 0, oz = 0, lift = .35) {
  for (let i = 0; i < p.count; i++) { const lx = p.getX(i) + ox, lz = p.getZ(i) + oz; p.setXYZ(i, lx, G.heightAt(s.x + lx, s.y - lz) - s.z + lift, lz); }
  geo.computeVertexNormals(); const m = new THREE.Mesh(geo, M(c)); m.receiveShadow = true; g.add(m); return m;
 }
-function coin(g, x, y, z) { const m = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, .5, 24), coinMat); m.rotation.x = Math.PI / 2; m.position.set(x, y, z); m.castShadow = true; g.add(m); coins.push(m); return m; }
+// Floating gold coins over the places were removed (Evan, 2026-10-24: he dislikes them). The memory coins are found, not shown; the calls stay as markers of where each one is hidden.
+function coin(g, x, y, z) { return null; }
 // a family home: a clapboard house facing the street and a treehouse in the backyard; Abbie's has the cellar door of Daddy's hideaway in the grass
 function family(g, wall, accent, pink) {
  const house = new THREE.Mesh(boxGeo, BODY.colonial.map(m => { const c = m.clone(); c.color = new THREE.Color(wall); return c; })); house.scale.set(11, 6.4, 9); house.castShadow = house.receiveShadow = true; g.add(house);
@@ -2091,7 +2092,8 @@ import('/simulations/paint-world/town-mount.mjs').then(m => m.start(window.Abbie
 import('/simulations/world-look.mjs').then(m => { if (m.isDeveloper()) { window.worldLook = m.worldLook(THREE, {scene, renderer, wash: WC}); m.mountWorldLookPanel(window.worldLook); } }).catch(e => console.warn('World look', e)); // developer tools only: the World look switch (Storybook, Sunday toon, Comic ink)
 import('/simulations/coaster-town.mjs').then(m => m.place(window.AbbieTown)).catch(() => {}); // the toy-car coaster on the skate park pad (AW-STUDY-0054); a no-op until that module ships
 (/[?&]bare\b/.test(location.search) ? Promise.resolve(null) : import('/simulations/abbietown/library-props.mjs?v=5')).then(m => m && m.dressTown(window.AbbieTown, THREE)).then(r => console.info('Library props', r)).catch(e => console.warn('Library props', e)); // finished library models on Main Street and in the yards
-import('/simulations/abbietown/townsfolk.mjs?v=1').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e)); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
+import('/simulations/carwash/index.mjs?v=1').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Carwash', e)); // the carwash on Main Street where the Moon Buggy is earned, and its left-bar button + garage (AW-STUDY-0059)
+import('/simulations/abbietown/townsfolk.mjs?v=2').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e)); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
 import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt})).catch(() => {}); // the world event cards (fireball, waterball, cats and dogs, tie-dye)
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
@@ -2127,3 +2129,5 @@ const town = window.AbbieTown, stage = town?.stage;
 const EXPO = h => 0.42 + 0.63 * Math.max(0, Math.sin(Math.PI * (h - 5) / 14)) ** 0.6; // dim from dusk to dawn, the town's own 1.05 at midday
 addEventListener('aw-world-clock', e => { if (stage?.renderer) stage.renderer.toneMappingExposure = EXPO(e.detail.hour) * (e.detail.weather === 'Rain' ? 0.82 : e.detail.weather === 'Cloudy' ? 0.92 : 1); });
 </script>
+<!-- The play HUD has its own file so a merge cannot drop it: simulations/town-hud-boot.mjs -->
+<script type="module" src="/simulations/town-hud-boot.mjs?v=1"></script>

@@ -30,7 +30,8 @@ function speakAloud(who, text, id, quiet) {
  if (quiet) return Promise.resolve(false);
  return voiceFor(id).then(url => new Promise(res => {
   if (url) { const a = new Audio(url); a.onended = () => res(true); a.onerror = () => res(false); a.play().catch(() => res(false)); return; }
-  const synth = window.speechSynthesis; if (!synth) return res(false);
+  return res(false); // no synthetic speech
+  const synth = window.speechSynthesis;
   const u = new SpeechSynthesisUtterance(text); u.pitch = who === 'abbie' ? 1.5 : 1.25; u.rate = 1.05;
   u.onend = () => res(true); u.onerror = () => res(false); synth.speak(u); setTimeout(() => res(false), 9000);
  }));

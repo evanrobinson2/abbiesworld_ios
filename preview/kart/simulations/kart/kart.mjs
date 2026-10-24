@@ -9,6 +9,7 @@
 // Board metres are x east, y north; scene metres are x east, z south, via world.toScene. Nothing here draws a gizmo or a label; the
 // only words anywhere are on the painted START sign.
 import * as T from 'three';
+import {createPickups} from './pickups.mjs';
 import {layoutOf, buildTrack, runLazily, seeded, inHex, R3, TRACK} from './track.mjs';
 import {createObstacles, PROP_SCALE} from './obstacles.mjs';
 import {bonk, boing, pop, chime, pipPip} from '../effect-hunt/sound.mjs';
@@ -20,7 +21,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  const toScene = (x, y) => world.toScene(x, y);
  const fromScene = (x, z) => [(x - world.origin.x) / world.scale, -(z - world.origin.z) / world.scale];
  const root = new T.Group(); root.name = 'kart track'; scene.add(root);
- const origOnBoard = world.onBoard, origNear = world.nearObstacles, baseMax = driver.K.maxSpeed, baseSlope = driver.K.slopeSlow;
+ const origOnBoard = world.onBoard, origNear = world.nearObstacles, baseMax = driver.K.maxSpeed, baseSlope = driver.K.slopeSlow, baseSteer = driver.K.steerRate;
  let L = layoutOf(board, extraIds, {width}), track = null, building = false, queued = null, attached = false, towKey = '';
  const cache = new Map(), obstacles = createObstacles({scene, world, toScene, fromScene, base: origNear, onBump: (o, power) => { if (power < 4) return; state.crashes++; puff({x: o.x, y: world.heightAt(o.x, o.z) + 1, z: o.z}, '#ffe9b0', 10, 4); onEvent({t: 'crash', kind: o.kind, power}); }, onSmash: (o, speed) => { state.smashes++; pop(); puff(o.obj.position, '#ffffff', 14, 5); onEvent({t: 'smash', kind: o.kind, speed}); }});
  const state = {lap: 0, laps, gate: 0, gateCount: 0, lapT: 0, best: null, surface: 'road', rebuilding: false, waiting: true, lastBuild: 0, tiles: [...extraIds], crashes: 0, smashes: 0};
@@ -52,6 +53,10 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  const signTex = canvasTex(512, 96, (c, w, h) => { c.fillStyle = '#fff7e8'; c.fillRect(0, 0, w, h); c.fillStyle = '#e9483c'; c.font = '800 70px ui-rounded,system-ui,sans-serif'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText('START', w / 2, h / 2 + 3); });
  const mat = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .8, flatShading: true, ...o});
  const mesh = (geo, m, name, x = 0, y = 0, z = 0) => { const o = new T.Mesh(geo, m); o.name = name; o.position.set(x, y, z); o.castShadow = o.receiveShadow = true; return o; };
+ // effect fuel (ember, droplet, treat, dye): collected pickups go into the backpack through effect-charge.mjs
+ const pickups = createPickups({scene, world, toScene, fromScene, inCar, collect: (kind, at) => {
+  import('../effect-charge.mjs').then(m => m.addFuel(kind)).catch(() => {}); puff({x: at.x, y: at.y, z: at.z}, {ember: '#ffb04d', droplet: '#8fd8ff', treat: '#f1c996', dye: '#ff7eb6'}[kind], 14, 4); pipPip();
+  try { window.dispatchEvent(new CustomEvent('aw:pickup', {detail: {kind}})); } catch {} EV('pickup', {kind}); }});
 
  let roadGroup = null, slabs = null, padsGroup = null;
  function mountMeshes(t) {
@@ -91,7 +96,7 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
  // ---- building and swapping tracks
  async function buildFor(layout) { if (cache.has(layout.key)) return cache.get(layout.key); const t = await runLazily(buildTrack(layout), {budget: 4}); cache.set(layout.key, t); return t; }
  function mount(t) {
-  track = t; L = t.L; mountMeshes(t); obstacles.mount(t); clearScenery(); for (const r of t.ramps) r.cool = 0;
+  track = t; L = t.L; mountMeshes(t); pickups.build(t); obstacles.mount(t); clearScenery(); for (const r of t.ramps) r.cool = 0;
   Object.assign(state, {gate: 0, gateCount: 0, lapT: 0, lap: state.lap}); state.length = t.main.length; state.lastBuild = t.ms; state.tiles = L.placed.map(h => h.slot);
  }
  function attach() {
@@ -148,6 +153,12 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
     if (r.pad) { s.boostT = Math.max(s.boostT, 1.3); pipPip(); EV('pad'); } else { driver.impulse(13 + Math.min(8, Math.abs(s.speed) * .22)); boing(); EV('jump'); }
    }
   }
+  if (s.boostT > 0) { // turbo: flames out the back, and the wheel is steadied so a blast can't spin you out or throw you off the road
+   if (!state._turbo) { state._turbo = true; boing(); EV('turbo'); }
+   if (!s.air && Math.random() < dt * 45) puff({x: s.x - Math.sin(s.heading) * 3.2, y: s.y, z: s.z - Math.cos(s.heading) * 3.2}, Math.random() < .5 ? '#ffb347' : '#fff3b0', 1, 4);
+   K.steerRate += (baseSteer * .72 - K.steerRate) * Math.min(1, dt * 10);
+  } else { state._turbo = false; K.steerRate += (baseSteer - K.steerRate) * Math.min(1, dt * 4); }
+  pickups.update(dt, bx, by);
   const pud = obstacles.puddleAt(s.x, s.z); if (pud && !s.air) { s.vx *= 1 - dt * 1.6; s.vz *= 1 - dt * 1.6; if (!state._wet) { state._wet = true; puff({x: s.x, y: s.y, z: s.z}, '#9fd8ff', 16, 5); EV('splash'); } } else state._wet = false;
   // laps: gates in order; the shortcut joins the first and the fourth hex
   const n = track.gates.length; state.lapT += dt;
@@ -164,5 +175,5 @@ export function createKart({scene, world, driver, board, tow = null, extraIds = 
   return state;
  }
  return {root, state, attach, frame, clearScenery, cleared, setTiles, prebuild, mount, obstacles, puff, get track() { return track; }, get layout() { return L; }, ready: async ({atStart = true} = {}) => { mount(await buildFor(L)); attach(); if (atStart) { state.waiting = true; const q = toScene(track.start.x, track.start.y); driver.place(q.x, q.z, Math.atan2(track.start.tx, -track.start.ty)); } return track; }, toScene, fromScene,
-  dispose() { polaroid?.dispose(); fire?.object.removeFromParent(); world.onBoard = origOnBoard; world.nearObstacles = origNear; driver.K.maxSpeed = baseMax; driver.K.slopeSlow = baseSlope; root.removeFromParent(); obstacles.dispose(); }};
+  dispose() { polaroid?.dispose(); fire?.object.removeFromParent(); world.onBoard = origOnBoard; world.nearObstacles = origNear; driver.K.maxSpeed = baseMax; driver.K.slopeSlow = baseSlope; driver.K.steerRate = baseSteer; root.removeFromParent(); pickups.dispose(); obstacles.dispose(); }};
 }

@@ -87,7 +87,7 @@ function sfx(kind){
 }
 function say(text,{speak=true,seconds}={}){
  const cap=$('#caption');cap.textContent=text;cap.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>cap.classList.remove('show'),(seconds??Math.min(9,2.5+text.length/16))*1000);
- if(speak&&S.sound&&'speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=1.02;u.pitch=1.05;speechSynthesis.speak(u);}
+ 
 }
 
 // ---- entities ---------------------------------------------------------------------------

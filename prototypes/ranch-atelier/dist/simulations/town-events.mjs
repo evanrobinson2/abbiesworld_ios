@@ -4,9 +4,16 @@
 // window.AWHud.effects); the god-view card deck stays in the Sandbox (event-hand.mjs). Weather and time of day are the chronograph's.
 // One call from the town page, after the scene exists:
 //   import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt}));
+// Each icon is a little greyed-out 3D model of the thing that drops (effect-icons.mjs). Effects are unlimited and always ready: tapping one
+// drops it, as often as she likes. Fire wheels wakes with the Hot Wheels charm instead.
 // (heightAt is optional; the town is in metres, y up.) Presentation layer only: the icons are not in the world; the effects they start are.
 import {createWorldEffects} from './world-effects.mjs';
+import {createEffectIcons} from './effect-icons.mjs';
 
+// Evan, 2026-10-24 (#546): no cooldowns, nothing runs out, every element is there from the start. So by default every effect is
+// always charged and tapping drops it, as often as you like. Charging from backpack items (effect-charge.mjs) is kept for a mode
+// he may want back: ?charge=1, or localStorage aw-effect-charge-mode = 'on'.
+const FREE = (() => { try { return !(/[?&]charge=1\b/.test(location.search) || localStorage.getItem('aw-effect-charge-mode') === 'on'); } catch { return true; } })();
 const DAY_SECONDS = 360; // the town has no clock for effects yet: an effect's "day" is six minutes
 const svg = body => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
 const EFFECTS = [
@@ -21,19 +28,26 @@ export function mountTownEvents({THREE, scene, camera, controls, renderer, heigh
   const buttons = {};
   // The icons go in the HUD's effects pill; wait for the HUD if it is not up yet (a few seconds at most, then the page body).
   const hud = window.AWHud ? Promise.resolve() : new Promise(r => { addEventListener('aw-hud-ready', r, {once: true}); setTimeout(r, 4000); });
+  const icons = createEffectIcons(THREE);
+  if (!document.getElementById('aw-effect-css')) document.head.append(Object.assign(document.createElement('style'), {id: 'aw-effect-css', textContent: '.aw-ico[data-effect]{width:46px;height:56px;border-radius:13px;border:2px solid #2a2018;background:var(--fx-bg);box-shadow:inset 0 2px 0 #ffffffb0,inset 0 -10px 14px #0000001f,0 3px 7px #2a201440;overflow:hidden;transition:transform .15s}.aw-ico[data-effect]::before{content:"";position:absolute;inset:0;background:conic-gradient(from 0deg at 50% 62%,#ffffff40 0 8%,#0000 8% 17%,#ffffff40 17% 25%,#0000 25% 34%,#ffffff40 34% 42%,#0000 42% 51%,#ffffff40 51% 59%,#0000 59% 68%,#ffffff40 68% 76%,#0000 76% 85%,#ffffff40 85% 93%,#0000 93%);pointer-events:none}.aw-ico[data-effect]::after{content:"";position:absolute;left:5px;right:5px;bottom:4px;height:6px;border-radius:50%;background:#2a20182e;pointer-events:none}.aw-ico[data-effect]:active{transform:scale(.94)}.aw-ico[data-effect] canvas{position:relative;z-index:1;margin-top:2px}.aw-ico[data-effect=fireball]{--fx-bg:linear-gradient(170deg,#ffd9a0,#ff9a4a 70%,#e8642a)}.aw-ico[data-effect=waterball]{--fx-bg:linear-gradient(170deg,#d6f1ff,#7cc8f2 70%,#4a9fd8)}.aw-ico[data-effect=cats-dogs]{--fx-bg:linear-gradient(170deg,#c8d2e0,#8d9fb0 70%,#5f7389)}.aw-ico[data-effect=tie-dye]{--fx-bg:linear-gradient(170deg,#ffe0f0,#c9a0ff 70%,#16d6c0)}.aw-ico[data-effect=fire-wheels]{--fx-bg:linear-gradient(170deg,#ffe9b0,#ff8a3a 60%,#7a3a1a)}.aw-ico[data-effect].pulse{animation:aw-ico-pulse .6s cubic-bezier(.3,1.6,.5,1)}'}));
   hud.then(() => {
   const host = window.AWHud?.effects || document.body, balloons = window.AWHud?.balloons;
   for (const e of EFFECTS) {
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'aw-ico'; b.dataset.layer = 'presentation'; b.dataset.effect = e.id; b.title = e.name; b.setAttribute('aria-label', e.name); b.innerHTML = e.icon;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'aw-ico'; b.dataset.layer = 'presentation'; b.dataset.effect = e.id; b.title = e.name; b.setAttribute('aria-label', e.name);
+    if (!icons?.mount(b, e.id)) b.innerHTML = e.icon;
     if (e.locked) b.dataset.locked = '1';
+    const pulse = () => { b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse'); };
+    // The world effects are unlimited and always ready (Evan, 2026-10-24, issue #529/#531): tap one and it happens, as often as she likes.
+    icons?.setCharged(e.id, !e.locked);
+    b.dataset.state = e.locked ? 'locked' : 'ready';
     b.onclick = async () => {
       if (e.id === 'fire-wheels') { const m = await import('./fire-wheels.mjs').catch(() => null); if (m?.fireWheelsUnlocked()) m.setFireWheels(!m.fireWheelsOn()); else b.title = 'Fire wheels: win the toy car charm first'; return; }
-      fx.play(e.id); b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse');
+      fx.play(e.id); pulse();
     };
     host.insertBefore(b, balloons?.parentElement === host ? balloons : null); buttons[e.id] = b;
   }
   });
   // Fire wheels wakes up when the charm is won, and shows whether the trail is on.
-  import('./fire-wheels.mjs').then(m => { const sync = () => { const b = buttons['fire-wheels']; if (!b) return; if (m.fireWheelsUnlocked()) delete b.dataset.locked; else b.dataset.locked = '1'; b.setAttribute('aria-pressed', String(m.fireWheelsOn())); }; sync(); m.onFireWheels(sync); addEventListener('focus', sync); setInterval(sync, 4000); }).catch(() => {});
+  import('./fire-wheels.mjs').then(m => { const sync = () => { const b = buttons['fire-wheels']; if (!b) return; if (m.fireWheelsUnlocked()) delete b.dataset.locked; else b.dataset.locked = '1'; icons?.setCharged('fire-wheels', m.fireWheelsUnlocked()); b.setAttribute('aria-pressed', String(m.fireWheelsOn())); }; sync(); m.onFireWheels(sync); addEventListener('focus', sync); setInterval(sync, 4000); }).catch(() => {});
   return {fx, buttons};
 }

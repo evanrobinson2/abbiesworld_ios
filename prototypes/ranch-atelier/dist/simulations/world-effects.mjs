@@ -11,12 +11,34 @@ export function createWorldEffects({T, scene, orbit, camera, canvas, heightAt = 
   let raf = 0;
   const hoursOf = c => c.day * 24 + c.hour;
   const mat = (color, o = {}) => new T.MeshStandardMaterial({color, roughness: 0.6, ...o});
+  // Where things land: terrain alone let effects fall through buildings, roofs, decks and bridges. Cast a ray down at each
+  // spot and take the highest solid world surface at or under the spot the player is looking at, else the terrain.
+  // Presentation-layer cues, other effects, invisible things and see-through glows are never ground.
+  const ray = new T.Raycaster(), DOWN = new T.Vector3(0, -1, 0), probe = new T.Vector3();
+  const solid = h => {
+    const o = h.object;
+    if (!o.isMesh || o.userData?.worldEffect) return false;
+    for (let n = o; n; n = n.parent) if (n.visible === false || n.userData?.worldEffect || n.userData?.layer === 'presentation') return false;
+    const m = [o.material].flat()[0];
+    return !(m && (m.depthWrite === false || (m.transparent && m.opacity < 0.5)));
+  };
+  function surfaceAt(x, z, top) {
+    const ground = heightAt(x, z);
+    try {
+      ray.set(probe.set(x, top, z), DOWN); ray.far = Math.max(1, top - ground + 50);
+      const hit = ray.intersectObjects(scene.children, true).find(solid);
+      if (hit && hit.point.y > ground) return hit.point.y;
+    } catch {}
+    return ground;
+  }
   // Effects are built in a local frame (metres-ish, ground at 0) placed on what the player is looking at, scaled by view distance.
   function frame() {
-    const cx = orbit.target.x, cz = orbit.target.z, gy = heightAt(cx, cz);
-    const s = camera ? Math.max(0.3, camera.position.distanceTo(orbit.target) / 12) : 1;
-    const g = new T.Group(); g.position.set(cx, gy, cz); g.scale.setScalar(s); scene.add(g);
-    return {g, s, H: (x, z) => (heightAt(cx + x * s, cz + z * s) - gy) / s};
+    const cx = orbit.target.x, cz = orbit.target.z, s = camera ? Math.max(0.3, camera.position.distanceTo(orbit.target) / 12) : 1;
+    const top = Math.max(orbit.target.y, heightAt(cx, cz)) + 3 * s, cache = new Map();
+    const world = (x, z) => { const k = Math.round(x * 5) + ',' + Math.round(z * 5); let y = cache.get(k); if (y === undefined) cache.set(k, y = surfaceAt(x, z, top)); return y; };
+    const gy = world(cx, cz);
+    const g = new T.Group(); g.userData.worldEffect = true; g.position.set(cx, gy, cz); g.scale.setScalar(s); scene.add(g);
+    return {g, s, H: (x, z) => (world(cx + x * s, cz + z * s) - gy) / s};
   }
 
   function start(fx) { fx.t0 = hoursOf(clock()); fx.age = 0; live.add(fx); if (!raf) raf = requestAnimationFrame(loop); return fx; }

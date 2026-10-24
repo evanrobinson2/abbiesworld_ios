@@ -12,12 +12,11 @@ This is the issue trigger that scheduled-task GitHub triggers (PR and release ev
    `main`, PR into `main`, merge, comment the result on the issue, close it. It never deploys; merged work
    ships in the next deploy batch.
 
-Which issues count: opened by the repo owner or a collaborator (ChatGPT posts as Evan), and the title
-starts with Dispatch, Research, Build, Fix or Implement, or the body says "for Claude", or it has the
-`claude-intake` label. Issues from the ChatGPT dispatch bridge (`abbies-dispatch:v1`, label `dispatch`)
-are skipped; they have their own routine and the `dispatch-relay` workflow.
+Which issues count: every issue opened by the repo owner or a collaborator (ChatGPT posts as Evan),
+whatever the title. Bot/CI issues and bridge dispatches (`abbies-dispatch:v1`, label `dispatch`) are
+skipped; the bridge has its own routine and the `dispatch-relay` workflow.
 
-## One-time setup (Evan)
+## Setup (done 2026-10-24)
 
 1. claude.ai/code/routines: create a routine named "Abbie's World issue intake" on this repo, paste the
    prompt from `ISSUE_ROUTINE_PROMPT.md`, add an **API trigger**, and copy its id (`trig_...`) and token.

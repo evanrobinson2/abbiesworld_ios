@@ -36,6 +36,11 @@ html.aw-town-hud #v2-chrono .ch-tiles{display:none}
 #aw-hand{position:fixed;z-index:30;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 10px);display:flex;align-items:flex-end;justify-content:center;gap:10px;pointer-events:none;max-width:calc(100vw - 96px)}
 #aw-hand>*{pointer-events:auto}
 html.aw-town-hud #aw-hand .pw-hand{position:static;--pw-w:92px}
+#aw-hand-tab{all:unset;box-sizing:border-box;cursor:pointer;display:grid;place-items:center;width:46px;height:34px;border-radius:17px;color:var(--v2-ink,#2b1d0e);background:linear-gradient(160deg,#ffffffc8,#ffffff58);box-shadow:inset 0 1px 0 #fff,0 1px 4px #2a201440;-webkit-tap-highlight-color:transparent}
+#aw-hand-tab svg{width:24px;height:24px}
+#aw-hand-tab:focus-visible{outline:2px solid var(--v2-accent,#b64932);outline-offset:2px}
+#aw-hand[data-open=false]>:not(#aw-hand-tab){display:none!important}
+#aw-hand[data-open=true] #aw-hand-tab{display:none}
 @media(max-width:520px){#aw-hand{max-width:calc(100vw - 80px);left:calc(50% + 28px)}}
 @media(prefers-reduced-motion:reduce){.aw-ico.pulse{animation:none}}`;
 
@@ -58,8 +63,17 @@ export function mountTownHud({stage, board} = {}) {
   let glow = null;
   grid.onclick = () => { if (!glow && stage && board) glow = hexGlow(stage, board.hexSide); if (!glow) return; grid.setAttribute('aria-pressed', String(glow.toggle())); };
 
-  // BOTTOM: the hand of cards. The Paint the World card sits in it.
-  const hand = el('div', {id: 'aw-hand'}); hand.setAttribute('aria-label', 'Cards'); document.body.append(hand);
+  // BOTTOM: the hand of cards. The Paint the World card sits in it. The hand rests as one small tab so it never covers the
+  // world or the controls (Evan, 2026-10-24: cards were blocking the interface); tap the tab to deal it, and it tucks away
+  // again after a card is used, on a tap in the world, or on Escape.
+  const hand = el('div', {id: 'aw-hand'}); hand.setAttribute('aria-label', 'Cards'); hand.dataset.open = 'false'; document.body.append(hand);
+  const tab = el('button', {type: 'button', id: 'aw-hand-tab', title: 'Cards'}, `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="6" width="10" height="14" rx="2" transform="rotate(-10 8.5 13)"/><rect x="10.5" y="4.5" width="10" height="14" rx="2" fill="#fff6c8" transform="rotate(8 15.5 11.5)"/></svg>`);
+  tab.setAttribute('aria-label', 'Show cards'); tab.dataset.layer = 'presentation'; hand.append(tab);
+  const setHand = open => { hand.dataset.open = String(open); tab.setAttribute('aria-expanded', String(open)); };
+  tab.onclick = () => setHand(true);
+  hand.addEventListener('click', e => { if (e.target.closest('#aw-hand-tab')) return; setTimeout(() => setHand(false), 350); });
+  addEventListener('pointerdown', e => { if (hand.dataset.open === 'true' && !hand.contains(e.target)) setHand(false); }, true);
+  addEventListener('keydown', e => { if (e.key === 'Escape') setHand(false); });
   const adopt = () => { const p = document.getElementById('paint-hand'); if (p && p.parentElement !== hand) hand.append(p); };
   adopt(); new MutationObserver(adopt).observe(document.body, {childList: true});
 

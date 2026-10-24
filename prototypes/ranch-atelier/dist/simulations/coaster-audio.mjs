@@ -5,6 +5,9 @@
 //    D6/9 -> G6 -> A(add9) -> D6/9), played live by a small synth band so it can follow the ride: 'garage' (pads and an
 //    arpeggio), 'ride' (drums, bass, the hook), 'slow' (the band slides into a low-pass and drops away), 'finish'
 //    (a cadence and a ta-da). One signal drives it: setState().
+// Round 3 (issue #542): the score is real music now. The produced Abbie's World track (music/abbies-world-reimagined.mp3,
+// our own, the same one the jukebox plays) streams under the ride; the live synth band is only the fallback where the
+// file can't be reached, so a ride is never silent and never plays both.
 //   const A = coasterAudio({muted}); A.wake(); A.play('whoosh-1', {rate, gain}); A.state('ride'); A.speed(v, air); A.slow(k)
 
 const SAMPLES = ['whoosh-1', 'whoosh-2', 'whoosh-3', 'magic-whoosh', 'carnival', 'stadium', 'chain', 'ratchet', 'countdown', 'jump-land-2', 'firework-launch', 'firework-burst-1',
@@ -17,7 +20,7 @@ const RHYTHM = [1, 0, 0, 1, 0, 0, 1, 0]; // 3 + 3 + 2 in eighths
 
 export function coasterAudio({muted = false} = {}) {
   let ac = null, master = null, musicBus = null, sfxBus = null, lp = null, wind = null, rumble = null, beds = {}, buf = {}, manifest = null;
-  let st = 'off', step = 0, nextT = 0, timer = null, slowK = 1, bpm = 138;
+  let track = null, trackOn = false, st = 'off', step = 0, nextT = 0, timer = null, slowK = 1, bpm = 138;
   const A = {
     get ctx() { return ac; },
     wake() {
@@ -26,7 +29,7 @@ export function coasterAudio({muted = false} = {}) {
         master = ac.createGain(); master.gain.value = .9; const comp = ac.createDynamicsCompressor(); comp.threshold.value = -14; comp.ratio.value = 4; master.connect(comp).connect(ac.destination);
         lp = ac.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 18000; lp.connect(master);
         musicBus = ac.createGain(); musicBus.gain.value = .5; musicBus.connect(lp); sfxBus = ac.createGain(); sfxBus.gain.value = .9; sfxBus.connect(lp);
-        load(); }
+        load(); loadTrack(); }
       if (ac.state === 'suspended') ac.resume(); return ac;
     },
     // ---- effects ----
@@ -50,11 +53,21 @@ export function coasterAudio({muted = false} = {}) {
     },
     quietRide() { if (wind) { const t = ac.currentTime; wind.g.gain.setTargetAtTime(0, t, .3); rumble.g.gain.setTargetAtTime(0, t, .3); rumble.c.gain.setTargetAtTime(0, t, .3); } },
     // slow motion: k = 1 normal, .2 very slow. The band and the world slide under a low-pass and down in pitch.
-    slow(k) { slowK = k; if (!ac) return; const t = ac.currentTime; lp.frequency.setTargetAtTime(k < .99 ? 500 + 5000 * k : 18000, t, .08); musicBus.gain.setTargetAtTime(k < .99 ? .28 : .5, t, .1);
+    slow(k) { slowK = k; if (track) track.playbackRate = Math.max(.5, k); if (!ac) return; const t = ac.currentTime; lp.frequency.setTargetAtTime(k < .99 ? 500 + 5000 * k : 18000, t, .08); musicBus.gain.setTargetAtTime(k < .99 ? .28 : .5, t, .1);
       if (k < .99) heartbeat(); },
     // ---- the score ----
-    state(s) { if (!A.wake()) return; if (s === st) return; const was = st; st = s; if (s === 'finish') cadence(); if (!timer) { nextT = ac.currentTime + .08; step = 0; timer = setInterval(tick, 25); } if (s === 'off') { clearInterval(timer); timer = null; } return was; },
+    state(s) { if (!A.wake()) return; if (s === st) return; const was = st; st = s; if (s === 'finish') cadence(); if (!timer) { nextT = ac.currentTime + .08; step = 0; timer = setInterval(tick, 25); } if (s === 'off') { clearInterval(timer); timer = null; } musicTrack(s); return was; },
   };
+  // The produced track: streamed, looped, into the music bus (so slow motion's low-pass and ducking still apply).
+  function loadTrack() {
+    try { track = new Audio('/music/abbies-world-reimagined.mp3'); track.loop = true; track.preload = 'auto'; track.crossOrigin = 'anonymous';
+      const g = ac.createGain(); g.gain.value = 1; ac.createMediaElementSource(track).connect(g).connect(musicBus); track.addEventListener('error', () => { trackOn = false; });
+      if (st !== 'off') musicTrack(st); } catch { track = null; }
+  }
+  function musicTrack(s) {
+    if (!track) return; if (s === 'off') { track.pause(); trackOn = false; return; }
+    if (trackOn) return; track.play().then(() => { trackOn = true; }, () => {});
+  }
   async function load() {
     try { manifest = manifest || await (await fetch('/sounds/manifest.json')).json(); } catch { return; }
     const byId = Object.fromEntries((manifest.sounds || []).map(s => [s.id, s]));
@@ -95,7 +108,7 @@ export function coasterAudio({muted = false} = {}) {
   }
   function play(i, t, spb) {
     const bar = Math.floor(i / 8) % 4, e = i % 8, ch = CHORDS[bar], ride = st === 'ride' || st === 'slow';
-    if (st === 'off') return;
+    if (st === 'off' || trackOn) return;
     // drums (ride only): kick on the 3+3+2, snare on 2 and 4, hats on every eighth
     if (ride && st !== 'slow') { if (RHYTHM[e]) osc('sine', 150, t, .002, .18, .9, musicBus, 45); if (e === 2 || e === 6) { nz(t, .12, .35, 'bandpass', 1800); osc('triangle', 190, t, .002, .08, .2); } nz(t, .03, e % 2 ? .08 : .14, 'highpass', 7000); }
     // bass on the 3+3+2
@@ -107,6 +120,6 @@ export function coasterAudio({muted = false} = {}) {
     // the hook: one note per quarter, in the ride
     if (ride && e % 2 === 0) { const n = HOOK[bar][e / 2]; osc('square', N(n + 12), t, .01, spb * 1.6, .07); osc('triangle', N(n + 24), t, .01, spb * 1.2, .04); }
   }
-  function cadence() { const t = ac.currentTime + .05; [[57, 61, 64, 69], [50, 57, 62, 66, 69, 74]].forEach((c, k) => c.forEach(n => osc('triangle', N(n + 12), t + k * .45, .02, 1.6, .06))); setTimeout(() => { if (st === 'finish') { st = 'garage'; } }, 3200); }
+  function cadence() { if (trackOn) return; const t = ac.currentTime + .05; [[57, 61, 64, 69], [50, 57, 62, 66, 69, 74]].forEach((c, k) => c.forEach(n => osc('triangle', N(n + 12), t + k * .45, .02, 1.6, .06))); setTimeout(() => { if (st === 'finish') { st = 'garage'; } }, 3200); }
   return A;
 }

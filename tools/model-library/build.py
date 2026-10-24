@@ -79,8 +79,9 @@ def classify(p):
         if re.search(rx, p): return col, place, src
     return 'Other', 'Ranch', 'Blender'
 
+PEOPLE = re.compile(r'\b(seller|worker|foreman|doctor|astronaut|warrior|hero|heroes|man|men|woman|women|girl|boy|child|kid|figure|figures|person|people|villager|farmer|miller|potter|scientist|bruiser|fighter|brute|chibi|mannequin|abbie|ani|daddy|mommy|lexi|jeff|georgia|pearl|legionary|centurion|soldier|character|characters|scarecrow|elder)\b|\bcs-\d|-suit\b|_suit\b|\b(clay|paint) (suit|tee)\b', re.I)
+PEOPLE_COLLECTIONS = ('Moon heroes (Meshy)', 'Character Studio', 'Bruiser study', 'Bodies and mannequins')
 TYPES = [
-    ('Character', r'character|hero|suit|tee\b|astronaut|man\b|woman|figure|body|mannequin|fighter|chibi|clay|bruiser|foreman|worker|doctor|scientist|girl|boy|abbie|ani\b|cs-\d'),
     ('Animal', r'cow|horse|goat|chicken|dog|cat\b|bub|sheep|pig|bird|animal|tardigrade|fish|bee\b'),
     ('Vehicle', r'car\b|car-|truck|tractor|buggy|suv|ship|rocket|aurora|boat|cart|bus\b|van\b|racer|sedan|pickup|kart|wheel'),
     ('Plant', r'tree|plant|flower|fern|bush|bramble|clover|borage|goldenrod|sunflower|hollyhock|marigold|coneflower|hazel|elder|maple|birch|apple|herb|crop|garden|moss|grass|reed|leaf'),
@@ -91,8 +92,11 @@ TYPES = [
     ('Furniture', r'bench|table|chair|stool|bed\b|shelf|counter|bar-|beanbag|couch|sofa|desk|cabinet|rack|crate|barrel|bucket|jar|pot\b|lamp|booth|stage|box|chest|bin\b|sign|fence'),
     ('Machine and tech', r'computer|terminal|boombox|crt|battery|machine|radio|screen|pod\b|bulkhead|panel|generator|antenna|robot|drone|console|register|blender|jukebox|disco|laser|dj'),
 ]
-def kind(text):
+UPG = re.compile(r'upgrade|charming|remaster|whimsical|[-_/]high\b|hi-?poly|rounds?/r[2-9]|-r[2-9]\b|_v[2-9]', re.I)
+NOT_PEOPLE = re.compile(r'charm|belt|greave|pauldron|sandal|helmet|shield|skirt|sash|spear|cuirass|bands|shrub|comb|\bgear\b|shoulder|plates|\bkey\b|\bbody\b|\bout\b|\brecipe\b|\bspec\b|\bcage\b|\bdemo|deltoid|\bv\d\b|paint (base|flair)|composed|\bboat\b|net and', re.I)
+def kind(text, col='', name=None):
     t = text.lower()
+    if not NOT_PEOPLE.search(name if name is not None else text) and (col in PEOPLE_COLLECTIONS or PEOPLE.search(text.replace('_', ' ').replace('-', ' '))): return 'People'
     for name, rx in TYPES:
         if re.search(rx, t): return name
     return 'Prop'
@@ -138,7 +142,7 @@ for h, paths in by_hash.items():
     key = h[:12]
     e = {
         'key': key, 'name': name, 'collection': col, 'place': place, 'source': src,
-        'type': kind(name + ' ' + rel), 'bytes': size,
+        'type': kind(name + ' ' + rel, col, name), 'pass': 'Upgrade' if UPG.search(rel + ' ' + name) else 'Original', 'bytes': size,
         'level': 'stage' if stage else 'model',
         'status': 'reviewed' if m else 'unreviewed',
         'glb': ('/' + rel) if served else None,
@@ -182,7 +186,7 @@ for blob, (b, path) in found.items():
     elif path.startswith('experiments/'):
         col, place, src = 'Rooftop experiments', 'Town', 'Meshy'
     nm = pretty(path, h)
-    it = {'key': h[:12], 'name': nm, 'collection': col, 'place': place, 'source': src, 'type': kind(nm + ' ' + path), 'bytes': len(data),
+    it = {'key': h[:12], 'name': nm, 'collection': col, 'place': place, 'source': src, 'type': kind(nm + ' ' + path, col, nm), 'pass': 'Upgrade' if UPG.search(path + ' ' + nm) else 'Original', 'bytes': len(data),
         'level': 'stage' if STAGE.search('/' + path) and not path.startswith('UE5/') else 'model', 'status': 'branch', 'glb': None, 'file': path,
         'branch': b.replace('origin/', ''), 'copies': 1}
     if os.path.exists(f'{THUMBS}/{h[:12]}.png'): it['thumb'] = f'/models/library/t/{h[:12]}.webp'

@@ -143,7 +143,7 @@ export function createStage(ctx,{room,relay}){
   },
   async time(a){if(a.hour!==undefined)ctx.setHour(a.hour);if(a.paused!==undefined)ctx.setPaused(a.paused);if(a.speed!==undefined)ctx.setSpeed(a.speed);return ctx.clock();},
   async weather(a){ctx.setWeather(a.mode);return {weather:ctx.clock().weather};},
-  async narrate(a){ui.caption(a.text,a.seconds??Math.min(12,3+a.text.length/14));if(a.speak&&'speechSynthesis' in window){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(a.text);u.rate=1.02;speechSynthesis.speak(u);}return {shown:true};},
+  async narrate(a){ui.caption(a.text,a.seconds??Math.min(12,3+a.text.length/14));return {shown:true};},
   async screenshot(a){return new Promise(resolve=>shots.push({resolve,width:a.width??960,quality:a.quality??.8}));}
  };
 

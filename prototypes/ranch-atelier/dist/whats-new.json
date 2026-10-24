@@ -12,6 +12,114 @@
       "tour": false
     },
     {
+      "id": "2026-10-24-car-picker-inspect",
+      "date": "2026-10-24",
+      "title": "Pick up a toy car and turn it around",
+      "line": "The garage now frames every car. Hold one to lift it, turn it with a finger, then put it back or choose it.",
+      "image": "/whats-new/2026-10-24-car-picker-inspect.png",
+      "thread": "issue-539",
+      "threadTitle": "Car picker camera and inspection",
+      "tour": false,
+      "link": "/studies/coaster/play.html"
+    },
+    {
+      "id": "2026-10-24-backpack-inspect",
+      "date": "2026-10-24",
+      "title": "Unzip your backpack and look closely",
+      "line": "Spin the backpack, unzip each pocket, tap a thing to hold it up big with a note about it, then put it back.",
+      "image": "/whats-new/2026-10-24-backpack-inspect.jpg",
+      "thread": "session_01MPyekYkd3HfDuMDGbCtqFv",
+      "threadTitle": "Interactive 3D backpack (issue 536)",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-coaster-music-backpack-fix",
+      "date": "2026-10-24",
+      "title": "Real music on the coaster, and a tidy backpack",
+      "line": "The ride plays our produced Abbie's World track instead of the synth band. The backpack closes cleanly: charms hang back where they belong and no gold coins float inside.",
+      "image": "/whats-new/2026-10-24-carwash-buggy.jpg",
+      "thread": "issue-542",
+      "threadTitle": "Dispatch: coaster music and backpack cleanup",
+      "tour": false,
+      "link": "/studies/coaster/play.html"
+    },
+    {
+      "id": "2026-10-24-backpack-upgrades",
+      "date": "2026-10-24",
+      "title": "Backpack upgrades and a place browser",
+      "line": "The backpack now upgrades with stars: more pockets, a bigger keyring. The cards along the bottom of the town are replaced by arrows that browse the places.",
+      "image": "/whats-new/2026-10-24-backpack-upgrades.jpg",
+      "thread": "issue-535",
+      "threadTitle": "Backpack upgrades, POI browser",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-carwash-moon-buggy",
+      "date": "2026-10-24",
+      "title": "The carwash and your Moon Buggy",
+      "line": "Roll the grubby buggy through the carwash, get soaked, and it's yours. Dress it with toy animals and colours.",
+      "image": "/whats-new/2026-10-24-carwash-buggy.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAZK5mDoYzg7w8wZwWBvd9Q",
+      "threadTitle": "Earn the buggy at the carwash",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-tile-cards",
+      "date": "2026-10-24",
+      "title": "Tap a town card to turn its hex",
+      "line": "Tapping a tile card in the town's hand flips it open with that hex turning live in 3D; drag to turn it. Look, don't edit: Winchester stays as it is.",
+      "image": "/whats-new/2026-10-24-town-tile-cards.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-kart-pickups",
+      "date": "2026-10-24",
+      "title": "Fuel to collect while you drive",
+      "line": "Embers, water drops, pet treats and dye drops sit along the track. Drive through one and it goes into your backpack to charge an effect.",
+      "image": "/whats-new/2026-10-24-kart-pickups.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF9Mas7aH7R2p9xFLqr9qzV",
+      "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-effect-icons",
+      "date": "2026-10-24",
+      "title": "World effects hover, and charge up",
+      "line": "The effect icons are little 3D things now, greyed out until you charge them with an item from your backpack. Then they glow, and you can drop them on the world.",
+      "image": "/whats-new/2026-10-24-effect-icons.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+      "threadTitle": "World event cards",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-backpack-loadout",
+      "date": "2026-10-24",
+      "title": "Dress the backpack by its parts",
+      "line": "The card slots are gone. Little glass dots sit on the backpack itself: tap one, or tap the part, and a small row of colours or shapes opens beside it. Tap one and it goes on.",
+      "image": "/whats-new/2026-10-24-backpack-loadout.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-toy-car-picker",
+      "date": "2026-10-24",
+      "title": "Pick your toy car",
+      "line": "A round button on the left swaps your toy car for the next one: racer, camper bus, roll-cage buggy, truck cab and more.",
+      "image": "/whats-new/2026-10-23-car-mode-polaroid.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF9Mas7aH7R2p9xFLqr9qzV",
+      "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
+      "tour": false
+    },
+    {
       "id": "2026-10-24-paint-slot",
       "date": "2026-10-24",
       "title": "Paint fireball and slot machine",
@@ -21,6 +129,17 @@
       "threadTitle": "AW-STUDY-0049 - Paint the World",
       "tour": true,
       "link": "/town"
+    },
+    {
+      "id": "2026-10-24-model-library",
+      "date": "2026-10-24",
+      "title": "Models is a proper library now",
+      "line": "Every model we have on one shelf with big pictures: search, studies down the side, and filters for source, type, place and status. Tap one to turn it around.",
+      "image": "/whats-new/2026-10-24-model-library.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9K3YJwLcfEwfvCoPXMCBhL",
+      "threadTitle": "Make all models easy to browse",
+      "tour": false,
+      "link": "/models"
     },
     {
       "id": "2026-10-24-model-library",
