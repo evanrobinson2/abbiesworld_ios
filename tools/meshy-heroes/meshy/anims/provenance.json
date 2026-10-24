@@ -710,6 +710,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/roll_behind_cover.glb"
    ]
+  },
+  "31": {
+   "task_id": "01a16b64-2338-726a-833c-4709baf2558e",
+   "credits": 3,
+   "name": "Catching Breath",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/catching_breath.glb"
+   ]
+  },
+  "27": {
+   "task_id": "01a16b64-2339-7425-9da7-854035e0506e",
+   "credits": 3,
+   "name": "Big Heart Gesture",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/big_heart_gesture.glb"
+   ]
+  },
+  "23": {
+   "task_id": "01a16b64-2338-77dc-834c-6a2205a814ea",
+   "credits": 3,
+   "name": "Funny Dancing 2",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/funnydancing_02.glb"
+   ]
+  },
+  "29": {
+   "task_id": "01a16b64-233d-7624-97dc-d1ada7394571",
+   "credits": 3,
+   "name": "Call Gesture",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/call_gesture.glb"
+   ]
+  },
+  "22": {
+   "task_id": "01a16b64-233c-712b-8de0-44e88787482b",
+   "credits": 3,
+   "name": "Funny Dancing 1",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/funnydancing_01.glb"
+   ]
+  },
+  "138": {
+   "task_id": "01a16b64-7c6c-735b-8ce8-68fe333d2fc9",
+   "credits": 3,
+   "name": "Block1",
+   "category": "Fighting",
+   "sub_category": "Blocking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/block1.glb"
+   ]
+  },
+  "24": {
+   "task_id": "01a16b64-7bd1-73b8-87ae-7326ca9d77ef",
+   "credits": 3,
+   "name": "Funny Dancing 3",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/funnydancing_03.glb"
+   ]
+  },
+  "87": {
+   "task_id": "01a16b64-7c3c-71df-b982-f64f069f66dd",
+   "credits": 3,
+   "name": "Boxing Practice",
+   "category": "Fighting",
+   "sub_category": "Punching",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/boxing_practice.glb"
+   ]
+  },
+  "90": {
+   "task_id": "01a16b64-7c6e-76c9-a98e-a9ad512aa955",
+   "credits": 3,
+   "name": "Counterstrike",
+   "category": "Fighting",
+   "sub_category": "Punching",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/counterstrike.glb"
+   ]
+  },
+  "7": {
+   "task_id": "01a16b64-a0e8-7761-b6e2-57161eb4b163",
+   "credits": 3,
+   "name": "BeHit FlyUp",
+   "category": "Fighting",
+   "sub_category": "GettingHit",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/behit_flyup.glb"
+   ]
   }
  }
 }
