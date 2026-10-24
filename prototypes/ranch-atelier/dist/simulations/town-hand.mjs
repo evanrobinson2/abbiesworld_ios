@@ -43,7 +43,7 @@ const CSS = `#aw-hand .aw-tile-card{all:unset;box-sizing:border-box;cursor:point
 // town's canvas, on a flat key colour that is cut out afterwards, so the card's art is the tile itself (Evan, 23:59Z: "the
 // main hex tiles need to come back"). Runs inside the stage's frame loop so the canvas is still readable.
 const KEY = [255, 0, 255];
-function captureHex(stage, id, size = 460) {
+function captureHex(stage, id, size = 320) {
   const {THREE: T, scene, renderer, dioGroup, tiles} = stage, tile = tiles[id]; if (!tile) return null;
   const cam = new T.OrthographicCamera(-122, 122, 122, -122, 1, 3000), az = 205 * Math.PI / 180, pitch = 52 * Math.PI / 180, c = tile.centre;
   cam.position.set(c.x + Math.sin(az) * Math.cos(pitch) * 700, c.y + Math.sin(pitch) * 700, c.z - Math.cos(az) * Math.cos(pitch) * 700); cam.lookAt(c.x, c.y - 6, c.z); cam.updateMatrixWorld();
@@ -99,9 +99,11 @@ export function mountTownHand({board, visit, stage} = {}) {
       if (!stage.dioGroup.visible || ++frames < 12) return; frames = 0;
       // Cartoon, like the sandbox's tile cards: flat bands of light and black ink round everything, for the capture only.
       let ink = null; try { if (look && !window.worldLook) ink = look.worldLook(stage.THREE, {scene: stage.scene, renderer: stage.renderer, initial: 'comic-ink'}); } catch (e) { console.warn('Hex ink', e); }
-      hexes.forEach((h, k) => { if (!pending.has(h.id)) return; const url = captureHex(stage, h.id); if (url) { pending.delete(h.id); deal(row.children[k], h, k, url); } });
+      // One hex a tick, so a slow GPU (or the CI's software renderer) is never held for seven renders in a single frame.
+      const k = hexes.findIndex(h => pending.has(h.id)), h = hexes[k];
+      if (h) { const url = captureHex(stage, h.id); if (url) { pending.delete(h.id); deal(row.children[k], h, k, url); } else tries++; }
       try { ink?.dispose(); } catch {}
-      if (!pending.size || ++tries >= 4) off(); // try again a few times if a hex was not ready
+      if (!pending.size || tries >= 6) off(); // try a hex again a few times if it was not ready
     });
   }
   return {row};
