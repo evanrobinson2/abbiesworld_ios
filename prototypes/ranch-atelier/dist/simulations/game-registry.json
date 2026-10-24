@@ -119,7 +119,7 @@
      "/"
     ],
     "marker": "GAME-TEST PASS smoke",
-    "covers": "the Ranch loads with a world canvas and no page errors (smoke only)"
+    "covers": "the Ranch map loads and throws no page errors (smoke only)"
    }
   },
   {
