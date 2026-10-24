@@ -41,7 +41,7 @@ for (const [name, viewport] of [['desktop', {width: 1440, height: 900}], ['ipad-
     const others = [...document.querySelectorAll('body *')].filter(e => !bar.contains(e) && !e.closest('.pl-door') && vis(e) && getComputedStyle(e).position === 'fixed' && e.getBoundingClientRect().bottom < 90 && e.getBoundingClientRect().height < 90 && e.getBoundingClientRect().width > 30 && !e.matches('#stage,#stage *,canvas,#v2-chrono-pop')).map(e => e.id || e.className);
     return {mounted: true, oldBar: [...document.querySelectorAll('.hud')].some(vis), barHeight: Math.round(bb.height), barRight: Math.round(bb.right), vw: innerWidth, kids: kids.length, offRow: off, rows: rows.size, others};
   });
-  await tab.screenshot({path: `${prefix}-${name}.png`});
+  await tab.screenshot({path: `${prefix}-${name}.png`, timeout: 240000}).catch(e => console.log(`(no screenshot for ${name}: ${e.message.split("\n")[0]})`)); // software GL is slow with the mission charms floating
   console.log(name, JSON.stringify(r));
   if (!r.mounted) failures.push(`${name}: the town HUD did not mount (is town-hud-boot.mjs still loaded by studies/abbietown/index.html?)`);
   if (r.oldBar) failures.push(`${name}: the old bottom bar (.hud) is visible`);
