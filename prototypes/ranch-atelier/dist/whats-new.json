@@ -1,6 +1,17 @@
 {
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
+   {
+     "id": "2026-10-24-effect-icons",
+     "date": "2026-10-24",
+     "title": "World effects hover, and charge up",
+     "line": "The effect icons are little 3D things now, greyed out until you charge them with an item from your backpack. Then they glow, and you can drop them on the world.",
+     "image": "/whats-new/2026-10-24-effect-icons.png",
+     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+     "threadTitle": "World event cards",
+     "tour": false,
+     "link": "/town"
+   },
     {
       "id": "2026-10-24-paint-slot",
       "date": "2026-10-24",

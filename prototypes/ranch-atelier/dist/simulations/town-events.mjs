@@ -4,8 +4,12 @@
 // window.AWHud.effects); the god-view card deck stays in the Sandbox (event-hand.mjs). Weather and time of day are the chronograph's.
 // One call from the town page, after the scene exists:
 //   import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt}));
+// Each icon is a little greyed-out 3D model of the thing that drops (effect-icons.mjs). Spending a backpack item on it charges it
+// up (effect-charge.mjs): it goes full colour, and tapping it again drops it. Fire wheels wakes with the Hot Wheels charm instead.
 // (heightAt is optional; the town is in metres, y up.) Presentation layer only: the icons are not in the world; the effects they start are.
 import {createWorldEffects} from './world-effects.mjs';
+import {FUEL, FUEL_NAME, fuel, isCharged, charge, spend, onCharge} from './effect-charge.mjs';
+import {createEffectIcons} from './effect-icons.mjs';
 
 const DAY_SECONDS = 360; // the town has no clock for effects yet: an effect's "day" is six minutes
 const svg = body => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
@@ -21,19 +25,32 @@ export function mountTownEvents({THREE, scene, camera, controls, renderer, heigh
   const buttons = {};
   // The icons go in the HUD's effects pill; wait for the HUD if it is not up yet (a few seconds at most, then the page body).
   const hud = window.AWHud ? Promise.resolve() : new Promise(r => { addEventListener('aw-hud-ready', r, {once: true}); setTimeout(r, 4000); });
+  const icons = createEffectIcons(THREE);
+  if (!document.getElementById('aw-effect-css')) document.head.append(Object.assign(document.createElement('style'), {id: 'aw-effect-css', textContent: '.aw-ico[data-state=ready]{background:linear-gradient(160deg,#fff6c8,#ffe27a);box-shadow:inset 0 1px 0 #fff,0 0 0 2px #ffd23f80,0 0 12px #ffd23f99}.aw-ico[data-fuel]::after{content:attr(data-fuel);position:absolute;right:-2px;top:-2px;min-width:16px;height:16px;border-radius:8px;background:#b64932;color:#fff;font:700 11px/16px system-ui;text-align:center}.aw-ico.nudge{animation:aw-nudge .4s}@keyframes aw-nudge{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}@media(prefers-reduced-motion:reduce){.aw-ico.nudge{animation:none}}'}));
   hud.then(() => {
   const host = window.AWHud?.effects || document.body, balloons = window.AWHud?.balloons;
   for (const e of EFFECTS) {
-    const b = document.createElement('button'); b.type = 'button'; b.className = 'aw-ico'; b.dataset.layer = 'presentation'; b.dataset.effect = e.id; b.title = e.name; b.setAttribute('aria-label', e.name); b.innerHTML = e.icon;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'aw-ico'; b.dataset.layer = 'presentation'; b.dataset.effect = e.id; b.title = e.name; b.setAttribute('aria-label', e.name);
+    if (!icons?.mount(b, e.id)) b.innerHTML = e.icon;
     if (e.locked) b.dataset.locked = '1';
+    const pulse = () => { b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse'); };
+    const sync = () => {
+      if (e.locked) return;
+      const on = isCharged(e.id), n = fuel(FUEL[e.id]); icons?.setCharged(e.id, on); b.dataset.state = on ? 'ready' : 'grey';
+      if (n && !on) b.dataset.fuel = n; else delete b.dataset.fuel;
+      b.title = on ? `${e.name}: charged, tap to drop it` : n ? `${e.name}: tap to charge it with ${FUEL_NAME[FUEL[e.id]]}` : `${e.name}: needs ${FUEL_NAME[FUEL[e.id]]}, found while driving the buggy`;
+    };
+    if (!e.locked) { sync(); onCharge(sync); }
     b.onclick = async () => {
       if (e.id === 'fire-wheels') { const m = await import('./fire-wheels.mjs').catch(() => null); if (m?.fireWheelsUnlocked()) m.setFireWheels(!m.fireWheelsOn()); else b.title = 'Fire wheels: win the toy car charm first'; return; }
-      fx.play(e.id); b.classList.remove('pulse'); void b.offsetWidth; b.classList.add('pulse');
+      if (isCharged(e.id)) { spend(e.id); fx.play(e.id); pulse(); }
+      else if (charge(e.id)) pulse();
+      else { b.classList.remove('nudge'); void b.offsetWidth; b.classList.add('nudge'); }
     };
     host.insertBefore(b, balloons?.parentElement === host ? balloons : null); buttons[e.id] = b;
   }
   });
   // Fire wheels wakes up when the charm is won, and shows whether the trail is on.
-  import('./fire-wheels.mjs').then(m => { const sync = () => { const b = buttons['fire-wheels']; if (!b) return; if (m.fireWheelsUnlocked()) delete b.dataset.locked; else b.dataset.locked = '1'; b.setAttribute('aria-pressed', String(m.fireWheelsOn())); }; sync(); m.onFireWheels(sync); addEventListener('focus', sync); setInterval(sync, 4000); }).catch(() => {});
+  import('./fire-wheels.mjs').then(m => { const sync = () => { const b = buttons['fire-wheels']; if (!b) return; if (m.fireWheelsUnlocked()) delete b.dataset.locked; else b.dataset.locked = '1'; icons?.setCharged('fire-wheels', m.fireWheelsUnlocked()); b.setAttribute('aria-pressed', String(m.fireWheelsOn())); }; sync(); m.onFireWheels(sync); addEventListener('focus', sync); setInterval(sync, 4000); }).catch(() => {});
   return {fx, buttons};
 }
