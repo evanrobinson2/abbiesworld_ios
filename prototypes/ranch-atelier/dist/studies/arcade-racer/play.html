@@ -84,7 +84,7 @@ table{border-collapse:collapse;width:100%;font:700 15px var(--font);font-variant
   <p id="asks"><span class="chip" id="bestchip">No best yet · set one!</span></p>
   <p style="margin-top:10px"><span class="read" id="rd">Grab the glowing orbs. Dodge the cones. Tap the rocket the moment the light goes green.</span> <button class="btn small" id="speak" aria-label="Read it to me" style="min-height:44px;padding:0 12px">🔈</button></p>
   <p style="margin-top:8px"><span class="mock">MOCK</span> <span style="font-size:13px">Read-aloud lights up the words only; the spoken voice is a Stage 2 ElevenLabs line.</span></p></div>
- <div class="row"><button class="btn hot" id="race" style="flex:1 1 220px;min-height:68px;font-size:23px">⏱ Race the clock</button>
+ <div class="row"><button class="btn hot" id="timed-race" style="flex:1 1 220px;min-height:68px;font-size:23px">⏱ Race the clock</button>
   <button class="btn" id="practice" style="flex:1 1 150px">Practice</button><button class="btn" id="togarage" style="flex:1 1 150px">Garage</button></div>
 </section>
 
@@ -127,11 +127,16 @@ import * as T from 'three';
 import {buildTrack, trackMeshes} from '/simulations/coaster-kit.mjs';
 import {CARS, buildCar} from '/simulations/coaster-cars.mjs';
 import {sfx, preload} from '/simulations/catalog-sfx.mjs';
-import {SPRINT, PADS, TRACK_ID, BOARD_KEY, LANE_X, STEP, makeModel, simulate} from './race-model.mjs';
+import {LANE_X, STEP, makeModel, simulate} from './race-model.mjs';
+import {course} from './tracks.mjs';
+const COURSE=course(new URLSearchParams(location.search).get('track'));
+const SPRINT=COURSE.track,PADS=COURSE.pads,TRACK_ID=COURSE.trackId,BOARD_KEY=COURSE.boardKey;
 import {earnedCharms} from '/simulations/backpack.mjs';
 
 const TEST = /[?&]test/.test(location.search), $ = id => document.getElementById(id);
 const q = new URLSearchParams(location.search);
+if(q.has('review')){document.querySelectorAll('#back,#rtown2').forEach(a=>{a.href='/studies/toy-world-review/?study=menu';a.target='_top'});}
+document.querySelector('#attract .chip').textContent=COURSE.def.name+' · Draft';
 const MOCK_KEY = 'aw-arcade-racer-mock-v1';   // MOCK storage: this device only. Production: ownership on the account (Postgres), see the study doc.
 
 // ---------- what you can earn ----------
@@ -162,7 +167,7 @@ scene.add(new T.HemisphereLight('#dff3ff', '#b9a37a', 1.1)); const sun = new T.D
 const trk = buildTrack(T, SPRINT);
 const world = new T.Group(); world.name = 'skate park (race world)'; scene.add(world);
 world.add(trackMeshes(T, trk));
-const ground = new T.Mesh(new T.PlaneGeometry(500, 500), new T.MeshStandardMaterial({color: '#cdbf9e', roughness: .95, flatShading: true})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.05; ground.name = 'skate park concrete'; world.add(ground);
+const ground = new T.Mesh(new T.PlaneGeometry(500, 500), new T.MeshStandardMaterial({color: COURSE.def.ground, roughness: .95, flatShading: true})); ground.rotation.x = -Math.PI / 2; ground.position.y = -.05; ground.name = 'skate park concrete'; world.add(ground);
 const poseAtS = (s, out = {}) => { const S = trk.S; let lo = 0, hi = S.length - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (S[m].s <= s) lo = m; else hi = m; } const f = Math.min(1, Math.max(0, (s - S[lo].s) / ((S[hi].s - S[lo].s) || 1)));
   out.p ||= new T.Vector3(); out.q ||= new T.Quaternion(); out.p.lerpVectors(S[lo].p, S[hi].p, f); out.q.slerpQuaternions(S[lo].q, S[hi].q, f); return out; };
 const lanePoint = (s, laneX, up = 0, out = new T.Vector3()) => { const o = poseAtS(s, {}); return out.set(laneX, up, 0).applyQuaternion(o.q).add(o.p); };
@@ -203,8 +208,8 @@ $('calm').onclick = () => setCalm(!calm);
 
 // ---------- screens ----------
 const S = {screen: 'attract', mode: 'timed', model: null, phase: 'idle', tick: 0, lane: 0, last: null, acc: 0, pres: 0, practice: false, orbit: 0, slowmo: 0};
-const bgSky = new T.Color('#8fd0ee'), bgShow = new T.Color('#15213d');
-function go(name) { S.screen = name; document.body.dataset.screen = name; scene.background = (name === 'garage' || name === 'prize') ? bgShow : bgSky; $('back').style.display = (name === 'race') ? 'none' : ''; $('tools').style.display = name === 'race' ? 'none' : 'flex'; if (name === 'garage') renderGarage(); if (name === 'ask') renderAsk(); }
+const bgSky = new T.Color(COURSE.def.sky), bgShow = new T.Color('#15213d');
+function go(name) { if(q.has('review'))parent.postMessage({type:'toy-racer-state',screen:name},location.origin); S.screen = name; document.body.dataset.screen = name; scene.background = (name === 'garage' || name === 'prize') ? bgShow : bgSky; $('back').style.display = (name === 'race') ? 'none' : ''; $('tools').style.display = name === 'race' ? 'none' : 'flex'; if (name === 'garage') renderGarage(); if (name === 'ask') renderAsk(); }
 const nextAch = () => ACH.find(a => !SAVE.ach[a.id]);
 $('play').onclick = () => { snd('click-1'); go('ask'); };
 function renderAsk() {
@@ -214,7 +219,7 @@ function renderAsk() {
 $('speak').onclick = () => { snd('popup'); const r = $('rd'); r.classList.add('on'); setTimeout(() => r.classList.remove('on'), 4200); };
 $('togarage').onclick = () => { snd('click-1'); go('garage'); };
 $('gback').onclick = () => { snd('click-1'); go('ask'); };
-$('race').onclick = () => startRace(false);
+$('timed-race').onclick = () => startRace(false);
 $('practice').onclick = () => startRace(true);
 $('gorace').onclick = () => startRace(false);
 $('again').onclick = () => startRace(false);
@@ -246,7 +251,7 @@ $('honk').onclick = () => snd('car-horn');
 // ---------- the race ----------
 function startRace(practice) {
   if (!SAVE.owned.includes(SAVE.pick)) SAVE.pick = START_CAR;
-  S.practice = practice; S.model = makeModel(trk); S.phase = 'count'; S.tick = 0; S.lane = 0; S.acc = 0; S.last = null; S.launchShown = false; S.slowmo = 0;
+  S.practice = practice; S.model = makeModel(trk, PADS); S.phase = 'count'; S.tick = 0; S.lane = 0; S.acc = 0; S.last = null; S.launchShown = false; S.slowmo = 0;
   const c = cars[SAVE.pick]; if (c.parent) c.parent.remove(c); c.scale.setScalar(1); c.userData.inCar(true); world.add(c); driver.car = c; driver.hist = {boost: 0};
   $('timer').textContent = '0.00'; $('prog').firstElementChild.style.width = '0'; $('nitro').classList.remove('show'); $('lamps').textContent = ''; $('tags').innerHTML = '';
   $('hint').textContent = practice ? 'PRACTICE · tap the left or right side to change lane' : '';
@@ -441,7 +446,7 @@ stage.traverse(o => { o.userData.presentation = true; });
 requestAnimationFrame(frame);
 
 // ---------- hooks for the headless run and the study page ----------
-window.arcade = {S, SAVE, ACH, get model() { return S.model; }, go, startRace, setLane, nitro, openPrize, showResults, claim, board, simulate: (p, o) => simulate(trk, p, o), trk, BOARD_KEY, TRACK_ID,
+window.arcade = {S, SAVE, ACH, get model() { return S.model; }, go, startRace, setLane, nitro, openPrize, showResults, claim, board, simulate: (p, o) => simulate(trk, p, {...o,pads:PADS}), trk, BOARD_KEY, TRACK_ID,
   reset() { SAVE = blank(); window.arcade.SAVE = SAVE; save(); }, get save() { return SAVE; },
   // bots drive the real race through the real inputs, one decision per tick
   autoplay(policy = 'greedy') { const iv = setInterval(() => { const m = S.model; if (S.screen !== 'race' || !m || S.phase === 'finish') return; if (S.phase === 'race' && m.launch === 'none' && m.t < .3) nitro(); if (policy === 'center') return; const want = (() => { let best = 0, bs = -1e9; for (const lane of [-1, 0, 1]) { let sc = lane === m.lane ? .05 : 0; for (const p of m.pads) { const d = p.s - m.s; if (p.hit || d < 1.5 || d > 11) continue; if (p.lane === lane) sc += (p.kind === 'orb' ? 1 : -3) / (1 + d * .1); } if (sc > bs) { bs = sc; best = lane; } } return best; })(); if (want !== S.lane) setLane(want); }, 4); return () => clearInterval(iv); },

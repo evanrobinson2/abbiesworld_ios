@@ -43,13 +43,13 @@ export const PADS = [
 ];
 export const LAUNCH_WINDOW = 0.45;   // seconds after GO in which the launch tap is perfect
 
-export function makeModel(trk) {
+export function makeModel(trk, padDefinitions = PADS) {
   const S = trk.S, n = S.length, h0 = S[0].p.y, G = 9.8 * .55;
   const base = new Float32Array(n);
   for (let i = 0; i < n; i++) base[i] = Math.min(20, Math.max(9, Math.sqrt(Math.max(0, 40 + 2 * G * (h0 - S[i].p.y)))));
   for (let k = 0; k < 6; k++) for (let i = 1; i < n - 1; i++) base[i] = (base[i - 1] + 2 * base[i] + base[i - 1 + 2]) / 4;
   const line = trk.marks.finish.s0 + 2;
-  const pads = PADS.map(([tag, off, lane, kind], id) => ({id, s: trk.marks[tag].s0 + off, lane, kind, hit: false}));
+  const pads = padDefinitions.map(([tag, off, lane, kind], id) => ({id, s: trk.marks[tag].s0 + off, lane, kind, hit: false}));
   const baseAt = s => { let lo = 0, hi = n - 1; while (hi - lo > 1) { const m = (lo + hi) >> 1; if (S[m].s <= s) lo = m; else hi = m; } return base[lo]; };
   const m = {
     trk, pads, line, S, t: 0, s: 0, v: 0, boost: 0, slow: 0, stall: 0, laneX: 0, lane: 0, orbs: 0, cones: 0, launch: 'none', done: false, time: null, ticks: 0, events: [],
@@ -88,8 +88,8 @@ export const policies = {
     return best;
   },
 };
-export function simulate(trk, policy = 'greedy', {launch = 'perfect'} = {}) {
-  const m = makeModel(trk), pol = policies[policy];
+export function simulate(trk, policy = 'greedy', {launch = 'perfect', pads = PADS} = {}) {
+  const m = makeModel(trk, pads), pol = policies[policy];
   if (launch === 'perfect') m.launchTap();
   let guard = 0;
   while (!m.done && guard++ < 6000) m.step(STEP, pol(m));

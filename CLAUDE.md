@@ -4,6 +4,7 @@ How Claude works in this repository (Abbie's World / Atelier Ranch). What we are
 documents; what is built lives in the status documents. Keep these three apart.
 
 ## Read first
+- `docs/design/STUDIES.md`: the repo-wide study and communication convention for every operator. Research and creative directions mature through attention, refinement and feedback; display Exploration, Proposal, Draft or Final / Game Ready. Delivery requires a verified working canonical online link, not merely an artifact, merge or deployment receipt.
 - `VISION.md`: "The Living Holodeck", the founding product vision.
 - `docs/MODELER_VISION.md`: the long-term source of truth for the AI modeler. We are building more than a 3D asset
   generator: a system that preserves creative intent, so whole experiences can be rebuilt, extended and upgraded as

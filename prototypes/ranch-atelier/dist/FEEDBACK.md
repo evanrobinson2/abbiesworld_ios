@@ -59,3 +59,9 @@ Feed: `GET /api/activity` proxies the dispatch bridge (`DISPATCH_FEED_URL`, defa
 `https://studio-mock-iota.vercel.app/api/dispatch-feed?format=activity`, header `X-Dispatch-Feed-Key` from
 `DISPATCH_FEED_KEY`); `POST /api/activity {dispatch_id, instructions}` forwards a reply. Without the key it reports
 offline. `?activity=sample` on any page shows `activity-sample.json` (demo jobs) instead.
+
+## Study room notes
+
+The review room at `/studies/toy-world-review/` uses the same private feedback service. Each multiline note has a server timestamp, studyId, studyLevel, studyContext, build ID and commit SHA. GET /api/feedback?studyId=toy-world-title (or menu/worlds/design/capture/racer/process) returns that study's notes newest first. nextBefore supplies the cursor for older notes. Client requestId makes retries return the same note. Failed requests keep the device-local draft; only a successful response is presented as saved.
+
+Operators read notes through the authorized API or existing feedback-inbox branch. Filter on studyId, preserve Evan's wording and record the response/decision. No public inbox or new credentials were introduced. Refresh reads shared notes on demand; no continuously watching agent is promised.
