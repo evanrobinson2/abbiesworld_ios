@@ -3242,6 +3242,69 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
         }
       ]
+    },
+    "winchester-inventory": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Models library, 1,493 distinct entries, and the decorator's role-tagged catalogue",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/models/library.json"
+        },
+        {
+          "k": "canon",
+          "t": "Town code: townsfolk.mjs, library-props.mjs, manifest.mjs, hero places in places.block.js (what is already in the game)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/prototypes/ranch-atelier/dist/simulations/abbietown"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0042 Abbie's Town and the Seven-Hex board (Winchester topology, cast, places, privacy rules)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Modeler brief: material roles, triangle budgets, floor pivot, GLB",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/ranch-rebuild/MODELER.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and Game Feel: why sounds, birds and bells are diegetic cues, not UI",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "reference",
+          "t": "Winchester, Massachusetts (Wikipedia): places, rail stations, lakes, history",
+          "href": "https://en.wikipedia.org/wiki/Winchester,_Massachusetts"
+        },
+        {
+          "k": "reference",
+          "t": "Things to do in Winchester, MA (travel list), checked against Wikipedia; every real place is flagged \"verify on drone day\"",
+          "href": "https://www.thecrazytourist.com/15-best-things-to-do-in-winchester-ma/"
+        },
+        {
+          "k": "design",
+          "t": "Paper Towns and Potemkin Villages (Unwinnable, 2026): game towns that feel inhabited; found by search, only the title read, not the article",
+          "href": "https://unwinnable.com/2026/05/18/paper-towns-and-potemkin-villages/"
+        },
+        {
+          "k": "design",
+          "t": "Wright-Locke Farm, Winchester (public pages; inspired by only), from the farm study",
+          "href": "https://www.wlfarm.org/"
+        },
+        {
+          "k": "oracle",
+          "t": "Game Oracle: Animal Crossing, Stardew Valley, Tiny Glade, Dorfromantik style records (not freshly consulted for this study)",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded for this draft"
+        }
+      ]
     }
   }
 }
