@@ -108,4 +108,4 @@ $('#note-form').onsubmit=async e=>{e.preventDefault();const note=$('#note').valu
 if($('#context'))mountContext($('#context'),'carwash');
 
 // Keep the shared connection control accessible without covering this study’s tool toggle.
-const placeConnection=()=>{const b=document.querySelector('#ranch-view-sharing'),parent=document.querySelector('#panel .scroll');if(b&&parent&&!parent.contains(b))parent.append(b)};new MutationObserver(placeConnection).observe(document.body,{childList:true,subtree:true});placeConnection();
+const placeConnection=()=>{const parent=document.querySelector('#panel .scroll');for(const id of ['ranch-view-sharing','app-settings-toggle']){const b=document.getElementById(id);if(b&&parent&&!parent.contains(b))parent.append(b)}};new MutationObserver(placeConnection).observe(document.body,{childList:true,subtree:true});placeConnection();

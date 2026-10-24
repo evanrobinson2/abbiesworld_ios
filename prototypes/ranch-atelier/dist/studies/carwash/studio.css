@@ -8,3 +8,5 @@
 #panel #ranch-view-sharing{position:static!important;width:100%!important;max-width:none!important;margin-top:18px!important;transform:none!important} .ctx-card{font-size:12px}.ctx-card h3{margin-top:16px} .ctx-card ul{padding-left:18px}.ctx-card small{display:block}
 
 #toolbar-tools #app-jukebox-toggle{position:static!important;transform:none!important;margin-top:10px}body:has([data-zoom="3"].selected) .title p{display:none}body:has([data-zoom="3"].selected) .title h1{font-size:20px}
+
+#panel #app-settings-toggle{position:static!important;inset:auto!important;transform:none!important;margin:14px 0 0!important;display:block!important}
