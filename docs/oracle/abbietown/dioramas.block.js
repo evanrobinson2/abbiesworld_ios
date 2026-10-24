@@ -308,7 +308,7 @@ function skyFrame(t) {
 function dioFrame(dt, t) {
  skyFrame(t);
  waterU.uWT.value = t;
- const k = 1 - Math.exp(-dt * 3.5), L = look;
+ const k = 1 - Math.exp(-dt * 3.5), L = window.AbbieTown?.lookFilter?.(look) || look; // lookFilter: a mode (Halloween) grades the zone's look without owning it
  if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
