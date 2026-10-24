@@ -17,7 +17,10 @@ export function createCelebrationModes({T, scene, camera, orbit, canvas, heightA
   root=new T.Group();root.name='disco-celebration';root.userData.worldEffect=true;
   const size=Math.max(1,camera.position.distanceTo(orbit.target)*.045);
   root.position.copy(orbit.target);const ground=heightAt(root.position.x,root.position.z);root.position.y=Number.isFinite(ground)?ground:orbit.target.y;
-  const ball=new T.Mesh(new T.SphereGeometry(size*.38,16,10),new T.MeshStandardMaterial({color:0xd7e7ff,metalness:.85,roughness:.15,flatShading:true,emissive:0x334466}));
+  const mirror=new T.SphereGeometry(size*.38,16,10).toNonIndexed(),colours=[];
+  for(let i=0;i<mirror.attributes.position.count;i++){const tile=Math.floor(i/6),shade=[.96,.58,.82,.68][(tile*7+Math.floor(tile/16))%4];colours.push(shade,Math.min(1,shade+.05),Math.min(1,shade+.12));}
+  mirror.setAttribute('color',new T.Float32BufferAttribute(colours,3));
+  const ball=new T.Mesh(mirror,new T.MeshStandardMaterial({vertexColors:true,metalness:.45,roughness:.18,flatShading:true,emissive:0x667788,emissiveIntensity:.25}));
   ball.position.y=size*4;root.add(ball);
   const dots=[];
   for(let i=0;i<24;i++){
