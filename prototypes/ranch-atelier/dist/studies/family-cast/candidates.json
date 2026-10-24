@@ -863,8 +863,202 @@
     }
    ],
    "errors": []
+  },
+  "city-baker": {
+   "name": "A baker (hex city)",
+   "group": "town",
+   "sample": "The ovens are hot and the bread is rising! Come and get it while it's warm, everyone!",
+   "descriptions": [
+    "A cheerful, round-voiced baker in her forties, warm laugh in her voice, up before dawn and happy about it. Animated family film, close microphone.",
+    "A jolly, booming baker man with flour on his apron, big-hearted and quick to laugh. Clean studio recording."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"The ovens are hot and the bread is rising! Come and get it while it's warm, everyone!\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"The ovens are hot and the bread is rising! Come and get it while it's warm, everyone!\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-teacher": {
+   "name": "The teacher (Winchester)",
+   "group": "town",
+   "sample": "We have run out of chalk! Would you carry a box over from the noticeboard?",
+   "descriptions": [
+    "A bright, patient primary-school teacher in her thirties, clear and kind, always encouraging, like a favourite teacher in an animated family film. Clean studio recording.",
+    "A warm, upbeat young teacher with a melodic voice who makes everything sound like an adventure. Close microphone."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"We have run out of chalk! Would you carry a box over from the noticeboard?\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"We have run out of chalk! Would you carry a box over from the noticeboard?\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-librarian": {
+   "name": "The librarian (Winchester)",
+   "group": "town",
+   "sample": "Someone left a book on a bench by the school. Could you bring it back before it rains?",
+   "descriptions": [
+    "A soft, gentle librarian in her sixties, hushed and kind, speaking as if in a quiet library, with a smile in the voice. Clean studio recording, animated family film.",
+    "A calm, bookish older man with a low, soothing voice who loves stories. Close microphone."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"Someone left a book on a bench by the school. Could you bring it back before it rains?\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"Someone left a book on a bench by the school. Could you bring it back before it rains?\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-postie": {
+   "name": "The postie (Winchester)",
+   "group": "town",
+   "sample": "I'm late! Please take this letter to the café for me?",
+   "descriptions": [
+    "A chirpy, quick-talking letter carrier in his twenties, always in a hurry but friendly, bouncy and bright. Animated family film, close microphone.",
+    "A cheerful young woman postie, fast and sunny, whistling between sentences. Clean studio recording."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"I'm late! Please take this letter to the café for me?\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"I'm late! Please take this letter to the café for me?\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-gardener": {
+   "name": "The gardener (Winchester)",
+   "group": "town",
+   "sample": "The sunflowers need seeds. The school has a jar. Could you ask for it?",
+   "descriptions": [
+    "A slow, sunny gardener in her fifties, relaxed and earthy, patient as a tomato plant, humming between words. Animated family film, close microphone.",
+    "A gentle, sun-warmed older man who loves flowers, easygoing drawl, kind. Clean studio recording."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"The sunflowers need seeds. The school has a jar. Could you ask for it?\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"The sunflowers need seeds. The school has a jar. Could you ask for it?\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-scientist": {
+   "name": "The scientist (Winchester)",
+   "group": "town",
+   "sample": "I lost my lucky magnifier! I think it is by the noticeboard. Can you look?",
+   "descriptions": [
+    "An excited, slightly breathless scientist in her forties, curious and kind, speaking quickly about discoveries, a friendly cartoon professor. Clean studio recording, animated family film.",
+    "A bright, enthusiastic woman inventor with a quick laugh and an inquisitive tone. Close microphone."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"I lost my lucky magnifier! I think it is by the noticeboard. Can you look?\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"I lost my lucky magnifier! I think it is by the noticeboard. Can you look?\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-neighbour": {
+   "name": "A neighbour (Winchester)",
+   "group": "town",
+   "sample": "Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him?",
+   "descriptions": [
+    "A friendly, chatty neighbour in his forties, easygoing and warm, leaning over the fence for a talk. Animated family film, close microphone.",
+    "A cheerful, talkative woman neighbour with a big smile in her voice. Clean studio recording."
+   ],
+   "candidates": [],
+   "errors": [
+    {
+     "description": 0,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him?\",\"ctx\":{\"min_length\":100}}]}"
+    },
+    {
+     "description": 1,
+     "error": "422 {\"detail\":[{\"type\":\"string_too_short\",\"loc\":[\"body\",\"text\"],\"msg\":\"String should have at least 100 characters\",\"input\":\"Bub has slipped his lead again. It will be on the common. Could you fetch it so I can catch him?\",\"ctx\":{\"min_length\":100}}]}"
+    }
+   ]
+  },
+  "town-farmer": {
+   "name": "The farmer (Winchester)",
+   "group": "town",
+   "sample": "The hens have been busy and the baker is out of eggs. Could you find a warm one and take it to the café?",
+   "descriptions": [
+    "An easy, cheerful farmer in his fifties, calm and friendly, a voice that smells of hay and sunshine. Animated family film, close microphone.",
+    "A warm, hearty farmer woman with a gentle country lilt, kind and unhurried. Clean studio recording."
+   ],
+   "candidates": [
+    {
+     "n": 1,
+     "description": 0,
+     "generated_voice_id": "dLss4KRL1Kvwp7LMI4cv",
+     "url": "/r2/voices/cast/town-farmer/202610240225-1.mp3",
+     "seconds": 6.4
+    },
+    {
+     "n": 2,
+     "description": 0,
+     "generated_voice_id": "HJMDO827nz6fjcBTo30m",
+     "url": "/r2/voices/cast/town-farmer/202610240225-2.mp3",
+     "seconds": 6.8
+    },
+    {
+     "n": 3,
+     "description": 0,
+     "generated_voice_id": "CV091ZgnLBk2rfTFjgsi",
+     "url": "/r2/voices/cast/town-farmer/202610240225-3.mp3",
+     "seconds": 5.7
+    },
+    {
+     "n": 4,
+     "description": 1,
+     "generated_voice_id": "M1LDqrLZBOrD9fSz3LMy",
+     "url": "/r2/voices/cast/town-farmer/202610240225-4.mp3",
+     "seconds": 7.7
+    },
+    {
+     "n": 5,
+     "description": 1,
+     "generated_voice_id": "BnR98rj8jcN7gdaM7A7U",
+     "url": "/r2/voices/cast/town-farmer/202610240225-5.mp3",
+     "seconds": 7.6
+    },
+    {
+     "n": 6,
+     "description": 1,
+     "generated_voice_id": "yO0JDGgpKJzH9UDFqpWM",
+     "url": "/r2/voices/cast/town-farmer/202610240225-6.mp3",
+     "seconds": 7.2
+    }
+   ],
+   "errors": []
   }
  },
  "model": "eleven_ttv_v3",
- "rendered": "2026-10-23T10:09:26Z"
+ "rendered": "2026-10-24T02:25:14Z"
 }
