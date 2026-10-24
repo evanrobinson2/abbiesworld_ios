@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-24-mindustry-conveyors",
-  "updatedAt": "2026-10-24T13:03:54.577049+00:00",
+  "revision": "anatomy-2026-10-24-mindustry-crafter-recovery",
+  "updatedAt": "2026-10-24T16:01:22.159338+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 125,
+    "findings": 129,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 78,
+    "sourceFilesFetched": 80,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1014,6 +1014,66 @@
               432
             ]
           }
+        },
+        {
+          "domain": "systems",
+          "title": "Output room gates actual efficiency separately from potential efficiency",
+          "finding": "GenericCrafter.shouldConsume rejects an output item when stored quantity plus scaled batch exceeds itemCapacity. Liquid fullness uses ignoreLiquidFullness and dumpExtraLiquid policy. BuildingComp computes minimum required-consumer efficiency, preserves it as potentialEfficiency, then zeros actual efficiency when shouldConsume/productionValid rejects updating. This separates available inputs from permitted production.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L205-L233",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              205,
+              233
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Craft completion triggers item consumption before output emission",
+          "finding": "craft invokes consume before item offload. BuildingComp.consume calls each consumer trigger; ConsumeItems.trigger removes rounded scaled recipe amounts. ConsumeItems.efficiency separately checks consumeTriggerValid or required items. This traces these classes, not atomic rollback, every consumer type or every recipe.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L308-L325",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              308,
+              325
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Blocked production still attempts output dumping",
+          "finding": "updateTile advances production only at positive efficiency and otherwise cools warmup. dumpOutputs is called outside that branch; item dumps use a timer and stop on a rejected dump, while liquids call dumpLiquid. This allows output drainage while production is blocked, subject to receiver behavior. The actual acceptance and recovery sequence remains to be traced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L237-L265",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              237,
+              265
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Fresh output falls back to local storage; stored output leaves only after acceptance",
+          "finding": "offload records production, checks nearby acceptItem and canDump, and sends a fresh item directly to the first accepting receiver; if none accepts it calls local handleItem. dump instead requires an existing stored item, delivers through receiver handleItem and then removes one locally. A rejected dump returns false without removing the stored item. Both use the rotating cdump index, not a measured fairness guarantee. Exception rollback and whole-network conservation remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/entities/comp/BuildingComp.java#L1006-L1019",
+            "blobSha": "4b4b90593d7f31cb48f2f6adba030a2cbd5cc42d",
+            "lines": [
+              1006,
+              1019
+            ]
+          }
         }
       ],
       "coverage": {
@@ -1034,7 +1094,7 @@
         "status": "design inference; not implemented in Ranch Atelier",
         "text": "Tie visible machine activity to simulated warmup and blocked outputs; save quick-choice preferences independently of world state."
       },
-      "nextPass": "Local conveyor movement, acceptance and serialization are partially traced. Network conservation, cache invalidation and runtime outcomes remain unexamined.",
+      "nextPass": "Generic item consumption and output recovery paths are partially traced. Liquid recovery, subclass policies, atomicity, network conservation and runtime outcomes remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
