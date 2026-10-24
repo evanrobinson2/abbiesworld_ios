@@ -1,6 +1,6 @@
 {
  "cap": 1000000,
- "total": 2394,
+ "total": 2424,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -946,6 +946,11 @@
    "what": "anim 125",
    "credits": 3,
    "at": "2026-10-24T00:52:22Z"
+  },
+  {
+   "what": "charm-toy-car 3d",
+   "credits": 30,
+   "at": "2026-10-24T17:17:03Z"
   }
  ],
  "live_balance": {
