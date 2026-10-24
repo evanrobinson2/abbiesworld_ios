@@ -1,5 +1,5 @@
 {
- "cap": 2000,
+ "cap": 2400,
  "total": 2125,
  "log": [
   {
@@ -481,5 +481,6 @@
  "live_balance": {
   "credits": 459,
   "at": "2026-10-23T21:55:19Z"
- }
+ },
+ "cap_note": "Evan raised the cap from 2,000 to 2,400 (decision 2026-10-24 00:31Z) for 84 core animations + 2 charm retextures"
 }
