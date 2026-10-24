@@ -23,7 +23,7 @@ export const GIVERS = {
  librarian: {name: 'The librarian', at: 'common', voice: 'soft, as if in a library'},
  postie: {name: 'The postie', at: 'common', voice: 'chirpy and in a hurry'},
  gardener: {name: 'The gardener', at: 'common', voice: 'slow and sunny'},
- scientist: {name: 'The scientist', at: 'lab', voice: 'excited, a little breathless'},
+ scientist: {name: 'The scientist', at: 'school', voice: 'excited, a little breathless'},
  neighbour: {name: 'A neighbour', at: 'noticeboard', voice: 'friendly and chatty'}
 };
 
@@ -34,18 +34,18 @@ export const TEMPLATES = [
   steps: [{do: 'visit', at: 'common', say: 'Find the sugar'}, {do: 'visit', at: 'cafe', say: 'Take it to the baker'}], reward: {id: 'quest-bun', name: 'Warm bun', icon: '🥐', thought: 'Mmm, still warm.'}},
  {id: 'teach-chalk', giver: 'teacher', ask: 'We have run out of chalk! Would you carry a box over from the noticeboard?', thanks: 'You saved the lesson. Take a gold star sticker.',
   steps: [{do: 'visit', at: 'noticeboard', say: 'Pick up the chalk'}, {do: 'visit', at: 'school', say: 'Bring it to the teacher'}], reward: {id: 'quest-sticker', name: 'Star sticker', icon: '🌟', thought: 'A sticker for the backpack!'}},
- {id: 'read-book', giver: 'librarian', ask: 'Someone left a book on the lab bench. Could you bring it back before it rains?', thanks: 'Thank you. Here is a bookmark.',
-  steps: [{do: 'visit', at: 'lab', say: 'Find the book'}, {do: 'visit', at: 'common', say: 'Return it to the librarian'}], reward: {id: 'quest-bookmark', name: 'Bookmark', icon: '🔖', thought: 'A tiny ribbon for my notebook.'}},
+ {id: 'read-book', giver: 'librarian', ask: 'Someone left a book on a bench by the school. Could you bring it back before it rains?', thanks: 'Thank you. Here is a bookmark.',
+  steps: [{do: 'visit', at: 'school', say: 'Find the book'}, {do: 'visit', at: 'common', say: 'Return it to the librarian'}], reward: {id: 'quest-bookmark', name: 'Bookmark', icon: '🔖', thought: 'A tiny ribbon for my notebook.'}},
  {id: 'post-letter', giver: 'postie', ask: "I'm late! Please take this letter to the café for me?", thanks: "You're quick! A stamp for your collection.",
   steps: [{do: 'visit', at: 'cafe', say: 'Deliver the letter'}], reward: {id: 'quest-stamp', name: 'Postage stamp', icon: '✉️', thought: 'Look, a tiny picture.'}},
  {id: 'garden-seeds', giver: 'gardener', ask: 'The sunflowers need seeds. The school has a jar. Could you ask for it?', thanks: 'They will be tall by summer. Have a seed packet.',
   steps: [{do: 'visit', at: 'school', say: 'Ask for the seed jar'}, {do: 'visit', at: 'common', say: 'Plant them with the gardener'}], reward: {id: 'quest-seeds', name: 'Sunflower seeds', icon: '🌻', thought: 'I will grow something.'}},
  {id: 'lab-sparkle', giver: 'scientist', ask: 'I lost my lucky magnifier! I think it is by the noticeboard. Can you look?', thanks: 'Found it! You are a real detective.',
-  steps: [{do: 'visit', at: 'noticeboard', say: 'Search by the noticeboard'}, {do: 'visit', at: 'lab', say: 'Give it back'}], reward: {id: 'quest-magnifier', name: 'Little magnifier', icon: '🔍', thought: 'Now I can spot tiny things.'}, charm: null},
+  steps: [{do: 'visit', at: 'noticeboard', say: 'Search by the noticeboard'}, {do: 'visit', at: 'school', say: 'Give it back'}], reward: {id: 'quest-magnifier', name: 'Little magnifier', icon: '🔍', thought: 'Now I can spot tiny things.'}, charm: null},
  {id: 'neighbour-bub', giver: 'neighbour', ask: 'Have you seen a big black dog wander past? Bub does love the common.', thanks: 'There he is, wagging! Take a biscuit for the road.',
   steps: [{do: 'visit', at: 'common', say: 'Look for bub'}, {do: 'visit', at: 'noticeboard', say: 'Tell the neighbour'}], reward: {id: 'quest-biscuit', name: 'Dog biscuit', icon: '🦴', thought: 'Bub will like this.'}},
- {id: 'cafe-cup', giver: 'baker', ask: 'A cup went missing from the café window. Could you look in the lab?', thanks: 'My favourite cup! Thank you.',
-  steps: [{do: 'visit', at: 'lab', say: 'Look for the cup'}, {do: 'visit', at: 'cafe', say: 'Carry it back'}], reward: {id: 'quest-cup', name: 'Painted cup', icon: '☕', thought: 'It has a tiny cat on it.'}}
+ {id: 'cafe-cup', giver: 'baker', ask: 'A cup went missing from the café window. Could you look by the noticeboard?', thanks: 'My favourite cup! Thank you.',
+  steps: [{do: 'visit', at: 'noticeboard', say: 'Look for the cup'}, {do: 'visit', at: 'cafe', say: 'Carry it back'}], reward: {id: 'quest-cup', name: 'Painted cup', icon: '☕', thought: 'It has a tiny cat on it.'}}
 ];
 
 const tpl = id => TEMPLATES.find(t => t.id === id);
