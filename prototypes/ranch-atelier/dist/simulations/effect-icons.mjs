@@ -48,6 +48,26 @@ export function createEffectIcons(T) {
       const flame = cone(mat(0xffb824, {emissive: 0xff8a00, emissiveIntensity: 1}), 0.18, 0.5, 0, -0.68, 0, Math.PI); tilt.add(flame);
       tilt.rotation.z = -0.65; g.add(tilt); g.scale.setScalar(0.95); return g;
     },
+    // the driving-mode icons: little vehicles seen from above and the side, so they read as the thing you drive
+    cart() { const g = new T.Group(), red = mat(0xd9402c, {roughness: 0.4}), steel = mat(0xb8bec8, {roughness: 0.3, metalness: 0.5}), tyre = mat(0x2a2a32);
+      const tray = new T.Mesh(new T.BoxGeometry(0.85, 0.28, 0.55), red); tray.position.y = 0.02; g.add(tray);
+      const bar = new T.Mesh(new T.BoxGeometry(0.06, 0.06, 0.6), steel); bar.position.set(-0.46, 0.38, 0); const post = new T.Mesh(new T.BoxGeometry(0.06, 0.4, 0.06), steel); post.position.set(-0.43, 0.2, 0); g.add(bar, post);
+      for (const [x, z] of [[0.28, 0.3], [0.28, -0.3], [-0.28, 0.3], [-0.28, -0.3]]) { const w = new T.Mesh(new T.CylinderGeometry(0.11, 0.11, 0.08, 14), tyre); w.rotation.x = Math.PI / 2; w.position.set(x, -0.2, z); g.add(w); }
+      g.rotation.x = 0.35; return g; },
+    buggy() { const g = new T.Group(), body = mat(0xe9e6df, {roughness: 0.35}), tyre = mat(0x2a2a32);
+      const hull = new T.Mesh(new T.BoxGeometry(0.95, 0.24, 0.52), body); g.add(hull);
+      const dome = new T.Mesh(new T.SphereGeometry(0.24, 16, 12, 0, 6.3, 0, 1.6), mat(0x58b8ff, {transparent: true, opacity: 0.85, roughness: 0.1})); dome.position.set(0.08, 0.12, 0); g.add(dome);
+      for (const [x, z] of [[0.32, 0.31], [0.32, -0.31], [-0.32, 0.31], [-0.32, -0.31]]) { const w = new T.Mesh(new T.CylinderGeometry(0.17, 0.17, 0.13, 16), tyre); w.rotation.x = Math.PI / 2; w.position.set(x, -0.15, z); g.add(w); }
+      g.rotation.x = 0.35; return g; },
+    coaster() { const g = new T.Group(), body = mat(0xff8a1f, {roughness: 0.3}), tyre = mat(0x2a2a32);
+      const hull = new T.Mesh(new T.BoxGeometry(1, 0.2, 0.48), body); g.add(hull);
+      const cab = new T.Mesh(new T.BoxGeometry(0.42, 0.18, 0.4), mat(0x58b8ff, {roughness: 0.2})); cab.position.set(-0.05, 0.18, 0); g.add(cab);
+      for (const [x, z] of [[0.33, 0.27], [0.33, -0.27], [-0.33, 0.27], [-0.33, -0.27]]) { const w = new T.Mesh(new T.CylinderGeometry(0.13, 0.13, 0.1, 14), tyre); w.rotation.x = Math.PI / 2; w.position.set(x, -0.12, z); g.add(w); }
+      g.rotation.x = 0.35; return g; },
+    god() { const g = new T.Group(), gold = mat(0xf2c14e, {roughness: 0.3, metalness: 0.4});
+      g.add(new T.Mesh(new T.SphereGeometry(0.26, 16, 12), gold));
+      for (const s of [1, -1]) { const p = new T.Mesh(new T.BoxGeometry(0.5, 0.04, 0.3), mat(0x2f6fd0, {roughness: 0.25})); p.position.x = s * 0.5; g.add(p); const arm = new T.Mesh(new T.CylinderGeometry(0.025, 0.025, 0.24, 6), gold); arm.rotation.z = Math.PI / 2; arm.position.x = s * 0.33; g.add(arm); }
+      const dish = new T.Mesh(new T.ConeGeometry(0.14, 0.14, 14, 1, true), mat(0xdfe3ea, {side: 2})); dish.position.y = 0.3; g.add(dish); g.rotation.set(0.4, 0, 0.3); return g; },
     bolt() { // the boost pad: a chunky yellow lightning bolt
       const sh = new T.Shape(); [[0.12, 0.7], [-0.32, -0.05], [-0.02, -0.05], [-0.16, -0.7], [0.34, 0.12], [0.04, 0.12], [0.3, 0.7]].forEach(([x, y], i) => i ? sh.lineTo(x, y) : sh.moveTo(x, y));
       const geo = new T.ExtrudeGeometry(sh, {depth: 0.22, bevelEnabled: true, bevelSize: 0.05, bevelThickness: 0.05, bevelSegments: 3}); geo.center();
