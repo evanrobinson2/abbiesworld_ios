@@ -755,6 +755,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  let picking = null, sampledAt = 0, anchorsNow = {}, tracked = {}, bounds = null;
  let want = 0, t = 0, yawNow = yaw, yawWant = yaw, drag = null, idle = 0, zoom = 1; const touches = new Map();
  function rebuild() {
+  if (bp && focus != null) { focus = null; hop = 0; onFocus?.(null); } // a rebuilt bag has new charms: leave the close-up rather than aim at a stale one
   if (bp) { holder.remove(bp.group); bp.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); }
   bp = buildBackpack(state.l, {charms: state.charms}); holder.add(bp.group); bp.setOpen(t); tracked = {}; sampledAt = 0;
   sprites = []; const sk = []; for (let i = 0; i < 7; i++) { if (bp.sockets.back[i]) sk.push(['back', bp.sockets.back[i]]); if (bp.sockets.front[i]) sk.push(['front', bp.sockets.front[i]]); }
@@ -762,14 +763,8 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
    const [h, p] = sk[i], s = new T.Sprite(new T.SpriteMaterial({map: itemTexture(it.icon), transparent: true, depthWrite: false}));
    s.scale.setScalar(.25); s.position.copy(p); s.userData.item = it; s.renderOrder = 5; bp[h].add(s); sprites.push(s);
   });
-  // Daddy's core memories ride in the front half as a little pile of gold coins.
-  if (state.coins > 0) {
-   coinPile = new T.Group(); coinPile.name = 'gold coins';
-   const cg = new T.CylinderGeometry(.05, .05, .013, 10), cm = new T.MeshStandardMaterial({name: 'coin gold', color: '#ffcc33', metalness: .8, roughness: .28, emissive: '#5a3c00', emissiveIntensity: .3, flatShading: true});
-   for (let i = 0; i < Math.min(12, state.coins); i++) { const c = new T.Mesh(cg, cm); c.rotation.x = Math.PI / 2 + (i % 3 - 1) * .2; c.rotation.y = i * 1.3; c.position.set((i % 4 - 1.5) * .07, (Math.floor(i / 4)) * .05, -.02 - (i % 2) * .012); coinPile.add(c); }
-   coinPile.position.set(0, bp.H * .5, -.02); coinPile.userData.item = {id: 'coins', name: state.coins === 1 ? "One of Daddy's core memories" : `${state.coins} of Daddy's core memories`, icon: '🪙'};
-   bp.front.add(coinPile);
-  } else coinPile = null;
+  // Coins are scrapped (Evan, 20:51Z): no gold pile floats in the front half any more.
+  coinPile = null;
   fit();
  }
  function fit() {
@@ -952,7 +947,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
 
  const api = {
   canvas, get isOpen() { return want > .5; },
-  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; focus = null; }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
+  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; api.unfocus(); }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
   get look() { return state.l; },
   setLook(nl) { state.l = look(nl); rebuild(); },
   setContents({items: it = state.items, coins: c = state.coins, charms: ch = state.charms} = {}) { state.items = it; state.coins = c; state.charms = ch; rebuild(); },
