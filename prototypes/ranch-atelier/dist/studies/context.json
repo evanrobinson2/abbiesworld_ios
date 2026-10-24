@@ -3728,6 +3728,36 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/"
         }
       ]
+    },
+    "winchester-flow": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "Evan's #612 direction (intro, title, Create New, Sandbox, Assimilate)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/612"
+        },
+        {
+          "k": "canon",
+          "t": "Intro readiness fix #610/#611",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/pull/611"
+        },
+        {
+          "k": "canon",
+          "t": "Real-world scene architecture (#608)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/pull/609"
+        },
+        {
+          "k": "canon",
+          "t": "Assimilate draft",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/ASSIMILATE.md"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        }
+      ],
+      "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
     }
   }
 }

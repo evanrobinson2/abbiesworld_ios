@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/study",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/study/",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/study/:tab(intro|title|create-new)",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
       "source": "/classic",
       "destination": "/simulations/index.html"
     },
