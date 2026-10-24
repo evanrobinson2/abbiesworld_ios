@@ -38,30 +38,24 @@ const WAITING = {
 const STATUS = {good: 'Close match', partial: 'Partial match', weak: 'Weak match'};
 const hue = s => { let h = 0; for (const c of String(s)) h = (h * 31 + c.charCodeAt(0)) % 360; return (h + 20) % 360; };
 
-/* ---------- sound: every verb answers, pitch wanders a little, picks climb a pentatonic scale ---------- */
+/* ---------- sound: every verb answers, pitch wanders a little, picks climb a pentatonic scale. Sounds come from the catalogue ---------- */
 const sound = (() => {
-  let ac, on = store.get('sound', true), last = 0;
-  const ctx = () => { if (!ac) { try { ac = new AudioContext(); } catch { return null; } } if (ac.state === 'suspended') ac.resume(); return ac; };
-  const tone = (f, {type = 'sine', dur = 0.12, vol = 0.08, at = 0, slide = 0} = {}) => {
-    const a = on && ctx(); if (!a) return;
-    const t = a.currentTime + at, o = a.createOscillator(), g = a.createGain(), wob = 1 + (Math.random() - 0.5) * 0.12;
-    o.type = type; o.frequency.setValueAtTime(f * wob, t); if (slide) o.frequency.exponentialRampToValueAtTime(f * wob * slide, t + dur);
-    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.008); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-    o.connect(g).connect(a.destination); o.start(t); o.stop(t + dur + 0.02);
-  };
+  let on = store.get('sound', true), last = 0, cs = null;
+  import('/simulations/catalog-sfx.mjs').then(m => { cs = m.sfx; }).catch(() => {});
+  const play = (id, gain = 0.6, rate = 1) => { if (on && cs) cs(id, {gain, rate: rate * (1 + (Math.random() - 0.5) * 0.08)}); };
   const PENTA = [0, 2, 4, 7, 9];
-  const note = n => 392 * Math.pow(2, (PENTA[n % 5] + 12 * Math.floor(n / 5)) / 12);
+  const note = n => Math.pow(2, (PENTA[n % 5] + 12 * Math.floor(n / 5)) / 12);
   return {
     get on(){ return on; }, set on(v){ on = v; store.set('sound', v); },
-    hover(){ const t = performance.now(); if (t - last < 70) return; last = t; tone(1500, {dur: 0.035, vol: 0.012}); },
-    pick(n){ tone(note(Math.min(n, 14)), {type: 'triangle', dur: 0.18, vol: 0.07}); },
-    unpick(){ tone(330, {type: 'triangle', dur: 0.12, vol: 0.05, slide: 0.8}); },
-    open(){ tone(523, {dur: 0.16, vol: 0.06}); tone(784, {dur: 0.22, vol: 0.05, at: 0.06}); tone(220, {type: 'triangle', dur: 0.3, vol: 0.03, slide: 2}); },
-    close(){ tone(660, {dur: 0.14, vol: 0.05, slide: 0.6}); },
-    step(d){ tone(d > 0 ? 880 : 740, {dur: 0.06, vol: 0.03}); },
-    switch(){ tone(587, {type: 'triangle', dur: 0.1, vol: 0.05}); tone(880, {type: 'triangle', dur: 0.12, vol: 0.04, at: 0.05}); },
-    drop(){ tone(140, {type: 'triangle', dur: 0.22, vol: 0.14, slide: 0.7}); tone(1046, {dur: 0.25, vol: 0.05, at: 0.05}); tone(1318, {dur: 0.3, vol: 0.04, at: 0.11}); },
-    boop(){ tone(260, {type: 'sine', dur: 0.16, vol: 0.06, slide: 0.75}); },
+    hover(){ const t = performance.now(); if (t - last < 70) return; last = t; play('tick', 0.12); },
+    pick(n){ play('pop-1', 0.5, note(Math.min(n, 14))); },
+    unpick(){ play('tap-2', 0.4, 0.85); },
+    open(){ play('open', 0.6); },
+    close(){ play('close', 0.5); },
+    step(d){ play('tick', 0.3, d > 0 ? 1.15 : 0.9); },
+    switch(){ play('toggle', 0.5); },
+    drop(){ play('place-1', 0.7); },
+    boop(){ play('tap-2', 0.5, 0.8); },
   };
 })();
 

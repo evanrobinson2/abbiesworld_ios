@@ -21105,6 +21105,22 @@
       "bytes": 23035,
       "blobSha": "bb5608b2e999749a77e4a8f542e3d104af188471",
       "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/core/Logic.java"
+    },
+    {
+      "game": "mindustry",
+      "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+      "bytes": 77348,
+      "sha256": "08c24985718c083b7c66d280f940f759227fb383ad6acd5bc28afbb0d8fadbb6",
+      "blobSha": "4b4b90593d7f31cb48f2f6adba030a2cbd5cc42d",
+      "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/entities/comp/BuildingComp.java"
+    },
+    {
+      "game": "mindustry",
+      "path": "core/src/mindustry/world/consumers/ConsumeItems.java",
+      "bytes": 1739,
+      "sha256": "9b80fabe56c1f3508e7aac189fdd25e75c9278d09d4c3350d25c9eb92a07bab9",
+      "blobSha": "a733cb4674c8629787dd5299c7046eb9be3135d6",
+      "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/consumers/ConsumeItems.java"
     }
   ],
   "decompilation": {
@@ -21132,5 +21148,212 @@
         "sha256": "305770ec9ea97478f7522ddbbefa95aa6d06bf4690b269967c05a7b81e03bfbc"
       }
     ]
+  },
+  "conveyorStudy": {
+    "game": "mindustry",
+    "commit": "17012d61d9e4c3cbd9820d87e81c24495486ac53",
+    "version": "v160.7",
+    "method": "original release source inspection; this pass did not decompile or observe gameplay",
+    "evidence": [
+      {
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "bytes": 16264,
+        "sha256": "54b33c5d30ede4df2b1e8e2a6fc3dbb27f0497621350852efa275c4f18106baa",
+        "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+        "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Conveyor motion propagates spacing constraints upstream",
+        "finding": "updateTile processes items from the forward end backward, clamps movement against the next item minus itemSpace, and applies a downstream limit derived from an aligned conveyor minitem. Motion uses speed times edelta. This traces local spacing and blocking, not whole-network throughput or conservation.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          265,
+          288
+        ]
+      },
+      {
+        "title": "Conveyor transfer checks receiver acceptance before local removal",
+        "finding": "pass requires a nonnull item and next building, same team, and receiver acceptItem. It invokes receiver handleItem and returns true; updateTile removes its local item only on that success. A rejected transfer remains on the belt. No transaction rollback or exception guarantee was established.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          278,
+          305
+        ]
+      },
+      {
+        "title": "Side loading uses stricter spacing and inserts halfway along the belt",
+        "finding": "acceptItem rejects full capacity or an absent facing edge. Direction-zero input needs minitem>=itemSpace; side input needs minitem>0.7. A rotating source that is also the next building is rejected. handleItem inserts direction-zero input at y=0 and side input at y=0.5 with lateral offset. External callers must honor acceptance; handleItem itself only checks capacity before using the facing edge.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          353,
+          383
+        ]
+      },
+      {
+        "title": "Conveyor saves quantize positions and retain legacy decoding",
+        "finding": "Revision 1 writes item count, short item ID and signed-byte encodings of lateral and forward position. read consumes every declared entry but stores only up to capacity; revision 0 decodes an older packed integer representation. It invokes updateTile after loading, so deserialization includes an update rather than only field assignment. This is not a runtime save/load round-trip or malformed-input validation result.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          387,
+          432
+        ]
+      }
+    ],
+    "coverage": {
+      "localMovement": "partial",
+      "transfer": "partial",
+      "saveLoad": "partial: revisioned encoding and bounded storage traced; runtime round-trip unexamined",
+      "networkConservation": "unexamined",
+      "runtime": "unexamined",
+      "neighborCache": "partial: proximity refresh traced; all invalidation callers unexamined"
+    },
+    "next": "Publish four conveyor findings with alignment trace through current production source after full build and deployed API/MCP plus desktop/mobile verification. Reconcile NetHack status-hook caveat in the same batch.",
+    "alignmentTrace": {
+      "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+      "lines": [
+        212,
+        223
+      ],
+      "finding": "onProximityUpdate refreshes visual blend bits and next=front(); nextc is limited to same-team ConveyorBuild, and aligned additionally requires equal rotation. This cached relation controls downstream spacing and lateral-position preservation at handoff. All cache invalidation callers remain unexamined."
+    }
+  },
+  "crafterConsumptionStudy": {
+    "game": "mindustry",
+    "commit": "17012d61d9e4c3cbd9820d87e81c24495486ac53",
+    "method": "bounded original-source inspection; no new bytecode decompilation or gameplay observation",
+    "evidence": [
+      {
+        "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+        "bytes": 12574,
+        "sha256": "cf90cda813388c097276e86cd06c6138c430d02c5b2a0c7b8cc8dc2cb6b26540",
+        "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+        "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java"
+      },
+      {
+        "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+        "bytes": 77348,
+        "sha256": "08c24985718c083b7c66d280f940f759227fb383ad6acd5bc28afbb0d8fadbb6",
+        "blobSha": "4b4b90593d7f31cb48f2f6adba030a2cbd5cc42d",
+        "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/entities/comp/BuildingComp.java"
+      },
+      {
+        "path": "core/src/mindustry/world/consumers/ConsumeItems.java",
+        "bytes": 1739,
+        "sha256": "9b80fabe56c1f3508e7aac189fdd25e75c9278d09d4c3350d25c9eb92a07bab9",
+        "blobSha": "a733cb4674c8629787dd5299c7046eb9be3135d6",
+        "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/consumers/ConsumeItems.java"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Output room gates actual efficiency separately from potential efficiency",
+        "finding": "GenericCrafter.shouldConsume rejects an output item when stored quantity plus scaled batch exceeds itemCapacity. Liquid fullness uses ignoreLiquidFullness and dumpExtraLiquid policy. BuildingComp computes minimum required-consumer efficiency, preserves it as potentialEfficiency, then zeros actual efficiency when shouldConsume/productionValid rejects updating. This separates available inputs from permitted production.",
+        "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+        "lines": [
+          205,
+          233
+        ],
+        "additionalEvidence": {
+          "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+          "lines": [
+            1967,
+            2008
+          ]
+        }
+      },
+      {
+        "title": "Craft completion triggers item consumption before output emission",
+        "finding": "craft invokes consume before item offload. BuildingComp.consume calls each consumer trigger; ConsumeItems.trigger removes rounded scaled recipe amounts. ConsumeItems.efficiency separately checks consumeTriggerValid or required items. This traces these classes, not atomic rollback, every consumer type or every recipe.",
+        "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+        "lines": [
+          308,
+          325
+        ],
+        "additionalEvidence": [
+          {
+            "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+            "lines": [
+              1918,
+              1921
+            ]
+          },
+          {
+            "path": "core/src/mindustry/world/consumers/ConsumeItems.java",
+            "lines": [
+              44,
+              52
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Blocked production still attempts output dumping",
+        "finding": "updateTile advances production only at positive efficiency and otherwise cools warmup. dumpOutputs is called outside that branch; item dumps use a timer and stop on a rejected dump, while liquids call dumpLiquid. This allows output drainage while production is blocked, subject to receiver behavior. The actual acceptance and recovery sequence remains to be traced.",
+        "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+        "lines": [
+          237,
+          265
+        ],
+        "additionalEvidence": {
+          "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+          "lines": [
+            335,
+            350
+          ]
+        }
+      },
+      {
+        "title": "Fresh output falls back to local storage; stored output leaves only after acceptance",
+        "finding": "offload records production, checks nearby acceptItem and canDump, and sends a fresh item directly to the first accepting receiver; if none accepts it calls local handleItem. dump instead requires an existing stored item, delivers through receiver handleItem and then removes one locally. A rejected dump returns false without removing the stored item. Both use the rotating cdump index, not a measured fairness guarantee. Exception rollback and whole-network conservation remain unexamined.",
+        "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+        "lines": [
+          1006,
+          1019
+        ],
+        "additionalEvidence": {
+          "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+          "lines": [
+            1077,
+            1125
+          ]
+        }
+      }
+    ],
+    "coverage": {
+      "consumption": "partial",
+      "outputRecovery": "partial: generic item transfer/recheck path composed; runtime and liquid recovery unexamined",
+      "runtime": "unexamined",
+      "atomicity": "unexamined"
+    },
+    "next": "Publish four bounded crafter findings and input/recovery traces after catalog reconciliation, full build and deployed API/MCP plus desktop/mobile checks. Preserve source-inspection labels and unresolved subclass/liquid behavior.",
+    "inputAcceptanceTrace": {
+      "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+      "lines": [
+        865,
+        870
+      ],
+      "finding": "Default acceptItem requires block.consumesItem and per-item count below getMaximumAccepted; default maximum is block.itemCapacity (787-788). Default handleItem just adds one. The sender acceptance check is therefore material; subclasses and consumption-filter setup remain unexamined."
+    },
+    "recoveryTrace": {
+      "finding": "Under the inspected generic paths, rejected output stays stored; successful later dumping lowers that output count; a later shouldConsume check can permit production again when capacity and other conditions pass. This is a composed static control-flow inference, not an observed scenario or guaranteed eventual delivery.",
+      "evidence": [
+        {
+          "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+          "lines": [
+            1103,
+            1118
+          ]
+        },
+        {
+          "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+          "lines": [
+            205,
+            233
+          ]
+        }
+      ]
+    }
   }
 }

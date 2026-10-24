@@ -1,6 +1,26 @@
 {
   "rewrites": [
     {
+      "source": "/study",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/study/",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
+      "source": "/study/player-home",
+      "destination": "/studies/player-home/index.html"
+    },
+    {
+      "source": "/study/world-browser",
+      "destination": "/studies/world-browser/index.html"
+    },
+    {
+      "source": "/study/:tab(intro|title|create-new)",
+      "destination": "/studies/winchester-flow/index.html"
+    },
+    {
       "source": "/classic",
       "destination": "/simulations/index.html"
     },

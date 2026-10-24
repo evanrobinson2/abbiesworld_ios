@@ -52,7 +52,7 @@ export function start(AT, {quiet = false} = {}) {
  function stop() { off(); hud.destroy(); if (stageEl && !document.body.classList.contains('play')) { saved == null ? stageEl.removeAttribute('style') : stageEl.setAttribute('style', saved); dispatchEvent(new Event('resize')); } if (mount) mount.dispose(); AT.stage.hideChrome(false); AT.enterScene('cafe-curb', {dist: 90, pitch: 40}); AT.exitScene(); running = null; }
  running = {m, world, hud, stop, ended: false};
  { const b = new URLSearchParams(location.search).get('beat'); if (b) { hud.bot(b); const v = m.view(); if (v.zone) world.setZone(v.zone, ZONES[v.zone].mood); } } // ?beat=<id> jumps ahead for testing
- window.moonMission = {m, world, hud, view: () => m.view(), bot: hud.bot};
+ window.moonMission = {m, world, hud, view: () => m.view(), bot: hud.bot, autoplay: hud.autoplay};
  return running;
 }
 export const stop = () => running && running.stop();

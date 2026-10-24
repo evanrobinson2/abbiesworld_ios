@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Assimilate</title>
+<style>
+:root{--bg:#fff7e8;--ink:#2b2418;--card:#fff;--accent:#d6604d;--line:#e7d9bd}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1913;--ink:#f3ead8;--card:#2a251b;--line:#4a4130}}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,sans-serif}
+main{max-width:480px;margin:0 auto;padding:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0}
+button,.pick{font:inherit;border:0;border-radius:14px;padding:12px 16px;background:var(--accent);color:#fff;cursor:pointer;display:inline-block}
+.pick.off{background:var(--line);color:var(--ink);opacity:.7;cursor:default}
+textarea{width:100%;box-sizing:border-box;font:inherit;border-radius:12px;border:1px solid var(--line);padding:10px;background:var(--bg);color:var(--ink)}
+canvas{width:100%;border-radius:14px;display:block}small{opacity:.75}#msg{min-height:1.4em}
+</style></head><body><main id="app">
+<h1>Assimilate</h1>
+<div id="gate" class="card" hidden>Assimilate isn’t open yet. It’s being tried out by invitation.</div>
+<div id="ui" hidden>
+<div class="card"><b>Before you send anything</b><br><small>You’re responsible for what you upload and must have the right to share it. Sexual or nude pictures and words, and anything not family-friendly, are turned away. Photos with children in them are held back for now. We look at your photo once to check it, make your scene, and don’t keep it. Video and sound aren’t ready yet.</small>
+<p><label><input type="checkbox" id="ok"> I’ve read this and I’m happy to go ahead</label></p></div>
+<div class="card">
+<label class="pick" for="photo">📷 Take or choose a photo</label> <input id="photo" type="file" accept="image/*" capture="environment" hidden>
+<span class="pick off" title="Not ready yet">🎬 Video · not ready yet</span> <span class="pick off" title="Not ready yet">🎙 Sound · not ready yet</span>
+<p><small id="picked">No photo yet. Words alone work too.</small></p>
+<textarea id="words" rows="3" maxlength="600" placeholder="What is it, and what feeling should the scene have?"></textarea>
+<p><button id="go">Make my scene</button></p><div id="msg" role="status"></div></div>
+<div class="card" id="out" hidden><canvas id="cv" width="360" height="300"></canvas><h2 id="t"></h2><p id="s"></p><p><small id="n"></small></p>
+<button id="keep">Keep in my yard</button> <button id="share" disabled title="Needs your approval, then a grown-up’s review. Not built yet.">Show everyone · later</button></div>
+</div></main>
+<script type="module">
+import {live} from '/simulations/experimental.mjs';
+import {draw} from '/simulations/assimilate.mjs';
+const $=id=>document.getElementById(id);
+if(!live('assimilate'))$('gate').hidden=false;else{$('ui').hidden=false;
+let photo='';
+const shrink=file=>new Promise((res,rej)=>{const img=new Image();img.onload=()=>{const k=Math.min(1,1024/Math.max(img.width,img.height)),c=document.createElement('canvas');c.width=img.width*k;c.height=img.height*k;c.getContext('2d').drawImage(img,0,0,c.width,c.height);res(c.toDataURL('image/jpeg',.8));};img.onerror=rej;img.src=URL.createObjectURL(file);});   // re-encoding also drops photo metadata (location, device)
+$('photo').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{photo=await shrink(f);$('picked').textContent='Photo ready.';}catch{photo='';$('picked').textContent='That photo couldn’t be read.';}};
+let last=null;
+$('go').onclick=async()=>{$('msg').textContent='';if(!$('ok').checked){$('msg').textContent='Please tick the box first.';return;}
+ $('go').disabled=true;$('msg').textContent='The workshop lights are on…';
+ try{const r=await fetch('/api/assimilate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({consent:true,words:$('words').value,photo})}),d=await r.json();
+  if(!r.ok){$('msg').textContent=d.error||'Something went wrong.';return;}
+  last=d;$('msg').textContent='';$('out').hidden=false;draw($('cv').getContext('2d'),d.brief);
+  $('t').textContent=d.brief.title;$('s').textContent=d.brief.story;
+  $('n').textContent=[d.note,d.brief.inferred.length?'Guessed: '+d.brief.inferred.join(', ')+'.':'',d.brief.wanted.length?'Wished for, not available yet: '+d.brief.wanted.join(', ')+'.':''].filter(Boolean).join(' ');
+ }catch{$('msg').textContent='No connection. Try again.';}finally{$('go').disabled=false;}};
+$('keep').onclick=()=>{try{const k='aw-assimilate-yard',all=JSON.parse(localStorage.getItem(k)||'[]');all.push({at:Date.now(),brief:last.brief});localStorage.setItem(k,JSON.stringify(all.slice(-20)));$('msg').textContent='Kept in your yard on this device.';}catch{$('msg').textContent='Couldn’t keep it here.';}};
+}
+</script></body></html>

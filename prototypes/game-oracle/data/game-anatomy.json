@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-24-endless-sky-lifecycle",
-  "updatedAt": "2026-10-24T00:48:15.962960+00:00",
+  "revision": "anatomy-2026-10-24-mindustry-crafter-recovery",
+  "updatedAt": "2026-10-24T16:01:22.159338+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 108,
+    "findings": 129,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 70,
+    "sourceFilesFetched": 80,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -954,11 +954,131 @@
             "url": "/data/anatomy/mindustry.json",
             "path": "package inventory / static analysis"
           }
+        },
+        {
+          "domain": "systems",
+          "title": "Conveyor motion propagates spacing constraints upstream",
+          "finding": "updateTile processes items from the forward end backward, clamps movement against the next item minus itemSpace, and applies a downstream limit derived from an aligned conveyor minitem. Motion uses speed times edelta. This traces local spacing and blocking, not whole-network throughput or conservation.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L265-L288",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              265,
+              288
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Conveyor transfer checks receiver acceptance before local removal",
+          "finding": "pass requires a nonnull item and next building, same team, and receiver acceptItem. It invokes receiver handleItem and returns true; updateTile removes its local item only on that success. A rejected transfer remains on the belt. No transaction rollback or exception guarantee was established.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L278-L305",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              278,
+              305
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Side loading uses stricter spacing and inserts halfway along the belt",
+          "finding": "acceptItem rejects full capacity or an absent facing edge. Direction-zero input needs minitem>=itemSpace; side input needs minitem>0.7. A rotating source that is also the next building is rejected. handleItem inserts direction-zero input at y=0 and side input at y=0.5 with lateral offset. External callers must honor acceptance; handleItem itself only checks capacity before using the facing edge.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L353-L383",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              353,
+              383
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Conveyor saves quantize positions and retain legacy decoding",
+          "finding": "Revision 1 writes item count, short item ID and signed-byte encodings of lateral and forward position. read consumes every declared entry but stores only up to capacity; revision 0 decodes an older packed integer representation. It invokes updateTile after loading, so deserialization includes an update rather than only field assignment. This is not a runtime save/load round-trip or malformed-input validation result.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L387-L432",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              387,
+              432
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Output room gates actual efficiency separately from potential efficiency",
+          "finding": "GenericCrafter.shouldConsume rejects an output item when stored quantity plus scaled batch exceeds itemCapacity. Liquid fullness uses ignoreLiquidFullness and dumpExtraLiquid policy. BuildingComp computes minimum required-consumer efficiency, preserves it as potentialEfficiency, then zeros actual efficiency when shouldConsume/productionValid rejects updating. This separates available inputs from permitted production.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L205-L233",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              205,
+              233
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Craft completion triggers item consumption before output emission",
+          "finding": "craft invokes consume before item offload. BuildingComp.consume calls each consumer trigger; ConsumeItems.trigger removes rounded scaled recipe amounts. ConsumeItems.efficiency separately checks consumeTriggerValid or required items. This traces these classes, not atomic rollback, every consumer type or every recipe.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L308-L325",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              308,
+              325
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Blocked production still attempts output dumping",
+          "finding": "updateTile advances production only at positive efficiency and otherwise cools warmup. dumpOutputs is called outside that branch; item dumps use a timer and stop on a rejected dump, while liquids call dumpLiquid. This allows output drainage while production is blocked, subject to receiver behavior. The actual acceptance and recovery sequence remains to be traced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L237-L265",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              237,
+              265
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Fresh output falls back to local storage; stored output leaves only after acceptance",
+          "finding": "offload records production, checks nearby acceptItem and canDump, and sends a fresh item directly to the first accepting receiver; if none accepts it calls local handleItem. dump instead requires an existing stored item, delivers through receiver handleItem and then removes one locally. A rejected dump returns false without removing the stored item. Both use the rotating cdump index, not a measured fairness guarantee. Exception rollback and whole-network conservation remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/entities/comp/BuildingComp.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/entities/comp/BuildingComp.java#L1006-L1019",
+            "blobSha": "4b4b90593d7f31cb48f2f6adba030a2cbd5cc42d",
+            "lines": [
+              1006,
+              1019
+            ]
+          }
         }
       ],
       "coverage": {
         "mechanics": "not yet studied",
-        "systems": "not yet studied",
+        "systems": "partial static evidence",
         "simulation": "partial static evidence",
         "procedural-generation": "partial static evidence",
         "ui": "partial static evidence",
@@ -974,7 +1094,7 @@
         "status": "design inference; not implemented in Ranch Atelier",
         "text": "Tie visible machine activity to simulated warmup and blocked outputs; save quick-choice preferences independently of world state."
       },
-      "nextPass": "Validate conveyor/crafter behavior in a running scenario. Atlas-region counts, schematic semantics, actual HUD flows and subclass-specific planet rules need further analysis.",
+      "nextPass": "Generic item consumption and output recovery paths are partially traced. Liquid recovery, subclass policies, atomicity, network conservation and runtime outcomes remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
@@ -1631,12 +1751,207 @@
             "url": "/data/anatomy/nethack.json",
             "path": "package inventory / static analysis"
           }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Room corridors use staged connection attempts before extra routes",
+          "finding": "makecorridors attempts adjacent rooms, with a random early break, then rooms two apart with unequal smeq labels, then a bounded cross-room label pass. With more than two rooms it attempts rn2(nroom)+4 extra connections using nxcor=true. This is evidence of staged connectivity construction, not proof that all seeds produce a connected traversable level.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L319-L347",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              319,
+              347
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "A failed corridor can leave geometry behind",
+          "finding": "join can create its origin door before calling dig_corridor. The digger changes tiles in place and can later return FALSE on its iteration guard, optional-route random termination, boundary or terrain mismatch. Neither inspected function rolls these writes back. The target door and smeq update occur only after successful digging. Partial corridor stubs are therefore possible in this control flow; their observed frequency remains unknown.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L294-L315",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              294,
+              315
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Corridor routing is a bounded local walker with secret and obstructed variants",
+          "finding": "dig_corridor chooses axis movement toward the destination, perturbs relative axis distances, tries permissible turns, continues straight where permitted, and changes direction around incompatible terrain. It accepts background terrain, intended floor or secret corridor. Ordinary CORR carving can instead create SCORR; optional nxcor routes can terminate randomly and place boulders. No shortest-path or global reachability guarantee was established.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/sp_lev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c#L2215-L2321",
+            "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
+            "lines": [
+              2215,
+              2321
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Door placement rules differ between required and extra corridors",
+          "finding": "okdoor requires horizontal or vertical wall, spare door capacity and no cardinally adjacent ordinary or secret door. finddpos first tries a random candidate, scans legal wall positions, then reuses an existing door and finally falls back to a corner coordinate. join bypasses okdoor for nxcor=false at both endpoints; nxcor=true requires it. dodoor retains the capacity check. Thus okdoor is not an unconditional invariant for every corridor endpoint.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L1237-L1256",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              1237,
+              1256
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Actions consume movement budget while world turns replenish it",
+          "finding": "When context.move is set, the hero loses NORMAL_SPEED movement. movemon passes run until the hero can act or no monster can move. When both budgets are exhausted, the loop applies monster distress, replenishes monster budgets, computes hero allowance and increments moves and monstermoves. Action count and world-turn count therefore need not coincide. Ordinary dispatcher cancellation is traced separately; individual command costs remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/allmain.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c#L93-L173",
+            "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+            "lines": [
+              93,
+              173
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Hero speed bonuses and burden affect the replenishment allowance",
+          "finding": "An actually moving mounted hero receives mcalcmove of the steed. Otherwise base allowance comes from the current monster form; Very_fast adds NORMAL_SPEED on rn2(3)!=0, while Fast adds it on rn2(3)==0. Burden then subtracts integer fractions of the allowance (one quarter, one half, three quarters or seven eighths). These are budget rules, not a measurement of real-time animation speed.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/allmain.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c#L131-L169",
+            "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+            "lines": [
+              131,
+              169
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Monster speed is randomly rounded into whole action budgets",
+          "finding": "mcalcmove adjusts base speed for slow or fast status, applies a galloping-steed branch, then removes the remainder modulo NORMAL_SPEED and restores one NORMAL_SPEED when a random draw is below that remainder. movemon skips ordinary dead or under-budget monsters and deducts NORMAL_SPEED before processing an eligible monster; remaining budget requests another pass. Full action outcomes, guard exceptions and cleanup remain outside this bounded trace.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mon.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mon.c#L639-L672",
+            "blobSha": "4f0a13d4af6a52352ff84c01b2ac330e3f01af21",
+            "lines": [
+              639,
+              672
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Command dispatch can cancel the default time charge",
+          "finding": "The main loop defaults context.move to 1 before command processing. Escape and empty/interrupted input clear it in rhack. For ordinary command-table dispatch, a zero handler result clears context.move and multi; rejected wizard-only or buried-incompatible commands use that same path. Unknown commands also clear both. Movement and occupations have distinct paths, so this is not a complete per-command cost inventory.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/cmd.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c#L4890-L4934",
+            "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
+            "lines": [
+              4890,
+              4934
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Status and hunger hooks follow world-turn replenishment",
+          "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Confusion expiration is traced separately; other expiration rules, hunger and spell aging remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/allmain.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c#L172-L182",
+            "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+            "lines": [
+              172,
+              182
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Confusion application separates duration from feedback",
+          "finding": "The potion branch increases existing confusion duration using itimeout_incr and a bless/curse-dependent random expression. make_confused changes the timeout field, flags the status display on start/end transitions and suppresses spoken recovery feedback when Unaware. This does not enumerate every source or cure.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/potion.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/potion.c#L902-L913",
+            "blobSha": "c6dffc5f979925361f5ba9023e4b5e820773dfa4",
+            "lines": [
+              902,
+              913
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Confusion expiry preserves transition feedback and interrupts occupations",
+          "finding": "The timed-property loop decrements active timeout fields. On confusion expiry it temporarily sets duration to one, then calls make_confused(0,TRUE), preserving the old-to-new transition used for feedback. It stops occupation only if Confusion is no longer effective. The earlier invulnerability return skips this timeout loop; do not claim all status durations always decay every world turn.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/timeout.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/timeout.c#L598-L604",
+            "blobSha": "f9df132dba01abd96a955b2770ebd9303ceab932",
+            "lines": [
+              598,
+              604
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Confusion can reroute a movement attempt before terrain resolution",
+          "finding": "In the inspected movement branch, Stunned or Confusion combined with a zero rn2(5) draw enters a direction-redraw loop. confdir is called until the destination is in bounds and not bad_rock, with a bounded retry guard that cancels multi and returns. Subsequent water friction may alter the destination again. This does not imply all confused actions fail or establish outcomes for attacks, spells or other commands.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/hack.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/hack.c#L1441-L1461",
+            "blobSha": "79fe7408c858a5c2754a173be2b7ed78e2eb5b65",
+            "lines": [
+              1441,
+              1461
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Timed-property setters clamp duration while retaining other intrinsic flags",
+          "finding": "itimeout clamps values below one to zero and values at or above TIMEOUT to TIMEOUT. itimeout_incr masks the old value to its timeout portion before adding the increment. set_itimeout clears only timeout bits and inserts the clamped duration, preserving other intrinsic flags. TIMEOUT is 0x00ffffff. These are inspected integer operations; no runtime boundary test was performed.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/potion.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/potion.c#L20-L48",
+            "blobSha": "c6dffc5f979925361f5ba9023e4b5e820773dfa4",
+            "lines": [
+              20,
+              48
+            ]
+          }
         }
       ],
       "coverage": {
-        "mechanics": "not yet studied",
+        "mechanics": "partial static evidence",
         "systems": "partial static evidence",
-        "simulation": "not yet studied",
+        "simulation": "partial static evidence",
         "procedural-generation": "partial static evidence",
         "ui": "not yet studied",
         "ux": "not yet studied",
@@ -1651,7 +1966,7 @@
         "status": "design inference; not implemented in Ranch Atelier",
         "text": "Generate connectivity and progression requirements before filling a location with incidental content."
       },
-      "nextPass": "Decode packed data, trace turn cost and monster scheduling, and observe inventory, visibility and failure feedback. Do not infer the full ruleset from generation code.",
+      "nextPass": "Confusion lifecycle is partially traced. All sources/cures, other status effects, individual command costs and runtime outcomes remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },

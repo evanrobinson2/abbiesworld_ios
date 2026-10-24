@@ -9,9 +9,19 @@ documents; what is built lives in the status documents. Keep these three apart.
   generator: a system that preserves creative intent, so whole experiences can be rebuilt, extended and upgraded as
   technology changes. Don't edit it to match the code; change the code toward it, or record the difference in the
   status doc.
+- `docs/design/LIVING_TOY_WORLD.md`: the consolidated product vision for arrival/unboxing, Capture, sharing, the home and arcade games.
 - `docs/MODELER_STATUS.md`: what the modeling pipeline does today against that vision, and what to build next.
 - `docs/architecture/`: the infrastructure that already exists (R2, Postgres, Vercel projects, MCP, auth, jobs).
   Read it before proposing any new service, store or deployment, and update it in the PR that changes infrastructure.
+
+## Invariant contracts (Evan, 2026-10-24)
+Read `INVARIANTS.md`; CI (`invariants` workflow) enforces each one.
+- No minigame or feature is live (reachable from abbies.world) without a real scene in the world and a passing headless-Chrome
+  run that plays it end to end. Otherwise it is experimental (`?exp=<id>`), like an experimental branch. Register it in
+  `simulations/game-registry.json`. Cutting this corner is how unfinished games reached the town.
+- The town HUD starts from `simulations/town-hud-boot.mjs` by its own script tag, never inline.
+- Only sounds from the sound catalogue (`sounds/manifest.json`); no MIDI, no oscillator-built music or effects.
+- Every voice is an ElevenLabs designed voice (never cloned); no browser speech synthesis or other TTS.
 
 ## Ground rules
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.

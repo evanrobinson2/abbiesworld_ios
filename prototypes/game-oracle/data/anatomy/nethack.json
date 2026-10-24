@@ -419,6 +419,434 @@
       "bytes": 112042,
       "blobSha": "79fe7408c858a5c2754a173be2b7ed78e2eb5b65",
       "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/hack.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/sp_lev.c",
+      "bytes": 174146,
+      "sha256": "a43b3542e376bb6c1b5242910f4fdb37dfea86668d067799f16cb04ce26ac9bd",
+      "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/allmain.c",
+      "bytes": 30401,
+      "sha256": "3a604ff5dc195d3a5ac66af146b843f0134453881e5f79b2004b98d22e12083d",
+      "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/mon.c",
+      "bytes": 147180,
+      "sha256": "8b3385090338c3b4fceff9eb2a308044c11889fbeb1baf005f39100c9fe1de9d",
+      "blobSha": "4f0a13d4af6a52352ff84c01b2ac330e3f01af21",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mon.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/cmd.c",
+      "bytes": 211684,
+      "sha256": "d5ff4e47890f23442fa02a374c30cbfff2b0c61a17a0b840ad5366b5d0563dd1",
+      "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/potion.c",
+      "sha256": "2e91ddc336067445fc467e7c6d96bd838465323eb7183d0da80510e7ddeda013",
+      "blobSha": "c6dffc5f979925361f5ba9023e4b5e820773dfa4",
+      "bytes": 81746,
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/potion.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/timeout.c",
+      "sha256": "4088647ffe5eace7c0554b83c8f6f9b5518682b22baad7abb6d1ec5818dcca7e",
+      "blobSha": "f9df132dba01abd96a955b2770ebd9303ceab932",
+      "bytes": 76815,
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/timeout.c"
+    },
+    {
+      "game": "nethack",
+      "path": "include/youprop.h",
+      "bytes": 15911,
+      "sha256": "cb73ca84accd64cd38e3672337b81c2e17972b47d1bf1c52d58bf855eb8e6eca",
+      "blobSha": "c9656aacf1f870fb0ca522c002d52ba3c9e9e590",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/youprop.h"
+    },
+    {
+      "game": "nethack",
+      "path": "include/prop.h",
+      "bytes": 5390,
+      "sha256": "78a29a5f25f970425997a2b93c8103c7c3ec461142bf9028eab274514883259f",
+      "blobSha": "570f3f2fac78abd19d584188b72a91813bb80814",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/prop.h"
     }
-  ]
+  ],
+  "corridorStudy": {
+    "game": "nethack",
+    "version": "NetHack-3.6.7_Released",
+    "commit": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "method": "bounded static inspection of original release source; not decompilation or gameplay observation",
+    "evidence": [
+      {
+        "path": "src/mklev.c",
+        "bytes": 58173,
+        "sha256": "a13daa6e9ee48333b9362b35f702a0faab611716353e8049c6f9d6fbf29bbff6",
+        "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c"
+      },
+      {
+        "path": "src/sp_lev.c",
+        "bytes": 174146,
+        "sha256": "a43b3542e376bb6c1b5242910f4fdb37dfea86668d067799f16cb04ce26ac9bd",
+        "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Room corridors use staged connection attempts before extra routes",
+        "finding": "makecorridors attempts adjacent rooms, with a random early break, then rooms two apart with unequal smeq labels, then a bounded cross-room label pass. With more than two rooms it attempts rn2(nroom)+4 extra connections using nxcor=true. This is evidence of staged connectivity construction, not proof that all seeds produce a connected traversable level.",
+        "path": "src/mklev.c",
+        "lines": [
+          319,
+          347
+        ]
+      },
+      {
+        "title": "A failed corridor can leave geometry behind",
+        "finding": "join can create its origin door before calling dig_corridor. The digger changes tiles in place and can later return FALSE on its iteration guard, optional-route random termination, boundary or terrain mismatch. Neither inspected function rolls these writes back. The target door and smeq update occur only after successful digging. Partial corridor stubs are therefore possible in this control flow; their observed frequency remains unknown.",
+        "path": "src/mklev.c",
+        "lines": [
+          294,
+          315
+        ],
+        "additionalEvidence": {
+          "path": "src/sp_lev.c",
+          "lines": [
+            2246,
+            2269
+          ]
+        }
+      },
+      {
+        "title": "Corridor routing is a bounded local walker with secret and obstructed variants",
+        "finding": "dig_corridor chooses axis movement toward the destination, perturbs relative axis distances, tries permissible turns, continues straight where permitted, and changes direction around incompatible terrain. It accepts background terrain, intended floor or secret corridor. Ordinary CORR carving can instead create SCORR; optional nxcor routes can terminate randomly and place boulders. No shortest-path or global reachability guarantee was established.",
+        "path": "src/sp_lev.c",
+        "lines": [
+          2215,
+          2321
+        ]
+      },
+      {
+        "title": "Door placement rules differ between required and extra corridors",
+        "finding": "okdoor requires horizontal or vertical wall, spare door capacity and no cardinally adjacent ordinary or secret door. finddpos first tries a random candidate, scans legal wall positions, then reuses an existing door and finally falls back to a corner coordinate. join bypasses okdoor for nxcor=false at both endpoints; nxcor=true requires it. dodoor retains the capacity check. Thus okdoor is not an unconditional invariant for every corridor endpoint.",
+        "path": "src/mklev.c",
+        "lines": [
+          1237,
+          1256
+        ],
+        "additionalEvidence": [
+          {
+            "path": "src/mklev.c",
+            "lines": [
+              69,
+              95
+            ]
+          },
+          {
+            "path": "src/mklev.c",
+            "lines": [
+              294,
+              310
+            ]
+          },
+          {
+            "path": "src/mklev.c",
+            "lines": [
+              1207,
+              1232
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "corridorControlFlow": "partial",
+      "runtime": "unexamined",
+      "globalConnectivityGuarantee": "unexamined",
+      "smeqInitializationAndPropagation": "partial: creation and join updates traced, repository-wide writers unexamined",
+      "doorAndBoulderSemantics": "partial: doorway constraints and initial door states traced; boulder movement unexamined"
+    },
+    "next": "Publish the four bounded corridor findings and supporting label/door traces after current catalog reconciliation, full build and deployed API/MCP plus desktop/mobile checks. Do not claim universal connectivity or traversability.",
+    "labelTrace": {
+      "initialization": {
+        "path": "src/sp_lev.c",
+        "lines": [
+          1283,
+          1286
+        ],
+        "finding": "Non-vault room creation assigns smeq[nroom]=nroom before add_room."
+      },
+      "update": {
+        "path": "src/mklev.c",
+        "lines": [
+          312,
+          315
+        ],
+        "finding": "After a successful dig, join copies the smaller endpoint label to the other endpoint. This inspected update does not relabel every room sharing the old label. Treat labels as construction bookkeeping; do not claim canonical disjoint-set components or runtime accessibility."
+      },
+      "scope": "Only downloaded source files were searched; whole-repository absence of other writes is not established."
+    },
+    "doorStateTrace": {
+      "path": "src/mklev.c",
+      "lines": [
+        384,
+        447
+      ],
+      "finding": "Door geometry has separate state: ordinary doors may be open, locked, closed or absent; secret doors are closed or locked. Difficulty and shop context affect traps, and some trapped-door branches can create a mimic. A successful corridor dig alone does not establish unimpeded movement."
+    }
+  },
+  "schedulingStudy": {
+    "game": "nethack",
+    "commit": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "method": "static inspection of original 3.6.7 release source; no gameplay observation or decompilation",
+    "evidence": [
+      {
+        "path": "src/allmain.c",
+        "bytes": 30401,
+        "sha256": "3a604ff5dc195d3a5ac66af146b843f0134453881e5f79b2004b98d22e12083d",
+        "blobSha": "5111c69a740ae055616e0071350b8f13d52bb3f4",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/allmain.c"
+      },
+      {
+        "path": "src/mon.c",
+        "bytes": 147180,
+        "sha256": "8b3385090338c3b4fceff9eb2a308044c11889fbeb1baf005f39100c9fe1de9d",
+        "blobSha": "4f0a13d4af6a52352ff84c01b2ac330e3f01af21",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mon.c"
+      },
+      {
+        "path": "src/cmd.c",
+        "bytes": 211684,
+        "sha256": "d5ff4e47890f23442fa02a374c30cbfff2b0c61a17a0b840ad5366b5d0563dd1",
+        "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Actions consume movement budget while world turns replenish it",
+        "finding": "When context.move is set, the hero loses NORMAL_SPEED movement. movemon passes run until the hero can act or no monster can move. When both budgets are exhausted, the loop applies monster distress, replenishes monster budgets, computes hero allowance and increments moves and monstermoves. Action count and world-turn count therefore need not coincide. Ordinary dispatcher cancellation is traced separately; individual command costs remain unexamined.",
+        "path": "src/allmain.c",
+        "lines": [
+          93,
+          173
+        ]
+      },
+      {
+        "title": "Hero speed bonuses and burden affect the replenishment allowance",
+        "finding": "An actually moving mounted hero receives mcalcmove of the steed. Otherwise base allowance comes from the current monster form; Very_fast adds NORMAL_SPEED on rn2(3)!=0, while Fast adds it on rn2(3)==0. Burden then subtracts integer fractions of the allowance (one quarter, one half, three quarters or seven eighths). These are budget rules, not a measurement of real-time animation speed.",
+        "path": "src/allmain.c",
+        "lines": [
+          131,
+          169
+        ]
+      },
+      {
+        "title": "Monster speed is randomly rounded into whole action budgets",
+        "finding": "mcalcmove adjusts base speed for slow or fast status, applies a galloping-steed branch, then removes the remainder modulo NORMAL_SPEED and restores one NORMAL_SPEED when a random draw is below that remainder. movemon skips ordinary dead or under-budget monsters and deducts NORMAL_SPEED before processing an eligible monster; remaining budget requests another pass. Full action outcomes, guard exceptions and cleanup remain outside this bounded trace.",
+        "path": "src/mon.c",
+        "lines": [
+          639,
+          672
+        ],
+        "additionalEvidence": {
+          "path": "src/mon.c",
+          "lines": [
+            744,
+            779
+          ]
+        }
+      },
+      {
+        "title": "Command dispatch can cancel the default time charge",
+        "finding": "The main loop defaults context.move to 1 before command processing. Escape and empty/interrupted input clear it in rhack. For ordinary command-table dispatch, a zero handler result clears context.move and multi; rejected wizard-only or buried-incompatible commands use that same path. Unknown commands also clear both. Movement and occupations have distinct paths, so this is not a complete per-command cost inventory.",
+        "path": "src/cmd.c",
+        "lines": [
+          4890,
+          4934
+        ],
+        "additionalEvidence": [
+          {
+            "path": "src/allmain.c",
+            "lines": [
+              372,
+              374
+            ]
+          },
+          {
+            "path": "src/cmd.c",
+            "lines": [
+              4722,
+              4741
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Status and hunger hooks follow world-turn replenishment",
+        "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Confusion expiration is traced separately; other expiration rules, hunger and spell aging remain unexamined.",
+        "path": "src/allmain.c",
+        "lines": [
+          172,
+          182
+        ],
+        "additionalEvidence": {
+          "path": "src/allmain.c",
+          "lines": [
+            275,
+            283
+          ]
+        }
+      }
+    ],
+    "coverage": {
+      "scheduling": "partial",
+      "commandTimeCost": "partial: ordinary dispatch cancellation traced; handler catalog and movement paths unexamined",
+      "runtime": "unexamined",
+      "statusTimers": "partial: call cadence traced, internal effects unexamined"
+    },
+    "next": "Publish five bounded scheduling findings after reconciling current catalog, full build and deployed API/MCP plus desktop/mobile verification. Then trace one concrete status lifecycle or another pilot subsystem."
+  },
+  "confusionStudy": {
+    "game": "nethack",
+    "commit": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "method": "bounded original-source inspection, no runtime observation",
+    "evidence": [
+      {
+        "path": "src/potion.c",
+        "sha256": "2e91ddc336067445fc467e7c6d96bd838465323eb7183d0da80510e7ddeda013",
+        "blobSha": "c6dffc5f979925361f5ba9023e4b5e820773dfa4",
+        "bytes": 81746,
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/potion.c"
+      },
+      {
+        "path": "src/timeout.c",
+        "sha256": "4088647ffe5eace7c0554b83c8f6f9b5518682b22baad7abb6d1ec5818dcca7e",
+        "blobSha": "f9df132dba01abd96a955b2770ebd9303ceab932",
+        "bytes": 76815,
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/timeout.c"
+      },
+      {
+        "path": "src/hack.c",
+        "sha256": "a86d507348db794a50ea550ce8c97cc2a7284979a5663753351bb7e528c5cda6",
+        "blobSha": "79fe7408c858a5c2754a173be2b7ed78e2eb5b65",
+        "bytes": 112042,
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/hack.c"
+      },
+      {
+        "path": "include/youprop.h",
+        "bytes": 15911,
+        "sha256": "cb73ca84accd64cd38e3672337b81c2e17972b47d1bf1c52d58bf855eb8e6eca",
+        "blobSha": "c9656aacf1f870fb0ca522c002d52ba3c9e9e590",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/youprop.h"
+      },
+      {
+        "path": "include/prop.h",
+        "bytes": 5390,
+        "sha256": "78a29a5f25f970425997a2b93c8103c7c3ec461142bf9028eab274514883259f",
+        "blobSha": "570f3f2fac78abd19d584188b72a91813bb80814",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/prop.h"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Confusion application separates duration from feedback",
+        "finding": "The potion branch increases existing confusion duration using itimeout_incr and a bless/curse-dependent random expression. make_confused changes the timeout field, flags the status display on start/end transitions and suppresses spoken recovery feedback when Unaware. This does not enumerate every source or cure.",
+        "path": "src/potion.c",
+        "lines": [
+          902,
+          913
+        ],
+        "additionalEvidence": {
+          "path": "src/potion.c",
+          "lines": [
+            61,
+            77
+          ]
+        }
+      },
+      {
+        "title": "Confusion expiry preserves transition feedback and interrupts occupations",
+        "finding": "The timed-property loop decrements active timeout fields. On confusion expiry it temporarily sets duration to one, then calls make_confused(0,TRUE), preserving the old-to-new transition used for feedback. It stops occupation only if Confusion is no longer effective. The earlier invulnerability return skips this timeout loop; do not claim all status durations always decay every world turn.",
+        "path": "src/timeout.c",
+        "lines": [
+          598,
+          604
+        ],
+        "additionalEvidence": [
+          {
+            "path": "src/timeout.c",
+            "lines": [
+              506,
+              507
+            ]
+          },
+          {
+            "path": "src/timeout.c",
+            "lines": [
+              548,
+              552
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Confusion can reroute a movement attempt before terrain resolution",
+        "finding": "In the inspected movement branch, Stunned or Confusion combined with a zero rn2(5) draw enters a direction-redraw loop. confdir is called until the destination is in bounds and not bad_rock, with a bounded retry guard that cancels multi and returns. Subsequent water friction may alter the destination again. This does not imply all confused actions fail or establish outcomes for attacks, spells or other commands.",
+        "path": "src/hack.c",
+        "lines": [
+          1441,
+          1461
+        ]
+      },
+      {
+        "title": "Timed-property setters clamp duration while retaining other intrinsic flags",
+        "finding": "itimeout clamps values below one to zero and values at or above TIMEOUT to TIMEOUT. itimeout_incr masks the old value to its timeout portion before adding the increment. set_itimeout clears only timeout bits and inserts the clamped duration, preserving other intrinsic flags. TIMEOUT is 0x00ffffff. These are inspected integer operations; no runtime boundary test was performed.",
+        "path": "src/potion.c",
+        "lines": [
+          20,
+          48
+        ],
+        "additionalEvidence": {
+          "path": "include/prop.h",
+          "lines": [
+            131,
+            131
+          ]
+        }
+      }
+    ],
+    "coverage": {
+      "application": "partial",
+      "expiry": "partial",
+      "movementEffect": "partial",
+      "allSourcesAndCures": "unexamined",
+      "runtime": "unexamined",
+      "durationHelpers": "verified by static source inspection; runtime unexamined"
+    },
+    "next": "Publish four bounded confusion lifecycle findings with pinned helper/property evidence; correct earlier scheduling caveat from untraced command mapping to partial dispatcher trace. Run full build and live API/MCP plus desktop/mobile checks.",
+    "propertyTrace": {
+      "path": "include/youprop.h",
+      "lines": [
+        82,
+        83
+      ],
+      "finding": "Confusion aliases HConfusion, which is u.uprops[CONFUSION].intrinsic. This definition does not combine a separate extrinsic source. Clearing only the timeout does not necessarily clear every bit of the intrinsic value; retain the effective-property check at expiry rather than asserting unconditional recovery."
+    }
+  }
 }

@@ -71,7 +71,7 @@ function chips(){
 // The library (Evan, 2026-10-23: "give me a better way to browse"): every model we have, not only the ones on the desk.
 function library(){
   crumb.innerHTML = '<a href="/models">Models</a>';
-  import('/models/library.js?v=5').then(l => l.mount(root));
+  import('/models/library.js?v=6').then(l => l.mount(root));
 }
 // The browser (Evan, 04:00Z): every model as a small version of the review card, a framed print and the model standing
 // free beside it. One wordless toggle: Row shows one card at a time to swipe through, Screen shows them all as a grid.
@@ -379,20 +379,10 @@ const speech = !!Rec;
 let rec = null, listening = false;
 // The status line survives re-renders, so what was heard and saved stays on screen after the page moves on.
 const hear = (s, kind = '') => { voiceLine = s; voiceKind = kind; const h = document.getElementById('heard'); if (h){ h.textContent = s; h.className = `heard ${kind}`; } };
-// Spoken replies use the device's own voice: instant, free, and nothing leaves the phone. Recognition pauses while it talks
-// so it does not hear itself.
+// Replies are shown, not spoken: every voice in the game is an ElevenLabs designed voice (INVARIANTS.md), and this page has no
+// pre-rendered lines, so there is no browser speech.
 let talking = false;
-function say(text, then){
-  const synth = window.speechSynthesis;
-  then?.(); return; // no synthetic speech
-  if (!synth || !window.SpeechSynthesisUtterance){ then?.(); return; }
-  const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 1.05;
-  const v = synth.getVoices().find(v => /en(-|_)US/.test(v.lang) && /Samantha|Google US|Aria|Jenny|Natural/i.test(v.name)); if (v) u.voice = v;
-  let done = false; const fin = () => { if (done) return; done = true; talking = false; if (listening && handsFree && rec) try { rec.start(); } catch {} then?.(); };
-  u.onend = fin; u.onerror = fin; setTimeout(fin, 1500 + text.length * 80);
-  talking = true; if (rec) try { rec.stop(); } catch {}
-  synth.cancel(); synth.speak(u);
-}
+function say(text, then){ then?.(); }
 function setMic(on){ const b = document.getElementById('mic'); if (b){ b.setAttribute('aria-pressed', String(on)); b.classList.toggle('live', on); } }
 
 // "accept", "ship it", "reject", "start over", or anything else said with adjust/change words. "next" and "back" move.

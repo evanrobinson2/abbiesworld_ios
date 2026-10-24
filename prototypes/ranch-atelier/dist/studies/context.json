@@ -3491,6 +3491,16 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md"
         },
         {
+          "k": "canon",
+          "t": "AI Gateway pattern, wallet caps and PG guard as already used by api/advisor.js and api/invent.js (tile chat reuses them)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/api/advisor.js"
+        },
+        {
+          "k": "canon",
+          "t": "simulations/first-person.mjs: the game's first person, reused rather than rebuilt",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/first-person.mjs"
+        },
+        {
           "k": "research",
           "t": "Thompson sampling for bandits (Beta posteriors per asset, group prior, pair bonus); the method behind the next batch",
           "href": "https://en.wikipedia.org/wiki/Thompson_sampling"
@@ -3511,6 +3521,301 @@
         {
           "k": "tutorial",
           "t": "None recorded for this draft"
+        }
+      ]
+    },
+    "project-chat": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Dispatch bridge and issue intake (docs/dispatch/ISSUE_INTAKE.md): the route the chat rides",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/dispatch/ISSUE_INTAKE.md"
+        },
+        {
+          "k": "canon",
+          "t": "Information grammar: the chat is presentation layer only, never in the world (HUD study, Game Feel)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "oracle",
+          "t": "None consulted for this draft"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "design",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded for this draft"
+        }
+      ]
+    },
+    "scene-builder": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Townscaper: click to place, a town grows itself; no HUD but a colour palette (4% of the screen). The model for \"auto first pass, then you\"",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/townscaper.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Tiny Glade: gridless building with procedural detail added around what you draw; a tools tray only (8%)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/tiny-glade.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Dorfromantik: tile placement with soft, tactile feedback (6%); what a hex edit should feel like",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/dorfromantik.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Besiege: the machine is the readout and physics is honest; failure is funny (8%). Sets the bar for the Physics bench",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/besiege.json"
+        },
+        {
+          "k": "oracle",
+          "t": "LEGO Bricktales: build, then a test run shows success in the world (10%)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/lego-bricktales.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Spore: creature, tribe, city and space editors that reshape themselves per stage; parts show what they do",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/spore.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Garry's Mod: spawn menu and tool gun over a physics sandbox (10%); the cost of too many tools",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/garrys-mod.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Planet Zoo: deep freeform building with welfare panels (20%); the \"fiddly\" end we avoid by default",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/planet-zoo.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Cities: Skylines: info views recolour the whole city; a model for the Sky and Physics overlays",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/cities-skylines.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Astroneer: terrain tool with a backpack that shows items physically (4%)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/astroneer.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Bad North: a whole battle on a toy island, almost no numbers (6%)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/bad-north.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Kerbal Space Program: build, launch, learn from physics; precise overlays only where needed (18%)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/kerbal-space-program.json"
+        },
+        {
+          "k": "oracle",
+          "t": "Minecraft: hotbar of blocks and an endless sandbox (9%); the tray of cards is its cousin",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/minecraft.json"
+        },
+        {
+          "k": "oracle",
+          "t": "RimWorld: deep sim parameters behind tabs (22%); what the Lab bench must not become",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/games/rimworld.json"
+        },
+        {
+          "k": "oracle",
+          "t": "The live Oracle consult call was not made (this cloud session cannot reach *.vercel.app); the records above are the repo's Oracle snapshot"
+        },
+        {
+          "k": "devblog",
+          "t": "How Townscaper works: a story four games in the making (Oskar Stalberg, Game Developer)",
+          "href": "https://www.gamedeveloper.com/game-platforms/how-townscaper-works-a-story-four-games-in-the-making"
+        },
+        {
+          "k": "devblog",
+          "t": "Tiny Glade developers on Bevy, proceduralism and cozy games (80.lv)",
+          "href": "https://80.lv/articles/exclusive-tiny-glade-developers-discuss-bevy-proceduralism-publishers-cozy-games/"
+        },
+        {
+          "k": "devblog",
+          "t": "A look at procedural tower roofs in Tiny Glade (80.lv)",
+          "href": "https://80.lv/articles/a-look-at-procedural-tower-roofs-in-tiny-glade/"
+        },
+        {
+          "k": "devblog",
+          "t": "Townscaper: the game which isn't a game (MCV)",
+          "href": "https://www.mcvuk.com/business-news/when-we-made-townscaper/"
+        },
+        {
+          "k": "design",
+          "t": "Math and Art, with Oskar Stalberg (interview on constraint-driven generation and toy design)",
+          "href": "https://etao.blog/2020/10/13/podcast-94/"
+        },
+        {
+          "k": "design",
+          "t": "How to make procedural generation look good and fun",
+          "href": "https://xraispotlight.substack.com/p/how-to-make-procedural-generation"
+        },
+        {
+          "k": "design",
+          "t": "Dreams vs. Super Mario Maker 2: how much freedom a creation tool can offer before it overwhelms",
+          "href": "https://www.laptopmag.com/features/dreams-vs-super-mario-maker-2"
+        },
+        {
+          "k": "design",
+          "t": "Mario Maker: remixing the play, create, share genre",
+          "href": "https://www.thesixthaxis.com/?p=224063"
+        },
+        {
+          "k": "tutorial",
+          "t": "Wave Function Collapse explained (Boris the Brave): the constraint idea behind the auto-decorator",
+          "href": "https://www.boristhebrave.com/2020/04"
+        },
+        {
+          "k": "tutorial",
+          "t": "Using the wave function collapse algorithm for dioramas (80.lv)",
+          "href": "https://80.lv/articles/using-wave-function-collapse-algorithm-for-dioramas"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar: touch the thing, nothing fails, close-ups (docs/design/INTERACTION_GRAMMAR.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        },
+        {
+          "k": "canon",
+          "t": "Game Feel laws and the banned web vocabulary (project file GAME_FEEL.md) and its checks (tools/game-feel-check)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/tree/main/tools/game-feel-check"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study: two layers that never mix, 8% budget (docs/oracle/hud/HUD_STUDY.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Modeler vision: preserve creative intent so scenes can be rebuilt (docs/MODELER_VISION.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/MODELER_VISION.md"
+        },
+        {
+          "k": "canon",
+          "t": "Invariant contracts: scene plus passing test before live (INVARIANTS.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/INVARIANTS.md"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0060 swipe diorama: taste file and learner we reuse as a ranking prior (docs/oracle/diorama-swipe/DIORAMA_STUDY.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0061 project chat and asset packs: the allowed-set we reuse (docs/oracle/project-chat/PROJECT_CHAT_STUDY.md)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/project-chat/PROJECT_CHAT_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Tile chat verbs contract the in-lab helper extends (simulations/tile-chat/contract.mjs)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/tile-chat/contract.mjs"
+        },
+        {
+          "k": "canon",
+          "t": "Existing modules the lab edits: planet-gravity, landscape-parameters, world-clock, ranch-weather, ranch-seasons-state, tile-physics, loadout",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/"
+        }
+      ]
+    },
+    "winchester-flow": {
+      "items": [
+        {
+          "k": "canon",
+          "t": "Evan's #612 direction (intro, title, Create New, Sandbox, Assimilate)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/612"
+        },
+        {
+          "k": "canon",
+          "t": "Intro readiness fix #610/#611",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/pull/611"
+        },
+        {
+          "k": "canon",
+          "t": "Real-world scene architecture (#608)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/pull/609"
+        },
+        {
+          "k": "canon",
+          "t": "Assimilate draft",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/ASSIMILATE.md"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        }
+      ],
+      "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
+    },
+    "world-browser": {
+      "items": [
+        {"k": "canon", "t": "Evan's #617 direction (World Browser, Capture, shared-by-default)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/617"},
+        {"k": "canon", "t": "Winchester flow study (#614)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/winchester-flow/index.html"},
+        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+      ],
+      "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
+    },
+    "player-home": {
+      "items": [
+        {"k": "canon", "t": "Evan's #619 direction (player and signature home)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/619"},
+        {"k": "canon", "t": "Backpack study: default bunny look and the charm list", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md"},
+        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+      ],
+      "recorded": "2026-10-24, no outside sources used; the two reference photos were not readable from the cloud worker, so the issue's written description was used"
+    },
+    "arcade-racer": {
+      "items": [
+        {
+          "k": "oracle",
+          "t": "Game Oracle consult() run on Evan's PC (source: studies, no model)",
+          "note": "Useful: small clear objective, icon and read-aloud support, explicit setup/play/payoff, the world responds to actions. Retrieval was off-topic for racing (Spore, Cartel Tycoon and others) and generic; none of it is used as racing research. Evidence quality for racing: none. This cloud thread could not reach the Oracle."
+        },
+        {
+          "k": "devblog",
+          "t": "Feeling of Speed (Critical Points)",
+          "href": "https://critpoints.net/2016/11/24/feeling-of-speed/",
+          "note": "Field of view widening, shake and dense nearby detail sell speed; kept in the race view, and kept on the presentation clock so the time cannot be bent (cited from prior knowledge, not re-read this round)"
+        },
+        {
+          "k": "devblog",
+          "t": "Fix Your Timestep (Gaffer On Games)",
+          "href": "https://gafferongames.com/post/fix_your_timestep/",
+          "note": "The race clock is fixed 1/60 s simulation steps; rendering and slow motion are separate, so a score is repeatable (cited from prior knowledge, not re-read this round)"
+        },
+        {
+          "k": "tutorial",
+          "t": "Accessible game design: reduced motion, read-aloud and large touch targets (Game Accessibility Guidelines)",
+          "href": "https://gameaccessibilityguidelines.com/",
+          "note": "Reduced-motion switch, skip on the prize, 48 px and larger touch targets, one clear objective (cited from prior knowledge, not re-read this round)"
+        },
+        {
+          "k": "canon",
+          "t": "Toy-car coaster study AW-STUDY-0054",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/coaster/COASTER_STUDY.md",
+          "note": "The track recipe, six cars and skate-park entrance reused; its 30.0 s normalisation is the thing timed mode replaces"
+        },
+        {
+          "k": "canon",
+          "t": "HUD and information study; interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "Race HUD is a timer numeral, a progress line and icons; words live on the screens between races"
+        },
+        {
+          "k": "reference",
+          "t": "Evan's eight reference photos (pink retro convertible, pink boxy off-roader, dark armoured toy, orange creature in packaging, toy demo)",
+          "note": "Not inspected: the files are on Evan's PC and this cloud thread had no PC agent. The grounded descriptions in the issue were used for packaging and silhouettes; cars are the existing original garage"
         }
       ]
     }

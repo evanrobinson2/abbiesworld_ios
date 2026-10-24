@@ -1,5 +1,6 @@
 import * as T from 'three';
 import {rollTile} from './tile-drop-impact.mjs?v=2';
+import {sfx as catalogSfx} from './catalog-sfx.mjs';
 // AW-STUDY-0025 Tile pull and print, the landing (docs/oracle/tile-print/TILE_PRINT_STUDY.md).
 // Evan, 2026-10-23: the tile rolls like a die; then "just literally drop" every piece with gravity, and "once everything
 // has fallen, rolled.. each piece in random rapid sequence hovers wobbles re-orients, and then shoots into its normal
@@ -19,21 +20,9 @@ const AXES = [new T.Vector3(1, 0, 0), new T.Vector3(-1, 0, 0), new T.Vector3(0, 
 const DOWN = new T.Vector3(0, -1, 0);
 const _q = new T.Quaternion(), _v = new T.Vector3(), _c = new T.Vector3(), _t = new T.Vector3();
 
-// A small synth, so the reveal has a voice with no catalogue and offline. Quiet; one tick per few pieces.
-let ctx = null;
-const audio = () => { if (!ctx) { try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch { ctx = null; } } ctx?.resume?.(); return ctx; };
-function tone(f, dur, type, gain, delay = 0, slide = 0) {
- const c = audio(); if (!c) return; const t = c.currentTime + delay, o = c.createOscillator(), g = c.createGain();
- o.type = type; o.frequency.setValueAtTime(f, t); if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30, f * slide), t + dur);
- g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(.0008, t + dur); o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur + .02);
-}
-function click(dur, f, gain) {
- const c = audio(); if (!c) return; const n = Math.floor(c.sampleRate * dur), buf = c.createBuffer(1, n, c.sampleRate), d = buf.getChannelData(0);
- for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n) ** 2;
- const s = c.createBufferSource(), fl = c.createBiquadFilter(), g = c.createGain(); s.buffer = buf; fl.type = 'bandpass'; fl.frequency.value = f; fl.Q.value = 1.5; g.gain.value = gain; s.connect(fl).connect(g).connect(c.destination); s.start();
-}
-const sfx = {last: 0, bounce() { const n = performance.now(); if (n - this.last < 50) return; this.last = n; click(.035, 1200 + Math.random() * 700, .06); },
- tick(i) { tone(1250 + (i % 12) * 55, .06, 'triangle', .08); }, chord() { [523, 659, 784, 1046].forEach((f, i) => tone(f, .55, 'sine', .08, i * .06)); }};
+// The reveal's voice, from the sound catalogue. Quiet; one tick per few pieces.
+const sfx = {last: 0, bounce() { const n = performance.now(); if (n - this.last < 50) return; this.last = n; catalogSfx('click-3', {gain: .3, rate: .9 + Math.random() * .3}); },
+ tick(i) { catalogSfx('tick', {gain: .5, rate: 1 + (i % 12) * .03}); }, chord() { catalogSfx('magic-chime', {gain: .7}); }};
 
 // Which things on a drawn tile are loose pieces, which stay, which grow in. Read from the drawn tile itself
 // (composer.draw): ground slabs and yard pads stay put; each standing asset group, tree crown, trunk and so on is a
@@ -170,7 +159,7 @@ export function landTile(group, {reducedMotion = false, onImpact, lift, floorAt}
  let sets = null;
  try { if (!reducedMotion) sets = collect(group); } catch { sets = null; }
  const bare = sets && (sets.parts.length >= 3 || sets.cover.length >= 3);
- let hexRadius = 4; try { const g = new T.Box3().setFromObject(group), s = g.getSize(new T.Vector3()); hexRadius = Math.max(1, Math.min(s.x, s.z) / 2); } catch { /* keep default */ }
+ let hexRadius = 4; try { const g = new T.Box3().setFromObject(group), s = g.getSize(new T.Vector3()), ws = group.getWorldScale(new T.Vector3()); hexRadius = Math.max(1, Math.min(s.x, s.z) / 2 / Math.max(1e-6, ws.x)); } catch { /* keep default */ }   // in the group's own units, so a scaled tile (the town's) reveals the same way
  const surface = floorAt ? (x, z) => floorAt(x, z) : () => Math.min(...(sets?.parts.map(p => p.c.y - p.half.y) || [0]));
  if (bare) { for (const pt of sets.parts) pt.node.visible = false; for (const pt of sets.cover) pt.node.visible = false; }   // the bare slab is what rolls
  const roll = rollTile(group, {reducedMotion, onImpact, lift});

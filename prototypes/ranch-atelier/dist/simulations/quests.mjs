@@ -18,14 +18,14 @@ const KEY = 'aw-quests', EVENT = 'aw-quests-change';
 
 // Who asks. `at` is one of the town's spots (cafe, school, common, noticeboard, lab, ...) so the town can place them.
 export const GIVERS = {
- baker: {name: 'The baker', at: 'cafe', voice: 'warm and floury'},
- teacher: {name: 'The teacher', at: 'school', voice: 'bright and patient'},
- librarian: {name: 'The librarian', at: 'common', voice: 'soft, as if in a library'},
- postie: {name: 'The postie', at: 'common', voice: 'chirpy and in a hurry'},
- gardener: {name: 'The gardener', at: 'common', voice: 'slow and sunny'},
- scientist: {name: 'The scientist', at: 'school', voice: 'excited, a little breathless'},
- neighbour: {name: 'A neighbour', at: 'noticeboard', voice: 'friendly and chatty'},
- farmer: {name: 'The farmer', at: 'farm', voice: 'easy and cheerful, smells of hay'}
+ baker: {name: 'The baker', at: 'cafe', cast: 'city-baker', voice: 'warm and floury'},
+ teacher: {name: 'The teacher', at: 'school', cast: 'town-teacher', voice: 'bright and patient'},
+ librarian: {name: 'The librarian', at: 'common', cast: 'town-librarian', voice: 'soft, as if in a library'},
+ postie: {name: 'The postie', at: 'common', cast: 'town-postie', voice: 'chirpy and in a hurry'},
+ gardener: {name: 'The gardener', at: 'common', cast: 'town-gardener', voice: 'slow and sunny'},
+ scientist: {name: 'The scientist', at: 'school', cast: 'town-scientist', voice: 'excited, a little breathless'},
+ neighbour: {name: 'A neighbour', at: 'noticeboard', cast: 'town-neighbour', voice: 'friendly and chatty'},
+ farmer: {name: 'The farmer', at: 'farm', cast: 'town-farmer', voice: 'easy and cheerful, smells of hay'}
 };
 
 // A step is {do: 'visit' | 'collect' | 'bring', at?: spot, item?: id, say}. report() ticks one off when it matches.
@@ -140,6 +140,17 @@ export function targets() {
   out.push({quest: id, at: st.at, do: st.do, item: st.item && t.item ? {id: t.item.id, name: t.item.name, icon: t.item.icon} : null, say: st.say, giver: t.giver, step: s.stepsDone, of: t.steps.length});
  }
  return out;
+}
+// The favour a backpack item belongs to: the object she is carrying for an open favour (with where she must go next), or the
+// reward of a finished one (no next place). Null for anything else. For the "help me" close-up: show it, say it again, point the way.
+export function forItem(itemId) {
+ const v = read();
+ for (const [id, s] of Object.entries(v.taken)) {
+  const t = tpl(id); if (!t) continue;
+  if (t.item?.id === itemId && !s.doneAt) { const st = t.steps[s.stepsDone]; return {quest: view(t, s), next: st ? {at: st.at, do: st.do, say: st.say} : null}; }
+  if (t.reward.id === itemId && s.doneAt) return {quest: view(t, s), next: null};
+ }
+ return null;
 }
 async function reward(q) {
  try {

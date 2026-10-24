@@ -53,24 +53,17 @@ function choose(mode,{fresh}){
  if(mode==='tour')runTour({fresh});else if(mode==='simple')runHints(true);
 }
 
-// Narration: voice/<id>.mp3 when rendered (tools/welcome-narration), the browser's own voice otherwise.
+// Narration: voice/<id>.mp3 when rendered (tools/welcome-narration), silent otherwise (ElevenLabs only).
 let audio=null,voiced=null;
 function unlockVoice(){
  try{audio=audio||new Audio();audio.src='welcome/voice/silence.mp3';audio.play().catch(()=>{});}catch{}
- try{speechSynthesis?.speak(Object.assign(new SpeechSynthesisUtterance(''),{volume:0}));}catch{}
 }
 async function voiceManifest(){if(voiced)return voiced;try{const r=await fetch('welcome/voice/manifest.json',{cache:'no-cache'});voiced=r.ok?(await r.json()).lines||{}:{};}catch{voiced={};}return voiced;}
 function say(stop,muted){
  if(muted())return Promise.resolve();
  const file=voiced?.[stop.id];
  if(file&&audio){audio.src='welcome/voice/'+file;return new Promise(res=>{const done=()=>{audio.onended=audio.onerror=null;res();};audio.onended=done;audio.onerror=done;audio.play().catch(done);});}
- try{
-  return Promise.resolve(); // no synthetic speech
-  if(!('speechSynthesis' in window))return Promise.resolve();
-  const u=new SpeechSynthesisUtterance(stop.line),voices=speechSynthesis.getVoices();
-  u.voice=voices.find(v=>/Samantha|Google UK English Female|Serena|Moira|Karen|Aria|Jenny/i.test(v.name))||voices.find(v=>/^en/i.test(v.lang))||null;u.rate=.98;u.pitch=1.06;
-  return new Promise(res=>{u.onend=u.onerror=res;speechSynthesis.cancel();speechSynthesis.speak(u);setTimeout(res,9000);});
- }catch{return Promise.resolve();}
+ return Promise.resolve(); // no synthetic speech: a stop without a pre-rendered ElevenLabs take stays silent
 }
 
 // The director: owns the camera for the length of the tour, one shot per stop, hard cuts like a commercial.
@@ -85,8 +78,8 @@ async function runTour({fresh}){
  const mute=make('button',{className:'aw-welcome aw-mute v2-glass',type:'button',title:'Narrator on or off'},'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="aw-wave" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>');
  mute.setAttribute('aria-label','Narrator on or off');
  let cancelled=false,muted=false;
- skip.onclick=()=>{cancelled=true;try{audio?.pause();speechSynthesis?.cancel();}catch{}};
- mute.onclick=()=>{muted=!muted;mute.classList.toggle('off',muted);try{if(muted){audio?.pause();speechSynthesis?.cancel();}}catch{}};
+ skip.onclick=()=>{cancelled=true;try{audio?.pause();}catch{}};
+ mute.onclick=()=>{muted=!muted;mute.classList.toggle('off',muted);try{if(muted){audio?.pause();}}catch{}};
  document.body.append(caption,skip,mute);
 
  const v=(x,y,z)=>new T.Vector3(x,y,z),pos=v(),tgt=v(),tmp=v();
@@ -137,7 +130,7 @@ async function runTour({fresh}){
  await sleep(cancelled?500:1800);cancelAnimationFrame(raf);shot=null;
  orbit.enabled=orbitWas;root.classList.remove('aw-tour','aw-tour-cards');
  for(const n of [caption,skip,mute])n.classList.add('leaving');setTimeout(()=>{caption.remove();skip.remove();mute.remove();},600);
- try{audio?.pause();speechSynthesis?.cancel();}catch{}
+ try{audio?.pause();}catch{}
  const record=store.get()||{};store.set({...record,mode:'tour',toured:new Date().toISOString()});
  await sleep(1400);runHints(true);
 }

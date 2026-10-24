@@ -2,6 +2,132 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-arcade-racer-stage1",
+      "date": "2026-10-24",
+      "title": "Skate-park rail racer: Stage 1 study",
+      "line": "Race the clock on a toy-car track, earn an achievement, unwrap a prize and unbox a new collectible car. A low-fidelity study for your feedback; saves are a mock. Experimental, not in the town yet.",
+      "image": "/whats-new/2026-10-24-arcade-racer-stage1.png",
+      "thread": "cmsg_01MthUeDQC4PVJETdeFHLquG",
+      "threadTitle": "Arcade rail racer (issue 621)",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place-garden",
+      "date": "2026-10-24",
+      "title": "Drop a Garden tile onto the board",
+      "line": "A fourth card: drag the Garden onto a glowing hex and planting beds and a shed grow in. The four cards now sit in their own row above the town's hand. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-garden.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place-ranch",
+      "date": "2026-10-24",
+      "title": "Drop a Ranch tile onto the board",
+      "line": "A third card in the town hand: drag the Ranch onto a glowing hex and a working farm, with its animals, prints, rolls and builds itself. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-ranch.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place-moon",
+      "date": "2026-10-24",
+      "title": "Drop a Moon tile onto the board",
+      "line": "A second card in the town hand: drag the Moon onto a glowing hex and a lunar base prints, rolls and builds itself. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-moon.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-moon-mission-live",
+      "date": "2026-10-24",
+      "title": "Moon Mission starts at its rocket charm",
+      "line": "Tap the rocket charm at the bakery curb: the black truck takes the family from Main Street to the Moon, all the way to the Polaroid. It plays end to end in a test run before anyone sees it.",
+      "image": "/whats-new/2026-10-24-moon-mission-live.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVy8GNXhZaS5vYRrj2Smp8w",
+      "threadTitle": "Invariant contracts",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place",
+      "date": "2026-10-24",
+      "title": "Pull a Meadow card and drop it on the board",
+      "line": "Drag a card to a glowing open hex: it laser-prints, rolls, drops and settles. Experimental, add ?exp to try it.",
+      "image": "/whats-new/2026-10-24-town-place.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-people-filters",
+      "date": "2026-10-24",
+      "title": "Every figure, filtered by detail and where it lives",
+      "line": "The models page can now filter people by low poly, medium or high detail (real triangle counts) and by whether they live in the game, a study or a branch.",
+      "image": "/whats-new/2026-10-24-people-filters.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9K3YJwLcfEwfvCoPXMCBhL",
+      "threadTitle": "Make all models easy to browse",
+      "tour": false,
+      "link": "/models?type=People"
+    },
+    {
+      "id": "2026-10-24-hud-no-emoji",
+      "date": "2026-10-24",
+      "title": "No more emoji buttons or cards pill",
+      "line": "The cards pill is gone and the hand of cards is always there. The driving mode buttons are little 3D vehicles, and the duplicate notebook button is removed.",
+      "image": "/whats-new/2026-10-24-drive-hud-2.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-drive-hud-3d",
+      "date": "2026-10-24",
+      "title": "Driving controls are little 3D things",
+      "line": "The row of round effect buttons and the cards pill are gone while you drive. The jet and boost buttons are now a real rocket and a lightning bolt.",
+      "image": "/whats-new/2026-10-24-drive-hud.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-quest-spotlight",
+      "date": "2026-10-24",
+      "title": "A light and an arrow show Abbie where to go",
+      "line": "When a neighbour asks for help, the next place glows with a spotlight, and an arrow at the edge of the screen points to it if it is out of view. Take the object out of your backpack and the favour is said again while the camera flies toward the place.",
+      "image": "/whats-new/2026-10-24-quest-spotlight.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYEeWzej4CnWZpZcVi2UvVEX",
+      "threadTitle": "Add random quests from townsfolk",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-one-world",
+      "date": "2026-10-24",
+      "title": "Just the one world",
+      "line": "The strip of old land and the little floating island behind Winchester are gone. Only the seven-hex board is left in the sky.",
+      "image": "/whats-new/2026-10-24-town-one-world.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-answers-every-tap",
+      "date": "2026-10-24",
+      "title": "Everything in the town answers a tap",
+      "line": "Tap a house, a tree, a lamp, a shop, the ducks, bub or the little pink car and it reacts: a knock, a bell, a bark, a shower of leaves.",
+      "image": "/whats-new/2026-10-24-town-answers-every-tap.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVgADL9xAHJJaqcShokDe4w",
+      "threadTitle": "Make the world interactive everywhere",
+      "tour": true,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-paint-balloons",
       "date": "2026-10-24",
       "title": "Water balloons that carry their type",
