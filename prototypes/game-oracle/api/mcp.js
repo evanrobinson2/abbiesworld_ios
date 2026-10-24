@@ -3,7 +3,9 @@ import {anatomy,searchAnatomy} from '../lib/anatomy.js';
 import {searchKnowledge,getIdentity,steamLibrary} from '../lib/knowledge.js';
 import {consult,gatewayToken,STYLE_IDS,DEFAULT_MODEL} from '../lib/director.js';
 import {timingSafeEqual} from 'node:crypto';
+import studioContext from '../data/studio-context.json' with {type:'json'};
 const tools=[
+ {name:'get_studio_context',description:'Read the compact shared studio brief: game philosophy, art, experience, technical standards, production lessons and explicit evidence coverage. Use when relevant; no model call or private feedback access.',inputSchema:{type:'object',properties:{},additionalProperties:false}},
  {name:'search_games',description:'Search the hosted Oracle art-style catalog. Source-reported tags, ownership snapshot and explicit unknowns are preserved.',inputSchema:{type:'object',properties:{q:{type:'string',maxLength:240},dimension:{type:'string'},perspective:{type:'string'},rendering:{type:'string'},ownership:{type:'string',enum:['owned-snapshot','unverified']},installed:{type:'string',enum:['true','false']},limit:{type:'integer',minimum:1,maximum:100},offset:{type:'integer',minimum:0}},additionalProperties:false}},
  {name:'get_game',description:'Get one game by stable Oracle ID with art claims, evidence and unknowns.',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id'],additionalProperties:false}},
  {name:'find_similar_games',description:'Find games sharing classified art attributes. Returns shared attributes, not embedding similarity.',inputSchema:{type:'object',properties:{id:{type:'string'}},required:['id'],additionalProperties:false}},
@@ -31,6 +33,7 @@ export default async function handler(req,res){
  for(const k of Object.keys(args)){const rule=tool.inputSchema.properties[k];if(!rule)return error(-32602,'Unsupported argument: '+k);if(rule.type==='integer'&&(!Number.isInteger(args[k])||args[k]<(rule.minimum??0)||args[k]>(rule.maximum??Infinity)))return error(-32602,'Invalid '+k);if(rule.type==='string'&&(typeof args[k]!=='string'||args[k].length>(rule.maxLength??240)))return error(-32602,'Invalid '+k);if(rule.enum&&!rule.enum.includes(args[k]))return error(-32602,'Invalid '+k);}
  if(tool.inputSchema.required?.some(k=>!args[k]))return error(-32602,'Missing '+tool.inputSchema.required.join(', '));
  let result;
+ if(tool.name==='get_studio_context')result=studioContext;
  if(tool.name==='search_games')result=search(args);
  if(tool.name==='get_game')result=catalog.games.find(g=>g.id===args.id);
  if(tool.name==='find_similar_games')result=similar(args.id);
