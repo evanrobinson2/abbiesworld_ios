@@ -78,5 +78,13 @@
     "installed": true,
     "status": "studied",
     "date": "2026-10-23"
-  }
+  },
+  "history": [
+    {
+      "date": "2026-10-24",
+      "issue": 642,
+      "note": "AW-118 re-assimilation attempted; ArtStation and 80.lv unreachable from cloud sandbox (DNS), so no new evidence. Confidence unchanged (rendering 0.15). See docs/oracle/spaceship-interior/AW-118_STUDY.md.",
+      "status": "pending evidence"
+    }
+  ]
 }
