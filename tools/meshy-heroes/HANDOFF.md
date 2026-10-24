@@ -7,8 +7,8 @@ first; its rules (PRs to `main`, the tour line, no engine artifacts, provenance 
 ## What this thread owns
 1. **Meshy runs and the credit ledger for every thread.** All Meshy spending goes through one runner and one ledger.
 2. **The hero characters**: 24 astronauts (6 people × plasticine/painterly × suit/tee) and Character Studio heroes cs-1, cs-2, cs-4.
-3. **The shared animation set**: 83 PG clips on the hero rig, plus the loader.
-4. **Meshy backpack charms**: tardigrade, heart, moon, rocket, star, floppy disk, bub, coffee cup, brass key, and the toy car (in flight).
+3. **The shared animation set**: 133 PG clips on the hero rig, plus the loader.
+4. **Meshy backpack charms**: tardigrade, heart, moon, rocket, star, floppy disk, bub, coffee cup, brass key, and the toy car.
 5. **The heroes living in the Winchester town** (`simulations/abbietown/heroes.mjs`).
 
 ## How the pipeline works
@@ -40,12 +40,12 @@ first; its rules (PRs to `main`, the tour line, no engine artifacts, provenance 
 - **Charms:** `prototypes/ranch-atelier/dist/simulations/assets/backpack/charms/*.glb`. Each one's history is in `tools/meshy-heroes/meshy/charm-*/`.
 - **Pictures:** `/mnt/project-files/moon-heroes/`.
 
+## Meshy balance
+About 10 credits left on 2026-10-24 17:35Z (160 before the last run; 50 animations at 3 each). Monthly credits reset around 2026-11-21. Never buy top-ups; Evan decides.
+
 ## Open work, in order
-1. **Toy-car charm (GitHub issue #534).** The Meshy run (`charm-toy-car`, textured, 30 credits) was dispatched at 17:15Z on branch `claude/project-thread-4a30bd`.
-   - The reference is a Blender render of the CC BY "Toy racer" (`tools/meshy-heroes/refs/charm-toy-car/`, with provenance and `render_ref.py`). Credit 3dworkbench (CC BY 4.0) wherever the model is credited.
-   - Then: run `python3 tools/meshy-heroes/charm_cleanup.py charm-toy-car`, which writes `charms/toy-car.glb`.
-   - Wire it in `simulations/backpack.mjs` (`CHARM_GLB`, `CHARM_SHADE`) in place of the hand-built box car. The Backpack and Charms threads own that file.
-   - Check it in the game, comment on #534 and close it. Status: see the thread's last message or `git log` on that branch.
+1. **Toy-car charm (GitHub issue #534): drafted, not yet live.** The Meshy model (textured, 30 credits) is cleaned to `charms/toy-car.glb` (7.6k tris) and mapped in `backpack.mjs`; the rocket and floppy disk lost their flat `CHARM_SHADE` paint so their textures show. All of this is in PR #630, which waits on `main`'s red `static` check (fixed by PR #631). Then: merge, send the sha to the deploys thread, check it in the game, comment on #534 and close it.
+   - The reference is a Blender render of the CC BY "Toy racer" (`tools/meshy-heroes/refs/charm-toy-car/`). Credit 3dworkbench (CC BY 4.0) wherever the model is credited.
 2. **Side-by-side page (a CLAUDE.md rule):** every model made from an image needs an interactive 3D viewer next to its inspiration picture. Not built yet for the 24 astronauts, the cs heroes or the charms. The refs are in `tools/meshy-heroes/refs/<id>/pick.png`.
 3. **cs-3 (stick man):** Meshy rigging failed with error 422 (pose estimation). Rerun from an A-pose image, or rig it in Blender.
 4. **Roster still to make:** 40 PG base bodies and the story heroes (Star Child, gem bug). They are listed in `tools/meshy-heroes/roster.json`.
@@ -53,7 +53,7 @@ first; its rules (PRs to `main`, the tour line, no engine artifacts, provenance 
    - Cost: 20 credits untextured or 30 textured each, plus 10 for remesh and rig.
 5. **Abbie wears her backpack** on the hero: `wearBackpack(chestBone, {height:.42, offset:[0,0,-.16]})` from `/simulations/backpack-wear.mjs`, with `pack.update(dt)` each frame. Not yet done in the town heroes.
 6. **Reusable painterly shader** owed to Character Studio (keep the comic cel-ink outline) in `simulations/`.
-7. **Optional: more animations.** Only 83 of Meshy's 678 library actions are cut, at 3 credits each. Use PG ones only (no weapons, shooting, dying or illness).
+7. **Optional: more animations.** Only 133 of Meshy's 678 library actions are cut (50 more added 2026-10-24 17:25Z, leaving about 10 credits), at 3 credits each. Use PG ones only (no weapons, shooting, dying or illness).
    - Command: `--anims 01a16a9d-de81-7778-b81c-d1e1ba82e0f2 <ids>`. Free library list: `meshy/anims/library.json`. Some ids are retired: they return 400 and aren't charged.
 
 ## Evan's standing rules that bite here
