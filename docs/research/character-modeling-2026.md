@@ -179,10 +179,11 @@ needs cleanup before it can be rigged.
   decimate to about 10k triangles, cap at four weights, split by material) gave three playable heroes with no tearing on
   six test moves (walk, wave, jab-cross, ko, roll, jump). One model, the stick man, was refused by Meshy's rigger.
 
+**Owner's conclusion (Evan, 2026-10-24 01:15Z).** ChatGPT is the better modeler, and the two-stage process (a low-poly pass, then an upgrade pass) is best. This fits the evidence above: a generator is good at the first stage (shape and likeness), and the second stage is where topology, weights and validation make it usable. It is an observation from Evan's trials, not something measured here, so the M0 to M2 tests should score ChatGPT output beside the Meshy heroes before the cast depends on it.
+
 **Recommendation.** Keep Meshy-plus-cleanup as the fast path for one-off heroes, because it is already working and
 tested. Build a hand-authored parametric base (the recipe) for the characters that must be reusable: Abbie, Ani and the
-family cast, the kids' character creator, and clothes. Use AI generation for concept art, props and background characters
-only. This also matches the repo vision (`docs/MODELER_VISION.md`: preserve intent so whole experiences can be rebuilt):
+family cast, the kids' character creator, and clothes. Use AI generation as the first stage of the two-stage process (see the owner's conclusion above), always followed by our upgrade pass. This also matches the repo vision (`docs/MODELER_VISION.md`: preserve intent so whole experiences can be rebuilt):
 a recipe and parameter file preserves intent; an AI mesh preserves only a result.
 
 ## 7. Trade-offs in one table
