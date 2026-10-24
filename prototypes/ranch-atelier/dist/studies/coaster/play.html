@@ -42,6 +42,11 @@ body:not(.tucked) #back{top:calc(max(12px,env(safe-area-inset-top)) + 84px)}
 #fire.on{box-shadow:0 0 0 2px #ffb020,0 0 26px rgba(255,120,20,.85),inset 0 1px 0 rgba(255,255,255,.7)}
 #fire.new{animation:pop .7s cubic-bezier(.2,1.6,.4,1),breathe 1.6s ease-in-out .7s 4}
 #again{left:50%;bottom:max(22px,env(safe-area-inset-bottom));translate:-50% 0;width:64px;height:64px;display:none;z-index:3}
+/* the inspect pair: put it back (left) and choose it (right), small glass orbs low on the sides so the car stays clear */
+#putback,#keep{bottom:max(26px,env(safe-area-inset-bottom));width:60px;height:60px;display:grid;place-items:center;color:#fff;cursor:pointer;z-index:3;opacity:0;pointer-events:none;transition:opacity .3s ease,transform .3s ease;transform:scale(.7)}
+#putback{left:max(22px,env(safe-area-inset-left))}#keep{right:max(22px,env(safe-area-inset-right))}
+body.inspecting #putback,body.inspecting #keep{opacity:1;pointer-events:auto;transform:none}
+#keep{box-shadow:0 0 0 2px #9be84c,0 10px 30px rgba(20,60,90,.3),inset 0 1px 0 rgba(255,255,255,.7)}
 @media (max-width:560px){#photo{left:50%;top:40%}#prize{left:50%;top:76%;width:84px;height:84px;font-size:42px}}
 </style>
 <script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
@@ -54,12 +59,14 @@ body:not(.tucked) #back{top:calc(max(12px,env(safe-area-inset-top)) + 84px)}
 <div id="photo" aria-label="Your ride photo"><img id="photoImg" alt="You, in the air over the gap"><span id="photoStars">★</span></div>
 <div id="prize" class="glass" aria-label="Charm"></div>
 <div id="fire" class="glass" role="switch" aria-label="Fire wheels" aria-checked="false"><svg viewBox="0 0 24 24"><path d="M12 2c1 3.5 5 5.5 5 10.5A5 5 0 0 1 7 12.5c0-2 1-3.5 2-4.5 0 2 1 3 2 3 0-3-1-5.5 1-9z" fill="#ff7a14"/><path d="M12 11c.5 1.8 2.5 2.8 2.5 5a2.5 2.5 0 0 1-5 0c0-1.3.7-2 1.3-2.6.2 1 .7 1.4 1.2 1.4 0-1.5-.5-2.5 0-3.8z" fill="#ffe08a"/></svg></div>
+<div id="putback" class="glass" role="button" aria-label="Put it back"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14L4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-3"/></svg></div>
+<div id="keep" class="glass" role="button" aria-label="Choose this car"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg></div>
 <div id="again" class="glass" role="button" aria-label="Ride again"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4h4"/></svg></div>
 <script type="module">
 import * as T from 'three';
 import {buildTrack, TRACK_30S, trackMeshes, poseAt, postFX} from '/simulations/coaster-kit.mjs';
 import {CARS, buildCar} from '/simulations/coaster-cars.mjs';
-import {coasterAudio} from '/simulations/coaster-audio.mjs';
+import {coasterAudio} from '/simulations/coaster-audio.mjs?v=3';
 import {buildWorld, buildGates, HEX_C} from './coaster-world.mjs';
 import {TOON_LOOKS, toonify} from '/simulations/toon-kit.mjs';
 const opt = async p => { try { return await import(p); } catch { return {}; } };
@@ -145,7 +152,8 @@ const modelCars = (async () => { const TM = await opt('/simulations/toy-car-mode
     const pad = new T.Mesh(new T.CylinderGeometry(1.05, 1.1, .1, 20), m(['#ffcf3a', '#3ad1e0', '#ff5d8f', '#9be84c', '#c58bff', '#ff7a14', '#f4ece0', '#1fb6c9'][i % 8])); pad.position.set(x, .35, 10.2); pad.name = 'turntable'; garage.add(pad);
     c.position.set(x, .4, 10.2); c.rotation.y = Math.PI + .5; c.userData.slot = c.position.clone(); c.userData.slotRot = c.rotation.y; tapProxy(c); scene.add(c); cars.push(c);
     if (saved.car === def.id && S.mode !== 'ride' && car !== c) { const old = car; old.position.copy(old.userData.slot); old.rotation.set(0, old.userData.slotRot, 0); car = c; parkAtStart(c); if (saved.paint) c.userData.paint(saved.paint); }
-  } catch (e) { console.warn('toy car', def.id, e.message); } })); })();
+  } catch (e) { console.warn('toy car', def.id, e.message); } }));
+  if (S.mode === 'zoom' && !tween) tweenTo(frameGarage(), 1.2); })();
 
 // the mirror charms: whatever Abbie has earned hangs in front of her, inside whichever car she picks
 const charmRig = new T.Group(); charmRig.name = 'mirror charms';
@@ -218,6 +226,14 @@ addEventListener('resize', resize); resize();
 const cam = {tx: HX, ty: 0, tz: HZ, dist: 520, az: 35, pitch: 42, fov: 30, shift: .3};
 const CAM_TILE = {tx: HX + 80, ty: 0, tz: HZ - 10, dist: 560, az: 35, pitch: 40, fov: 30, shift: .3}, CAM_PARK = {tx: HX, ty: 0, tz: HZ, dist: 170, az: 20, pitch: 34, fov: 30, shift: .75},
   CAM_ZOOM = {tx: -2, ty: 6, tz: -18, dist: 62, az: 30, pitch: 24, fov: 28, shift: 1}, CAM_LOW = {tx: 4, ty: 2, tz: 4, dist: 14, az: 70, pitch: 6, fov: 34, shift: .2};
+// entering the garage: the camera moves on purpose to frame the whole row of cars (the free-model stage included), whatever
+// the screen shape, so every car is in view and easy to tap
+function frameGarage() {
+  if (!cars.length) return CAM_ZOOM;
+  const a = cars.map(c => c.userData.slot || c.position), x0 = Math.min(...a.map(p => p.x)), x1 = Math.max(...a.map(p => p.x)), z0 = Math.min(...a.map(p => p.z)), z1 = Math.max(...a.map(p => p.z));
+  const r = Math.hypot(x1 - x0, z1 - z0) / 2 + 2.6, half = Math.tan(CAM_ZOOM.fov * Math.PI / 360) * Math.min(1, innerWidth / innerHeight);
+  return Object.assign(CAM_ZOOM, {tx: (x0 + x1) / 2, ty: 1.2, tz: (z0 + z1) / 2, dist: Math.max(20, r * 1.12 / half), az: 12, pitch: 46, shift: 0});
+}
 Object.assign(cam, SKIP ? CAM_LOW : CAM_TILE);
 const ease = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
 let tween = null;
@@ -251,12 +267,13 @@ const ray = new T.Raycaster(), ptr = new T.Vector2(), pts = new Map(); let dragM
 const ringMat = new T.MeshBasicMaterial({color: '#fff3a8', transparent: true, opacity: .9, depthTest: false, fog: false});
 const hint = new T.Mesh(new T.TorusGeometry(1.4, .05, 6, 32), ringMat); hint.name = 'tap-me ring'; hint.userData.presentation = true; hint.renderOrder = 9; hint.visible = false; scene.add(hint);
 function pick(x, y, targets) { ptr.set(x / innerWidth * 2 - 1, -(y / innerHeight) * 2 + 1); ray.setFromCamera(ptr, camera); return ray.intersectObjects(targets, true)[0]; }
-renderer.domElement.addEventListener('pointerdown', e => { AU.wake(); pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); dragMoved = 0; if (pts.size === 2) { const [a, b] = [...pts.values()]; lastD = Math.hypot(a.x - b.x, a.y - b.y); } });
+renderer.domElement.addEventListener('pointerdown', e => { AU.wake(); pts.set(e.pointerId, {x: e.clientX, y: e.clientY}); dragMoved = 0; if (S.mode === 'inspect') insp.spin.set(0, 0); else armLift(e.clientX, e.clientY); if (pts.size === 2) { const [a, b] = [...pts.values()]; lastD = Math.hypot(a.x - b.x, a.y - b.y); } });
 addEventListener('pointermove', e => { const p = pts.get(e.pointerId); if (S.mode === 'ride') { S.latT = Math.max(-1, Math.min(1, (e.clientX / innerWidth - .5) * 2.6)) * .42; return; } if (!p) return;
   const dx = e.clientX - p.x, dy = e.clientY - p.y; p.x = e.clientX; p.y = e.clientY; dragMoved += Math.abs(dx) + Math.abs(dy);
-  if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y); cam.dist = Math.max(10, Math.min(700, cam.dist * lastD / d)); lastD = d; return; }
+  if (pts.size === 2) { const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y); if (S.mode === 'inspect') insp.k = Math.max(.6, Math.min(1.7, insp.k * d / lastD)); else cam.dist = Math.max(10, Math.min(700, cam.dist * lastD / d)); lastD = d; return; }
+  if (S.mode === 'inspect' && insp.car) { turnHeld(dx, dy); return; }
   if (tween || S.blend || !['tile', 'zoom', 'end'].includes(S.mode)) return; cam.az -= dx * .3; cam.pitch = Math.max(6, Math.min(66, cam.pitch + dy * .2)); });
-const up = e => { pts.delete(e.pointerId); if (e.target !== renderer.domElement) return; if (dragMoved < 8 && S.mode === 'zoom' && !tween && !S.blend) tap(e.clientX, e.clientY); else if (dragMoved < 8 && S.mode === 'ride') summon(); };
+const up = e => { pts.delete(e.pointerId); clearTimeout(liftT); if (e.target !== renderer.domElement) return; if (dragMoved < 8 && S.mode === 'zoom' && !tween && !S.blend) tap(e.clientX, e.clientY); else if (dragMoved < 8 && S.mode === 'ride') summon(); };
 // the overhead strip: tucked away while the camera is busy, a tap brings it back for a few seconds
 let stripTimer = 0; const stripShown = () => !document.body.classList.contains('tucked');
 function summon() { document.body.classList.remove('tucked'); clearTimeout(stripTimer); stripTimer = setTimeout(() => { if (S.mode === 'ride' && !document.getElementById('v2-chrono-pop')?.checkVisibility?.()) document.body.classList.add('tucked'); }, 5000); }
@@ -284,12 +301,45 @@ function choose(c) {
   const s = startPos(); hop(c, s.p, s.q, 1.1); AU.play('slide-up', {gain: .6}); AU.play('magic-whoosh', {gain: .5, when: .5}); remember({});
 }
 
+// ---------- inspecting: hold a car to lift it out of the row, turn it with a finger, put it back or choose it ----------
+// Holding on a parked car (about a third of a second, finger still) floats it up in front of the camera at a size that fills the screen well.
+// One finger turns it freely about its own middle (it keeps a little momentum), two fingers resize it. The left orb puts it back where it
+// came from, the right orb chooses it. Tapping a car still chooses it, exactly as before.
+const insp = {car: null, q: new T.Quaternion(), k: 1, spin: new T.Vector2(), t: 0, mid: new T.Vector3(), size: 1, from: null};
+let liftT = 0;
+function carMid(c) { const sq = c.quaternion.clone(), sp = c.position.clone(); c.quaternion.identity(); c.position.set(0, 0, 0); c.updateMatrixWorld(true);
+  const b = new T.Box3(); c.traverse(o => { if (o.isMesh && o.name !== 'tap proxy') b.expandByObject(o); }); c.quaternion.copy(sq); c.position.copy(sp); c.updateMatrixWorld(true);
+  return {mid: b.getCenter(new T.Vector3()), size: Math.max(.5, b.getSize(new T.Vector3()).length())}; }
+function armLift(x, y) { clearTimeout(liftT); if (S.mode !== 'zoom' || tween || S.blend || hops.length) return;
+  liftT = setTimeout(() => { if (dragMoved >= 8 || pts.size !== 1 || S.mode !== 'zoom') return; const h = pick(x, y, cars); const c = h && cars.find(c => { let p = h.object; while (p) { if (p === c) return true; p = p.parent; } return false; }); if (c) lift(c); }, 340); }
+function lift(c) {
+  if (S.mode !== 'zoom') return; const m = carMid(c); Object.assign(insp, {car: c, mid: m.mid, size: m.size, k: 1, t: 0, from: {p: c.position.clone(), q: c.quaternion.clone()}}); insp.q.copy(c.quaternion); insp.spin.set(0, 0);
+  S.mode = 'inspect'; hint.visible = false; document.body.classList.add('inspecting'); AU.play('slide-up', {gain: .5}); }
+function heldPose(k) { // where the held car floats: straight ahead of the camera, far enough that it fills about half the screen height
+  const d = insp.size * insp.k / (.5 * 2 * Math.tan(camera.fov * Math.PI / 360)), fwd = new T.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
+  const target = camera.position.clone().addScaledVector(fwd, d); return target; }
+function turnHeld(dx, dy) { const up = new T.Vector3(0, 1, 0), rt = new T.Vector3(1, 0, 0).applyQuaternion(camera.quaternion);
+  const q = new T.Quaternion().setFromAxisAngle(up, dx * .012).premultiply(new T.Quaternion().setFromAxisAngle(rt, dy * .012)); insp.q.premultiply(q); insp.spin.set(dx, dy); }
+function stepInspect(dt) { const c = insp.car; if (!c) return; insp.t = Math.min(1, insp.t + dt / .7); const e = ease(insp.t);
+  if (!pts.size && insp.spin.lengthSq() > .01) { turnHeld(insp.spin.x, insp.spin.y); insp.spin.multiplyScalar(Math.exp(-dt * 4)); } // coast to a stop after a flick
+  const tgt = heldPose(), q = insp.from.q.clone().slerp(insp.q, e), mid = insp.mid.clone().applyQuaternion(q), home = insp.from.p.clone().add(insp.mid.clone().applyQuaternion(insp.from.q));
+  const centre = home.lerp(tgt, e); centre.y += Math.sin(e * Math.PI) * 1.2; c.quaternion.copy(q); c.position.copy(centre).sub(mid); }
+function endInspect() { insp.car = null; document.body.classList.remove('inspecting'); S.mode = 'zoom'; hint.visible = true; }
+// put it back: it hops to the slot it came from (the start line, if it was the chosen car); choose it: it hops to the start line
+function putBack() { const c = insp.car; if (!c || S.mode !== 'inspect') return; endInspect(); AU.play('pop-2', {rate: .8, gain: .5});
+  if (c === car) { const s = startPos(); hop(c, s.p, s.q, .8); } else hop(c, c.userData.slot.clone(), new T.Quaternion().setFromEuler(new T.Euler(0, c.userData.slotRot, 0)), .8); }
+function keepHeld() { const c = insp.car; if (!c || S.mode !== 'inspect') return; endInspect(); if (c === car) { const s = startPos(); hop(c, s.p, s.q, .8); } else choose(c); }
+$('putback').addEventListener('click', putBack); $('keep').addEventListener('click', keepHeld);
+addEventListener('keydown', e => { if (S.mode === 'inspect' && e.key === 'Escape') putBack(); if (S.mode === 'inspect' && (e.key === 'Enter' || e.key === ' ')) keepHeld(); });
+
+if (TEST) window.__coaster = {S, cars, insp, lift, putBack, keepHeld, hops, get car() { return car; }, camera}; // for the browser tests
+
 // ---------- the flow ----------
 $('go').addEventListener('click', () => { AU.wake(); AU.state('garage'); AU.bed('carnival', .18); $('go').classList.add('gone'); S.mode = 'flow'; AU.play('whoosh-2', {gain: .6}); S.barsT = 1;
-  tweenTo(CAM_PARK, 3.2, () => { tweenTo(CAM_ZOOM, 2.4, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }); }); });
+  tweenTo(CAM_PARK, 3.2, () => { tweenTo(frameGarage(), 2.4, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }); }); });
 function intro() { // from the town: an establishing shot low in the skate park, rising to the miniature view, bars on
   S.mode = 'intro'; S.barsT = 1; $('go').classList.add('gone');
-  tweenTo({...CAM_LOW, az: 120}, .01, () => tweenTo(CAM_ZOOM, 3.6, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }));
+  tweenTo({...CAM_LOW, az: 120}, .01, () => tweenTo(frameGarage(), 3.6, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }));
 }
 function getIn() {
   if (S.mode !== 'zoom') return; hint.visible = false; tween = null; AU.play('click-2'); AU.state('ride');
@@ -408,9 +458,9 @@ function frame() {
   stars.forEach(s => { if (!s.got) s.g.children[0].rotation.y = t * 2 + s.ph; });
   if (S.mode === 'tile' && !tween) cam.az += dt * 1.6;
   // the garage: parked cars turn slowly on their turntables; hops arc through the air
-  cars.forEach(c => { if (c !== car && !hops.some(h => h.c === c)) { c.rotation.y += dt * .5; } });
+  cars.forEach(c => { if (c !== car && c !== insp.car && !hops.some(h => h.c === c)) { c.rotation.y += dt * .5; } }); stepInspect(dt);
   for (let i = hops.length - 1; i >= 0; i--) { const h = hops[i]; h.t += dt; const e = ease(h.t / h.dur); h.c.position.lerpVectors(h.p0, h.p1, e); h.c.position.y += Math.sin(e * Math.PI) * 4; h.c.quaternion.slerpQuaternions(h.q0, h.q1, e); if (h.t >= h.dur) { hops.splice(i, 1); if (h.c !== car) h.c.userData.slotRot = h.c.rotation.y; else AU.play('jump-land-2', {gain: .5}); } }
-  hint.visible = hint.visible && S.mode === 'zoom'; if (hint.visible) { hint.position.copy(car.position).setY(car.position.y + .55); hint.quaternion.copy(camera.quaternion); hint.scale.setScalar((1 + .12 * Math.sin(t * 5)) * Math.max(1, cam.dist / 40)); }
+  hint.visible = hint.visible && (S.mode === 'zoom'); if (hint.visible) { hint.position.copy(car.position).setY(car.position.y + .55); hint.quaternion.copy(camera.quaternion); hint.scale.setScalar((1 + .12 * Math.sin(t * 5)) * Math.max(1, cam.dist / 40)); }
   stepSky(dt); if (trail && S.mode !== 'ride') trail.update(dt, null);
   if (S.mode !== S.lastMode) { S.lastMode = S.mode; tuck(['ride', 'flow', 'intro'].includes(S.mode)); fireUI(); }
   if (S.mode === 'ride') ride(SKY.paused ? 0 : dt); // the strip's pause button holds the ride too
