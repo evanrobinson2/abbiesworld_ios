@@ -3491,6 +3491,16 @@
           "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md"
         },
         {
+          "k": "canon",
+          "t": "AI Gateway pattern, wallet caps and PG guard as already used by api/advisor.js and api/invent.js (tile chat reuses them)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/api/advisor.js"
+        },
+        {
+          "k": "canon",
+          "t": "simulations/first-person.mjs: the game's first person, reused rather than rebuilt",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/first-person.mjs"
+        },
+        {
           "k": "research",
           "t": "Thompson sampling for bandits (Beta posteriors per asset, group prior, pair bonus); the method behind the next batch",
           "href": "https://en.wikipedia.org/wiki/Thompson_sampling"
