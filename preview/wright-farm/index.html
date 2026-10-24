@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0059 - The Farm</title>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js","three/addons/controls/OrbitControls.js":"/vendor/OrbitControls.js","three/addons/loaders/GLTFLoader.js":"/vendor/loaders/GLTFLoader.js"}}</script>
+<style>
+:root{color-scheme:light}*{box-sizing:border-box}html,body{margin:0;height:100%;background:#cfe6bf;font:15px/1.45 "Nunito",system-ui,sans-serif;color:#2b2a26;overflow:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+.glass{background:rgba(255,255,255,.55);border-radius:20px;box-shadow:0 10px 30px rgba(40,50,20,.22),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -2px 6px rgba(255,255,255,.35)}
+#views{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;gap:8px;padding:8px}
+#views button{all:unset;cursor:pointer;width:46px;height:46px;border-radius:15px;display:grid;place-items:center;font-size:22px;background:rgba(255,255,255,.7);box-shadow:inset 0 1px 0 #fff,0 2px 6px rgba(40,50,20,.2);transition:transform .15s}
+#views button:hover,#views button:focus-visible{transform:translateY(-4px) scale(1.08)}
+#card{position:fixed;right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));width:min(290px,calc(100vw - 24px));padding:14px 16px;font-size:14px}
+#card b{display:block;font:600 16px "Fredoka",system-ui,sans-serif;color:#7a4a1a;margin-bottom:4px}
+#card p{margin:0 0 8px}#census{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:13px;color:#4a4636}
+#card button{all:unset;cursor:pointer;float:right;font-size:12px;opacity:.6}
+#toast{position:fixed;left:50%;top:18%;transform:translate(-50%,0);padding:8px 16px;opacity:0;transition:opacity .4s,transform .4s;font-weight:700;pointer-events:none}
+#load{position:fixed;inset:0;display:grid;place-items:center;font:600 18px "Fredoka",system-ui,sans-serif;color:#5a6a2a;background:#cfe6bf;transition:opacity .6s}
+@media(max-width:600px){#card{top:auto;bottom:80px;right:12px}}
+</style></head><body>
+<canvas id="c" aria-label="The farm in 3D. Drag to look around, pinch or scroll to zoom, tap an animal."></canvas>
+<div id="load">Opening the farm gate…</div>
+<div id="views" class="glass" role="group" aria-label="Places on the farm"></div>
+<aside id="card" class="glass"><button id="x" aria-label="Hide">×</button><b>The Farm</b><p>A farm for the kids, inspired by a real one in Winchester, with more animals. Tap an animal. Tap an egg, apple or pumpkin to collect it.</p><div id="census"></div></aside>
+<div id="toast" class="glass"></div>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+import {buildFarm} from './simulations/farm/wright-farm.mjs';
+const canvas = document.getElementById('c'), renderer = new THREE.WebGLRenderer({canvas, antialias: true, preserveDrawingBuffer: true}); renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); renderer.shadowMap.enabled = true; renderer.toneMapping = THREE.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
+const scene = new THREE.Scene(); scene.background = new THREE.Color('#d6ebf5'); const camera = new THREE.PerspectiveCamera(40, 1, 1, 3000);
+scene.add(new THREE.HemisphereLight('#ffffff', '#8a7a52', 1.15)); const sun = new THREE.DirectionalLight('#fff0cf', 2.6); sun.position.set(-160, 220, 150); sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); Object.assign(sun.shadow.camera, {left: -150, right: 150, top: 150, bottom: -150, near: 10, far: 600}); scene.add(sun, sun.target);
+const controls = new OrbitControls(camera, canvas); controls.enableDamping = true; controls.maxPolarAngle = 1.45; controls.minDistance = 12; controls.maxDistance = 420;
+const base = (x, y) => 8 + Math.sin(x * .03) * 2.2 + Math.cos(y * .035 + 1) * 1.8 + (y * .02); // a gentle hill rising to the north
+const toast = document.getElementById('toast'); let tt = 0; const say = t => { toast.textContent = t; toast.style.opacity = 1; toast.style.transform = 'translate(-50%,-8px)'; clearTimeout(tt); tt = setTimeout(() => { toast.style.opacity = 0; toast.style.transform = 'translate(-50%,0)'; }, 1800); };
+const farm = await buildFarm({heightAt: base, onTap: e => say(e.name + ' is happy!'), onCollect: e => say('Got ' + (e.item === 'egg' ? 'an egg' : e.item === 'apple' ? 'an apple' : e.item === 'honey' ? 'a jar of honey' : 'a pumpkin') + '!')});
+scene.add(farm.root);
+const VIEWS = [['🏡', 'the yard', [0, 0], 120, 205], ['🐄', 'the pasture', [64, 0], 90, 250], ['🐐', 'the goats', [54, 50], 70, 200], ['🐖', 'the pigs', [38, -62], 70, 170], ['🦆', 'the pond', [-68, -8], 70, 130], ['🍎', 'the orchard', [20, 70], 90, 200], ['🔭', 'the whole farm', [0, 0], 230, 205]];
+const to = {p0: null}; function fly(c, d, az) { const tg = new THREE.Vector3(c[0], farm.hf(c[0], c[1]) + 3, -c[1]), a = az * Math.PI / 180, pitch = .62; to.t = 0; to.p0 = camera.position.clone(); to.t0 = controls.target.clone(); to.p1 = new THREE.Vector3(tg.x + Math.sin(a) * Math.cos(pitch) * d, tg.y + Math.sin(pitch) * d, tg.z - Math.cos(a) * Math.cos(pitch) * d); to.t1 = tg; }
+for (const [ic, name, c, d, az] of VIEWS) { const b = document.createElement('button'); b.textContent = ic; b.title = name; b.setAttribute('aria-label', name); b.onclick = () => fly(c, d, az); document.getElementById('views').append(b); }
+fly([0, 0], 230, 205); camera.position.copy(to.p1); controls.target.copy(to.t1); to.t = 1;
+const ray = new THREE.Raycaster(), ndc = new THREE.Vector2(); let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+canvas.addEventListener('pointerup', e => { if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; ndc.set(e.clientX / innerWidth * 2 - 1, -e.clientY / innerHeight * 2 + 1); ray.setFromCamera(ndc, camera); farm.tap(ray); });
+document.getElementById('x').onclick = () => document.getElementById('card').remove();
+const resize = () => { renderer.setSize(innerWidth, innerHeight, false); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix(); }; addEventListener('resize', resize); resize();
+const data = await farm.ready; const names = {cow: 'cows', horse: 'horses', goat: 'goats', sheep: 'sheep', pig: 'pigs', alpaca: 'alpacas', chicken: 'hens', duck: 'ducks', rabbit: 'rabbits', dog: 'dog', cat: 'cat'}; const cs = data.counts();
+document.getElementById('census').innerHTML = Object.entries(cs).map(([k, n]) => `<span>${n} ${names[k]}</span>`).join('');
+document.getElementById('load').style.opacity = 0; setTimeout(() => document.getElementById('load').remove(), 700);
+const clock = new THREE.Clock(); window.__farm = {farm, camera, controls, THREE, jump(i, d, az) { const v = VIEWS[i]; fly(v[2], d || v[3], az ?? v[4]); camera.position.copy(to.p1); controls.target.copy(to.t1); to.t = 1; }};
+renderer.setAnimationLoop(() => { const dt = Math.min(.05, clock.getDelta());
+ if (to.t < 1) { to.t = Math.min(1, to.t + dt / 1.6); const k = to.t < .5 ? 2 * to.t * to.t : 1 - Math.pow(-2 * to.t + 2, 2) / 2; camera.position.lerpVectors(to.p0, to.p1, k); controls.target.lerpVectors(to.t0, to.t1, k); }
+ controls.update(); sun.target.position.copy(controls.target); sun.position.set(controls.target.x - 160, controls.target.y + 220, controls.target.z + 150);
+ const t = controls.target; farm.update(dt, camera.position.distanceTo(t) < 330 ? [{x: t.x, z: t.z}] : []); renderer.render(scene, camera); });
+</script></body></html>

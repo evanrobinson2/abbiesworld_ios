@@ -189,3 +189,9 @@ Using what she carries (same round): tap a thing in the open backpack and `aw-in
 listener that takes it calls `inventory().remove(item.id)`. The effect pickups picked up while driving (embers, droplets,
 pet treats, dye drops) are counted by `effect-charge.mjs`, the one store, and the backpack shows them as items. Tapping
 one charges its world effect there and then (`charge(id)`), and Abbie says so.
+
+## Abbie's default backpack (Evan, 2026-10-24 01:00Z)
+
+"this is abbie's default backpack": Bunny, Grape, Stripes, Heart pocket, Pink and gold straps, Rainbow lining, Rainbow
+bear notebook. `DEFAULT_LOOK` in `backpack.mjs`; `look()` uses it whenever nothing is saved, so new players start with
+it and Abbie wears it in every game until she changes it. Tour: no.

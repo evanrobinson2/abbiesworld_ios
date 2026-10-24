@@ -1,0 +1,1001 @@
+id,batch,pack,class,name,needed_for,tri_target,tri_max,scale
+AW-0001,1,main-street,building,Corner bakery shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0002,2,main-street,building,Pizza parlour shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0003,2,main-street,building,Hoagie shop shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0004,2,main-street,building,Pharmacy shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0005,2,main-street,building,Bookshop shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0006,2,main-street,building,Hardware store shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0007,2,main-street,building,Flower shop shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0008,2,main-street,building,Toy shop shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0009,2,main-street,building,Ice cream shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0010,2,main-street,building,Barber shopfront,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0011,2,main-street,building,Bank facade,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0012,2,main-street,building,Town hall,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0013,2,main-street,building,Clock tower,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0014,2,main-street,building,Bandstand,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0015,2,main-street,building,Fountain,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0016,2,main-street,building,Bus shelter,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0017,2,main-street,building,Newspaper box,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0018,2,main-street,building,Phone box,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0019,2,main-street,building,Parking meter,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0020,2,main-street,building,Street lamp gas,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0021,2,main-street,building,Street lamp modern,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0022,1,main-street,building,Hanging shop sign,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0023,2,main-street,building,A-frame sandwich board,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0024,2,main-street,building,Awning striped,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0025,2,main-street,building,Window box planter,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0026,2,main-street,building,Bench bus stop,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0027,2,main-street,building,Trash can public,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0028,2,main-street,building,Recycling bin,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0029,2,main-street,building,Bike rack,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0030,2,main-street,building,Fire hydrant,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0031,2,main-street,building,Mailbox street,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0032,2,main-street,building,Bollard stone,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0033,2,main-street,building,Crosswalk sign,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0034,2,main-street,building,Stop sign,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0035,2,main-street,building,Traffic light,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0036,2,main-street,building,Manhole cover,"Winchester downtown hex, Ani's neighbourhood",3000,12000,true size
+AW-0037,1,kit-pieces,kit,Wall plain 2m,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0038,2,kit-pieces,kit,Wall with window 2m,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0039,2,kit-pieces,kit,Wall with door 2m,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0040,2,kit-pieces,kit,Wall corner,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0041,2,kit-pieces,kit,Wall half timber,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0042,2,kit-pieces,kit,Wall brick,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0043,1,kit-pieces,kit,Wall clapboard,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0044,2,kit-pieces,kit,Wall stone,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0045,2,kit-pieces,kit,Wall adobe,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0046,2,kit-pieces,kit,Roof gable 2m,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0047,2,kit-pieces,kit,Roof hip,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0048,2,kit-pieces,kit,Roof flat parapet,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0049,1,kit-pieces,kit,Roof shingle ridge,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0050,2,kit-pieces,kit,Roof tile ridge,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0051,2,kit-pieces,kit,Roof thatch,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0052,2,kit-pieces,kit,Roof dormer,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0053,2,kit-pieces,kit,Chimney brick,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0054,2,kit-pieces,kit,Chimney stone,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0055,1,kit-pieces,kit,Door arched,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0056,2,kit-pieces,kit,Door double,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0057,3,kit-pieces,kit,Door barn,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0058,3,kit-pieces,kit,Door cellar,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0059,3,kit-pieces,kit,Window round,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0060,3,kit-pieces,kit,Window square,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0061,1,kit-pieces,kit,Window shutters,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0062,3,kit-pieces,kit,Window bay,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0063,3,kit-pieces,kit,Window stained,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0064,3,kit-pieces,kit,Porch roof,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0065,3,kit-pieces,kit,Porch post,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0066,3,kit-pieces,kit,Porch rail,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0067,1,kit-pieces,kit,Stair straight,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0068,3,kit-pieces,kit,Stair spiral,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0069,3,kit-pieces,kit,Balcony,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0070,3,kit-pieces,kit,Gutter,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0071,3,kit-pieces,kit,Downspout,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0072,3,kit-pieces,kit,Foundation stone,"Hex city, Winchester houses, hand-made buildings, replaces boxes",150,800,2 m grid
+AW-0073,1,homes-yards,prop,Picket fence section,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0074,3,homes-yards,prop,Picket gate,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0075,3,homes-yards,prop,Hedge section,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0076,3,homes-yards,prop,Wooden mailbox,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0077,3,homes-yards,prop,Doghouse,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0078,3,homes-yards,prop,Porch swing,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0079,3,homes-yards,prop,Porch rocking chair,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0080,3,homes-yards,prop,Welcome mat,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0081,3,homes-yards,prop,Wreath door,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0082,3,homes-yards,prop,Doorbell,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0083,3,homes-yards,prop,House number plaque,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0084,3,homes-yards,prop,Garden gnome,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0085,3,homes-yards,prop,Bird bath,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0086,3,homes-yards,prop,Bird feeder,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0087,3,homes-yards,prop,Wind chime,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0088,3,homes-yards,prop,Hammock,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0089,3,homes-yards,prop,Clothesline,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0090,3,homes-yards,prop,Garden hose reel,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0091,3,homes-yards,prop,Wheelbarrow,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0092,3,homes-yards,prop,Raised garden bed,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0093,3,homes-yards,prop,Trellis,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0094,3,homes-yards,prop,Fire pit,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0095,3,homes-yards,prop,Barbecue grill,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0096,3,homes-yards,prop,Patio table umbrella,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0097,3,homes-yards,prop,Lawn chair,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0098,3,homes-yards,prop,Sprinkler,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0099,3,homes-yards,prop,Lawn mower,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0100,3,homes-yards,prop,Snow shovel,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0101,3,homes-yards,prop,Jack o lantern porch,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0102,3,homes-yards,prop,Tire swing,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0103,3,homes-yards,prop,Treehouse ladder,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0104,3,homes-yards,prop,Treehouse platform,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0105,3,homes-yards,prop,Treehouse hatch,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0106,3,homes-yards,prop,Rope bridge segment,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0107,3,homes-yards,prop,Garage door,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0108,3,homes-yards,prop,Basketball hoop driveway,"Winchester neighbourhoods, Ani's cul de sac, Abbie's yard",300,1500,object at true scale
+AW-0109,1,trees-plants,plant,Sugar maple,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0110,3,trees-plants,plant,Red maple,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0111,4,trees-plants,plant,White birch,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0112,4,trees-plants,plant,Pine,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0113,4,trees-plants,plant,Spruce,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0114,4,trees-plants,plant,Hemlock,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0115,1,trees-plants,plant,Cedar young,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0116,4,trees-plants,plant,Willow weeping,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0117,4,trees-plants,plant,Apple tree blossom,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0118,4,trees-plants,plant,Cherry tree blossom,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0119,4,trees-plants,plant,Pear tree,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0120,4,trees-plants,plant,Dogwood,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0121,1,trees-plants,plant,Magnolia,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0122,4,trees-plants,plant,Crabapple,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0123,4,trees-plants,plant,Sycamore,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0124,4,trees-plants,plant,Beech,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0125,4,trees-plants,plant,Elm,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0126,4,trees-plants,plant,Dead tree,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0127,1,trees-plants,plant,Stump with mushrooms,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0128,4,trees-plants,plant,Fallen log,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0129,4,trees-plants,plant,Hollow log,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0130,4,trees-plants,plant,Lilac bush,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0131,4,trees-plants,plant,Hydrangea bush,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0132,4,trees-plants,plant,Rhododendron,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0133,1,trees-plants,plant,Holly bush,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0134,4,trees-plants,plant,Boxwood ball,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0135,4,trees-plants,plant,Forsythia,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0136,4,trees-plants,plant,Rose bush,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0137,4,trees-plants,plant,Blueberry bush,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0138,4,trees-plants,plant,Raspberry bramble,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0139,1,trees-plants,plant,Daffodil patch,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0140,4,trees-plants,plant,Tulip patch,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0141,4,trees-plants,plant,Daisy patch,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0142,4,trees-plants,plant,Sunflower row,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0143,4,trees-plants,plant,Lavender row,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0144,4,trees-plants,plant,Black eyed Susan patch,"Every outdoor scene, replaces procedural trees and flowers",400,2000,true height
+AW-0145,4,rocks-terrain,prop,Boulder round,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0146,4,rocks-terrain,prop,Boulder flat,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0147,4,rocks-terrain,prop,Boulder mossy,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0148,4,rocks-terrain,prop,Rock pile small,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0149,4,rocks-terrain,prop,Stepping stones,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0150,1,rocks-terrain,prop,Cliff face chunk,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0151,4,rocks-terrain,prop,Cliff overhang,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0152,4,rocks-terrain,prop,Cliff arch,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0153,4,rocks-terrain,prop,Stone stairs,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0154,4,rocks-terrain,prop,Dirt path section,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0155,4,rocks-terrain,prop,Cobble path section,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0156,4,rocks-terrain,prop,Wooden boardwalk section,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0157,4,rocks-terrain,prop,Wooden footbridge,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0158,4,rocks-terrain,prop,Stone footbridge,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0159,4,rocks-terrain,prop,Stone ford,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0160,4,rocks-terrain,prop,Pond edge stones,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0161,4,rocks-terrain,prop,Beach pebbles,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0162,4,rocks-terrain,prop,Driftwood,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0163,4,rocks-terrain,prop,Sand dune clump,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0164,4,rocks-terrain,prop,Snow drift,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0165,4,rocks-terrain,prop,Mud puddle,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0166,4,rocks-terrain,prop,Puddle reflective,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0167,5,rocks-terrain,prop,Crystal cluster blue,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0168,5,rocks-terrain,prop,Crystal cluster pink,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0169,5,rocks-terrain,prop,Geode half,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0170,5,rocks-terrain,prop,Fossil slab,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0171,5,rocks-terrain,prop,Cave mouth,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0172,5,rocks-terrain,prop,Cave stalactite cluster,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0173,5,rocks-terrain,prop,Hot spring pool,"Hex tiles, Moon base surround, coast and pond",300,1500,object at true scale
+AW-0174,5,parks-play,prop,Soccer goal,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0175,5,parks-play,prop,Soccer ball,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0176,5,parks-play,prop,Baseball backstop,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0177,5,parks-play,prop,Baseball base,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0178,5,parks-play,prop,Pitcher mound,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0179,5,parks-play,prop,Dugout bench,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0180,5,parks-play,prop,Scoreboard,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0181,5,parks-play,prop,Bleacher section,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0182,5,parks-play,prop,Picnic basket,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0183,5,parks-play,prop,Park gazebo,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0184,5,parks-play,prop,Park drinking fountain,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0185,5,parks-play,prop,Duck pond dock,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0186,5,parks-play,prop,Duck family,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0187,5,parks-play,prop,Playground slide,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0188,5,parks-play,prop,Playground see saw,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0189,5,parks-play,prop,Playground spring rider,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0190,5,parks-play,prop,Playground climbing dome,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0191,5,parks-play,prop,Monkey bars,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0192,1,parks-play,prop,Merry go round,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0193,5,parks-play,prop,Sandcastle,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0194,5,parks-play,prop,Kite,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0195,5,parks-play,prop,Frisbee,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0196,5,parks-play,prop,Skate ramp quarter pipe,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0197,5,parks-play,prop,Skate rail,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0198,5,parks-play,prop,Skate box,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0199,5,parks-play,prop,Skateboard,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0200,5,parks-play,prop,Scooter,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0201,5,parks-play,prop,Train park mini locomotive,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0202,5,parks-play,prop,Train park mini car,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0203,5,parks-play,prop,Train park mini station,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0204,5,parks-play,prop,Train park crossing gate,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0205,5,parks-play,prop,Tennis net,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0206,5,parks-play,prop,Tennis ball,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0207,5,parks-play,prop,Jump rope,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0208,5,parks-play,prop,Hula hoop,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0209,5,parks-play,prop,Chalk bucket,"Leonard Field, Ginn Field train park, skate park, school yard",300,1500,object at true scale
+AW-0210,5,institutions,building,Schoolhouse,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0211,5,institutions,building,School bus stop sign,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0212,5,institutions,building,School desk,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0213,5,institutions,building,School chalkboard,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0214,5,institutions,building,School locker,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0215,5,institutions,building,School clock,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0216,1,institutions,building,Gym hoop,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0217,5,institutions,building,Library building,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0218,5,institutions,building,Library shelf,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0219,6,institutions,building,Library reading nook,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0220,6,institutions,building,Library card catalog,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0221,6,institutions,building,Fire station,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0222,6,institutions,building,Fire engine toy,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0223,6,institutions,building,Police station,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0224,6,institutions,building,Post office,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0225,6,institutions,building,Post box,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0226,6,institutions,building,Post truck,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0227,6,institutions,building,Church steeple,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0228,6,institutions,building,Church bell,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0229,6,institutions,building,Museum front,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0230,6,institutions,building,Museum dinosaur skeleton,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0231,6,institutions,building,Hospital front,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0232,6,institutions,building,Doctor bag,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0233,6,institutions,building,Vet clinic,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0234,6,institutions,building,Town square obelisk,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0235,6,institutions,building,War memorial,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0236,6,institutions,building,Water tower,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0237,1,institutions,building,Power pole,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0238,6,institutions,building,Substation box,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0239,6,institutions,building,Radio mast,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0240,6,institutions,building,Train depot,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0241,6,institutions,building,Train platform,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0242,6,institutions,building,Rail car toy,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0243,6,institutions,building,Railroad crossing sign,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0244,6,institutions,building,Rail track section,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0245,6,institutions,building,River bridge arch,"School jump, Winchester civic hex, basement quests",3000,12000,true size
+AW-0246,1,vehicles,vehicle,Family station wagon,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0247,6,vehicles,vehicle,Family minivan,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0248,6,vehicles,vehicle,Delivery van,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0249,6,vehicles,vehicle,School bus,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0250,6,vehicles,vehicle,Fire truck,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0251,6,vehicles,vehicle,Police car,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0252,6,vehicles,vehicle,Ambulance,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0253,6,vehicles,vehicle,Mail van,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0254,6,vehicles,vehicle,Ice cream truck,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0255,6,vehicles,vehicle,Taxi,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0256,6,vehicles,vehicle,Tractor,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0257,6,vehicles,vehicle,Farm truck,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0258,1,vehicles,vehicle,Hay wagon,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0259,6,vehicles,vehicle,Horse cart,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0260,6,vehicles,vehicle,Wheelbarrow cart,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0261,6,vehicles,vehicle,Red wagon,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0262,6,vehicles,vehicle,Tricycle,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0263,6,vehicles,vehicle,Kids bicycle,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0264,6,vehicles,vehicle,Adult bicycle,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0265,6,vehicles,vehicle,Tandem bike,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0266,6,vehicles,vehicle,Skateboard cruiser,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0267,6,vehicles,vehicle,Roller skates,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0268,6,vehicles,vehicle,Go kart,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0269,6,vehicles,vehicle,Soap box racer,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0270,1,vehicles,vehicle,Golf cart,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0271,6,vehicles,vehicle,Moped,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0272,6,vehicles,vehicle,Motorcycle sidecar,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0273,7,vehicles,vehicle,Steam train engine,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0274,7,vehicles,vehicle,Train passenger car,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0275,7,vehicles,vehicle,Train freight car,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0276,7,vehicles,vehicle,Trolley,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0277,7,vehicles,vehicle,Hot air balloon,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0278,7,vehicles,vehicle,Blimp,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0279,7,vehicles,vehicle,Biplane,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0280,7,vehicles,vehicle,Helicopter,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0281,7,vehicles,vehicle,Rowboat,"Winchester roads, coaster garage, kart mode, coast",1500,6000,toy-scaled 0.8x
+AW-0282,7,food-places,prop,Coffee cup to go,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0283,7,food-places,prop,Coffee mug ceramic,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0284,7,food-places,prop,Latte art cup,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0285,7,food-places,prop,Teapot,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0286,7,food-places,prop,Tea cup and saucer,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0287,7,food-places,prop,Milk jug,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0288,7,food-places,prop,Sugar bowl,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0289,7,food-places,prop,Cake stand,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0290,7,food-places,prop,Birthday cake,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0291,7,food-places,prop,Cupcake,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0292,7,food-places,prop,Cupcake tray,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0293,7,food-places,prop,Croissant,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0294,7,food-places,prop,Baguette,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0295,7,food-places,prop,Bread loaf,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0296,7,food-places,prop,Pretzel,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0297,7,food-places,prop,Donut box,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0298,7,food-places,prop,Donut glazed,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0299,7,food-places,prop,Cookie jar,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0300,7,food-places,prop,Cookie tray,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0301,7,food-places,prop,Pie whole,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0302,7,food-places,prop,Pie slice,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0303,7,food-places,prop,Pizza whole,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0304,7,food-places,prop,Pizza box,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0305,7,food-places,prop,Pizza slice,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0306,1,food-places,prop,Pizza oven brick,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0307,7,food-places,prop,Pizza peel,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0308,7,food-places,prop,Hoagie sandwich,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0309,7,food-places,prop,Hot dog cart,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0310,7,food-places,prop,Burger and fries tray,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0311,7,food-places,prop,Ice cream cone,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0312,7,food-places,prop,Sundae glass,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0313,7,food-places,prop,Popsicle,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0314,7,food-places,prop,Lollipop swirl,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0315,7,food-places,prop,Candy jar,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0316,7,food-places,prop,Cotton candy,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0317,7,food-places,prop,Popcorn bucket,"Coffee shop basement, cafe diorama, market, kitchen minigames",300,1500,object at true scale
+AW-0318,1,farm-animals,animal,Horse brown,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0319,7,farm-animals,animal,Horse white,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0320,7,farm-animals,animal,Pony,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0321,7,farm-animals,animal,Foal,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0322,7,farm-animals,animal,Donkey,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0323,7,farm-animals,animal,Mule,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0324,7,farm-animals,animal,Cow Holstein,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0325,8,farm-animals,animal,Cow Highland,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0326,8,farm-animals,animal,Calf,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0327,8,farm-animals,animal,Bull,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0328,8,farm-animals,animal,Goat white,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0329,8,farm-animals,animal,Goat spotted,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0330,1,farm-animals,animal,Kid goat,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0331,8,farm-animals,animal,Lamb,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0332,8,farm-animals,animal,Alpaca,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0333,8,farm-animals,animal,Llama,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0334,8,farm-animals,animal,Pig pink,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0335,8,farm-animals,animal,Piglet,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0336,8,farm-animals,animal,Hen brown,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0337,8,farm-animals,animal,Rooster,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0338,8,farm-animals,animal,Chick,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0339,8,farm-animals,animal,Duck white,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0340,8,farm-animals,animal,Duckling,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0341,8,farm-animals,animal,Goose,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0342,1,farm-animals,animal,Turkey,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0343,8,farm-animals,animal,Guinea fowl,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0344,8,farm-animals,animal,Barn cat orange,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0345,8,farm-animals,animal,House cat grey,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0346,8,farm-animals,animal,Kitten,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0347,8,farm-animals,animal,Black lab dog,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0348,8,farm-animals,animal,Puppy,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0349,8,farm-animals,animal,Border collie,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0350,8,farm-animals,animal,Farm cat sleeping,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0351,8,farm-animals,animal,Rabbit white,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0352,8,farm-animals,animal,Bunny baby,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0353,8,farm-animals,animal,Guinea pig,"Ranch, farm tiles, Winchester, riding",1500,5000,"true size, toy-scaled 1.15x"
+AW-0354,1,wild-animals,animal,Red fox,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0355,8,wild-animals,animal,Grey squirrel,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0356,8,wild-animals,animal,Chipmunk,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0357,8,wild-animals,animal,Raccoon,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0358,8,wild-animals,animal,Skunk,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0359,8,wild-animals,animal,Hedgehog,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0360,8,wild-animals,animal,Porcupine,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0361,8,wild-animals,animal,Deer doe,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0362,8,wild-animals,animal,Deer fawn,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0363,8,wild-animals,animal,Stag,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0364,8,wild-animals,animal,Moose,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0365,8,wild-animals,animal,Black bear cub,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0366,1,wild-animals,animal,Beaver,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0367,8,wild-animals,animal,Otter,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0368,8,wild-animals,animal,Muskrat,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0369,8,wild-animals,animal,Mouse field,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0370,8,wild-animals,animal,Bat,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0371,8,wild-animals,animal,Owl snowy,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0372,8,wild-animals,animal,Hawk,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0373,8,wild-animals,animal,Eagle,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0374,8,wild-animals,animal,Robin,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0375,8,wild-animals,animal,Blue jay,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0376,8,wild-animals,animal,Cardinal,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0377,8,wild-animals,animal,Chickadee,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0378,1,wild-animals,animal,Woodpecker,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0379,8,wild-animals,animal,Hummingbird,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0380,9,wild-animals,animal,Crow,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0381,9,wild-animals,animal,Heron,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0382,9,wild-animals,animal,Swan,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0383,9,wild-animals,animal,Canada goose,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0384,9,wild-animals,animal,Frog green,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0385,9,wild-animals,animal,Toad,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0386,9,wild-animals,animal,Turtle painted,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0387,9,wild-animals,animal,Snapping turtle,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0388,9,wild-animals,animal,Salamander,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0389,9,wild-animals,animal,Snake garter,"Woods, pond, coast, hex tile ambience, Moon-cow swap",1500,5000,"true size, toy-scaled 1.15x"
+AW-0390,1,townsfolk,character,Baker with apron,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0391,9,townsfolk,character,Barista,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0392,9,townsfolk,character,Pizza maker,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0393,9,townsfolk,character,Gardener,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0394,9,townsfolk,character,Neighbour wave,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0395,9,townsfolk,character,Mail carrier,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0396,9,townsfolk,character,Fire fighter,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0397,1,townsfolk,character,Police officer,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0398,9,townsfolk,character,Doctor,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0399,9,townsfolk,character,Nurse,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0400,9,townsfolk,character,Teacher,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0401,9,townsfolk,character,Librarian,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0402,9,townsfolk,character,Farmer,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0403,9,townsfolk,character,Shepherd,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0404,1,townsfolk,character,Stable hand,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0405,9,townsfolk,character,Fisher,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0406,9,townsfolk,character,Sailor,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0407,9,townsfolk,character,Ranger,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0408,9,townsfolk,character,Mechanic,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0409,9,townsfolk,character,Builder hard hat,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0410,9,townsfolk,character,Painter,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0411,1,townsfolk,character,Musician fiddle,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0412,9,townsfolk,character,Drummer kid,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0413,9,townsfolk,character,Crossing guard,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0414,9,townsfolk,character,Bus driver,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0415,9,townsfolk,character,Shopkeeper,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0416,9,townsfolk,character,Grandma with knitting,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0417,9,townsfolk,character,Grandpa with cane,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0418,1,townsfolk,character,Toddler,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0419,9,townsfolk,character,Preschooler,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0420,9,townsfolk,character,School kid with backpack,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0421,9,townsfolk,character,Teen on skateboard,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0422,9,townsfolk,character,Baby in stroller,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0423,9,townsfolk,character,Astronaut adult,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0424,9,townsfolk,character,Astronaut kid,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0425,9,townsfolk,character,Moon miner,"Winchester, café, farm, school, Moon base; rigged to the shared 82-clip skeleton",2500,7000,"child 1.1 m, adult 1.7 m"
+AW-0426,9,clothes-held,prop,Straw hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0427,9,clothes-held,prop,Beanie knit,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0428,9,clothes-held,prop,Baseball cap,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0429,9,clothes-held,prop,Sun hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0430,9,clothes-held,prop,Rain hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0431,9,clothes-held,prop,Chef hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0432,9,clothes-held,prop,Hard hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0433,9,clothes-held,prop,Cowboy hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0434,9,clothes-held,prop,Top hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0435,10,clothes-held,prop,Wizard hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0436,10,clothes-held,prop,Crown paper,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0437,10,clothes-held,prop,Party hat,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0438,10,clothes-held,prop,Space helmet kid,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0439,10,clothes-held,prop,Goggles,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0440,10,clothes-held,prop,Sunglasses round,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0441,10,clothes-held,prop,Scarf long,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0442,10,clothes-held,prop,Mittens,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0443,10,clothes-held,prop,Rain boots,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0444,10,clothes-held,prop,Sneakers,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0445,10,clothes-held,prop,Apron,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0446,10,clothes-held,prop,Overalls,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0447,10,clothes-held,prop,Raincoat yellow,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0448,10,clothes-held,prop,Cape red,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0449,10,clothes-held,prop,Tool belt,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0450,10,clothes-held,prop,Backpack red,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0451,10,clothes-held,prop,Backpack mini,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0452,10,clothes-held,prop,Lunch box,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0453,10,clothes-held,prop,Water bottle,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0454,10,clothes-held,prop,Umbrella,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0455,10,clothes-held,prop,Walking stick,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0456,1,clothes-held,prop,Lantern hand,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0457,10,clothes-held,prop,Flashlight,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0458,10,clothes-held,prop,Camera Polaroid,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0459,10,clothes-held,prop,Magnifier,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0460,10,clothes-held,prop,Butterfly net,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0461,10,clothes-held,prop,Fishing rod,"Character Studio loadouts, FPS slots, townsfolk props",300,1500,object at true scale
+AW-0462,10,toys-playroom,prop,Teddy bear,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0463,10,toys-playroom,prop,Bunny plush,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0464,10,toys-playroom,prop,Dinosaur plush,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0465,10,toys-playroom,prop,Unicorn plush,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0466,10,toys-playroom,prop,Toy block cube,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0467,10,toys-playroom,prop,Toy block arch,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0468,10,toys-playroom,prop,Toy block cylinder,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0469,10,toys-playroom,prop,Toy train engine,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0470,10,toys-playroom,prop,Toy train track curve,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0471,10,toys-playroom,prop,Toy car red,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0472,10,toys-playroom,prop,Toy car blue,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0473,10,toys-playroom,prop,Toy truck dump,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0474,10,toys-playroom,prop,Toy robot tin,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0475,10,toys-playroom,prop,Toy rocket,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0476,10,toys-playroom,prop,Toy xylophone,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0477,10,toys-playroom,prop,Toy drum,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0478,10,toys-playroom,prop,Toy piano,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0479,10,toys-playroom,prop,Rubber duck,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0480,10,toys-playroom,prop,Spinning top,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0481,10,toys-playroom,prop,Jack in the box,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0482,10,toys-playroom,prop,Rocking horse,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0483,10,toys-playroom,prop,Dollhouse,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0484,10,toys-playroom,prop,Doll small,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0485,10,toys-playroom,prop,Tea set toy,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0486,11,toys-playroom,prop,Play kitchen,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0487,11,toys-playroom,prop,Play shop till,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0488,11,toys-playroom,prop,Lego style brick pile,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0489,11,toys-playroom,prop,Puzzle piece giant,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0490,11,toys-playroom,prop,Board game box,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0491,11,toys-playroom,prop,Dice big,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0492,11,toys-playroom,prop,Playing cards fan,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0493,11,toys-playroom,prop,Marbles bag,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0494,11,toys-playroom,prop,Yo yo,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0495,11,toys-playroom,prop,Kaleidoscope,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0496,11,toys-playroom,prop,Music box,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0497,11,toys-playroom,prop,Toy chest,"Abbie's room, Grace's basement, toy-car coaster, minigame pickups",300,1500,object at true scale
+AW-0498,1,charms-pickups,prop,Bub dog charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0499,11,charms-pickups,prop,Toy car charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0500,11,charms-pickups,prop,Pizza slice charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0501,11,charms-pickups,prop,Acorn charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0502,11,charms-pickups,prop,Feather charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0503,11,charms-pickups,prop,Shell charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0504,11,charms-pickups,prop,Pinecone charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0505,11,charms-pickups,prop,Pearl charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0506,11,charms-pickups,prop,Compass charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0507,11,charms-pickups,prop,Lantern charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0508,11,charms-pickups,prop,Bell charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0509,11,charms-pickups,prop,Horseshoe charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0510,11,charms-pickups,prop,Clover charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0511,11,charms-pickups,prop,Mushroom charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0512,11,charms-pickups,prop,Cloud charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0513,11,charms-pickups,prop,Lightning charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0514,11,charms-pickups,prop,Snowflake charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0515,11,charms-pickups,prop,Flame charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0516,11,charms-pickups,prop,Droplet charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0517,11,charms-pickups,prop,Leaf charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0518,11,charms-pickups,prop,Paw print charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0519,11,charms-pickups,prop,Bone charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0520,11,charms-pickups,prop,Fish charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0521,11,charms-pickups,prop,Butterfly charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0522,11,charms-pickups,prop,Ladybug charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0523,11,charms-pickups,prop,Crown charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0524,11,charms-pickups,prop,Music note charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0525,11,charms-pickups,prop,Paintbrush charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0526,11,charms-pickups,prop,Camera charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0527,11,charms-pickups,prop,Telescope charm,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0528,11,charms-pickups,prop,Medallion gold minigame,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0529,11,charms-pickups,prop,Ember fuel,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0530,11,charms-pickups,prop,Droplet fuel,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0531,11,charms-pickups,prop,Treat fuel,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0532,11,charms-pickups,prop,Dye fuel,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0533,11,charms-pickups,prop,Backpack facet strap,"Charms thread, backpack facets, world-effect fuel",300,1500,object at true scale
+AW-0534,11,school-basement,prop,Paper airplane,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0535,11,school-basement,prop,Eraser,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0536,11,school-basement,prop,Ruler,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0537,12,school-basement,prop,Pencil case,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0538,12,school-basement,prop,Globe small,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0539,12,school-basement,prop,Pennant banner,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0540,1,school-basement,prop,Trophy shelf,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0541,12,school-basement,prop,Roof vent,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0542,12,school-basement,prop,Roof chimney,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0543,12,school-basement,prop,Roof antenna,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0544,12,school-basement,prop,Roof skylight,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0545,12,school-basement,prop,Fire escape ladder,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0546,12,school-basement,prop,Water tank rooftop,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0547,12,school-basement,prop,Pigeon coop,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0548,12,school-basement,prop,Basement stairs,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0549,12,school-basement,prop,Basement boiler,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0550,12,school-basement,prop,Basement shelf,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0551,12,school-basement,prop,Basement crate,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0552,12,school-basement,prop,Old CRT computer,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0553,12,school-basement,prop,Floppy disk stack,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0554,12,school-basement,prop,Dial phone,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0555,12,school-basement,prop,Desk lamp,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0556,12,school-basement,prop,Filing cabinet,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0557,12,school-basement,prop,Cardboard box stack,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0558,12,school-basement,prop,Paint can stack,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0559,12,school-basement,prop,Holiday decoration box,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0560,12,school-basement,prop,Old couch,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0561,12,school-basement,prop,Dartboard,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0562,12,school-basement,prop,Pool table,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0563,12,school-basement,prop,Foosball table,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0564,12,school-basement,prop,Arcade cabinet,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0565,12,school-basement,prop,Vinyl records stack,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0566,12,school-basement,prop,Record player,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0567,12,school-basement,prop,Lava lamp,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0568,12,school-basement,prop,Bookshelf,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0569,12,school-basement,prop,Cobweb corner,"School jump, Grace's Basement, floppy word game",300,1500,object at true scale
+AW-0570,12,moon-exterior,building,Habitat pod,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0571,12,moon-exterior,building,Airlock tunnel,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0572,12,moon-exterior,building,Lander small,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0573,12,moon-exterior,building,Dome greenhouse,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0574,12,moon-exterior,building,Radar dish,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0575,12,moon-exterior,building,Comms tower,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0576,12,moon-exterior,building,Solar panel field,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0577,12,moon-exterior,building,Solar tracker,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0578,12,moon-exterior,building,Battery bank,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0579,12,moon-exterior,building,Fuel tank,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0580,12,moon-exterior,building,Fuel pipe run,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0581,12,moon-exterior,building,Ore cart,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0582,1,moon-exterior,building,Ore conveyor,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0583,12,moon-exterior,building,Ore crusher,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0584,12,moon-exterior,building,Kiosk booth,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0585,12,moon-exterior,building,Beacon light,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0586,12,moon-exterior,building,Flag moon,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0587,12,moon-exterior,building,Rover charger,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0588,12,moon-exterior,building,Crater boulder,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0589,13,moon-exterior,building,Regolith mound,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0590,13,moon-exterior,building,Moon tree glass,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0591,13,moon-exterior,building,Moon cheese cave,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0592,13,moon-exterior,building,Cable run,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0593,13,moon-exterior,building,Walkway tube,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0594,13,moon-exterior,building,Stair gantry,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0595,13,moon-exterior,building,Ladder rung,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0596,13,moon-exterior,building,Hatch round,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0597,13,moon-exterior,building,Window porthole,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0598,13,moon-exterior,building,Warning lamp,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0599,13,moon-exterior,building,Antenna mast,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0600,13,moon-exterior,building,Weather vane lunar,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0601,13,moon-exterior,building,Sample rack,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0602,13,moon-exterior,building,Footprint stamp,"Moon Mission, Moon base FPS, hex tile Moon",3000,12000,true size
+AW-0603,13,moon-interior,prop,Bunk bed pod,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0604,13,moon-interior,prop,Sleeping bag,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0605,13,moon-interior,prop,Galley counter,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0606,13,moon-interior,prop,Galley fridge,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0607,13,moon-interior,prop,Food pouch,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0608,13,moon-interior,prop,Plant grow rack,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0609,13,moon-interior,prop,Microscope,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0610,13,moon-interior,prop,Sample jar,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0611,13,moon-interior,prop,Test tube rack,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0612,13,moon-interior,prop,Control console,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0613,13,moon-interior,prop,Flight plan table,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0614,13,moon-interior,prop,Star map hologram,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0615,1,moon-interior,prop,Radio set,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0616,13,moon-interior,prop,Headset,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0617,13,moon-interior,prop,Intercom panel,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0618,13,moon-interior,prop,Monitor wall,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0619,13,moon-interior,prop,Keyboard chunky,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0620,13,moon-interior,prop,Locker,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0621,13,moon-interior,prop,Spacesuit rack,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0622,13,moon-interior,prop,Helmet rack,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0623,13,moon-interior,prop,Oxygen tank,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0624,13,moon-interior,prop,Medkit,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0625,13,moon-interior,prop,Cargo crate,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0626,13,moon-interior,prop,Gym bike,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0627,13,moon-interior,prop,Window seat,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0628,13,moon-interior,prop,Cat bed,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0629,13,moon-interior,prop,Poster rocket,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0630,13,moon-interior,prop,Calendar mission,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0631,13,moon-interior,prop,Whiteboard,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0632,13,moon-interior,prop,Coffee machine pod,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0633,13,moon-interior,prop,Snack machine,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0634,13,moon-interior,prop,Floor grate,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0635,13,moon-interior,prop,Pipe elbow,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0636,13,moon-interior,prop,Lamp strip,"Moon base FPS, Moon Mission chapters",300,1500,object at true scale
+AW-0637,1,moon-creatures,animal,Moon cow,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0638,13,moon-creatures,animal,Moon calf,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0639,13,moon-creatures,animal,Moon chicken,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0640,13,moon-creatures,animal,Moon sheep,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0641,14,moon-creatures,animal,Moon cat,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0642,14,moon-creatures,animal,Gem bug blue,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0643,14,moon-creatures,animal,Gem bug pink,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0644,14,moon-creatures,animal,Moon moth,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0645,14,moon-creatures,animal,Moon rabbit,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0646,14,moon-creatures,animal,Moon frog,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0647,14,moon-creatures,animal,Space snail,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0648,14,moon-creatures,animal,Dust bunny friendly,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0649,1,moon-creatures,animal,Star child,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0650,14,moon-creatures,animal,Cheese mouse,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0651,14,moon-creatures,animal,Crater crab,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0652,14,moon-creatures,animal,Moon jelly floater,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0653,14,moon-creatures,animal,Rock hopper,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0654,14,moon-creatures,animal,Lantern fish floating,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0655,14,moon-creatures,animal,Glow worm,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0656,14,moon-creatures,animal,Alien plant sprout,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0657,14,moon-creatures,animal,Alien plant bloom,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0658,14,moon-creatures,animal,Moon mushroom,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0659,14,moon-creatures,animal,Cheese moon plant,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0660,14,moon-creatures,animal,Space pup,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0661,14,moon-creatures,animal,Space owl,"Moon Mission cow swap, gem bug, moon farm",1500,5000,"true size, toy-scaled 1.15x"
+AW-0662,1,space,vehicle,Rocket small,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0663,14,space,vehicle,Rocket launch tower,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0664,14,space,vehicle,Launch gantry,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0665,14,space,vehicle,Capsule,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0666,14,space,vehicle,Shuttle,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0667,14,space,vehicle,Satellite,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0668,14,space,vehicle,Space station module,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0669,14,space,vehicle,Space station arm,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0670,14,space,vehicle,Escape pod,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0671,14,space,vehicle,Cargo drone,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0672,14,space,vehicle,Scout ship,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0673,14,space,vehicle,Cruiser hull,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0674,1,space,vehicle,Cockpit seat,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0675,14,space,vehicle,Engine nozzle,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0676,14,space,vehicle,Thruster,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0677,14,space,vehicle,Boarding ramp,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0678,14,space,vehicle,Cargo bay door,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0679,14,space,vehicle,Hologram table,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0680,14,space,vehicle,Warp ring,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0681,14,space,vehicle,Asteroid small,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0682,14,space,vehicle,Comet,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0683,14,space,vehicle,Planet small,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0684,14,space,vehicle,Moon prop,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0685,14,space,vehicle,Space buoy,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0686,14,space,vehicle,Beacon satellite,"Aurora, starship kit, Moon Mission launch",1500,6000,toy-scaled 0.8x
+AW-0687,14,halloween,prop,Jack o lantern happy,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0688,14,halloween,prop,Jack o lantern spooky,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0689,14,halloween,prop,Pumpkin patch row,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0690,14,halloween,prop,Pumpkin stack,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0691,14,halloween,prop,Candy corn pile,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0692,14,halloween,prop,Candy bucket,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0693,14,halloween,prop,Trick or treat bag,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0694,15,halloween,prop,Ghost sheet friendly,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0695,15,halloween,prop,Ghost kid costume,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0696,15,halloween,prop,Witch hat,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0697,15,halloween,prop,Witch cauldron,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0698,15,halloween,prop,Broom flying,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0699,15,halloween,prop,Bat string,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0700,15,halloween,prop,Spider web corner,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0701,15,halloween,prop,Spider friendly,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0702,15,halloween,prop,Skeleton friendly,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0703,15,halloween,prop,Tombstone cute,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0704,15,halloween,prop,Coffin cute,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0705,15,halloween,prop,Crypt door,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0706,15,halloween,prop,Haunted house,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0707,1,halloween,prop,Haunted tree,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0708,15,halloween,prop,Graveyard fence,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0709,15,halloween,prop,Lantern string,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0710,15,halloween,prop,Candle jar,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0711,15,halloween,prop,Scarecrow field,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0712,15,halloween,prop,Corn stalk bundle,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0713,15,halloween,prop,Apple bobbing tub,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0714,15,halloween,prop,Caramel apple,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0715,15,halloween,prop,Costume pirate,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0716,15,halloween,prop,Costume dinosaur,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0717,15,halloween,prop,Costume astronaut,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0718,15,halloween,prop,Costume fairy,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0719,15,halloween,prop,Costume knight,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0720,15,halloween,prop,Mask fox,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0721,15,halloween,prop,Black cat arched,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0722,15,halloween,prop,Owl branch,"Halloween game (waits on Evan's go), October town",300,1500,object at true scale
+AW-0723,15,seasonal,prop,Snowman,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0724,15,seasonal,prop,Snow fort,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0725,15,seasonal,prop,Snow pile,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0726,15,seasonal,prop,Icicle row,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0727,15,seasonal,prop,Ice skates,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0728,15,seasonal,prop,Hot cocoa mug,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0729,15,seasonal,prop,Gingerbread house,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0730,15,seasonal,prop,Christmas tree,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0731,15,seasonal,prop,Ornament ball,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0732,15,seasonal,prop,Wreath,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0733,15,seasonal,prop,Stocking,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0734,15,seasonal,prop,Present stack,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0735,15,seasonal,prop,Menorah,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0736,15,seasonal,prop,Advent calendar,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0737,15,seasonal,prop,Candy cane,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0738,15,seasonal,prop,Valentine heart box,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0739,15,seasonal,prop,Easter egg basket,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0740,15,seasonal,prop,Spring bulbs pot,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0741,15,seasonal,prop,Kite spring,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0742,15,seasonal,prop,Rain puddle boots,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0743,15,seasonal,prop,Umbrella stand,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0744,15,seasonal,prop,Swimming pool,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0745,16,seasonal,prop,Beach umbrella,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0746,16,seasonal,prop,Sandcastle bucket,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0747,16,seasonal,prop,Surfboard,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0748,16,seasonal,prop,Sunscreen bottle,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0749,1,seasonal,prop,Watermelon slice,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0750,16,seasonal,prop,Corn on cob,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0751,16,seasonal,prop,Fireworks rocket,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0752,16,seasonal,prop,Sparkler,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0753,16,seasonal,prop,Flag bunting,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0754,16,seasonal,prop,Harvest wagon,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0755,16,seasonal,prop,Cornucopia,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0756,16,seasonal,prop,Pumpkin pie,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0757,16,seasonal,prop,Leaf rake,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0758,16,seasonal,prop,Thanksgiving table,Always today and now: real date and season dress the world,300,1500,object at true scale
+AW-0759,16,market-crafts,prop,Produce stall,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0760,16,market-crafts,prop,Fish stall,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0761,16,market-crafts,prop,Bread stall,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0762,16,market-crafts,prop,Honey stall,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0763,16,market-crafts,prop,Pottery stall,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0764,16,market-crafts,prop,Scales balance,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0765,16,market-crafts,prop,Coin purse,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0766,16,market-crafts,prop,Ledger book,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0767,16,market-crafts,prop,Crate of carrots,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0768,16,market-crafts,prop,Crate of apples,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0769,16,market-crafts,prop,Crate of onions,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0770,16,market-crafts,prop,Sack of flour,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0771,16,market-crafts,prop,Barrel pickles,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0772,16,market-crafts,prop,Barrel cider,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0773,16,market-crafts,prop,Amphora oil,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0774,16,market-crafts,prop,Clay pot,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0775,16,market-crafts,prop,Clay pot painted,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0776,16,market-crafts,prop,Wicker hamper,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0777,16,market-crafts,prop,Wool bundle,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0778,16,market-crafts,prop,Yarn basket,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0779,16,market-crafts,prop,Spinning wheel,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0780,16,market-crafts,prop,Loom,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0781,16,market-crafts,prop,Wooden spoon set,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0782,16,market-crafts,prop,Cutting board,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0783,16,market-crafts,prop,Candle dipped,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0784,16,market-crafts,prop,Soap bar,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0785,16,market-crafts,prop,Basket weaving frame,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0786,16,market-crafts,prop,Potter wheel,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0787,16,market-crafts,prop,Kiln,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0788,16,market-crafts,prop,Anvil,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0789,16,market-crafts,prop,Forge small,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0790,16,market-crafts,prop,Bellows,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0791,1,market-crafts,prop,Horseshoe pile,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0792,16,market-crafts,prop,Leather roll,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0793,16,market-crafts,prop,Net fishing,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0794,16,market-crafts,prop,Lantern market,"Ranch market, produce seller, home and market sets",300,1500,object at true scale
+AW-0795,16,kitchen-home,prop,Kitchen table,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0796,16,kitchen-home,prop,Kitchen chair,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0797,17,kitchen-home,prop,Highchair,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0798,17,kitchen-home,prop,Fridge retro,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0799,17,kitchen-home,prop,Stove,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0800,17,kitchen-home,prop,Kettle,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0801,17,kitchen-home,prop,Toaster,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0802,17,kitchen-home,prop,Mixer,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0803,17,kitchen-home,prop,Pan,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0804,17,kitchen-home,prop,Pot,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0805,17,kitchen-home,prop,Colander,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0806,17,kitchen-home,prop,Fruit bowl wooden,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0807,17,kitchen-home,prop,Dish rack,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0808,17,kitchen-home,prop,Sink,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0809,17,kitchen-home,prop,Pantry shelf,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0810,17,kitchen-home,prop,Spice rack,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0811,17,kitchen-home,prop,Apron hook,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0812,17,kitchen-home,prop,Dining lamp,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0813,17,kitchen-home,prop,Sofa,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0814,17,kitchen-home,prop,Armchair,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0815,17,kitchen-home,prop,Coffee table,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0816,17,kitchen-home,prop,Rug round,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0817,17,kitchen-home,prop,Rug rectangular,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0818,17,kitchen-home,prop,Bookshelf kid,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0819,17,kitchen-home,prop,Floor lamp,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0820,17,kitchen-home,prop,Table lamp,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0821,17,kitchen-home,prop,TV retro,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0822,17,kitchen-home,prop,Fireplace,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0823,17,kitchen-home,prop,Mantel clock,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0824,17,kitchen-home,prop,Picture frame,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0825,17,kitchen-home,prop,Vase flowers,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0826,17,kitchen-home,prop,Curtain,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0827,17,kitchen-home,prop,Window seat cushion,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0828,17,kitchen-home,prop,Bed kid,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0829,17,kitchen-home,prop,Bed bunk,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0830,17,kitchen-home,prop,Crib,"Winchester homes, Abbie's house, coffee shop apartment",300,1500,object at true scale
+AW-0831,17,workshop-tools,prop,Hammer,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0832,17,workshop-tools,prop,Mallet,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0833,1,workshop-tools,prop,Axe,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0834,17,workshop-tools,prop,Hatchet,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0835,17,workshop-tools,prop,Chisel,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0836,17,workshop-tools,prop,Screwdriver,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0837,17,workshop-tools,prop,Pliers,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0838,17,workshop-tools,prop,Spirit level,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0839,17,workshop-tools,prop,Tape measure,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0840,17,workshop-tools,prop,Hand drill,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0841,17,workshop-tools,prop,Workbench,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0842,17,workshop-tools,prop,Vise,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0843,17,workshop-tools,prop,Toolbox open,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0844,17,workshop-tools,prop,Tool wall,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0845,17,workshop-tools,prop,Ladder,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0846,17,workshop-tools,prop,Step ladder,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0847,17,workshop-tools,prop,Sawhorse,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0848,18,workshop-tools,prop,Lumber stack,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0849,18,workshop-tools,prop,Brick stack,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0850,18,workshop-tools,prop,Paint bucket,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0851,18,workshop-tools,prop,Paint roller,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0852,18,workshop-tools,prop,Cement mixer,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0853,18,workshop-tools,prop,Wheelbarrow filled,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0854,18,workshop-tools,prop,Shovel dirt pile,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0855,18,workshop-tools,prop,Pick,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0856,18,workshop-tools,prop,Pulley block,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0857,18,workshop-tools,prop,Crane small,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0858,18,workshop-tools,prop,Scaffold section,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0859,18,workshop-tools,prop,Blueprint roll,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0860,18,workshop-tools,prop,Hard hat rack,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0861,18,workshop-tools,prop,Welding mask,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0862,18,workshop-tools,prop,Lantern work,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0863,18,workshop-tools,prop,Extension cord reel,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0864,18,workshop-tools,prop,Generator small,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0865,18,workshop-tools,prop,Barrel oil,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0866,18,workshop-tools,prop,Sharpening stone,"Ranch rebuild, builders, Moon base, modelling bench",300,1500,object at true scale
+AW-0867,18,effects-props,prop,Ember fireball,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0868,18,effects-props,prop,Droplet raincloud,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0869,18,effects-props,prop,Treat piñata,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0870,18,effects-props,prop,Dye splash,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0871,18,effects-props,prop,Paint balloon red,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0872,18,effects-props,prop,Paint balloon blue,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0873,18,effects-props,prop,Paint balloon yellow,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0874,18,effects-props,prop,Paint balloon green,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0875,1,effects-props,prop,Paint balloon pink,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0876,18,effects-props,prop,Paint fireball icon,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0877,18,effects-props,prop,Lightning bolt model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0878,18,effects-props,prop,Rain cloud model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0879,18,effects-props,prop,Snow cloud model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0880,18,effects-props,prop,Wind swirl model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0881,18,effects-props,prop,Rainbow arc,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0882,18,effects-props,prop,Sun model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0883,18,effects-props,prop,Moon crescent model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0884,18,effects-props,prop,Star model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0885,18,effects-props,prop,Fog puff model,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0886,18,effects-props,prop,Leaf swirl,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0887,18,effects-props,prop,Petal swirl,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0888,18,effects-props,prop,Firefly jar,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0889,18,effects-props,prop,Wishing well,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0890,18,effects-props,prop,Wish star,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0891,18,effects-props,prop,Confetti burst,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0892,18,effects-props,prop,Sparkle trio,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0893,18,effects-props,prop,Heart float,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0894,18,effects-props,prop,Music note float,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0895,18,effects-props,prop,Sleepy Z float,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0896,18,effects-props,prop,Question bubble,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0897,18,effects-props,prop,Exclamation bubble,"World effects as hovering 3D models, paint balloons, weather",300,1500,object at true scale
+AW-0898,18,coast-water,prop,Dock section,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0899,19,coast-water,prop,Dock post,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0900,19,coast-water,prop,Dock ladder,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0901,19,coast-water,prop,Pier end,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0902,19,coast-water,prop,Lighthouse,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0903,19,coast-water,prop,Buoy red,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0904,19,coast-water,prop,Buoy striped,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0905,19,coast-water,prop,Rope pile,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0906,19,coast-water,prop,Lobster trap,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0907,19,coast-water,prop,Fish crate,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0908,19,coast-water,prop,Crab pot,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0909,19,coast-water,prop,Anchor,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0910,19,coast-water,prop,Ship wheel,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0911,19,coast-water,prop,Rowing oar,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0912,19,coast-water,prop,Life ring,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0913,19,coast-water,prop,Beach hut,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0914,19,coast-water,prop,Beach chair,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0915,19,coast-water,prop,Tide pool rock,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0916,19,coast-water,prop,Shell conch,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0917,1,coast-water,prop,Shell scallop,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0918,19,coast-water,prop,Shell spiral,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0919,19,coast-water,prop,Sea glass cluster,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0920,19,coast-water,prop,Coral small,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0921,19,coast-water,prop,Kelp strand,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0922,19,coast-water,prop,Seaweed pile,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0923,19,coast-water,prop,Message in bottle,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0924,19,coast-water,prop,Treasure chest,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0925,19,coast-water,prop,Treasure map,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0926,19,coast-water,prop,Driftwood arch,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0927,19,coast-water,prop,Waterwheel,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0928,19,coast-water,prop,Mill wheel,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0929,19,coast-water,prop,Fish ladder,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0930,19,coast-water,prop,Beaver lodge,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0931,19,coast-water,prop,Heron nest,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0932,19,coast-water,prop,Stepping log,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0933,19,coast-water,prop,Canoe rack,"Coast and estuary, Horn Pond, canyon water",300,1500,object at true scale
+AW-0934,19,carnival,prop,Ferris wheel,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0935,19,carnival,prop,Carousel,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0936,19,carnival,prop,Carousel horse,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0937,19,carnival,prop,Bumper car,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0938,19,carnival,prop,Tilt a whirl cup,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0939,19,carnival,prop,Swing ride,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0940,19,carnival,prop,Coaster track straight,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0941,19,carnival,prop,Coaster track curve,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0942,19,carnival,prop,Coaster loop,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0943,19,carnival,prop,Coaster corkscrew,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0944,19,carnival,prop,Coaster station,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0945,19,carnival,prop,Coaster car,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0946,19,carnival,prop,Coaster lift hill chain,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0947,19,carnival,prop,Ticket booth,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0948,19,carnival,prop,Ticket roll,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0949,19,carnival,prop,Prize shelf,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0950,20,carnival,prop,Ring toss,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0951,20,carnival,prop,Balloon dart,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0952,20,carnival,prop,Whack a mole,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0953,20,carnival,prop,Strength tester,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0954,20,carnival,prop,Fortune booth,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0955,20,carnival,prop,Funhouse mirror,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0956,20,carnival,prop,Cotton candy stand,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0957,20,carnival,prop,Popcorn machine,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0958,20,carnival,prop,Fair flag,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0959,1,carnival,prop,Fair sign arch,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0960,20,carnival,prop,Haystack seat,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0961,20,carnival,prop,Tent striped,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0962,20,carnival,prop,Trampoline,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0963,20,carnival,prop,Slingshot target,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0964,20,carnival,prop,Zip line tower,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0965,20,carnival,prop,Ball cannon,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0966,20,carnival,prop,Slot machine paint,"Toy-car coaster, skate park, town fair",300,1500,object at true scale
+AW-0967,20,music-art,prop,Guitar acoustic,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0968,20,music-art,prop,Ukulele,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0969,20,music-art,prop,Violin,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0970,20,music-art,prop,Fiddle,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0971,20,music-art,prop,Drum kit small,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0972,20,music-art,prop,Drum djembe,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0973,20,music-art,prop,Tambourine,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0974,20,music-art,prop,Maracas,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0975,20,music-art,prop,Trumpet,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0976,20,music-art,prop,Flute,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0977,20,music-art,prop,Recorder,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0978,20,music-art,prop,Piano upright,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0979,20,music-art,prop,Microphone stand,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0980,20,music-art,prop,Amp small,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0981,20,music-art,prop,Stage riser,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0982,20,music-art,prop,Stage curtain,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0983,20,music-art,prop,Spotlight,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0984,20,music-art,prop,Easel,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0985,20,music-art,prop,Canvas blank,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0986,20,music-art,prop,Paint palette,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0987,20,music-art,prop,Paint tubes,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0988,20,music-art,prop,Brush jar,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0989,20,music-art,prop,Clay lump,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0990,20,music-art,prop,Clay figure small,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0991,20,music-art,prop,Sketchbook,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0992,20,music-art,prop,Crayon box,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0993,20,music-art,prop,Watercolour set,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0994,20,music-art,prop,Scissors kid,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0995,20,music-art,prop,Glue stick,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0996,20,music-art,prop,Sticker sheet,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0997,20,music-art,prop,Origami crane,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0998,20,music-art,prop,Paper lantern,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-0999,20,music-art,prop,Puppet stage,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale
+AW-1000,20,music-art,prop,Hand puppet,"Cafe stage, Painted Brush, Character Studio, school",300,1500,object at true scale

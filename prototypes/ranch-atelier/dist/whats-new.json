@@ -2,6 +2,70 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-drive-exit",
+      "date": "2026-10-24",
+      "title": "Leave drive mode any time, and never lose your car",
+      "line": "A round close button (and Escape) always stops driving. The plain drive now passes through houses, trees and bushes, and a pale outline shows your car where scenery would hide it.",
+      "image": "/whats-new/2026-10-24-drive-exit.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF9Mas7aH7R2p9xFLqr9qzV",
+      "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-abbie-default-backpack",
+      "date": "2026-10-24",
+      "title": "Abbie's own backpack",
+      "line": "Everyone now starts with Abbie's backpack: the bunny in grape stripes with a heart pocket, pink and gold straps, a rainbow lining and the rainbow bear notebook. She wears it everywhere.",
+      "image": "/whats-new/2026-10-24-abbie-default-backpack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-one-glass-bar",
+      "date": "2026-10-24",
+      "title": "One glass bar along the top",
+      "line": "Time, weather, the hex glow and the world effects now share a single glass bar, on iPad and phone too.",
+      "image": "/whats-new/2026-10-24-one-glass-bar.png",
+      "thread": "issue-544",
+      "threadTitle": "One top glass bar",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-wasd",
+      "date": "2026-10-24",
+      "title": "Slide around the map with WASD",
+      "line": "On the Winchester map, W, A, S and D (or the arrow keys) slide the view over the ground. Hold Shift to go faster.",
+      "image": "/whats-new/2026-10-23-charm-intro.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-the-farm",
+      "date": "2026-10-24",
+      "title": "The Farm",
+      "line": "A farm for the kids to explore, with cows, horses, goats, pigs, alpacas, sheep, ducks and bunnies. Find eggs, say hi, and help the farmer.",
+      "image": "/whats-new/2026-10-24-the-farm.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY4HEgYDJ4BwetRSiGJLPmDs",
+      "threadTitle": "Farm and riding school tiles",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-dressing",
+      "date": "2026-10-24",
+      "title": "Winchester filled in from the model library",
+      "line": "Main Street now has markets, benches and lamps, yards have gardens, farm bits and mailboxes, the Common has trees and a fountain, and the baker, the gardener and the neighbour are finished characters.",
+      "image": "/whats-new/2026-10-24-town-dressing.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "Abbie's Town",
+      "tour": false
+    },
+    {
       "id": "2026-10-24-car-picker-inspect",
       "date": "2026-10-24",
       "title": "Pick up a toy car and turn it around",

@@ -72,7 +72,7 @@ The minigame exposes `window.__carwash.start()` so the Demo thread's shared char
 the loaner at the carwash is the start.
 
 ## After the win: a bigger buggy that can be seen (Evan, 01:57Z)
-Evan's screenshot shows the earned buggy hidden behind foliage, only its halo ring visible. Proposal, to agree with the Kart mode thread (which
+Evan's screenshot shows the earned buggy hidden behind foliage, only its halo ring visible. Agreed with the Kart mode thread (which
 owns car mode, travel-through-scenery and the can't-leave-drive-mode fix): the earned buggy drives at vehicle scale 4.0 instead of 2.6, with a
 brighter theme-coloured pennant on a tall mast so it reads over trees, the chase camera lifts and pulls back with the scale, and trees and bushes
 within about 8 m of the buggy dither away (world layer stays untouched; this is a render fade) so it is never swallowed. Scenery the buggy
@@ -97,3 +97,5 @@ Recorded in `prototypes/ranch-atelier/dist/studies/context.json` (key `carwash`)
 Early lesson: the first carwash was built as a sealed drive-through before anyone asked what the player does inside it. Next time the
 design card's table of stations, skill moments and music sections comes before the first mesh; and the brief for the music is written
 in the same sitting as the stations, because the sections of the song are the stations.
+
+Update 02:02Z: the Kart thread shipped `mountHunt({scale})` (chase camera and bump radius follow) and a pale outline of the vehicle through foliage, with plain drives passing through scenery, so no foliage fade is needed. The earned buggy hops on at `scale: 4`.
