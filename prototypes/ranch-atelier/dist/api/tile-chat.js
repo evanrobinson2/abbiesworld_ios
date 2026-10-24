@@ -16,7 +16,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,p
  return async(req,res)=>{
   res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
   const {VERBS,PLANNER_PROMPT,validatePlan}=await import('../simulations/tile-chat/contract.mjs');
-  const enabled=env.TILE_CHAT_ENABLED!=='false';
+  const enabled=env.TILE_CHAT_ENABLED==='true'; // off unless explicitly turned on (Evan dropped the tile game, 2026-10-24)
   if(req.method==='GET')return json(res,200,{enabled,model:MODEL,verbs:VERBS});
   if(req.method!=='POST')return json(res,405,{error:'Use POST.'});
   const origin=req.headers.origin,host=req.headers['x-forwarded-host']||req.headers.host;
