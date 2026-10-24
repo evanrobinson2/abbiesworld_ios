@@ -1130,6 +1130,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_and_doze_off.glb"
    ]
+  },
+  "271": {
+   "task_id": "01a16ef8-9c55-7326-9634-ceeddae089fa",
+   "credits": 3,
+   "name": "Wake Up and Look Up",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/wake_up_and_look_up.glb"
+   ]
+  },
+  "466": {
+   "task_id": "01a16ef8-9c5b-7082-9496-cf05230c3b98",
+   "credits": 3,
+   "name": "Regular Jump",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/regular_jump.glb"
+   ]
+  },
+  "441": {
+   "task_id": "01a16ef8-9c5b-70f2-9d2e-9488d5b532ec",
+   "credits": 3,
+   "name": "Climb Stairs",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/climb_stairs.glb"
+   ]
+  },
+  "269": {
+   "task_id": "01a16ef8-9c5d-76c2-a837-e9f23e221d65",
+   "credits": 3,
+   "name": "Sleep",
+   "category": "DailyActions",
+   "sub_category": "Sleeping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sleep.glb"
+   ]
+  },
+  "470": {
+   "task_id": "01a16ef8-9c59-7150-ad3d-dd401beafad5",
+   "credits": 3,
+   "name": "Jumping Down",
+   "category": "BodyMovements",
+   "sub_category": "Jumping",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jumping_down.glb"
+   ]
+  },
+  "449": {
+   "task_id": "01a16ef8-f402-724b-ba60-b130d0042078",
+   "credits": 3,
+   "name": "Climb Up Rope",
+   "category": "BodyMovements",
+   "sub_category": "Climbing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/climb_up_rope.glb"
+   ]
+  },
+  "262": {
+   "task_id": "01a16ef8-f4b1-7514-8017-5428b2bed3c2",
+   "credits": 3,
+   "name": "Crouch and Push Forward",
+   "category": "DailyActions",
+   "sub_category": "Pushing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/crouch_and_push_forward.glb"
+   ]
+  },
+  "343": {
+   "task_id": "01a16ef8-f404-77ba-adc7-dd91719824a9",
+   "credits": 3,
+   "name": "Sit and Drink",
+   "category": "DailyActions",
+   "sub_category": "Drinking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/sit_and_drink.glb"
+   ]
+  },
+  "39": {
+   "task_id": "01a16ef8-f526-72ee-a5b1-147f872abc38",
+   "credits": 3,
+   "name": "Excited Walk Female",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/excited_walk_f.glb"
+   ]
+  },
+  "44": {
+   "task_id": "01a16ef8-f52c-70f5-bcb2-cb800962230a",
+   "credits": 3,
+   "name": "Happy Jump Female",
+   "category": "BodyMovements",
+   "sub_category": "Acting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/happy_jump_f.glb"
+   ]
   }
  }
 }
