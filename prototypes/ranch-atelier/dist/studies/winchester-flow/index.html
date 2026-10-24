@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Winchester: Intro, Title, Create New</title>
+<style>
+:root{--bg:#fff7e8;--ink:#2b2418;--card:#fff;--accent:#d6604d;--line:#e7d9bd;--soft:#7a6c52}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1913;--ink:#f3ead8;--card:#2a251b;--line:#4a4130;--soft:#b9a98a}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,sans-serif}
+header{padding:14px 16px 0;max-width:960px;margin:0 auto}h1{margin:0;font-size:22px}
+.tag{display:inline-block;font-size:12px;border-radius:999px;padding:2px 9px;border:1px solid var(--line);margin-right:6px}.tag.real{background:#cfe9c9;color:#1d3a18;border-color:#9bc792}.tag.mock{background:#ffe3a8;color:#4a3300;border-color:#e8c06a}.tag.future{background:#e5e0f3;color:#2c2352;border-color:#bdb3df}
+nav.tabs{display:flex;gap:6px;padding:10px 16px;max-width:960px;margin:0 auto;flex-wrap:wrap}
+nav.tabs button,.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}
+nav.tabs button[aria-selected=true],.btn.go{background:var(--accent);color:#fff;border-color:var(--accent)}
+section{max-width:960px;margin:0 auto;padding:0 16px 40px}section[hidden]{display:none}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;margin:12px 0}
+small,.soft{color:var(--soft)}
+/* intro */
+#stage{position:relative;height:340px;border-radius:18px;overflow:hidden;background:#0d0b14;touch-action:manipulation;cursor:pointer}
+#stage canvas{width:100%;height:100%;display:block}
+#ready{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);width:10px;height:10px;border-radius:50%;background:#ffd36b;opacity:.15;transition:all .6s}
+#ready.on{opacity:1;width:46px;border-radius:8px;box-shadow:0 0 18px #ffd36b}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+/* title */
+.title{display:grid;grid-template-columns:150px 1fr;gap:12px;min-height:300px;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,#9cc9a0,#e8d9a6)}
+.title .left{background:rgba(255,255,255,.55);padding:14px;display:grid;gap:8px;align-content:start}
+.title .left b{padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.7);font-weight:600;font-size:14px}
+.title .right{padding:14px;display:flex;justify-content:flex-end;align-items:flex-start}
+.cc{width:230px;background:rgba(255,255,255,.8);border-radius:18px;border:1px solid rgba(255,255,255,.9);box-shadow:0 8px 24px rgba(0,0,0,.15);padding:12px;color:#2b2418}
+.cc h3{margin:0 0 2px}.cc ul{list-style:none;margin:8px 0 0;padding:0}.cc li{padding:8px 10px;border-radius:10px;cursor:pointer;display:flex;justify-content:space-between}
+.cc li[aria-selected=true]{background:#d6604d;color:#fff}.cc li.new{border:1.5px dashed #d6604d;margin-top:4px}
+@media(max-width:560px){.title{grid-template-columns:1fr}.title .left{display:none}.cc{width:100%}}
+/* create */
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.opt{border:2px solid var(--line);border-radius:18px;background:var(--card);padding:14px;text-align:center;cursor:pointer;font:inherit;color:inherit}
+.opt:hover,.opt[aria-pressed=true]{border-color:var(--accent)}
+.opt svg{width:72px;height:72px}.opt span{display:block;margin-top:4px;font-weight:600}
+.opt.iconly span{display:none}.opt.labely svg{display:none}.opt.labely span{font-size:20px;padding:22px 0}
+.hexgrid{display:block;margin:8px auto}
+.hexgrid polygon{fill:#bfe0b5;stroke:#5c8a52;stroke-width:1.5;cursor:pointer}.hexgrid polygon.on{fill:#f2c26b}
+.notice{border-left:4px solid var(--accent)}
+textarea{width:100%;font:inherit;border-radius:12px;border:1px solid var(--line);padding:8px;background:var(--bg);color:var(--ink)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><h1>Winchester: Intro, Title, Create New</h1>
+<p class="soft">Studies for #612. Everything here is a <b>clickable mock</b> unless tagged otherwise. <span class="tag real">real</span> works today · <span class="tag mock">mock</span> picture of an idea · <span class="tag future">future</span> not built.</p></header>
+<nav class="tabs" role="tablist"><button role="tab" data-t="intro">1 · Intro</button><button role="tab" data-t="title">2 · Title and cities</button><button role="tab" data-t="create-new">3 · Create New</button><a class="btn" href="/studies/">All studies</a></nav>
+
+<section id="intro" hidden>
+<p><span class="tag mock">mock</span> Tap the stage. A flickering spotlight, a hovering backpack, tiny zip-zaps. A tap makes a focused burst that shows one trinket up close; keep tapping and the bursts get chaotic until the whole set is out. No words.</p>
+<div id="stage"><canvas id="cv"></canvas><div id="ready" title="ready"></div></div>
+<div class="card row"><label>Zap strength <input type="range" id="zap" min="0" max="10" value="4"></label>
+<label>Flicker <input type="range" id="flk" min="0" max="10" value="5"></label>
+<button class="btn go" id="adv" disabled>Wait for it…</button></div>
+<div class="card"><b>What it shows about readiness</b><p class="soft">The small light at the bottom turns into a glowing bar when loading is done, and only then can you move on. Here a timer stands in for loading. <span class="tag real">real</span> The actual scene-readiness fix is #610/#611 (the Winchester opening waits on real scene readiness); it has not been checked on a phone against a live deploy yet.</p></div>
+</section>
+
+<section id="title" hidden>
+<p><span class="tag mock">mock</span> Navigation on the left; a floating city card on the right showing the loaded city by default, how many cities exist, and Create New as the final choice. Tap the card to open the picker.</p>
+<div class="title"><div class="left"><b>Play</b><b>Friends</b><b>Cards</b><b>Settings</b></div>
+<div class="right"><div class="cc" id="cc"></div></div></div>
+<div class="card"><b>Choices to settle</b><p class="soft">Card floats over a live view of the city (here a gradient). Count shows as "3 cities" so the user sees the world is plural before they see Create New. The two sample cities besides Winchester are placeholders.</p></div>
+</section>
+
+<section id="create-new" hidden>
+<p><span class="tag mock">mock</span> Two options: Sandbox and Assimilate. Try three treatments and tell us which one you understand without help (counts are kept on this device only).</p>
+<div class="card"><div class="row" id="variants"></div><div class="opts" id="opts" style="margin-top:12px"></div><p><small id="votes"></small></p></div>
+
+<div class="card"><h3 style="margin-top:0">Sandbox <span class="tag mock">mock</span></h3>
+<p class="soft">OmniTile: place any tile on a small hex footprint. A new topology you can reroll and parameterize, played as a game. The footprint here is five hexes across the middle row, in rows of 3, 4, 5, 4, 3, which is <b>19 tiles</b> (Evan said about fifteen; five-wide on a hex layout is nineteen, so we use 19).</p>
+<svg class="hexgrid" id="hex" width="320" height="270" viewBox="0 0 320 270"></svg>
+<div class="row"><button class="btn" id="reroll">Reroll topology</button><small id="hexn"></small></div></div>
+
+<div class="card"><h3 style="margin-top:0">Assimilate <span class="tag mock">mock of the flow</span></h3>
+<p class="soft">Photo or words in, one themed tile out, kept as a personal experiment until approved for the shared world. The camera icon tells it apart from Sandbox.</p>
+<div class="card notice"><b>Before you send anything</b><br><small>You're responsible for what you upload and must have the right to share it. Sexual or nude material and anything not family-friendly is turned away. Photos with children in them are held back for now. A photo is looked at once to check it and make your scene, and isn't kept. (Wording needs review by someone qualified; it does not remove all legal risk.)</small></div>
+<div class="row"><span class="btn">📷 Photo</span><span class="btn" style="opacity:.5">🎬 Video · not ready</span><span class="btn" style="opacity:.5">🎙 Sound · not ready</span></div>
+<textarea rows="2" placeholder="What is it, and what feeling should the scene have?"></textarea>
+<p><span class="tag real">real</span> <a href="/studies/assimilate/index.html">Assimilate draft</a>: photo or words to one themed tile, with screening, by invitation.</p>
+<p class="soft"><b>Still outstanding from #612:</b> video and audio cloud processing, reconstruction of the submitted object (the draft places a marker and flat shapes; it is not object reconstruction), a real composed 3D scene, and private persistence. <span class="tag future">future</span></p></div>
+</section>
+
+<script>
+const $=s=>document.querySelector(s),tabs=['intro','title','create-new'];
+function show(t){if(!tabs.includes(t))t='intro';tabs.forEach(x=>{$('#'+x).hidden=x!==t});document.querySelectorAll('[data-t]').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===t));if(t==='intro')startIntro();else stopIntro()}
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{history.replaceState(null,'','/study/'+b.dataset.t);show(b.dataset.t)});
+/* intro */
+const cv=$('#cv'),cx=cv.getContext('2d'),TR=['🧸','🔑','🪁','⭐','🧩','🐚','🎈','🪀'];let sp=[],raf=0,t0=0,readyAt=0,taps=0;
+function fit(){const r=cv.getBoundingClientRect();cv.width=r.width;cv.height=r.height}
+function burst(){taps++;const W=cv.width,H=cv.height,n=taps===1?1:Math.min(8,taps*2);for(let i=0;i<n;i++){const big=taps===1;sp.push({e:TR[(taps+i)%TR.length],x:W/2,y:H/2+20,vx:big?0:(Math.random()-.5)*8,vy:big?-1.2:-2-Math.random()*5,s:big?96:34,life:1})}}
+function frame(ts){if(!t0)t0=ts;const W=cv.width,H=cv.height,tm=(ts-t0)/1000,fl=+$('#flk').value/10,zp=+$('#zap').value/10;
+cx.fillStyle='#0d0b14';cx.fillRect(0,0,W,H);const a=.55+.35*Math.sin(tm*7)*Math.sin(tm*13.3)*fl+(Math.random()<.04*fl?-.4:0);
+const g=cx.createRadialGradient(W/2,H*.2,10,W/2,H*.7,H);g.addColorStop(0,`rgba(255,236,170,${Math.max(.1,a)})`);g.addColorStop(1,'rgba(255,236,170,0)');cx.fillStyle=g;cx.fillRect(0,0,W,H);
+const by=H/2+Math.sin(tm*2)*8;cx.font='84px serif';cx.textAlign='center';cx.fillText('🎒',W/2,by+30);
+if(zp>0&&Math.random()<.15+zp*.3){cx.strokeStyle=`rgba(255,240,150,${.4+zp*.5})`;cx.lineWidth=1.5;cx.beginPath();let x=W/2+(Math.random()-.5)*70,y=by-30;cx.moveTo(x,y);for(let i=0;i<4;i++){x+=(Math.random()-.5)*26;y-=8+Math.random()*10;cx.lineTo(x,y)}cx.stroke()}
+sp=sp.filter(p=>p.life>0);for(const p of sp){p.x+=p.vx;p.y+=p.vy;if(p.s<90)p.vy+=.25;p.life-=p.s>90?.004:.006;cx.globalAlpha=Math.max(0,p.life);cx.font=p.s+'px serif';cx.fillText(p.e,p.x,p.y)}cx.globalAlpha=1;
+if(ts-t0>readyAt&&!$('#ready').classList.contains('on')){$('#ready').classList.add('on');$('#adv').disabled=false;$('#adv').textContent='Continue'}
+raf=requestAnimationFrame(frame)}
+function startIntro(){stopIntro();fit();sp=[];taps=0;t0=0;readyAt=4000;$('#ready').classList.remove('on');$('#adv').disabled=true;$('#adv').textContent='Wait for it…';raf=requestAnimationFrame(frame)}
+function stopIntro(){cancelAnimationFrame(raf)}
+$('#stage').onclick=burst;$('#adv').onclick=()=>{history.replaceState(null,'','/study/title');show('title')};addEventListener('resize',()=>{if(!$('#intro').hidden)fit()});
+/* title */
+const CI=[['Winchester','loaded'],['Moonbase','sample'],['Hex City','sample']];let open=false,sel=0;
+function city(){const c=$('#cc');c.innerHTML=`<small>${CI.length} cities</small><h3>${CI[sel][0]}</h3><small>${CI[sel][1]==='loaded'?'loaded':'sample city (placeholder)'}</small>`+(open?`<ul role="listbox">${CI.map((x,i)=>`<li role="option" data-i="${i}" aria-selected="${i===sel}">${x[0]}</li>`).join('')}<li class="new" data-n="1">＋ Create New</li></ul>`:`<ul><li style="background:#d6604d;color:#fff;justify-content:center" data-open="1">Choose a city ▾</li></ul>`);}
+$('#cc').onclick=e=>{const l=e.target.closest('li');if(!l)return;if(l.dataset.open){open=true}else if(l.dataset.n){history.replaceState(null,'','/study/create-new');show('create-new')}else{sel=+l.dataset.i;open=false}city()};city();
+/* create new */
+const V={a:['Labels and icons',''],b:['Icon first','iconly'],c:['Labels only','labely']};let cur=localStorage.aw614v||'a';
+const ICON={sandbox:'<svg viewBox="0 0 72 72"><polygon points="36,6 60,20 60,48 36,62 12,48 12,20" fill="#bfe0b5" stroke="#5c8a52" stroke-width="3"/><polygon points="36,22 48,29 48,43 36,50 24,43 24,29" fill="#f2c26b"/></svg>',assim:'<svg viewBox="0 0 72 72"><rect x="8" y="20" width="56" height="38" rx="9" fill="#d6604d"/><rect x="24" y="12" width="20" height="10" rx="4" fill="#d6604d"/><circle cx="36" cy="39" r="12" fill="#fff"/><circle cx="36" cy="39" r="7" fill="#2b2418"/></svg>'};
+function opts(){document.querySelectorAll('#variants').forEach(v=>v.innerHTML=Object.entries(V).map(([k,x])=>`<button class="btn ${k===cur?'go':''}" data-v="${k}">${x[0]}</button>`).join(''));
+$('#opts').innerHTML=`<button class="opt ${V[cur][1]}" data-p="sandbox">${ICON.sandbox}<span>Sandbox</span></button><button class="opt ${V[cur][1]}" data-p="assim">${ICON.assim}<span>Assimilate</span></button>`;
+let v={};try{v=JSON.parse(localStorage.aw614vote||'{}')}catch{}$('#votes').textContent='Picked quickest on this device: '+(Object.keys(v).length?Object.entries(v).map(([k,n])=>V[k][0]+' '+n).join(', '):'nothing yet')+'. Tap an option to count it for the treatment you are on.'}
+$('#create-new').addEventListener('click',e=>{const b=e.target.closest('[data-v]'),o=e.target.closest('[data-p]');if(b){cur=b.dataset.v;try{localStorage.aw614v=cur}catch{}opts()}if(o){try{const v=JSON.parse(localStorage.aw614vote||'{}');v[cur]=(v[cur]||0)+1;localStorage.aw614vote=JSON.stringify(v)}catch{}opts();document.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed',x===o))}});opts();
+/* hex */
+const ROWS=[3,4,5,4,3],R=28;let on=new Set();
+function hex(){let h='',k=0;ROWS.forEach((n,r)=>{for(let i=0;i<n;i++){const cx0=160+(i-(n-1)/2)*R*1.75,cy0=135+(r-2)*R*1.52,p=[0,1,2,3,4,5].map(j=>{const a=Math.PI/180*(60*j-30);return(cx0+R*Math.cos(a)).toFixed(1)+','+(cy0+R*Math.sin(a)).toFixed(1)}).join(' ');h+=`<polygon points="${p}" data-k="${k}" class="${on.has(k)?'on':''}"/>`;k++}});$('#hex').innerHTML=h;$('#hexn').textContent=k+' tiles, '+on.size+' placed'}
+$('#hex').onclick=e=>{const p=e.target.closest('polygon');if(!p)return;const k=+p.dataset.k;on.has(k)?on.delete(k):on.add(k);hex()};
+$('#reroll').onclick=()=>{on=new Set();for(let i=0;i<19;i++)if(Math.random()<.55)on.add(i);hex()};hex();
+const p=location.pathname.split('/').filter(Boolean);show(tabs.includes(p[1])?p[1]:(location.hash||'').slice(1)||'intro');
+</script></body></html>
