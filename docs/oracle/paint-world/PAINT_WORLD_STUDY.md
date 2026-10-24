@@ -71,3 +71,12 @@ Spending the card grants a random handful: count 3 to 7 (weights 1,2,4,2,1, so f
 
 ## In Winchester (/town)
 `paint-world/town-mount.mjs` mounts on `AbbieTown.stage` like the Moon Mission: it uses the town's scene and camera, and the stage's tiles for the height function (NaN off the seven hexes, so paint never lands in the void). The town has no hour of the day, so the paint keeps its own game clock (a day in three minutes) and its plants never glow (no night). Units: the module's `unit` is render units per metre (sandbox .1, town 1); every size derives from it. The paint shader includes the three.js log-depth chunks because the town uses a logarithmic depth buffer. The card and tray are the same modules as the sandbox; the god-view deck's `ranch:play-event` with `paint-rain` also grants balls here.
+
+## The paint fireball and slot machine (Evan, 2026-10-23)
+The Paint card is no longer a card in the hand. Evan: effect cards that did not look good become icons; the goo balls look like a fireball icon, but paint, with a facet showing how many you hold.
+- `simulations/paint-world/paint-hud.mjs`: the icon (a paint-splat fireball) on the top bar, a hexagonal facet with the ball count, and the balls waiting in a row beside it. You drag them down into the world; letting go on the row puts one back. Zero words, only digits.
+- Press the icon for the slot machine: three reels spin game objects (hex tile, bell, sheep, cheese, star, floppy disk, mushroom, apple). Three in a line wins a full handful (`rollGrant`); anything else pays one ball.
+- The odds are one in three by design, not by chance of the object set: the win is decided first (`WIN_ODDS`) and the reels land on it, and a miss never shows three alike. With independent reels no set of objects gives one in three, so the set is only for looks.
+- One spin per real minute (`SPIN_COOLDOWN_MS`), with the countdown on the icon, kept in `localStorage` so a reload does not reset it.
+- Placement is a guess under the top bar (right edge); the Design lead owns the overall layout, so the position is two CSS lines in `paint-hud.mjs`.
+- The god-view deck's `paint-rain` event still grants a full handful with no spin.

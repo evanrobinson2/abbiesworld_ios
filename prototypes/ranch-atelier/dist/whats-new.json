@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-paint-slot",
+      "date": "2026-10-24",
+      "title": "Paint fireball and slot machine",
+      "line": "Paint balls now live on the top bar as a paint-splat fireball with a count. Press it to spin the slot machine: three in a line wins a whole handful, and you can spin once a minute.",
+      "image": "/whats-new/2026-10-24-paint-slot.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-model-library",
       "date": "2026-10-24",
       "title": "Models is a proper library now",
