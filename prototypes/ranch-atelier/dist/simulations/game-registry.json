@@ -3,7 +3,7 @@
  "entries": [
   {
    "id": "cafe",
-   "name": "The café",
+   "name": "The caf\u00e9",
    "kind": "feature",
    "status": "live",
    "owner": "AW-STUDY-0013",
@@ -15,12 +15,12 @@
     "gates": [
      "town:cafe-door"
     ],
-    "note": "café diorama, reached from the curb in Downtown"
+    "note": "caf\u00e9 diorama, reached from the curb in Downtown"
    },
    "test": {
     "script": "tools/minigame-test/route-cafe-basement.cjs",
     "marker": "ROUTE OK",
-    "covers": "café, register key, old door, basement, back out to the town"
+    "covers": "caf\u00e9, register key, old door, basement, back out to the town"
    }
   },
   {
@@ -37,7 +37,7 @@
     "gates": [
      "town:cafe-cellar"
     ],
-    "note": "the cellar bulkhead behind the café"
+    "note": "the cellar bulkhead behind the caf\u00e9"
    },
    "test": {
     "script": "tools/minigame-test/route-cafe-basement.cjs",
@@ -85,7 +85,7 @@
     "gates": [
      "town:skate-park"
     ],
-    "note": "the skate park pad by the café"
+    "note": "the skate park pad by the caf\u00e9"
    },
    "test": {
     "script": "tools/minigame-test/coaster-flow.cjs",
@@ -141,7 +141,7 @@
      "town:truck",
      "town:launch"
     ],
-    "note": "the black truck at the café curb and the launch pad north of home"
+    "note": "the black truck at the caf\u00e9 curb and the launch pad north of home"
    },
    "needs": [
     "a headless-Chrome run that plays the mission from the truck to the end (only unit tests today)"
@@ -398,6 +398,27 @@
     "script": "tools/game-registry/town-features.cjs",
     "marker": "GAME-TEST PASS town-features",
     "covers": "the board carries 'library-*' instanced props"
+   }
+  },
+  {
+   "id": "heroes",
+   "name": "Meshy heroes in town",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Meshy heroes thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "abbietown/heroes.mjs"
+   ],
+   "scene": {
+    "stage": "town",
+    "note": "Abbie, Ani and the other animated heroes beside their places"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the hero groups stand on the board with a loaded model"
    }
   },
   {

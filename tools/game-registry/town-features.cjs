@@ -16,6 +16,7 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   await until(() => { let n = 0; window.AbbieTown.scene.traverse(o => { if (/^townsfolk-/.test(o.name || '')) n++; }); return n > 0; }, 'quests: townsfolk stand at their places');
   await until(() => !!window.AbbieTown.stage.tiles.farm, 'farm: the farm hex is on the board');
   await until(() => { let n = 0; const f = o => { if (/^library-/.test(o.name || '')) n++; }; window.AbbieTown.scene.traverse(f); window.AbbieTown.stage.dioGroup?.traverse(f); return n > 0; }, 'town dressing: library props are placed');
+  await until(() => { const h = window.AbbieTown.heroes; return h && h.length > 0 && h.some(g => g.children.length > 0); }, 'heroes: the Meshy heroes stand in town');
   await until(() => window.AbbieInventory, 'backpack: the inventory is up');
   const r = await p.evaluate(() => { const A = window.AbbieInventory, id = 'invariant-test-item'; A.remove(id); const added = !!A.add({id, name: 'Test', from: 'test', thought: 'test'}), has = A.has(id), removed = A.remove(id); return {added, has, removed, gone: !A.has(id)}; });
   if (!(r.added && r.has && r.removed && r.gone)) throw new Error('backpack round trip failed ' + JSON.stringify(r));
