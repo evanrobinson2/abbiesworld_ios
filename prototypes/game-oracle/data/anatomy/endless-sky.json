@@ -29945,5 +29945,69 @@
       "Packaged jobs.txt differs from pinned source only in CRLF line endings, verified by normalized byte equality.",
       "Random.cpp mean-value comment is not treated as authoritative distribution behavior; implementation delegates to the C++ distribution. No mean claim published."
     ]
+  },
+  "missionRecoveryStudy": {
+    "at": "2026-10-23T22:40:26.662521+00:00",
+    "game": "endless-sky",
+    "method": "Pinned v0.11.2 original source inspection; no runtime observation or decompilation.",
+    "sources": [
+      {
+        "path": "source/Mission.cpp",
+        "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+        "sha256": "6c883e82a8aed94e6df081abfcaebcd23f61bc2bf1fdfe719feb8a46da90cf8e",
+        "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp"
+      },
+      {
+        "path": "source/PlayerInfo.cpp",
+        "blobSha": "694875380eaa26d9ae1fc164eb7f2ddffaebfd9b",
+        "sha256": "b46164c6e39129ecd94f36ee0eb77032ba45206fdf4bf4dea3cdf2156f665af9",
+        "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/PlayerInfo.cpp"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Landing resolves failure before completion and makes one extra dependency pass",
+        "finding": "StepMissions first reconciles destroyed mission NPC ships and executes each mission stopover action. It then tests failure before completion; otherwise, arrivals can run visit actions. A second pass checks failure/completion again because one mission action may change another mission. This is two passes, not a general fixed-point solver. Nonunique visible jobs aggregate unfinished-arrival dialogs. The final sweep removes cargo/passenger references absent from the active mission list.",
+        "evidence": [
+          "source/PlayerInfo.cpp:4788-4893"
+        ]
+      },
+      {
+        "title": "Mission removal leaves the active list before callbacks and cleans cargo afterward",
+        "finding": "RemoveMission moves the mission into doneMissions before executing its trigger, preserving lifetime for dialogs and preventing a self-failing callback from finding it in the active list again. It then removes mission cargo from the player hold and each ship. Mission::Do updates fail/abort counters before checking action feasibility, so an unavailable fail action does not prevent failure accounting. Abort without its own action uses the fail action for compatibility. Complete counters are updated only after the action feasibility check. This traces normal control flow; exceptions, persistence and UI dialog lifecycle remain unexamined.",
+        "evidence": [
+          "source/PlayerInfo.cpp:2822-2839",
+          "source/Mission.cpp:1266-1316"
+        ]
+      },
+      {
+        "title": "Deadlines mark failure after the due date; landing resolves removal",
+        "finding": "CheckDeadline marks a mission failed only when it has a deadline strictly earlier than today and has not already been marked failed. Equality with the due date does not trigger this check. PlayerInfo checks deadlines during its date-update loop, emits a message for newly expired visible missions, and skips daily actions for failed missions. The inspected landing path later prioritizes failure removal. This traces the named paths, not every possible failure-removal caller.",
+        "evidence": [
+          "source/Mission.cpp:936-945",
+          "source/PlayerInfo.cpp:913-922",
+          "source/PlayerInfo.cpp:4834-4837"
+        ]
+      },
+      {
+        "title": "Arrival is insufficient when mission cargo remains in another system",
+        "finding": "CanComplete requires the destination or matching completion filter and IsSatisfied. Satisfaction checks remaining waypoints/stopovers, completion conditions, action feasibility, NPC success and nonoptional timers. It then blocks completion for mission passengers or any mission cargo entry on an out-of-system ship, including zero-mass mission cargo. A carried ship without its own system is treated as present if its parent is in the current system. This is a source-level completion gate, not proof of total cargo conservation or actual unloading behavior.",
+        "evidence": [
+          "source/Mission.cpp:1073-1128"
+        ]
+      }
+    ],
+    "coverage": {
+      "landingResolution": "verified bounded source trace",
+      "callbackOrdering": "verified bounded source trace",
+      "exceptions": "unexamined",
+      "runtime": "unexamined",
+      "saveLoad": "unexamined",
+      "deadlineTrigger": "verified static strict date comparison and daily-action gate",
+      "completionCargoGate": "verified static remote-ship checks including zero-mass cargo"
+    },
+    "designInference": "Remove an item from the active collection before invoking callbacks that could revisit it; preserve lifetime until UI consumers finish and clean dependent cargo explicitly. Not implemented Ranch behavior.",
+    "next": "Runtime, persistence, exceptions and full action side effects remain unexamined.",
+    "updatedAt": "2026-10-23T23:44:24.276789+00:00"
   }
 }
