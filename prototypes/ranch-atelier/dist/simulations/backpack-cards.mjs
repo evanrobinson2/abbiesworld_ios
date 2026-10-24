@@ -10,7 +10,8 @@
 //   deck.show('style' | 'colour' | 'pocket' | 'trim' | 'lining');  deck.dispose();
 // Presentation layer: the hand is drawn for the player and is invisible to every perception.
 import {renderFace} from '../cards/v3/face.mjs?v=2';
-import {STYLES, FACETS, option, styleOf, patternCanvas, accentFor, pocketPath} from './backpack.mjs?v=8';
+import {STYLES, FACETS, option, styleOf, patternCanvas, accentFor, pocketPath} from './backpack.mjs?v=9';
+import {coverCanvas} from './notebook.mjs?v=1';
 
 const styleArt = id => new URL(`./assets/backpack/style-${id}.png`, import.meta.url).href;
 const faces = new Map();
@@ -45,6 +46,7 @@ function bagArt(l, {open = false} = {}) {
 
 const tint = (hex, t) => { const n = parseInt(hex.slice(1), 16), r = n >> 16, gg = n >> 8 & 255, b = n & 255, m = v => Math.round(v + (243 - v) * t).toString(16).padStart(2, '0'); return '#' + m(r) + m(gg) + m(b); };
 function cardsFor(facet, l, split = false) {
+ if (facet === 'notebook') return FACETS.find(x => x.id === 'notebook').options.map(o => ({facet: 'notebook', value: o.id, name: o.name, art: coverCanvas(o.id, 300, 380).toDataURL(), colour: o.c}));
  if (facet === 'style') return STYLES.map(s => ({facet: 'style', value: s.id, name: s.name, art: styleArt(s.id), colour: option('colour', s.look.colour).c}));
  const fs = facet === 'colour' && !split ? ['colour', 'pattern'] : [facet];
  return fs.flatMap(f => FACETS.find(x => x.id === f).options.map(o => {
@@ -75,7 +77,7 @@ export function cardDeck(el, {look, onDrop, split = false}) {
  async function show(facet) {
   current = facet; const my = ++gen, l = look(), cards = cardsFor(facet, l, split);
   clearDrags();
-  label.textContent = {style: 'Styles', colour: split ? 'Colours' : 'Colour and pattern', pattern: 'Patterns', pocket: 'Pockets', trim: 'Straps', lining: 'Lining'}[facet] || '';
+  label.textContent = {style: 'Styles', colour: split ? 'Colours' : 'Colour and pattern', pattern: 'Patterns', notebook: 'Notebooks', pocket: 'Pockets', trim: 'Straps', lining: 'Lining'}[facet] || '';
   row.innerHTML = '';
   cards.forEach((cd, i) => {
    const b = document.createElement('button'); b.type = 'button'; b.className = 'aw-bp-card'; b.style.setProperty('--i', i); b.setAttribute('aria-label', cd.name);
