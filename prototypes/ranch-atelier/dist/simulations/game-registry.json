@@ -3,7 +3,7 @@
  "entries": [
   {
    "id": "cafe",
-   "name": "The caf\u00e9",
+   "name": "The café",
    "kind": "feature",
    "status": "live",
    "owner": "AW-STUDY-0013",
@@ -15,12 +15,12 @@
     "gates": [
      "town:cafe-door"
     ],
-    "note": "caf\u00e9 diorama, reached from the curb in Downtown"
+    "note": "café diorama, reached from the curb in Downtown"
    },
    "test": {
     "script": "tools/minigame-test/route-cafe-basement.cjs",
     "marker": "ROUTE OK",
-    "covers": "caf\u00e9, register key, old door, basement, back out to the town"
+    "covers": "café, register key, old door, basement, back out to the town"
    }
   },
   {
@@ -37,7 +37,7 @@
     "gates": [
      "town:cafe-cellar"
     ],
-    "note": "the cellar bulkhead behind the caf\u00e9"
+    "note": "the cellar bulkhead behind the café"
    },
    "test": {
     "script": "tools/minigame-test/route-cafe-basement.cjs",
@@ -85,7 +85,7 @@
     "gates": [
      "town:skate-park"
     ],
-    "note": "the skate park pad by the caf\u00e9"
+    "note": "the skate park pad by the café"
    },
    "test": {
     "script": "tools/minigame-test/coaster-flow.cjs",
@@ -484,6 +484,26 @@
     "a door in the world (the new-world hex) and a real in-world scene",
     "real models and the town renderer instead of stand-in shapes",
     "a headless-Chrome run: choose, build, place, undo, rebuild from record, leave"
+   ]
+  },
+  {
+   "id": "assimilate",
+   "name": "Assimilate: a real photo or words become one tile",
+   "kind": "feature",
+   "status": "experimental",
+   "owner": "issue-612",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "module": "simulations/assimilate.mjs",
+    "note": "studies/assimilate/index.html, open with ?exp=assimilate; personal yard is browser-local"
+   },
+   "needs": [
+    "a headless-Chrome run: upload a photo, get a themed tile, see a rejection",
+    "real tile meshes for props instead of flat stand-ins; rebuilding the shown object (modeler)",
+    "video and audio intake (no cloud service exists)",
+    "child-photo rule decided by Evan; provider retention verified; legal review of the upload notice",
+    "server-side personal yard, player approval and curation before the shared world"
    ]
   }
  ]
