@@ -1,0 +1,12 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+const load=()=>import('../simulations/minigame-contract.mjs');
+test('pause, resume and exit are available by default',async()=>{const {createMiniGameContract}=await load();const calls=[];const mg=createMiniGameContract({id:'g',onPause:()=>calls.push('p'),onResume:()=>calls.push('r'),onExit:()=>calls.push('x')});
+assert.deepEqual(mg.available(),{pause:true,exit:true});assert.ok(mg.pause().ok);assert.ok(mg.paused);assert.ok(mg.togglePause().ok);assert.ok(!mg.paused);assert.ok(mg.exit().ok);assert.deepEqual(calls,['p','r','x']);});
+test('an override turns off only the named controls and restores them when it ends',async()=>{const {createMiniGameContract}=await load();const mg=createMiniGameContract({id:'g'});
+mg.beginOverride({situation:'final-cutscene',rationale:'The ending plays once and must not be skipped by accident.',controls:['exit']});
+assert.deepEqual(mg.available(),{pause:true,exit:false});const r=mg.exit();assert.equal(r.ok,false);assert.match(r.reason,/final-cutscene/);assert.ok(!mg.exited);
+mg.endOverride('final-cutscene');assert.deepEqual(mg.available(),{pause:true,exit:true});assert.ok(mg.exit().ok);assert.deepEqual(mg.log.map(e=>e.event),['begin','end']);});
+test('an override without situation, rationale or valid controls is rejected, so lockout cannot be accidental',async()=>{const {createMiniGameContract}=await load();const mg=createMiniGameContract({id:'g'});
+assert.throws(()=>mg.beginOverride({rationale:'long enough rationale'}));assert.throws(()=>mg.beginOverride({situation:'s'}));assert.throws(()=>mg.beginOverride({situation:'s',rationale:'long enough rationale',controls:['quit']}));assert.deepEqual(mg.available(),{pause:true,exit:true});});
+test('a paused game stays resumable even if pause is overridden afterwards, and ending an unknown override throws',async()=>{const {createMiniGameContract}=await load();const mg=createMiniGameContract({id:'g'});
+mg.pause();mg.beginOverride({situation:'cutscene',rationale:'Short scripted moment, pause would break the timing.',controls:['pause']});assert.ok(mg.resume().ok);assert.equal(mg.pause().ok,false);assert.throws(()=>mg.endOverride('nope'));});
