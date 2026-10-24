@@ -15,58 +15,77 @@ for r in rows:
     else: r['status']='missing';r['matches']=[]
     r['matches']=r['matches'][:2]
     out.append(r)
+import merge
+pairs,new=merge.merged(out)
+MN={'S':'Blender code','P':'Free kit','V':'Variant'}
+for mine,g in pairs:
+    mine['build']=MN.get(g['m'],'');mine['pri']=min(mine['pri'],g['p'])
+    mine['lib']=g['st'] if g['st']!=mine['status'] and g['st']!='missing' else ''
+def sz(g):
+    n=g['n'].lower();c=g['g']
+    if c=='PEOPLE': return 1.7
+    if c=='ANIMALS': return .5
+    if c=='PLACES': return 10
+    if any(w in n for w in('car','truck','van','wagon','bus','kayak','sailboat')): return 4.5
+    return 1.5
+nid=len(out)
+for g in new:
+    nid+=1;ex=[w.lower() for w in g['ex'][:1]]
+    ok=g['st']in('have','partial') and ex and (merge.toks(g['n'])&merge.toks(ex[0]))
+    out.append(dict(id=f'W{nid:03d}',cat=g['g'],grp='From the library review',name=g['n'],size=sz(g),pri=g['p'],real=False,note=(g['note']+'; ' if g['note'] else '')+'size to be confirmed',
+      status='adapt' if ok else 'missing',matches=[dict(n=g['ex'][0],k=g['th'][0].split('/')[-1].split('.')[0],c='',up=False,g='',ingame=False)] if ok and g['th'] else [],build=MN.get(g['m'],''),lib=('library review marked it '+g['st']+', match looked wrong: '+g['ex'][0]) if g['st']!='missing' and not ok else '',
+      extra_thumb=g['th'][:2] if ok else []))
 C=collections.Counter((r['cat'],r['status']) for r in out)
 tot=collections.Counter(r['status'] for r in out)
-# ---- pipeline request
-def budget(size,cat,name):
-    n=name.lower()
-    if cat=='PLACES': return (3000,9000) if size>=8 else (1500,4000)
-    if cat=='PEOPLE': return (2500,6000)
-    if cat=='ANIMALS': return (600,1500) if size<.5 else (1500,4000)
-    if size>=6: return (2500,7000)
-    return (500,2000) if size<1.5 else (1200,3500)
+# ---- pipeline request (same format as the 2,000-model plan: preview/asset-plan-2000, tools/asset-batches)
+CLS={'prop':(300,1500),'plant':(400,2000),'animal':(1500,5000),'character':(2500,7000),'vehicle':(1500,6000),'building':(3000,12000)}
+def klass(r):
+    if r['cat']=='PEOPLE': return 'character'
+    if r['cat']=='ANIMALS': return 'animal'
+    if r['cat']=='PLACES': return 'building'
+    if r['grp']=='Vehicles': return 'vehicle'
+    if r['grp']=='Nature': return 'plant'
+    return 'prop'
 need=[r for r in out if r['status'] in('missing','adapt')]
 need.sort(key=lambda r:(r['pri'],r['id']))
-lines=[]
-for r in need:
-    s1,s2=budget(r['size'],r['cat'],r['name'])
-    tag='ADAPT' if r['status']=='adapt' else 'NEW'
-    lines.append(f"{r['id']} | P{r['pri']} | {tag} | {r['cat']} | {r['name']} | longest side {r['size']} m | tris S1<={s1}, S2<={s2}"+(f" | note: {r['note']}" if r['note'] else ''))
-PIPE=f"""ROLE
-You are the 3D modeler for Abbie's World, a kids' game (PG, friendly, never scary). The game is a toy-table version of Winchester, Massachusetts, a New England town of brick shops, white clapboard houses, maples and a lake. You will model the {len(need)} items listed at the end, in priority order (P1 first). Do P1 completely before starting P2.
+lines=[];batch=[]
+for i,r in enumerate(need,1):
+    k=klass(r);t,m=CLS[k];r['wi']=f'WI-{i:03d}';r['batch']=(i-1)//50+1
+    tag='ADAPT a library model' if r['status']=='adapt' else 'NEW'
+    lines.append(f"{r['wi']} | batch {r['batch']} | {k} | {r['name']} | {tag} | longest side {r['size']} m | tris aim {t} cap {m} | from {r['id']}"+(f" | note: {r['note']}" if r['note'] else ''))
+nb=(len(need)-1)//50+1
+PIPE=f"""# ChatGPT brief: Abbie's World, Winchester priority batches
 
-THE TWO-STAGE PROCESS (use it for every item)
-Stage 1, low poly: build the silhouette and the named parts with the fewest triangles that still read, as flat-colour materials, no textures. Export <ID>_<slug>_s1.glb.
-Stage 2, upgrade pass: keep the same parts, same pivot and same size. Add bevels, small silhouette details, a baked normal or bump map and a baked ambient occlusion in the base colour (one 1024x1024 map at most per item). Export <ID>_<slug>_s2.glb. Never change the proportions between stages; stage 2 is the same object, better made.
+You are the modeler for Abbie's World, a kids' game (PG, friendly, never scary): a toy-table version of Winchester, Massachusetts, a New England town of brick shops, white clapboard houses, maples, a lake and a commuter train. This request is {len(need)} items in {nb} batches of up to 50 (WI-001 to WI-{len(need):03d}), most important first. They are the Winchester slice of the wider model plan and use the same format, so the same intake check reads them. Do batch 1 completely, deliver it, then wait for the go on batch 2.
 
-STYLE LINE
-Chunky, warm, storybook toy-miniature in the spirit of Tiny Glade and Dorfromantik: soft bevels, slightly oversized silhouettes, rich saturated colour blocks, gentle wear, late-afternoon New England light. Chunky silhouettes beat fine detail: details under 3 % of the object's size are not seen in the game. No brand names, logos, readable real signs, house numbers, licence plates or real people's likenesses.
+## The two stages (for every item)
+Stage 1, charming low poly (file ends `-charming.glb`): the silhouette and the named parts with the fewest triangles that still read. Soft, chunky storybook proportions, a little tilt and lean, rich warm colour blocks, flat materials, no textures. Reference mood: Tiny Glade, Dorfromantik, the farmer figure with the straw hat and apple basket.
+Stage 2, upgrade pass (file ends `-upgrade.glb`): the same object, same parts, same pivot and same size, built better: bevels, layered parts, plank and shingle rhythm, believable joinery, one hero detail, one baked normal or bump map and baked ambient occlusion in the base colour (one 1024 px map at most). Never change proportions between stages, and the two must read as the same object at a glance.
+Late-afternoon New England light. Chunky silhouettes beat fine detail: anything under 3 % of the object's size is not seen in the game.
 
-TECHNICAL SPEC (every item)
-- Format: binary glTF (.glb), glTF 2.0, one mesh per named part, no animation (the game poses models itself), no lights, no cameras.
-- Units: metres. Z-up in the modelling tool is fine, but the exported GLB must be Y-up with +Y up and the front of the object facing +Z.
-- Pivot (origin) on the floor at the centre of the footprint, y = 0 is the ground, the object sits on it.
-- Size: the item's "longest side" below, in metres, real-world scale (the game rescales to its own sizes, so proportions matter more than the absolute value).
-- Triangles: S1 and S2 budgets are per item in the list, because the game draws many copies. Fewer is better if it still reads.
-- Materials: flat base colours. Name every material starting with its shading role: Timber, Plank, Roof, Shingle, Plaster, Stone, Brick, Metal, Iron, Glass, Water, Clay, Cloth, Fur, Hair, Feather, Bark, Leaf, Stem, Flower, Fruit, Soil, Paint. Examples: Roof_Slate, Brick_Red, Leaf_Light, Fur_Chestnut. Anything with Leaf, Needle, Grass, Stem or Flower in the name is recoloured by the seasons, so use those words only for plants.
-- Parts: name every mesh by what it is (Door, Awning, Wheel_FL, Head, Tail), never Cube.001.
-- People: A-pose, neutral and friendly, about 1.7 m adult, 1.2 m child, skin tones varied, simple clothes by role, no logos, no weapons. Faces simple and kind; never a real person.
-- Animals: standing idle pose, head up, legs separate parts so the game can animate them later.
-- Buildings: one door facing +Z, windows as separate parts, roof as its own part, no interior unless the item says so.
-- ADAPT items: a close model already exists in the game library; make a new variant that fits the description instead of starting from nothing, and say which library model you adapted.
+## Format (the acceptance checks read these)
+- One GLB per model: `WI-001-charming.glb`, `WI-001-upgrade.glb`. glTF 2.0 binary, no animation, no lights, no cameras, no helper objects, no axes or ground planes.
+- Units metres, +Y up, the origin on the floor at the centre of the footprint (the base sits on y = 0), the front facing +Z. Size is the item's "longest side" below at real-world scale (toys slightly toy-scaled); bounds must match within 15 percent.
+- Triangles: each item gives `tris aim` and `cap` for its class (prop 300/1500, plant 400/2000, animal 1500/5000, character 2500/7000, vehicle 1500/6000, building 3000/12000). Stay under the cap; the game draws many copies.
+- Parts are separate named meshes (roof, door, awning, wheel_fl, head, tail), never Cube.001. Moving parts keep their own pivots (door hinge, wheel axle).
+- Materials are named by what they are, starting with a shading role: timber, plank, roof, shingle, plaster, stone, brick, metal, iron, glass, water, clay, cloth, fur, hair, feather, bark, leaf, stem, flower, fruit, soil, paint_red. Share materials. No image textures except the one baked map, no vertex colour. Words leaf, needle, grass, stem and flower are recoloured by the seasons, so use them for plants only.
+- People: relaxed A-pose, friendly neutral faces, varied skin tones, simple clothes by role, no logos, no weapons, never a real person's likeness; adult about 1.7 m, child about 1.2 m. Smooth mannequin base layer under clothes. Animals: standing idle, head up, legs as separate parts. Buildings: one door facing +Z, windows as separate parts, roof its own part, no interior unless the note says so.
+- No brand names, logos, readable real signs, house numbers, licence plates, or text baked onto anything.
+- ADAPT items: a close model already exists in the game library; make the variant described rather than starting from nothing, and say which library model you adapted.
+- A sidecar `WI-001.json` per item: id, name, from_inventory_id, style files, triangles per file, bounds in metres, pivot, anchors (feet, hands, door, seat), material roles, needed_for.
+- A 1024 px preview PNG per model on a plain warm background (#fbf8f1), three-quarter view, soft shadow; it must read at 64 px.
 
-FOR EVERY ITEM, DELIVER
-1. <ID>_<slug>_s1.glb and <ID>_<slug>_s2.glb
-2. <ID>_<slug>_turntable.png: a 3 x 1 contact sheet (front, side, three-quarter) of stage 2 on a plain light background
-3. one line in manifest.json: {{"id","name","slug","stage1_tris","stage2_tris","height_m","longest_m","materials":[...],"parts":[...],"source":"chatgpt","notes"}}
+## Acceptance checks (a batch is rejected if any fail)
+1. Both GLBs load; triangles under the cap; bounds within 15 percent of the size; origin at the base.
+2. No object, camera, light or helper left; no stray textures; part and material names follow the rules.
+3. Charming and upgrade are the same object at a glance and visibly different in craft.
+4. The silhouette reads at 64 px.
+5. Nothing breaks the style rules above; the preview matches the model.
 
-HAND-BACK TO THE LIBRARY
-Zip the batch as winchester-batch-<NN>.zip containing the GLBs, the PNGs and manifest.json, at most 25 items per zip, P1 first. Give the zip to Evan. He drops it to Claude, who will: place each item at models/winchester/<ID>-<slug>/ in the repo (evanrobinson2/abbiesworld_ios) with model.glb (stage 2), stage1.glb, render.jpg and provenance.json (the prompt, the date, the model, the stage notes), add it to dist/models/library.json as a new "Winchester inventory" collection with pass "Original" for stage 1 and "Upgrade" for stage 2, and tag it with a decorator role in props-catalogue.json. If a file fails the checks (pivot, scale, triangle budget, material names), it will come back to you with the reason.
+## Hand-back
+Zip each batch (GLBs, sidecars, previews) and give the zip to Evan. He passes it to Claude, who opens a GitHub issue titled `Model batch WI-NN` listing the slot ids with the zip link. The intake routine checks, converts, lands the files under prototypes/ranch-atelier/dist/asset-batches/, rebuilds library.json, and opens a side-by-side review page. Failed slots come back with the reason and are redone in the next issue, never silently replaced. Report anything you could not do, or changed, in a notes line; do not skip items quietly.
 
-HOW TO WORK
-Do one item at a time. After each stage 1, check the silhouette from the front and side against the description before spending the upgrade pass. Report anything you could not do, and anything you changed, in the notes field. Do not skip items quietly.
-
-THE ITEMS (id | priority | NEW or ADAPT | category | what | size | triangle budgets)
+## The items (id | batch | class | what | NEW or ADAPT | size | triangles | inventory id | note)
 """+"\n".join(lines)+"\n"
 # ---- drone / photo checklist
 HEXES={

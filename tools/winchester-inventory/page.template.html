@@ -27,7 +27,7 @@ pre{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);bor
 </style></head><body><div class="wrap">
 <span class="badge">DRAFTED</span> <span class="sub">AW-STUDY-0057 · planning doc, nothing built yet</span>
 <h1>Winchester, alive: the inventory</h1>
-<p class="sub">People, places, things and animals that make Abbie's Winchester feel like a real town, checked against the model library and what the town already places. Plus Saturday's drone shot list and a brief for ChatGPT to model what's missing (low-poly first, then an upgrade pass).</p>
+<p class="sub">People, places, things and animals that make Abbie's Winchester feel like a real town, checked against the model library and what the town already places. This is the single merged list: it folds in the library thread's 292-item review (duplicates removed, its build method and its marks kept where they differ). Plus Saturday's drone shot list and a brief for ChatGPT to model what's missing (low-poly first, then an upgrade pass).</p>
 <div class="stats" id="stats"></div>
 <h2>1 · The inventory</h2>
 <p class="sub"><b>In game</b> is already built into the town (as code-made low-poly shapes, so it still wants a real model). <b>Library</b> is a finished model that fits. <b>Adapt</b> is a close cousin we can recolour or rework. <b>Missing</b> has nothing yet. Matching was done by name against the library and then read by eye, so treat "library" as a strong hint, not a promise. <span class="real">◎ verify on drone day</span> marks a real landmark whose look should come from Saturday's photos.</p>
@@ -36,7 +36,7 @@ pre{white-space:pre-wrap;background:var(--card);border:1px solid var(--line);bor
 <h2>2 · Saturday: drone and photo checklist</h2>
 <div id="rules"></div><div id="hex"></div>
 <h2>3 · Pipeline request for ChatGPT</h2>
-<p class="sub">Self-contained. Copy it, paste it into ChatGPT with no other context. It covers <b id="nn"></b> items (missing and adapt), P1 first, with scale, floor pivot, GLB, materials, triangle budgets, the two stages and how to hand results back.</p>
+<p class="sub">Self-contained, in the same format as the 2,000-model plan (charming then upgrade, same acceptance checks, ids WI-001 up) so these become priority batches, not a second pipeline. It covers <b id="nn"></b> items (missing and adapt) in batches of 50, P1 first, with scale, floor pivot, GLB, materials, triangle caps, the two stages and the hand-back.</p>
 <p><button class="copy" id="cp">Copy the whole request</button> <span id="cpd" class="sub"></span></p>
 <pre id="pipe"></pre>
 <h2>4 · Context engineering</h2><div class="ctxcard" id="ctx"></div>
@@ -54,7 +54,7 @@ function ctl(){const opt=(a,v)=>a.map(x=>`<button data-k="${v}" data-v="${x}" cl
  $('#ctl').innerHTML=opt(['ALL',...CAT],'cat')+opt(['ALL','ingame','have','adapt','missing'],'st')+opt(['ALL','1','2','3'],'pr').replace(/>(\d)</g,'>P$1<')+`<input id="q" placeholder="search" value="${esc(q)}">`;
  $('#q').oninput=e=>{q=e.target.value;rows(true)};$('#ctl').querySelectorAll('button').forEach(b=>b.onclick=()=>{const k=b.dataset.k,v=b.dataset.v;if(k=='cat')cat=v;else if(k=='st')st=v;else pr=v;ctl();rows()})}
 function rows(keep){const ql=q.toLowerCase();const r=D.rows.filter(x=>(cat=='ALL'||x.cat==cat)&&(st=='ALL'||x.status==st)&&(pr=='ALL'||x.pri==pr)&&(!ql||(x.name+x.grp+x.note).toLowerCase().includes(ql)));
- $('#rows').innerHTML=r.map(x=>`<tr><td class="note">${x.id}</td><td><b>${esc(x.name)}</b>${x.real?' <span class="real">◎</span>':''}<div class="note">${esc(x.cat.toLowerCase())} · ${esc(x.grp)}${x.note?' · '+esc(x.note):''}</div></td><td class="sz note">${x.size} m</td><td class="pr note">P${x.pri}</td>
+ $('#rows').innerHTML=r.map(x=>`<tr><td class="note">${x.id}</td><td><b>${esc(x.name)}</b>${x.real?' <span class="real">◎</span>':''}<div class="note">${esc(x.cat.toLowerCase())} · ${esc(x.grp)}${x.note?' · '+esc(x.note):''}${x.build?' · build: '+esc(x.build):''}${x.lib?' · <i>'+esc(x.lib.length<12?'library review marked it '+x.lib:x.lib)+'</i>':''}</div></td><td class="sz note">${x.size} m</td><td class="pr note">P${x.pri}</td>
  <td><span class="pill ${x.status}">${L[x.status]}</span> ${x.matches.map(m=>`<span class="m"><img loading="lazy" src="https://ranch.abbies.world/models/library/t/${m.k}.webp" onerror="this.style.display='none'" alt="">${esc(m.n)}</span>`).join('')}</td></tr>`).join('')||'<tr><td colspan=5 class="note">Nothing matches.</td></tr>';
  if(keep){$('#q').focus()}}
 ctl();rows();
