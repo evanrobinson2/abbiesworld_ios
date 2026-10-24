@@ -8,6 +8,7 @@ const DAY = 24, rnd = (a, b) => a + Math.random() * (b - a), ease = t => 1 - Mat
 // Effects scale with the camera distance to what the player looks at (1 at the ranch's usual view), so they read at any zoom, ranch or town.
 export function createWorldEffects({T, scene, orbit, camera, canvas, heightAt = () => 0, clock}) {
   const live = new Set();
+  let spot = null; // a balloon thrown by hand lands its effect here; otherwise it lands where the player is looking
   let raf = 0;
   const hoursOf = c => c.day * 24 + c.hour;
   const mat = (color, o = {}) => new T.MeshStandardMaterial({color, roughness: 0.6, ...o});
@@ -33,7 +34,7 @@ export function createWorldEffects({T, scene, orbit, camera, canvas, heightAt = 
   }
   // Effects are built in a local frame (metres-ish, ground at 0) placed on what the player is looking at, scaled by view distance.
   function frame() {
-    const cx = orbit.target.x, cz = orbit.target.z, s = camera ? Math.max(0.3, camera.position.distanceTo(orbit.target) / 12) : 1;
+    const cx = spot ? spot.x : orbit.target.x, cz = spot ? spot.z : orbit.target.z, s = camera ? Math.max(0.3, camera.position.distanceTo(orbit.target) / 12) : 1;
     const top = Math.max(orbit.target.y, heightAt(cx, cz)) + 3 * s, cache = new Map();
     const world = (x, z) => { const k = Math.round(x * 5) + ',' + Math.round(z * 5); let y = cache.get(k); if (y === undefined) cache.set(k, y = surfaceAt(x, z, top)); return y; };
     const gy = world(cx, cz);
@@ -151,7 +152,7 @@ export function createWorldEffects({T, scene, orbit, camera, canvas, heightAt = 
 
   const effects = {fireball, waterball, 'cats-dogs': catsAndDogs, 'tie-dye': tieDye};
   return {
-    play(id) { if (effects[id]) { if (id === 'tie-dye') for (const f of live) if (f.tie) { f.end(); live.delete(f); } const fx = effects[id](); if (id === 'tie-dye') fx.tie = true; return fx; } },
+    play(id, at = null) { if (effects[id]) { if (id === 'tie-dye') for (const f of live) if (f.tie) { f.end(); live.delete(f); } spot = at; let fx; try { fx = effects[id](); } finally { spot = null; } if (id === 'tie-dye') fx.tie = true; return fx; } },
     has: id => id in effects,
     clear() { for (const f of live) f.end(); live.clear(); },
   };
