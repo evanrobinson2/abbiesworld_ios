@@ -203,3 +203,14 @@ land at one shared squeeze (`BOARD` in `dioramas.block.js`), so heights meet acr
 
 ### Board queries for the cart (Effect Hunt)
 `AbbieTown.board.obstaclesNear(x, y, r)` returns houses, places and trees within `r` of a point (board metres east/north of the middle hex) as `{x, y, r, kind: 'tree'|'building', hex}`. `AbbieTown.board.roadSpawns(every = 30)` returns drivable street points as `{hex, x, y, heading (radians, east = 0, counter-clockwise), width}`.
+
+
+## Dressed from the library (2026-10-24, drafted)
+Evan: "I'm not confident you're aware of all those when you proc gen'd Winchester ... you might add several hundred more assets and types."
+The town was built from code, before the model library existed. The decorator now draws on the library by role.
+- `tools/town-props/build_catalogue.py` role-tags `models/library.json` into `simulations/abbietown/props-catalogue.json` (street, shop, yard, garden, farm, park, road, water). Coded names (RC, NS, BA) were tagged from their contact sheets; the rest by keyword. Re-run it when the library grows. A toy pistol (NS02) and anything weapon, armour, Moon, Space or Roman is excluded.
+- `simulations/abbietown/library-props.mjs` places by rule, not coordinates: kerbside lamps and benches along every road (thick downtown, thinner outward), a market on the pavement in front of each shop, two to five everyday things round every house (garden things in Ani's side, farm things in Abbie and Daddy's side), trees, benches and a fountain on the Common, toy cars along the kerb. A place is skipped if it is outside its hex, inside a building, under a tree, on a road or on another thing.
+- One InstancedMesh per mesh of each model type, parented to the board, so the whole dressing costs about one draw call per mesh type. Load `?bare` for the town without it (before/after).
+- Not placed yet: water-edge things (boats, quays, reeds), because the board has no water query. They are tagged `water` in the catalogue.
+- The people in town (townsfolk.mjs) use library characters where one fits: the baker and gardener are the model-challenge produce sellers (with their own idle animation), the neighbour is BA-0081 with a gentle sway. The rest keep stand-ins until the library has a matching model.
+- A bigger world: the twelve open slots touch the seven hexes (`board.slots`). Real-land hexes out there would be built by the same `buildDiorama` from the land data (neighbouring towns), made-up ones (the farm, the Moon) are built by their own modules and mounted at a slot.

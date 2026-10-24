@@ -22,12 +22,12 @@ export function mode({date = new Date(), search = '', stored = {}} = {}) {
   const m = date.getMonth() + 1, d = date.getDate(), [fm, fd] = SEASON.from, [tm, td] = SEASON.to;
   const inSeason = (m === fm && d >= fd) || (m === tm && d <= td);
   if (!inSeason) return {on: false, why: 'not the season'};
-  if (!flagOn({experimental: q.get('experimental') || stored.experimental}, 'halloween')) return {on: false, why: 'experiment not switched on'};
+  if (!flagOn({experimental: q.get('experimental') || q.get('exp') || stored.experimental}, 'halloween')) return {on: false, why: 'experiment not switched on'};
   return {on: true, why: 'the season'};
 }
 // The rule that makes the flag stick: ?experimental=halloween joins the stored list, ?experimental=off clears it.
 export function nextStored(search = '', stored = {}) {
-  const q = new URLSearchParams(search), out = {...stored}, e = q.get('experimental'), h = q.get('halloween');
+  const q = new URLSearchParams(search), out = {...stored}, e = q.get('experimental') || q.get('exp'), h = q.get('halloween'); // ?exp=name is the games' shorthand
   if (e === 'off') out.experimental = ''; else if (e) out.experimental = [...new Set([...String(stored.experimental || '').split(',').filter(Boolean), ...e.split(',')])].join(',');
   if (h) out.halloween = h === 'auto' ? '' : h;
   return out;
