@@ -13,7 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 API = "https://api.meshy.ai/openapi"
-CAP = 2400  # Evan raised it from 2,000 on 2026-10-24 00:31Z for the core animation set
+CAP = 1_000_000  # Evan 2026-10-24 17:12Z: "you can use all meshy credits"; Meshy's own balance is the limit now
 CREDITS = HERE / "meshy" / "credits.json"
 lock = threading.Lock()
 

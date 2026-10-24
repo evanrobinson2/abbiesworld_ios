@@ -1,5 +1,5 @@
 {
- "cap": 2400,
+ "cap": 1000000,
  "total": 2394,
  "log": [
   {
@@ -952,5 +952,5 @@
   "credits": 459,
   "at": "2026-10-23T21:55:19Z"
  },
- "cap_note": "Evan raised the cap from 2,000 to 2,400 (decision 2026-10-24 00:31Z) for 84 core animations + 2 charm retextures"
+ "cap_note": "Evan 2026-10-24 17:12Z: use all Meshy credits (cap lifted; Meshy's balance is the limit)"
 }
