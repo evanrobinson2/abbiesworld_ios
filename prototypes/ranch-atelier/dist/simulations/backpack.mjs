@@ -129,7 +129,27 @@ export function charmCount(id) { const v = saved(), c = CHARMS.find(x => x.id ==
 export const inBox = id => !!saved().boxed?.[id];
 export function putInBox(id, yes = true) { const v = saved(); v.boxed = {...(v.boxed || {})}; if (yes) v.boxed[id] = true; else delete v.boxed[id]; save(v); }
 // What hangs on the backpack: each charm she has and hasn't put away, a repeatable one up to its hang limit (moon cheese: two).
-export function keychain() { const boxed = saved().boxed || {}; return earnedCharms().filter(id => !boxed[id]).flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), c.hang || 1))).fill(id); }); }
+export function keychain() { const boxed = saved().boxed || {}, extra = UPGRADES.keyring.levels[upgradeLevel('keyring')].extra; return earnedCharms().filter(id => !boxed[id]).flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), (c.hang || 1) + (c.repeat ? extra : 0)))).fill(id); }); }
+
+// ---------- upgrades: the plain way to make the backpack better (Evan, 2026-10-24: "a standard, straightforward inventory
+// upgrade system"). Each upgrade has a few levels; a level costs stars, and she has one star for every memory coin and every
+// charm she has earned. Stars are only ever spent on upgrades, so what she has earned is never taken away.
+export const UPGRADES = {
+ pockets: {name: 'Pockets', icon: '🎒', blurb: 'Room for more things', levels: [
+  {cap: 8, cost: 0, says: 'Carries 8 things'}, {cap: 12, cost: 2, says: 'Carries 12 things'}, {cap: 16, cost: 3, says: 'Carries 16 things'}, {cap: 24, cost: 4, says: 'Carries 24 things'}]},
+ keyring: {name: 'Keyring', icon: '🔑', blurb: 'More of the same charm on the ring', levels: [
+  {extra: 0, cost: 0, says: 'Repeat charms hang as usual'}, {extra: 1, cost: 2, says: 'One more of each repeat charm hangs'}, {extra: 2, cost: 3, says: 'Two more of each repeat charm hang'}]}
+};
+export const upgradeLevel = id => Math.max(0, Math.min(UPGRADES[id].levels.length - 1, (saved().up || {})[id] | 0));
+export const capacity = () => UPGRADES.pockets.levels[upgradeLevel('pockets')].cap;
+export const starsSpent = () => Object.keys(UPGRADES).reduce((n, id) => n + UPGRADES[id].levels.slice(1, upgradeLevel(id) + 1).reduce((a, l) => a + l.cost, 0), 0);
+export const starsLeft = () => Math.max(0, coinCount() + earnedCharms().length - starsSpent());
+// The next level of an upgrade, or null at the top.
+export const nextLevel = id => UPGRADES[id].levels[upgradeLevel(id) + 1] || null;
+export function buyUpgrade(id) {
+ const next = UPGRADES[id] && nextLevel(id); if (!next || next.cost > starsLeft()) return false;
+ const v = saved(); save({...v, up: {...(v.up || {}), [id]: upgradeLevel(id) + 1}}); return true;
+}
 // A charm she can win again (repeat: true) counts up instead; earnCharm then returns how many she has.
 export function earnCharm(id) {
  const c = CHARMS.find(x => x.id === id); if (!c) return false;
@@ -533,6 +553,19 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  { const u = lg.attributes.uv; for (let i = 0; i < u.count; i++) u.setXY(i, u.getX(i) * 1.6, u.getY(i) * 1.6); }
  const lf = new T.Mesh(lg, m.lining); lf.name = 'lining front'; lf.position.z = -.004; front.add(lf);
  const lb = new T.Mesh(lg, m.lining); lb.name = 'lining back'; lb.position.z = .004; back.add(lb);
+ // The compartments (issue #536): each half's inside is zipped shut under a cloth cover. The pull rides the cover's top
+ // edge; unzipping runs it down and the cover shrinks to the bottom, so what is inside shows from the top first.
+ lg.computeBoundingBox();
+ const zipTop = lg.boundingBox.max.y, covers = {}, coverMat = m.fabric.clone(); coverMat.side = T.DoubleSide;
+ for (const [h, half2, sg] of [['back', back, 1], ['front', front, -1]]) {
+  const group = new T.Group(); group.name = `compartment cover ${h}`; group.position.z = sg * .2;
+  const sheet = new T.Mesh(lg, coverMat); sheet.name = 'cover cloth'; group.add(sheet);
+  const track = new T.Mesh(new T.BoxGeometry(Math.max(.2, halfWidthAt(zipTop - .06) * 1.7), .018, .014), m.metal); track.name = 'cover zip teeth'; track.position.set(0, zipTop - .005, sg * .008); group.add(track);
+  const pull = new T.Mesh(new T.BoxGeometry(.05, .1, .022), m.metal); pull.name = 'compartment zip pull'; pull.position.z = sg * .23; pull.userData.zip = sheet.userData.zip = track.userData.zip = h;
+  half2.add(group, pull); covers[h] = {group, pull, sheet, track, k: 1};
+ }
+ const setZip = (h, k) => { const c = covers[h]; c.k = k; c.group.scale.y = Math.max(.001, k); c.group.visible = k > .03; c.pull.position.y = Math.max(.07, zipTop * k - .02); c.pull.position.x = 0; };
+ setZip('back', 1); setZip('front', 1);
  // The zip: piping round each half's rim, and a pull at the top.
  const pipe = z => { const pts = outline.map(p => new T.Vector3(p.x, p.y, z)); return new T.TubeGeometry(new T.CatmullRomCurve3(pts, true), 80, .016, 4, true); };
  front.add(Object.assign(new T.Mesh(pipe(.014), m.trim), {name: 'zip piping front'}));
@@ -666,7 +699,7 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  let openT = 0;
  const tmp = new T.Vector3(), wp = new T.Vector3(), wq = new T.Quaternion(), inv = new T.Matrix4();
  return {
-  group: root, front, back, H, W, half, sockets, look: l, charms: pend,
+  group: root, front, back, H, W, half, sockets, look: l, charms: pend, covers, setZip, zipTop,
   get open() { return openT; },
   setOpen(t) { openT = t; front.rotation.x = t * Math.PI; },
   // world: the swing follows how the ring moves through the world (a backpack worn by a walking figure), in metres,
@@ -694,8 +727,8 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
 }
 
 // ---------- a view: one canvas that draws a backpack, opens it and shows what's inside ----------
-function itemTexture(icon) {
- const N = 128, cv = Object.assign(document.createElement('canvas'), {width: N, height: N}), g = cv.getContext('2d');
+function itemTexture(icon, px = 128) {
+ const N = 128, cv = Object.assign(document.createElement('canvas'), {width: px, height: px}), g = cv.getContext('2d'); g.scale(px / N, px / N);
  const t = new T.CanvasTexture(cv); t.colorSpace = T.SRGBColorSpace;
  const tile = () => { g.clearRect(0, 0, N, N); g.fillStyle = 'rgba(255,255,255,.92)'; g.shadowColor = 'rgba(40,20,40,.35)'; g.shadowBlur = 10; g.shadowOffsetY = 4; g.beginPath(); g.roundRect(10, 10, N - 20, N - 20, 26); g.fill(); g.shadowColor = 'transparent'; };
  tile();
@@ -708,8 +741,10 @@ function itemTexture(icon) {
  t.needsUpdate = true; return t;
 }
 
+// What the callout says about an item: its own words, who gave it, or a plain line.
+const aboutOf = it => it.about || it.thought || (it.id === 'coins' ? 'Coins that hold Daddy\'s core memories.' : it.from ? `Given to Abbie by ${it.from}.` : 'Something Abbie picked up on her adventures.');
 // el: a positioned element the canvas fills. items: [{id, name, icon}], coins: a number, charms: charm ids.
-export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null, onPart = null} = {}) {
+export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null, onPart = null, onUse = null} = {}) {
  await three();
  const canvas = document.createElement('canvas'); canvas.className = 'aw-bp-canvas';
  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'none', cursor: 'pointer'});
@@ -731,25 +766,28 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  const floor = new T.Mesh(new T.CircleGeometry(1.2, 24), new T.ShadowMaterial({opacity: .18})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
  const holder = new T.Group(); scene.add(holder);
 
+ const has = {back: false, front: false}, zip = {back: {k: 1, want: 1, wig: 0}, front: {k: 1, want: 1, wig: 0}};
+ let insp = null, callout = null, hinted = false;
  let bp = null, sprites = [], coinPile = null, state = {l: look(l), items, coins, charms};
  let picking = null, sampledAt = 0, anchorsNow = {}, tracked = {}, bounds = null;
  let want = 0, t = 0, yawNow = yaw, yawWant = yaw, drag = null, idle = 0, zoom = 1; const touches = new Map();
  function rebuild() {
+  if (bp && focus != null) { focus = null; hop = 0; onFocus?.(null); } // a rebuilt bag has new charms: leave the close-up rather than aim at a stale one
   if (bp) { holder.remove(bp.group); bp.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); }
   bp = buildBackpack(state.l, {charms: state.charms}); holder.add(bp.group); bp.setOpen(t); tracked = {}; sampledAt = 0;
-  sprites = []; const sk = []; for (let i = 0; i < 7; i++) { if (bp.sockets.back[i]) sk.push(['back', bp.sockets.back[i]]); if (bp.sockets.front[i]) sk.push(['front', bp.sockets.front[i]]); }
-  state.items.slice(0, sk.length).forEach((it, i) => {
-   const [h, p] = sk[i], s = new T.Sprite(new T.SpriteMaterial({map: itemTexture(it.icon), transparent: true, depthWrite: false}));
-   s.scale.setScalar(.25); s.position.copy(p); s.userData.item = it; s.renderOrder = 5; bp[h].add(s); sprites.push(s);
-  });
-  // Daddy's core memories ride in the front half as a little pile of gold coins.
-  if (state.coins > 0) {
-   coinPile = new T.Group(); coinPile.name = 'gold coins';
-   const cg = new T.CylinderGeometry(.05, .05, .013, 10), cm = new T.MeshStandardMaterial({name: 'coin gold', color: '#ffcc33', metalness: .8, roughness: .28, emissive: '#5a3c00', emissiveIntensity: .3, flatShading: true});
-   for (let i = 0; i < Math.min(12, state.coins); i++) { const c = new T.Mesh(cg, cm); c.rotation.x = Math.PI / 2 + (i % 3 - 1) * .2; c.rotation.y = i * 1.3; c.position.set((i % 4 - 1.5) * .07, (Math.floor(i / 4)) * .05, -.02 - (i % 2) * .012); coinPile.add(c); }
-   coinPile.position.set(0, bp.H * .5, -.02); coinPile.userData.item = {id: 'coins', name: state.coins === 1 ? "One of Daddy's core memories" : `${state.coins} of Daddy's core memories`, icon: '🪙'};
-   bp.front.add(coinPile);
-  } else coinPile = null;
+  // Things sit in the compartment they belong to: favours, keys and small treasures in the front pocket, the rest in the
+  // main compartment. A full compartment spills into the other one.
+  sprites = []; const free = {back: [...bp.sockets.back], front: [...bp.sockets.front]}; has.back = has.front = false;
+  for (const it of state.items) {
+   const want2 = it.compartment || (/^quest-|key|stamp|charm/i.test(it.id) ? 'front' : 'back'), h = free[want2].length ? want2 : free[want2 === 'front' ? 'back' : 'front'].length ? (want2 === 'front' ? 'back' : 'front') : null; if (!h) continue;
+   const p = free[h].shift(), s = new T.Sprite(new T.SpriteMaterial({map: itemTexture(it.icon), transparent: true, depthWrite: false}));
+   s.scale.setScalar(.25); s.position.copy(p); s.userData.item = it; s.userData.comp = h; s.renderOrder = 5; bp[h].add(s); sprites.push(s); has[h] = true;
+  }
+  // Coins are scrapped (Evan, 20:51Z): no gold pile floats in the front half any more.
+  coinPile = null;
+  for (const h of ['back', 'front']) { const c = bp.covers[h]; if (!has[h]) { zip[h].k = zip[h].want = 0; } bp.setZip(h, zip[h].k); c.pull.visible = has[h]; }
+  // A rebuild (new item, new look) keeps the item she is looking at in her hands.
+  if (insp) { const sp = sprites.find(x => x.userData.item.id === insp.item.id); if (sp) { insp.src = sp; insp.item = sp.userData.item; sp.visible = false; } else if (insp.item.id !== 'coins' || !coinPile) release(true); else { insp.src = coinPile; coinPile.visible = false; } }
   fit();
  }
  function fit() {
@@ -797,9 +835,11 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  canvas.addEventListener('pointerup', e => {
   touches.delete(e.pointerId); const d = drag; drag = null; if (!d || d.moved) return;
   const r = pick(e.clientX, e.clientY);
+  if (insp) { release(); return; }
   if (want > .5 && !deck) {
-   const hit = r.intersectObjects([...sprites, ...(coinPile ? [coinPile] : [])], true)[0];
-   if (hit) { let o = hit.object; while (o && !o.userData.item) o = o.parent; if (o) { say(o.userData.item.name, e); onTap?.(o.userData.item); return; } }
+   const live = [...sprites.filter(x => x.visible), ...(coinPile?.visible ? [coinPile] : []), ...['back', 'front'].flatMap(h => [bp.covers[h].group.visible ? bp.covers[h].group : null, bp.covers[h].pull.visible ? bp.covers[h].pull : null].filter(Boolean))];
+   const hit = r.intersectObjects(live, true)[0];
+   if (hit) { let o = hit.object; while (o && !o.userData.item && !o.userData.zip) o = o.parent; if (o?.userData.zip) { api.zip(o.userData.zip); return; } if (o) { inspect(o.userData.item, o); return; } }
   }
   const ch = r.intersectObjects(bp.charms.map(p => p.mesh), true)[0];
   if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { api.focusCharm(i); return; } }
@@ -880,6 +920,26 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  const camPos = new T.Vector3(), camAt = new T.Vector3(), wantPos = new T.Vector3(), wantAt = new T.Vector3(), tmpV = new T.Vector3();
  let snapped = false, burst = 0, hop = 0; const fBox = new T.Box3(), fQ = new T.Quaternion(), fQ2 = new T.Quaternion(), fUp = new T.Vector3(0, 1, 0);
 
+ // Looking closely at one thing: it comes out of its compartment into a larger view, with a short callout, and goes back.
+ const iFrom = new T.Vector3(), iTo = new T.Vector3(), iDir = new T.Vector3(), iScale = new T.Vector3(), iQ = new T.Quaternion(), iEul = new T.Euler();
+ function inspect(item, src) {
+  if (insp) return;
+  const mesh = new T.Mesh(new T.PlaneGeometry(1, 1), new T.MeshBasicMaterial({map: itemTexture(item.icon, 512), transparent: true, side: T.DoubleSide, depthTest: false, toneMapped: false}));
+  mesh.renderOrder = 20; mesh.name = 'inspected item'; scene.add(mesh); src.getWorldPosition(mesh.position);
+  insp = {item, src, mesh, k: 0, dir: 1}; src.visible = false; showCallout(item); onFocus?.('item:' + item.id);
+ }
+ function finishRelease() { if (!insp) return; insp.src.visible = true; scene.remove(insp.mesh); insp.mesh.material.map?.dispose(); insp.mesh.material.dispose(); insp.mesh.geometry.dispose(); insp = null; }
+ function release(now = false) { if (!insp) return; hideCallout(); onFocus?.(null); if (now) finishRelease(); else insp.dir = -1; }
+ function showCallout(item) {
+  hideCallout(); callout = document.createElement('div'); callout.className = 'aw-bp-callout'; callout.setAttribute('role', 'status');
+  const name = Object.assign(document.createElement('b'), {textContent: item.name}), about = Object.assign(document.createElement('p'), {textContent: aboutOf(item)}), row = document.createElement('div'); row.className = 'aw-bp-crow';
+  const btn = (text, cls, fn, label) => { const b = Object.assign(document.createElement('button'), {type: 'button', className: 'aw-bp-cbtn ' + cls, textContent: text}); if (label) b.setAttribute('aria-label', label); b.addEventListener('pointerdown', ev => ev.stopPropagation()); b.addEventListener('click', ev => { ev.stopPropagation(); fn(); }); return b; };
+  if (item.id !== 'coins' && onUse) row.append(btn(item.fuel ? 'Charge' : 'Use', 'use', () => { const it = insp?.item; if (it) onUse(it); }));
+  row.append(btn('Put back', 'back', () => release(), 'Put it back in the backpack'));
+  callout.append(name, about, row); el.append(callout);
+ }
+ function hideCallout() { callout?.remove(); callout = null; }
+
  let raf = 0, prev = performance.now(), alive = true;
  const ease = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
  function frame(now) {
@@ -901,7 +961,11 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   holder.position.y = e * bp.H * .98;
   // The floating mini (Evan, 22:55Z): the backpack hangs in the air on its own and idles there, waiting to be touched.
   if (float) { const k = 1 - e * .7; holder.position.y += Math.sin(now / 900) * bp.H * .035 * k; holder.rotation.z = Math.sin(now / 1300) * .05 * k; holder.rotation.x += Math.sin(now / 1100) * .03 * k; }
-  for (const sp of sprites) { sp.visible = e > .6; sp.material.opacity = Math.min(1, (e - .6) * 4); }
+  // The cover cloth hides what is inside by depth, so an item shows as the zip runs down past it.
+  for (const sp of sprites) { sp.visible = e > .6 && insp?.src !== sp; sp.material.opacity = Math.min(1, (e - .6) * 4); }
+  if (coinPile) coinPile.visible = insp?.src !== coinPile;
+  if (picking === 'lining') zip.back.want = zip.front.want = 0; else if (want < .5) for (const h of ['back', 'front']) zip[h].want = has[h] ? 1 : 0;
+  for (const h of ['back', 'front']) { const z = zip[h]; z.k += (z.want - z.k) * Math.min(1, dt * 6); if (Math.abs(z.want - z.k) < .003) z.k = z.want; z.wig = Math.max(0, z.wig - dt * 2.2); bp.setZip(h, z.k); bp.covers[h].pull.rotation.z = Math.sin(now / 45) * z.wig * .6; }
   // Glow the part being decorated, gently.
   if (glow) { const k = .18 + .12 * Math.sin(now / 260) + burst * .5; bp.group.traverse(o => { if (o.isMesh && o.material?.emissive && facetOf(o) === glow) { o.material.emissive.setHex(0xfff3d0); o.material.emissiveIntensity = k; } }); }
   burst = Math.max(0, burst - dt * 2);
@@ -924,6 +988,15 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   const k = Math.min(1, dt * (focus != null ? 4 : 7)); camPos.lerp(wantPos, k); camAt.lerp(wantAt, k);
   cam.position.copy(camPos); cam.lookAt(camAt);
   floor.visible = !float && e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
+  if (insp) {
+   insp.k = Math.max(0, Math.min(1, insp.k + insp.dir * dt / .5)); const ek = ease(insp.k);
+   const d = camPos.distanceTo(camAt) * .5, vh = 2 * Math.tan(fov / 2) * d, size = Math.min(vh, vh * cam.aspect) * .62;
+   insp.src.getWorldPosition(iFrom); insp.src.getWorldScale(iScale);
+   cam.getWorldDirection(iDir); iTo.copy(cam.position).addScaledVector(iDir, d).addScaledVector(cam.up, vh * .06);
+   insp.mesh.position.lerpVectors(iFrom, iTo, ek); insp.mesh.scale.setScalar(iScale.x + (size - iScale.x) * ek);
+   insp.mesh.quaternion.copy(cam.quaternion).multiply(iQ.setFromEuler(iEul.set(.12 * ek, ek * .5 * Math.sin(now / 700), 0)));
+   if (insp.dir < 0 && insp.k <= 0) finishRelease();
+  }
   bp.update(dt);
   renderer.render(scene, cam);
   if (onPart) { if (now - sampledAt > 400) { sampledAt = now; sample(); } project(); }
@@ -932,7 +1005,12 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
 
  const api = {
   canvas, get isOpen() { return want > .5; },
-  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; focus = null; }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
+  open() { want = 1; idle = 0; if (!hinted && (has.back || has.front)) { hinted = true; setTimeout(() => alive && want > .5 && !insp && say('Tap a zip to open a pocket', null, 2600), 900); } }, close() { release(true); want = 0; idle = 0; api.unfocus(); }, toggle() { if (want > .5) release(true); want = want > .5 ? 0 : 1; idle = 0; },
+  // The compartments: zip('back') runs the main compartment's zip, zip('front') the front pocket's; open true/false forces it.
+  zip(h, open) { const z = zip[h]; if (!z || !has[h]) return; z.want = open == null ? (z.want > .5 ? 0 : 1) : open ? 0 : 1; z.wig = 1; if (want < .5) want = 1; say(`${h === 'front' ? 'Front pocket' : 'Main pocket'} ${z.want ? 'zipped shut' : 'open'}`, null, 1400); },
+  zipped(h) { return zip[h]?.want > .5; }, get compartments() { return {back: {items: sprites.filter(x => x.userData.comp === 'back').map(x => x.userData.item.id), zipped: zip.back.want > .5}, front: {items: [...sprites.filter(x => x.userData.comp === 'front').map(x => x.userData.item.id), ...(coinPile ? ['coins'] : [])], zipped: zip.front.want > .5}}; },
+  inspect(id) { const sp = sprites.find(x => x.userData.item.id === id) || (id === 'coins' && coinPile); if (sp) inspect(sp.userData.item, sp); return !!sp; },
+  release() { release(); }, get inspecting() { return insp ? insp.item : null; },
   get look() { return state.l; },
   setLook(nl) { state.l = look(nl); rebuild(); },
   setContents({items: it = state.items, coins: c = state.coins, charms: ch = state.charms} = {}) { state.items = it; state.coins = c; state.charms = ch; rebuild(); },
@@ -957,7 +1035,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   get focused() { return focus; },
   say(text, ms) { say(text, null, ms); },
   bounce() { if (bp) bp.group.scale.setScalar(1.12); bp?.charms.forEach(p => p.vz += 3); },
-  dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); canvas.remove(); deck?.dispose(); tag?.remove(); }
+  dispose() { release(true); alive = false; cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); canvas.remove(); deck?.dispose(); tag?.remove(); }
  };
  style();
  if (dressUp) api.dressUp(true);
@@ -983,6 +1061,13 @@ function style() {
  const s = document.createElement('style'); s.id = 'aw-bp-css';
  s.textContent = `
  .aw-bp-dress{position:absolute;inset:0;pointer-events:none;z-index:2}
+ .aw-bp-callout{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:5;width:max-content;max-width:min(300px,calc(100% - 12px));padding:8px 12px 10px;border-radius:20px;text-align:center;color:#3a2a4a;font:13px/1.3 var(--app-font,system-ui);
+  background:linear-gradient(160deg,#ffffffec,#ffffffb4);box-shadow:inset 0 1.5px 0 #fff,0 12px 26px -10px #2a103077;animation:aw-bp-rise .28s cubic-bezier(.3,1.4,.5,1)}
+ .aw-bp-callout b{display:block;font-size:15px}.aw-bp-callout p{margin:3px 0 7px;opacity:.85}
+ .aw-bp-crow{display:flex;gap:8px;justify-content:center}
+ .aw-bp-cbtn{min-width:78px;min-height:40px;padding:0 14px;border-radius:20px;border:1.5px solid #ffffffe0;cursor:pointer;font:700 13px/1 var(--app-font,system-ui);color:#3a2a4a;background:linear-gradient(160deg,#ffffffe8,#ffffff90);box-shadow:inset 0 2px 0 #fff,inset 0 -5px 8px #0000001a,0 6px 14px -6px #2a103066}
+ .aw-bp-cbtn.use{background:linear-gradient(160deg,#fff6c8,#ffd23f)}.aw-bp-cbtn:active{transform:scale(.94)}
+ @keyframes aw-bp-rise{from{opacity:0;transform:translate(-50%,10px)}}
  .aw-bp-orb{pointer-events:auto;width:40px;height:40px;border-radius:50%;border:1.5px solid #ffffffe0;cursor:pointer;display:grid;place-items:center;padding:0;
   box-shadow:inset 0 2px 0 #ffffffb0,inset 0 -6px 10px #00000026,0 8px 18px -6px #2a103066;font:700 22px/1 var(--app-font,system-ui);color:#3a2a4a;transition:transform .15s}
  .aw-bp-orb:active{transform:scale(.9)}
