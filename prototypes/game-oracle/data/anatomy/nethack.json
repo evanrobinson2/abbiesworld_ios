@@ -699,7 +699,7 @@
       },
       {
         "title": "Status and hunger hooks follow world-turn replenishment",
-        "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Internal expiration, hunger and spell-aging rules have not been traced.",
+        "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Confusion expiration is traced separately; other expiration rules, hunger and spell aging remain unexamined.",
         "path": "src/allmain.c",
         "lines": [
           172,

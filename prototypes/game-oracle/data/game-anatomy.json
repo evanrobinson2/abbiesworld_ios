@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-24-nethack-confusion",
-  "updatedAt": "2026-10-24T09:51:17.811000+00:00",
+  "revision": "anatomy-2026-10-24-mindustry-conveyors",
+  "updatedAt": "2026-10-24T13:03:54.577049+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 121,
+    "findings": 125,
     "runtimeObserved": 0,
     "sourceFilesFetched": 78,
     "selectedClassesDecompiled": 5
@@ -954,11 +954,71 @@
             "url": "/data/anatomy/mindustry.json",
             "path": "package inventory / static analysis"
           }
+        },
+        {
+          "domain": "systems",
+          "title": "Conveyor motion propagates spacing constraints upstream",
+          "finding": "updateTile processes items from the forward end backward, clamps movement against the next item minus itemSpace, and applies a downstream limit derived from an aligned conveyor minitem. Motion uses speed times edelta. This traces local spacing and blocking, not whole-network throughput or conservation.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L265-L288",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              265,
+              288
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Conveyor transfer checks receiver acceptance before local removal",
+          "finding": "pass requires a nonnull item and next building, same team, and receiver acceptItem. It invokes receiver handleItem and returns true; updateTile removes its local item only on that success. A rejected transfer remains on the belt. No transaction rollback or exception guarantee was established.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L278-L305",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              278,
+              305
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Side loading uses stricter spacing and inserts halfway along the belt",
+          "finding": "acceptItem rejects full capacity or an absent facing edge. Direction-zero input needs minitem>=itemSpace; side input needs minitem>0.7. A rotating source that is also the next building is rejected. handleItem inserts direction-zero input at y=0 and side input at y=0.5 with lateral offset. External callers must honor acceptance; handleItem itself only checks capacity before using the facing edge.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L353-L383",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              353,
+              383
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Conveyor saves quantize positions and retain legacy decoding",
+          "finding": "Revision 1 writes item count, short item ID and signed-byte encodings of lateral and forward position. read consumes every declared entry but stores only up to capacity; revision 0 decodes an older packed integer representation. It invokes updateTile after loading, so deserialization includes an update rather than only field assignment. This is not a runtime save/load round-trip or malformed-input validation result.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java#L387-L432",
+            "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+            "lines": [
+              387,
+              432
+            ]
+          }
         }
       ],
       "coverage": {
         "mechanics": "not yet studied",
-        "systems": "not yet studied",
+        "systems": "partial static evidence",
         "simulation": "partial static evidence",
         "procedural-generation": "partial static evidence",
         "ui": "partial static evidence",
@@ -974,7 +1034,7 @@
         "status": "design inference; not implemented in Ranch Atelier",
         "text": "Tie visible machine activity to simulated warmup and blocked outputs; save quick-choice preferences independently of world state."
       },
-      "nextPass": "Validate conveyor/crafter behavior in a running scenario. Atlas-region counts, schematic semantics, actual HUD flows and subclass-specific planet rules need further analysis.",
+      "nextPass": "Local conveyor movement, acceptance and serialization are partially traced. Network conservation, cache invalidation and runtime outcomes remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
@@ -1755,7 +1815,7 @@
         {
           "domain": "simulation",
           "title": "Status and hunger hooks follow world-turn replenishment",
-          "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Internal expiration, hunger and spell-aging rules have not been traced.",
+          "finding": "After movement replenishment and increments of moves and monstermoves, the once-per-turn block invokes nh_timeout and run_regions, and later gethungry and age_spells. Those calls are attached to world-turn advancement rather than every command dispatch or every monster action. Confusion expiration is traced separately; other expiration rules, hunger and spell aging remain unexamined.",
           "basis": "source inspection",
           "evidence": {
             "path": "src/allmain.c",
