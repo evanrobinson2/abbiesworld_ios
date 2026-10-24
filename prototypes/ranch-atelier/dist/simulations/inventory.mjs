@@ -276,19 +276,8 @@ function pickUp(item, thought, done = null) {
     bubble.classList.add('out'); setTimeout(() => bubble.remove(), 300);
   }, ms);
 }
-// The small girl's voice in her head: a light, higher voice; quiet when sound is off.
-function speak(text) {
-  const prefs = window.AWLook?.state?.prefs || {};
-  if (prefs.mute || !('speechSynthesis' in window)) return false;
-  try {
-    const u = new SpeechSynthesisUtterance(text.replace(/\.\.\./g, '…'));
-    const voices = speechSynthesis.getVoices().filter(v => /^en/i.test(v.lang));
-    u.voice = voices.find(v => /child|girl|kid/i.test(v.name)) || voices.find(v => /samantha|karen|moira|tessa|fiona|victoria|female|zira|aria|jenny/i.test(v.name)) || voices[0] || null;
-    u.pitch = 1.7; u.rate = 1.02; u.volume = 0.9;
-    speechSynthesis.cancel(); speechSynthesis.speak(u);
-    return true;
-  } catch { return false; }
-}
+// Her inner voice is text only: the browser's built-in speech sounded harsh and synthetic, so nothing is spoken.
+function speak() { return false; }
 
 function style() {
   if (document.getElementById('aw-pocket-css')) return;
