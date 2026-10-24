@@ -25,11 +25,16 @@ for (const f of files) if (/\.midi?$/i.test(f)) errors.push(`${f}: a MIDI file i
 
 const SYNTH = /createOscillator\s*\(|new\s+OscillatorNode\b|createPeriodicWave\s*\(|\.noteOn\s*\(/g;
 const VOICE = /\bspeechSynthesis\b|\bSpeechSynthesisUtterance\b|\bResponsiveVoice\b/g;
+// A sound built from random samples (noise bursts, wind, crunches) is a synth too: a createBuffer filled from Math.random.
+// Playing back recorded or streamed samples (decodeAudioData, ElevenLabs PCM) is not.
+const noise = {};
 const counts = {}, voices = {};
 for (const f of files.filter(f => /\.(m?js|html)$/.test(f))) {
   const src = fs.readFileSync(f, 'utf8');
   const n = (src.match(SYNTH) || []).length, v = (src.match(VOICE) || []).length;
   if (n) counts[f] = n;
+  const nz = (src.replace(/\n/g, ' ').match(/\.createBuffer\s*\(.{0,500}?Math\.random\s*\(/g) || []).filter(m => !/\bgl\.|\bGL\./.test(m)).length;
+  if (nz) noise[f] = nz;
   if (v) voices[f] = v;
 }
 if (process.argv.includes('--write')) {
@@ -43,6 +48,8 @@ for (const [f, n] of Object.entries(counts)) {
   if (!base[f]) errors.push(`${f}: ${n} synthesized sound(s) (oscillators) in a file the audit doesn't list. Pick the sound from the catalogue (sounds/manifest.json).`);
   else if (n > base[f].oscillators) errors.push(`${f}: ${n} oscillators, the audit allows ${base[f].oscillators}. Synthesized audio may only go down.`);
 }
+
+for (const [f, n] of Object.entries(noise)) errors.push(`${f}: ${n} noise-buffer synth(s) (createBuffer filled from Math.random). Pick the sound from the catalogue (sounds/manifest.json).`);
 
 const baseVoice = JSON.parse(fs.readFileSync(BASE, 'utf8')).browserVoice || {};
 for (const [f, n] of Object.entries(voices)) {

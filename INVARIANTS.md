@@ -45,5 +45,5 @@ Every effect plays through `simulations/catalog-sfx.mjs` (`sfx('coin-1')`), whic
 Games: seven are experimental (`needs` in the registry says what each lacks). The registry's `scene.stage: "town"` covers
 features mounted on the Winchester board (intro, paint balls, world effects, quests, backpack); their one run is
 `tools/game-registry/town-features.cjs`.
-Known gap: the audio check sees oscillators, `.mid` files, browser speech and unknown catalogue ids. It cannot see a
-noise-buffer synth; review for that.
+The audio check sees oscillators, `.mid` files, browser speech, unknown catalogue ids and noise-buffer synths (a
+`createBuffer` filled from `Math.random`). Playing back streamed or decoded samples is fine.
