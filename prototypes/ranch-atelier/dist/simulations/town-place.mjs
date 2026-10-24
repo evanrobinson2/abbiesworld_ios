@@ -13,15 +13,16 @@ import {createImpactEffects, sharedImpactSound, IMPACT_DUST} from './tile-drop-i
 
 const SAND_R = 9, ROT = Math.PI / 6, DRAG_PX = 8;          // the sandbox hex radius in render units; pointy to flat top
 const mk = (tag, cls, css) => { const e = document.createElement(tag); if (cls) e.className = cls; if (css) e.style.cssText = css; return e; };
-const CSS = `#aw-hand .aw-place-card{all:unset;pointer-events:auto;box-sizing:border-box;position:relative;cursor:grab;flex:none;width:var(--tc-w,70px);margin:0 4px;touch-action:none;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 4px 7px #0004);transition:transform .18s cubic-bezier(.2,1.4,.4,1)}
-#aw-hand .aw-place-card:hover,#aw-hand .aw-place-card:focus-visible{transform:translateY(-12px) scale(1.1);outline:none}
-#aw-hand .aw-place-card canvas.v2-face{display:block;width:100%;height:auto}
-#aw-hand .aw-place-card .tp-blank{position:absolute;inset:0;width:100%;height:100%}
+const CSS = `#aw-place-row{position:fixed;z-index:29;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom) + 104px);display:flex;align-items:flex-end;justify-content:center;gap:6px;pointer-events:none}   /* a row of its own above the town's hand, so every card is reachable */
+#aw-place-row .aw-place-card{all:unset;pointer-events:auto;box-sizing:border-box;position:relative;cursor:grab;flex:none;width:var(--tc-w,70px);margin:0 4px;touch-action:none;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 4px 7px #0004);transition:transform .18s cubic-bezier(.2,1.4,.4,1)}
+#aw-place-row .aw-place-card:hover,#aw-place-row .aw-place-card:focus-visible{transform:translateY(-12px) scale(1.1);outline:none}
+#aw-place-row .aw-place-card canvas.v2-face{display:block;width:100%;height:auto}
+#aw-place-row .aw-place-card .tp-blank{position:absolute;inset:0;width:100%;height:100%}
 .aw-place-ghost{position:fixed;z-index:10050;left:0;top:0;width:96px;pointer-events:none;will-change:transform;filter:drop-shadow(0 12px 14px #0006)}
 .aw-place-ghost canvas{display:block;width:100%;height:auto}
 .aw-place-hint{position:fixed;z-index:10049;left:50%;bottom:calc(env(safe-area-inset-bottom) + 130px);transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#fffdf6e6;color:#3b2a1c;font:700 14px system-ui,sans-serif;pointer-events:none}
-@media(max-width:520px){#aw-hand{--tc-w:36px}#aw-hand .aw-place-card{margin:0 2px}}   /* nine cards must fit the phone's narrow hand */
-@media(prefers-reduced-motion:reduce){#aw-hand .aw-place-card{transition:none}}`;
+@media(max-width:520px){#aw-place-row{--tc-w:46px}}
+@media(prefers-reduced-motion:reduce){#aw-place-row .aw-place-card{transition:none}}`;
 
 export function mountTownPlace(A) {
   const stage = A?.stage, board = A?.board, hand = window.AWHud?.hand;
@@ -29,12 +30,12 @@ export function mountTownPlace(A) {
   document.head.append(Object.assign(mk('style'), {textContent: CSS})); installTilePullStyle();
   const HEX = board.hexSide, K = HEX / SAND_R, KS = K * .1, cos = Math.cos(ROT), sin = Math.sin(ROT);
   // One card per kind of tile, side by side after the town's own cards. `card` is the one in hand.
-  const KINDS = [['meadow', 'Meadow'], ['moon', 'Moon']], LABEL = Object.fromEntries(KINDS);
-  let anchor = document.getElementById('aw-tile-cards');
+  const KINDS = [['meadow', 'Meadow'], ['moon', 'Moon'], ['ranch', 'Ranch'], ['garden', 'Garden']], LABEL = Object.fromEntries(KINDS);
+  const row = mk('div'); row.id = 'aw-place-row'; row.dataset.layer = 'presentation'; document.body.append(row);
   const cards = KINDS.map(([kind, label]) => {
     const c = mk('button', 'aw-place-card'); c.type = 'button'; c.dataset.generator = kind; c.dataset.layer = 'presentation';
     c.setAttribute('aria-label', label + ' tile: pull it onto a glowing open hex'); c.title = label;
-    if (anchor) anchor.after(c); else hand.append(c); anchor = c;
+    row.append(c);
     import('../cards/v3/hand.mjs?v=2').then(m => m.cardFace(c)).catch(e => console.warn(label + ' card', e));
     return c;
   });
@@ -100,7 +101,32 @@ export function mountTownPlace(A) {
     const moon = await mb.createMoonBoardTile(tile, SAND_R * 20, heightAt), inner = moon.group;
     inner.scale.multiplyScalar(K); inner.rotation.y = ROT; inner.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
     const outer = new T.Group(); outer.add(inner);
-    return {outer, inner, id: tile.id, life: moon.life, floorAt: heightAt};   // the Moon's own units are plan units, so no .1
+    return {outer, inner, id: tile.id, tick: dt => moon.life.update(dt), floorAt: heightAt};   // the Moon's own units are plan units, so no .1
+  }
+  // The Ranch: planned by the sandbox's own worker on its own terrain, which is lifted to the town's ground at the hex's centre and
+  // blended into it along the edge (as the Moon's terrain is), then drawn by the composer with its animals.
+  async function buildRanch(slot, type = 'ranch') {
+    const [tm, comp, ps, rs, rg, ss, gf] = await Promise.all([import('./tile-metrics.js'), import('./ranch-composer.js?paths=16'), import('./placement-settings.mjs'), import('./ranch-spaces.mjs?habitat=4'), import('./ranch-generation-client.mjs'), import('./poi/sugar-shack-spec.mjs'), import('./garden-facets.mjs')]);
+    const D = SAND_R * 20; tm.setLabHexDiameter(D); composer ??= await comp.createRanchComposer({variants: false});
+    await composer.prepareModels(rs.RANCH_MODELS);
+    const seed = Math.floor(Math.random() * 9000) + 11, tile = {id: (type === 'crop' ? 'garden-' : 'ranch-') + slot.id, type, center: {x: 0, z: 0}, rotation: 0, seed, placement: ps.placementSettings(type, {complexity: 1, vegetation: 3, variety: 3}), ...(type === 'crop' ? {garden: gf.gardenSettings({})} : {})};
+    const board = {terrain: null, seed, landscape: {height: 8 + (seed % 700) / 100, vegetation: 1.8, biodiversity: 3, props: 1, seed: seed ^ 0x51a7, procedural: true}, tiles: [tile]};
+    const counts = {goatPlay: 1, playground: 1, horses: 1, cows: 1, goats: 2, chickens: 3}, req = rs.spaceRequirements(composer.dimensions, 1, D, counts, 'homestead'); req['sugar-shack'] = [{...ss.SUGAR_SHACK}];
+    const planned = await rg.planRanchAsync(board, {dimensions: composer.dimensions, requirementsByType: req, requirementsByTile: ps.tileRequirements(board, req, composer.dimensions, D, counts)}, D);
+    const own = planned.heightAt, plan = planned.assembly.plans.find(q => q.id === tile.id) || planned.assembly.plans[0];
+    const toBoard = (mx, mz) => { const x0 = mx * KS, z0 = mz * KS; return [slot.x + x0 * cos + z0 * sin, slot.y - (-x0 * sin + z0 * cos)]; };
+    const town = (mx, mz) => ground(...toBoard(mx, mz)) / KS, datum = town(0, 0) - own(0, 0), apothem = D / 2 * Math.sqrt(3) / 2, fade = Math.min(5, D / 2 * .15);
+    const heightAt = (mx, mz) => { const d = apothem - Math.max(Math.abs(mx), Math.abs(mx * .5 + mz * Math.sqrt(3) / 2), Math.abs(-mx * .5 + mz * Math.sqrt(3) / 2)), t = Math.max(0, Math.min(1, d / fade)), k = t * t * (3 - 2 * t); return town(mx, mz) * (1 - k) + (own(mx, mz) + datum) * k; };
+    const inner = await composer.draw(tile, Object.assign(plan, {ranchSpaces: true}), {landscape: ps.tileLandscape(tile, board.landscape), heightAt, managed: true, exposedEdges: []});
+    let life = null;
+    if (type !== 'crop') try {
+      const {createRanchLife} = await import('./ranch-life.mjs?motion=37');
+      life = await createRanchLife(composer, {...planned.assembly, plans: [plan]}, {...board, tiles: [tile]}, heightAt);
+      life.root.position.set(-plan.center.x * .1, 0, -plan.center.z * .1); inner.add(life.root);
+    } catch (e) { console.warn('Ranch animals', e); }
+    inner.scale.setScalar(K); inner.rotation.y = ROT; inner.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+    const outer = new T.Group(); outer.add(inner);
+    return {outer, inner, id: tile.id, tick: life && (dt => life.update(dt * 6, dt, dt * 6)), floorAt: (x, z) => heightAt(x / .1, z / .1) * .1};
   }
   // A still of the new tile for the print window, drawn on the town's renderer into a target, the world untouched.
   function stillOf(outer, size = 384) {
@@ -126,15 +152,15 @@ export function mountTownPlace(A) {
     if (kind) card = cards.find(c => c.dataset.generator === kind) || card; kind = card.dataset.generator;
     busy = true; const win = openPrintWindow({name: LABEL[kind], at: from, still: faceCopy()});
     try {
-      const built = await (kind === 'moon' ? buildMoon : buildMeadow)(slot), still = stillOf(built.outer);
+      const built = await ({moon: buildMoon, ranch: buildRanch, garden: s => buildRanch(s, 'crop')}[kind] || buildMeadow)(slot), still = stillOf(built.outer);
       await win.reveal({reveal: t => { still.style.clipPath = `inset(${((1 - t) * 100).toFixed(1)}% 0 0 0)`; }}, still, 900);
       await win.stamp();
       const placed = A.placeTile(slot.id, {id: built.id, name: LABEL[kind], zone: 'board', group: built.outer});
       if (!placed) { win.fail('That hex is taken'); built.outer.removeFromParent(); return; }
-      if (built.life) stage.frame(dt => built.life.update(dt));   // the Moon keeps living once it is down
+      if (built.tick) stage.frame(built.tick);   // the Moon and the Ranch keep living once they are down
       win.close(card); showGlow(false);
       const where = new T.Vector3(slot.x, ground(slot.x, slot.y), -slot.y).applyMatrix4(stage.dioGroup.matrixWorld);
-      const [dust, soil] = IMPACT_DUST[kind], landing = landTile(built.inner, {floorAt: built.floorAt, onImpact: ({radius}) => { sound.play(0, 1); fx.burst({position: where, radius, groundAt: () => where.y, dust, soil}); }});
+      const [dust, soil] = IMPACT_DUST[kind === 'garden' ? 'crop' : kind], landing = landTile(built.inner, {floorAt: built.floorAt, onImpact: ({radius}) => { sound.play(0, 1); fx.burst({position: where, radius, groundAt: () => where.y, dust, soil}); }});
       const off = stage.frame(dt => { landing.update(dt); if (landing.done) off(); });
       window.dispatchEvent(new CustomEvent('aw-tile-placed', {detail: {id: built.id, slot: slot.id}}));
     } catch (e) { console.warn(LABEL[kind] + ' tile', e); win.fail('Could not print it'); }
@@ -164,6 +190,6 @@ export function mountTownPlace(A) {
     c.addEventListener('pointerup', e => { if (!drag) return; if (drag.live) endDrag(e, false); else drag = null; });
     c.addEventListener('pointercancel', e => { if (drag?.live) endDrag(e, true); else drag = null; });
   }
-  const api = {card: cards[0], cards, place, buildMeadow, buildMoon, slotAt, screenOf}; A.tilePlace = api;   // for tests and for the next card types
+  const api = {card: cards[0], cards, place, buildMeadow, buildMoon, buildRanch, slotAt, screenOf}; A.tilePlace = api;   // for tests and for the next card types
   return api;
 }
