@@ -15,9 +15,9 @@ export const HEROES = [
  {id: 'abbie', name: 'Abbie', glb: 'A1-clay-tee', at: 'common', turn: 3.5, out: 13, idle: 'idle', moves: ['big_wave_hello', 'funnydancing_01', 'look_around_dumbfounded']},
  {id: 'daddy', name: 'Daddy', glb: 'A3-clay-tee', at: 'common', turn: 3.25, out: 13, idle: 'idle_03', moves: ['stand_and_drink', 'big_wave_hello']},
  {id: 'ani', name: 'Ani', glb: 'A2-clay-tee', at: 'common', turn: 3.38, out: 13, idle: 'idle', moves: ['big_wave_hello', 'funnydancing_01', 'look_around_dumbfounded']},
- {id: 'commander', name: 'Commander', glb: 'A4-clay-suit', at: 'launch', turn: 2.84, idle: 'idle_03', moves: ['look_around_dumbfounded', 'big_wave_hello']},
- {id: 'engineer', name: 'Engineer', glb: 'A5-clay-suit', at: 'launch', turn: 3.14, idle: 'idle', moves: ['stand_and_drink', 'catching_breath']},
- {id: 'crewmate', name: 'Crewmate', glb: 'A6-clay-suit', at: 'launch', turn: 3.44, idle: 'idle_02', moves: ['funnydancing_01', 'big_wave_hello']},
+ {id: 'commander', name: 'Commander', glb: 'A4-clay-suit', at: 'launch', turn: 2.3, idle: 'idle_03', moves: ['look_around_dumbfounded', 'big_wave_hello']},
+ {id: 'engineer', name: 'Engineer', glb: 'A5-clay-suit', at: 'launch', turn: 2.55, idle: 'idle', moves: ['stand_and_drink', 'catching_breath']},
+ {id: 'crewmate', name: 'Crewmate', glb: 'A6-clay-suit', at: 'launch', turn: 2.8, idle: 'idle_02', moves: ['funnydancing_01', 'big_wave_hello']},
 ];
 
 export function mountHeroes(town, {THREE: T} = {}) {
