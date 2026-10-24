@@ -1,0 +1,90 @@
+[
+  {
+    "file": "frames/01-0237.jpg",
+    "timestamp": "03:57",
+    "seconds": 237,
+    "title": "Arrival and layout",
+    "observed": "Dirty vehicle and customer in a marked parking area. The wash operates in a sunny outdoor lot, with a small service building and street beyond.",
+    "original": "03-55-layout.png"
+  },
+  {
+    "file": "frames/02-0310.jpg",
+    "timestamp": "05:10",
+    "seconds": 310,
+    "title": "Sponge / local foam",
+    "observed": "A hand and sponge work directly over the car surface. Bubble clusters cover the rear glass and roof. HUD shows 21.1% foaming, 11% cleaned total, and a 64% cleaning goal.",
+    "original": "05-10-foam.png"
+  },
+  {
+    "file": "frames/03-0396.jpg",
+    "timestamp": "06:36\u201306:37",
+    "seconds": 396,
+    "title": "Foam coverage / next step",
+    "observed": "The front is covered in thick foam; the checklist has advanced to washing and offers the next step. This frame is still the sponge tool, not the rinse tool.",
+    "original": "06-35-wash.png"
+  },
+  {
+    "file": "frames/04-0512.jpg",
+    "timestamp": "08:32",
+    "seconds": 512,
+    "title": "High view of roof",
+    "observed": "Elevated viewpoint exposes the roof. HUD offers Elevate, wet sponge, switch tool, switch soap color and X-ray vision. Nearly complete foaming corresponds to only 50% cleaned total.",
+    "original": "08-32-elevated.png"
+  },
+  {
+    "file": "frames/05-0560.jpg",
+    "timestamp": "09:20",
+    "seconds": 560,
+    "title": "Hose / local removal",
+    "observed": "Hand-held hose sprays near the rear wheel and body. Blue paint is exposed while foam remains on adjacent surfaces. Total cleaned is 91%, above the 64% goal, and finishing is available.",
+    "original": "09-20-rinse.png"
+  },
+  {
+    "file": "frames/06-0662.jpg",
+    "timestamp": "about 11:02",
+    "seconds": 662,
+    "title": "Customer feedback",
+    "observed": "Customer panel displays high mood. Job panel shows standard wash $300, 100% work, 64% goal, extra-clean bonus indicator and total $555. Do not infer the arithmetic from this single frame.",
+    "original": "11-15-result.png"
+  },
+  {
+    "file": "frames/07-1405.jpg",
+    "timestamp": "about 23:25",
+    "seconds": 1405,
+    "title": "Suspicious-customer tutorial",
+    "observed": "Tutorial directs the player to acquire a baseball bat. Behind it are a suspicious-customer warning and a thief-risk meter.",
+    "original": "23-24-suspicious-customers.png"
+  },
+  {
+    "file": "frames/08-1409.jpg",
+    "timestamp": "about 23:28\u201323:30",
+    "seconds": 1409,
+    "title": "Risk and acceptance",
+    "observed": "Customer emits a greenish haze. Panel has a thief meter with safe/risky/danger zones and accept/kick choices. This filename was captured after the tutorial closed.",
+    "original": "23-28-thief-tutorial.png"
+  },
+  {
+    "file": "frames/09-1482.jpg",
+    "timestamp": "24:42",
+    "seconds": 1482,
+    "title": "Bat confrontation",
+    "observed": "Bat is held in view and the suspicious customer is lying on the ground. The objective still asks for the customer car to be washed; this is before the later payment/escape event.",
+    "original": "24-42-confrontation.png"
+  },
+  {
+    "file": "frames/10-1548.jpg",
+    "timestamp": "25:48\u201325:50",
+    "seconds": 1548,
+    "title": "Payment triggers thief objective",
+    "observed": "After the key-handover choice, washing and payment-attempt checklist items are checked. The remaining objective is to take down the thief.",
+    "original": "25-48-handover.png"
+  },
+  {
+    "file": "frames/11-1567.jpg",
+    "timestamp": "26:07\u201326:08",
+    "seconds": 1567,
+    "title": "Unresolved pursuit",
+    "observed": "Player looks toward soap-storage equipment with the thief objective active. Captions express that they have no vehicle. This frame establishes the objective, not a successful chase or police call.",
+    "original": "26-08-pursuit.png"
+  }
+]

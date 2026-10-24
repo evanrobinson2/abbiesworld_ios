@@ -1,3 +1,5 @@
+> **Current direction: Level 1 / Exploration, October 24 afternoon.** See [LEVEL1_EXPLORATION.md](LEVEL1_EXPLORATION.md). The historical tunnel proposal below is preserved; direct robotic washing, partial-work scores and rewards for the entering vehicle supersede its timed conveyor and buggy-only reward.
+
 # AW-STUDY-0060 The Carwash: a four-minute minigame
 
 Evan, 2026-10-24 01:10Z: "you need to do a full study for carwash. there was so much more it could have been a 4 minute mini game",

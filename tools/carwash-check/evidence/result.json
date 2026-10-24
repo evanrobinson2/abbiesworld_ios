@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "checks": [
+    "partial score",
+    "finite reward",
+    "new filthy run",
+    "vehicle choice",
+    "part turn",
+    "three zoom levels",
+    "phone layout"
+  ],
+  "feedback": "Unauthenticated error flow only; live shared submission still pending"
+}
