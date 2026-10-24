@@ -1327,7 +1327,7 @@ document.getElementById('hexes').onclick = e => { regionsGroup.visible = !region
  clk.onclick = () => { lapse = !lapse; clk.setAttribute('aria-pressed', lapse); bar.hidden = !lapse; if (lapse) { set(HISTORY.from); play.onclick(); } else { stop(); year = 2026; drawHouses(); } };
 }
 let charmTimer = 0;
-document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
+document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => retown(+e.target.value), 120); };
 
 // ---------- facts and the manifest ----------
 const fmt = n => Math.round(n).toLocaleString('en-US');
@@ -2092,8 +2092,10 @@ if (/[?&](mission|beat=)/.test(location.search)) setTimeout(() => window.AbbieTo
 
 
 // ---------- go ----------
-buildTown(1);
-const {train, line} = placeSpots(); setupDioramas(); makePins();
+function lateReal(fn) { const had = new Set(scene.children); const r = fn(); for (const o of scene.children) if (!had.has(o)) { realLayer.push(o); if (viewDio) { o.userData.realVis = o.visible; o.visible = false; } } return r; } // buildTown and placeSpots run after the board exists, so what they add (trees, houses, the off-map islands, the train) joins the real-map layer and stays hidden while the board shows: no second landmass
+function retown(charm) { lateReal(() => buildTown(charm)); }
+retown(1);
+const {train, line} = lateReal(placeSpots); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, scene, renderer, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
 import('/simulations/paint-world/town-mount.mjs').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Paint the World', e)); // the Paint card and splat balls on the board (AW-STUDY-0049)
