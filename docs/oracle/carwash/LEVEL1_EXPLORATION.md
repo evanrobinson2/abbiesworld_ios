@@ -1,12 +1,12 @@
 # AW-STUDY-0060 · Carwash · Level 1 / Exploration
 
 Canonical review route: https://app.abbies.world/studies/carwash/
-Publication: pending live verification. Revision `carwash-l1-20261024-r2`.
+Publication: first live release verified on October 24; FPS contract and mobile follow-up publication tracked in PRs. Revision `carwash-l1-20261024-r2`.
 
 ## Design card
 - What the player needs to feel: My hand controls the machine, and every bit I clean counts.
 - How the character knows: the robot tool follows their hand; mud, foam, water, wax and shine visibly change on the actual vehicle.
-- Mode: direct manipulation in the wash studio; diegetic machinery and surface state, precise score and camera controls in the presentation layer. Study review controls are for Evan, not a proposed final player HUD.
+- Mode: **FPS as the existing player avatar**. Direct manipulation at the wash station uses the shared FPS/input/camera systems. This canvas only tests surface tools and station views; it does not implement avatar entry. Study review controls are for Evan, not a proposed final player HUD.
 - Who: player washing their own vehicle; grown-up reviewing the Exploration and leaving notes.
 - The whole scene adapts: working arm, rollers, water and surface appearance follow the active tool. This experiment is silent; catalogued music and sounds remain later work.
 
@@ -22,6 +22,8 @@ The brief evolved during exploration:
 4. Corrected the interpretation: **not arcade chaos**. The carwash is visually busy; the job is simple. Rinse, soap, scrub the top and sides, pressure-wash tires, rinse, wax and dry. Partial work earns points and a score. No combo pressure or all-or-nothing completion.
 5. Part selection on a miniature car diagram rotates to the chosen view in **0.25 seconds**, with **three zoom levels**.
 6. Optional world stories: a thief tries to rob the wash; choose to call police and chase, then return. Preserve all wash progress. The surprise must not turn ordinary washing into a forced chase.
+
+7. Explicit FPS mode as the existing avatar, also required for Hot Wheels and other avatar-played minigames. Standard transitions and shared systems remain authoritative. First mission step: temporary fun carwash uniform. Low-poly placeholders are acceptable for missing assets. See `AVATAR_MINIGAME_CONTRACT.md`.
 
 ## Scope implemented for review
 
@@ -77,3 +79,5 @@ What cost time: the initial full worktree tried fetching large missing assets; a
 Reusable lesson: keep one finite per-surface work ledger independent of visuals and reward state. Capture the latest verb sequence before adding timers or combos. Reuse the real vehicle builder, use a sparse checkout for focused studies, and check shared chrome before polishing scene decoration.
 
 Validation: surface-work browser harness passed, including sequential wax/dry credit. Eleven focused feedback/view-context tests passed. Game-feel lint passed. The game-registry check reports two unchanged town-mount baseline violations (carwash and halloween live guards); broader npm tests are limited by this sparse checkout’s omitted modules.
+
+Canonical first-release verification: 427 points earned through rinse/soap/scrub/rinse/wax/dry; signed-in QA note `mvmslvdt-be19f0d3` saved and read back. Full hosted build passed 440 tests. Live signed-in phone check found profile-button overlap; PR #634 moves that control into the drawer. The current FPS contract addition documents requested integration rather than claiming it implemented.
