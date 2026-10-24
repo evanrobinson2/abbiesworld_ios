@@ -1,0 +1,238 @@
+{
+  "recordedAt": "2026-10-24T19:03:57.177Z",
+  "consultationEnvironment": "Evan’s local Game Oracle library and repository director",
+  "queries": [
+    {
+      "query": "washing",
+      "total": 0,
+      "results": []
+    },
+    {
+      "query": "PowerWash",
+      "total": 0,
+      "results": []
+    },
+    {
+      "query": "Scribble",
+      "total": 0,
+      "results": []
+    },
+    {
+      "query": "Overcooked",
+      "total": 1,
+      "results": [
+        {
+          "id": "steam-728880",
+          "name": "Overcooked! 2",
+          "styles": {
+            "dimension": [
+              "3D"
+            ],
+            "perspective": [
+              "overhead"
+            ],
+            "rendering": [
+              "cartoon"
+            ],
+            "palette": [
+              "colorful",
+              "warm interior / cool exterior"
+            ],
+            "animation": [
+              "character gestures",
+              "animated props",
+              "authored camera shots"
+            ],
+            "materials": [
+              "smooth stylized surfaces"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "query": "arcade",
+      "total": 15,
+      "results": [
+        {
+          "id": "steam-2062430",
+          "name": "BALL x PIT",
+          "styles": {
+            "dimension": [
+              "2D"
+            ],
+            "perspective": [
+              "top-down"
+            ],
+            "rendering": [
+              "pixel art"
+            ],
+            "palette": [],
+            "animation": [],
+            "materials": []
+          }
+        },
+        {
+          "id": "steam-262830",
+          "name": "Crimsonland",
+          "styles": {
+            "dimension": [
+              "2D"
+            ],
+            "perspective": [
+              "top-down"
+            ],
+            "rendering": [],
+            "palette": [],
+            "animation": [],
+            "materials": []
+          }
+        },
+        {
+          "id": "steam-227380",
+          "name": "Dragon's Lair",
+          "styles": {
+            "dimension": [],
+            "perspective": [],
+            "rendering": [
+              "full-motion video"
+            ],
+            "palette": [],
+            "animation": [],
+            "materials": []
+          }
+        }
+      ]
+    }
+  ],
+  "consultation": {
+    "schema": "oracle.plan.v1",
+    "idea": "Level 1 Exploration for Abbie’s World carwash: visually busy wash studio, simple calm job. Articulated robotic apparatus follows cursor or finger immediately. Rinse, soap, scrub the top and sides, pressure wash tires, rinse, wax, dry. Every run starts super filthy. Partial work always earns a score, no combos or timer pressure. Decoration-pack progress belongs to whichever vehicle enters. Small car diagram selects parts in 0.25 seconds; whole, part and close zoom. Crayola Scribble Scrubbie wash-station reference. Optional story event: thief robs wash, choose to call police and chase, preserve wash on return. Study only, not game-ready.",
+    "audience": "kid",
+    "source": "studies",
+    "model": null,
+    "reading": "No model was used; this plan is assembled from the Oracle's studies for \"Level 1 Exploration for Abbie’s World carwash: visually busy wash studio, simple calm job. Articulated robotic apparatus\".",
+    "title": "Level 1 Exploration for Abbie’s",
+    "pitch": "A small storybook read-aloud game built around: Level 1 Exploration for Abbie’s World carwash: visually busy wash studio, simple calm job. Articulated robotic apparatus follows cursor or finger immediately. Rinse, soap, scrub the top and sides, pre",
+    "fantasy": "You are an upstart boss who grows a tiny farm into a region-spanning logistics empire, one route and one district at a time.",
+    "verbs": [
+      "build",
+      "place",
+      "watch"
+    ],
+    "rules": [
+      {
+        "rule": "Ranch supply chains: fields and animals produce raw goods (wheat, milk, wool, apples), workshops turn them into products (bread, cheese, yarn, pies), carts carry them along roads to a market stall or the station.",
+        "why": "From Cartel Tycoon"
+      },
+      {
+        "rule": "Bottlenecks are the puzzle: barns and carts have capacity, so a child sees goods pile up and fixes it by building another cart or a bigger barn.",
+        "why": "From Cartel Tycoon"
+      },
+      {
+        "rule": "Two kinds of reward: coins from selling, and 'thank-you stars' from neighbours you deliver to. Stars unlock new building types; coins build them.",
+        "why": "From Cartel Tycoon"
+      },
+      {
+        "rule": "Expansion by valleys: helping a neighbouring valley (delivering what it asks for) opens its land, new crops and a new road.",
+        "why": "From Cartel Tycoon"
+      },
+      {
+        "rule": "Gentle pressure instead of raids: the weather and the seasons (a rainy week floods a road, winter slows fields), so players spread out and plan ahead. Nothing is lost; things just slow down.",
+        "why": "From Cartel Tycoon"
+      },
+      {
+        "rule": "Ranch hands with traits (fast, careful, loves animals) run a building or a cart; one can be put in charge of a valley.",
+        "why": "From Cartel Tycoon"
+      }
+    ],
+    "goal": "Finish the thing you set out to build, or keep playing as long as you like.",
+    "fail": null,
+    "beats": [
+      {
+        "title": "Set the scene",
+        "what": "The world shows where the game happens.",
+        "player": "Looks around and taps."
+      },
+      {
+        "title": "Play",
+        "what": "The core verbs, repeated, with the world answering each one.",
+        "player": "Builds and places."
+      },
+      {
+        "title": "Payoff",
+        "what": "The world celebrates what was made.",
+        "player": "Watches and shares."
+      }
+    ],
+    "choices": [],
+    "presentation": {
+      "style": "storybook",
+      "name": "Storybook read-aloud",
+      "why": "Suggested by the idea's words.",
+      "overlays": [
+        "narrator subtitles",
+        "chapter title",
+        "words in the world"
+      ],
+      "readAloud": true,
+      "pacing": {
+        "shotSeconds": [
+          5,
+          10
+        ],
+        "promptWaitSeconds": 8
+      }
+    },
+    "factory": [],
+    "references": [
+      {
+        "title": "Cartel Tycoon",
+        "take": "Ranch supply chains: fields and animals produce raw goods (wheat, milk, wool, apples), workshops turn them into products (bread, cheese, yarn, pies), carts carry them along roads to a market stall or the station. Bottlenecks are the puzzle:",
+        "leave": "the drug, crime, violence, police and corruption theme, entirely; money laundering as a concept (the two rewards are gifts and coins, nothing hidden); raids, rival gangs and any loss of what the player built; leader death and succession (he"
+      },
+      {
+        "title": "Abbie's World (Ranch Atelier)",
+        "take": null,
+        "leave": null
+      },
+      {
+        "title": "Tiny Glade",
+        "take": "Every placement settles over 300-500 ms with a spring and a soft sound; no popping. Fences and paths drawn as strokes, generated by our own recipe. Builder modes have no wrong moves: resolve conflicts instead of rejecting.",
+        "leave": "medieval castle vocabulary; free-floating terrain patch as the only frame"
+      }
+    ],
+    "kidFit": "The default for children who can't read yet: everything is spoken, words are large and few.",
+    "grounding": {
+      "identities": [
+        "Cartel Tycoon",
+        "Abbie's World (Ranch Atelier)",
+        "Tiny Glade"
+      ],
+      "studies": [
+        "Black & White",
+        "OpenTTD",
+        "Alpha Zoo"
+      ],
+      "styleSuggested": "storybook"
+    }
+  },
+  "interpretation": "Retrieval/template only. No model-authored design endorsement. Final carwash design is our synthesis of Evan’s evolving brief; generic building advice is not adopted as washing mechanics.",
+  "references": [
+    {
+      "title": "Crayola Scribble Scrubbie+ official app listing",
+      "url": "https://apps.apple.com/us/app/crayola-scribble-scrubbie/id6744193586",
+      "used": "Pet washing station and 3D coloring; not firsthand play."
+    },
+    {
+      "title": "Crayola Scribble Scrubbie physical toy",
+      "url": "https://www.crayola.com/products/toys/scribble-scrubbie-pets-1-count-747482",
+      "used": "Color, wash with brush, repeat."
+    },
+    {
+      "title": "User-supplied video",
+      "url": "https://www.youtube.com/watch?v=nMAUrbUJ5LQ",
+      "used": "Separate research chat extracting timestamps and frames; analysis pending."
+    }
+  ]
+}
