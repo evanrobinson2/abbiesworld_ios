@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0059 - Abbie's Wardrobe</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: opens on Abbie herself (a live toy you dress by tapping her), with the two choices Evan has to make beside
+   her (how the options open, and which look). Then the recommendation, the comparison, the architecture, touch, assets
+   and next steps. One column on phones. */
+:root{--bg:#f1efe6;--plate:#fffdf8;--ink:#2b1d2e;--soft:#6c5f70;--line:#e2dccd;--pink:#d2386f;--teal:#1f7f84;--leaf:#3f7d3a;--gold:#b07c14;
+ --display:"Fredoka",ui-rounded,system-ui,sans-serif;--body:"Source Serif 4",Georgia,serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#15151a;--plate:#201f27;--ink:#f1ecf3;--soft:#b7adbb;--line:#37343f;--pink:#f06a9b;--teal:#58c4c7;--leaf:#7fc173;--gold:#e6b24a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#15151a;--plate:#201f27;--ink:#f1ecf3;--soft:#b7adbb;--line:#37343f;--pink:#f06a9b;--teal:#58c4c7;--leaf:#7fc173;--gold:#e6b24a;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 var(--body);padding:28px max(16px,env(safe-area-inset-right)) 80px max(16px,env(safe-area-inset-left))}
+main{max-width:1120px;margin:0 auto;display:grid;gap:56px}
+.col{max-width:720px;width:100%;margin:0 auto;display:grid;gap:14px;min-width:0}
+h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(2.1rem,6vw,3.5rem)} h1 em{font-style:normal;color:var(--pink)}
+h2{font-size:clamp(1.5rem,3.2vw,2.1rem)} h3{font-size:1.06rem}
+p,ul,ol{margin:0} ul,ol{padding-left:1.15em;display:grid;gap:5px}
+.eyebrow{font:600 .76rem/1 var(--display);letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+.lede{font-size:1.13rem;color:var(--soft)}
+.meta{font:500 .86rem var(--display);color:var(--soft)}
+a{color:var(--teal)}
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:28px;align-items:center}
+@media (max-width:860px){.hero{grid-template-columns:1fr}}
+.stage{position:relative;aspect-ratio:4/5;max-height:80vh;width:100%;border-radius:28px;overflow:hidden;touch-action:none;
+ background:radial-gradient(120% 90% at 50% 15%,#cfe7f2,#e6f1d6 62%,#bcd99f);box-shadow:inset 0 1px 0 #fff8,0 22px 50px -28px #3a204a88}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .hint{position:absolute;left:14px;top:14px;z-index:3;font:600 .8rem var(--display);color:#2b1d2e;background:#ffffffc8;padding:6px 11px;border-radius:999px;pointer-events:none;transition:opacity .4s}
+.choose{display:grid;gap:8px}
+.choose h3{font-size:.92rem;color:var(--soft);font-weight:600}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:600 .95rem var(--display);border:1.5px solid var(--line);border-radius:999px;padding:9px 15px;cursor:pointer;color:var(--ink);background:var(--plate);min-height:44px}
+.seg button[aria-pressed="true"]{border-color:var(--pink);background:color-mix(in srgb,var(--pink) 14%,var(--plate))}
+.card{background:var(--plate);border:1px solid var(--line);border-radius:22px;padding:20px 22px;display:grid;gap:10px}
+.rec{border:2px solid var(--leaf)}
+.rec .eyebrow{color:var(--leaf)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:1120px;width:100%;margin:0 auto}
+@media (max-width:860px){.grid3{grid-template-columns:1fr}}
+.verdict{font:600 .8rem var(--display);letter-spacing:.06em;text-transform:uppercase}
+.yes{color:var(--leaf)} .no{color:var(--pink)} .maybe{color:var(--gold)}
+.mini{height:150px;border-radius:16px;background:radial-gradient(120% 90% at 50% 15%,#cfe7f2,#e6f1d6 62%,#bcd99f);position:relative;overflow:hidden}
+.mini svg{position:absolute;inset:0;width:100%;height:100%}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .82rem var(--display);letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:16px;background:var(--plate)}
+code{font-size:.88em;background:color-mix(in srgb,var(--line) 60%,transparent);padding:1px 5px;border-radius:6px}
+.designcard{font:500 .95rem/1.5 var(--display)}
+.designcard b{color:var(--teal)}
+
+/* ---- the three looks, as dialects of one grammar (the loadout beads and strip, simulations/loadout.mjs) ---- */
+/* Forest: carved wooden beads and a leaf-shaped strip, for Winchester, the woods and the tree houses. */
+html.look-forest .aw-lo-pip{background:radial-gradient(circle at 35% 30%,#e0a868,#a8682e 60%,#6b3f18);border:2px solid #5b3a1e;box-shadow:inset 0 2px 0 #ffd9a088,inset 0 -3px 5px #0004,0 6px 12px -4px #2a160a99}
+html.look-forest .aw-lo-pip.on{border-color:#9fd36a;box-shadow:0 0 0 3px #9fd36a99,inset 0 2px 0 #ffd9a088,0 8px 16px -4px #2a160a99}
+html.look-forest .aw-lo-tray{border-radius:26px 6px 26px 6px;border:2px solid #5d8f3a;background:linear-gradient(160deg,#fff7e2 0%,#f1e2bd 55%,#e2cf9e 100%);
+ box-shadow:inset 0 0 0 3px #fff8,0 16px 28px -12px #2a3a1070}
+html.look-forest .aw-lo-tray b{color:#4a6a2a;font-family:var(--display)}
+html.look-forest .aw-lo-tray b::before{content:"";display:inline-block;width:12px;height:12px;margin-right:6px;vertical-align:-1px;border-radius:12px 0;background:#6aa84a;transform:rotate(-20deg)}
+html.look-forest .aw-lo-opt{border-color:#8a5a2c;box-shadow:0 3px 6px -2px #3a200a77,inset 0 1px 0 #fff8}
+html.look-forest .aw-lo-opt.on{border-color:#5d8f3a;box-shadow:0 0 0 3px #9fd36a,0 3px 6px -2px #3a200a77}
+/* Storybook: paper tags on a stitched string and a page torn from her notebook, for the notebook and story moments. */
+@font-face{font-family:"AW Pencil";src:url(../../fonts/patrick-hand-latin.woff2) format("woff2");font-display:swap}
+html.look-story .aw-lo-pip{border-radius:7px 7px 7px 50%;background:#fffaf0;border:1.5px dashed #b04a6a;box-shadow:0 4px 8px -3px #3a204a66;rotate:-8deg}
+html.look-story .aw-lo-pip i{border-radius:50%}
+html.look-story .aw-lo-pip.on{border-style:solid;border-color:#d2386f}
+html.look-story .aw-lo-tray{border-radius:4px;border:0;background:repeating-linear-gradient(#fff9d6 0 23px,#a9c7e6 23px 24px);
+ box-shadow:0 1px 0 #e8d98a,0 14px 24px -10px #3a204a66;clip-path:polygon(0 3%,4% 0,9% 2%,15% 0,22% 3%,30% 0,38% 2%,46% 0,55% 3%,63% 0,72% 2%,80% 0,88% 3%,95% 0,100% 2%,100% 100%,0 100%);padding-top:12px}
+html.look-story .aw-lo-tray b{font:400 18px/1 "AW Pencil",cursive;letter-spacing:.02em;text-transform:none;color:#4a4a55}
+html.look-story .aw-lo-opt{border:2px solid #5a5a66;border-radius:46% 54% 50% 50%/52% 48% 52% 48%;box-shadow:none}
+html.look-story .aw-lo-opt.on{border-color:#d2386f;box-shadow:0 0 0 2px #d2386f55}
+/* Ring: the options fan out round the bead instead of opening as a strip beside her (pattern B). */
+html.pattern-ring .aw-lo-tray{background:none!important;border:0!important;box-shadow:none!important;clip-path:none!important;padding:0;width:0;height:0}
+html.pattern-ring .aw-lo-tray b{display:none}
+html.pattern-ring .aw-lo-opts{display:block;position:relative;width:0;height:0}
+html.pattern-ring .aw-lo-opt{position:absolute;left:0;top:0;--a:calc(var(--i) / var(--n) * 1turn);--r:calc(var(--n) * 6px + 46px);
+ transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--r) * -1)) rotate(calc(var(--a) * -1))}
+html.pattern-ring .aw-lo-opt:hover{transform:translate(-50%,-50%) rotate(var(--a)) translateY(calc(var(--r) * -1)) rotate(calc(var(--a) * -1)) scale(1.12)}
+</style>
+</head>
+<body>
+<main>
+<section class="hero">
+ <div class="stage" id="stage"><span class="hint" id="hint">Tap a dot on Abbie, or tap her clothes</span></div>
+ <div style="display:grid;gap:18px">
+  <div class="eyebrow">AW-STUDY-0059 · Wardrobe and backpack · for Evan's review</div>
+  <h1>Dress Abbie by <em>tapping her</em></h1>
+  <p class="lede">A small bead sits on each part of Abbie you can change: her head, her top, her bottoms, her shoes, a little extra, and the backpack on her back. Tap a bead, or the part itself, and a short row of choices opens beside her. Tap one and she's wearing it. No menus and no walls of cards.</p>
+  <div class="choose">
+   <h3>1. How do the choices open?</h3>
+   <div class="seg" id="pattern"><button aria-pressed="true" data-v="strip">Beside her (recommended)</button><button aria-pressed="false" data-v="ring">In a ring round the bead</button></div>
+  </div>
+  <div class="choose">
+   <h3>2. Which look?</h3>
+   <div class="seg" id="look"><button aria-pressed="true" data-v="glass">Liquid glass</button><button aria-pressed="false" data-v="forest">Forest wood and leaf</button><button aria-pressed="false" data-v="story">Storybook paper</button></div>
+  </div>
+  <p class="meta">This is a study: nothing here is in the game yet. Drag to turn her. Escape or a tap on the grass puts the choices away.</p>
+ </div>
+</section>
+
+<section class="col">
+ <div class="card rec">
+  <div class="eyebrow">Recommendation</div>
+  <h2>One grammar for everything she can wear or carry</h2>
+  <ul>
+   <li><b>Beads on the thing itself, choices beside it.</b> This is the FPS gunsmith idea, the one the backpack and the buggy garage already use (<code>simulations/loadout.mjs</code>). You point at the part you want to change and see it change on her, live.</li>
+   <li><b>The wardrobe is separate from the backpack.</b> Clothes are what she <i>wears</i> (only looks). The backpack is what she <i>carries</i> (her things, plus the plain upgrades from issue 535 that change what it can hold). The backpack shows up here as one bead on her back. Tapping it can swap its style, but its contents and upgrades stay in the backpack's own view (issue 536).</li>
+   <li><b>One grammar, a dialect per place.</b> Liquid glass in the app and the HUD, wood and leaf in Winchester and the woods, and paper tags inside her notebook. The beads, the strip and the taps stay the same everywhere. Only the materials change, the way CLAUDE.md's place dialects ask.</li>
+   <li><b>Choices open beside her, not in a ring.</b> The ring is fun, but it covers the very part you are dressing, and it breaks up with ten choices. Keep the ring for short lists of four or fewer, like hats.</li>
+  </ul>
+  <p class="meta">Decision for Evan: pick the look (or a dialect per place), and confirm that clothes get their own wardrobe, apart from the backpack.</p>
+ </div>
+</section>
+
+<section class="grid3" aria-label="Three ways to open the choices">
+ <div class="card">
+  <div class="mini"><svg viewBox="0 0 200 150"><circle cx="70" cy="40" r="13" fill="#f4c9a8"/><rect x="55" y="54" width="30" height="40" rx="10" fill="#ff7fb0"/><rect x="58" y="94" width="10" height="36" rx="5" fill="#6a7fd0"/><rect x="72" y="94" width="10" height="36" rx="5" fill="#6a7fd0"/><circle cx="70" cy="72" r="6" fill="#fff" stroke="#ffd23f" stroke-width="2.5"/><rect x="108" y="56" width="80" height="34" rx="12" fill="#ffffffd8"/><g fill="#ff7fb0"><circle cx="122" cy="73" r="8"/></g><circle cx="142" cy="73" r="8" fill="#ffb347"/><circle cx="162" cy="73" r="8" fill="#5fb7ff"/><circle cx="178" cy="73" r="5" fill="#7bd389"/></svg></div>
+  <div class="verdict yes">A · Recommended</div>
+  <h3>Beads, and a strip beside her</h3>
+  <p>The part stays in view while you choose, so every tap shows on her at once. It already works for the backpack and the buggy, and it reads well on a phone, where the strip drops below her.</p>
+ </div>
+ <div class="card">
+  <div class="mini"><svg viewBox="0 0 200 150"><circle cx="100" cy="40" r="13" fill="#f4c9a8"/><rect x="85" y="54" width="30" height="40" rx="10" fill="#ff7fb0"/><rect x="88" y="94" width="10" height="36" rx="5" fill="#6a7fd0"/><rect x="102" y="94" width="10" height="36" rx="5" fill="#6a7fd0"/><circle cx="100" cy="72" r="6" fill="#fff" stroke="#ffd23f" stroke-width="2.5"/><g><circle cx="100" cy="36" r="9" fill="#ff7fb0" stroke="#fff" stroke-width="2"/><circle cx="134" cy="52" r="9" fill="#ffb347" stroke="#fff" stroke-width="2"/><circle cx="140" cy="88" r="9" fill="#5fb7ff" stroke="#fff" stroke-width="2"/><circle cx="66" cy="52" r="9" fill="#7bd389" stroke="#fff" stroke-width="2"/><circle cx="60" cy="88" r="9" fill="#a98bff" stroke="#fff" stroke-width="2"/><circle cx="100" cy="108" r="9" fill="#e2533b" stroke="#fff" stroke-width="2"/></g></svg></div>
+  <div class="verdict maybe">B · Short lists only</div>
+  <h3>A ring round the bead</h3>
+  <p>It feels like a toy, and your thumb travels the least. But the ring sits on top of the very part you're changing, and with eight or more choices it grows bigger than she is. Try it above with the top or the shoes.</p>
+ </div>
+ <div class="card">
+  <div class="mini"><svg viewBox="0 0 200 150"><circle cx="60" cy="40" r="13" fill="#f4c9a8"/><rect x="45" y="54" width="30" height="40" rx="10" fill="#ff7fb0"/><rect x="48" y="94" width="10" height="36" rx="5" fill="#6a7fd0"/><rect x="62" y="94" width="10" height="36" rx="5" fill="#6a7fd0"/><rect x="120" y="0" width="80" height="150" fill="#ffffffe8"/><g fill="#d8d0e0"><rect x="130" y="14" width="60" height="10" rx="4"/><rect x="130" y="34" width="60" height="10" rx="4"/><rect x="130" y="54" width="60" height="10" rx="4"/><rect x="130" y="74" width="60" height="10" rx="4"/><rect x="130" y="94" width="60" height="10" rx="4"/><rect x="130" y="114" width="60" height="10" rx="4"/></g></svg></div>
+  <div class="verdict no">C · Not for us</div>
+  <h3>A paper-doll list down the side</h3>
+  <p>This is the classic RPG character sheet, with slots in a column next to the figure. It's precise, but it's a side panel: it covers a third of the world, it needs reading, and it's the facet menu Evan called unusable in issue 535.</p>
+ </div>
+</section>
+
+<section class="col">
+ <div class="eyebrow">Architecture</div>
+ <h2>What she wears, what she carries, what it can do</h2>
+ <div class="tablewrap"><table>
+  <tr><th></th><th>Wardrobe</th><th>Backpack look</th><th>Backpack upgrades</th><th>Backpack contents</th></tr>
+  <tr><td>What it is</td><td>Clothes: head, top, bottoms, shoes, an extra</td><td>Style, colour, pattern, pocket, straps, lining, notebook</td><td>Plain upgrades: more pockets, a keyring (issue 535)</td><td>Quest items, pickups, charms</td></tr>
+  <tr><td>Kind</td><td>Cosmetic</td><td>Cosmetic</td><td>Functional</td><td>Inventory</td></tr>
+  <tr><td>Changed by</td><td>Beads on Abbie (this study)</td><td>The bead on her back, or the backpack's own view</td><td>Earned by playing, picked in the backpack view</td><td>Playing: picking up, using, quests</td></tr>
+  <tr><td>Stored in</td><td><code>aw-wardrobe</code> (new)</td><td><code>aw-backpack</code> (look)</td><td><code>aw-backpack</code> (upgrades)</td><td><code>aw-inventory</code></td></tr>
+  <tr><td>Who reads it</td><td>Everywhere she is drawn: FPS, minigames, intro</td><td><code>backpack-wear.mjs</code>, the left bar</td><td>The inventory (capacity)</td><td>Quests, directors, the voice controller (through the manifest)</td></tr>
+ </table></div>
+ <p>Rules: a look never changes what she can carry, and an upgrade never changes how she looks, beyond the extra pocket you can see. Clothes are never items in the backpack. Tapping the bead on her back takes you to the backpack itself. Characters perceive what she is wearing (it's in the world), but the beads are on the presentation layer, so no bot ever sees a bead.</p>
+</section>
+
+<section class="col">
+ <div class="eyebrow">Touch and children</div>
+ <h2>Made for small fingers that can't read yet</h2>
+ <ul>
+  <li><b>Every target is at least 44 points.</b> A bead is drawn at 26 px, but it has a 44 px hit ring. On a touch screen the choices in the strip grow to 42 px with 8 px gaps (this study added that to the shared <code>loadout.mjs</code>).</li>
+  <li><b>You don't need words.</b> Each choice is the thing itself (a colour, a hat, a shoe), and it shows on her the moment you tap it. Names appear only as a tooltip for grown-ups and in the VoiceOver labels.</li>
+  <li><b>Colour isn't the only clue.</b> Clothes choices carry a small shape icon on top of their colour, so a child who can't tell red from green still sees which is which.</li>
+  <li><b>It's easy to get out.</b> Tap the bead again, tap the grass, or press Escape. Nothing is lost, because every tap saves as you go.</li>
+  <li><b>Calm motion.</b> With reduced motion on, the beads stop breathing and the strip simply appears.</li>
+  <li><b>One hand.</b> On a phone the strip opens below her, within thumb reach, and never covers the part being dressed.</li>
+ </ul>
+</section>
+
+<section class="col">
+ <div class="eyebrow">What it needs</div>
+ <h2>Assets and data</h2>
+ <ul>
+  <li><b>Abbie's clothes as named parts on her figure,</b> built as engineered low-poly geometry from a recipe, the way the Character Studio cast is (<code>studies/character-studio/characters.mjs</code>). Each part has a slot name (<code>head</code>, <code>top</code>, <code>bottom</code>, <code>feet</code>, <code>extra</code>) and its own material name. The figure in this study is a placeholder toy, not her final model.</li>
+  <li><b>Six to ten choices per slot</b> to start: MJ proofs, then recipes, with each choice keeping its intent in its asset folder, per the modeler rules.</li>
+  <li><b>A shape icon for each choice,</b> a small white silhouette drawn from the model so they always match.</li>
+  <li><b>A new store,</b> <code>aw-wardrobe</code>: <code>{head, top, bottom, feet, extra}</code> with option ids, plus a default (Evan's pick, the way the backpack has <code>DEFAULT_LOOK</code>).</li>
+  <li><b>One function to wear the outfit,</b> <code>wearOutfit(figure)</code>, next to <code>wearBackpack()</code>, so every game that shows her dresses her the same way.</li>
+  <li><b>Unlocks, later:</b> some clothes could be charm rewards (a space helmet for the Moon Mission). Clothes still never count as backpack items.</li>
+ </ul>
+</section>
+
+<section class="col">
+ <div class="eyebrow">Next steps</div>
+ <h2>After Evan picks</h2>
+ <ol>
+  <li>Evan picks the look (or a dialect per place) and confirms the wardrobe is its own thing, apart from the backpack.</li>
+  <li>Make proofs for her first clothes in Midjourney, one sheet per slot, and get his picks.</li>
+  <li>Build her figure's clothes as recipe parts, with <code>aw-wardrobe</code> and <code>wearOutfit()</code>.</li>
+  <li>Put the wardrobe in the game: a small figure of her on the left bar next to the backpack (the things she can touch). Tapping it brings her into focus with her beads, the same way the backpack comes out.</li>
+  <li>Wire the bead on her back to the backpack view (issue 536), so it's one tap from her clothes to her things.</li>
+ </ol>
+</section>
+
+<section class="col">
+ <div class="eyebrow">Design card</div>
+ <div class="card designcard">
+  <div><b>What the player feels:</b> "I made Abbie look like me today."</div>
+  <div><b>How would the character know?</b> She's wearing it. Townsfolk can notice a new hat, and the clothes are in the world.</div>
+  <div><b>Mode:</b> spatial (the beads sit on the person they're about), with the strip as the one bit of overlay, because choosing needs precision. "None" can't dress her, and diegetic (a mirror in her bedroom) is a lovely later way in, but it's slow for every change.</div>
+  <div><b>Who it's for:</b> the player (the child).</div>
+  <div><b>The whole game adapts:</b> she wears the outfit in every game. A rain coat or a space helmet can match the weather or the Moon.</div>
+  <div><b>Way of acting:</b> HUD and app, summoned from the left bar. It's not a card and not a tile.</div>
+ </div>
+</section>
+</main>
+
+<script type="module">
+import {three, buildBackpack, look as bagLook} from '../../simulations/backpack.mjs?v=14';
+import {loadout} from '../../simulations/loadout.mjs?v=2';
+const T = await three();
+const stage = document.getElementById('stage');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---------- the placeholder Abbie: a low-poly toy with named parts, one slot per part ----------
+const mat = (name, color, o = {}) => new T.MeshStandardMaterial({name, color, roughness: .75, metalness: 0, flatShading: true, ...o});
+const SKIN = mat('skin', '#f2c6a0'), HAIR = mat('hair', '#6b4227');
+const icon = d => `<svg viewBox="0 0 24 24" width="24" height="24"><path d="${d}" fill="#fffffff0" stroke="#00000030" stroke-width=".6"/></svg>`;
+const I = {
+ bow: 'M5 8l6 4-6 4zM19 8l-6 4 6 4zM10.5 10.5h3v3h-3z', band: 'M4 15a8 8 0 0 1 16 0h-2.4a5.6 5.6 0 0 0-11.2 0z', hat: 'M3 16h18v2H3zM7 16a5 5 0 0 1 10 0z', crown: 'M5 16l1-7 3 3 3-5 3 5 3-3 1 7z', helmet: 'M12 4a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm-4 7h8v4H8z', none: 'M6 7l11 11-1 1L5 8zm11-1l1 1L7 18l-1-1z',
+ tee: 'M7 5l-4 3 2 3 2-1v9h10v-9l2 1 2-3-4-3h-2a3 3 0 0 1-6 0z', hoodie: 'M7 6l-4 3 2 4 2-1v8h10v-8l2 1 2-4-4-3c0-2-2-3-5-3S7 4 7 6z', overalls: 'M7 4h2v4h6V4h2v5l1 10H6l1-10z', sweater: 'M6 5l-4 4 2 3 2-1v9h12v-9l2 1 2-3-4-4z', dress: 'M9 4h6l1 4 4 12H4L8 8z',
+ skirt: 'M8 6h8l4 12H4z', shorts: 'M6 6h12l1 9h-5l-2-4-2 4H5z', jeans: 'M7 4h10l1 16h-4l-2-10-2 10H6z', leggings: 'M8 4h8l-1 16h-2.5L12 9l-.5 11H9z',
+ sneaker: 'M3 16c0-3 2-5 5-5l2 2h4l5 2c1 0 2 1 2 2v1H3z', boot: 'M7 4h6v9l6 3v3H5v-3l2-1z', sandal: 'M3 17h18v2H3zM8 12l4 5 4-5', rain: 'M8 3h7v12l4 2v3H6V15l2-1z',
+ scarf: 'M5 9c4 3 10 3 14 0v3c-2 1.5-4 2-5 2v6h-3v-6c-2 0-4-1-6-2z', glasses: 'M2 11h20v1.5h-2a3.5 3.5 0 0 1-7 0h-2a3.5 3.5 0 0 1-7 0H2z', necklace: 'M5 6c1 6 13 6 14 0l1 1c-1 5-4 7-7 7.4V17h-2v-2.6C8 14 5 12 4 7z', wings: 'M12 12C8 4 3 6 3 10s5 6 9 2zm0 0c4-8 9-6 9-2s-5 6-9 2z'
+};
+const C = (c) => c; // colours as given
+const SLOTS = [
+ {id: 'head', name: 'Head', options: [
+  {id: 'bow', name: 'Big bow', c: '#ff4fa3', ic: I.bow}, {id: 'band', name: 'Headband', c: '#a98bff', ic: I.band}, {id: 'sunhat', name: 'Sun hat', c: '#f2c15a', ic: I.hat},
+  {id: 'crown', name: 'Flower crown', c: '#7bd389', ic: I.crown}, {id: 'helmet', name: 'Space helmet', c: '#cfe6ff', ic: I.helmet}, {id: 'none', name: 'Nothing', c: '#e8e2d8', ic: I.none}]},
+ {id: 'top', name: 'Top', options: [
+  {id: 'tee-pink', name: 'Pink tee', c: '#ff7fb0', ic: I.tee}, {id: 'hoodie', name: 'Lilac hoodie', c: '#b79cf0', ic: I.hoodie}, {id: 'overalls', name: 'Overalls', c: '#5b7fd1', ic: I.overalls},
+  {id: 'sweater', name: 'Rainbow sweater', c: 'linear-gradient(#ff6b6b,#ffb347,#ffe066,#7bd389,#5fb7ff,#a98bff)', ic: I.sweater}, {id: 'dress', name: 'Sunny dress', c: '#ffd23f', ic: I.dress},
+  {id: 'tee-mint', name: 'Mint tee', c: '#6fd3bf', ic: I.tee}, {id: 'stripe', name: 'Striped tee', c: 'repeating-linear-gradient(0deg,#ff7fb0 0 5px,#fff 5px 9px)', ic: I.tee}]},
+ {id: 'bottom', name: 'Bottoms', options: [
+  {id: 'skirt', name: 'Twirly skirt', c: '#8c5bc7', ic: I.skirt}, {id: 'shorts', name: 'Shorts', c: '#5fb7ff', ic: I.shorts}, {id: 'jeans', name: 'Jeans', c: '#3f5fa8', ic: I.jeans},
+  {id: 'leggings', name: 'Leggings', c: '#2e3760', ic: I.leggings}, {id: 'skirt-pink', name: 'Pink skirt', c: '#ff9ac0', ic: I.skirt}]},
+ {id: 'feet', name: 'Shoes', options: [
+  {id: 'sneaker', name: 'Sneakers', c: '#ffffff', ic: I.sneaker}, {id: 'sneaker-pink', name: 'Pink sneakers', c: '#ff7fb0', ic: I.sneaker}, {id: 'boot', name: 'Ranch boots', c: '#8a5a3c', ic: I.boot},
+  {id: 'rain', name: 'Rain boots', c: '#ffd23f', ic: I.rain}, {id: 'sandal', name: 'Sandals', c: '#f2c15a', ic: I.sandal}, {id: 'moon', name: 'Moon boots', c: '#dfe5ec', ic: I.boot}]},
+ {id: 'extra', name: 'Extra', options: [
+  {id: 'none', name: 'Nothing', c: '#e8e2d8', ic: I.none}, {id: 'scarf', name: 'Scarf', c: '#e2533b', ic: I.scarf}, {id: 'glasses', name: 'Sunglasses', c: '#2b2b33', ic: I.glasses},
+  {id: 'necklace', name: 'Heart necklace', c: '#ffd23f', ic: I.necklace}, {id: 'wings', name: 'Fairy wings', c: '#cfe6ff', ic: I.wings}]},
+ {id: 'pack', name: 'Backpack', options: ['bunny', 'classic', 'explorer', 'bubble', 'saddlebag', 'turtle', 'rolltop', 'retro', 'wicker', 'rocket'].map(id => ({id, name: id[0].toUpperCase() + id.slice(1), icon: `../../simulations/assets/backpack/style-${id}.png`}))}
+];
+const KEY = 'aw-wardrobe-study';
+let wear = {head: 'bow', top: 'tee-pink', bottom: 'skirt', feet: 'sneaker-pink', extra: 'none', pack: bagLook().style};
+try { wear = {...wear, ...JSON.parse(localStorage.getItem(KEY) || '{}')}; } catch {}
+const opt = (s, id) => { const S = SLOTS.find(x => x.id === s); return S.options.find(o => o.id === id) || S.options[0]; };
+const solid = c => /^#/.test(c) ? c : (c.match(/#[0-9a-f]{6}/i) || ['#ff7fb0'])[0];
+const stripes = c => /gradient/.test(c);
+
+function figure() {
+ const g = new T.Group(); g.name = 'Abbie (study placeholder)';
+ const add = (geo, m, x, y, z, slot, name) => { const o = new T.Mesh(geo, m); o.position.set(x, y, z); o.name = name; o.userData.slot = slot; o.castShadow = true; g.add(o); return o; };
+ const top = opt('top', wear.top), bot = opt('bottom', wear.bottom), ft = opt('feet', wear.feet), hd = opt('head', wear.head), ex = opt('extra', wear.extra);
+ const TOP = mat('top ' + top.id, solid(top.c)), BOT = mat('bottoms ' + bot.id, solid(bot.c)), SHOE = mat('shoes ' + ft.id, solid(ft.c));
+ if (stripes(top.c)) TOP.map = stripeTex(top.c);
+ // legs, under whatever she wears
+ const legLen = .38;
+ for (const s of [-1, 1]) {
+  add(new T.CapsuleGeometry(.045, legLen, 4, 8), bot.id === 'leggings' || bot.id === 'jeans' ? BOT : SKIN, s * .065, .1 + legLen / 2 + .03, 0, bot.id === 'leggings' || bot.id === 'jeans' ? 'bottom' : null, 'leg');
+  // shoes
+  const tall = ft.id === 'boot' || ft.id === 'rain' || ft.id === 'moon';
+  const shoe = add(new T.BoxGeometry(.09, tall ? .16 : .07, .16, 1, 1, 1), SHOE, s * .065, tall ? .08 : .035, .025, 'feet', 'shoe');
+  if (ft.id === 'moon') shoe.scale.set(1.25, 1, 1.1);
+  if (ft.id === 'sandal') { shoe.scale.y = .4; shoe.position.y = .015; }
+ }
+ // bottoms
+ if (bot.id.startsWith('skirt')) add(new T.CylinderGeometry(.13, .22, .2, 10, 1, true), BOT, 0, .52, 0, 'bottom', 'skirt').material.side = T.DoubleSide;
+ else if (bot.id === 'shorts') { add(new T.CylinderGeometry(.14, .16, .14, 10), BOT, 0, .55, 0, 'bottom', 'shorts'); }
+ else add(new T.CylinderGeometry(.14, .15, .1, 10), BOT, 0, .58, 0, 'bottom', 'hips');
+ // body and top
+ const dress = top.id === 'dress';
+ add(new T.CylinderGeometry(.13, .15, .3, 10), TOP, 0, .76, 0, 'top', 'torso');
+ if (dress) add(new T.CylinderGeometry(.15, .25, .28, 12, 1, true), TOP, 0, .52, 0, 'top', 'dress skirt').material.side = T.DoubleSide;
+ if (top.id === 'overalls') { const bib = add(new T.BoxGeometry(.16, .14, .02), TOP, 0, .8, .14, 'top', 'bib'); for (const s of [-1, 1]) add(new T.BoxGeometry(.03, .16, .02), TOP, s * .07, .87, .12, 'top', 'overall strap'); bib.material = TOP; g.children.find(o => o.name === 'torso').material = mat('tee under', '#fff6e2'); }
+ if (top.id === 'hoodie') add(new T.TorusGeometry(.09, .035, 6, 12), TOP, 0, .92, -.05, 'top', 'hood').rotation.x = 1.2;
+ for (const s of [-1, 1]) {
+  const arm = new T.Group(); arm.position.set(s * .17, .88, 0); arm.rotation.z = s * .35; g.add(arm);
+  const up = new T.Mesh(new T.CapsuleGeometry(.04, .13, 4, 8), top.id === 'overalls' ? g.children.find(o => o.name === 'torso').material : TOP); up.position.y = -.08; up.name = 'sleeve'; up.userData.slot = 'top'; arm.add(up);
+  const lo = new T.Mesh(new T.CapsuleGeometry(.034, .12, 4, 8), top.id === 'hoodie' || top.id === 'sweater' ? TOP : SKIN); lo.position.y = -.24; lo.name = 'forearm'; lo.userData.slot = top.id === 'hoodie' || top.id === 'sweater' ? 'top' : null; arm.add(lo);
+ }
+ // head and hair (no face: kids' faces are never drawn)
+ add(new T.CylinderGeometry(.04, .045, .06, 8), SKIN, 0, .94, 0, null, 'neck');
+ add(new T.IcosahedronGeometry(.13, 2), SKIN, 0, 1.06, 0, null, 'head');
+ const hair = add(new T.SphereGeometry(.14, 14, 10, 0, Math.PI * 2, 0, Math.PI * .58), HAIR, 0, 1.075, -.012, null, 'hair');
+ add(new T.CylinderGeometry(.14, .12, .14, 14, 1, true, Math.PI * .65, Math.PI * 1.7), HAIR, 0, 1.0, -.01, null, 'hair back').material.side = T.DoubleSide;
+ for (const s of [-1, 1]) add(new T.SphereGeometry(.05, 8, 6), HAIR, s * .14, 1.08, -.05, null, 'pigtail');
+ // head things
+ const HD = mat('head ' + hd.id, solid(hd.c));
+ if (hd.id === 'bow') { for (const s of [-1, 1]) add(new T.ConeGeometry(.05, .09, 4), HD, s * .05, 1.21, -.02, 'head', 'bow loop').rotation.z = s * Math.PI / 2; add(new T.SphereGeometry(.025, 6, 4), HD, 0, 1.21, -.02, 'head', 'bow knot'); }
+ if (hd.id === 'band') add(new T.TorusGeometry(.135, .016, 6, 18, Math.PI), HD, 0, 1.08, .01, 'head', 'headband').rotation.y = Math.PI / 2;
+ if (hd.id === 'sunhat') { add(new T.CylinderGeometry(.25, .25, .015, 18), HD, 0, 1.15, 0, 'head', 'hat brim'); add(new T.SphereGeometry(.14, 12, 8, 0, Math.PI * 2, 0, Math.PI / 2), HD, 0, 1.15, 0, 'head', 'hat crown'); add(new T.TorusGeometry(.14, .012, 4, 16), mat('hat ribbon', '#ff4fa3'), 0, 1.17, 0, 'head', 'hat ribbon').rotation.x = Math.PI / 2; }
+ if (hd.id === 'crown') { const r = new T.Group(); r.position.set(0, 1.17, 0); g.add(r); ['#ff7fb0', '#ffd23f', '#a98bff', '#fff', '#ff9a5c', '#7bd389'].forEach((c, i) => { const a = i / 6 * Math.PI * 2, f = new T.Mesh(new T.IcosahedronGeometry(.028, 0), mat('flower', c)); f.position.set(Math.cos(a) * .12, 0, Math.sin(a) * .12); f.name = 'crown flower'; f.userData.slot = 'head'; r.add(f); }); }
+ if (hd.id === 'helmet') { add(new T.SphereGeometry(.21, 16, 12), new T.MeshPhysicalMaterial({name: 'helmet glass', color: '#dff1ff', transmission: .6, transparent: true, opacity: .45, roughness: .05}), 0, 1.06, 0, 'head', 'space helmet'); add(new T.TorusGeometry(.17, .025, 6, 18), mat('helmet ring', '#dfe5ec', {metalness: .6, roughness: .3}), 0, .9, 0, 'head', 'helmet ring').rotation.x = Math.PI / 2; }
+ // extra
+ const EX = mat('extra ' + ex.id, solid(ex.c));
+ if (ex.id === 'scarf') add(new T.TorusGeometry(.085, .035, 6, 14), EX, 0, .93, 0, 'extra', 'scarf').rotation.x = Math.PI / 2;
+ if (ex.id === 'glasses') for (const s of [-1, 1]) add(new T.TorusGeometry(.035, .01, 5, 12), EX, s * .045, 1.07, .125, 'extra', 'sunglasses');
+ if (ex.id === 'necklace') { add(new T.TorusGeometry(.07, .006, 4, 16), EX, 0, .9, .03, 'extra', 'necklace').rotation.x = Math.PI / 2.4; add(new T.OctahedronGeometry(.02), mat('heart', '#ff4fa3'), 0, .85, .12, 'extra', 'necklace heart'); }
+ if (ex.id === 'wings') for (const s of [-1, 1]) { const w = add(new T.CircleGeometry(.16, 10), new T.MeshStandardMaterial({name: 'wing film', color: '#e6f4ff', transparent: true, opacity: .55, side: T.DoubleSide, roughness: .2}), s * .14, .86, -.2, 'extra', 'fairy wing'); w.scale.set(.75, 1.15, 1); w.rotation.set(0, s * .8, s * .4); }
+ // the backpack on her back
+ const bp = buildBackpack({...bagLook(), style: wear.pack}), k = .36 / bp.H; bp.group.scale.setScalar(k); bp.group.position.set(0, .6, -.14 - bp.D * k * .5); bp.group.rotation.y = Math.PI;
+ bp.group.traverse(o => { if (o.isMesh) { o.userData.slot = 'pack'; o.castShadow = true; } }); bp.group.userData.slot = 'pack'; g.add(bp.group);
+ return g;
+}
+function stripeTex(css) {
+ const cols = css.match(/#[0-9a-f]{6}/gi) || ['#ff7fb0', '#fff'], c = Object.assign(document.createElement('canvas'), {width: 8, height: 64}), x = c.getContext('2d');
+ cols.forEach((cc, i) => { x.fillStyle = cc; x.fillRect(0, i * 64 / cols.length, 8, 64 / cols.length + 1); });
+ const t = new T.CanvasTexture(c); t.colorSpace = T.SRGBColorSpace; t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(1, 2); return t;
+}
+
+// ---------- the stage ----------
+const renderer = new T.WebGLRenderer({antialias: true, alpha: true}); renderer.setPixelRatio(Math.min(2, devicePixelRatio)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.shadowMap.enabled = true; renderer.toneMapping = T.ACESFilmicToneMapping;
+stage.prepend(renderer.domElement);
+const scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, .05, 30);
+scene.add(new T.HemisphereLight('#fff6e6', '#6f7a5a', 1.3));
+const sun = new T.DirectionalLight('#fff1d6', 2.3); sun.position.set(1.5, 3, 2.2); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); for (const k of ['left', 'bottom']) sun.shadow.camera[k] = -1.2; for (const k of ['right', 'top']) sun.shadow.camera[k] = 1.2; scene.add(sun);
+const ground = new T.Mesh(new T.CircleGeometry(1.4, 32), new T.ShadowMaterial({opacity: .2})); ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
+const holder = new T.Group(); scene.add(holder);
+let fig = null; function rebuild() { if (fig) { holder.remove(fig); fig.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); } fig = figure(); holder.add(fig); }
+rebuild();
+function fit() { const r = stage.getBoundingClientRect(); renderer.setSize(r.width, r.height, false); cam.aspect = r.width / r.height; cam.updateProjectionMatrix(); }
+new ResizeObserver(fit).observe(stage); fit();
+
+// Where each bead sits: a point on the part, in Abbie's own space, with the way it faces (to dim it round the back).
+const ANCH = {head: [[0, 1.24, .02], [0, 1, 0]], top: [[-.06, .8, .15], [0, 0, 1]], bottom: [[.07, .5, .2], [0, 0, 1]], feet: [[.07, .06, .12], [0, 0, 1]], extra: [[.07, .94, .1], [0, 0, 1]], pack: [[.16, .72, -.3], [1, 0, -1]]};
+const v = new T.Vector3(), n = new T.Vector3(), toCam = new T.Vector3();
+function anchor(id) {
+ const a = ANCH[id]; if (!a || !fig) return null; const r = stage.getBoundingClientRect();
+ v.set(...a[0]); holder.localToWorld(v); n.set(...a[1]).normalize().applyQuaternion(holder.quaternion); toCam.copy(cam.position).sub(v).normalize();
+ const back = id !== 'head' && n.dot(toCam) < -.15; const p = v.clone().project(cam);
+ return {x: r.left + (p.x + 1) / 2 * r.width, y: r.top + (1 - p.y) / 2 * r.height, back};
+}
+const lo = loadout(document.body, {
+ slots: () => SLOTS.map(s => ({id: s.id, name: s.name, options: s.options.map(o => ({id: o.id, name: o.name, swatch: o.c, icon: o.icon || (o.ic ? icon(o.ic) : '')}))})),
+ value: id => wear[id], anchor, avoid: () => { const r = stage.getBoundingClientRect(); const m = r.width * .27; return {left: r.left + m, right: r.right - m, top: r.top + r.height * .08, bottom: r.bottom - r.height * .1}; },
+ onSelect: id => { selected = id; if (id === 'pack') yawWant = 2.4; else if (id) yawWant = Math.max(-.6, Math.min(.6, yawWant)); document.getElementById('hint').style.opacity = 0; },
+ onPick: (id, o) => { wear[id] = o; try { localStorage.setItem(KEY, JSON.stringify(wear)); } catch {} rebuild(); hop = 1; }
+});
+let selected = null, yawWant = -.35, yaw = -.35, hop = 0, drag = null, idle = 0;
+// tap a part: select its slot; tap the grass: put the strip away
+const ray = new T.Raycaster(), ndc = new T.Vector2();
+const canvas = renderer.domElement;
+canvas.addEventListener('pointerdown', e => { drag = {x: e.clientX, yaw: yawWant, moved: false}; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointermove', e => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) drag.moved = true; yawWant = drag.yaw + dx * .01; idle = 0; });
+canvas.addEventListener('pointerup', e => { const d = drag; drag = null; if (!d || d.moved) return; const r = canvas.getBoundingClientRect(); ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, cam);
+ const h = ray.intersectObject(fig, true).find(h => { let o = h.object; while (o && !o.userData.slot && o !== fig) o = o.parent; return o?.userData.slot; });
+ let o = h?.object; while (o && !o.userData.slot && o !== fig) o = o.parent; const slot = o?.userData.slot || null;
+ if (slot) { if (lo.selected !== slot) lo.select(slot); } else if (lo.selected) lo.select(null); });
+
+let prev = performance.now();
+(function frame(now) {
+ requestAnimationFrame(frame); const dt = Math.min(.05, (now - prev) / 1000); prev = now; idle += dt;
+ if (!selected && !drag && idle > 3 && !reduced) yawWant += dt * .18 * Math.sign(Math.sin(now / 9000) || 1);
+ yaw += (yawWant - yaw) * Math.min(1, dt * 6); holder.rotation.y = yaw;
+ hop = Math.max(0, hop - dt * 3); holder.position.y = Math.sin(hop * Math.PI) * .04;
+ cam.position.set(0, .78, 3.2 / Math.min(1, cam.aspect * 1.25)); cam.lookAt(0, .66, 0);
+ renderer.render(scene, cam);
+})(prev);
+
+// ---------- the two choices for Evan ----------
+const H = document.documentElement;
+function seg(id, cls) { const el = document.getElementById(id); el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); for (const x of el.querySelectorAll('button')) H.classList.remove(cls + x.dataset.v); H.classList.add(cls + b.dataset.v); lo.refresh(); }); H.classList.add(cls + el.querySelector('[aria-pressed="true"]').dataset.v); }
+seg('pattern', 'pattern-'); seg('look', 'look-');
+// The ring (pattern B) centres the options on the bead: number them, and pin the strip to its bead after the module places it.
+new MutationObserver(() => { const os = document.querySelectorAll('.aw-lo-opt'); os.forEach((o, i) => { o.style.setProperty('--i', i); o.style.setProperty('--n', os.length); }); }).observe(document.body, {subtree: true, childList: true});
+(function pin() { requestAnimationFrame(pin); if (!H.classList.contains('pattern-ring')) return; const tray = document.querySelector('.aw-lo-tray'), pip = document.querySelector('.aw-lo-pip.on'); if (!tray || !pip || tray.hidden) return; tray.style.left = pip.style.left; tray.style.top = pip.style.top; })();
+</script>
+<script type="module" src="/look/context-card.mjs" data-context-study="wardrobe"></script>
+</body>
+</html>

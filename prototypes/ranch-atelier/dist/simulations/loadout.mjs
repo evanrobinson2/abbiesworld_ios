@@ -132,6 +132,8 @@ function style() {
   .aw-lo-opt.on{border-color:#ffd23f;box-shadow:0 0 0 2px #ffd23f99,0 3px 8px -3px #2a103066}
   @media (prefers-reduced-motion: reduce){.aw-lo-pip{animation:none!important;transition:none}}
   html.aw-reduce-motion .aw-lo-pip{animation:none!important}
-  @media (max-width:560px){.aw-lo-opts{grid-template-columns:repeat(var(--cols,5),30px)}.aw-lo-opt{width:30px;height:30px}}`;
+  @media (max-width:560px){.aw-lo-opts{grid-template-columns:repeat(var(--cols,5),30px)}.aw-lo-opt{width:30px;height:30px}}
+  /* Fingers (AW-STUDY-0059): every target at least 44 px. The bead's hit ring already is; the swatches grow on touch. */
+  @media (pointer: coarse){.aw-lo-opts{grid-template-columns:repeat(var(--cols,5),42px);gap:8px}.aw-lo-opt{width:42px;height:42px}}`;
   document.head.append(s);
 }
