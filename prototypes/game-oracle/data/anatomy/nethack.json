@@ -451,6 +451,38 @@
       "sha256": "d5ff4e47890f23442fa02a374c30cbfff2b0c61a17a0b840ad5366b5d0563dd1",
       "blobSha": "6b285240d8502f031f14cf2acafd041f16712c19",
       "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/cmd.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/potion.c",
+      "sha256": "2e91ddc336067445fc467e7c6d96bd838465323eb7183d0da80510e7ddeda013",
+      "blobSha": "c6dffc5f979925361f5ba9023e4b5e820773dfa4",
+      "bytes": 81746,
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/potion.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/timeout.c",
+      "sha256": "4088647ffe5eace7c0554b83c8f6f9b5518682b22baad7abb6d1ec5818dcca7e",
+      "blobSha": "f9df132dba01abd96a955b2770ebd9303ceab932",
+      "bytes": 76815,
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/timeout.c"
+    },
+    {
+      "game": "nethack",
+      "path": "include/youprop.h",
+      "bytes": 15911,
+      "sha256": "cb73ca84accd64cd38e3672337b81c2e17972b47d1bf1c52d58bf855eb8e6eca",
+      "blobSha": "c9656aacf1f870fb0ca522c002d52ba3c9e9e590",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/youprop.h"
+    },
+    {
+      "game": "nethack",
+      "path": "include/prop.h",
+      "bytes": 5390,
+      "sha256": "78a29a5f25f970425997a2b93c8103c7c3ec461142bf9028eab274514883259f",
+      "blobSha": "570f3f2fac78abd19d584188b72a91813bb80814",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/prop.h"
     }
   ],
   "corridorStudy": {
@@ -608,7 +640,7 @@
     "findings": [
       {
         "title": "Actions consume movement budget while world turns replenish it",
-        "finding": "When context.move is set, the hero loses NORMAL_SPEED movement. movemon passes run until the hero can act or no monster can move. When both budgets are exhausted, the loop applies monster distress, replenishes monster budgets, computes hero allowance and increments moves and monstermoves. Action count and world-turn count therefore need not coincide. Command-to-context.move behavior remains untraced.",
+        "finding": "When context.move is set, the hero loses NORMAL_SPEED movement. movemon passes run until the hero can act or no monster can move. When both budgets are exhausted, the loop applies monster distress, replenishes monster budgets, computes hero allowance and increments moves and monstermoves. Action count and world-turn count therefore need not coincide. Ordinary dispatcher cancellation is traced separately; individual command costs remain unexamined.",
         "path": "src/allmain.c",
         "lines": [
           93,
@@ -689,5 +721,132 @@
       "statusTimers": "partial: call cadence traced, internal effects unexamined"
     },
     "next": "Publish five bounded scheduling findings after reconciling current catalog, full build and deployed API/MCP plus desktop/mobile verification. Then trace one concrete status lifecycle or another pilot subsystem."
+  },
+  "confusionStudy": {
+    "game": "nethack",
+    "commit": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "method": "bounded original-source inspection, no runtime observation",
+    "evidence": [
+      {
+        "path": "src/potion.c",
+        "sha256": "2e91ddc336067445fc467e7c6d96bd838465323eb7183d0da80510e7ddeda013",
+        "blobSha": "c6dffc5f979925361f5ba9023e4b5e820773dfa4",
+        "bytes": 81746,
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/potion.c"
+      },
+      {
+        "path": "src/timeout.c",
+        "sha256": "4088647ffe5eace7c0554b83c8f6f9b5518682b22baad7abb6d1ec5818dcca7e",
+        "blobSha": "f9df132dba01abd96a955b2770ebd9303ceab932",
+        "bytes": 76815,
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/timeout.c"
+      },
+      {
+        "path": "src/hack.c",
+        "sha256": "a86d507348db794a50ea550ce8c97cc2a7284979a5663753351bb7e528c5cda6",
+        "blobSha": "79fe7408c858a5c2754a173be2b7ed78e2eb5b65",
+        "bytes": 112042,
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/hack.c"
+      },
+      {
+        "path": "include/youprop.h",
+        "bytes": 15911,
+        "sha256": "cb73ca84accd64cd38e3672337b81c2e17972b47d1bf1c52d58bf855eb8e6eca",
+        "blobSha": "c9656aacf1f870fb0ca522c002d52ba3c9e9e590",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/youprop.h"
+      },
+      {
+        "path": "include/prop.h",
+        "bytes": 5390,
+        "sha256": "78a29a5f25f970425997a2b93c8103c7c3ec461142bf9028eab274514883259f",
+        "blobSha": "570f3f2fac78abd19d584188b72a91813bb80814",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/include/prop.h"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Confusion application separates duration from feedback",
+        "finding": "The potion branch increases existing confusion duration using itimeout_incr and a bless/curse-dependent random expression. make_confused changes the timeout field, flags the status display on start/end transitions and suppresses spoken recovery feedback when Unaware. This does not enumerate every source or cure.",
+        "path": "src/potion.c",
+        "lines": [
+          902,
+          913
+        ],
+        "additionalEvidence": {
+          "path": "src/potion.c",
+          "lines": [
+            61,
+            77
+          ]
+        }
+      },
+      {
+        "title": "Confusion expiry preserves transition feedback and interrupts occupations",
+        "finding": "The timed-property loop decrements active timeout fields. On confusion expiry it temporarily sets duration to one, then calls make_confused(0,TRUE), preserving the old-to-new transition used for feedback. It stops occupation only if Confusion is no longer effective. The earlier invulnerability return skips this timeout loop; do not claim all status durations always decay every world turn.",
+        "path": "src/timeout.c",
+        "lines": [
+          598,
+          604
+        ],
+        "additionalEvidence": [
+          {
+            "path": "src/timeout.c",
+            "lines": [
+              506,
+              507
+            ]
+          },
+          {
+            "path": "src/timeout.c",
+            "lines": [
+              548,
+              552
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Confusion can reroute a movement attempt before terrain resolution",
+        "finding": "In the inspected movement branch, Stunned or Confusion combined with a zero rn2(5) draw enters a direction-redraw loop. confdir is called until the destination is in bounds and not bad_rock, with a bounded retry guard that cancels multi and returns. Subsequent water friction may alter the destination again. This does not imply all confused actions fail or establish outcomes for attacks, spells or other commands.",
+        "path": "src/hack.c",
+        "lines": [
+          1441,
+          1461
+        ]
+      },
+      {
+        "title": "Timed-property setters clamp duration while retaining other intrinsic flags",
+        "finding": "itimeout clamps values below one to zero and values at or above TIMEOUT to TIMEOUT. itimeout_incr masks the old value to its timeout portion before adding the increment. set_itimeout clears only timeout bits and inserts the clamped duration, preserving other intrinsic flags. TIMEOUT is 0x00ffffff. These are inspected integer operations; no runtime boundary test was performed.",
+        "path": "src/potion.c",
+        "lines": [
+          20,
+          48
+        ],
+        "additionalEvidence": {
+          "path": "include/prop.h",
+          "lines": [
+            131,
+            131
+          ]
+        }
+      }
+    ],
+    "coverage": {
+      "application": "partial",
+      "expiry": "partial",
+      "movementEffect": "partial",
+      "allSourcesAndCures": "unexamined",
+      "runtime": "unexamined",
+      "durationHelpers": "verified by static source inspection; runtime unexamined"
+    },
+    "next": "Publish four bounded confusion lifecycle findings with pinned helper/property evidence; correct earlier scheduling caveat from untraced command mapping to partial dispatcher trace. Run full build and live API/MCP plus desktop/mobile checks.",
+    "propertyTrace": {
+      "path": "include/youprop.h",
+      "lines": [
+        82,
+        83
+      ],
+      "finding": "Confusion aliases HConfusion, which is u.uprops[CONFUSION].intrinsic. This definition does not combine a separate extrinsic source. Clearing only the timeout does not necessarily clear every bit of the intrinsic value; retain the effective-property check at expiry rather than asserting unconditional recovery."
+    }
   }
 }
