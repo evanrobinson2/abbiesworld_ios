@@ -77,6 +77,6 @@ The Paint card is no longer a card in the hand. Evan: effect cards that did not 
 - `simulations/paint-world/paint-hud.mjs`: the icon (a paint-splat fireball) on the top bar, a hexagonal facet with the ball count, and the balls waiting in a row beside it. You drag them down into the world; letting go on the row puts one back. Zero words, only digits.
 - Press the icon for the slot machine: three reels spin game objects (hex tile, bell, sheep, cheese, star, floppy disk, mushroom, apple). Three in a line wins a full handful (`rollGrant`); anything else pays one ball.
 - The odds are one in three by design, not by chance of the object set: the win is decided first (`WIN_ODDS`) and the reels land on it, and a miss never shows three alike. With independent reels no set of objects gives one in three, so the set is only for looks.
-- One spin per real minute (`SPIN_COOLDOWN_MS`), with the countdown on the icon, kept in `localStorage` so a reload does not reset it.
+- Superseded 2026-10-24 (Evan, issue #529: freeform sandbox): no cooldown and no running out. The tray holds `FULL` (8) balls at all times, each its own colour and size (`rollBall`), refills as you throw, and the slot machine can be pulled whenever you like to reshuffle the whole tray; a win deals only big and giant balls. `SPIN_COOLDOWN_MS` is 0.
 - Placement is a guess under the top bar (right edge); the Design lead owns the overall layout, so the position is two CSS lines in `paint-hud.mjs`.
 - The god-view deck's `paint-rain` event still grants a full handful with no spin.
