@@ -10,6 +10,10 @@
 import {createWorldEffects} from './world-effects.mjs';
 import {createEffectIcons} from './effect-icons.mjs';
 
+// Evan, 2026-10-24 (#546): no cooldowns, nothing runs out, every element is there from the start. So by default every effect is
+// always charged and tapping drops it, as often as you like. Charging from backpack items (effect-charge.mjs) is kept for a mode
+// he may want back: ?charge=1, or localStorage aw-effect-charge-mode = 'on'.
+const FREE = (() => { try { return !(/[?&]charge=1\b/.test(location.search) || localStorage.getItem('aw-effect-charge-mode') === 'on'); } catch { return true; } })();
 const DAY_SECONDS = 360; // the town has no clock for effects yet: an effect's "day" is six minutes
 const svg = body => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${body}</svg>`;
 const EFFECTS = [
@@ -45,5 +49,7 @@ export function mountTownEvents({THREE, scene, camera, controls, renderer, heigh
   });
   // Fire wheels wakes up when the charm is won, and shows whether the trail is on.
   import('./fire-wheels.mjs').then(m => { const sync = () => { const b = buttons['fire-wheels']; if (!b) return; if (m.fireWheelsUnlocked()) delete b.dataset.locked; else b.dataset.locked = '1'; icons?.setCharged('fire-wheels', m.fireWheelsUnlocked()); b.setAttribute('aria-pressed', String(m.fireWheelsOn())); }; sync(); m.onFireWheels(sync); addEventListener('focus', sync); setInterval(sync, 4000); }).catch(() => {});
+  // A balloon thrown by hand (paint-world/paint-hud.mjs) names its effect and where it lands.
+  addEventListener('ranch:play-event', e => { const d = e.detail; if (d?.at && fx.has(d.id)) fx.play(d.id, d.at); });
   return {fx, buttons};
 }

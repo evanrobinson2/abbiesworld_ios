@@ -95,7 +95,10 @@
     ],
     "marker": "GAME-TEST PASS coaster",
     "covers": "garage, pick a car, the whole ride to the finish"
-   }
+   },
+   "mounts": [
+    "coaster-town.mjs"
+   ]
   },
   {
    "id": "ranch",
@@ -267,7 +270,10 @@
     "script": "tools/game-registry/town-features.cjs",
     "marker": "GAME-TEST PASS town-features",
     "covers": "?intro=1 replays it: charms circle, fold in, the town drops"
-   }
+   },
+   "mounts": [
+    "town-warm.mjs"
+   ]
   },
   {
    "id": "paint-world",
@@ -285,7 +291,10 @@
     "script": "tools/game-registry/town-features.cjs",
     "marker": "GAME-TEST PASS town-features",
     "covers": "the paint card and balloons mount on the HUD"
-   }
+   },
+   "mounts": [
+    "paint-world/town-mount.mjs"
+   ]
   },
   {
    "id": "town-events",
@@ -303,7 +312,10 @@
     "script": "tools/game-registry/town-features.cjs",
     "marker": "GAME-TEST PASS town-features",
     "covers": "the effect icons mount in the HUD pill"
-   }
+   },
+   "mounts": [
+    "town-events.mjs"
+   ]
   },
   {
    "id": "quests",
@@ -321,7 +333,10 @@
     "script": "tools/game-registry/town-features.cjs",
     "marker": "GAME-TEST PASS town-features",
     "covers": "townsfolk stand at their places on the board"
-   }
+   },
+   "mounts": [
+    "abbietown/townsfolk.mjs"
+   ]
   },
   {
    "id": "backpack",
@@ -340,6 +355,85 @@
     "marker": "GAME-TEST PASS town-features",
     "covers": "the inventory takes an item and gives it back"
    }
+  },
+  {
+   "id": "farm",
+   "name": "The Wright farm",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Farm tiles thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "farm/wright-farm.mjs"
+   ],
+   "scene": {
+    "stage": "town",
+    "note": "the farm hex on the Winchester board"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the farm hex is on the board (stage.tiles.farm)"
+   }
+  },
+  {
+   "id": "town-dressing",
+   "name": "Town dressing (library props)",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Hex city thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "abbietown/library-props.mjs"
+   ],
+   "scene": {
+    "stage": "town",
+    "note": "library models on Main Street and in the yards"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the board carries 'library-*' instanced props"
+   }
+  },
+  {
+   "id": "medallions",
+   "name": "Mission medallions",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "Medallions thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "medallions.mjs"
+   ],
+   "scene": {
+    "note": "mounted on the board behind ?medallions"
+   },
+   "needs": [
+    "a headless-Chrome run that collects a medallion and starts its mission"
+   ]
+  },
+  {
+   "id": "halloween",
+   "name": "Halloween mode",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "Halloween thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "halloween-mode/town.mjs"
+   ],
+   "scene": {
+    "note": "lanterns, costumes and doors on the board"
+   },
+   "needs": [
+    "a headless-Chrome run that trick-or-treats a door",
+    "Evan's go"
+   ]
   }
  ]
 }

@@ -23,7 +23,8 @@ export function start(AT) {
  let hud = null;
  const mountHud = () => { hud = createPaintHud({host: window.AWHud?.balloons || null, onThrow: (ball, x, y, vx, vy) => {
   if (!dioGroup.visible) return false;
-  const g = groundThrow(T, camera, renderer.domElement, controls.target, x, y, vx, vy); if (!g) return false;
+  const g = groundThrow(T, camera, renderer.domElement, controls.target, x, y, vx, vy, heightAt); if (!g) return false;
+  if (ball.kind && ball.kind !== 'paint') { dispatchEvent(new CustomEvent('ranch:play-event', {detail: {id: ball.kind, at: {x: g.x + g.vx * .5, z: g.z + g.vz * .5}}})); return true; } // a world effect's own balloon: the effect lands where it was thrown
   world.launch({...g, colour: ball.colour, R: (7.5 + Math.random() * 4) * SCALE * ball.R}, clock); return true;
  }}); };
  // The fireball and its balls go in the HUD's balloons slot (the end of the top row); wait for the HUD a few seconds at most.

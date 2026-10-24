@@ -21,7 +21,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook, UPGRADES, upgradeLevel, capacity, starsLeft, nextLevel, buyUpgrade} from './backpack.mjs?v=13';
+import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook, UPGRADES, upgradeLevel, capacity, starsLeft, nextLevel, buyUpgrade} from './backpack.mjs?v=14';
 import {sfx as catalogSfx} from './catalog-sfx.mjs';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -115,7 +115,7 @@ function drawNotebookMini() {
 let mini = null;
 async function miniPack(canvas) {
   try {
-    const B = await import('./backpack.mjs?v=13'), T = await B.three();
+    const B = await import('./backpack.mjs?v=14'), T = await B.three();
     const renderer = new T.WebGLRenderer({canvas, antialias: true, alpha: true}); renderer.setPixelRatio(1); renderer.outputColorSpace = T.SRGBColorSpace; renderer.toneMapping = T.ACESFilmicToneMapping;
     const scene = new T.Scene(), cam = new T.PerspectiveCamera(26, canvas.width / canvas.height, .05, 20);
     scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.3)); const key = new T.DirectionalLight('#fff1d6', 2.6); key.position.set(1.4, 2.4, 2.6); scene.add(key);
@@ -211,7 +211,7 @@ async function openPop() {
   pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const B = await import('./backpack.mjs?v=13');
+      const B = await import('./backpack.mjs?v=14');
       view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onUse: useItem,
         onChange: l => { setLook(l); drawPeek(); }});
     } else { view.setLook(bagLook()); view.setContents(contents); }

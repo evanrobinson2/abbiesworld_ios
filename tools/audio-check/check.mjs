@@ -64,6 +64,7 @@ for (const f of files.filter(f => /\.(m?js|html)$/.test(f))) {
 for (const f of files.filter(f => /\.(m?js|html)$/.test(f))) {
   const src = fs.readFileSync(f, 'utf8'); if (!/catalog-sfx\.mjs/.test(src) || f.endsWith('catalog-sfx.mjs')) continue;
   const ids = new Set();
+  for (const m of src.matchAll(/from\s+['"]([^'"]*catalog-sfx\.mjs)['"]/g)) { const t = m[1].startsWith('/') ? path.join(DIST, m[1]) : path.join(path.dirname(f), m[1]); if (!fs.existsSync(t)) errors.push(`${f}: imports ${m[1]}, which does not resolve.`); }
   for (const m of src.matchAll(/\b(?:sfx|catalogSfx|S_|P|preload)\(\s*\[?\s*((?:['"][a-z0-9-]+['"]\s*,?\s*)+)/g)) for (const x of m[1].match(/['"][a-z0-9-]+['"]/g)) ids.add(x.slice(1, -1));
   for (const m of src.matchAll(/\b(?:ONE|one)\(([^)]*)\)/g)) for (const x of m[1].match(/['"][a-z0-9-]+['"]/g) || []) ids.add(x.slice(1, -1));
   for (const m of src.matchAll(/'(?:abbies-world-reimagined)'/g)) ids.add('abbies-world-reimagined');

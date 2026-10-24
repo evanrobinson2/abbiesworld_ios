@@ -22,6 +22,10 @@ TARGET_TRIS = 8000
 def clean(cid):
     folder = HERE / "meshy" / cid
     src = folder / f"{cid}.glb"
+    if cid.endswith("-tex"):  # a textured retexture rerun on the same geometry replaces the plain charm
+        cid = cid.removesuffix("-tex")
+        folder = HERE / "meshy" / cid / "tex"
+        src = folder / "model.glb"
     bpy.ops.wm.read_factory_settings(use_empty=True)
     bpy.ops.import_scene.gltf(filepath=str(src))
     ms = [o for o in bpy.data.objects if o.type == "MESH"]

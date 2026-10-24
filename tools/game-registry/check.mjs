@@ -61,6 +61,12 @@ for (const e of entries) {
   }
 }
 
+// 4b. every module the town page mounts belongs to a registry entry (a game can't slip in as a bare import)
+const claimedMods = new Set(entries.flatMap(e => [...(e.mounts || []), ...(e.scene?.module ? [e.scene.module.replace(/^simulations\//, '')] : [])]));
+const TOOLING = new Set(['experimental.mjs', 'world-look.mjs']);   // the switch itself and a developer tool
+for (const m of town.matchAll(/import\('\/simulations\/([^'?]+\.mjs)/g)) if (!claimedMods.has(m[1]) && !TOOLING.has(m[1])) fail(m[1], 'mounted on the town page with no registry entry (add "mounts" to its entry, or a new entry)');
+for (const e of entries) if (e.status === 'experimental') for (const m of e.mounts || []) for (const line of town.split('\n')) if (line.includes(m) && /import\(/.test(line) && !line.includes(`live('${e.id}')`)) fail(e.id, `the town mounts ${m} without checking live('${e.id}')`);
+
 // 5. HUD guard
 for (const [file, label] of [[TOWN, 'live town page'], [TEMPLATE, 'town template']]) {
   const html = read(file);

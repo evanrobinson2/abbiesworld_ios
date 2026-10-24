@@ -60,7 +60,7 @@ export function mountGarage(AT, carwash) {
  }
  async function hopOn() {
   if (window.__effectHunt || hopped) return; hopped = 'loading'; closeGarage();
-  try { const m = await import('../effect-hunt/town-mount.mjs'); hopped = m.mountHunt({stage: AT.stage, mode: 'buggy', start: nearestRoad(), kart: false, onExit: hopOff}); addBrush(); }
+  try { const m = await import('../effect-hunt/town-mount.mjs'); hopped = m.mountHunt({stage: AT.stage, mode: 'buggy', start: nearestRoad(), kart: false, scale: 4, onExit: hopOff}); addBrush(); }
   catch (e) { console.warn('garage: could not hop on', e); hopped = null; }
  }
  function hopOff() { const h = hopped; hopped = null; closeGarage(); if (h && h !== 'loading') h.dispose(); document.querySelectorAll('.aw-hunt-brush').forEach(b => b.remove()); }
