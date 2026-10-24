@@ -52,7 +52,7 @@ export function createHud({mission: m, world, container = document.body, quiet =
 let cursor = {daddy: 0, abbie: 0, ani: 0}, sound = !quiet, thrust = 0, tilt = 0, typing = 0;
 
 function speak(who, text) { const s = $('say'); s.className = 'say' + (arguments[2] ? ' thought' : ''); s.innerHTML = `<span class="who" style="background:${color(who)}"></span>`; s.append(text);
- if (sound && 'speechSynthesis' in window) { try { const u = new SpeechSynthesisUtterance(text), v = VOICE[who] || {}; u.pitch = v.pitch || 1; u.rate = v.rate || 1; speechSynthesis.speak(u); } catch {} } }
+ }
 function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.place}`; el.innerHTML = '<span></span><i></i>'; const [sp, ln] = [el.firstChild, el.lastChild]; clearInterval(typing); let n = 0;
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
 // three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)

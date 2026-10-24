@@ -29,7 +29,7 @@ export function innerVoice({font = 'VT323', size = 28, speak = false, onTouch = 
  const pick = () => { const vs = window.speechSynthesis?.getVoices?.() || [], en = vs.filter(v => /en[-_]US/i.test(v.lang));
   device = en.find(v => /Samantha|Ava|Allison|Susan|Aria|Jenny|Google US English/i.test(v.name)) || en[0] || null; };
  try { pick(); speechSynthesis.onvoiceschanged = pick; } catch {}
- const talk = text => { if (!ready) { pending = text; return; } try { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text.replace(/\.\.\./g, '…').replace(/"/g, '')); if (device) u.voice = device; u.lang = 'en-US'; u.pitch = 1.6; u.rate = 1.03; speechSynthesis.speak(u); } catch {} };
+ const talk = text => { if (!ready) { pending = text; return; } /* text only: no synthetic speech */ };
  const unlock = () => { if (ready) return; ready = true; if (pending && voice.thought) talk(pending); pending = null; };
  addEventListener('pointerdown', unlock, {capture: true}); addEventListener('keydown', unlock, {capture: true});
  const seen = new Set();
