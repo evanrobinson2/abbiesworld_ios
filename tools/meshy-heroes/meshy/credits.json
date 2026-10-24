@@ -1,6 +1,6 @@
 {
  "cap": 1000000,
- "total": 2424,
+ "total": 2454,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -951,6 +951,56 @@
    "what": "charm-toy-car 3d",
    "credits": 30,
    "at": "2026-10-24T17:17:03Z"
+  },
+  {
+   "what": "anim 41",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 285",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 298",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 56",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 290",
+   "credits": 3,
+   "at": "2026-10-24T17:28:48Z"
+  },
+  {
+   "what": "anim 301",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 303",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 306",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 308",
+   "credits": 3,
+   "at": "2026-10-24T17:29:10Z"
+  },
+  {
+   "what": "anim 313",
+   "credits": 3,
+   "at": "2026-10-24T17:29:20Z"
   }
  ],
  "live_balance": {
