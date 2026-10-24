@@ -1,0 +1,58 @@
+# One-off audit for the model library: counts what is in the R2 bucket and in the Meshy account. Read-only.
+name: model-audit
+on:
+  push:
+    branches: [claude/model-audit-r2]
+    paths: ['.github/workflows/model-audit.yml']
+  workflow_dispatch:
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: R2 catalogue
+        run: |
+          B=https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev
+          for f in models/catalog-all.json models/catalog.json models/paths.json; do
+            code=$(curl -sS -o /tmp/$(basename $f) -w '%{http_code}' $B/$f); echo "$f -> $code $(stat -c %s /tmp/$(basename $f)) bytes"
+          done
+          python3 - <<'P'
+          import json,collections,re
+          d=json.load(open('/tmp/catalog-all.json')); l=d if isinstance(d,list) else d.get('models') or d.get('items') or d.get('assets') or list(d.values())
+          print('R2 catalog-all entries:',len(l))
+          if l and isinstance(l[0],dict):
+              print('keys:',sorted(l[0].keys())[:30])
+              kinds=collections.Counter(str(x.get('kind') or x.get('type') or x.get('ext') or '?') for x in l); print('kinds:',kinds.most_common(10))
+              grp=collections.Counter(str(x.get('group') or x.get('source') or x.get('path','').split('/')[0] or '?') for x in l); print('groups:',grp.most_common(40))
+              sh=set(x.get('sha256') for x in l if x.get('sha256')); print('distinct sha256:',len(sh))
+              glb=[x for x in l if str(x.get('path') or x.get('glb') or x.get('url') or '').lower().endswith(('.glb','.gltf'))]; print('glb/gltf entries:',len(glb))
+              print('sample:',json.dumps(l[0])[:600])
+              import os
+              json.dump(l,open('/tmp/r2-all.json','w'))
+          P
+          cp /tmp/r2-all.json /tmp/out-r2.json 2>/dev/null || true
+      - name: R2 file list as artifact
+        uses: actions/upload-artifact@v4
+        with: {name: r2-catalog, path: /tmp/catalog-all.json}
+      - name: Meshy task history
+        env: {MESHY_API_KEY: '${{ secrets.MESHY_API_KEY }}'}
+        run: |
+          python3 - <<'P'
+          import json,os,urllib.request,collections
+          key=os.environ['MESHY_API_KEY']
+          def get(u):
+              r=urllib.request.Request(u,headers={'Authorization':'Bearer '+key}); return json.load(urllib.request.urlopen(r,timeout=60))
+          tot=0; allt=[]
+          for ep in ['v2/text-to-3d','v1/image-to-3d','v1/multi-image-to-3d','v1/rigging','v1/animations','v1/retexture','v1/remesh']:
+              n=0
+              for p in range(1,60):
+                  try: r=get(f'https://api.meshy.ai/openapi/{ep}?page_num={p}&page_size=50')
+                  except Exception as e: print(ep,'stop',p,str(e)[:80]); break
+                  l=r if isinstance(r,list) else r.get('result') or r.get('data') or []
+                  if not l: break
+                  n+=len(l); allt+= [dict(ep=ep,**{k:x.get(k) for k in ('id','status','created_at','prompt','name')}) for x in l]
+                  if len(l)<50: break
+              print(ep,n); tot+=n
+          print('MESHY TOTAL tasks:',tot)
+          st=collections.Counter((t['ep'],t['status']) for t in allt); print(st.most_common(20))
+          byday=collections.Counter(str(t['created_at'])[:8] for t in allt if t['created_at']); print('created sample:',list(byday.items())[:5])
+          P
