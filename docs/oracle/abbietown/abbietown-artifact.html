@@ -2087,14 +2087,15 @@ buildTown(1);
 const {train, line} = placeSpots(); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, scene, renderer, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
-import('/simulations/paint-world/town-mount.mjs').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Paint the World', e)); // the Paint card and splat balls on the board (AW-STUDY-0049)
+const mounts = []; // late mounted modules; the opening waits on these (town-warm.mjs) instead of a fixed delay
+mounts.push(import('/simulations/paint-world/town-mount.mjs').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Paint the World', e))); // the Paint card and splat balls on the board (AW-STUDY-0049)
 import('/simulations/world-look.mjs').then(m => { if (m.isDeveloper()) { window.worldLook = m.worldLook(THREE, {scene, renderer, wash: WC}); m.mountWorldLookPanel(window.worldLook); } }).catch(e => console.warn('World look', e)); // developer tools only: the World look switch (Storybook, Sunday toon, Comic ink)
-import('/simulations/coaster-town.mjs').then(m => m.place(window.AbbieTown)).catch(() => {}); // the toy-car coaster on the skate park pad (AW-STUDY-0054); a no-op until that module ships
-import('/simulations/abbietown/townsfolk.mjs?v=1').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e)); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
-import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt})).catch(() => {}); // the world event cards (fireball, waterball, cats and dogs, tie-dye)
+mounts.push(import('/simulations/coaster-town.mjs').then(m => m.place(window.AbbieTown)).catch(() => {})); // the toy-car coaster on the skate park pad (AW-STUDY-0054); a no-op until that module ships
+mounts.push(import('/simulations/abbietown/townsfolk.mjs?v=1').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e))); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
+mounts.push(import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt})).catch(() => {})); // the world event cards (fireball, waterball, cats and dogs, tie-dye)
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
-const wcReady = WC.precompile(scene, camera); import('/simulations/town-warm.mjs?v=4').then(m => m.warmTown({renderer, scene, camera, controls, ready: wcReady})).catch(() => {}); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
+const wcReady = WC.precompile(scene, camera); import('/simulations/town-warm.mjs?v=5').then(m => m.warmTown({renderer, scene, camera, controls, ready: wcReady, mounts})).catch(() => {}); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
 function onLine(d) { d = ((d % lineLen) + lineLen) % lineLen; for (let i = 1; i < line.length; i++) { const l = Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); if (d <= l) { const t = d / l; return [line[i - 1][0] + (line[i][0] - line[i - 1][0]) * t, line[i - 1][1] + (line[i][1] - line[i - 1][1]) * t]; } d -= l; } return line[line.length - 1]; }
 const tmp = new THREE.Vector3();
