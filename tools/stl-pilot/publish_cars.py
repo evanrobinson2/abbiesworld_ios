@@ -8,7 +8,7 @@ import json, os, shutil
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.abspath(os.path.join(HERE, "..", "..", "prototypes", "ranch-atelier", "dist"))
 GROUP = "Free sources \u00b7 Printables"
-ORDER = ["car-racer", "car-toddler", "car-pickup", "car-sedan", "car-wedge", "car-concept"]
+ORDER = ["car-racer", "car-toddler", "car-pickup", "car-sedan", "car-wedge", "car-concept", "car-bus", "car-cage-kart", "car-small-truck", "car-box-truck"]
 NOTES = json.load(open(os.path.join(HERE, "car_notes.json"), encoding="utf-8"))
 
 mp = os.path.join(DIST, "models", "manifest.json")
@@ -34,8 +34,8 @@ for slug in ORDER:
         "urls": {"ref": f"/models/{mid}/ref.jpg", "glb": f"/models/{mid}/model.glb"},
         "good": note["good"], "off": note["off"],
         "source": {"site": "Printables", "author": p["author"], "licence": "CC0" if cc0 else "CC BY 4.0", "licenceUrl": p["licence_url"],
-                   "url": p["model_url"], "authorUrl": p["author_url"], "credit": p.get("origin", "")},
-        "steps": [["Where it came from.", f"{p['title']} by {p['author']} on Printables, shared under {lic}."],
+                   "title": p["title"], "url": p["model_url"], "authorUrl": p["author_url"], "credit": p.get("origin", "")},
+        "steps": [["Where it came from.", f"{note['name']}, made by {p['author']} and shared on Printables under {lic}."],
                   ["What we did.", "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."]],
         "details": [["Size", f"{sz[0]:g} wide \u00d7 {sz[1]:g} tall \u00d7 {sz[2]:g} long, m"], ["Wheels", str(n["wheel_count"]) if n["wheel_count"] else "Fused to the body"], ["Licence", lic]],
     })
@@ -44,7 +44,7 @@ manifest["models"] = keep + new
 json.dump(manifest, open(mp, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
 
 md = ["# Toy cars from Printables", "",
-      "Six toy cars (CC0 or CC BY only), cleaned with `stl_pipeline.py` (car mode, `stl_cars.py`). Garage contract: glTF Y-up, metres, car faces +Z, "
+      "Ten cars (CC0 or CC BY only), cleaned with `stl_pipeline.py` (car mode, `stl_cars.py`). Garage contract: glTF Y-up, metres, car faces +Z, "
       "wheel bottoms on y = 0, body is one node, each wheel its own node named `wheel`, `wheel.001`, ... with its origin at the wheel centre and the axle along X. "
       "Published at `prototypes/ranch-atelier/dist/models/stl-car-<name>/model.glb`.", "",
       "| Car | Licence | Status | Source tris | Final tris | Wheels | W × H × L (m) | Time | GLB |", "|---|---|---|---:|---:|---:|---|---:|---:|"]
@@ -57,6 +57,9 @@ md += ["", "## Notes", "",
        "- Wheels of the racer, toddler car and pickup are separate files in the source, so we placed copies on estimated axles. The sedan's four wheels are separate shells inside its one file and were found automatically.",
        "- The wedge and the concept car have their wheels fused to the body; they are published as weak because the wheels cannot spin.",
        "- Sizes are set to about car size (2.6 to 4.6 m long) for the garage; change `length_m` in `stl_cars.py` for another scale.",
+       "- **Not imported (licence):** OpenRC F1 car (printables.com/model/2714) is CC BY-SA 4.0 (ShareAlike); Landy Mini (printables.com/model/41264) is CC BY-NC-SA 4.0 (non-commercial, ShareAlike); 4-Door JEEP Wrangler (printables.com/model/191480) is the Printables Standard Digital File License (personal, non-commercial use only). None of them were downloaded.",
+       "- **Dropped after trying:** Thing ico Go-Kart with Driver (CC0, printables.com/model/440954): 72k triangles of open shells and a track logo; it collapsed into a crumpled mess at 5k and its wheels could not be found, so it is not published (the STL and licence proof stay on the PC).",
+       "- **Brand rule:** the camper bus nose badge and rear plate lettering were sanded flat in the geometry (`flatten` in `stl_cars.py`); the cars carry generic names, and the original Printables titles appear only in provenance.json and the source line.",
        "- The source STLs stay on the PC (git-ignored); `provenance.json` has each sha256. Wheel bottoms land within about 3 cm of y = 0 (the sedan's two wheel sizes share meshes)."]
 open(os.path.join(HERE, "CARS.md"), "w", encoding="utf-8").write("\n".join(md) + "\n")
 print("published", len(new))

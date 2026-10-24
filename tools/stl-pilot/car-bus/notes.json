@@ -1,0 +1,79 @@
+{
+  "slug": "car-bus",
+  "stages": {
+    "import": {
+      "seconds": 0.08,
+      "tris": 281037,
+      "files": [
+        "source_body.stl",
+        "source_wheel.stl",
+        "source_top.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 1.14,
+      "tris": 280955,
+      "open_edges_before": 50,
+      "open_edges_after": 50,
+      "dust_shells_removed": 2,
+      "flattened_vertices": 3226
+    },
+    "orient_and_wheels": {
+      "seconds": 0.08,
+      "tris": 433961,
+      "wheels": 4,
+      "body_dims_mm": [
+        213.6,
+        84.6,
+        77.5
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.15,
+      "tris": 433961,
+      "final_size_m_wh_l": [
+        1.957,
+        1.739,
+        4.5
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 10.82,
+      "tris": 5499,
+      "parts": {
+        "body": {
+          "before": 229953,
+          "after": 4619
+        },
+        "wheel": {
+          "before": 51002,
+          "after": 220
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.35,
+      "tris": 5268,
+      "glb": "car-bus.glb",
+      "bytes": 421536
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 5500,
+  "pipeline": "stl_cars.py",
+  "scale_to_metres": {
+    "factor": 0.021068664333895808,
+    "final_size_m": [
+      1.957,
+      1.739,
+      4.5
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 5268,
+  "high_poly_tris": 229953,
+  "wheel_count": 4,
+  "script_total_s": 13.2,
+  "process_wall_s": 14.48
+}
