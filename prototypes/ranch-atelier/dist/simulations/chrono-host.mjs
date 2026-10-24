@@ -4,7 +4,7 @@
 import {startWorldClock} from './world-clock.mjs?v=1';
 import {ICONS} from './chrono-icons.mjs?v=1';
 import {mountChrono} from './chrono.mjs?v=3';
-import {inventory} from './inventory.mjs?v=11';
+import {inventory} from './inventory.mjs?v=12';
 
 export function mountWorldChrono({hour} = {}) {
   if (document.getElementById('v2-chrono')) return null;
