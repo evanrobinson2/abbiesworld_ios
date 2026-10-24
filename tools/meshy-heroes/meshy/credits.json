@@ -1,6 +1,6 @@
 {
  "cap": 2400,
- "total": 2391,
+ "total": 2397,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -896,6 +896,16 @@
    "what": "anim 7",
    "credits": 3,
    "at": "2026-10-24T00:51:59Z"
+  },
+  {
+   "what": "anim 174",
+   "credits": 3,
+   "at": "2026-10-24T00:52:22Z"
+  },
+  {
+   "what": "anim 125",
+   "credits": 3,
+   "at": "2026-10-24T00:52:22Z"
   }
  ],
  "live_balance": {
