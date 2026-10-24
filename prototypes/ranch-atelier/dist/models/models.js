@@ -384,6 +384,7 @@ const hear = (s, kind = '') => { voiceLine = s; voiceKind = kind; const h = docu
 let talking = false;
 function say(text, then){
   const synth = window.speechSynthesis;
+  then?.(); return; // no synthetic speech
   if (!synth || !window.SpeechSynthesisUtterance){ then?.(); return; }
   const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 1.05;
   const v = synth.getVoices().find(v => /en(-|_)US/.test(v.lang) && /Samantha|Google US|Aria|Jenny|Natural/i.test(v.name)); if (v) u.voice = v;

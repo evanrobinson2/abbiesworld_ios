@@ -1,0 +1,11 @@
+// Starts the town's play HUD: the glowing-grid and effects top row, the left edge's neighbours, and the hand of tile cards
+// (town-hud.mjs, town-hand.mjs). It lives in its own file, loaded by its own tag at the end of studies/abbietown/index.html,
+// because the inline module there is edited by many threads and twice a merge dropped these lines, bringing the old bottom
+// bar back (Evan, 2026-10-24 01:00Z). Do not move this back inline. Runs after the inline module has mounted the chronograph.
+import {mountTownHud} from './town-hud.mjs?v=1';
+
+const town = window.AbbieTown, stage = town?.stage;
+if (document.body.classList.contains('play') && stage) {
+  mountTownHud({stage, board: town.board});
+  import('./town-hand.mjs?v=2').then(m => m.mountTownHand({board: town.board, stage, visit: id => town.visit('dio-' + id)})).catch(e => console.warn('Town hand', e));
+}

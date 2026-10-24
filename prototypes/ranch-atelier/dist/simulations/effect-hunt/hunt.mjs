@@ -23,7 +23,7 @@ export const MODES = [
 export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll, offset = {x: 0, y: 0, z: 0}, wins = [window], uiRoot = document.body, onExit, start: startAt = null, fov = 58, camHold = 0, vehicleScale = 1.9, chase = {dist: 20, height: 8.5}, tune = {}}) {
  const effectsAt = e => { const s = spotOf(e, world.board), p = world.toScene(s.x, s.y); return {x: p.x, y: world.heightAt(p.x, p.z), z: p.z}; };
  const places = new Map(EFFECTS.map(e => { const p = effectsAt(e); return [e.id, p]; }));
- const beam = createBeacons({scene, effects: EFFECTS, place: e => { const p = places.get(e.id); return {x: p.x, y: p.y, z: p.z}; }});
+ const beam = createBeacons({scene, camera, effects: EFFECTS, place: e => { const p = places.get(e.id); return {x: p.x, y: p.y, z: p.z}; }});
  beam.restore(found()); beam.set(beacons);
  const fx = createFx({scene, heightAt: world.heightAt});
  const start = startAt || world.roadStart?.(0, -40) || (() => { const s = world.toScene(0, -40); return {x: s.x, z: s.z, heading: Math.PI}; })();

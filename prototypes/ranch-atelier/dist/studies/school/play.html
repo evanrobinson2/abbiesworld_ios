@@ -304,7 +304,7 @@ function say(text, opts = {}) {
  try { speechSynthesis?.cancel(); voiceEl?.pause(); voiceEl = new Audio(url); voiceEl.volume = .95; voiceEl.play().catch(() => speak(text, opts)); } catch { speak(text, opts); }
 }
 function speak(text, {grownUp = false, narrator = false} = {}) {
- try { voiceEl?.pause(); const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
+ try { voiceEl?.pause(); return; /* no synthetic speech */ const s = speechSynthesis; if (!s) return; s.cancel(); const u = new SpeechSynthesisUtterance(text);
   u.pitch = grownUp ? .6 : narrator ? .85 : 1.7; u.rate = grownUp ? 1.05 : narrator ? .95 : 1.08; u.volume = .9;
   const vs = s.getVoices(), en = vs.filter(v => /^en/i.test(v.lang)); u.voice = en.find(v => /child|junior|samantha|karen|female/i.test(v.name)) || en[0] || null;
   s.speak(u); } catch {}
