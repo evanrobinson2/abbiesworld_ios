@@ -702,7 +702,7 @@ function itemTexture(icon) {
 }
 
 // el: a positioned element the canvas fills. items: [{id, name, icon}], coins: a number, charms: charm ids.
-export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null} = {}) {
+export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null, onPart = null} = {}) {
  await three();
  const canvas = document.createElement('canvas'); canvas.className = 'aw-bp-canvas';
  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'none', cursor: 'pointer'});
@@ -725,10 +725,11 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  const holder = new T.Group(); scene.add(holder);
 
  let bp = null, sprites = [], coinPile = null, state = {l: look(l), items, coins, charms};
+ let picking = null, sampledAt = 0, anchorsNow = {}, tracked = {}, bounds = null;
  let want = 0, t = 0, yawNow = yaw, yawWant = yaw, drag = null, idle = 0, zoom = 1; const touches = new Map();
  function rebuild() {
   if (bp) { holder.remove(bp.group); bp.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); }
-  bp = buildBackpack(state.l, {charms: state.charms}); holder.add(bp.group); bp.setOpen(t);
+  bp = buildBackpack(state.l, {charms: state.charms}); holder.add(bp.group); bp.setOpen(t); tracked = {}; sampledAt = 0;
   sprites = []; const sk = []; for (let i = 0; i < 7; i++) { if (bp.sockets.back[i]) sk.push(['back', bp.sockets.back[i]]); if (bp.sockets.front[i]) sk.push(['front', bp.sockets.front[i]]); }
   state.items.slice(0, sk.length).forEach((it, i) => {
    const [h, p] = sk[i], s = new T.Sprite(new T.SpriteMaterial({map: itemTexture(it.icon), transparent: true, depthWrite: false}));
@@ -797,6 +798,8 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { api.focusCharm(i); return; } }
   if (focus != null) { api.unfocus(); return; }
   if (deck) { const f = hitPart(e.clientX, e.clientY), g = f && f !== 'charm' ? f : 'style'; deck.show(g); onDeal?.(g); highlight(g !== 'style' ? g : null); return; }
+  // The loadout (loadout.mjs): a tap on a part selects that slot; a tap on nothing lets it go. Opening is the host's.
+  if (onPart && want < .9) { const f = hitPart(e.clientX, e.clientY); onPart(f === 'charm' ? null : f); return; }
   if (r.intersectObject(bp.group, true).length || want > .5) api.toggle();
  });
  let tag = null;
@@ -832,6 +835,39 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   if (bp) bp.group.scale.setScalar(.9);
  }
 
+ // Where each slot sits on screen: a grid of rays over the stage, every few frames. Each slot's bead goes on the hit of
+ // its own part nearest a home spot on the silhouette (so the two straps get one bead, colour and pattern sit apart on
+ // the shell); a part out of sight (the lining while shut, no pocket) falls back to that home spot.
+ const HOME = {style: [.5, 0], colour: [.32, .3], pattern: [.66, .52], pocket: [.5, .74], trim: [.18, 0], lining: [.94, .24]};
+ function sample() {
+  const r = canvas.getBoundingClientRect(); if (!r.width) return;
+  const N = 22, hits = {all: []}; let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+   const x = r.left + (i + .5) / N * r.width, y = r.top + (j + .5) / N * r.height;
+   const h = pick(x, y).intersectObject(bp.group, true).find(h => h.object.visible && !h.object.isSprite); if (!h) continue;
+   const f = facetOf(h.object), q = [x, y, h.object, h.point]; (hits[f] ||= []).push(q); hits.all.push(q);
+   x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+  }
+  if (x1 < x0) { tracked = {}; bounds = null; return; }
+  const c = r.width / N / 2; bounds = {left: x0 - c, top: y0 - c, right: x1 + c, bottom: y1 + c};
+  const out = {};
+  for (const [f, [hx, hy]] of Object.entries(HOME)) {
+   const tx = x0 + hx * (x1 - x0), ty = y0 + hy * (y1 - y0), own = hits[f === 'pattern' ? 'colour' : f], src = f !== 'style' && own?.length ? own : hits.all;
+   let best = src[0], bd = 1e18; for (const p of src) { const d = (p[0] - tx) ** 2 + (p[1] - ty) ** 2; if (d < bd) { bd = d; best = p; } }
+   out[f] = {o: best[2], p: best[2].worldToLocal(best[3].clone()), lift: f === 'style' ? 40 : 0};
+  }
+  tracked = out;
+ }
+ // Each frame the tracked points are carried with their parts and projected, so the beads stay on as it bobs and turns.
+ function project() {
+  const r = canvas.getBoundingClientRect(), out = {}; if (!Object.keys(tracked).length) return;
+  for (const [f, t] of Object.entries(tracked)) {
+   if (!t.o.parent) continue; const v = t.o.localToWorld(tmpV.copy(t.p)).project(cam);
+   out[f] = {x: r.left + (v.x + 1) / 2 * r.width, y: Math.max(r.top + 12, r.top + (1 - v.y) / 2 * r.height - t.lift)};
+  }
+  anchorsNow = out;
+ }
+
  // The charm close-up: the camera comes in on one charm, it turns slowly, its quest is told; swipe for the next.
  let focus = null;
  const camPos = new T.Vector3(), camAt = new T.Vector3(), wantPos = new T.Vector3(), wantAt = new T.Vector3(), tmpV = new T.Vector3();
@@ -846,7 +882,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   const goal = deck && focus == null ? Math.max(want, .36) : want;
   t += Math.sign(goal - t) * Math.min(Math.abs(goal - t), dt / .55); const e = ease(t);
   bp.setOpen(e);
-  if ((spin || float) && !drag && idle > 2 && want < .5 && !deck && focus == null) yawWant += dt * (float ? .12 : .25);
+  if ((spin || float) && !drag && idle > 2 && want < .5 && !deck && !picking && focus == null) yawWant += dt * (float ? .12 : .25);
   // In close-up the bag turns its charm's seam toward you, rather than the camera flying round (or through) it.
   const fSide = focus != null && bp.charms[focus] ? Math.sign(bp.charms[focus].anchor.position.x || 1) : 0;
   if (focus != null) yawWant += (-fSide * 1.1 - yawWant) * Math.min(1, dt * 4);
@@ -874,7 +910,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
    wantPos.copy(wantAt).add(tmpV.set(fSide * d * .12, d * .15, d));
   } else {
    const inHand = deck && !deckHost, ty = H * (.5 + .5 * e) + (inHand ? -H * .12 : 0), span = H * (1.35 + e * 1.15) * (inHand ? 1.45 : 1), wide = (bp.W + .5) * 1.25;
-   const dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * 1.08;
+   const dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * (float && !deck ? .86 : 1.08);
    wantAt.set(0, ty, 0); wantPos.set(0, ty + .35 * (1 - e) + .1, dist * zoom);
   }
   if (!snapped) { camPos.copy(wantPos); camAt.copy(wantAt); snapped = true; }
@@ -883,6 +919,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   floor.visible = !float && e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
   bp.update(dt);
   renderer.render(scene, cam);
+  if (onPart) { if (now - sampledAt > 400) { sampledAt = now; sample(); } project(); }
  }
  raf = requestAnimationFrame(frame);
 
@@ -897,6 +934,11 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   // Deal one facet's hand (the slots around the floating backpack); null puts the hand away.
   deal(f) { if (f == null) { api.dressUp(false); onDeal?.(null); return; } focus = null; if (!deck) mountDeck(f); else { deck.show(f); onDeal?.(f); } highlight(f === 'style' ? null : f === 'pattern' ? 'colour' : f); },
   get dealt() { return deck?.facet || null; },
+  // The loadout's slots on the model, in client px: anchors(), select(f) glows a slot and holds the bag still (the
+  // lining opens it part way), pick(f, value) puts a choice on.
+  anchors() { return anchorsNow; }, get bounds() { return bounds; },
+  select(f) { picking = f; focus = null; highlight(f === 'style' || f === 'notebook' ? null : f === 'pattern' ? 'colour' : f); if (f === 'lining') want = Math.max(want, .62); else if (want < .9) want = 0; idle = 0; },
+  pick(f, value) { apply(f, value); if (f === 'style') highlight(null); },
   get charmCount() { return bp.charms.length; },
   focusCharm(i = 0) {
    const n = bp.charms.length; if (!n) { say('No charms yet: finish a quest to earn one.'); return; }

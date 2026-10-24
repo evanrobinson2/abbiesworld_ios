@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-backpack-loadout",
+      "date": "2026-10-24",
+      "title": "Dress the backpack by its parts",
+      "line": "The card slots are gone. Little glass dots sit on the backpack itself: tap one, or tap the part, and a small row of colours or shapes opens beside it. Tap one and it goes on.",
+      "image": "/whats-new/2026-10-24-backpack-loadout.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-toy-car-picker",
       "date": "2026-10-24",
       "title": "Pick your toy car",

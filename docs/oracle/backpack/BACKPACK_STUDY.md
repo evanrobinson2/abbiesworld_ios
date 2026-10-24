@@ -159,3 +159,28 @@ notebook as a facet of her backpack. you can show it under the backpack on the l
   round the floating backpack, and it stays the same when the style changes (`keep: true`).
 
 Tour: yes. Players need to know where their quests are.
+
+## Round 8: the loadout, dressing it by its parts (Evan, 2026-10-24 00:16Z)
+
+"The card dynamic is NOT working at all. instead leverage inspiration from FPS games and treat the facets like they are
+slots on the model -> then find very simple small interaction systems where you click the facet to enable selection
+then pick from a small and unobtrusive list of options."
+
+What changed: the seven card slots round the floating backpack and the hand along the bottom are gone. In their place is
+`simulations/loadout.mjs`, a shared module modelled on an FPS gunsmith. A small glass bead sits on each slot of the
+model: the style just above it, colour and pattern on the shell, the pocket, the straps, the lining at the opening, and
+the notebook peeking out. The beads ride with the backpack as it floats. Tap a bead, or the part itself, and that slot is
+selected: the part glows, the bag stops turning (the lining opens it part way), and a short strip of swatches or mini
+icons opens beside the bag, never over it (below it on a phone). Tap one and it goes on. Tap the bead again, empty space,
+or Escape, and the strip folds away. The basket orb opens it half shell on what she carries.
+
+How the beads find their parts: `backpackView` casts a 22 by 22 grid of rays over its stage every 0.4 s. Each slot takes
+the hit on its own part nearest a home spot on the silhouette, so the two straps get one bead and colour and pattern sit
+apart on the shell. That hit is kept as a point on the part, so the bead stays glued to it every frame. A part out of
+sight (the lining while shut, no pocket) falls back to the nearest surface by its home spot. `view.anchors()`,
+`view.bounds`, `view.select(f)` and `view.pick(f, value)` are the hooks; `onPart` turns part taps into selection.
+
+Reuse: the buggy (carwash) and her clothes can use the same module with their own slots and anchors. The card faces
+(`backpack-cards.mjs`) stay for the study page's old decorate mode only.
+
+Tour: no. It is the same backpack, dressed in a simpler way.
