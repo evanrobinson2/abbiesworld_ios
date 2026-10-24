@@ -2,6 +2,16 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-town-place-moon",
+      "date": "2026-10-24",
+      "title": "Drop a Moon tile onto the board",
+      "line": "A second card in the town hand: drag the Moon onto a glowing hex and a lunar base prints, rolls and builds itself. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-moon.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
       "id": "2026-10-24-town-place",
       "date": "2026-10-24",
       "title": "Pull a Meadow card and drop it on the board",
