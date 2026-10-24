@@ -62,3 +62,17 @@ export const pointerOf = lib => ({key: 'current', id: lib.current});
 export const tileCount = b => Object.keys(b.cells).length;
 // The stable map of boards: each board keeps its slot (by order made), so the world does not reshuffle when you switch.
 export function layout(lib) { const s = spiral(lib.boards.length + 1); return {boards: lib.boards.map((b, i) => ({id: b.id, ...s[i]})), openSlot: s[lib.boards.length]}; }
+
+// Worlds in orbs (Evan, 2026-10-23, from the Inspiring Shaders study #11: "a fun unlock to a new world"). A new world can
+// arrive as a glowing orb: earned or found, carried in the backpack, and opened by stepping into it. Opening an orb makes a
+// new board on the orb's land (made: 'orb') and shows it; the orb is used up. Orbs never replace or change a board.
+export function earnOrb(lib, {land = 'ranch', name, why = 'found'} = {}) {
+ if (!LANDS[land]) throw Error('Unknown land');
+ const orbs = lib.orbs || [], id = 'orb-' + (orbs.length + (lib.opened || 0) + 1);
+ return {...lib, orbs: [...orbs, {id, land, name: cleanName(name) || LANDS[land].name, why}]};
+}
+export function openOrb(lib, id) {
+ const o = (lib.orbs || []).find(x => x.id === id); if (!o) throw Error('No such orb');
+ const next = newBoard({...lib}, {name: o.name, land: o.land}), b = next.boards.at(-1);
+ return {...next, orbs: lib.orbs.filter(x => x.id !== id), opened: (lib.opened || 0) + 1, boards: next.boards.map(x => x === b ? {...b, made: 'orb', orb: o.id} : x)};
+}

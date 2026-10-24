@@ -10125,6 +10125,1162 @@
    ],
    "outline": 0.9,
    "status": "good"
+  },
+  {
+   "id": "stl-pirate-chest",
+   "name": "Pirate's Treasure Chest - Solid",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "fantasy prop",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -25,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-pirate-chest/ref.jpg",
+    "glb": "/models/stl-pirate-chest/model.glb"
+   },
+   "good": [
+    "Right shape and proportions: rounded lid, skull plaque, chunky feet.",
+    "Solid and closed, so it is cheap and safe to drop into a scene."
+   ],
+   "off": [
+    "The carved detail is smeared into soft blobs at this size.",
+    "It is a print-style solid block, so the lid does not open.",
+    "One plain wood colour, with no metal bands or gold."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "YourBuddyDinec",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/634848-pirates-treasure-chest-solid",
+    "authorUrl": "https://www.printables.com/@YourBuddyDinec",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Pirate's Treasure Chest - Solid by YourBuddyDinec on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.5 × 0.387 × 0.42 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-potion-bottle",
+   "name": "Wizard Potion Bottle",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "fantasy prop",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -20,
+    60
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-potion-bottle/ref.jpg",
+    "glb": "/models/stl-potion-bottle/model.glb"
+   },
+   "good": [
+    "Clean, friendly bottle shape.",
+    "One tidy piece, nothing broken to repair."
+   ],
+   "off": [
+    "Plain milky grey stands in for glass, so it needs a real glass look.",
+    "The cork or cap was not included, only the bottle."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Jc Wentzel",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/257760-wizard-potion-bottle",
+    "authorUrl": "https://www.printables.com/@JcWentzel_289380",
+    "credit": "author's original creation (imported from Thingiverse by the author)"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Wizard Potion Bottle by Jc Wentzel on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.166 × 0.166 × 0.2 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-space-helmet",
+   "name": "Retro Space Helmet 1",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "sci-fi gear",
+   "status": "weak",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-space-helmet/ref.jpg",
+    "glb": "/models/stl-space-helmet/model.glb"
+   },
+   "good": [
+    "The retro look is readable from a distance."
+   ],
+   "off": [
+    "It is a thin printed shell with open edges, and shrinking it folded the sheets into a crumpled mess.",
+    "Too heavy for a small prop even after the damage.",
+    "Needs to be rebuilt from its outline instead of cleaned up."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Craig Staples",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/885271-retro-space-helmet-1",
+    "authorUrl": "https://www.printables.com/@CraigStaples_1107886",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Retro Space Helmet 1 by Craig Staples on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.36 × 0.302 × 0.324 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-street-lamp",
+   "name": "Parisian Street Lamp",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "town prop",
+   "status": "good",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    80
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-street-lamp/ref.jpg",
+    "glb": "/models/stl-street-lamp/model.glb"
+   },
+   "good": [
+    "The cleanest result of the set: crisp, light and the right height.",
+    "Stands on the ground with its base at the middle."
+   ],
+   "off": [
+    "Metal and lamp glass share one dark colour.",
+    "Very tall and thin, so players could walk into it from odd angles."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Citron",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/873657-parisian-street-lamp",
+    "authorUrl": "https://www.printables.com/@Citron_295663",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Parisian Street Lamp by Citron on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.426 × 1.117 × 4.2 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-sci-fi-crate",
+   "name": "Sci Fi Crate (90mm Single Color: bottom and top)",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "sci-fi gear",
+   "status": "weak",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    60
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-sci-fi-crate/ref.jpg",
+    "glb": "/models/stl-sci-fi-crate/model.glb"
+   },
+   "good": [
+    "Tray and lid are kept as two separate named parts."
+   ],
+   "off": [
+    "The lid and tray were printed side by side, and my guess at putting the lid on leaves it floating above the rim.",
+    "Edges are jagged after shrinking.",
+    "Rebuilding this crate would be quicker than fixing it."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Secret Person of Secrets",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/531037-sci-fi-crate",
+    "authorUrl": "https://www.printables.com/@SecretPersono_537888",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Sci Fi Crate (90mm Single Color: bottom and top) by Secret Person of Secrets on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.471 × 0.6 × 0.377 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-picnic-table",
+   "name": "Picnic Table",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "town prop",
+   "status": "good",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    55
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-picnic-table/ref.jpg",
+    "glb": "/models/stl-picnic-table/model.glb"
+   },
+   "good": [
+    "Already light, so nothing was lost.",
+    "Planks and crossed legs are right, at a sensible full size."
+   ],
+   "off": [
+    "Flat brown wood colour, with no grain or wear yet."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "makers (gunna)",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/446580-picnic-table",
+    "authorUrl": "https://www.printables.com/@gunna",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Picnic Table by makers (gunna) on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.578 × 1.8 × 0.94 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-park-bench",
+   "name": "the park bench",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "town prop",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -35,
+    55
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-park-bench/ref.jpg",
+    "glb": "/models/stl-park-bench/model.glb"
+   },
+   "good": [
+    "Clear bench shape with proper slats.",
+    "A huge scan-like source was brought down to a light model."
+   ],
+   "off": [
+    "The usual shrinking got stuck on this messy mesh, so it was rebuilt from a rough shell and the edges are softer than the original.",
+    "It was the slowest model to process.",
+    "The Printables picture is marked as AI-generated."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "gabi123",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "url": "https://www.printables.com/model/1560190-the-park-bench",
+    "authorUrl": "https://www.printables.com/@gabi123_3353521",
+    "credit": "author's original creation; page marks the preview image as AI-generated"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "the park bench by gabi123 on Printables, shared under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.8 × 0.7 × 0.896 m"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-lighthouse",
+   "name": "Low Poly Lighthouse",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "building",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-lighthouse/ref.jpg",
+    "glb": "/models/stl-lighthouse/model.glb"
+   },
+   "good": [
+    "Already light, so it was kept almost as it came.",
+    "Reads well from far away."
+   ],
+   "off": [
+    "It is a tiny island scene, not just a tower; the rock base would have to go to use the building alone.",
+    "Rock, plaster and glass share one grey."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "erre_stvdio",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/58833-low-poly-lighthouse",
+    "authorUrl": "https://www.printables.com/@erre_stvdio",
+    "credit": "author's original creation (imported from Thingiverse by the author)"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Low Poly Lighthouse by erre_stvdio on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "6.535 × 6.442 × 9 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-tractor",
+   "name": "Tractor (base body + complete wheels)",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "vehicle",
+   "status": "partial",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    65
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-tractor/ref.jpg",
+    "glb": "/models/stl-tractor/model.glb"
+   },
+   "good": [
+    "Body and wheels are two separate named parts.",
+    "The wheels went onto the axle stubs automatically."
+   ],
+   "off": [
+    "It is a toy-style tractor: a boxy cab with no seat or engine detail.",
+    "Front and back wheel sizes may be the wrong way round.",
+    "Most of the detail is spent on the wheel treads."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Thijs",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/81929-tractor",
+    "authorUrl": "https://www.printables.com/@Thijs",
+    "credit": "remix of 'Tractor' by lemairec (thingiverse.com/lemairec); credit both"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Tractor (base body + complete wheels) by Thijs on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.949 × 3.6 × 2.429 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-chicken",
+   "name": "Chicken",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "creature",
+   "status": "good",
+   "ask": "A free Printables model, cleaned up for our game. Is it a good starting point, or should we rebuild it in our own style?",
+   "orbit": [
+    -30,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-chicken/ref.jpg",
+    "glb": "/models/stl-chicken/model.glb"
+   },
+   "good": [
+    "Cute, soft, relaxed creature that suits a storybook look.",
+    "A very heavy source came down to a light model with the shape intact."
+   ],
+   "off": [
+    "Plain clay colour, with no comb or beak colours yet.",
+    "It is a re-upload of another maker's chicken, so credit the original author."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "opslasher2000 (re-upload)",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "url": "https://www.printables.com/model/496190-chicken",
+    "authorUrl": "https://www.printables.com/@opslasher2000_882122",
+    "credit": "re-upload of 'Chicken' by Infalivia (thingiverse.com), CC BY; credit Infalivia as original author"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Chicken by opslasher2000 (re-upload) on Printables, shared under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to real-world size with its base on the ground, made it light enough for the game, unwrapped it and baked in surface detail and shading."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "0.4 × 0.266 × 0.29 m"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-racer",
+   "name": "Toy racer",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "good",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-racer/ref.jpg",
+    "glb": "/models/stl-car-racer/model.glb"
+   },
+   "good": [
+    "Chunky, friendly racer with a clear nose, cockpit bump and big tyres.",
+    "Four separate wheels, each named wheel, with the axle running side to side so they can spin.",
+    "Sits on the ground facing forward, at about car size."
+   ],
+   "off": [
+    "Wheel positions were placed by eye from the body shape, so they may sit a little off the real axles.",
+    "One plain tan colour, with no number plate or stripes."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "3dworkbench",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Toy racer",
+    "url": "https://www.printables.com/model/624877-3dworkbench-toy-car",
+    "authorUrl": "https://www.printables.com/@3dworkbench",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Toy racer, made by 3dworkbench and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.344 wide × 1.216 tall × 3.2 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-toddler",
+   "name": "Chunky toddler car",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-toddler/ref.jpg",
+    "glb": "/models/stl-car-toddler/model.glb"
+   },
+   "good": [
+    "Soft, rounded toy shape that suits a storybook garage.",
+    "Four separate wheels that can spin."
+   ],
+   "off": [
+    "The body is a flat slab with a window hole, more of a toy block than a car.",
+    "Wheels are huge for the body and were placed by eye."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Thump2010",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Chunky toddler car",
+    "url": "https://www.printables.com/model/457455-safer-toddlers-toy-car",
+    "authorUrl": "https://www.printables.com/@Thump2010_791839",
+    "credit": "remix of 'Toddlers Toy Car' by Newton101 (thingiverse.com); credit both"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Chunky toddler car, made by Thump2010 and shared on Printables under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.675 wide × 1.489 tall × 2.6 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-pickup",
+   "name": "Toy pickup truck",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-pickup/ref.jpg",
+    "glb": "/models/stl-car-pickup/model.glb"
+   },
+   "good": [
+    "Reads clearly as a pickup, with a cab and an open bed.",
+    "Four separate wheels that can spin."
+   ],
+   "off": [
+    "The wheels are tiny compared with the body, so it looks like it is gliding.",
+    "Wheel positions were placed by eye.",
+    "The original has a print-in-place tailgate that is not kept."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Korbinian",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Toy pickup truck",
+    "url": "https://www.printables.com/model/389381-toy-car",
+    "authorUrl": "https://www.printables.com/@Korbinian",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Toy pickup truck, made by Korbinian and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.45 wide × 1.069 tall × 4.6 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-sedan",
+   "name": "Red sedan",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-sedan/ref.jpg",
+    "glb": "/models/stl-car-sedan/model.glb"
+   },
+   "good": [
+    "Plain, readable family car shape.",
+    "Wheels were found inside the file automatically, so they sit exactly right and can spin."
+   ],
+   "off": [
+    "Very simple flat panels with no real detail.",
+    "Lighter than the usual size for a car, so it can take more detail."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Jibraan Ahmed",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Red sedan",
+    "url": "https://www.printables.com/model/834935-low-poly-car",
+    "authorUrl": "https://www.printables.com/@JibraanAhmed_1958699",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Red sedan, made by Jibraan Ahmed and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.056 wide × 1.352 tall × 4.4 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-wedge",
+   "name": "Wedge toy car",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "weak",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-wedge/ref.jpg",
+    "glb": "/models/stl-car-wedge/model.glb"
+   },
+   "good": [
+    "Great retro wedge silhouette."
+   ],
+   "off": [
+    "The wheels are fused to the body, so they cannot spin and the car cannot be used for driving as it is.",
+    "To use it, the wheels would need to be cut out and rebuilt."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "jirka.skladal",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Wedge toy car",
+    "url": "https://www.printables.com/model/303932-toy-car",
+    "authorUrl": "https://www.printables.com/@jirkaskladal_405051",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Wedge toy car, made by jirka.skladal and shared on Printables under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.086 wide × 1.419 tall × 4.2 long, m"
+    ],
+    [
+     "Wheels",
+     "Fused to the body"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-concept",
+   "name": "Concept sports car",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "weak",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-concept/ref.jpg",
+    "glb": "/models/stl-car-concept/model.glb"
+   },
+   "good": [
+    "The most detailed and exciting shape of the set."
+   ],
+   "off": [
+    "The wheels are fused to the body, so they cannot spin.",
+    "The source is very heavy and was shrunk a long way, which softens the detail.",
+    "The Printables picture is marked as AI-generated, so treat the design as inspiration."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "SirJellybeans",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Concept sports car",
+    "url": "https://www.printables.com/model/1554985-low-poly-print-in-place-futuristic-model-car",
+    "authorUrl": "https://www.printables.com/@SirJellybeans",
+    "credit": "author's own model; the Printables picture is marked AI-generated"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Concept sports car, made by SirJellybeans and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.155 wide × 1.11 tall × 4.6 long, m"
+    ],
+    [
+     "Wheels",
+     "Fused to the body"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-bus",
+   "name": "Camper bus",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-bus/ref.jpg",
+    "glb": "/models/stl-car-bus/model.glb"
+   },
+   "good": [
+    "Instantly readable 1970s-style camper bus with its split windscreen, bumper and roof.",
+    "Four separate wheels that can spin.",
+    "The raised badge on the nose and the lettering on the rear plate were sanded flat, so no brand mark is left."
+   ],
+   "off": [
+    "The window frames and roof edge come out soft and lumpy at this size.",
+    "Wheel positions were placed by eye from the body shape.",
+    "The model is still the shape of a famous real van, so check it is generic enough before shipping."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "ChelsCCT (Chelsey Creates Things)",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Volkswagen Bus 1970s",
+    "url": "https://www.printables.com/model/13466-volkswagen-bus-1970s",
+    "authorUrl": "https://www.printables.com/@ChelsCCT",
+    "credit": "author's original creation (imported from Thingiverse)"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Camper bus, made by ChelsCCT (Chelsey Creates Things) and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.957 wide × 1.739 tall × 4.5 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-cage-kart",
+   "name": "Roll-cage buggy",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "good",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-cage-kart/ref.jpg",
+    "glb": "/models/stl-car-cage-kart/model.glb"
+   },
+   "good": [
+    "Clean open roll-cage buggy with seat, steering wheel and big tyres.",
+    "Four wheels were found as separate pieces in the file, so they sit exactly right and can spin.",
+    "Light and open, so it reads well from far away."
+   ],
+   "off": [
+    "The thin cage bars are chunky at this size.",
+    "One plain gold colour, with no stripes or number."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Joe Naab",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Go kart model",
+    "url": "https://www.printables.com/model/597582-go-kart-model",
+    "authorUrl": "https://www.printables.com/@JoeNaab_1282550",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Roll-cage buggy, made by Joe Naab and shared on Printables under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.531 wide × 1.118 tall × 2.6 long, m"
+    ],
+    [
+     "Wheels",
+     "4"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-small-truck",
+   "name": "Truck cab",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "partial",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-small-truck/ref.jpg",
+    "glb": "/models/stl-car-small-truck/model.glb"
+   },
+   "good": [
+    "Strong, simple lorry cab with a good silhouette.",
+    "Three wheel sets, each with its own axle, that can spin."
+   ],
+   "off": [
+    "It is just the cab with no trailer.",
+    "Each wheel set joins a left and right wheel on one axle, so they turn together (fine for rolling, not for steering).",
+    "A bit tall and square for a toy."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "Pusesis productions",
+    "licence": "CC0",
+    "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "title": "Small truck toy",
+    "url": "https://www.printables.com/model/1081809-small-truck-toy",
+    "authorUrl": "https://www.printables.com/@PisesisProdu_2571265",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Truck cab, made by Pusesis productions and shared on Printables under CC0 1.0 (public domain)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "2.608 wide × 3.636 tall × 5.5 long, m"
+    ],
+    [
+     "Wheels",
+     "3"
+    ],
+    [
+     "Licence",
+     "CC0 1.0 (public domain)"
+    ]
+   ]
+  },
+  {
+   "id": "stl-car-box-truck",
+   "name": "Box truck",
+   "style": "",
+   "group": "Free sources · Printables",
+   "subject": "toy car",
+   "status": "weak",
+   "ask": "A free toy car for the garage. Does it look right, and is it worth keeping or rebuilding?",
+   "orbit": [
+    -35,
+    70
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/stl-car-box-truck/ref.jpg",
+    "glb": "/models/stl-car-box-truck/model.glb"
+   },
+   "good": [
+    "Friendly chunky box truck with a rounded cab."
+   ],
+   "off": [
+    "Only one axle has wheels that can spin; the front wheels are fused to the body.",
+    "So it cannot be used for driving as it is."
+   ],
+   "source": {
+    "site": "Printables",
+    "author": "D3D",
+    "licence": "CC BY 4.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by/4.0/",
+    "title": "Box Truck Toy",
+    "url": "https://www.printables.com/model/911977-box-truck-toy",
+    "authorUrl": "https://www.printables.com/@d3dp",
+    "credit": "author's original creation"
+   },
+   "steps": [
+    [
+     "Where it came from.",
+     "Box truck, made by D3D and shared on Printables under CC BY 4.0 (credit the author)."
+    ],
+    [
+     "What we did.",
+     "Repaired the mesh, set it to car size facing forward with its wheels on the ground, lightened it for the game and baked in surface shading. Wheels are separate so they can spin."
+    ]
+   ],
+   "details": [
+    [
+     "Size",
+     "1.967 wide × 2.744 tall × 5.5 long, m"
+    ],
+    [
+     "Wheels",
+     "1"
+    ],
+    [
+     "Licence",
+     "CC BY 4.0 (credit the author)"
+    ]
+   ]
   }
  ]
 }

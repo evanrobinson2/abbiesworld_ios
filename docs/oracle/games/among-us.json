@@ -50,9 +50,9 @@
       "outline": "none",
       "surface": "flat_colour",
       "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "The ship is a flat top-down map of rooms; its look is the floor plan.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.5
     },
     "motion": null,
     "palette": null,

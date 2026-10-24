@@ -5,7 +5,7 @@ import {readFileSync} from 'node:fs';
 import {createMission, PLAYERS, fmtClock} from '../moonmission/mission.mjs';
 import {BEATS} from '../moonmission/script.mjs';
 import {ZONES, REGIONS, hexFlower, regionAt, resolveZones, startCoordinate} from '../moonmission/zones.mjs';
-import {botMoves} from '../moonmission/games.mjs';
+import {botMoves, moonMining, CHEESE_CHANCE, flightPlan, cowSwap, moonLanding} from '../moonmission/games.mjs';
 import {newLander, stepLander, SOFT} from '../moonmission/lander.mjs';
 import {makeLand, growTown, anchors} from '../abbietown/town.mjs';
 
@@ -25,29 +25,30 @@ function play(m, {maxS = 4000, choice = () => 0, onFx = () => {}} = {}) {
  return out;
 }
 
-test('the four moon-base games are played to the end by a bot family', () => {
- const m = createMission(), fx = play(m), done = fx.filter(e => e.fx === 'game-done').map(e => e.game);
- assert.deepEqual(done, ['wire', 'zapper', 'harmonizer', 'buggy']);
+test('Chapter 2: the five moon-base games are played to the end by a bot family', () => {
+ const m = createMission({chapter: 2}), fx = play(m), done = fx.filter(e => e.fx === 'game-done').map(e => e.game);
+ assert.deepEqual(done, ['mining', 'wire', 'zapper', 'harmonizer', 'buggy']);
  for (const id of ['airlock-badge', 'gem-shard', 'star-seed']) assert.ok(m.state.items.some(i => i.id === id), id);
 });
 
-test('Part 1 plays through from the black truck to the Moon base pad', () => {
+test('Chapter 1 plays from the black truck to the Moon: three launch consoles, then the Polaroid', () => {
  const m = createMission(), fx = play(m);
  assert.ok(m.state.done, 'reached the end');
- assert.equal(fx.at(-1).fx, 'end');
- assert.ok(m.state.items.some(i => i.id === 'memory-key'), "Daddy's memory key");
+ assert.equal(fx.at(-1).fx, 'end'); assert.equal(fx.at(-1).id, 'chapter-1');
+ assert.deepEqual(fx.filter(e => e.fx === 'game-done').map(e => e.game), ['flight', 'cows', 'landing']);
+ assert.ok(fx.some(e => e.fx === 'polaroid') && m.state.items.some(i => i.id === 'moon-polaroid'), 'the Polaroid');
  for (const id of ['suit-abbie', 'suit-ani', 'snack-packs', 'old-radio']) assert.ok(m.state.items.some(i => i.id === id), id);
  const kinds = fx.map(e => e.fx);
- for (const k of ['stamp', 'kaboom', 'eyes-open', 'liftoff', 'landed', 'golden-key']) assert.ok(kinds.includes(k), k);
+ for (const k of ['stamp', 'kaboom', 'eyes-open', 'liftoff', 'golden-key', 'polaroid']) assert.ok(kinds.includes(k), k);
  assert.ok(kinds.indexOf('stamp') < kinds.indexOf('kaboom') && kinds.indexOf('kaboom') < kinds.indexOf('liftoff'));
 });
 
 test('every beat opens with a mission card and its zone; the zones are light on Earth and dark after liftoff', () => {
  const m = createMission(), fx = play(m), cards = fx.filter(e => e.fx === 'card');
- assert.equal(cards.length, BEATS.length);
+ const ch1 = BEATS.slice(0, BEATS.findIndex(b => b.id === 'arrive')); assert.equal(cards.length, ch1.length);
  assert.ok(cards[0].clock === 'T-24:00:00' && cards[1].clock === 'T-00:45:00');
  const zones = fx.filter(e => e.fx === 'zone');
- assert.deepEqual(zones.map(z => z.id), BEATS.map(b => b.zone));
+ assert.deepEqual(zones.map(z => z.id), ch1.map(b => b.zone));
  const launch = fx.findIndex(e => e.fx === 'liftoff');
  assert.ok(zones.every((z, i) => fx.indexOf(z) < launch ? z.mood === 'light' : true));
  assert.ok(zones.filter(z => fx.indexOf(z) > launch).every(z => z.mood === 'dark'));
@@ -147,3 +148,28 @@ test('the mission starts at the coffee shop curb on Main Street, from the town a
 });
 
 test('the clock reads like a launch clock', () => { assert.equal(fmtClock(-2700), 'T-00:45:00'); assert.equal(fmtClock(10), 'T+00:00:10'); assert.equal(fmtClock(-86400), 'T-24:00:00'); });
+
+test('moon cheese: a bot crew wins the charm with exactly three cheeses, and a kiosk win repeats', () => {
+ for (const seed of [1, 2, 3, 4, 5]) {
+  const g = moonMining(['daddy', 'abbie', 'ani'], seed); let t = 0;
+  while (!g.done && t < 600) { for (const e of botMoves({name: 'mining', ...g.view()})) g.input(e); g.step(.2); t += .2; }
+  assert.ok(g.done, 'seed ' + seed); assert.equal(g.G.cheese, 3); assert.equal(g.G.charm, true);
+ }
+});
+test('moon cheese: about one broken rock in three drops cheese, rocks grow back, nobody fails', () => {
+ let broke = 0, cheese = 0;
+ for (let seed = 1; seed <= 300; seed++) { const g = moonMining(['daddy'], seed, 1e9); for (let i = 0; i < 6; i++) { g.input({player: 'daddy', rock: i, swing: true}); g.step(.5); g.input({player: 'daddy', rock: i, swing: true}); g.step(.5); }
+  g.step(1); broke += g.G.mined; cheese += g.G.rocks.filter(r => r.state === 'cheese').length + g.G.cheese; }
+ assert.ok(Math.abs(cheese / broke - CHEESE_CHANCE) < .04, String(cheese / broke));
+ const g = moonMining(['daddy'], 9, 1e9); g.input({player: 'daddy', rock: 0, swing: true}); g.step(.5); g.input({player: 'daddy', rock: 0, swing: true}); g.step(5); g.step(5);
+ assert.equal(g.G.rocks[0].state, 'rock'); assert.equal(g.G.rocks[0].hp, 2);
+});
+
+test('launch consoles: Daddy needs the gold window but a miss only widens it; Ani swaps by matching; Abbie always lands', () => {
+ const f = flightPlan(['daddy']); f.input({press: true}); f.step(.1); f.input({press: true}); assert.equal(f.G.stage, 0); assert.equal(f.G.misses, 1); assert.ok(f.G.tol > .1);
+ let t = 0; while (!f.done && t < 200) { for (const e of botMoves({name: 'flight', ...f.view()})) f.input(e); f.step(.05); t += .05; } assert.ok(f.done); assert.deepEqual(f.G.fired, ['stage-1', 'stage-2', 'retro']);
+ const c = cowSwap(['ani'], 3); c.input({cow: 0}); const wrong = (c.G.cows[0].want + 1) % 6; c.input({veg: wrong}); assert.equal(c.G.swapped, 0); assert.ok(c.G.shake > 0);
+ t = 0; while (!c.done && t < 100) { for (const e of botMoves({name: 'cows', ...c.view()})) c.input(e); c.step(.1); t += .1; } assert.ok(c.done); assert.equal(c.G.swapped, 6);
+ for (const seed of [1, 2, 3]) { const l = moonLanding(['abbie'], seed); t = 0; while (!l.done && t < 300) { for (const e of botMoves({name: 'landing', ...l.view()})) l.input(e); l.step(.1); t += .1; } assert.ok(l.done, 'seed ' + seed); }
+ const idle = moonLanding(['abbie'], 1); t = 0; while (!idle.done && t < 300) { idle.step(.1); t += .1; } assert.ok(idle.done, 'hands off still ends (bouncy)');
+});

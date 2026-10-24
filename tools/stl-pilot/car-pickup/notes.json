@@ -1,0 +1,77 @@
+{
+  "slug": "car-pickup",
+  "stages": {
+    "import": {
+      "seconds": 0.01,
+      "tris": 15306,
+      "files": [
+        "source_body.stl",
+        "source_wheel.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.23,
+      "tris": 15302,
+      "open_edges_before": 3,
+      "open_edges_after": 3,
+      "dust_shells_removed": 0
+    },
+    "orient_and_wheels": {
+      "seconds": 0.01,
+      "tris": 33914,
+      "wheels": 4,
+      "body_dims_mm": [
+        176.5,
+        84.0,
+        41.0
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.01,
+      "tris": 33914,
+      "final_size_m_wh_l": [
+        2.45,
+        1.069,
+        4.6
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 2.94,
+      "tris": 5000,
+      "parts": {
+        "body": {
+          "before": 9098,
+          "after": 4120
+        },
+        "wheel": {
+          "before": 6204,
+          "after": 220
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.26,
+      "tris": 5000,
+      "glb": "car-pickup.glb",
+      "bytes": 306440
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 5000,
+  "pipeline": "stl_cars.py",
+  "scale_to_metres": {
+    "factor": 0.026065198272013035,
+    "final_size_m": [
+      2.45,
+      1.069,
+      4.6
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 5000,
+  "high_poly_tris": 9098,
+  "wheel_count": 4,
+  "script_total_s": 3.85,
+  "process_wall_s": 4.75
+}

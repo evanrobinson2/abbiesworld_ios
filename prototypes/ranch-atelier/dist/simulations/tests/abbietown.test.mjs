@@ -56,7 +56,7 @@ import {ENTRANCES, backUrl, available} from '../abbietown/entrances.mjs';
 import {GATES} from '../worlds/worlds.mjs';
 test('every town entrance is a real gate of the worlds model, or a known town-only one', () => {
   for (const id of Object.keys(ENTRANCES)) { assert.ok(id.startsWith('town:')); if (GATES[id]) assert.equal(GATES[id].world, 'town'); }
-  assert.equal(backUrl('town:lab-door'), '/town?at=town%3Alab-door');
+  assert.equal(backUrl('town:truck'), '/town?at=town%3Atruck');
   assert.ok(!available('town:cafe-cellar', {items: []})); assert.ok(available('town:cafe-cellar', {items: ['cafe-key']}));
   for (const e of Object.values(ENTRANCES)) assert.ok(e.url || e.kind === 'stage');
 });

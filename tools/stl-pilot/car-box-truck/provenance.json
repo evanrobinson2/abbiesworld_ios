@@ -1,0 +1,23 @@
+{
+  "slug": "car-box-truck",
+  "title": "Box Truck Toy",
+  "model_url": "https://www.printables.com/model/911977-box-truck-toy",
+  "author": "D3D",
+  "author_url": "https://www.printables.com/@d3dp",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "category": "toy car",
+  "origin": "author's original creation",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "5e92963f9572348581aeaf3aaf76d6a73a345cf247c20146600d60f9acf627b5",
+      "bytes": 723084
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

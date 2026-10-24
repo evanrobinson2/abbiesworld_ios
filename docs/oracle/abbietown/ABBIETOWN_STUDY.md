@@ -166,3 +166,40 @@ The town is the in-game hub the café, basement, science lab and Moon Mission pl
 - Coming back: a game opened from the town gets `?from=<url>`; the url is `/town?at=<gate id>`, and the town flies to that gate's scene. The older `?from=cafe` also lands Downtown.
 - `window.AbbieTown`: `entrances`, `go(gate, state)`, `scenes`, `enterScene(id, {look, fov, dist, azimuth, pitch, lock})`, `exitScene()`, `registerScene({id, region, anchor, facing, bounds, look})` (region null parks it off-map), `mount(id, {onFrame, onExit})` returning `{group, setMood, dispose}`, and `stage` (THREE, scene, camera, controls, renderer, clock, dioGroup, farGroup, tiles with spots, `frame(fn)`, `flyTo`, `setLook`, `hideChrome`). Events: `abbietown:scene-enter`, `abbietown:scene-exit`, `abbietown:enter`, `abbietown:cafe-door`.
 - Scenes on the tiles: `cafe-curb`, `lab-door`, `abbie-kitchen`, `treehouse`, `anis-kitchen`, `launch-pad`, `school-door`, and `dio-<region>`.
+
+## The Moon Mission starts at the café curb (Evan, 2026-10-23 3:33 PM)
+"This needs to be fully integrated into the winchester diorama." The town side of the `town:truck` entrance is
+`mission.block.js` (inlined after `dioramas.block.js`): a black truck parked in Main Street outside the café. Tapping it
+calls `AbbieTown.go('town:truck')`; the `abbietown:enter` listener for module `moon-mission` loads
+`simulations/moonmission/town-mount.mjs` (the mission side, AW-STUDY-0036) and starts it on the stage. `/town?mission`
+opens straight on it (`?beat=<id>` jumps ahead). While a stage module runs, `stage.hideChrome` now hides every town bar
+(the toolbar and the year bar); the truck comes back to the curb when the mission ends.
+
+
+## Winchester, MA: the seven-hex board (Evan, 2026-10-23 4:31 PM: "I approve")
+One board, seven flat-top hexes in three zones, named Winchester, MA (`AbbieTown.board.name`). Built on `/town` from the real
+land at one shared squeeze (`BOARD` in `dioramas.block.js`), so heights meet across every hex edge. Blueprint:
+`docs/oracle/abbietown/BLUEPRINT.html` (live at /studies/abbietown/blueprint.html).
+- Downtown (3): `downtown` (The Square: the high school at the middle where the three zones meet, church park, café, Frozen
+  Hoagies, Comella's, lab, noticeboard), `depot-river` (depot, rail yard, mill), `reservoir-hills` (the big water, dock, trail, lookout).
+- Ani's side (2): `neighbourhood` (the nine house types in three tiers), `anis-side` (cul de sac, Horn Pond, hill, Launch).
+- Abbie and Daddy's side (2): `abbie-daddy-side` (home, yard, Muraco door, Leonard Field), `gingerbread-hill` (the Gingerbread
+  House, Daddy's sealed bunker door behind it, a pond).
+- The Launch Road runs from Launch across the north of Abbie's hex to Gingerbread Hill.
+- Minimap logos: the three zones have one (church, duck, house); the high school has none.
+- Code: `places.block.js` (the new models), `decorate.block.js` (the procedural decorator: fences, hedges, beds, mailboxes,
+  reeds, lily pads, stone walls, rocks, meadow flowers, groves), `dioramas.block.js` (the board).
+- For the tiles that come next (Moon, Ranch): `AbbieTown.board = {name, hexSide, hexes, slots (the 12 open hexes touching the
+  seven, board metres east/north of the middle), heightAt(x, y) (the squeezed real ground, defined beyond the seven hexes too),
+  tileAt(x, y)}`. A new tile takes its edge from `heightAt`, so it conforms to Winchester's topography.
+- Spots (tile-local, `AbbieTown.stage.tiles[id].spots`): downtown `cafe`, `cafeRoof`, `lab`, `school`/`highschool`, `noticeboard`,
+  `common`; anis-side `ani`, `culdesac`, `launch`; abbie-daddy-side `home`, `muraco`, `leonard` (plus `gingerbread`, `bunker`,
+  `launch` translated from the hexes that really hold them, so the Moon Mission's lookups keep working); gingerbread-hill
+  `gingerbread`, `bunker`.
+- Fixed on the way: the old lattice dropped one row of triangles along one side of every tile (a serrated edge).
+- Not done yet: Main Street granite setts, a tilt-shift pass for the opening tour, the hand-modelled tree houses.
+- Skate park (for the toy-car coaster, AW-STUDY-0054): a flat concrete pad by the high school on the `downtown` hex. Spot
+  `downtown.skatepark` (tile-local x, z, y, facing, `curb`, `out`, `street`); scene id `skate-park` (region `downtown`).
+
+### Board queries for the cart (Effect Hunt)
+`AbbieTown.board.obstaclesNear(x, y, r)` returns houses, places and trees within `r` of a point (board metres east/north of the middle hex) as `{x, y, r, kind: 'tree'|'building', hex}`. `AbbieTown.board.roadSpawns(every = 30)` returns drivable street points as `{hex, x, y, heading (radians, east = 0, counter-clockwise), width}`.

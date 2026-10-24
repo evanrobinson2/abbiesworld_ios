@@ -12,7 +12,7 @@ function buildHouse(type, tier, W, D, H, wall, roofc, hash) {
  const roof = (w, rh, d, c, x, y, z, ry = 0) => { const m = new THREE.Mesh(gableGeo, hkM(c)); m.scale.set(d, rh, w); m.position.set(x, y, z); m.rotation.y = Math.PI / 2 + ry; m.castShadow = true; g.add(m); return m; }; // ridge along x
  const cylM = (r, h, c, x, y, z) => { const m = new THREE.Mesh(HK.cyl, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
  const cone = (r, h, c, x, y, z) => { const m = new THREE.Mesh(HK.cone, hkM(c)); m.scale.set(r, h, r); m.position.set(x, y, z); m.castShadow = true; g.add(m); return m; };
- const win = (x, y, z, w = .9, h = 1.1, side = 0) => { if (side) b(.12, h, w, WIN, x, y, z); else { b(w + .3, h + .3, .1, TRIM, x, y - .15, z - .01); b(w, h, .16, WIN, x, y, z); } };
+ const win = (x, y, z, w = .9, h = 1.1, side = 0) => { if (side) b(.12, h, w, WIN, x, y, z); else { b(w + .3, h + .3, .1, TRIM, x, y - .15, z - .01); b(w, h, .16, WIN, x, y, z); b(.07, h, .2, TRIM, x, y, z + .02); b(w, .07, .2, TRIM, x, y + h / 2 - .05, z + .02); if (tier > 0) { b(.22, h, .12, DOOR, x - w / 2 - .22, y - .15, z); b(.22, h, .12, DOOR, x + w / 2 + .22, y - .15, z); } } };
  const door = (x, z) => { b(1.1, 1.9, .2, DOOR, x, 0, z); b(.12, .12, .24, '#d8b24a', x + .35, .95, z); };
  const chimney = (x, z, hh, c = '#8a4a36') => b(.6, hh, .6, c, x, 0, z);
  const row = (n, y, z, span, w, hgt) => { for (let i = 0; i < n; i++) win(n === 1 ? 0 : -span / 2 + span * i / (n - 1), y, z, w, hgt); };

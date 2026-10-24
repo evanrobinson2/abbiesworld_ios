@@ -54,8 +54,8 @@ export function installStoryBook(host){
  root.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();setOpen(false);}});
 
  // Reading aloud. narrating() holds the next beat until the line has been heard.
- function say(text,{min=Math.max(4500,text.split(/\s+/).length*380)}={}){narrationUntil=performance.now()+min;live.textContent=text;try{if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=.95;u.pitch=1.12;const voice=speechSynthesis.getVoices().find(v=>/en/i.test(v.lang)&&/(female|zira|aria|jenny|samantha|google us)/i.test(v.name));if(voice)u.voice=voice;speechSynthesis.speak(u);}catch{}}
- const narrating=()=>performance.now()<narrationUntil||(('speechSynthesis' in window)&&speechSynthesis.speaking);
+ function say(text,{min=Math.max(4500,text.split(/\s+/).length*380)}={}){narrationUntil=performance.now()+min;live.textContent=text;}
+ const narrating=()=>performance.now()<narrationUntil;
 
  function setMode(next){mode=next;
   const busy=['thinking','building','playing'].includes(mode);

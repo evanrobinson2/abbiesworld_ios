@@ -1,0 +1,23 @@
+{
+  "slug": "car-sedan",
+  "title": "Red sedan",
+  "model_url": "https://www.printables.com/model/834935-low-poly-car",
+  "author": "Jibraan Ahmed",
+  "author_url": "https://www.printables.com/@JibraanAhmed_1958699",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "category": "toy car",
+  "origin": "author's original creation",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "be54be2e8b5048771d63497542f310af8e139bd16ede69099ce9ed9ca1c29406",
+      "bytes": 147484
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

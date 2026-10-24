@@ -80,3 +80,15 @@ list, known icons, name length, two stats or fewer, everything inside the safe z
 ppi, subject centred and sized for the art style, nothing clipped, and pop-out height (5–15% of the card).
 
 `library/` holds web previews listed in /explore (Cards). Picture sources and the cut-out method are in `provenance.json`. Fonts are Fredoka and Nunito (SIL OFL, in `fonts/`).
+
+## World event cards
+
+`type: "event"` (set `events.json`, page `/cards/?set=/cards/events.json`) is for things that happen to the whole world:
+weather, time of day, sky and space. They are told apart from tile cards at a glance: a night-blue frame with rays
+(pattern `rays`), a burst-edged art window, and a **WORLD EVENT** banner in the event's own `color`. Events carry no
+cost; the bottom-left stat is what the event gives. Art is `artMode: "scene"`: the forge paints the sky, ground and
+weather in flat cel colour from `spec.scene` (`paint-rain`, `meteorite`, `rain`, `storm`, `snow`, `rainbow`, `dawn`,
+`night`, `fog`, `aurora`), and an optional `art.model` (the meteorite uses the in-game GLB) stands in it. Scene art is
+ours by construction, so it needs no `art.status`.
+
+In the game, `showEventCard(id)` from `event-card.mjs` slides the card in from the right edge instead of a side panel.

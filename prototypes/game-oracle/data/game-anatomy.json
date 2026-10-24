@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-23-wesnoth-animation",
-  "updatedAt": "2026-10-23T17:34:40.877992+00:00",
+  "revision": "anatomy-2026-10-24-endless-sky-lifecycle",
+  "updatedAt": "2026-10-24T00:48:15.962960+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 100,
+    "findings": 108,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 65,
+    "sourceFilesFetched": 70,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1144,13 +1144,166 @@
               1227
             ]
           }
+        },
+        {
+          "domain": "systems",
+          "title": "Mission offers and acceptance have separate eligibility checks",
+          "finding": "CanOffer checks context-specific source filters, offer/failure conditions, repeat limits and feasibility of offer/accept/decline/defer actions. CanAccept separately checks acceptance conditions, offer/accept action feasibility and available space. CreateMissions skips job templates when the current planet lacks a job-board service and routes jobs separately from other offered missions. This distinguishes an offer from a capacity-validated acceptance; UI handling is not yet traced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L981-L1050",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              981,
+              1050
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:981-1050",
+            "source/PlayerInfo.cpp:4747-4782"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Procedural missions begin failed and become valid only after instantiation",
+          "finding": "Instantiate builds a new result with hasFailed=true, copies authored settings and selects locations from filters. Missing filtered waypoints, stopovers or destinations return the failed result. A missing or invalid fixed destination falls back to the current planet when available. The normal successful path substitutes display text and clears hasFailed at the end. CreateMissions excludes failed instantiated results before adding them to available lists. This is authored-template instantiation, not proof of procedural story generation; selection distributions and all nested action behavior remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L1483-L1560",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              1483,
+              1560
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:1483-1560",
+            "source/Mission.cpp:1758-1772",
+            "source/PlayerInfo.cpp:4765-4782"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Player mission capacity includes reclaimable commodity space and extra crew bunks",
+          "finding": "HasSpace(PlayerInfo) compares mission cargo with free cargo plus commodity cargo, and passengers with free bunks plus flagship crew above required crew. The Ship overload instead tests strictly free cargo and bunks. Subsequent sale/unloading and crew-dismissal operations remain untraced.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L1054-L1068",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              1054,
+              1068
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:1054-1068"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Default cargo-job payment scales with route and payload",
+          "finding": "A bare payment directive adds 150 to paymentMultiplier. GameAction instantiation computes payment + (jumps + 1) * payload * paymentMultiplier. Mission instantiation defines payload as cargoSize + 10*passengers. Thus the inspected Cargo [0] template, which specifies bare completion payment, derives its reward from generated cargo quantity and calculated jumps. MissionAction instantiates the action before dialog substitution and preserves completion-payment text across later actions. Route calculation and actual credit transfer remain outside this bounded trace.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/GameAction.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/GameAction.cpp#L185-L192",
+            "blobSha": "3bf8247b5b34ce8c517a10ddc399dddd318747f6",
+            "lines": [
+              185,
+              192
+            ]
+          },
+          "supportingEvidence": [
+            "source/GameAction.cpp:185-192",
+            "source/GameAction.cpp:550-552",
+            "source/Mission.cpp:1613-1620",
+            "source/MissionAction.cpp:355-380"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Landing resolves failure before completion and makes one extra dependency pass",
+          "finding": "StepMissions first reconciles destroyed mission NPC ships and executes each mission stopover action. It then tests failure before completion; otherwise, arrivals can run visit actions. A second pass checks failure/completion again because one mission action may change another mission. This is two passes, not a general fixed-point solver. Nonunique visible jobs aggregate unfinished-arrival dialogs. The final sweep removes cargo/passenger references absent from the active mission list.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/PlayerInfo.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/PlayerInfo.cpp#L4788-L4893",
+            "blobSha": "694875380eaa26d9ae1fc164eb7f2ddffaebfd9b",
+            "lines": [
+              4788,
+              4893
+            ]
+          },
+          "supportingEvidence": [
+            "source/PlayerInfo.cpp:4788-4893"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Mission removal leaves the active list before callbacks and cleans cargo afterward",
+          "finding": "RemoveMission moves the mission into doneMissions before executing its trigger, preserving lifetime for dialogs and preventing a self-failing callback from finding it in the active list again. It then removes mission cargo from the player hold and each ship. Mission::Do updates fail/abort counters before checking action feasibility, so an unavailable fail action does not prevent failure accounting. Abort without its own action uses the fail action for compatibility. Complete counters are updated only after the action feasibility check. This traces normal control flow; exceptions, persistence and UI dialog lifecycle remain unexamined.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/PlayerInfo.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/PlayerInfo.cpp#L2822-L2839",
+            "blobSha": "694875380eaa26d9ae1fc164eb7f2ddffaebfd9b",
+            "lines": [
+              2822,
+              2839
+            ]
+          },
+          "supportingEvidence": [
+            "source/PlayerInfo.cpp:2822-2839",
+            "source/Mission.cpp:1266-1316"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Deadlines mark failure after the due date; landing resolves removal",
+          "finding": "CheckDeadline marks a mission failed only when it has a deadline strictly earlier than today and has not already been marked failed. Equality with the due date does not trigger this check. PlayerInfo checks deadlines during its date-update loop, emits a message for newly expired visible missions, and skips daily actions for failed missions. The inspected landing path later prioritizes failure removal. This traces the named paths, not every possible failure-removal caller.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L936-L945",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              936,
+              945
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:936-945",
+            "source/PlayerInfo.cpp:913-922",
+            "source/PlayerInfo.cpp:4834-4837"
+          ]
+        },
+        {
+          "domain": "systems",
+          "title": "Arrival is insufficient when mission cargo remains in another system",
+          "finding": "CanComplete requires the destination or matching completion filter and IsSatisfied. Satisfaction checks remaining waypoints/stopovers, completion conditions, action feasibility, NPC success and nonoptional timers. It then blocks completion for mission passengers or any mission cargo entry on an out-of-system ship, including zero-mass mission cargo. A carried ship without its own system is treated as present if its parent is in the current system. This is a source-level completion gate, not proof of total cargo conservation or actual unloading behavior.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Mission.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Mission.cpp#L1073-L1128",
+            "blobSha": "4144910a76fce2db2fc1b78e21b681b46130c35d",
+            "lines": [
+              1073,
+              1128
+            ]
+          },
+          "supportingEvidence": [
+            "source/Mission.cpp:1073-1128"
+          ]
         }
       ],
       "coverage": {
         "mechanics": "not yet studied",
-        "systems": "not yet studied",
+        "systems": "partial static evidence",
         "simulation": "partial static evidence",
-        "procedural-generation": "not yet studied",
+        "procedural-generation": "partial static evidence",
         "ui": "partial static evidence",
         "ux": "not yet studied",
         "rendering": "partial static evidence",
@@ -1162,9 +1315,9 @@
       "inventoryUrl": "/data/anatomy/endless-sky.json",
       "lesson": {
         "status": "design inference; not implemented in Ranch Atelier",
-        "text": "Use one map with task-specific overlays, and let simulation entities supply the data that drives their rendered parts."
+        "text": "Use one map with task-specific overlays, and let simulation entities supply the data that drives their rendered parts. Keep template eligibility, concrete instantiation and acceptance capacity as separate decisions, and prevent incomplete generated jobs from entering offer lists. Not implemented Ranch behavior. Remove an item from the active collection before invoking callbacks that could revisit it; preserve lifetime until UI consumers finish and clean dependent cargo explicitly. Not implemented Ranch behavior."
       },
-      "nextPass": "Investigate economy updates, mission generation and AI scheduling next. Determine which content is authored versus generated; asset file counts alone cannot answer this.",
+      "nextPass": "Runtime, persistence, exceptions and full action side effects remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },

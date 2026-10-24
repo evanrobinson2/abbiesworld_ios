@@ -575,7 +575,24 @@ The 3D version (Evan, 18:40Z: "make the moon mission in the game world; Meshy fo
 
 Goal 3 (Evan, 19:15Z): production quality, low-poly isometric, following the same loop. Built so far: the isometric camera is the default in `world.html` (rooms cut away, `?view=fp` for first person), and games 3 to 6 are pure models in `simulations/moonmission/games.mjs` (wire puzzle at the airlock, bug zapper in the habitat, Star Child harmonizer in the cave, buggy ride on the crater road), each with its own 3D scene, per-player controls and a bot test. Nobody can fail in any of them. Still missing for "done": real Meshy heroes (stand-ins today), the cafe and truck hi-fi model passes, sound and the designed voices on the 3D page, dialog moved onto the shared kit's tree runner, and the slide-to-escape style framing and effects polish.
 
+In the town (Evan, 19:33Z / 3:33 PM: "this needs to be fully integrated into the winchester diorama"): /town now starts
+the mission. A black truck waits in Main Street outside the café on the Downtown diorama; tapping it (or `/town?mission`)
+runs `town-mount.mjs` on the town's stage through the `town:truck` entrance (town side: `docs/oracle/abbietown/mission.block.js`).
+
 ## 16. How it was made, and how to be faster next time
 To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
 the reference art is frozen first (section 9), the couch kit goes into `simulations/`, tests run by state, the
 `whats-new.json` re-insert script, concept art in parallel.
+
+
+## 18. Chapter 1 and Chapter 2 (Evan, 2026-10-23 20:28Z)
+- Chapter 1 is getting to the Moon and ends there. Round 1 is getting ready (flight check, packing, radio, oxygen, helmets, the arm switch). Round 2 is the launch and journey on three tactile consoles, one 2D game each, played one after another:
+  - Daddy, the pilot: a flight plan with three burns (detach stage 1, detach stage 2, retro boosters for the gravity assist). Two clicks per burn: start the sweep, then click when the marker is in the gold window. A miss widens the window.
+  - Ani: the cow swap (Evan's idea). Tag a cow, give it the vegetable it wants; six cows trot off to the moon farm. Alternatives pitched: Star fuel, Pack the rocket, Moon cows.
+  - Abbie: lands us (thrust, steer left and right; lights and feet automatic; a hard touch is a bounce).
+  - Everyone then celebrates with a Polaroid of the trip (item `moon-polaroid`), and the chapter ends (`end: chapter-1`).
+- Chapter 2 is the Moon base: `createMission({chapter: 2})` starts at the `arrive` beat: outpost (moon cheese), airlock wires, habitat bugs, Star Child, buggy. `?chapter=2` works on `/studies/moon-mission/world.html` and `/town?mission`.
+- Code: `games.mjs` (flightPlan, cowSwap, moonLanding), `consoles.mjs` (the three 2D canvases and their touch/keys), `hud.mjs` (mounts the console in the player's panel, Polaroid overlay). Tests cover all three with a bot family.
+
+## 19. The standalone test page is gone (Evan, 2026-10-23 21:27Z)
+- Evan rejected `/studies/moon-mission/world.html`: the Moon Mission plays inside the real Winchester board at /town, nowhere else. The page is removed from the site and from whats-new. The modules it used stay (`mission.mjs`, `world3d.mjs`, `hud.mjs`, `consoles.mjs`, `town-mount.mjs`); the in-town build reuses them. `?chapter=` and `?beat=` work on /town?mission.

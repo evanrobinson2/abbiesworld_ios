@@ -1,0 +1,24 @@
+{
+  "slug": "potion-bottle",
+  "title": "Wizard Potion Bottle",
+  "model_url": "https://www.printables.com/model/257760-wizard-potion-bottle",
+  "author": "Jc Wentzel",
+  "author_url": "https://www.printables.com/@JcWentzel_289380",
+  "licence": "Creative Commons Attribution 4.0 (CC BY 4.0)",
+  "licence_url": "http://creativecommons.org/licenses/by/4.0/",
+  "source_file": "WizardPotionBottle.stl",
+  "category": "fantasy prop",
+  "origin": "author's original creation (imported from Thingiverse by the author)",
+  "attribution_required": true,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source.stl",
+      "sha256": "67809690044a335059d3e4a53746389d287a51a398b98a5e03f9e1ae0c16a3d4",
+      "bytes": 10434084
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

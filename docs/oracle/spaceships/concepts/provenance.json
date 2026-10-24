@@ -1,0 +1,79 @@
+{
+  "generated": "2026-10-23",
+  "mode": "Relax",
+  "model": "v8.2 Standard",
+  "ar": "16:9",
+  "note": "Prompts 1-6 composed from the design sheet, as no prompt files existed. Full-size PNGs of each 4-image grid.",
+  "jobs": [
+    {
+      "concept": 1,
+      "title": "key art: Earthrise lunar landing pad",
+      "jobId": "3e099f6e-d8de-4aef-b1c5-acdcd117520b",
+      "url": "https://www.midjourney.com/jobs/3e099f6e-d8de-4aef-b1c5-acdcd117520b",
+      "files": [
+        "aurora_1_0.jpg",
+        "aurora_1_1.jpg",
+        "aurora_1_2.jpg",
+        "aurora_1_3.jpg"
+      ]
+    },
+    {
+      "concept": 2,
+      "title": "orthographic design sheet",
+      "jobId": "0d0f4352-8a00-4a72-95f0-480e55f7e7eb",
+      "url": "https://www.midjourney.com/jobs/0d0f4352-8a00-4a72-95f0-480e55f7e7eb",
+      "files": [
+        "aurora_2_0.jpg",
+        "aurora_2_1.jpg",
+        "aurora_2_2.jpg",
+        "aurora_2_3.jpg"
+      ]
+    },
+    {
+      "concept": 3,
+      "title": "three-ship lineup",
+      "jobId": "310f0c5f-4028-45b5-a804-01ad7e7a71c3",
+      "url": "https://www.midjourney.com/jobs/310f0c5f-4028-45b5-a804-01ad7e7a71c3",
+      "files": [
+        "aurora_3_0.jpg",
+        "aurora_3_1.jpg",
+        "aurora_3_2.jpg",
+        "aurora_3_3.jpg"
+      ]
+    },
+    {
+      "concept": 4,
+      "title": "cutaway interior",
+      "jobId": "51283d63-e980-4187-96dc-32468c89b2c1",
+      "url": "https://www.midjourney.com/jobs/51283d63-e980-4187-96dc-32468c89b2c1",
+      "files": [
+        "aurora_4_0.jpg",
+        "aurora_4_1.jpg",
+        "aurora_4_2.jpg",
+        "aurora_4_3.jpg"
+      ]
+    },
+    {
+      "concept": 5,
+      "title": "cockpit interior",
+      "jobId": "6bb584e2-d782-4fd4-84f5-74e352035b56",
+      "url": "https://www.midjourney.com/jobs/6bb584e2-d782-4fd4-84f5-74e352035b56",
+      "files": [
+        "aurora_5_0.jpg",
+        "aurora_5_1.jpg",
+        "aurora_5_2.jpg",
+        "aurora_5_3.jpg"
+      ]
+    },
+    {
+      "concept": 6,
+      "title": "takeoff, vertical thrust",
+      "jobId": "def03ab5-290e-4f8c-82d2-6f1761a99e2c",
+      "url": "https://www.midjourney.com/jobs/def03ab5-290e-4f8c-82d2-6f1761a99e2c",
+      "files": [
+        "aurora_6_2.jpg"
+      ]
+    }
+  ],
+  "prompts": "Prompt text was not recorded: prompts 1-6 were composed from the design sheet and no prompt files existed."
+}

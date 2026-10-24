@@ -1,0 +1,87 @@
+{
+  "slug": "chicken",
+  "stages": {
+    "import": {
+      "seconds": 0.16,
+      "tris": 1110016,
+      "files": [
+        "source.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 3.44,
+      "tris": 1110016,
+      "open_edges_before": 0,
+      "open_edges_after": 0,
+      "dust_shells_removed": 0,
+      "welded_verts": 0
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.0,
+      "tris": 1110016,
+      "final_size_m": [
+        0.4,
+        0.266,
+        0.29
+      ]
+    },
+    "decimate": {
+      "seconds": 18.67,
+      "tris": 8000,
+      "per_part": {
+        "body": {
+          "fallback": null,
+          "before": 1110016,
+          "budget": 8000,
+          "ratio": 0.1216,
+          "after": 8000,
+          "attempts": 2
+        }
+      }
+    },
+    "uv": {
+      "seconds": 1.06,
+      "tris": 8000,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 1.45,
+      "tris": 8000,
+      "texture_px": 512,
+      "extrusion_m": 0.008
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 8000,
+      "materials": [
+        "mat_chicken_clay"
+      ]
+    },
+    "export": {
+      "seconds": 0.65,
+      "tris": 8000,
+      "glb": "chicken.glb",
+      "bytes": 277624
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 8000,
+  "scale_to_metres": {
+    "factor": 0.0082970339679768,
+    "source_size_mm": [
+      48.21,
+      32.03,
+      34.99
+    ],
+    "final_size_m": [
+      0.4,
+      0.266,
+      0.29
+    ]
+  },
+  "high_poly_tris": 1110016,
+  "final_tris": 8000,
+  "script_total_s": 26.3,
+  "process_wall_s": 27.22,
+  "bake_source": "repaired high-poly (1110016 tris) built from the source STL(s) in this folder; not stored separately"
+}

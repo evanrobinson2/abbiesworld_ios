@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Abbie’s World: the demo</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<style>
+/* The demo flow (opening tour, scientist chat, board, mission board). The 3D stage fills the screen; everything else is
+   a glass object summoned over it. The play HUD is two icon buttons and has zero words. */
+html,body{margin:0;height:100%;overflow:hidden;background:#cfe6f5;font-family:var(--app-font,system-ui,sans-serif);color:var(--app-ink,#4c4330);-webkit-user-select:none;user-select:none;touch-action:none}
+#town{position:fixed;inset:0;width:100%;height:100%;border:0;display:block}
+#smoke{position:fixed;inset:0;z-index:50;pointer-events:none;display:none}
+#gate{position:fixed;inset:0;z-index:40;display:grid;place-items:center;background:linear-gradient(160deg,#ffd9ea,#cfd8ff 55%,#cfeedd);transition:opacity .5s}
+#gate.go{opacity:0;pointer-events:none}
+#gate div{display:grid;gap:18px;justify-items:center;text-align:center;padding:24px}
+#gate h1{margin:0;font:700 clamp(30px,7vw,52px)/1.05 var(--app-heading,Georgia,serif);letter-spacing:-.02em}
+#gate button,.glass{appearance:none;border:1px solid #fff9;color:inherit;font:inherit;cursor:pointer;background:linear-gradient(170deg,#ffffffcc,#ffffff55);box-shadow:0 10px 26px #2a1f1230,inset 0 1px 0 #fff,inset 0 -3px 6px #00000014;backdrop-filter:none}
+#gate button{border-radius:999px;padding:16px 36px;font-size:22px;font-weight:700;transition:transform .2s}
+#gate button:disabled{opacity:.5;cursor:progress}
+#gate button:hover:not(:disabled){transform:translateY(-3px) scale(1.03)}
+#dock{position:fixed;z-index:30;right:max(12px,env(safe-area-inset-right));bottom:max(12px,env(safe-area-inset-bottom));display:flex;gap:10px;align-items:flex-end}
+#dock[hidden],#chest[hidden]{display:none}
+#pin{width:56px;height:56px;border-radius:20px;font-size:26px}
+#tray{display:flex;gap:10px;padding:8px 12px;border-radius:22px;background:linear-gradient(170deg,#c99a63,#8a5b32);box-shadow:0 8px 20px #0004,inset 0 2px 0 #ffffff44}
+#tray:empty{display:none}
+.tile{width:56px;height:62px;border:0;cursor:pointer;background:none;position:relative;filter:drop-shadow(0 6px 8px #0003);transition:transform .2s}
+.tile::before{content:"";position:absolute;inset:0;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(160deg,#9fe07a,#5aa05a)}
+.tile.moon::before{background:linear-gradient(160deg,#e4e4ee,#8a8a98)}
+.tile i{position:relative;font-style:normal;font-size:26px}
+.tile.held{transform:translateY(-8px) scale(1.1)}.tile.locked{opacity:.55}
+#chest{position:fixed;z-index:30;left:max(12px,env(safe-area-inset-left));bottom:max(12px,env(safe-area-inset-bottom));width:150px;padding:8px 10px 10px;border-radius:16px;background:linear-gradient(170deg,#7a5232,#4a301e);box-shadow:0 10px 22px #0005,inset 0 2px 0 #ffffff33,inset 0 -4px 8px #0006;color:#ffe9b8;text-align:center}
+#chest b{display:block;font:700 12px var(--app-heading,Georgia,serif);letter-spacing:.06em;margin-bottom:5px}
+#chest div{display:grid;grid-template-columns:repeat(5,1fr);gap:4px}
+.slot{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;font-size:14px;background:#00000050;box-shadow:inset 0 2px 3px #0008}
+.slot.have{background:radial-gradient(circle at 35% 30%,#fff3b0,#e8b84a)}
+/* the mission notebook (Evan, 21:25Z): paper, rings, a hand-ruled checklist; the chosen line gets a pencil circle and a halo in the world */
+.missions{position:fixed;z-index:25;left:50%;bottom:max(14px,env(safe-area-inset-bottom));transform:translate(-50%,40px) rotate(-.6deg);opacity:0;width:min(560px,calc(100vw - 24px));max-height:46vh;overflow:auto;transition:.5s cubic-bezier(.2,.9,.3,1.1);
+ padding:18px 20px 16px 44px;border-radius:6px 16px 16px 6px;color:#2c3a5a;font-family:"Bradley Hand","Segoe Print","Comic Sans MS",cursive;
+ background:repeating-linear-gradient(#fffdf3 0 31px,#bcd3ee 31px 32px);box-shadow:0 18px 40px #0005,inset 8px 0 14px #0001;border-left:3px solid #e9a3a3}
+.missions.in{opacity:1;transform:translate(-50%,0) rotate(-.6deg)}
+.rings{position:absolute;left:-11px;top:14px;bottom:14px;display:flex;flex-direction:column;justify-content:space-between}
+.rings u{display:block;width:26px;height:9px;border-radius:5px;background:linear-gradient(#e8e8ee,#8a8a98);box-shadow:0 2px 3px #0005}
+.missions h2{margin:0 0 4px;font-size:26px;font-weight:700;letter-spacing:.02em;line-height:32px}
+.missions ul{list-style:none;margin:0;padding:0}
+.missions li{position:relative;display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 4px;cursor:pointer;border-radius:12px}
+.missions li:hover{background:#ffe9a830}
+.missions li.on{outline:2.5px solid #3a5fd0;outline-offset:-2px;border-radius:18px 24px 16px 22px}
+.box{flex:none;width:24px;height:24px;border:2.5px solid #2c3a5a;border-radius:5px;display:grid;place-items:center;font-size:22px;line-height:1;color:#2d9d4a;font-weight:800}
+.txt{flex:1;display:grid;line-height:1.15}.txt b{font-size:19px}.txt small{font-size:14px;opacity:.75}
+.charm{font-size:20px}
+.missions li.done .txt b{text-decoration:line-through;text-decoration-thickness:2px}
+.missions li.sealed{opacity:.55}.missions li.finale .txt b{font-size:22px}
+.missions em{font:700 12px system-ui;font-style:normal;padding:3px 9px;border-radius:999px;background:#3f7ea6;color:#fff}
+.go{display:flex;gap:6px}.go button{width:40px;height:40px;border-radius:14px;font-size:20px;padding:0}
+#mission{position:fixed;inset:0;z-index:45;background:#000}
+#mission[hidden]{display:none}
+#mission iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+#mission button{position:absolute;z-index:2;left:max(10px,env(safe-area-inset-left));top:max(10px,env(safe-area-inset-top));width:44px;height:44px;border-radius:16px;font-size:20px}
+@media(max-height:640px){.txt small{display:none}}
+@media(max-width:760px){#chest{width:110px}}
+</style>
+</head>
+<body>
+<iframe id="town" title="Winchester, MA"></iframe>
+<script>document.getElementById("town").src = new URLSearchParams(location.search).get("town") || "/town?play&quiet"; // ?town=<url> points the frame elsewhere for testing</script>
+<canvas id="smoke"></canvas>
+<div id="gate"><div><h1>Abbie’s World</h1><button aria-label="Begin" disabled>▶</button></div></div>
+<div id="chest" hidden></div>
+<div id="dock" hidden><button id="pin" class="glass" aria-label="Missions">📌</button><div id="tray"></div></div>
+<div id="mission" hidden><button class="glass" aria-label="Back to the board">✕</button><iframe title="Mission" allow="autoplay; fullscreen"></iframe></div>
+<script type="importmap">{"imports": {"three": "/vendor/three.module.js", "three/addons/loaders/GLTFLoader.js": "/vendor/loaders/GLTFLoader.js"}}</script>
+<script type="module">import {start} from '/simulations/demo/flow.mjs'; start();</script>
+<script type="module">/* Abbie's backpack: the inventory, on every page she plays (AW-STUDY-0046). Tap it or press B. */ import {inventory} from '/simulations/inventory.mjs?v=12'; inventory();</script>
+</body>
+</html>

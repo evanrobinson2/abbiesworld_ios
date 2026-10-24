@@ -36,8 +36,10 @@ body[data-room] .bar{background:var(--bg)}
 .block[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);box-shadow:0 3px 0 color-mix(in srgb,var(--accent) 60%,#000)}
 .block:focus-visible,.tile:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 .rail{position:fixed;top:calc(env(safe-area-inset-top,0px) + 62px);z-index:3;display:flex;flex-direction:column;gap:22px}
-.rail.left{left:max(16px,env(safe-area-inset-left,0px))}
-.rail.right{right:max(46px,calc(env(safe-area-inset-right,0px) + 30px));align-items:flex-end} /* clear of the Context tab */
+.rail.left{left:max(16px,env(safe-area-inset-left,0px));display:grid;grid-template-columns:repeat(2,auto);gap:26px 30px;align-content:start;padding:6px 0 30px;max-height:calc(100vh - 340px);overflow-y:auto;scrollbar-width:none} /* the cast is 14 figures: two columns, and it scrolls clear of the drawer */
+.rail.left::-webkit-scrollbar,.rail.right::-webkit-scrollbar{display:none}
+.rail.left .tile span{white-space:normal;width:74px;text-align:center;line-height:1.1}
+.rail.right{right:max(46px,calc(env(safe-area-inset-right,0px) + 30px));align-items:flex-end;max-height:calc(100vh - 340px);overflow-y:auto;overflow-x:visible;scrollbar-width:none;padding:6px 0 30px} /* clear of the Context tab */
 .tile{position:relative;width:58px;height:58px;border:0;padding:0;border-radius:var(--r);background:var(--surface) center/cover no-repeat;cursor:pointer;
  box-shadow:0 3px 0 var(--edge);transform:translateY(-3px);transition:transform .08s}
 .tile:active{transform:translateY(0)}
@@ -73,7 +75,7 @@ body[data-dark] .title small,body[data-dark] .now .src{color:#d9d2e6}
 <body>
 <canvas id="stage" aria-label="The character on stage. Press on it to pick it up."></canvas>
 <iframe class="frame" id="room" hidden title="Character Studio room"></iframe>
-<div id="load">Rigging the brute…</div>
+<div id="load">Rigging the hero…</div>
 <header class="bar">
  <div class="mark" aria-hidden="true">AW</div>
  <div class="title">Character Studio<small>AW-STUDY-0037</small></div>
@@ -128,7 +130,7 @@ box.castShadow = true; box.visible = false; scene.add(box);
 toonify(T, scene, TOON_LOOKS.sunday);
 const film = filmLook(T, renderer, scene, camera, {fogDensity: .02, fogStart: 9, focus: 6, aperture: .7, aoRadius: .3, bloom: .12, threshold: 1.3, sunCol: '#ffd6a0'});
 
-let dir = 'studio', bodyId = 'red', room = 'stage', real = true, tour = false, dressed = null;
+let dir = 'studio', bodyId = 'cs-4', room = 'stage', real = true, tour = false, dressed = null;
 let actor = null, move = byId.idle, t0 = performance.now() / 1000;
 const loader = new GLTFLoader(), cache = {}, drawing = {value: 0};
 let mocap = {};

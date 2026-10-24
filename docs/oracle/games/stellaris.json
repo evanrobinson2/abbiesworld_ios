@@ -49,10 +49,14 @@
       "outlines": false,
       "outline": "none",
       "surface": "pbr",
-      "post": [],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.15
+      "post": [
+        "bloom",
+        "colour grade"
+      ],
+      "signature": "Each species ship set shares one shape language (mammalian, aquatic, molluscoid...) at strategy-map distance.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "A ship family is one shape idea repeated at many sizes; it must read as a silhouette from very far away."
     },
     "motion": null,
     "palette": null,

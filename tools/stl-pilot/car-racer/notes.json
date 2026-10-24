@@ -1,0 +1,77 @@
+{
+  "slug": "car-racer",
+  "stages": {
+    "import": {
+      "seconds": 0.02,
+      "tris": 58172,
+      "files": [
+        "source_body.stl",
+        "source_wheel.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.33,
+      "tris": 58172,
+      "open_edges_before": 0,
+      "open_edges_after": 0,
+      "dust_shells_removed": 0
+    },
+    "orient_and_wheels": {
+      "seconds": 0.02,
+      "tris": 122738,
+      "wheels": 4,
+      "body_dims_mm": [
+        150.0,
+        35.0,
+        55.0
+      ]
+    },
+    "scale_pivot": {
+      "seconds": 0.04,
+      "tris": 122738,
+      "final_size_m_wh_l": [
+        1.344,
+        1.216,
+        3.2
+      ]
+    },
+    "decimate_uv_bake": {
+      "seconds": 4.64,
+      "tris": 4992,
+      "parts": {
+        "body": {
+          "before": 36650,
+          "after": 4120
+        },
+        "wheel": {
+          "before": 21522,
+          "after": 218
+        }
+      },
+      "texture_px": 512
+    },
+    "export": {
+      "seconds": 0.18,
+      "tris": 4992,
+      "glb": "car-racer.glb",
+      "bytes": 291872
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 5000,
+  "pipeline": "stl_cars.py",
+  "scale_to_metres": {
+    "factor": 0.021333333333333336,
+    "final_size_m": [
+      1.344,
+      1.216,
+      3.2
+    ],
+    "axes": "width, height, length"
+  },
+  "final_tris": 4992,
+  "high_poly_tris": 36650,
+  "wheel_count": 4,
+  "script_total_s": 5.59,
+  "process_wall_s": 6.52
+}

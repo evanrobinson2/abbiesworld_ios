@@ -37,7 +37,14 @@ export const FACETS = [
   {id: 'rainbow', name: 'Rainbow', strap: '#ff7a59', metal: '#ffd23f', rainbow: true}, {id: 'black-chrome', name: 'Black and chrome', strap: '#262a30', metal: '#dfe5ec'}]},
  {id: 'lining', name: 'Lining', options: [
   {id: 'lemon', name: 'Lemon', c: '#ffe98a'}, {id: 'lilac', name: 'Lilac', c: '#cdb6f2'}, {id: 'seaglass', name: 'Sea glass', c: '#a9e3d6'},
-  {id: 'peach', name: 'Peach', c: '#ffc4a3'}, {id: 'night', name: 'Starry night', c: '#26306b', stars: true}, {id: 'rainbow', name: 'Rainbow', c: '#ffffff', rainbow: true}]}
+  {id: 'peach', name: 'Peach', c: '#ffc4a3'}, {id: 'night', name: 'Starry night', c: '#26306b', stars: true}, {id: 'rainbow', name: 'Rainbow', c: '#ffffff', rainbow: true}]},
+ // Her notebook rides in the backpack and holds her quests (Evan, 23:39Z: "let her pick her notebook as a facet of her
+ // backpack", fluffy covers like his picture). It is hers whatever the style, so a new style keeps it (keep: true).
+ // Drawn by notebook.mjs.
+ {id: 'notebook', name: 'Notebook', keep: true, options: [
+  {id: 'strawberry', name: 'Strawberry', c: '#ff4fa3'}, {id: 'unicorn', name: 'Unicorn', c: '#f6f2ee'}, {id: 'puppy', name: 'Puppy', c: '#ffe45a'},
+  {id: 'rainbow-bear', name: 'Rainbow bear', c: '#ff9a5c'}, {id: 'bunny', name: 'Bunny', c: '#ffc9d6'}, {id: 'kitty', name: 'Kitty', c: '#c6a4f0'},
+  {id: 'teddy', name: 'Teddy', c: '#ffb0c2'}]}
 ];
 
 // ---------- the ten styles (MJ proofs: tools/midjourney/outputs/backpack-0046/) ----------
@@ -62,15 +69,22 @@ export const CORE_MEMORIES = 11; // Grace's basement 10 + the school roof 1, so 
 export const CHARMS = [
  // The first charm (Evan, 16:49Z): win the cell game, Abbie's science adventure, and get off the slide.
  {id: 'tardigrade', name: 'Tardigrade', icon: '🦠', quest: "Win Abbie's science adventure"},
- {id: 'first-memory', name: 'Gold coin', icon: '🪙', quest: "Find one of Daddy's core memories", when: s => s.coins >= 1},
- {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Find all ten memories in Grace's basement", when: s => s.places["Grace's basement"] >= 10},
- {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Find the memory on the school roof', when: s => Object.keys(s.places).some(p => /school/i.test(p) && s.places[p] > 0)},
+ // Every reward is a backpack charm (Evan, 20:51Z): no gold coin charm. The floppy disk is won by beating the word game
+ // in Grace's basement, two minutes of play in all; the basement game calls earnCharm('basement').
+ {id: 'basement', name: 'Floppy disk', icon: '💾', quest: "Beat the word game in Grace's basement (two minutes of play)"},
+ // Coins are scrapped (Evan, 20:51Z), so no charm unlocks from them any more: the school game calls earnCharm('school-roof')
+ // when she climbs onto the roof, and the heart crowns the set.
+ {id: 'school-roof', name: 'Star', icon: '⭐', quest: 'Climb onto the school roof'},
  {id: 'brass-key', name: 'Brass key', icon: '🗝️', quest: "Find the café's secret key", when: s => s.items.includes('cafe-basement-key')},
  {id: 'moon-key', name: 'Moon', icon: '🌙', quest: 'Earn the key to the Moon base', when: s => s.items.some(i => /moon/i.test(i))},
- {id: 'all-memories', name: 'Heart', icon: '💛', quest: "Find every one of Daddy's core memories", when: s => s.coins >= CORE_MEMORIES},
+ {id: 'all-memories', name: 'Heart', icon: '💛', quest: 'Earn every other charm', crown: true},
  {id: 'bub', name: 'Bub', icon: '🐕', quest: 'Play fetch with bub'},
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
- {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'}
+ {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
+ {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster'},
+ {id: 'moon-buggy', name: 'Moon buggy', icon: '🚙', quest: 'Roll the Moon Buggy through the carwash and get soaked'},
+ // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
+ {id: 'moon-cheese', name: 'Moon cheese', icon: '🧀', quest: 'Mine three moon cheeses at the Moon kiosk', repeat: true, hang: 2}
 ];
 
 // ---------- saved look and charms ----------
@@ -87,7 +101,7 @@ export function look(v = saved()) {
 }
 export function setLook(patch) {
  const v = saved(), next = {...v, ...patch};
- if (patch.style && patch.style !== v.style) for (const f of FACETS) if (!(f.id in patch)) next[f.id] = styleOf(patch.style).look[f.id];
+ if (patch.style && patch.style !== v.style) for (const f of FACETS) if (!(f.id in patch) && !f.keep) next[f.id] = styleOf(patch.style).look[f.id];
  save(next); return look(next);
 }
 export const onLook = fn => { const h = () => fn(look()); addEventListener(EVENT, h); return () => removeEventListener(EVENT, h); };
@@ -103,19 +117,55 @@ function progress() {
 }
 export function earnedCharms() {
  const s = progress(), given = saved().charms || {};
- return CHARMS.filter(c => given[c.id] || (c.when && c.when(s))).map(c => c.id);
+ const has = new Set(CHARMS.filter(c => !c.crown && (given[c.id] || (c.when && c.when(s)))).map(c => c.id));
+ // The heart comes with every other one-off charm (moon cheese, which she can win again and again, doesn't count).
+ const all = CHARMS.every(c => c.crown || c.repeat || has.has(c.id));
+ return CHARMS.filter(c => has.has(c.id) || (c.crown && (given[c.id] || all))).map(c => c.id);
 }
 export const coinCount = () => progress().coins;
+// How many of a charm she owns (0 or 1, or the count for a repeatable one).
+export function charmCount(id) { const v = saved(), c = CHARMS.find(x => x.id === id); if (!c) return 0; if (c.repeat) return v.counts?.[id] || (v.charms?.[id] ? 1 : 0); return earnedCharms().includes(id) ? 1 : 0; }
+// She keeps each charm on her backpack or in her jewellery box (Evan, 20:51Z). A new charm goes on the backpack.
+export const inBox = id => !!saved().boxed?.[id];
+export function putInBox(id, yes = true) { const v = saved(); v.boxed = {...(v.boxed || {})}; if (yes) v.boxed[id] = true; else delete v.boxed[id]; save(v); }
+// What hangs on the backpack: each charm she has and hasn't put away, a repeatable one up to its hang limit (moon cheese: two).
+export function keychain() { const boxed = saved().boxed || {}, extra = UPGRADES.keyring.levels[upgradeLevel('keyring')].extra; return earnedCharms().filter(id => !boxed[id]).flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), (c.hang || 1) + (c.repeat ? extra : 0)))).fill(id); }); }
+
+// ---------- upgrades: the plain way to make the backpack better (Evan, 2026-10-24: "a standard, straightforward inventory
+// upgrade system"). Each upgrade has a few levels; a level costs stars, and she has one star for every memory coin and every
+// charm she has earned. Stars are only ever spent on upgrades, so what she has earned is never taken away.
+export const UPGRADES = {
+ pockets: {name: 'Pockets', icon: '🎒', blurb: 'Room for more things', levels: [
+  {cap: 8, cost: 0, says: 'Carries 8 things'}, {cap: 12, cost: 2, says: 'Carries 12 things'}, {cap: 16, cost: 3, says: 'Carries 16 things'}, {cap: 24, cost: 4, says: 'Carries 24 things'}]},
+ keyring: {name: 'Keyring', icon: '🔑', blurb: 'More of the same charm on the ring', levels: [
+  {extra: 0, cost: 0, says: 'Repeat charms hang as usual'}, {extra: 1, cost: 2, says: 'One more of each repeat charm hangs'}, {extra: 2, cost: 3, says: 'Two more of each repeat charm hang'}]}
+};
+export const upgradeLevel = id => Math.max(0, Math.min(UPGRADES[id].levels.length - 1, (saved().up || {})[id] | 0));
+export const capacity = () => UPGRADES.pockets.levels[upgradeLevel('pockets')].cap;
+export const starsSpent = () => Object.keys(UPGRADES).reduce((n, id) => n + UPGRADES[id].levels.slice(1, upgradeLevel(id) + 1).reduce((a, l) => a + l.cost, 0), 0);
+export const starsLeft = () => Math.max(0, coinCount() + earnedCharms().length - starsSpent());
+// The next level of an upgrade, or null at the top.
+export const nextLevel = id => UPGRADES[id].levels[upgradeLevel(id) + 1] || null;
+export function buyUpgrade(id) {
+ const next = UPGRADES[id] && nextLevel(id); if (!next || next.cost > starsLeft()) return false;
+ const v = saved(); save({...v, up: {...(v.up || {}), [id]: upgradeLevel(id) + 1}}); return true;
+}
+// A charm she can win again (repeat: true) counts up instead; earnCharm then returns how many she has.
 export function earnCharm(id) {
- if (!CHARMS.some(c => c.id === id)) return false;
- const v = saved(); v.charms = {...(v.charms || {})}; if (v.charms[id]) return false;
+ const c = CHARMS.find(x => x.id === id); if (!c) return false;
+ const v = saved(); v.charms = {...(v.charms || {})};
+ if (c.repeat) { v.counts = {...(v.counts || {})}; v.counts[id] = (v.counts[id] || (v.charms[id] ? 1 : 0)) + 1; v.charms[id] ||= new Date().toISOString(); save(v); return v.counts[id]; }
+ if (v.charms[id]) return false;
  v.charms[id] = new Date().toISOString(); save(v); return true;
 }
 // Charms she has earned but not yet seen arrive: returns them once, then remembers they were seen.
 export function newCharms() {
  const v = saved(), seen = new Set(v.seen || []), earned = earnedCharms(), fresh = earned.filter(id => !seen.has(id));
- if (fresh.length) { v.seen = [...seen, ...fresh]; try { localStorage.setItem(STORE, JSON.stringify(v)); } catch {} }
- return fresh.map(id => CHARMS.find(c => c.id === id));
+ // A repeatable charm arrives again each time its count goes up.
+ const seenN = {...(v.seenCounts || {})}, again = earned.filter(id => CHARMS.find(c => c.id === id).repeat && seen.has(id) && charmCount(id) > (seenN[id] || 1));
+ earned.forEach(id => { if (CHARMS.find(c => c.id === id).repeat) seenN[id] = charmCount(id); });
+ if (fresh.length || again.length) { v.seen = [...seen, ...fresh]; v.seenCounts = seenN; try { localStorage.setItem(STORE, JSON.stringify(v)); } catch {} }
+ return [...fresh, ...again].map(id => CHARMS.find(c => c.id === id));
 }
 
 // A small flat backpack for the chronograph register, in her colours.
@@ -163,6 +213,28 @@ export function patternCanvas(base, pattern, accent, cloth) {
 }
 function star2d(g, cx, cy, r, ri) { g.beginPath(); for (let i = 0; i < 10; i++) { const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? ri : r; g.lineTo(cx + Math.cos(a) * rr, cy + Math.sin(a) * rr); } g.closePath(); g.fill(); }
 function heart2d(g, cx, cy, s) { g.beginPath(); g.moveTo(cx, cy + s * .9); g.bezierCurveTo(cx - s * 1.4, cy - s * .1, cx - s * .6, cy - s * 1.1, cx, cy - s * .35); g.bezierCurveTo(cx + s * .6, cy - s * 1.1, cx + s * 1.4, cy - s * .1, cx, cy + s * .9); g.fill(); }
+// The cloth's relief as a normal map, made from a grain-only height canvas (the colour canvas would raise its own
+// stripes and dots). Canvas twill, pebbled leather, nubbly plush and a basket weave each get their own.
+function normalTexture(cloth) {
+ const key = 'normal|' + cloth; if (texCache.has(key)) return texCache.get(key);
+ const N = 256, h = Object.assign(document.createElement('canvas'), {width: N, height: N}), g = h.getContext('2d');
+ g.fillStyle = '#808080'; g.fillRect(0, 0, N, N);
+ const rnd = (() => { let a = 7; return () => (a = (a * 16807) % 2147483647) / 2147483647; })();
+ if (cloth === 'wicker') { for (let y = 0; y < N; y += 32) for (let x = 0; x < N; x += 32) { const v = ((x + y) / 32) % 2; for (let k = 0; k < 4; k++) { g.fillStyle = k % 2 ? '#a0a0a0' : '#d8d8d8'; v ? g.fillRect(x + 2 + k * 7, y + 2, 5, 28) : g.fillRect(x + 2, y + 2 + k * 7, 28, 5); } } }
+ else if (cloth === 'vinyl') { g.fillStyle = '#868686'; for (let i = 0; i < 80; i++) g.fillRect(rnd() * N, rnd() * N, 3, 3); }
+ else if (cloth === 'leather') { for (let i = 0; i < 1400; i++) { const x = rnd() * N, y = rnd() * N, r = 2 + rnd() * 3; g.fillStyle = `rgba(${rnd() < .5 ? 40 : 200},${rnd() < .5 ? 40 : 200},128,.35)`; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill(); } }
+ else if (cloth === 'plush') { for (let i = 0; i < 2600; i++) { g.fillStyle = rnd() < .5 ? 'rgba(210,210,210,.5)' : 'rgba(60,60,60,.5)'; g.fillRect(rnd() * N, rnd() * N, 3, 3); } }
+ else { for (let i = 0; i < N; i += 4) { g.fillStyle = (i / 4) % 2 ? '#b0b0b0' : '#707070'; g.fillRect(i, 0, 2, N); g.fillStyle = (i / 4) % 2 ? '#a0a0a0' : '#787878'; g.fillRect(0, i + 2, N, 2); } }
+ const src = g.getImageData(0, 0, N, N).data, out = g.createImageData(N, N), k = cloth === 'vinyl' ? 1.2 : cloth === 'leather' ? 2.4 : 3;
+ const hv = (x, y) => src[(((y + N) % N) * N + ((x + N) % N)) * 4] / 255;
+ for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+  const dx = (hv(x + 1, y) - hv(x - 1, y)) * k, dy = (hv(x, y + 1) - hv(x, y - 1)) * k, l = Math.hypot(dx, dy, 1), o = (y * N + x) * 4;
+  out.data[o] = (-dx / l * .5 + .5) * 255; out.data[o + 1] = (dy / l * .5 + .5) * 255; out.data[o + 2] = (1 / l * .5 + .5) * 255; out.data[o + 3] = 255;
+ }
+ g.putImageData(out, 0, 0);
+ const t = new T.CanvasTexture(h); t.wrapS = t.wrapT = T.RepeatWrapping; t.repeat.set(2.6, 2.6); t.anisotropy = 8;
+ texCache.set(key, t); return t;
+}
 function liningTexture(o) {
  const key = 'lining|' + o.id; if (texCache.has(key)) return texCache.get(key);
  const N = 128, cv = Object.assign(document.createElement('canvas'), {width: N, height: N}), g = cv.getContext('2d');
@@ -184,17 +256,21 @@ function materials(l, st) {
  const map = patternTexture(col, cloth === 'wicker' ? 'plain' : l.pattern, accent, cloth);
  const rough = {fabric: .88, canvas: .92, plush: 1, leather: .6, vinyl: .42, wicker: .85}[cloth] ?? .85;
  const M = (name, o) => Object.assign(new T.MeshStandardMaterial({flatShading: true, ...o}), {name});
+ const P = (name, o) => Object.assign(new T.MeshPhysicalMaterial({flatShading: true, ...o}), {name});
  return {
-  fabric: M(`fabric ${cloth}`, {color: '#ffffff', map, bumpMap: map, bumpScale: cloth === 'vinyl' ? .2 : 1.2, roughness: rough, metalness: 0}),
+  fabric: P(`fabric ${cloth}`, {color: '#ffffff', map, normalMap: normalTexture(cloth), normalScale: new T.Vector2(1, 1).multiplyScalar(cloth === 'vinyl' ? .35 : cloth === 'plush' ? 1.4 : 1), roughness: rough, metalness: 0,
+   sheen: cloth === 'plush' ? 1 : cloth === 'canvas' ? .5 : 0, sheenRoughness: .6, sheenColor: new T.Color(col).lerp(new T.Color('#ffffff'), .5),
+   clearcoat: cloth === 'vinyl' ? .8 : cloth === 'leather' ? .25 : 0, clearcoatRoughness: .25}),
   pocket: M('fabric pocket', {color: shade(col, -.07), roughness: rough, map: l.pattern === 'plain' ? null : map}),
-  trim: M('trim strap', {color: trim.strap, roughness: .7}),
+  trim: P('trim strap', {color: trim.strap, roughness: .68, sheen: .6, sheenRoughness: .5, sheenColor: new T.Color(trim.strap).lerp(new T.Color('#ffffff'), .5), normalMap: normalTexture('canvas'), normalScale: new T.Vector2(.6, .6)}),
   trim2: M('trim strap', {color: trim.rainbow ? '#5fb7ff' : shade(trim.strap, -.08), roughness: .7}),
-  metal: M('metal hardware', {color: trim.metal, roughness: .3, metalness: .75}),
+  metal: M('metal hardware', {color: trim.metal, roughness: .24, metalness: .9, envMapIntensity: 1.3}),
   lining: M('lining', {color: '#ffffff', map: liningTexture(lin), roughness: .95, side: T.DoubleSide, emissive: lin.c, emissiveIntensity: .12}),
+  thread: M('thread', {color: light ? shade(col, -.32) : shade(col, .42), roughness: .9}),
   dark: M('ink dark', {color: '#2a2230', roughness: .5}),
   white: M('paint white', {color: '#fbf7ee', roughness: .6}),
   pink: M('felt pink', {color: '#f6a3bf', roughness: .95}),
-  glass: M('glass porthole', {color: '#9fd8ff', roughness: .08, metalness: .1, transparent: true, opacity: .72, emissive: '#1d4d7a', emissiveIntensity: .25}),
+  glass: P('glass porthole', {color: '#9fd8ff', roughness: .05, metalness: .1, clearcoat: 1, clearcoatRoughness: .05, transparent: true, opacity: .72, emissive: '#1d4d7a', emissiveIntensity: .25}),
   leaf: M('leaf green', {color: '#4f9a45', roughness: .8}),
   gold: M('metal gold', {color: '#ffcc33', roughness: .28, metalness: .8, emissive: '#5a3c00', emissiveIntensity: .25}),
   neon1: M('vinyl neon pink', {color: '#ff4fa3', roughness: .4}), neon2: M('vinyl neon yellow', {color: '#ffe23f', roughness: .4}),
@@ -233,6 +309,8 @@ function pocketShape(id, w) {
 // About 5 cm tall in the world; every part is named.
 function gem(points, t, apex, centre = [0, 0]) {
  // points: the outline (x, y), counter-clockwise. A rim band of thickness 2t, and a fan to an apex on each side.
+ const area = points.reduce((a, [x, y], i) => { const [x2, y2] = points[(i + 1) % points.length]; return a + x * y2 - x2 * y; }, 0);
+ if (area < 0) points = points.slice().reverse(); // the facets assume a counter-clockwise outline
  const pos = [], n = points.length, [cx, cy] = centre;
  const P = (x, y, z) => pos.push(x, y, z);
  for (let i = 0; i < n; i++) {
@@ -247,18 +325,76 @@ const starPts = (r, ri, k = 5) => Array.from({length: k * 2}, (_, i) => { const 
 const heartPts = (k, n = 18) => { const s = new T.Shape(); heartShape(s, k); return s.getSpacedPoints(n).slice(0, -1).map(p => [p.x, p.y]); };
 function heartShape(s, k) { s.moveTo(0, -k * .9); s.bezierCurveTo(-k * 1.5, k * .1, -k * .7, k * 1.2, 0, k * .45); s.bezierCurveTo(k * .7, k * 1.2, k * 1.5, k * .1, 0, -k * .9); }
 
+// ---------- Meshy charms ----------
+// The charms that take up canon are Meshy models made from their Midjourney picks (Evan, 17:27Z), cleaned in Blender
+// (simulations/assets/backpack/charms/, centred, largest side 1, Y up). Untextured ones have one material, "charm",
+// which is shaded here as enamel or gold. Until a model has loaded, or if it can't, the hand-built charm stands in.
+const CHARM_GLB = {tardigrade: 'tardigrade', 'all-memories': 'heart', 'moon-key': 'moon', rocket: 'rocket', 'school-roof': 'star', basement: 'floppy-disk',
+ bub: 'bub', barista: 'coffee-cup', 'brass-key': 'brass-key'};
+const CHARM_SHADE = {heart: ['enamel heart red', '#e8334f', .1, .22], moon: ['metal gold moon', '#f0b93a', .75, .28], rocket: ['enamel rocket red', '#d9393a', .1, .25],
+ star: ['metal gold star', '#ffc93a', .7, .3], 'floppy-disk': ['enamel floppy blue', '#2f55c8', .15, .24],
+ bub: ['enamel bub black', '#2a2622', .05, .45], 'coffee-cup': ['enamel cup cream', '#f1e6d4', .05, .4], 'brass-key': ['metal brass key', '#e0b04a', .8, .28]};
+const CHARM_SIZE = .11;
+// Turns that make each model hang the way a charm does: the water bear and bub side on, the disk and the key standing up.
+const CHARM_TURN = {tardigrade: [0, -Math.PI / 2, 0], 'floppy-disk': [Math.PI / 2, 0, 0], 'brass-key': [Math.PI / 2, 0, 0], bub: [0, -Math.PI / 2.6, 0]};
+const glbCharms = new Map(), glbLoads = new Map();
+// A small reader for these GLBs (one node, plain triangles, an optional base-colour image), so every page can load the
+// charms with its own three.js and needs no importmap for GLTFLoader.
+async function readGLB(url) {
+ const buf = await (await fetch(url)).arrayBuffer(), dv = new DataView(buf);
+ if (dv.getUint32(0, true) !== 0x46546c67) throw new Error('not a glb');
+ const jl = dv.getUint32(12, true), j = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 20, jl))), bin = 20 + jl + 8;
+ const N = {5120: Int8Array, 5121: Uint8Array, 5122: Int16Array, 5123: Uint16Array, 5125: Uint32Array, 5126: Float32Array}, W = {SCALAR: 1, VEC2: 2, VEC3: 3, VEC4: 4};
+ const acc = i => { const a = j.accessors[i], v = j.bufferViews[a.bufferView], C = N[a.componentType], n = W[a.type];
+  if (v.byteStride && v.byteStride !== n * C.BYTES_PER_ELEMENT) throw new Error('interleaved');
+  return new T.BufferAttribute(new C(buf.slice(bin + (v.byteOffset || 0) + (a.byteOffset || 0), bin + (v.byteOffset || 0) + (a.byteOffset || 0) + a.count * n * C.BYTES_PER_ELEMENT)), n, !!a.normalized); };
+ const g = new T.Group();
+ for (const node of j.nodes) {
+  if (node.mesh == null) continue;
+  for (const pr of j.meshes[node.mesh].primitives) {
+   const geo = new T.BufferGeometry();
+   for (const [k, name] of [['POSITION', 'position'], ['NORMAL', 'normal'], ['TEXCOORD_0', 'uv']]) if (pr.attributes[k] != null) geo.setAttribute(name, acc(pr.attributes[k]));
+   if (pr.indices != null) geo.setIndex(acc(pr.indices));
+   if (!geo.attributes.normal) geo.computeVertexNormals();
+   let mat = null; const pm = pr.material != null && j.materials?.[pr.material]?.pbrMetallicRoughness, ti = pm?.baseColorTexture?.index;
+   if (ti != null) { const im = j.images[j.textures[ti].source], v = j.bufferViews[im.bufferView];
+    const bmp = await createImageBitmap(new Blob([new Uint8Array(buf, bin + (v.byteOffset || 0), v.byteLength)], {type: im.mimeType || 'image/png'}), {imageOrientation: 'none'});
+    const tex = new T.Texture(bmp); tex.flipY = false; tex.colorSpace = T.SRGBColorSpace; tex.needsUpdate = true;
+    mat = new T.MeshStandardMaterial({map: tex, roughness: .3, metalness: .15}); mat.name = 'enamel charm'; }
+   const m = new T.Mesh(geo, mat); const M4 = new T.Matrix4();
+   if (node.matrix) M4.fromArray(node.matrix); else M4.compose(new T.Vector3(...(node.translation || [0, 0, 0])), new T.Quaternion(...(node.rotation || [0, 0, 0, 1])), new T.Vector3(...(node.scale || [1, 1, 1])));
+   m.applyMatrix4(M4); g.add(m);
+  }
+ }
+ return g;
+}
+export async function loadCharmModels(ids = CHARMS.map(c => c.id)) {
+ await three();
+ // Every view waits on the same load, so a second view that asks while the first is loading is rebuilt too.
+ const want = [...new Set(ids.map(id => CHARM_GLB[id]).filter(Boolean))];
+ for (const f of want) if (!glbLoads.has(f)) glbLoads.set(f, readGLB(new URL(`./assets/backpack/charms/${f}.glb`, import.meta.url).href).then(g => glbCharms.set(f, g)).catch(() => {}));
+ await Promise.all(want.map(f => glbLoads.get(f)));
+ return want.some(f => glbCharms.get(f));
+}
+function meshyCharm(id) {
+ const f = CHARM_GLB[id], src = f && glbCharms.get(f); if (!src) return null;
+ const g = new T.Group(), sh = CHARM_SHADE[f];
+ const mat = sh && Object.assign(new T.MeshStandardMaterial({color: sh[1], metalness: sh[2], roughness: sh[3], emissive: sh[2] > .5 ? '#5a3c00' : '#000', emissiveIntensity: sh[2] > .5 ? .3 : 0}), {name: sh[0]});
+ src.updateMatrixWorld(true);
+ src.traverse(o => { if (!o.isMesh) return;
+  // Geometry is copied, so a view that rebuilds (and disposes its meshes) never frees the cached model.
+  const m = new T.Mesh(o.geometry.clone().applyMatrix4(o.matrixWorld), mat || o.material || new T.MeshStandardMaterial({color: '#f7c23c'})); m.name = `charm ${f}`; m.castShadow = true; g.add(m); });
+ g.scale.setScalar(CHARM_SIZE); if (CHARM_TURN[f]) g.rotation.set(...CHARM_TURN[f]); return g;
+}
+
 function charmMesh(id, m) {
  const g = new T.Group(); g.name = `charm ${id}`;
  const M = (name, c, o = {}) => Object.assign(new T.MeshStandardMaterial({color: c, flatShading: true, roughness: .38, ...o}), {name});
  const gold = M('metal gold charm', '#f7c23c', {metalness: .55, roughness: .3, emissive: '#6a4600', emissiveIntensity: .4});
+ const meshy = meshyCharm(id); if (meshy) g.add(meshy); else {
  const add = (geo, mat, name, x = 0, y = 0, z = 0) => { const o = new T.Mesh(geo, mat); o.name = name; o.position.set(x, y, z); g.add(o); return o; };
  const ext = (shape, d, mat, name, bev = .006) => { const geo = new T.ExtrudeGeometry(shape, {depth: d, bevelEnabled: true, bevelThickness: bev, bevelSize: bev, bevelSegments: 1, curveSegments: 6}); geo.center(); return add(geo, mat, name); };
- if (id === 'first-memory') { // the gold coin of Daddy's core memories, a faceted star struck on both faces
-  add(new T.CylinderGeometry(.058, .058, .02, 14), gold, 'coin body').rotation.x = Math.PI / 2;
-  add(new T.TorusGeometry(.056, .007, 4, 14), gold, 'coin rim');
-  const st = add(gem(starPts(.034, .015), .004, .008), M('metal gold bright', '#ffd65a', {metalness: .9, roughness: .2, emissive: '#6a4a00', emissiveIntensity: .3}), 'struck star'); st.position.z = 0;
-  st.scale.z = 1.9;
- } else if (id === 'school-roof') { // the faceted gold star
+ if (id === 'school-roof') { // the faceted gold star
   add(gem(starPts(.066, .03), .01, .02), M('metal gold star', '#ffc93a', {metalness: .7, roughness: .3, emissive: '#6a4300', emissiveIntensity: .3}), 'faceted star');
  } else if (id === 'all-memories') { // the faceted red heart
   add(gem(heartPts(.052), .012, .022, [0, .005]), M('enamel heart red', '#e8334f', {roughness: .22, metalness: .1}), 'faceted heart');
@@ -271,12 +407,27 @@ function charmMesh(id, m) {
   add(gem(heartPts(.012, 10), .003, .004), M('enamel key red', '#e8334f', {roughness: .25}), 'bow heart', 0, .036, 0);
   add(new T.BoxGeometry(.013, .072, .012), gold, 'key shaft', 0, -.014, 0);
   add(new T.BoxGeometry(.024, .011, .012), gold, 'key bit', .012, -.042, 0); add(new T.BoxGeometry(.017, .01, .012), gold, 'key bit', .009, -.026, 0);
- } else if (id === 'basement') { // Grace's floppy disk
-  add(new T.BoxGeometry(.1, .1, .014), M('enamel floppy blue', '#3b5bd9', {roughness: .3}), 'floppy body');
-  add(new T.BoxGeometry(.052, .034, .016), M('metal shutter', '#d9dde4', {metalness: .8, roughness: .25}), 'floppy shutter', .006, .031, 0);
-  add(new T.BoxGeometry(.016, .022, .018), M('ink dark', '#26304f'), 'shutter window', .012, .031, 0);
-  add(new T.BoxGeometry(.072, .042, .016), M('paper label', '#fbf7ee', {roughness: .8}), 'floppy label', 0, -.022, 0);
-  add(new T.BoxGeometry(.05, .004, .017), M('ink label line', '#e8334f'), 'label line', 0, -.012, 0);
+ } else if (id === 'basement') { // Grace's floppy disk, after Evan's pick: blue enamel in dark metal, a silver shutter, a yellow label
+  const edge = M('metal floppy edge', '#3a3f52', {metalness: .7, roughness: .3}), blue = M('enamel floppy blue', '#2f55c8', {roughness: .24});
+  const silver = M('metal shutter', '#c9ccd2', {metalness: .85, roughness: .22}), dark = M('ink dark', '#1d2436');
+  const body = new T.Shape(); body.moveTo(-.05, -.05); body.lineTo(.05, -.05); body.lineTo(.05, .04); body.lineTo(.04, .05); body.lineTo(-.05, .05); body.closePath();
+  ext(body, .008, edge, 'floppy rim', .003);
+  const face = new T.Shape(); face.moveTo(-.046, -.046); face.lineTo(.046, -.046); face.lineTo(.046, .038); face.lineTo(.038, .046); face.lineTo(-.046, .046); face.closePath();
+  ext(face, .012, blue, 'floppy body', .002);
+  add(new T.BoxGeometry(.05, .032, .02), silver, 'floppy shutter', -.004, .03, 0);
+  add(new T.BoxGeometry(.016, .026, .023), M('enamel slider white', '#f4f1e8', {roughness: .5}), 'shutter slider', -.01, .03, 0);
+  add(new T.BoxGeometry(.01, .02, .023), dark, 'shutter window', .01, .03, 0);
+  add(new T.BoxGeometry(.068, .03, .02), M('enamel label yellow', '#f2c94c', {roughness: .35}), 'floppy label', .004, -.012, 0);
+  add(new T.BoxGeometry(.026, .006, .023), M('enamel label blue', '#7fd3f5', {roughness: .3}), 'label bar', .018, -.008, 0);
+  for (const x of [-.02, -.01]) add(new T.BoxGeometry(.005, .005, .023), dark, 'label dot', x, -.018, 0);
+  add(new T.BoxGeometry(.058, .012, .019), edge, 'floppy slot', .008, -.038, 0);
+  for (const [x, y] of [[-.042, .042], [-.042, -.042], [.042, -.042], [.038, .034]]) add(new T.BoxGeometry(.006, .006, .019), edge, 'corner screw', x, y, 0);
+ } else if (id === 'moon-cheese') { // a wedge of moon cheese: pale gold, faceted, with crater holes on its faces
+  const cheese = M('enamel moon cheese', '#f0bf2a', {roughness: .4, emissive: '#4a3200', emissiveIntensity: .12}), hole = M('enamel cheese hole', '#b97a10', {roughness: .6});
+  const w = new T.Shape(); w.moveTo(-.05, -.03); w.lineTo(.05, -.03); w.lineTo(-.05, .045); w.closePath();
+  add(new T.ExtrudeGeometry(w, {depth: .03, bevelEnabled: true, bevelThickness: .004, bevelSize: .004, bevelSegments: 1}), cheese, 'cheese wedge', 0, 0, -.015);
+  for (const [x, y, r, z] of [[-.03, -.012, .008, .0195], [-.012, .008, .006, .0195], [.012, -.016, .007, .0195], [-.035, .02, .005, .0195], [-.022, -.018, .006, -.0195], [0, -.008, .007, -.0195]]) {
+   const h = add(new T.CircleGeometry(r, 7), hole, 'cheese hole', x, y, z); if (z < 0) h.rotation.y = Math.PI; }
  } else if (id === 'tardigrade') { // a water bear: a plump segmented body on four pairs of stubby legs, in pink enamel (to match the cell game's water bear) with gold claws
   const skin = M('enamel tardigrade pink', '#f6a8c4', {roughness: .3, emissive: '#5a1f38', emissiveIntensity: .2}), fold = M('enamel tardigrade fold', '#e889ab', {roughness: .3});
   [-.03, -.01, .01, .03].forEach((x, i) => { const seg = add(new T.IcosahedronGeometry(.024, 1), i % 2 ? fold : skin, 'tardigrade segment', x, .002 * (i % 2), 0); seg.scale.set(.95, .82 - Math.abs(x) * 2, .8); });
@@ -304,6 +455,19 @@ function charmMesh(id, m) {
   add(new T.CylinderGeometry(.037, .037, .012, 10), M('lid white', '#fbf7ee', {roughness: .4}), 'cup lid', 0, .04, 0);
   add(new T.CylinderGeometry(.03, .036, .008, 10), M('lid white', '#fbf7ee', {roughness: .4}), 'lid rim', 0, .049, 0);
   add(new T.IcosahedronGeometry(.008, 0), M('enamel leaf', '#4f9a45'), 'sleeve mark', 0, -.005, .034).scale.z = .3;
+ } else if (id === 'toy-car') { // a little red toy car with fat black wheels
+  const red = M('enamel car red', '#e23a3a', {roughness: .25}), glass = M('enamel car window', '#9fd6f0', {roughness: .2}), tyre = M('rubber tyre', '#1d1b20', {roughness: .7});
+  add(new T.BoxGeometry(.09, .026, .044), red, 'car body', 0, -.006, 0);
+  add(new T.BoxGeometry(.046, .024, .04), red, 'car cabin', -.006, .018, 0);
+  for (const z of [-1, 1]) add(new T.BoxGeometry(.036, .016, .002), glass, 'car window', -.006, .019, z * .0205);
+  for (const x of [-.03, .03]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.013, .013, .01, 10), tyre, 'car wheel', x, -.02, z * .024).rotation.x = Math.PI / 2;
+  for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .006, .008), gold, 'car headlight', .046, -.002, z * .013);
+ } else if (id === 'moon-buggy') { // a little Moon Buggy: big lugged tyres, a split nose, tall bars
+  const body = M('enamel buggy slate', '#4a6a8a', {roughness: .3}), tyre = M('rubber tyre', '#1d1b20', {roughness: .7}), lamp = M('enamel buggy lamp', '#e8f6ff', {roughness: .2, emissive: '#bfeaff', emissiveIntensity: .6});
+  add(new T.BoxGeometry(.07, .02, .04), body, 'buggy frame', 0, -.004, 0); add(new T.BoxGeometry(.03, .024, .036), body, 'buggy nose', .026, .008, 0); add(new T.BoxGeometry(.028, .01, .03), M('enamel buggy seat', '#1e2128', {roughness: .8}), 'buggy seat', -.012, .012, 0);
+  for (const x of [-.026, .026]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.014, .014, .012, 10), tyre, 'buggy wheel', x, -.016, z * .026).rotation.x = Math.PI / 2;
+  for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .005, .006), lamp, 'buggy headlight', .044, .006, z * .01);
+  add(new T.CylinderGeometry(.002, .002, .03, 5), M('buggy bar', '#9fb3c8'), 'buggy bars', .016, .02, 0).rotation.z = .3;
  } else if (id === 'rocket') { // the red rocket with a porthole
   const red = M('enamel rocket red', '#d9393a', {roughness: .25}), cream = M('enamel rocket cream', '#f4ece0', {roughness: .3});
   add(new T.CylinderGeometry(.024, .026, .07, 8), cream, 'rocket body');
@@ -312,6 +476,7 @@ function charmMesh(id, m) {
   add(new T.CircleGeometry(.011, 10), M('glass porthole', '#5fb7ff', {roughness: .1, emissive: '#1d4d7a', emissiveIntensity: .3}), 'porthole glass', 0, .012, .0255);
   for (const a of [0, 2.1, 4.2]) { const f = add(new T.BoxGeometry(.022, .03, .006), a ? red : M('enamel fin blue', '#2e4fb8'), 'rocket fin', Math.cos(a) * .026, -.03, Math.sin(a) * .026); f.rotation.y = -a; f.rotation.z = .25 * Math.sign(Math.cos(a) || 1); }
   add(new T.CylinderGeometry(.016, .02, .012, 8), gold, 'rocket nozzle', 0, -.041, 0);
+ }
  }
  // The gold jump ring, a short chain and the bail: it hangs from the pivot at the group's origin.
  const top = new T.Box3().setFromObject(g).max.y, chain = new T.Group(); chain.name = 'charm chain';
@@ -322,6 +487,42 @@ function charmMesh(id, m) {
 }
 
 // Build one backpack. Returns the group, both halves, the open control and the charm pendulums.
+// Little real parts that make it read as sewn and zipped, not extruded: a row of stitches along a path, and zip teeth.
+// Both are InstancedMeshes (one draw call each) and named by what they are.
+function stitchRow(pts, mat, name, {step = .05, len = .026, r = .0045, closed = false} = {}) {
+ const n = pts.length, seg = [], total = (() => { let t = 0; for (let i = 0; i < n - (closed ? 0 : 1); i++) { const a = pts[i], b = pts[(i + 1) % n], d = a.distanceTo(b); seg.push(d); t += d; } return t; })();
+ const count = Math.max(2, Math.floor(total / step)), inst = new T.InstancedMesh(new T.BoxGeometry(len, r * 2, r * 2), mat, count), m4 = new T.Matrix4(), q = new T.Quaternion(), pos = new T.Vector3(), tan = new T.Vector3(), one = new T.Vector3(1, 1, 1), x = new T.Vector3(1, 0, 0);
+ let si = 0, acc = 0;
+ for (let k = 0; k < count; k++) {
+  const target = (k + .5) * total / count; while (si < seg.length - 1 && acc + seg[si] < target) { acc += seg[si]; si++; }
+  const a = pts[si], b = pts[(si + 1) % n], f = seg[si] ? (target - acc) / seg[si] : 0;
+  pos.lerpVectors(a, b, f); tan.subVectors(b, a).normalize(); q.setFromUnitVectors(x, tan);
+  inst.setMatrixAt(k, m4.compose(pos, q, one));
+ }
+ inst.name = name; inst.castShadow = false; return inst;
+}
+function zipTeeth(pts, mat, name, z, step = .017) {
+ const n = pts.length, geo = new T.BoxGeometry(.008, .0055, .011);
+ const list = []; let carry = 0;
+ for (let i = 0; i < n; i++) { const a = pts[i], b = pts[(i + 1) % n], d = a.distanceTo(b); let t = carry; while (t < d) { list.push([a.clone().lerp(b, t / d), b.clone().sub(a).normalize()]); t += step; } carry = t - d; }
+ const im = new T.InstancedMesh(geo, mat, list.length), m4 = new T.Matrix4(), q = new T.Quaternion(), one = new T.Vector3(1, 1, 1), x = new T.Vector3(1, 0, 0), side = new T.Vector3();
+ list.forEach(([p, tn], k) => { side.set(-tn.y, tn.x, 0); p.addScaledVector(side, (k % 2 ? 1 : -1) * .0042); p.z = z; im.setMatrixAt(k, m4.compose(p, q.setFromUnitVectors(x, tn), one)); });
+ im.name = name; return im;
+}
+// A flat padded strap: a rounded-rectangle section swept along a curve (the width lies across the bag).
+function ribbon(curve, w, t, segs, mat, name) {
+ const sec = [[-1, -.55], [-.55, -1], [.55, -1], [1, -.55], [1, .55], [.55, 1], [-.55, 1], [-1, .55]], pos = [], idx = [], P = curve.getSpacedPoints(segs), fr = [];
+ const up = new T.Vector3(0, 0, 1);
+ P.forEach((p, i) => { const tn = curve.getTangentAt(i / segs).normalize(), wd = new T.Vector3().crossVectors(up, tn).normalize(), th = new T.Vector3().crossVectors(tn, wd).normalize(); fr.push([p, wd, th]);
+  sec.forEach(([u, v]) => { const q = p.clone().addScaledVector(wd, u * w / 2).addScaledVector(th, v * t / 2); pos.push(q.x, q.y, q.z); }); });
+ for (let i = 0; i < segs; i++) for (let j = 0; j < 8; j++) { const a = i * 8 + j, b = i * 8 + (j + 1) % 8, c = (i + 1) * 8 + j, d = (i + 1) * 8 + (j + 1) % 8; idx.push(a, c, b, b, c, d); }
+ const g = new T.BufferGeometry(); g.setAttribute('position', new T.Float32BufferAttribute(pos, 3)); g.setIndex(idx);
+ const uv = []; for (let i = 0; i <= segs; i++) for (let j = 0; j < 8; j++) uv.push(j / 8 * 2, i / segs * 6); g.setAttribute('uv', new T.Float32BufferAttribute(uv, 2)); g.computeVertexNormals();
+ const o = new T.Mesh(g, mat); o.name = name; o.userData.frames = fr; return o;
+}
+// One charm on its own, without its chain (for reference renders and side-by-side with its Meshy model).
+export async function charmModel(id) { await three(); await loadCharmModels([id]); const c = charmMesh(id, materials(look(), styleOf('classic'))); return c.children[1]; }
+
 export function buildBackpack(l = look(), {charms = []} = {}) {
  const st = styleOf(l.style), m = materials(l, st), shape = SIL[st.id]();
  const half = DEPTH[st.id] ?? .15, bev = .045, puff = PUFF[st.id] ?? .2;
@@ -356,6 +557,15 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  const pipe = z => { const pts = outline.map(p => new T.Vector3(p.x, p.y, z)); return new T.TubeGeometry(new T.CatmullRomCurve3(pts, true), 80, .016, 4, true); };
  front.add(Object.assign(new T.Mesh(pipe(.014), m.trim), {name: 'zip piping front'}));
  back.add(Object.assign(new T.Mesh(pipe(-.014), m.trim2), {name: 'zip piping back'}));
+ // Stitching round each shell's face, and zip teeth along the rim on the cut side.
+ const rim = outline.slice(0, -1), c0 = new T.Vector2(0, cy);
+ const inset = d => rim.map((pt, i) => { const a = rim[(i + rim.length - 1) % rim.length], b = rim[(i + 1) % rim.length], tx = b.x - a.x, ty = b.y - a.y, l = Math.hypot(tx, ty) || 1; let nx = -ty / l, ny = tx / l; if (nx * (c0.x - pt.x) + ny * (c0.y - pt.y) < 0) { nx = -nx; ny = -ny; } return new T.Vector2(pt.x + nx * d, pt.y + ny * d); });
+ const on = (pts2, sign, lift) => pts2.map(q => new T.Vector3(q.x, q.y, sign * (surfaceZ(q.x, q.y) + lift)));
+ front.add(stitchRow(on(inset(.07), 1, .0015), m.thread, 'stitching front', {closed: true, step: .052}));
+ back.add(stitchRow(on(inset(.07), -1, .0015), m.thread, 'stitching back', {closed: true, step: .052}));
+ const flat = (pts2, z) => pts2.map(q => new T.Vector3(q.x, q.y, z));
+ front.add(zipTeeth(flat(inset(.03), 0), m.metal, 'zip teeth front', -.007));
+ back.add(zipTeeth(flat(inset(.03), 0), m.metal, 'zip teeth back', .007));
  for (const s of [-1, 1]) { const p = new T.Mesh(new T.BoxGeometry(.03, .06, .012), m.metal); p.name = 'zip pull'; p.position.set(s * .1, H - .045, .03); p.rotation.x = .25; front.add(p); }
 
  // Straps, handle and buckles on the back half.
@@ -363,7 +573,9 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
  const bz = (x, y) => -surfaceZ(x, y);
  for (const s of [-1, 1]) {
   const x = s * W * .22;
-  tube([new T.Vector3(x, H * .84, bz(x, H * .84) + .02), new T.Vector3(x * 1.08, H * .62, bz(x, H * .6) - .16), new T.Vector3(x * 1.15, H * .32, bz(x, H * .3) - .12), new T.Vector3(x * 1.2, H * .12, bz(x, H * .12) + .01)], .034, m.trim, 'shoulder strap', back);
+  const sc = new T.CatmullRomCurve3([new T.Vector3(x, H * .84, bz(x, H * .84) + .02), new T.Vector3(x * 1.08, H * .62, bz(x, H * .6) - .16), new T.Vector3(x * 1.15, H * .32, bz(x, H * .3) - .12), new T.Vector3(x * 1.2, H * .12, bz(x, H * .12) + .01)]);
+  const strap = ribbon(sc, .078, .028, 28, m.trim, 'shoulder strap'); back.add(strap);
+  for (const e of [-1, 1]) back.add(stitchRow(strap.userData.frames.map(([pt, wd, th]) => pt.clone().addScaledVector(wd, e * .028).addScaledVector(th, .0155)), m.thread, 'strap stitching', {step: .042, len: .02, r: .0035}));
   const b = new T.Mesh(new T.BoxGeometry(.07, .05, .02), m.metal); b.name = 'strap buckle'; b.position.set(x * 1.12, H * .26, bz(x, H * .26) - .1); back.add(b);
  }
  if (!['bunny', 'rocket'].includes(st.id)) tube([new T.Vector3(-.12, H - .03, -.04), new T.Vector3(-.08, H + .08, -.04), new T.Vector3(.08, H + .08, -.04), new T.Vector3(.12, H - .03, -.04)], .022, m.trim, 'top handle', back);
@@ -472,23 +684,29 @@ export function buildBackpack(l = look(), {charms = []} = {}) {
   front: [[-.17, .76], [.17, .76], [-.17, .24], [.17, .24], [0, .24]].map(([x, y]) => new T.Vector3(x * W / .78, y * H, -.07))
  };
  let openT = 0;
- const tmp = new T.Vector3(), inv = new T.Matrix4();
+ const tmp = new T.Vector3(), wp = new T.Vector3(), wq = new T.Quaternion(), inv = new T.Matrix4();
  return {
   group: root, front, back, H, W, half, sockets, look: l, charms: pend,
   get open() { return openT; },
   setOpen(t) { openT = t; front.rotation.x = t * Math.PI; },
-  update(dt) {
+  // world: the swing follows how the ring moves through the world (a backpack worn by a walking figure), in metres,
+  // turned into the backpack's own frame; otherwise it follows the ring inside the backpack (the viewer's toy).
+  update(dt, {world = false, gain = .02} = {}) {
    root.updateMatrixWorld(true); inv.copy(root.matrixWorld).invert();
+   if (world) root.getWorldQuaternion(wq).invert();
    for (const p of pend) {
     tmp.setFromMatrixPosition(p.anchor.matrixWorld).applyMatrix4(inv);
-    if (p.last) { const v = tmp.clone().sub(p.last).divideScalar(Math.max(dt, 1e-3)); const a = v.clone().sub(p.vel).divideScalar(Math.max(dt, 1e-3)); p.vel.copy(v);
+    if (world) wp.setFromMatrixPosition(p.anchor.matrixWorld);
+    const at = world ? wp : tmp;
+    if (p.last) { const v = at.clone().sub(p.last).divideScalar(Math.max(dt, 1e-3)); const a = v.clone().sub(p.vel).divideScalar(Math.max(dt, 1e-3)); p.vel.copy(v);
+     if (world) a.applyQuaternion(wq).clampLength(0, 60);
      // A damped pendulum driven by how its ring moves (and a breath of idle sway).
      const L = .12, g = 9.8, k = dt;
-     p.vx += (-(g / L) * Math.sin(p.ax) - a.z / L * .02 - 3.2 * p.vx) * k + Math.sin(performance.now() / 900 + p.id.length) * .002;
-     p.vz += (-(g / L) * Math.sin(p.az) + a.x / L * .02 - 3.2 * p.vz) * k;
+     p.vx += (-(g / L) * Math.sin(p.ax) - a.z / L * gain - 3.2 * p.vx) * k + Math.sin(performance.now() / 900 + p.id.length) * .002;
+     p.vz += (-(g / L) * Math.sin(p.az) + a.x / L * gain - 3.2 * p.vz) * k;
      p.ax = Math.max(-1.2, Math.min(1.2, p.ax + p.vx * k)); p.az = Math.max(-1.2, Math.min(1.2, p.az + p.vz * k));
     }
-    p.last = (p.last || new T.Vector3()).copy(tmp);
+    p.last = (p.last || new T.Vector3()).copy(at);
     p.mesh.position.copy(tmp); p.mesh.rotation.set(p.ax, p.id.length * .7, p.az);
    }
   }
@@ -511,7 +729,7 @@ function itemTexture(icon) {
 }
 
 // el: a positioned element the canvas fills. items: [{id, name, icon}], coins: a number, charms: charm ids.
-export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true} = {}) {
+export async function backpackView(el, {look: l = look(), items = [], coins = 0, charms = earnedCharms(), dressUp = false, onChange = null, onTap = null, onFocus = null, yaw = -.45, spin = true, float = false, deckHost = null, overSlot = null, onDeal = null, onPart = null} = {}) {
  await three();
  const canvas = document.createElement('canvas'); canvas.className = 'aw-bp-canvas';
  Object.assign(canvas.style, {position: 'absolute', inset: '0', width: '100%', height: '100%', display: 'block', touchAction: 'none', cursor: 'pointer'});
@@ -520,30 +738,33 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1)); renderer.outputColorSpace = T.SRGBColorSpace; renderer.shadowMap.enabled = true;
  renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.05;
  const scene = new T.Scene(), cam = new T.PerspectiveCamera(30, 1, .05, 50);
- scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.5));
+ // A small studio to reflect: a soft sky, a warm key softbox and a cool rim strip, so metal, vinyl and glass read as themselves.
+ { const es = new T.Scene(), sky = new T.Mesh(new T.SphereGeometry(10, 24, 16), new T.MeshBasicMaterial({side: T.BackSide, vertexColors: true})), pa = sky.geometry.attributes.position, col = new Float32Array(pa.count * 3), c1 = new T.Color('#e9f2ff'), c2 = new T.Color('#9a8aa6');
+  for (let i = 0; i < pa.count; i++) { const c = c2.clone().lerp(c1, Math.max(0, Math.min(1, pa.getY(i) / 10 * .5 + .5))); col.set([c.r, c.g, c.b], i * 3); }
+  sky.geometry.setAttribute('color', new T.BufferAttribute(col, 3)); es.add(sky);
+  const box = (w, h, x, y, z, k, c) => { const m = new T.Mesh(new T.PlaneGeometry(w, h), new T.MeshBasicMaterial({color: new T.Color(c).multiplyScalar(k), side: T.DoubleSide})); m.position.set(x, y, z); m.lookAt(0, 0, 0); es.add(m); };
+  box(5, 4, 4, 5, 5, 5, '#fff2d8'); box(1.2, 6, -6, 2, -3, 4, '#cfe6ff'); box(8, 1.2, 0, 8, 0, 2.5, '#ffffff');
+  const pm = new T.PMREMGenerator(renderer); scene.environment = pm.fromScene(es, .03).texture; scene.environmentIntensity = .6; pm.dispose(); es.traverse(o => { o.geometry?.dispose(); o.material?.dispose(); }); }
+ scene.add(new T.HemisphereLight('#fff6e6', '#6f5a7a', 1.0));
  const sun = new T.DirectionalLight('#fff1d6', 2.4); sun.position.set(1.6, 3, 2.4); sun.castShadow = true; sun.shadow.mapSize.set(1024, 1024); sun.shadow.camera.left = sun.shadow.camera.bottom = -1.6; sun.shadow.camera.right = sun.shadow.camera.top = 1.6; scene.add(sun);
  const rim = new T.DirectionalLight('#bfe3ff', 1.1); rim.position.set(-2, 1.5, -2); scene.add(rim);
  const floor = new T.Mesh(new T.CircleGeometry(1.2, 24), new T.ShadowMaterial({opacity: .18})); floor.rotation.x = -Math.PI / 2; floor.receiveShadow = true; scene.add(floor);
  const holder = new T.Group(); scene.add(holder);
 
  let bp = null, sprites = [], coinPile = null, state = {l: look(l), items, coins, charms};
+ let picking = null, sampledAt = 0, anchorsNow = {}, tracked = {}, bounds = null;
  let want = 0, t = 0, yawNow = yaw, yawWant = yaw, drag = null, idle = 0, zoom = 1; const touches = new Map();
  function rebuild() {
+  if (bp && focus != null) { focus = null; hop = 0; onFocus?.(null); } // a rebuilt bag has new charms: leave the close-up rather than aim at a stale one
   if (bp) { holder.remove(bp.group); bp.group.traverse(o => { if (o.isMesh) o.geometry.dispose(); }); }
-  bp = buildBackpack(state.l, {charms: state.charms}); holder.add(bp.group); bp.setOpen(t);
+  bp = buildBackpack(state.l, {charms: state.charms}); holder.add(bp.group); bp.setOpen(t); tracked = {}; sampledAt = 0;
   sprites = []; const sk = []; for (let i = 0; i < 7; i++) { if (bp.sockets.back[i]) sk.push(['back', bp.sockets.back[i]]); if (bp.sockets.front[i]) sk.push(['front', bp.sockets.front[i]]); }
   state.items.slice(0, sk.length).forEach((it, i) => {
    const [h, p] = sk[i], s = new T.Sprite(new T.SpriteMaterial({map: itemTexture(it.icon), transparent: true, depthWrite: false}));
    s.scale.setScalar(.25); s.position.copy(p); s.userData.item = it; s.renderOrder = 5; bp[h].add(s); sprites.push(s);
   });
-  // Daddy's core memories ride in the front half as a little pile of gold coins.
-  if (state.coins > 0) {
-   coinPile = new T.Group(); coinPile.name = 'gold coins';
-   const cg = new T.CylinderGeometry(.05, .05, .013, 10), cm = new T.MeshStandardMaterial({name: 'coin gold', color: '#ffcc33', metalness: .8, roughness: .28, emissive: '#5a3c00', emissiveIntensity: .3, flatShading: true});
-   for (let i = 0; i < Math.min(12, state.coins); i++) { const c = new T.Mesh(cg, cm); c.rotation.x = Math.PI / 2 + (i % 3 - 1) * .2; c.rotation.y = i * 1.3; c.position.set((i % 4 - 1.5) * .07, (Math.floor(i / 4)) * .05, -.02 - (i % 2) * .012); coinPile.add(c); }
-   coinPile.position.set(0, bp.H * .5, -.02); coinPile.userData.item = {id: 'coins', name: state.coins === 1 ? "One of Daddy's core memories" : `${state.coins} of Daddy's core memories`, icon: '🪙'};
-   bp.front.add(coinPile);
-  } else coinPile = null;
+  // Coins are scrapped (Evan, 20:51Z): no gold pile floats in the front half any more.
+  coinPile = null;
   fit();
  }
  function fit() {
@@ -551,6 +772,8 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  }
  const ro = new ResizeObserver(fit); ro.observe(el);
  rebuild();
+ // The Meshy charms arrive after the first frame; the backpack is rebuilt with them (and keeps its pose).
+ loadCharmModels(state.charms).then(got => { if (got) rebuild(); });
 
  // Which facet a part of the backpack belongs to: tap the part and its cards come up (Evan, 16:34Z).
  const facetOf = o => {
@@ -596,7 +819,9 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   const ch = r.intersectObjects(bp.charms.map(p => p.mesh), true)[0];
   if (ch) { let o = ch.object; while (o && !o.userData.charm) o = o.parent; const i = bp.charms.findIndex(p => p.mesh === o); if (i >= 0) { api.focusCharm(i); return; } }
   if (focus != null) { api.unfocus(); return; }
-  if (deck) { const f = hitPart(e.clientX, e.clientY); deck.show(f && f !== 'charm' ? f : 'style'); highlight(f && f !== 'style' && f !== 'charm' ? f : null); return; }
+  if (deck) { const f = hitPart(e.clientX, e.clientY), g = f && f !== 'charm' ? f : 'style'; deck.show(g); onDeal?.(g); highlight(g !== 'style' ? g : null); return; }
+  // The loadout (loadout.mjs): a tap on a part selects that slot; a tap on nothing lets it go. Opening is the host's.
+  if (onPart && want < .9) { const f = hitPart(e.clientX, e.clientY); onPart(f === 'charm' ? null : f); return; }
   if (r.intersectObject(bp.group, true).length || want > .5) api.toggle();
  });
  let tag = null;
@@ -612,12 +837,12 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  // cards show and you drop into the facet"). The cards are Cards v3 faces (backpack-cards.mjs); dropping one on the
  // backpack, or tapping it, puts that choice on.
  let deck = null;
- async function mountDeck() {
-  const {cardDeck} = await import('./backpack-cards.mjs?v=2');
+ async function mountDeck(first = 'style') {
+  const {cardDeck} = await import('./backpack-cards.mjs?v=6');
   if (deck || !alive) return;
-  deck = cardDeck(el, {look: () => state.l,
-   onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null; if (!over) return false; apply(f, value); return true; }});
-  deck.show('style');
+  deck = cardDeck(deckHost || el, {look: () => state.l, split: !!deckHost,
+   onDrop: (facet, value, x, y) => { const f = facet === 'style' ? 'style' : facet; const over = x == null || hitPart(x, y) != null || !!overSlot?.(x, y, f); if (!over) return false; apply(f, value); return true; }});
+  deck.show(first); onDeal?.(first);
  }
  function apply(f, value) {
   if (f === 'style') change({style: value}, true); else change({[f]: value});
@@ -627,9 +852,42 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
  }
  function change(patch, styleChange = false) {
   let nl = {...state.l, ...patch};
-  if (styleChange) nl = {...styleOf(patch.style).look, style: patch.style};
+  if (styleChange) nl = {...styleOf(patch.style).look, notebook: state.l.notebook, style: patch.style};
   state.l = nl; rebuild(); if (glow) highlight(glow); onChange?.(nl);
   if (bp) bp.group.scale.setScalar(.9);
+ }
+
+ // Where each slot sits on screen: a grid of rays over the stage, every few frames. Each slot's bead goes on the hit of
+ // its own part nearest a home spot on the silhouette (so the two straps get one bead, colour and pattern sit apart on
+ // the shell); a part out of sight (the lining while shut, no pocket) falls back to that home spot.
+ const HOME = {style: [.5, 0], colour: [.32, .3], pattern: [.66, .52], pocket: [.5, .74], trim: [.18, 0], lining: [.94, .24]};
+ function sample() {
+  const r = canvas.getBoundingClientRect(); if (!r.width) return;
+  const N = 22, hits = {all: []}; let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  for (let j = 0; j < N; j++) for (let i = 0; i < N; i++) {
+   const x = r.left + (i + .5) / N * r.width, y = r.top + (j + .5) / N * r.height;
+   const h = pick(x, y).intersectObject(bp.group, true).find(h => h.object.visible && !h.object.isSprite); if (!h) continue;
+   const f = facetOf(h.object), q = [x, y, h.object, h.point]; (hits[f] ||= []).push(q); hits.all.push(q);
+   x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y);
+  }
+  if (x1 < x0) { tracked = {}; bounds = null; return; }
+  const c = r.width / N / 2; bounds = {left: x0 - c, top: y0 - c, right: x1 + c, bottom: y1 + c};
+  const out = {};
+  for (const [f, [hx, hy]] of Object.entries(HOME)) {
+   const tx = x0 + hx * (x1 - x0), ty = y0 + hy * (y1 - y0), own = hits[f === 'pattern' ? 'colour' : f], src = f !== 'style' && own?.length ? own : hits.all;
+   let best = src[0], bd = 1e18; for (const p of src) { const d = (p[0] - tx) ** 2 + (p[1] - ty) ** 2; if (d < bd) { bd = d; best = p; } }
+   out[f] = {o: best[2], p: best[2].worldToLocal(best[3].clone()), lift: f === 'style' ? 40 : 0};
+  }
+  tracked = out;
+ }
+ // Each frame the tracked points are carried with their parts and projected, so the beads stay on as it bobs and turns.
+ function project() {
+  const r = canvas.getBoundingClientRect(), out = {}; if (!Object.keys(tracked).length) return;
+  for (const [f, t] of Object.entries(tracked)) {
+   if (!t.o.parent) continue; const v = t.o.localToWorld(tmpV.copy(t.p)).project(cam);
+   out[f] = {x: r.left + (v.x + 1) / 2 * r.width, y: Math.max(r.top + 12, r.top + (1 - v.y) / 2 * r.height - t.lift)};
+  }
+  anchorsNow = out;
  }
 
  // The charm close-up: the camera comes in on one charm, it turns slowly, its quest is told; swipe for the next.
@@ -646,7 +904,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   const goal = deck && focus == null ? Math.max(want, .36) : want;
   t += Math.sign(goal - t) * Math.min(Math.abs(goal - t), dt / .55); const e = ease(t);
   bp.setOpen(e);
-  if (spin && !drag && idle > 2 && want < .5 && !deck && focus == null) yawWant += dt * .25;
+  if ((spin || float) && !drag && idle > 2 && want < .5 && !deck && !picking && focus == null) yawWant += dt * (float ? .12 : .25);
   // In close-up the bag turns its charm's seam toward you, rather than the camera flying round (or through) it.
   const fSide = focus != null && bp.charms[focus] ? Math.sign(bp.charms[focus].anchor.position.x || 1) : 0;
   if (focus != null) yawWant += (-fSide * 1.1 - yawWant) * Math.min(1, dt * 4);
@@ -656,6 +914,8 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   holder.rotation.x = -e * .38;
   const s = bp.group.scale.x; bp.group.scale.setScalar(s + (1 - s) * Math.min(1, dt * 10));
   holder.position.y = e * bp.H * .98;
+  // The floating mini (Evan, 22:55Z): the backpack hangs in the air on its own and idles there, waiting to be touched.
+  if (float) { const k = 1 - e * .7; holder.position.y += Math.sin(now / 900) * bp.H * .035 * k; holder.rotation.z = Math.sin(now / 1300) * .05 * k; holder.rotation.x += Math.sin(now / 1100) * .03 * k; }
   for (const sp of sprites) { sp.visible = e > .6; sp.material.opacity = Math.min(1, (e - .6) * 4); }
   // Glow the part being decorated, gently.
   if (glow) { const k = .18 + .12 * Math.sin(now / 260) + burst * .5; bp.group.traverse(o => { if (o.isMesh && o.material?.emissive && facetOf(o) === glow) { o.material.emissive.setHex(0xfff3d0); o.material.emissiveIntensity = k; } }); }
@@ -671,27 +931,36 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
    const d = Math.max(.3, p.size * 2.6) * zoom * (1 + hop * 1.6);
    wantPos.copy(wantAt).add(tmpV.set(fSide * d * .12, d * .15, d));
   } else {
-   const ty = H * (.5 + .5 * e) + (deck ? -H * .12 : 0), span = H * (1.35 + e * 1.15) * (deck ? 1.45 : 1), wide = (bp.W + .5) * 1.25;
-   const dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * 1.08;
+   const inHand = deck && !deckHost, ty = H * (.5 + .5 * e) + (inHand ? -H * .12 : 0), span = H * (1.35 + e * 1.15) * (inHand ? 1.45 : 1), wide = (bp.W + .5) * 1.25;
+   const dist = Math.max(span / 2 / Math.tan(fov / 2), wide / 2 / Math.tan(fov / 2) / cam.aspect) * (float && !deck ? .86 : 1.08);
    wantAt.set(0, ty, 0); wantPos.set(0, ty + .35 * (1 - e) + .1, dist * zoom);
   }
   if (!snapped) { camPos.copy(wantPos); camAt.copy(wantAt); snapped = true; }
   const k = Math.min(1, dt * (focus != null ? 4 : 7)); camPos.lerp(wantPos, k); camAt.lerp(wantAt, k);
   cam.position.copy(camPos); cam.lookAt(camAt);
-  floor.visible = e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
+  floor.visible = !float && e < .5 && focus == null; floor.material.opacity = .18 * (1 - e * 2);
   bp.update(dt);
   renderer.render(scene, cam);
+  if (onPart) { if (now - sampledAt > 400) { sampledAt = now; sample(); } project(); }
  }
  raf = requestAnimationFrame(frame);
 
  const api = {
   canvas, get isOpen() { return want > .5; },
-  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; focus = null; }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
+  open() { want = 1; idle = 0; }, close() { want = 0; idle = 0; api.unfocus(); }, toggle() { want = want > .5 ? 0 : 1; idle = 0; },
   get look() { return state.l; },
   setLook(nl) { state.l = look(nl); rebuild(); },
   setContents({items: it = state.items, coins: c = state.coins, charms: ch = state.charms} = {}) { state.items = it; state.coins = c; state.charms = ch; rebuild(); },
   // Decorate (the old name dressUp is kept for callers): the backpack opens part way, the style cards are dealt.
   dressUp(on = true) { if (on && !deck) { focus = null; mountDeck(); } else if (!on && deck) { deck.dispose(); deck = null; highlight(null); } },
+  // Deal one facet's hand (the slots around the floating backpack); null puts the hand away.
+  deal(f) { if (f == null) { api.dressUp(false); onDeal?.(null); return; } focus = null; if (!deck) mountDeck(f); else { deck.show(f); onDeal?.(f); } highlight(f === 'style' ? null : f === 'pattern' ? 'colour' : f); },
+  get dealt() { return deck?.facet || null; },
+  // The loadout's slots on the model, in client px: anchors(), select(f) glows a slot and holds the bag still (the
+  // lining opens it part way), pick(f, value) puts a choice on.
+  anchors() { return anchorsNow; }, get bounds() { return bounds; },
+  select(f) { picking = f; focus = null; highlight(f === 'style' || f === 'notebook' ? null : f === 'pattern' ? 'colour' : f); if (f === 'lining') want = Math.max(want, .62); else if (want < .9) want = 0; idle = 0; },
+  pick(f, value) { apply(f, value); if (f === 'style') highlight(null); },
   get charmCount() { return bp.charms.length; },
   focusCharm(i = 0) {
    const n = bp.charms.length; if (!n) { say('No charms yet: finish a quest to earn one.'); return; }
@@ -701,6 +970,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   },
   unfocus() { if (focus == null) return; const p = bp.charms[focus]; if (p) p.mesh.children[1].quaternion.identity(); focus = null; onFocus?.(null); },
   get focused() { return focus; },
+  say(text, ms) { say(text, null, ms); },
   bounce() { if (bp) bp.group.scale.setScalar(1.12); bp?.charms.forEach(p => p.vz += 3); },
   dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); canvas.remove(); deck?.dispose(); tag?.remove(); }
  };

@@ -1,0 +1,33 @@
+{
+ "source": "script.mjs",
+ "model": "eleven_multilingual_v2",
+ "voices": {
+  "abbie": "6v1NVkWFOx7RiSwU4UYB",
+  "ani": "jyg28xewKUsbhcdswLJR"
+ },
+ "rendered": "2026-10-23T20:46:09+00:00",
+ "lines": {
+  "t01": "t01.mp3",
+  "t02": "t02.mp3",
+  "t03": "t03.mp3",
+  "t04": "t04.mp3",
+  "t05": "t05.mp3",
+  "t06": "t06.mp3",
+  "t07": "t07.mp3",
+  "t08": "t08.mp3",
+  "t09": "t09.mp3",
+  "t10": "t10.mp3"
+ },
+ "hash": {
+  "t01": "91e5c052acdd",
+  "t02": "79e19d2f1de2",
+  "t03": "870d9d45f328",
+  "t04": "5d43a580c8b3",
+  "t05": "247d24bcbda6",
+  "t06": "4ca5de8d20d6",
+  "t07": "0616fa732eed",
+  "t08": "1407b810db90",
+  "t09": "7716955cb511",
+  "t10": "42bdd578f127"
+ }
+}

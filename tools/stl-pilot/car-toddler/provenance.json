@@ -1,0 +1,28 @@
+{
+  "slug": "car-toddler",
+  "title": "Chunky toddler car",
+  "model_url": "https://www.printables.com/model/457455-safer-toddlers-toy-car",
+  "author": "Thump2010",
+  "author_url": "https://www.printables.com/@Thump2010_791839",
+  "licence": "Creative Commons Zero / Public Domain (CC0 1.0)",
+  "licence_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "category": "toy car",
+  "origin": "remix of 'Toddlers Toy Car' by Newton101 (thingiverse.com); credit both",
+  "attribution_required": false,
+  "date_retrieved": "2026-10-23",
+  "licence_screenshot": "licence.jpg",
+  "source_image": "source-image.jpg",
+  "source_files": [
+    {
+      "file": "source_body.stl",
+      "sha256": "9d16603d1a75a2842fb9086ab8bf9c5819190092f8fc21baa3d295aad61f1cdb",
+      "bytes": 543684
+    },
+    {
+      "file": "source_wheel.stl",
+      "sha256": "0b7eacfbfb1a9f2225414d94de257008f29795f66bd1b6563324237adba48cc7",
+      "bytes": 712884
+    }
+  ],
+  "stl_location": "Not in git. Kept on the PC next to this file (git-ignored); re-download from model_url and check the sha256."
+}

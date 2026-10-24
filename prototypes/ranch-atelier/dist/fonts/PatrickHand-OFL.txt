@@ -1,0 +1,3 @@
+Patrick Hand (fonts/patrick-hand-latin.woff2), Copyright 2012 Patrick Wagesreiter, from Google Fonts.
+Licensed under the SIL Open Font License, Version 1.1: https://openfontlicense.org
+Used for the pencil handwriting in Abbie's notebook (simulations/notebook.mjs).

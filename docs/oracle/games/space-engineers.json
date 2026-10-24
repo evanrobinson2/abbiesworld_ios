@@ -50,11 +50,13 @@
       "outline": "none",
       "surface": "pbr",
       "post": [
-        "colour grade"
+        "colour grade",
+        "bloom"
       ],
-      "signature": null,
-      "source": "derived from the art note by rendering_notes.RULES",
-      "confidence": 0.3
+      "signature": "Every block is a physical cube on a grid with its own PBR material and damage state.",
+      "source": "oracle rendering study 2026-10-23 (public knowledge, no captures, no game files)",
+      "confidence": 0.55,
+      "lesson": "A grid of blocks makes building legible but looks like a box; hide the grid under shaped armour."
     },
     "motion": null,
     "palette": null,

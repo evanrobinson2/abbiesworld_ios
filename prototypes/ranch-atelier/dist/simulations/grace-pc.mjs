@@ -5,7 +5,7 @@
 // Built by tools/grace-dos/build.sh; licences and sources in tools/grace-dos/README.md.
 export const DOS_W = 640, DOS_H = 400;
 
-const DISK_FILES = {keystorm: 'keystorm', recipes: 'recipes', blank: 'blank', coin: 'coin'};
+// Every floppy in the disk box is studies/basement/disks/<id>.img.gz (built by tools/grace-dos/build.sh).
 
 async function gunzip(url) {
  const r = await fetch(url); if (!r.ok) throw Error(url + ' ' + r.status);
@@ -14,17 +14,22 @@ async function gunzip(url) {
 }
 const fetchBuf = async url => { const r = await fetch(url); if (!r.ok) throw Error(url + ' ' + r.status); return r.arrayBuffer(); };
 
-// KeyboardEvent.key to PC scancode set 1. Shifted characters press Shift around the key.
-const SC = {Escape: 1, Backspace: 14, Tab: 15, Enter: 28, ' ': 57, ArrowUp: [0xE0, 0x48], ArrowDown: [0xE0, 0x50], ArrowLeft: [0xE0, 0x4B], ArrowRight: [0xE0, 0x4D]};
+// KeyboardEvent.key to PC scancode set 1. Shifted characters press Shift around the key. `code` names keys that have no
+// character (arrows, function keys, the editing block); [0xE0, n] is an extended key.
+const SC = {Escape: 1, Backspace: 14, Tab: 15, Enter: 28, ' ': 57, Control: 29, Shift: 42, Alt: 56, CapsLock: 58,
+ ArrowUp: [0xE0, 0x48], ArrowDown: [0xE0, 0x50], ArrowLeft: [0xE0, 0x4B], ArrowRight: [0xE0, 0x4D],
+ Home: [0xE0, 0x47], End: [0xE0, 0x4F], PageUp: [0xE0, 0x49], PageDown: [0xE0, 0x51], Insert: [0xE0, 0x52], Delete: [0xE0, 0x53]};
+for (let i = 1; i <= 10; i++) SC['F' + i] = 58 + i; SC.F11 = 0x57; SC.F12 = 0x58;
 const ROWS = [['1234567890-=', 2], ['qwertyuiop[]', 16], ["asdfghjkl;'`", 30], ['\\zxcvbnm,./', 43]];
 const SHIFTED = {'!': '1', '@': '2', '#': '3', $: '4', '%': '5', '^': '6', '&': '7', '*': '8', '(': '9', ')': '0', _: '-', '+': '=', '{': '[', '}': ']', ':': ';', '"': "'", '~': '`', '|': '\\', '<': ',', '>': '.', '?': '/'};
 for (const [chars, first] of ROWS) [...chars].forEach((c, i) => { SC[c] = first + i; });
+// -> {shift, down: [...make codes], up: [...break codes]} or null for a key the PC has no use for
 function scancodes(k) {
  let shift = false, code = SC[k];
  if (code === undefined && k.length === 1) { const lower = k.toLowerCase(); if (lower !== k) { shift = true; code = SC[lower]; } else if (SHIFTED[k]) { shift = true; code = SC[SHIFTED[k]]; } }
  if (code === undefined) return null;
  const down = Array.isArray(code) ? code : [code], up = down.map((c, i) => i === down.length - 1 ? c | 0x80 : c);
- return shift ? [0x2A, ...down, ...up, 0xAA] : [...down, ...up];
+ return {shift, down, up};
 }
 
 export class GracePC {
@@ -73,7 +78,7 @@ export class GracePC {
  async insert(disk) {
   this.disk = disk; this.sound('disk');
   if (!this.v86) return true;
-  try { const buf = await gunzip(this.base + DISK_FILES[disk.id] + '.img.gz'); if (this.disk === disk && this.v86) await this.v86.set_fda({buffer: buf}); }
+  try { const buf = await gunzip(this.base + disk.id + '.img.gz'); if (this.disk === disk && this.v86) await this.v86.set_fda({buffer: buf}); }
   catch (e) { console.warn('[grace-pc] disk', e); }
   return true;
  }
@@ -81,12 +86,26 @@ export class GracePC {
 
  // At the DOS prompt with nothing typed, Escape is not for the computer: the scene uses it to stand up.
  atPrompt() { const [r, c] = this.cursor, line = (this.text[r] || []).join('').slice(0, c); return /^[A-Z]:\\[^>]*>$/.test(line.trimEnd()); }
+ // A tap: press and release together (typing). A game that polls the keyboard wants keyDown/keyUp, so a key can be held.
  key(k) {
   if (!this.on) return k !== 'Escape';
   if (k === 'Escape' && this.atPrompt()) return false;
-  const codes = scancodes(k); if (!codes || !this.v86) return true;
-  this.v86.keyboard_send_scancodes(codes); this.sound('key'); return true;
+  const c = scancodes(k); if (!c || !this.v86) return true;
+  this.v86.keyboard_send_scancodes(c.shift ? [0x2A, ...c.down, ...c.up, 0xAA] : [...c.down, ...c.up]); this.sound('key'); return true;
  }
+ // Held keys: the browser's own repeat sends keyDown again, as a PC keyboard repeats its make code.
+ keyDown(k) {
+  if (!this.on || !this.v86) return !this.on && k !== 'Escape';
+  if (k === 'Escape' && this.atPrompt()) return false;
+  const c = scancodes(k); if (!c) return true;
+  this.held ??= new Map(); if (!this.held.has(k)) this.sound('key');
+  this.held.set(k, c); this.v86.keyboard_send_scancodes(c.shift && !this.held.get('Shift') ? [0x2A, ...c.down] : c.down); return true;
+ }
+ keyUp(k) {
+  const c = this.held?.get(k); if (!c || !this.v86) return;
+  this.held.delete(k); this.v86.keyboard_send_scancodes(c.shift && !this.held.get('Shift') ? [...c.up, 0xAA] : c.up);
+ }
+ releaseAll() { for (const k of [...(this.held?.keys() || [])]) this.keyUp(k); }
 
  tick() {
   if (!this.v86 || !this.box) return;

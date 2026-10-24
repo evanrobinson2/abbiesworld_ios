@@ -31,9 +31,13 @@ import {inventory} from '/simulations/inventory.mjs';
 import {give as giveMemoryCoin} from '/simulations/memory-coins.mjs';
 
 const q = new URLSearchParams(location.search);
-const fromCafe = q.get('from') === 'cafe';
+const embed = q.has('embed');   // inside another page's iframe (the sandbox's "play while you wait"): the way up tells the parent instead
+const fromCafe = q.get('from') === 'cafe' || embed;
 // Both ways up (the door, and the ending) land in the café diorama, which walks her up the stairs.
 const CAFE_EXIT = '/studies/cafe/diorama.html?from=basement';
+const leave = () => { if (embed) parent.postMessage({type: 'basement', event: 'quit'}, '*'); else location.href = CAFE_EXIT; };
+let paused = false;
+addEventListener('message', e => { const t = e.data?.type; if (t !== 'pause' && t !== 'resume') return; paused = t === 'pause'; try { if (paused) pc.v86?.stop(); else pc.v86?.run(); } catch {} });
 const renderer = new T.WebGLRenderer({antialias: false, powerPreference: 'high-performance'});
 renderer.setPixelRatio(1); renderer.shadowMap.enabled = true; renderer.shadowMap.type = T.BasicShadowMap;
 renderer.toneMapping = T.ACESFilmicToneMapping; renderer.toneMappingExposure = 1.1;
@@ -61,6 +65,9 @@ function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = fa
  node.connect(out).connect(master); src.start(now); src.stop(now + t + .02);
 }
 const SFX = {
+ gb: n => ({move: () => blip({f: 330, t: .025, type: 'square', g: .03, lp: 2400}), turn: () => blip({f: 520, t: .03, type: 'square', g: .03, lp: 2400}), lock: () => blip({f: 120, t: .06, type: 'square', g: .04, lp: 900}),
+  clear: () => [0, 1, 2].forEach(i => blip({f: 520 + i * 160, t: .07, type: 'square', g: .035, lp: 2600, at: i * .06})), big: () => [0, 1, 2, 3, 4].forEach(i => blip({f: 480 + i * 130, t: .08, type: 'square', g: .04, lp: 2800, at: i * .06})),
+  over: () => [0, 1, 2, 3].forEach(i => blip({f: 400 - i * 70, t: .14, type: 'square', g: .04, lp: 1600, at: i * .14})), start: () => [0, 1].forEach(i => blip({f: 600 + i * 300, t: .08, type: 'square', g: .035, lp: 2600, at: i * .08})), click: () => blip({f: 700, t: .03, type: 'square', g: .03, lp: 2400})})[n]?.(),
  click: () => { blip({noise: true, t: .03, g: .25, lp: 3000}); blip({f: 1800, t: .02, g: .05}); },
  stepWood: () => blip({noise: true, t: .09, g: .12, lp: 500}), stepStone: () => blip({noise: true, t: .05, g: .05, lp: 1800}), stepRug: () => blip({noise: true, t: .07, g: .05, lp: 300}),
  creak: () => blip({f: 180, t: .35, type: 'sawtooth', g: .02, slide: 90, lp: 900}),
@@ -140,6 +147,9 @@ const crtLight = new T.PointLight('#b8d0ff', 0, 1.6, 2); crtLight.castShadow = f
 
 // ---------- Lights: dark until the switches are right. ----------
 scene.add(new T.AmbientLight('#20243a', .16));
+U.gameboy.onSound = n => SFX.gb(n);
+// Holding it up to the bulb: a little extra warmth over the handheld while she looks at it (the desk's cone is hard-edged).
+const gbLamp = new T.PointLight('#ffe6bf', 0, 1.1, 1.6); gbLamp.position.copy(U.gameboy.group.position).add(new T.Vector3(-.14, .24, 0)); scene.add(gbLamp);
 const hall = new T.SpotLight('#ffcf8a', 5, 7, .55, .6, 1.4); hall.position.set(.45, ROOM.landing + 1.8, ROOM.back + .4); hall.target.position.set(1.6, 0, -.4);
 hall.castShadow = true; hall.shadow.mapSize.set(512, 512); scene.add(hall, hall.target);
 // The little lamp over the switches: enough light to see the three toggles, never enough to see the room.
@@ -286,11 +296,13 @@ const CLOSE = {
  switches: () => { const p = U.switches.getWorldPosition(new T.Vector3()); return {pos: p.clone().add(new T.Vector3(0, -.02, innerWidth < innerHeight ? .75 : .5)), look: p, fov: 36}; },
  clipboard: () => { const p = U.clipboard.getWorldPosition(new T.Vector3()); return {pos: p.clone().add(new T.Vector3(-.05, innerWidth < innerHeight ? .9 : .42, .12)), look: p.clone().add(new T.Vector3(0, 0, .01)), fov: 36}; },
  wash: () => screenFrame(1.6),
+ // Her pocket game player, seen from above and a little from the chair side, so the top of the unit is the top of the view.
+ gameboy: () => { const p = U.gameboy.group.getWorldPosition(new T.Vector3()), d = innerWidth < innerHeight ? .34 : .235; return {pos: p.clone().add(new T.Vector3(-d * .42, d * .9, 0)), look: p.clone().add(new T.Vector3(.008, 0, 0)), fov: 36}; },
 };
 const FRAMES = {desk: deskFrame, screen: () => screenFrame(), side: sideFrame, ...CLOSE};
 function glide(name, mode) { cam.from = {pos: camera.position.clone(), look: cam.lookAt.clone(), fov: camera.fov}; cam.to = name; cam.toMode = mode; cam.mode = 'glide'; cam.t = 0; if (mode !== 'screen') keys.blur(); }
 function closeUp(name) { cam.close = name; glide(name, 'close'); }
-function leaveClose() { if (!cam.close) return; cam.close = null; washing = null; glide('side', 'side'); }
+function leaveClose() { if (!cam.close) return; if (cam.close === 'gameboy') U.gameboy.releaseAll(); cam.close = null; washing = null; me.state === 'seated' ? glide('desk', 'desk') : glide('side', 'side'); }
 function sitDown() {
  if (me.state === 'seated') return;
  walkTo(ROOM.chair.x - .02, () => {
@@ -375,6 +387,7 @@ renderer.domElement.addEventListener('pointerdown', e => {
  if (cam.mode === 'glide' || cam.mode.startsWith('swoop')) return;
  if (cam.mode === 'close') {
   if (cam.close === 'switches') { if (hit && named(hit.object, /light switches/)) { const p = U.switches.worldToLocal(hit.point.clone()); return flipToggle(p.x < -.03 ? 0 : p.x > .03 ? 2 : 1); } return leaveClose(); }
+  if (cam.close === 'gameboy') { const h = hits.find(h => named(h.object, /Game Boy/)), k = h && U.gameboy.keyAt(h.object, h.point); if (!k) return leaveClose(); gbDown(k, e.pointerId); return; }
   if (cam.close === 'clipboard') { if (hit && named(hit.object, /^clipboard$/)) { SFX.page(); return readAloud(); } return leaveClose(); }
   if (cam.close === 'wash') { const h = hits.find(h => h.object === U.screen); if (h && washing) { dragging = true; renderer.domElement.setPointerCapture(e.pointerId); washing === 'wash' ? SFX.spray() : SFX.rub(); scrub(h.uv); return; } if (hit && named(hit.object, /spray bottle|towel|Grace's computer/)) return; if (me.state === 'seated') { cam.close = null; washing = null; return glide('desk', 'desk'); } return leaveClose(); }
  }
@@ -383,6 +396,7 @@ renderer.domElement.addEventListener('pointerdown', e => {
   if (cam.mode !== 'desk') return;
   const disk = hit && U.disks.find(d => isIn(hit.object, d));
   if (disk) return insertDisk(disk);
+  if (hit && named(hit.object, /Game Boy/)) { SFX.click(); return closeUp('gameboy'); }
   if (hit && named(hit.object, /power switch/)) return powerSwitch();
   if (hit && named(hit.object, /spray bottle|towel/) || hit?.object === U.screen && chores.dry < 1) return startWash();
   if (hit && named(hit.object, /^manual$|Grace's manual/)) return giveCoin('manual', U.manual);
@@ -397,6 +411,7 @@ renderer.domElement.addEventListener('pointerdown', e => {
  if (hit && named(hit.object, /^door$/)) return goBack();
  const lit = lightsOn();
  if (!lit && hit && hit.point.x > 3.7) { walkTo(Math.min(hit.point.x, 4.1)); say(light1 ? "I can't make anything out over there." : "It's too dark over there."); return; }
+ if (hit && named(hit.object, /Game Boy/)) return walkTo(ROOM.chair.x - .2, () => { me.face = 1; me.reach = 1; SFX.click(); closeUp('gameboy'); });
  if (hit && named(hit.object, /^clipboard$/)) return walkTo(ROOM.chair.x - .2, () => { me.face = 1; me.reach = 1; closeUp('clipboard'); SFX.page(); readAloud(); });
  if (hit && named(hit.object, /power plug|power cord|outlet/)) return plugIn();
  if (hit && named(hit.object, /power switch/)) return powerSwitch();
@@ -522,15 +537,29 @@ function headHome() {
 }
 
 // ---------- Keys: the real keyboard goes to the computer while she sits at the screen. ----------
-function forward(k) {
+// `hold` keys go down and come up with the real keyboard, so a game that polls the keys sees them held; taps (the phone's
+// keyboard, which has no key-up) press and release together.
+function forward(k, hold = false) {
  if (cam.mode === 'close' && k === 'Escape') return me.state === 'seated' ? (cam.close = null, washing = null, glide('desk', 'desk')) : leaveClose();
  if (cam.mode === 'desk' && k === 'Escape') return standUp();
  if (cam.mode !== 'screen') return;
- const used = pc.key(k); if (!used && k === 'Escape') standUp();
+ const used = hold ? pc.keyDown(k) : pc.key(k); if (!used && k === 'Escape') standUp();
 }
+// A phone's keyboard types into the hidden field (taps); a real keyboard goes straight to the PC, held keys and all.
+const touchOnly = matchMedia('(pointer: coarse)').matches;
+// The pocket game player: a tapped button is held until the finger lifts; the keyboard works too (arrows, X and Z, Enter).
+const GB_KEYS = {ArrowLeft: 'left', ArrowRight: 'right', ArrowDown: 'down', ArrowUp: 'up', a: 'left', d: 'right', s: 'down', w: 'up', x: 'a', X: 'a', ' ': 'a', z: 'b', Z: 'b', Enter: 'start', Shift: 'select'};
+let gbTouch = null;
+function gbDown(k, id) { audio(); gbTouch = {k, id}; U.gameboy.press(k, true); }
+addEventListener('pointerup', e => { if (gbTouch && e.pointerId === gbTouch.id) { U.gameboy.press(gbTouch.k, false); gbTouch = null; } });
+addEventListener('pointercancel', () => { if (gbTouch) { U.gameboy.press(gbTouch.k, false); gbTouch = null; } });
+addEventListener('keyup', e => { if (cam.close === 'gameboy') { const k = GB_KEYS[e.key]; if (k) U.gameboy.press(k, false); return; } if (me.state === 'seated') { if (!(touchOnly && e.target === keys && e.key.length === 1)) e.preventDefault(); pc.keyUp(e.key); } });
+addEventListener('blur', () => pc.releaseAll());
 addEventListener('keydown', e => {
  audio(); 
- if (me.state === 'seated' || cam.mode === 'close') { if (e.target === keys && e.key.length === 1) return; e.preventDefault(); return forward(e.key); }
+ if (cam.close === 'gameboy') { e.preventDefault(); if (e.key === 'Escape') return leaveClose(); const k = GB_KEYS[e.key]; if (k && !e.repeat) U.gameboy.press(k, true); return; }
+
+ if (me.state === 'seated' || cam.mode === 'close') { if (touchOnly && e.target === keys && e.key.length === 1) return; e.preventDefault(); return forward(e.key, true); }
  if (e.key === 'ArrowLeft' || e.key === 'a') walkTo(me.x - .6); else if (e.key === 'ArrowRight' || e.key === 'd') walkTo(me.x + .6);
 });
 // Phone keyboards type into the hidden field; each character goes to the computer as it arrives.
@@ -551,16 +580,17 @@ let last = performance.now(), time = 0, hummed = false, opened = false; const sk
 await Promise.race([Promise.all([document.fonts.load('20px VT323')]), new Promise(r => setTimeout(r, 1500))]);
 const headPos = new T.Vector3();
 function frame(now) {
+ if (paused) { last = now; requestAnimationFrame(frame); return; }
  const rdt = Math.min(.25, (now - last) / 1000), dt = Math.min(.05, rdt); last = now; time += dt;
  // Going back up: through the door, it swings shut... then she can't help it (or, from the café, back up she goes).
  // ...and "I have to know" brings her back to the start: the same dark, the same two choices.
  if (me.goneT) { const s = (now - me.goneT) / 1000; me.gone = s < 1 ? s : s < 3 ? 1 : Math.max(0, 4 - s); U.door.rotation.y = s < 1.2 ? -.42 - s * .6 : s < 3 ? -.05 : -.05 - Math.min(1, s - 3) * .37;
   if (ending.leaving) { me.gone = Math.min(1, s); U.door.rotation.y = s < 1.2 ? -.42 - s * .6 : -1.14 + Math.min(1, (s - 1.2) / .6) * 1.09; if (s > 1.8 && !me.shut) { me.shut = true; SFX.door(); ending.offT = time; } }
-  else { if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(() => { location.href = CAFE_EXIT; }, 600); }
+  else { if (s > 1.15 && !me.shut) { me.shut = true; SFX.door(); if (fromCafe) setTimeout(leave, 600); }
   if (!fromCafe && s > 3 && !me.back) { me.back = true; SFX.door(); say("...but what's down there? I have to know."); } if (!fromCafe && s > 4.2) { me.goneT = 0; me.gone = 0; me.shut = me.back = false; if (!lightsOn()) setTimeout(() => { if (!voice.thought?.choices && !lightsOn()) opening(); }, 2600); } } }
  // The ending: wait for the disk's coin to settle, then the room warms and Daddy calls; at the last, the set powers down.
  if (ending.pending && !ending.called && !rewards.length && !flying.length) { ending.wait += dt; if (ending.wait > 2.2) { ending.pending = false; callDown(); } }
- if (ending.offT) { ending.off = Math.min(1, (time - ending.offT) / 1.6); if (ending.off >= 1 && !ending.home) { ending.home = true; if (!q.has('stay')) setTimeout(() => { location.href = CAFE_EXIT; }, 400); } }
+ if (ending.offT) { ending.off = Math.min(1, (time - ending.offT) / 1.6); if (ending.off >= 1 && !ending.home) { ending.home = true; if (!q.has('stay')) setTimeout(leave, 400); } }
  placeKid(dt);
  for (const w of [...rewards]) if (!w.r.update(rdt)) { rewards.splice(rewards.indexOf(w), 1); w.then(); }
  for (const f of [...flying]) { f.t = Math.min(1, f.t + rdt / f.dur); f.step(f.t); if (f.t >= 1) { flying.splice(flying.indexOf(f), 1); f.done(); } }
@@ -594,6 +624,8 @@ function frame(now) {
  // Seated at the desk the camera is her eyes, so she steps out of her own view.
  kid.visible = !(me.state === 'seated' && ['desk', 'screen', 'close'].includes(cam.mode));
  voice.tick(now);
+ U.gameboy.step(dt, cam.close === 'gameboy' || cam.mode === 'desk');
+ gbLamp.intensity += ((cam.close === 'gameboy' ? .4 : 0) - gbLamp.intensity) * Math.min(1, dt * 3);
  if (!skip && !opened && time > 3.6) { opened = true; opening(); }
  // The era pass: chunky pixels in the room, a crisp tube at the screen; the warm-up when it opens, the power-down at the end.
  if (!skipBoot && time > .2 && time < 1.4 && !hummed) { hummed = true; blip({f: 15700, t: 1.4, type: 'sine', g: .006}); blip({noise: true, t: .25, g: .05, lp: 600, at: 1.1}); }
@@ -616,7 +648,8 @@ const opening = () => say("It's dark in here... it feels old.", {choices: [
  {label: 'Try the switches', go: toSwitches},
  {label: 'Go back up', go: goBack}]});
 requestAnimationFrame(frame);
-window.basement = {me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, giveCoin, ending, headHome, callDown, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }, get time() { return time; }};
+if (embed) parent.postMessage({type: 'basement', event: 'ready'}, '*');
+window.basement = {gameboy: U.gameboy, closeUp, leaveClose, me, pc, cam, chores, sw, flipToggle, sitDown, standUp, walkTo, glide, insertDisk, giveCoin, ending, headHome, callDown, plugIn, powerSwitch, startWash, scrub: uv => scrub(uv), closeUp, leaveClose, U, say, get kid() { return kid; }, get rigged() { return rigged; }, get time() { return time; }};
 </script>
 </body>
 </html>

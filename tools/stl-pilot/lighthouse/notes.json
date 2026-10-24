@@ -1,0 +1,87 @@
+{
+  "slug": "lighthouse",
+  "stages": {
+    "import": {
+      "seconds": 0.0,
+      "tris": 5128,
+      "files": [
+        "source.stl"
+      ]
+    },
+    "repair": {
+      "seconds": 0.01,
+      "tris": 5128,
+      "open_edges_before": 9,
+      "open_edges_after": 9,
+      "dust_shells_removed": 0,
+      "welded_verts": 0
+    },
+    "assemble_scale_pivot": {
+      "seconds": 0.0,
+      "tris": 5128,
+      "final_size_m": [
+        6.535,
+        6.442,
+        9.0
+      ]
+    },
+    "decimate": {
+      "seconds": 0.01,
+      "tris": 5000,
+      "per_part": {
+        "island": {
+          "fallback": null,
+          "before": 5128,
+          "budget": 5000,
+          "ratio": 0.975,
+          "after": 5000,
+          "attempts": 1
+        }
+      }
+    },
+    "uv": {
+      "seconds": 0.91,
+      "tris": 5000,
+      "islands": "smart_project+pack"
+    },
+    "bake": {
+      "seconds": 0.32,
+      "tris": 5000,
+      "texture_px": 512,
+      "extrusion_m": 0.18
+    },
+    "material": {
+      "seconds": 0.0,
+      "tris": 5000,
+      "materials": [
+        "mat_rock_and_plaster"
+      ]
+    },
+    "export": {
+      "seconds": 0.35,
+      "tris": 5000,
+      "glb": "lighthouse.glb",
+      "bytes": 304844
+    }
+  },
+  "blender": "4.1.1",
+  "target_tris": 5000,
+  "scale_to_metres": {
+    "factor": 0.06962711111305234,
+    "source_size_mm": [
+      93.85,
+      92.52,
+      129.26
+    ],
+    "final_size_m": [
+      6.535,
+      6.442,
+      9.0
+    ]
+  },
+  "high_poly_tris": 5128,
+  "final_tris": 5000,
+  "script_total_s": 1.96,
+  "process_wall_s": 2.97,
+  "bake_source": "repaired high-poly (5128 tris) built from the source STL(s) in this folder; not stored separately"
+}

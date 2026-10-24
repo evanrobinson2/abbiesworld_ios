@@ -55,7 +55,7 @@ uniform vec3 uWashMul,uPaper;varying vec2 vUv;
 float h21(vec2 p){p=fract(p*vec2(123.34,456.21));p+=dot(p,p+45.32);return fract(p.x*p.y);}
 float vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);return mix(mix(h21(i),h21(i+vec2(1,0)),f.x),mix(h21(i+vec2(0,1)),h21(i+vec2(1,1)),f.x),f.y);}
 float viewZ(float d){if(uLog>.5)return pow(uFar+1.,d)-1.;float zn=d*2.-1.;return 2.*uNear*uFar/(uFar+uNear-zn*(uFar-uNear));}
-float wash(vec2 uv){float z=viewZ(texture2D(tDepth,uv).x);float t=clamp((z-uStart)/max(1.,uEnd-uStart),0.,1.);return pow(t*t*(3.-2.*t),uCurve)*uMax;}
+float wash(vec2 uv){float dp=texture2D(tDepth,uv).x;float z=viewZ(dp);float t=clamp((z-uStart)/max(1.,uEnd-uStart),0.,1.);return pow(t*t*(3.-2.*t),uCurve)*uMax*(dp>.99999?.3:1.);}
 float lum(vec3 c){return dot(c,vec3(.2126,.7152,.0722));}
 void main(){
  vec2 px=1./uRes;vec4 src=texture2D(tColor,vUv);float w=wash(vUv);

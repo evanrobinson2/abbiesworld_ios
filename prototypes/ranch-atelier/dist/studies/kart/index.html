@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AW-STUDY-0058 - Kart Mode</title>
+<style>
+:root{--bg:#f6f1ff;--plate:#fff;--ink:#241b3a;--soft:#62597c;--line:#ddd3f0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#150f24;--plate:#21193a;--ink:#f1ecff;--soft:#b2a8d0;--line:#3a2f5c;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 ui-rounded,system-ui,sans-serif;padding:0 16px 80px}
+main{max-width:960px;margin:0 auto}h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;margin:28px 0 8px}h2{margin:32px 0 8px}.id{font:700 12px system-ui;letter-spacing:.12em;color:var(--soft);text-transform:uppercase}
+p,li{max-width:66ch}.go{display:inline-block;margin:12px 10px 0 0;padding:12px 22px;border-radius:999px;background:linear-gradient(135deg,#ff7eb6,#7fe4ff);color:#241b3a;font-weight:700;text-decoration:none}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.shots img{width:100%;border-radius:16px;display:block}
+</style>
+</head>
+<body><main>
+<div class="id">AW-STUDY-0058 · Round 1</div><h1>Kart Mode: the Racetrack</h1>
+<p>The board turns into a racetrack. The six outer tiles make a looping road, the middle tile becomes a dirt shortcut, and every tile you place in a slot adds a bulge or a hairpin. The track is rebuilt quietly in the background, so you keep driving until the new one is ready.</p>
+<a class="go" href="play.html">Drive it</a><a class="go" href="play.html?dev">Workbench (place tiles)</a>
+<h2>What it looks like</h2>
+<div class="shots"><img src="img/start.jpg" alt="Driving the road with kerbs, hay and a boost pad ahead"><img src="img/drive.jpg" alt="Splashing through a puddle past a pumpkin"><img src="img/overhead.jpg" alt="Overhead: three placed tiles lengthen the loop"></div>
+<h2>How it plays</h2>
+<ul><li>Soft scenery (cones, crates, fences, hay, mailboxes) bursts when you hit it fast; hard scenery (trees, benches, parked cars, the fountain) bounces you and costs speed.</li>
+<li>Orange ramps launch you, yellow chevron pads boost you, puddles slow you, grass tops out at about 70% speed.</li>
+<li>Three laps; the shortcut through the square counts. Three pips are the only thing on screen.</li>
+<li>Halos and laser beacons are only earned from the car, as in the Effect Hunt; the overhead cheat sits in the workbench.</li></ul>
+<h2>Open</h2>
+<p>Drift turbo, a countdown, rivals, bridges over water, mounting in the real town (it needs to clear houses on the road line), real vehicle art. Details in docs/oracle/kart/KART_STUDY.md. Tour: no for this page, yes once it runs in the town.</p>
+<script type="module" src="/look/context-card.mjs" data-context-study="kart"></script>
+</main></body></html>

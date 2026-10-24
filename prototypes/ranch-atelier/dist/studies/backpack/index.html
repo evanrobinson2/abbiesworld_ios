@@ -110,6 +110,13 @@ a{color:var(--teal)}
 </section>
 
 <section class="col">
+ <span class="eyebrow">Worn</span>
+ <h2>She wears it, and the charms jingle</h2>
+ <p>Wherever Abbie is shown (the first-person levels, the Moon Mission, Grace's basement, the science adventure), she wears this backpack in her own look, with the charms she keeps on it. They swing as she runs and jingle when they knock together. A charm she puts in her jewellery box comes off the backpack. Tap the stage for sound.</p>
+ <div class="pane" id="wornStage" style="aspect-ratio:4/3"><span class="tag">Live 3D · she runs, they swing</span></div>
+</section>
+
+<section class="col">
  <span class="eyebrow">Design card</span>
  <h2>How she knows what she carries</h2>
  <div class="grid2">
@@ -134,10 +141,10 @@ a{color:var(--teal)}
 </main>
 
 <script type="module">
-import {STYLES, FACETS, CHARMS, look, setLook, earnedCharms, backpackView, swatch, pocketSvg, styleOf} from '../../simulations/backpack.mjs?v=3';
+import {STYLES, FACETS, CHARMS, look, setLook, earnedCharms, backpackView, swatch, pocketSvg, styleOf, three} from '../../simulations/backpack.mjs?v=12';
 const $ = id => document.getElementById(id);
 const DEMO = [{id: 'cafe-basement-key', name: 'Brass key', icon: '🗝️'}, {id: 'crayon', name: 'Purple crayon', icon: '🖍️'}, {id: 'map', name: "Daddy's map", icon: '🗺️'}, {id: 'apple', name: 'An apple for bub', icon: '🍎'}, {id: 'shell', name: 'A seashell', icon: '🐚'}];
-const DEMO_CHARMS = ['tardigrade', 'first-memory', 'school-roof', 'brass-key', 'basement', 'all-memories', 'moon-key', 'bub', 'barista', 'rocket'];
+const DEMO_CHARMS = ['tardigrade', 'moon-cheese', 'moon-cheese', 'school-roof', 'brass-key', 'basement', 'all-memories', 'moon-key', 'bub', 'barista', 'rocket'];
 let cur = look();
 const hero = await backpackView($('stage'), {look: cur, items: DEMO, coins: 5, charms: DEMO_CHARMS, onChange: l => { cur = l; sync(); }});
 $('stage').addEventListener('pointerup', () => setTimeout(() => $('hint').textContent = hero.isOpen ? 'Tap it again to close' : 'Tap it to open', 50));
@@ -167,6 +174,34 @@ function sync() {
 sync();
 const charmView = await backpackView($('charmStage'), {look: {style: 'classic'}, items: [], coins: 0, charms: DEMO_CHARMS, spin: false});
 let ci = 0; charmView.focusCharm(0); setInterval(() => { if (document.hidden) return; const box = $('charmStage').getBoundingClientRect(); if (box.bottom < 0 || box.top > innerHeight) return; charmView.focusCharm(++ci); }, 4200);
+// Worn: a smooth stand-in mannequin runs a loop wearing the shared attachment (simulations/backpack-wear.mjs).
+(async () => {
+ const T = await three(), {wearBackpack} = await import('../../simulations/backpack-wear.mjs');
+ const el = $('wornStage'), r = new T.WebGLRenderer({antialias: true, alpha: true}); r.setPixelRatio(Math.min(2, devicePixelRatio)); el.appendChild(r.domElement);
+ Object.assign(r.domElement.style, {width: '100%', height: '100%', display: 'block'});
+ const scene = new T.Scene(), cam = new T.PerspectiveCamera(35, 4 / 3, .1, 50); cam.position.set(2, 1.45, 2.6); cam.lookAt(0, .85, 0);
+ scene.add(new T.HemisphereLight('#fff6e8', '#b9c8a0', 1.6)); const sun = new T.DirectionalLight('#fff', 1.6); sun.position.set(3, 5, 2); scene.add(sun);
+ const ground = new T.Mesh(new T.CircleGeometry(3, 40), new T.MeshStandardMaterial({color: '#cfe3b0', roughness: 1})); ground.rotation.x = -Math.PI / 2; scene.add(ground);
+ const skin = new T.MeshStandardMaterial({color: '#e8c2a4', roughness: .6}), suit = new T.MeshStandardMaterial({color: '#e0569a', roughness: .7});
+ const fig = new T.Group(), part = (g, m, x, y, z, p = fig) => { const o = new T.Mesh(g, m); o.position.set(x, y, z); p.add(o); return o; };
+ const chest = part(new T.CapsuleGeometry(.16, .3, 4, 10), suit, 0, .95, 0); part(new T.SphereGeometry(.14, 16, 12), skin, 0, 1.36, 0);
+ const legs = [-1, 1].map(s => { const h = new T.Group(); h.position.set(s * .08, .72, 0); fig.add(h); part(new T.CapsuleGeometry(.06, .5, 3, 8), suit, 0, -.32, 0, h); return h; });
+ const arms = [-1, 1].map(s => { const h = new T.Group(); h.position.set(s * .21, 1.12, 0); fig.add(h); part(new T.CapsuleGeometry(.045, .38, 3, 8), skin, 0, -.24, 0, h); return h; });
+ scene.add(fig);
+ const pack = await wearBackpack(chest, {charms: DEMO_CHARMS.slice(0, 6), height: .42, offset: [0, .04, -.2]});
+ let t = 0, last = performance.now(), seen = false;
+ new IntersectionObserver(e => seen = e[0].isIntersecting).observe(el);
+ (function frame(now) {
+  requestAnimationFrame(frame); const dt = Math.min(.05, (now - last) / 1000); last = now; if (!seen && t > 0) return; t += dt;
+  const w = el.clientWidth, h = el.clientHeight; if (r.domElement.width !== Math.round(w * r.getPixelRatio())) { r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); }
+  // A loop: run, stop and turn, run again, so the charms swing, settle and knock.
+  const run = Math.max(0, Math.sin(t * .7)), a = t * .55, step = Math.sin(t * 9) * run;
+  fig.position.set(Math.cos(a) * 1.05, Math.abs(Math.sin(t * 9)) * .05 * run, Math.sin(a) * 1.05); fig.rotation.y = -a;
+  legs.forEach((l, i) => l.rotation.x = (i ? 1 : -1) * step * .7); arms.forEach((l, i) => l.rotation.x = (i ? -1 : 1) * step * .8);
+  scene.updateMatrixWorld(true); pack.update(dt); r.render(scene, cam);
+ })(last);
+ window.__worn = pack;
+})();
 const got = new Set(earnedCharms());
 $('charms').innerHTML = CHARMS.map(c => `<div class="charm ${got.has(c.id) ? 'got' : ''}"><span class="i">${c.icon}</span><div><b>${c.name}</b><small>${c.quest}${c.when ? '' : ' (quest coming)'}</small></div></div>`).join('');
 </script>

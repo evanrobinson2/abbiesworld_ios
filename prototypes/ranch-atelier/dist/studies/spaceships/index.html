@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Spaceship Games Study</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* AW-STUDY-0035. A hangar-floor look: deep space blue, stencil orange, white-box grey. Main column plus a right-side
+   context engineering card (stacks below on phones). */
+:root{--bg:#0b0f19;--paper:#121828;--raised:#1a2236;--ink:#e9edf5;--muted:#9aa5ba;--line:#26304a;--orange:#ff8a3d;--cyan:#59c8ff;--good:#6fdc9a;
+--display:"Chakra Petch",system-ui,sans-serif;--body:"IBM Plex Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;color-scheme:dark}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eef1f6;--paper:#fff;--raised:#f3f5f9;--ink:#141a26;--muted:#566176;--line:#d5dbe6;--orange:#c85a10;--cyan:#0b6fa8;--good:#16824a;color-scheme:light}}
+:root[data-theme="light"]{--bg:#eef1f6;--paper:#fff;--raised:#f3f5f9;--ink:#141a26;--muted:#566176;--line:#d5dbe6;--orange:#c85a10;--cyan:#0b6fa8;--good:#16824a;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px;align-items:start}
+@media (max-width:980px){.wrap{grid-template-columns:minmax(0,1fr)}}
+main{display:flex;flex-direction:column;gap:20px;min-width:0}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+h1{font:700 clamp(36px,6.4vw,62px)/1.02 var(--display);margin:0;text-wrap:balance}
+h2{font:700 30px/1.1 var(--display);margin:26px 0 0;text-wrap:balance}
+h3{font:600 20px/1.2 var(--display);margin:0}
+p{margin:0;max-width:72ch}.lede{font-size:19px}.muted{color:var(--muted)}
+a{color:var(--cyan)}
+.stage{position:relative;border-radius:16px;overflow:hidden;background:#05070d;border:1px solid var(--line);aspect-ratio:16/10;max-width:100%}
+.stage canvas{display:block;width:100%;height:100%}
+.ctrls{display:flex;flex-wrap:wrap;gap:8px}
+.ctrls button{font:600 14px var(--body);color:var(--ink);background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer}
+.ctrls button[aria-pressed="true"]{background:var(--orange);border-color:var(--orange);color:#111}
+.ctrls button:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font:500 12px/1.4 var(--mono);color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:14px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:8px;align-content:start;min-width:0}
+.tag{font:500 11px/1 var(--mono);color:var(--orange);letter-spacing:.1em;text-transform:uppercase}
+.big{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:14px}
+.big .card{padding:20px}
+.big h3{font-size:24px}
+ul,ol{margin:0;padding-left:20px;display:grid;gap:6px;max-width:76ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em;color:var(--muted);background:var(--raised)}
+td:first-child{font-weight:600;white-space:nowrap}
+.own{font:500 10px/1 var(--mono);color:var(--good);margin-left:6px}
+.scale svg{width:100%;height:auto;display:block}
+.concepts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px}
+.concepts figure{margin:0;display:grid;gap:6px}
+.concepts img{width:100%;border-radius:10px;display:block}
+figcaption{font:500 12px/1.4 var(--mono);color:var(--muted)}
+.pending{border:1px dashed var(--line);border-radius:14px;padding:18px;color:var(--muted)}
+.quote{border-left:3px solid var(--orange);padding:4px 0 4px 14px;font-size:17px;max-width:68ch}
+aside{position:sticky;top:max(16px,env(safe-area-inset-top,0px));background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px;font-size:14px;max-height:calc(100vh - 32px);overflow:auto}
+@media (max-width:980px){aside{position:static;max-height:none}}
+aside h2{font-size:22px;margin:0}
+aside h3{font:600 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.08em;color:var(--orange)}
+aside ul{padding-left:16px;gap:4px}
+aside li{overflow-wrap:anywhere}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+.concepts{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}.cgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.cgrid img{width:100%;height:auto;border-radius:8px;display:block}
+@media (min-width:700px){.cgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style></head>
+<body>
+<div class="wrap">
+<main>
+<span class="eyebrow">AW-STUDY-0035 · Oracle study</span>
+<h1>How the great games design their spaceships</h1>
+<p class="lede">You named three masters: RSI (Star Citizen), Starfield and EVE Online. This study reads how their studios actually build ships, goes through the 27 space games in the Oracle, and turns it into rules for Abbie's World. And the Aurora Mk II you asked about is RSI's: the ground-up redesign of Star Citizen's first starter ship, flyable since this March.</p>
+
+<h2>A ship, built the way studios build them</h2>
+<p class="muted">This is a white-box ship, the same stage Star Citizen's pipeline uses: named parts with real pivots, before any final art. It's our own blockout, not any game's model. Try the buttons. They are the mechatronics pass in miniature.</p>
+<div class="stage" id="stage" role="img" aria-label="Interactive white-box spaceship with moving landing gear, engines, canopy, ramp and snap-on modules"></div>
+<div class="ctrls" id="ctrls">
+ <button type="button" data-act="land" aria-pressed="true">Landed</button>
+ <button type="button" data-act="fly" aria-pressed="false">Flying</button>
+ <button type="button" data-act="board" aria-pressed="false">Board</button>
+ <button type="button" data-act="cut" aria-pressed="false">Cutaway</button>
+ <button type="button" data-act="shape" aria-pressed="false">Shape hierarchy</button>
+ <button type="button" data-mod="cargo" aria-pressed="true">Cargo pod</button>
+ <button type="button" data-mod="garage" aria-pressed="false">Buggy garage</button>
+ <button type="button" data-mod="lab" aria-pressed="false">Science lab</button>
+</div>
+<div class="legend" id="legend"><span><i style="background:#cfd5df"></i>Hull</span><span><i style="background:#ff8a3d"></i>Moving part</span><span><i style="background:#59c8ff"></i>Module (snaps on, adds mass)</span><span><i style="background:#ffcf7a"></i>Light that shows state</span><span>Figures: a 1.2 m child and a 1.9 m adult</span></div>
+
+<h2>The short version</h2>
+<ol>
+ <li><b>A ship is a character before it is a vehicle.</b> Start with who flies it and what it has been through.</li>
+ <li><b>One silhouette, read from the back and from far away.</b> Three big volumes, a few medium, many small, and the detail gathered at one focal point.</li>
+ <li><b>Shape language is a promise.</b> Round means friendly, a flat belly means it can land, swept means fast, an exposed frame means rugged. Keep a family consistent and families distinct.</li>
+ <li><b>Function first: every part says what it's for.</b> Place the cockpit, engines, landing gear, door and ramp before the hull wraps them. This is NASA-punk.</li>
+ <li><b>Ships are built from parts, and the parts are the game.</b> Modules snap on, change the silhouette and add mass.</li>
+ <li><b>Inside and outside are one ship.</b> Size doors, ladders and seats to the bodies that use them.</li>
+ <li><b>Boarding is a ritual:</b> the ramp drops, light spills out, the canopy lifts, the gear unfolds.</li>
+ <li><b>Information lives on the ship.</b> Use cockpit screens, glowing engines, warm windows and running lights.</li>
+ <li><b>Flight feel comes from thrusters you can see:</b> VTOL fans that swivel and wings that fold.</li>
+ <li><b>Damage and upgrades show on the parts.</b></li>
+</ol>
+
+<h2>The three masters</h2>
+<div class="big">
+ <div class="card"><span class="tag">RSI · Star Citizen</span><h3>A ship is a hierarchy of named parts</h3>
+  <p>Concept artists deliver "upward of 16 different roughs", then a rough 3D model. Engineers check the landing gear, thrusters, cockpit, bunks and weapons before any final art. In the white box the ship is sliced into pieces that can be damaged on their own and are "attached together by code at runtime". Damage, effects, animation and variants all hang off those pieces.</p>
+  <p class="muted">A door built too small for the pilot (the "Hobbins Hole") is why sizes are checked at the concept stage. The Aurora Mk I came in five variants; a cockpit fix used to be made five times, and now it's made once.</p></div>
+ <div class="card"><span class="tag">RSI · Aurora Mk II</span><h3>How to make a Mk 2</h3>
+  <p>"Takes the essence of the Mk I and brings it up to a level suitable for the game as it exists today." It keeps three nods to the Mk I: the round side door, the bed and the window. Everything else is new. Four swept wings fold back to land, and the lower wings carry VTOL fans. It's bigger inside so you can walk around and reach the components. It's also the first ship with snap-on external modules (cargo and combat), and they add mass.</p>
+  <p class="muted">24.5 m long and 63.5 t, against the Mk I's 19 m and 27 t. RSI chose modules over variants: one base ship that does "a little bit of most missions".</p></div>
+ <div class="card"><span class="tag">Bethesda · Starfield</span><h3>NASA-punk and a kit of parts</h3>
+  <p>"You can draw a line from current-day space technology and extrapolate from there." On the ships that shows up as stencils, hazard stripes, exposed truss and chunky struts. The ship builder snaps cockpits, habs, engines and gear together, and the habs <em>generate the interior</em>. Every hab must connect. The manufacturer (Taiyo, Deimos, Hopetech, Stroud-Eklund, Nova Galactic) changes only the look, never what a part does.</p></div>
+ <div class="card"><span class="tag">CCP · EVE Online</span><h3>Shape language per family</h3>
+  <p>Amarr ships are golden cathedrals, Caldari are hard slabs taken from fighter jets and carriers, Gallente have "art nouveau curves", and Minmatar are proud "scrap heaps". The rule is "visual distinction from the other races, and a visual cohesion within each race". In the Rupture redesign, "messy 3D blockouts" found the problems that 2D hides, and warm orange windows say a crowd lives inside. Tech 3 cruisers have five subsystems that change the ship's actual shape, for thousands of combinations.</p></div>
+</div>
+
+<h2>Scale</h2>
+<div class="card scale"><svg viewBox="0 0 900 240" role="img" aria-label="Scale comparison of ships and people">
+ <g font-family="IBM Plex Mono, monospace" font-size="12" fill="currentColor">
+  <line x1="20" y1="200" x2="880" y2="200" stroke="currentColor" stroke-opacity=".3"/>
+  <g fill="#ff8a3d"><rect x="40" y="188" width="4" height="12"/><rect x="52" y="181" width="5" height="19"/></g>
+  <text x="30" y="220">people 1.2 / 1.9 m</text>
+  <rect x="110" y="163" width="190" height="37" rx="18" fill="#cfd5df" fill-opacity=".85"/><text x="110" y="220">USS Aurora ferry (ours) 6.4 m</text>
+  <rect x="330" y="116" width="0" height="0"/>
+  <rect x="330" y="128" width="380" height="72" rx="22" fill="#cfd5df" fill-opacity=".55"/><text x="330" y="220">2x ferry RE-073 12.8 m</text>
+  <rect x="110" y="40" width="570" height="0"/>
+  <line x1="110" y1="60" x2="680" y2="60" stroke="#59c8ff" stroke-width="10" stroke-linecap="round"/><text x="110" y="45">RSI Aurora Mk I · 19 m long</text>
+  <line x1="110" y1="100" x2="845" y2="100" stroke="#59c8ff" stroke-width="10" stroke-linecap="round"/><text x="110" y="85">RSI Aurora Mk II · 24.5 m long</text>
+ </g>
+ <text x="880" y="235" text-anchor="end" font-family="IBM Plex Mono, monospace" font-size="11" fill="currentColor" fill-opacity=".6">1 px = 3 cm · lengths only</text>
+</svg></div>
+
+<h2>The Oracle's space games, ship by ship</h2>
+<p class="muted">"Role" is what the ship is to the player. <span class="own">owned</span> marks games in your Steam library. The full records are in the study's <code>ship-signatures.json</code>.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>Game</th><th>Role</th><th>Built from</th><th>Inside</th><th>Boarding</th><th>What we learn</th></tr></thead>
+<tbody>
+<tr><td>Outer Wilds<span class="own">owned</span></td><td>Home, campfire</td><td>One handmade ship</td><td>Walk-in cockpit, ship log</td><td>Lift under the hull</td><td>A small, fragile ship you love coming home to</td></tr>
+<tr><td>Kerbal Space Program<span class="own">owned</span></td><td>The puzzle</td><td>Stacked parts</td><td>Faces in the windows</td><td>Hatch</td><td>Chunky parts, one job each; mass you can feel</td></tr>
+<tr><td>Starfield<span class="own">owned</span></td><td>Your house</td><td>Snap kit, habs</td><td>Generated walk-through</td><td>Ramp, ladder</td><td>The interior grows from the parts outside</td></tr>
+<tr><td>No Man's Sky<span class="own">owned</span></td><td>Collectible</td><td>Procedural part sets</td><td>Cockpit</td><td>Climb-in</td><td>Each class reads by its silhouette</td></tr>
+<tr><td>FTL<span class="own">owned</span></td><td>The board</td><td>Rooms as systems</td><td>Cutaway</td><td>None</td><td>The floor plan explains the ship</td></tr>
+<tr><td>Space Engineers<span class="own">owned</span></td><td>The build</td><td>Blocks</td><td>Walk-through</td><td>Doors</td><td>Pistons, rotors and hinges are the fun</td></tr>
+<tr><td>Stellaris<span class="own">owned</span></td><td>Fleet icon</td><td>Species sets</td><td>None</td><td>None</td><td>One shape idea at many sizes</td></tr>
+<tr><td>Space Pirates and Zombies 2<span class="own">owned</span></td><td>Toy, weapon</td><td>Parts</td><td>None</td><td>None</td><td>Parts fall off when hit</td></tr>
+<tr><td>Starcom: Unknown Space<span class="own">owned</span></td><td>Growing base</td><td>Modules</td><td>None</td><td>None</td><td>New modules visibly grow the hull</td></tr>
+<tr><td>Mass Effect: Andromeda<span class="own">owned</span></td><td>Home between missions</td><td>Fixed</td><td>Walk-through</td><td>Ramp</td><td>A hero window on the bridge</td></tr>
+<tr><td>Among Us<span class="own">owned</span></td><td>The map</td><td>Rooms</td><td>Top-down</td><td>None</td><td>The ship is a social space</td></tr>
+<tr><td>ASTRONEER<span class="own">owned</span></td><td>Shuttle</td><td>Click-on modules</td><td>Seat</td><td>Seat</td><td>Bright chunky modules read at any size</td></tr>
+<tr><td>Star Citizen</td><td>Vehicle, home</td><td>Named pieces, modules</td><td>Walk-through</td><td>Door, ramp, elevator</td><td>Pipeline, metrics, modules with mass</td></tr>
+<tr><td>EVE Online</td><td>Fleet</td><td>Hulls, T3 subsystems</td><td>None</td><td>None</td><td>Family shape language; warm windows</td></tr>
+</tbody></table></div>
+<p class="muted">The other 15 space games in the Oracle (Breathedge, IXION, Dyson Sphere Program, Deliver Us The Moon, The Invincible, Surviving Mars, Sins of a Solar Empire, Ring Runner, Transcendence, VoidExpanse, Entropy, Breachway, ΔV, Empyrion, Space Pirates and Zombies) add little about ship design. Most use fixed hulls where fitted slots change the stats, not the look. All 16 hand-studied games now carry a "How it's drawn" note in the Oracle.</p>
+
+<h2>What a ship is made of</h2>
+<div class="grid">
+ <div class="card"><span class="tag">Silhouette</span><p>Design the rear view first, because that's what the player sees. Check every angle: a sleek ship can "come back looking like a duck". Use two or three tones: ground colours underneath, sky colours on top.</p></div>
+ <div class="card"><span class="tag">Function</span><p>Place the cockpit, engines, gear, door, ramp, sensors and cargo first. Name each part by its job. A part is what gets damaged, animated, upgraded and varied.</p></div>
+ <div class="card"><span class="tag">Interior</span><p>A window promises a room. Doors, ladders, bunks and seats fit both a 1.9 m adult and Abbie's 1.1 m eye height. Leave room to walk to the machinery.</p></div>
+ <div class="card"><span class="tag">Mechanics</span><p>Gear, ramps, canopies, folding wings and swivelling engines. Each one gets a pivot, a range and a sound. Landing and take-off are shots worth watching.</p></div>
+ <div class="card"><span class="tag">Displays</span><p>Diegetic first: cockpit screens, engine glow, warm windows, beacons, red and green running lights. Overlay is only for precise numbers.</p></div>
+ <div class="card"><span class="tag">Damage and upgrades</span><p>Scorch, dent and spark per part; parts can fall off. An upgrade is a new part you can see and feel.</p></div>
+</div>
+
+<h2>What Abbie's World adopts</h2>
+<ol>
+ <li>Every ship gets a one-line story before anyone draws it.</li>
+ <li>Silhouette first: from the back, at card size and at 50 m.</li>
+ <li>A shape language per maker. Some ideas: Aurora Works (round explorers in ivory and sunset orange), Bolt &amp; Bucket (haulers with exposed frames, yellow and rust) and Swiftwing (white and blue racers).</li>
+ <li>Function first, with kid-readable NASA-punk details: stencils, hatches, hazard stripes.</li>
+ <li>Named parts with snap points. Modules change both the silhouette and the mass.</li>
+ <li>The inside matches the outside, at Abbie's size, with a cutaway view that works as the ship's map.</li>
+ <li>Boarding and landing are the best moments, and the mechatronics pass is where they get made.</li>
+ <li>State shows on the ship, never on the screen.</li>
+ <li>Damage and upgrades show on the parts.</li>
+</ol>
+
+<h2>Concept art</h2>
+<div class="concepts" id="concepts">
+ <section class="card"><h3>Key art: earthrise on a lunar pad</h3><p class="muted">Ivory hull, orange stripes, glowing nacelles, a lit ramp. Picks the look of the family explorer.</p><div class="cgrid"><a href="img/aurora_1_0.jpg"><img src="img/aurora_1_0.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 1"></a><a href="img/aurora_1_1.jpg"><img src="img/aurora_1_1.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 2"></a><a href="img/aurora_1_2.jpg"><img src="img/aurora_1_2.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 3"></a><a href="img/aurora_1_3.jpg"><img src="img/aurora_1_3.jpg" loading="lazy" alt="Key art: earthrise on a lunar pad, option 4"></a></div></section>
+ <section class="card"><h3>Design sheet</h3><p class="muted">The silhouette from the side: swivel nacelles, gear and the rear bay on a drafting sheet.</p><div class="cgrid"><a href="img/aurora_2_0.jpg"><img src="img/aurora_2_0.jpg" loading="lazy" alt="Design sheet, option 1"></a><a href="img/aurora_2_1.jpg"><img src="img/aurora_2_1.jpg" loading="lazy" alt="Design sheet, option 2"></a><a href="img/aurora_2_2.jpg"><img src="img/aurora_2_2.jpg" loading="lazy" alt="Design sheet, option 3"></a><a href="img/aurora_2_3.jpg"><img src="img/aurora_2_3.jpg" loading="lazy" alt="Design sheet, option 4"></a></div></section>
+ <section class="card"><h3>Three makers, same scale</h3><p class="muted">A round explorer, a boxy yellow hauler and a swept white and blue racer: one shape language each.</p><div class="cgrid"><a href="img/aurora_3_0.jpg"><img src="img/aurora_3_0.jpg" loading="lazy" alt="Three makers, same scale, option 1"></a><a href="img/aurora_3_1.jpg"><img src="img/aurora_3_1.jpg" loading="lazy" alt="Three makers, same scale, option 2"></a><a href="img/aurora_3_2.jpg"><img src="img/aurora_3_2.jpg" loading="lazy" alt="Three makers, same scale, option 3"></a><a href="img/aurora_3_3.jpg"><img src="img/aurora_3_3.jpg" loading="lazy" alt="Three makers, same scale, option 4"></a></div></section>
+ <section class="card"><h3>Cutaway interior</h3><p class="muted">Walkable at Abbie's size: bunk, kitchen, round windows, a dog on the floor.</p><div class="cgrid"><a href="img/aurora_4_0.jpg"><img src="img/aurora_4_0.jpg" loading="lazy" alt="Cutaway interior, option 1"></a><a href="img/aurora_4_1.jpg"><img src="img/aurora_4_1.jpg" loading="lazy" alt="Cutaway interior, option 2"></a><a href="img/aurora_4_2.jpg"><img src="img/aurora_4_2.jpg" loading="lazy" alt="Cutaway interior, option 3"></a><a href="img/aurora_4_3.jpg"><img src="img/aurora_4_3.jpg" loading="lazy" alt="Cutaway interior, option 4"></a></div></section>
+ <section class="card"><h3>Cockpit</h3><p class="muted">Big window first. The planet fills the view and the controls sit low and warm.</p><div class="cgrid"><a href="img/aurora_5_0.jpg"><img src="img/aurora_5_0.jpg" loading="lazy" alt="Cockpit, option 1"></a><a href="img/aurora_5_1.jpg"><img src="img/aurora_5_1.jpg" loading="lazy" alt="Cockpit, option 2"></a><a href="img/aurora_5_2.jpg"><img src="img/aurora_5_2.jpg" loading="lazy" alt="Cockpit, option 3"></a><a href="img/aurora_5_3.jpg"><img src="img/aurora_5_3.jpg" loading="lazy" alt="Cockpit, option 4"></a></div></section>
+ <p class="muted">Made with Midjourney v8.2 (Relax mode). The prompts and job ids are in docs/oracle/spaceships/concepts/provenance.json. These are our own concepts: they borrow what the study learned and copy no game ship.</p>
+</div>
+
+<h2>Meshy ships</h2>
+<p>Meshy built all eight ship pictures into 3D, and a Blender pass mirrored each one so it is exactly symmetric. <a href="models.html">Spin them beside their pictures</a>.</p>
+
+<h2>Next: Mk 2 from concept to moving model</h2>
+<ol>
+ <li>You pick the concept art (any of the four in each row).</li>
+ <li>Meshy turns the pick into a model (done for all eight, untextured, mirrored symmetric).</li>
+ <li>Blender cleanup, the Bruiser way: low poly, split into named parts at the module seams, real materials.</li>
+ <li>The mechatronics pass: the gear unfolds in three steps, the VTOL nacelles swivel, the canopy hinges, the ramp drops and the modules snap on. Each part gets a sound.</li>
+</ol>
+<p class="quote">The brief: a family explorer, our own design. It keeps three signatures of our first ship: a round door, a bunk and a big window. A rear bay takes modules that change the shape and the weight. The nacelles swivel and the gear folds for the landing ritual. The inside is walk-through at Abbie's size, and everything the ship is doing shows on the ship.</p>
+</main>
+
+<aside aria-label="Context engineering">
+ <h2>Context engineering</h2>
+ <p class="muted">What this study was built from.</p>
+ <h3>Oracle consultation</h3>
+ <ul>
+  <li>27 space and sci-fi game profiles, plus Outer Wilds, ASTRONEER and Among Us</li>
+  <li>"How it's drawn": 16 space games hand-studied for this study</li>
+  <li>Game identity schema, HUD study, rendering study, Moon base kit</li>
+ </ul>
+ <h3>Game developer sources</h3>
+ <ul>
+  <li><a href="https://robertsspaceindustries.com/en/comm-link/transmission/14244-How-Ideas-Take-Flight-The-Star-Citizen-Ship-Pipeline">RSI: How Ideas Take Flight, the ship pipeline</a></li>
+  <li><a href="https://starcitizen.tools/Comm-Link:Q%26A_-_RSI_Aurora">RSI: Aurora Mk II Q&amp;A</a></li>
+  <li><a href="https://starcitizen.tools/RSI_Aurora_Mk_II">Aurora Mk II reference</a></li>
+  <li><a href="https://starcitizen.tools/Ship_Pipeline">Star Citizen pipeline and Gold Standard</a></li>
+  <li><a href="https://eveonline.com/article/iconic-ships-reimagined-the-minmatar-rupture">CCP: Iconic Ships Reimagined, the Rupture</a></li>
+  <li><a href="https://www.eveonline.com/article/strategic-cruisers-a-new-breed/">CCP: Strategic Cruisers</a></li>
+  <li><a href="https://www.gamingnexus.com/Article/4771/GN-Unplugged-EVE-Universe--The-Art-of-New-Eden">The Art of New Eden</a></li>
+  <li><a href="https://www.techradar.com/news/starfields-developers-are-aiming-for-a-nasa-punk-aesthetic">Starfield: NASA-punk</a></li>
+  <li><a href="https://dotesports.com/starfield/news/starfield-shipbuilder-habs-explained-interiors-stations-and-more">Starfield: habs and interiors</a></li>
+  <li><a href="https://www.gamedeveloper.com/art/environment-art-and-modeling-in-kerbal-space-program">KSP: art and modelling</a></li>
+  <li><a href="https://gdcvault.com/play/1018034/Designing-Without-a-Pitch-FTL">GDC: the FTL postmortem</a></li>
+  <li><a href="https://www.gdcvault.com/play/1027368/">GDC: Outer Wilds</a></li>
+  <li><a href="https://forum.paradoxplaza.com/forum/developer-diary/stellaris-dev-diary-230-the-art-of-aquatics-ships-the-drake.1495959/">Stellaris dev diary 230: ship art</a></li>
+ </ul>
+ <h3>Game design blogs and tutorials</h3>
+ <ul>
+  <li><a href="https://www.creativebloq.com/sci-fi/video-game-spaceship-design-21619331">Video game spaceship design</a></li>
+  <li><a href="https://creativebloq.com/how-to/modelling-a-spaceship-for-gameplay-design">Modelling a spaceship for gameplay</a></li>
+  <li><a href="https://acapulco.artstation.com/blog/z6Br/design-analysis-moth-by-john-liberto">Design analysis: Moth</a></li>
+  <li><a href="https://www.hudsandguis.com/home/star-citizen-revisited-part-1">Star Citizen UI revisited</a></li>
+  <li><a href="https://magazine.artstation.com/2015/09/crafting-star-citizens-3d-concepts/">Crafting Star Citizen's 3D concepts</a></li>
+ </ul>
+ <h3>Rules followed</h3>
+ <ul>
+  <li>Learn the style, never copy the work: no game meshes or art on this page</li>
+  <li>HUD and information grammar (diegetic first)</li>
+ </ul>
+</aside>
+</div>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+const host=document.getElementById('stage');
+const renderer=new THREE.WebGLRenderer({antialias:true});renderer.setPixelRatio(Math.min(2,devicePixelRatio));renderer.shadowMap.enabled=true;
+host.appendChild(renderer.domElement);
+const scene=new THREE.Scene();scene.background=new THREE.Color('#070a12');
+const cam=new THREE.PerspectiveCamera(38,1,0.1,200);cam.position.set(-15,7.5,11);
+const ctl=new OrbitControls(cam,renderer.domElement);ctl.target.set(0,2,0);ctl.enableDamping=true;ctl.maxPolarAngle=1.5;ctl.minDistance=6;ctl.maxDistance=40;
+scene.add(new THREE.HemisphereLight('#bcd3ff','#2a2420',0.9));
+const sun=new THREE.DirectionalLight('#fff4e0',2.2);sun.position.set(8,14,6);sun.castShadow=true;sun.shadow.mapSize.set(1024,1024);Object.assign(sun.shadow.camera,{left:-14,right:14,top:14,bottom:-14});scene.add(sun);
+const ground=new THREE.Mesh(new THREE.CircleGeometry(16,48),new THREE.MeshStandardMaterial({color:'#3a3f4a',roughness:1}));ground.rotation.x=-Math.PI/2;ground.receiveShadow=true;scene.add(ground);
+const ring=new THREE.Mesh(new THREE.RingGeometry(6.6,6.9,48),new THREE.MeshBasicMaterial({color:'#ff8a3d',transparent:true,opacity:.5}));ring.rotation.x=-Math.PI/2;ring.position.y=.01;scene.add(ring);
+
+const C={hull:'#cfd5df',hull2:'#aeb6c4',move:'#ff8a3d',mod:'#59c8ff',glass:'#1d3340',light:'#ffcf7a',dark:'#3a4152'};
+const H={primary:'#e8d9b5',secondary:'#8fb3e6',tertiary:'#ff6f91'};
+const mats=[];
+function M(col,role,extra={}){const m=new THREE.MeshStandardMaterial({color:col,roughness:.55,metalness:.15,flatShading:true,...extra});m.userData={base:col,role};mats.push(m);return m}
+function mesh(geo,mat,parent,pos=[0,0,0],rot=[0,0,0]){const o=new THREE.Mesh(geo,mat);o.position.set(...pos);o.rotation.set(...rot);o.castShadow=o.receiveShadow=true;parent.add(o);return o}
+const ship=new THREE.Group();scene.add(ship);
+const body=new THREE.Group();body.position.y=.8;ship.add(body);
+const roof=[];
+// Primary volumes: cockpit, hab, engine block.
+const hab=mesh(new THREE.BoxGeometry(3.2,2.4,4.4,1,1,1),M(C.hull,'primary'),body,[0,2.6,0]);
+const habRoof=mesh(new THREE.CylinderGeometry(1.6,1.6,4.4,10,1,false,0,Math.PI),M(C.hull,'primary'),body,[0,3.8,0],[Math.PI/2,0,Math.PI/2]);roof.push(habRoof);
+const cockpit=mesh(new THREE.SphereGeometry(1.5,12,8,0,Math.PI*2,0,Math.PI/2),M(C.hull,'primary'),body,[0,2.4,2.5]);cockpit.scale.set(1.05,.75,1.5);
+mesh(new THREE.BoxGeometry(3.2,1.1,2.2),M(C.hull,'primary'),body,[0,1.85,2.8]);
+const engine=mesh(new THREE.BoxGeometry(2.6,2,1.6),M(C.hull2,'primary'),body,[0,2.6,-3.4]);
+for(const x of[-.65,.65]){mesh(new THREE.CylinderGeometry(.5,.62,.8,10),M(C.dark,'tertiary'),body,[x,2.6,-4.5],[Math.PI/2,0,0]);mesh(new THREE.CircleGeometry(.48,10),M(C.light,'tertiary',{emissive:'#ff9a3c',emissiveIntensity:.0}),body,[x,2.6,-4.91],[0,Math.PI,0]).name='glow'}
+// Secondary: belly, spine, pylons. Tertiary: stencils, vents, lights.
+mesh(new THREE.BoxGeometry(2.6,.4,6),M(C.hull2,'secondary'),body,[0,1.25,-.4]);
+const spine=mesh(new THREE.BoxGeometry(.5,.35,3),M(C.hull2,'secondary'),body,[0,5.45,0]);roof.push(spine);
+for(let i=0;i<5;i++)mesh(new THREE.BoxGeometry(.06,.5,.5),M(C.dark,'tertiary'),body,[1.62,2.7,-1.6+i*.75]);
+mesh(new THREE.BoxGeometry(.04,.18,1.6),M('#ff8a3d','tertiary'),body,[-1.62,3.3,0]);
+// Windows (warm = someone home) and running lights.
+const warm=[];for(const s of[-1,1])for(let i=0;i<3;i++){const w=mesh(new THREE.CircleGeometry(.22,10),M(C.light,'tertiary',{emissive:'#ffb45a',emissiveIntensity:1.2}),body,[s*1.61,3,-1.2+i*1.1],[0,s*Math.PI/2,0]);warm.push(w)}
+mesh(new THREE.SphereGeometry(.12,8,6),M('#ff4d3d','tertiary',{emissive:'#ff4d3d',emissiveIntensity:2}),body,[-2.95,2.9,.6]);
+mesh(new THREE.SphereGeometry(.12,8,6),M('#59e08a','tertiary',{emissive:'#59e08a',emissiveIntensity:2}),body,[2.95,2.9,.6]);
+// Canopy (moving part): hinged at its back edge.
+const canopyHinge=new THREE.Group();canopyHinge.position.set(0,3.1,1.5);body.add(canopyHinge);
+const canopy=mesh(new THREE.SphereGeometry(1.25,12,8,0,Math.PI*2,0,Math.PI/2),M(C.glass,'secondary',{roughness:.1,metalness:.4,transparent:true,opacity:.85}),canopyHinge,[0,-.05,1.35]);canopy.scale.set(1,.7,1.3);
+mesh(new THREE.TorusGeometry(1.25,.06,6,16,Math.PI),M(C.move,'move'),canopyHinge,[0,-.05,1.35],[0,Math.PI/2,0]);
+// Interior props (seen in cutaway): two seats, bunk, table; sized to adult and child.
+const inside=new THREE.Group();body.add(inside);
+for(const x of[-.55,.55])mesh(new THREE.BoxGeometry(.5,.9,.5),M('#6f7a8f','tertiary'),inside,[x,2.0,2.4]);
+mesh(new THREE.BoxGeometry(1.0,.25,2.0),M('#c26b4a','tertiary'),inside,[-.9,1.9,-1]);mesh(new THREE.BoxGeometry(1.0,.25,2.0),M('#c26b4a','tertiary'),inside,[-.9,2.9,-1]);
+mesh(new THREE.CylinderGeometry(.45,.45,.75,10),M('#8a7356','tertiary'),inside,[.8,1.85,-.2]);
+// Engine nacelles on pylons (moving part): swivel from back-pointing (flight) to down-pointing (landing/hover).
+const nac=[];for(const s of[-1,1]){mesh(new THREE.BoxGeometry(1.2,.35,.9),M(C.hull2,'secondary'),body,[s*2.1,2.9,.6]);
+ const p=new THREE.Group();p.position.set(s*2.95,2.9,.6);body.add(p);
+ mesh(new THREE.CylinderGeometry(.62,.62,1.9,12),M(C.move,'move'),p,[0,0,0],[Math.PI/2,0,0]);
+ const g=mesh(new THREE.CircleGeometry(.5,12),M(C.light,'tertiary',{emissive:'#ff9a3c',emissiveIntensity:0}),p,[0,0,-.96],[0,Math.PI,0]);g.name='glow';
+ nac.push(p)}
+// Landing gear (moving part): upper leg pivots at the belly, lower leg at the knee.
+const legs=[];for(const [x,z] of[[-1.3,1.8],[1.3,1.8],[-1.3,-2.2],[1.3,-2.2]]){const hip=new THREE.Group();hip.position.set(x,1.1,z);body.add(hip);
+ mesh(new THREE.BoxGeometry(.22,1.0,.22),M(C.move,'move'),hip,[0,-.5,0]);const knee=new THREE.Group();knee.position.set(0,-1,0);hip.add(knee);
+ mesh(new THREE.BoxGeometry(.16,.9,.16),M(C.dark,'move'),knee,[0,-.45,0]);mesh(new THREE.CylinderGeometry(.4,.45,.12,10),M(C.dark,'move'),knee,[0,-.92,0]);legs.push({hip,knee,s:Math.sign(x)})}
+// Side ramp (moving part): closed it is the port door; open it slopes to the ground, with the doorway lit.
+const rampHinge=new THREE.Group();rampHinge.position.set(-1.62,1.3,.2);body.add(rampHinge);
+mesh(new THREE.BoxGeometry(3.2,.1,1.3),M(C.move,'move'),rampHinge,[-1.6,0,0]);
+const doorLight=mesh(new THREE.PlaneGeometry(1.1,2.1),M(C.light,'tertiary',{emissive:'#ffb45a',emissiveIntensity:0}),body,[-1.61,2.45,.2],[0,-Math.PI/2,0]);
+// Snap-on modules on the roof bay behind the cockpit (blue): each changes silhouette and mass.
+const mods={};
+function modGroup(name,build,mass){const g=new THREE.Group();g.position.set(0,3.6,-3.4);body.add(g);build(g);g.userData.mass=mass;mods[name]=g;return g}
+modGroup('cargo',g=>{mesh(new THREE.BoxGeometry(2.2,1.2,2.2),M(C.mod,'module'),g,[0,.6,0]);mesh(new THREE.BoxGeometry(2.3,.12,.15),M(C.dark,'tertiary'),g,[0,1.2,0])},1.8);
+modGroup('garage',g=>{mesh(new THREE.BoxGeometry(2.6,1.4,2.8),M(C.mod,'module'),g,[0,.7,0]);mesh(new THREE.BoxGeometry(1.8,1.0,.05),M(C.dark,'tertiary'),g,[0,.6,-1.42])},2.6);
+modGroup('lab',g=>{mesh(new THREE.CylinderGeometry(.9,.9,2.2,12),M(C.mod,'module'),g,[0,.9,0],[0,0,Math.PI/2]);const d=mesh(new THREE.SphereGeometry(.6,10,6,0,Math.PI*2,0,Math.PI/2.4),M('#dfe6f0','tertiary',{side:THREE.DoubleSide}),g,[0,2.1,.2],[-.5,0,0]);mesh(new THREE.CylinderGeometry(.04,.04,.6,6),M(C.dark,'tertiary'),g,[0,1.8,0])},1.2);
+// Scale figures: a 1.2 m child and a 1.9 m adult by the ramp.
+function fig(h,x,col){const g=new THREE.Group();g.position.set(-6.4,0,x);scene.add(g);mesh(new THREE.CapsuleGeometry(h*.14,h*.55,4,8),M(col,'figure'),g,[0,h*.42,0]);mesh(new THREE.SphereGeometry(h*.11,10,8),M(col,'figure'),g,[0,h*.9,0]);return g}
+fig(1.2,-.9,'#ff7fb6');fig(1.9,.8,'#9fb0ff');
+
+const st={fly:0,board:0,cut:0,shape:0,mod:'cargo'};const cur={fly:0,board:0};
+function setPressed(){for(const b of document.querySelectorAll('#ctrls button')){const a=b.dataset.act,m=b.dataset.mod;let on=false;
+ if(a==='land')on=!st.fly;if(a==='fly')on=!!st.fly;if(a==='board')on=!!st.board;if(a==='cut')on=!!st.cut;if(a==='shape')on=!!st.shape;if(m)on=st.mod===m;b.setAttribute('aria-pressed',on)}}
+document.getElementById('ctrls').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;const a=b.dataset.act;
+ if(a==='land'){st.fly=0}else if(a==='fly'){st.fly=1;st.board=0}else if(a==='board'){st.board=st.board?0:1;if(st.board)st.fly=0}else if(a==='cut')st.cut^=1;else if(a==='shape')st.shape^=1;
+ if(b.dataset.mod)st.mod=b.dataset.mod;apply();setPressed()});
+function apply(){for(const r of roof)r.visible=!st.cut;habRoofVis();for(const [k,g] of Object.entries(mods))g.visible=k===st.mod&&!st.cut;
+ for(const m of mats){const r=m.userData.role;if(r==='figure')continue;
+  if(st.shape){m.color.set(r==='primary'?H.primary:r==='secondary'||r==='module'?H.secondary:H.tertiary)}else m.color.set(m.userData.base)}}
+function habRoofVis(){hab.scale.y=st.cut?.55:1;hab.position.y=st.cut?1.95:2.6}
+apply();
+const clock=new THREE.Clock();
+function resize(){const w=host.clientWidth,h=host.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+new ResizeObserver(resize).observe(host);resize();
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tick(){const dt=Math.min(.05,clock.getDelta()),k=reduce?1:1-Math.exp(-dt*3.2),t=clock.elapsedTime;
+ cur.fly+=(st.fly-cur.fly)*k;cur.board+=(st.board-cur.board)*k;
+ // Gear: three-step fold (hip swings out and up, knee tucks).
+ for(const L of legs){L.hip.rotation.z=L.s*(.35+cur.fly*1.0);L.knee.rotation.z=-L.s*(.35+cur.fly*1.9)}
+ for(const p of nac)p.rotation.x=(1-cur.fly)*(-Math.PI/2);
+ const hover=cur.fly;ship.position.y=hover*2.2+(reduce?0:Math.sin(t*1.6)*.08*hover);
+ rampHinge.rotation.z=-Math.PI/2+cur.board*(Math.PI/2+0.72);canopyHinge.rotation.x=-cur.board*0.9;
+ const glowOn=.3+cur.fly*2.2;ship.traverse(o=>{if(o.name==='glow')o.material.emissiveIntensity=glowOn});
+ doorLight.material.emissiveIntensity=cur.board*2.5;
+ ring.material.opacity=.25+.35*(1-cur.fly);
+ ctl.update();renderer.render(scene,cam);requestAnimationFrame(tick)}
+tick();
+</script>
+</body></html>

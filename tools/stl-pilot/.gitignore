@@ -1,0 +1,6 @@
+logs_*.txt
+runall*.out
+__pycache__/
+*.stl
+*_normal.png
+*_ao.png

@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
-      "source": "/science-lab",
-      "destination": "/studies/cell/play.html"
+      "source": "/classic",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/demo",
+      "destination": "/demo/index.html"
     },
     {
       "source": "/town",
@@ -403,6 +407,24 @@
       "source": "/manifest.webmanifest"
     },
     {
+      "source": "/models/(.*)\\.(glb|jpg|png|webp)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/vendor/model-viewer.min.js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
       "source": "/explore/(.*)\\.(js|css)",
       "headers": [
         {
@@ -443,6 +465,22 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/",
+      "destination": "/town",
+      "permanent": false,
+      "missing": [
+        {
+          "type": "host",
+          "value": "explore.abbies.world"
+        }
+      ]
+    },
+    {
+      "source": "/science-lab",
+      "destination": "/town",
+      "permanent": false
+    },
     {
       "source": "/billing",
       "has": [
@@ -528,37 +566,11 @@
       "has": [
         {
           "type": "host",
-          "value": "app.abbies.world"
-        }
-      ],
-      "destination": "/studies/",
-      "permanent": false
-    },
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
           "value": "explore.abbies.world"
         }
       ],
       "destination": "/explore",
       "permanent": false
-    },
-    {
-      "source": "/",
-      "destination": "/sandbox",
-      "permanent": false,
-      "missing": [
-        {
-          "type": "host",
-          "value": "explore.abbies.world"
-        },
-        {
-          "type": "host",
-          "value": "app.abbies.world"
-        }
-      ]
     },
     {
       "source": "/town-life",
