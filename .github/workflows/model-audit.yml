@@ -9,6 +9,26 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - name: R2 against the repo
+        run: |
+          curl -sS -o /tmp/catalog-all.json https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/models/catalog-all.json
+          python3 - <<'P'
+          import json,hashlib,subprocess,collections
+          l=json.load(open('/tmp/catalog-all.json'))
+          mod=[x for x in l if x.get('kind')!='reference-image' and str(x.get('source_path','')).lower().endswith(('.glb','.gltf','.obj','.stl','.fbx'))]
+          print('R2 model entries (3D files):',len(mod),' distinct sha:',len(set(x['sha256'] for x in mod)))
+          have=set()
+          for f in subprocess.check_output(['git','ls-files'],text=True).splitlines():
+              if f.lower().endswith(('.glb','.gltf','.obj','.stl','.fbx')): have.add(hashlib.sha256(open(f,'rb').read()).hexdigest())
+          miss=[x for x in mod if x['sha256'] not in have]
+          print('R2 3D files NOT in this checkout:',len(miss),' distinct:',len(set(x['sha256'] for x in miss)))
+          print(collections.Counter(x.get('tree') for x in mod).most_common(), collections.Counter(x.get('tree') for x in miss).most_common())
+          for x in miss[:60]: print(' ',x.get('tree'),x.get('source_path'))
+          json.dump(miss,open('/tmp/r2-missing.json','w'))
+          P
+      - uses: actions/upload-artifact@v4
+        with: {name: r2-missing, path: /tmp/r2-missing.json}
       - name: R2 catalogue
         run: |
           B=https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev
