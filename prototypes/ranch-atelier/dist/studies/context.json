@@ -3405,6 +3405,114 @@
           "note": "The parallel asks that replaced facets with upgrades and added zips while the loadout shipped."
         }
       ]
+    },
+    "carwash": {
+      "recorded": "2026-10-24, while writing the study",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Kart study: the Effect Hunt driver and car mode the carwash rides on",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/kart/KART_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Music Bible: D major, 124 bpm, 3+3+2",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/music/MUSIC_BIBLE.md"
+        },
+        {
+          "k": "canon",
+          "t": "HUD study and GAME_FEEL.md: no words, world layer vs presentation layer",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Composer README: ElevenLabs Music API, licence check, music-takes workflow",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/composer/README.md"
+        },
+        {
+          "k": "devblog",
+          "t": "PowerWash Simulator devs on making cleaning fun (Kotaku): instant dirt reveal, no fail state, layered difficulty",
+          "href": "https://kotaku.com/powerwash-sim-devs-on-making-cleaning-fun-advanced-cro-1847319502",
+          "note": "read in full: the reveal, ongoing feedback and optional challenge mode became the pre-soak and rinse stations"
+        },
+        {
+          "k": "devblog",
+          "t": "Road to the IGF: Ghost Town Games' Overcooked (Game Developer)",
+          "href": "https://gamedeveloper.com/design/road-to-the-igf-ghost-town-games-i-overcooked-i-",
+          "note": "read in full: stations and shared pressure, restrictions added to prevent frustration; tuned by watching people play"
+        },
+        {
+          "k": "design",
+          "t": "The Develop Post-Mortem: Overcooked (MCV)",
+          "href": "https://mcvuk.com/the-develop-post-mortem-overcooked/",
+          "note": "found by search, not read in full"
+        },
+        {
+          "k": "design",
+          "t": "PowerWash Simulator 2: how FuturLab built the sequel (Xbox Wire)",
+          "href": "https://news.xbox.com/en-us/2025/10/23/powerwash-simulator-2-how-futurlab-built-a-sparking-sequel/",
+          "note": "found by search, not read in full"
+        },
+        {
+          "k": "design",
+          "t": "The Toca Boca story and its open-ended play",
+          "href": "https://collect.readwriterespond.com/toca-boca-story",
+          "note": "found by search, not read in full; the no-fail, toy-box feel"
+        },
+        {
+          "k": "research",
+          "t": "Rose Royce, Car Wash (the song the anthem is inspired by, not copied from)",
+          "href": "https://en.wikipedia.org/wiki/Car_Wash_(song)",
+          "note": "copyrighted; licensing is the route for the real one"
+        }
+      ]
+    },
+    "diorama-swipe": {
+      "recorded": "2026-10-24",
+      "items": [
+        {
+          "k": "canon",
+          "t": "Model library: 1,493 distinct entries, roles and places drive the decks (dist/models/library.json)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/models/library.json"
+        },
+        {
+          "k": "canon",
+          "t": "AW-STUDY-0057 Winchester inventory: the setting and role vocabulary the dioramas borrow",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/preview/winchester-inventory/index.html"
+        },
+        {
+          "k": "canon",
+          "t": "Town tile cards (town-tiles.mjs, AW-STUDY-0025): the hex card shape the bottom tray copies",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/town-tiles.mjs"
+        },
+        {
+          "k": "canon",
+          "t": "Practice reps: attempt, score, lesson, retry, show the progression (here: hot dog rate per batch)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/diorama-swipe/DIORAMA_STUDY.md"
+        },
+        {
+          "k": "research",
+          "t": "Thompson sampling for bandits (Beta posteriors per asset, group prior, pair bonus); the method behind the next batch",
+          "href": "https://en.wikipedia.org/wiki/Thompson_sampling"
+        },
+        {
+          "k": "oracle",
+          "t": "Game Oracle: Tiny Glade, Dorfromantik, Townscaper style records (not freshly consulted for this draft)",
+          "href": "https://abbies-game-oracle.vercel.app/"
+        },
+        {
+          "k": "devblog",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "design",
+          "t": "None recorded for this draft"
+        },
+        {
+          "k": "tutorial",
+          "t": "None recorded for this draft"
+        }
+      ]
     }
   }
 }
