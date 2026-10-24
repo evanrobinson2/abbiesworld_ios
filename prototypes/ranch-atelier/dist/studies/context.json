@@ -3407,63 +3407,97 @@
       ]
     },
     "carwash": {
-      "recorded": "2026-10-24, while writing the study",
+      "recorded": "2026-10-24 · Level 1 Exploration, revised from Evan’s live feedback",
       "items": [
+        {
+          "k": "oracle",
+          "t": "Evan’s local Game Oracle: washing / Scribble / Overcooked retrieval and director consultation",
+          "href": "/studies/carwash/oracle-evidence.json",
+          "note": "Local library consultation. source=studies, model=null; no model-authored opinion. Zero cleaning-reference matches; colorful Overcooked presentation is a source-tag reference, not a washing mechanic."
+        },
+        {
+          "k": "reference",
+          "t": "Crayola Scribble Scrubbie+ — official app listing",
+          "href": "https://apps.apple.com/us/app/crayola-scribble-scrubbie/id6744193586",
+          "note": "3D coloring and Pet Washing Station. Evan confirmed with a screenshot. Direct touch and centered subject inform the study."
+        },
+        {
+          "k": "reference",
+          "t": "Crayola Scribble Scrubbie color / wash / repeat",
+          "href": "https://www.crayola.com/products/toys/scribble-scrubbie-pets-1-count-747482",
+          "note": "Official physical-toy description; no assets copied."
+        },
+        {
+          "k": "reference",
+          "t": "Evan’s gameplay-video reference — key-frame research in progress",
+          "href": "https://www.youtube.com/watch?v=nMAUrbUJ5LQ",
+          "note": "Separate requested chat 01a16f4a-c99b-7612-89c2-185c3e6cdc99. Do not claim full video reviewed until evidence arrives."
+        },
+        {
+          "k": "canon",
+          "t": "Round 1 study: simple cleaning, partial scores, robot tools, car-part views",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/carwash/LEVEL1_EXPLORATION.md",
+          "note": "Latest user brief supersedes earlier tunnel timing and mandatory full completion."
+        },
         {
           "k": "canon",
           "t": "Kart study: the Effect Hunt driver and car mode the carwash rides on",
-          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/kart/KART_STUDY.md"
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/kart/KART_STUDY.md",
+          "note": "Inherited from round 0; not re-verified in this exploration. "
         },
         {
           "k": "canon",
           "t": "Music Bible: D major, 124 bpm, 3+3+2",
-          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/music/MUSIC_BIBLE.md"
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/music/MUSIC_BIBLE.md",
+          "note": "Inherited from round 0; not re-verified in this exploration. "
         },
         {
           "k": "canon",
           "t": "HUD study and GAME_FEEL.md: no words, world layer vs presentation layer",
-          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md",
+          "note": "Inherited from round 0; not re-verified in this exploration. "
         },
         {
           "k": "canon",
           "t": "Composer README: ElevenLabs Music API, licence check, music-takes workflow",
-          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/composer/README.md"
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/tools/composer/README.md",
+          "note": "Inherited from round 0; not re-verified in this exploration. "
         },
         {
           "k": "devblog",
           "t": "PowerWash Simulator devs on making cleaning fun (Kotaku): instant dirt reveal, no fail state, layered difficulty",
           "href": "https://kotaku.com/powerwash-sim-devs-on-making-cleaning-fun-advanced-cro-1847319502",
-          "note": "read in full: the reveal, ongoing feedback and optional challenge mode became the pre-soak and rinse stations"
+          "note": "Inherited from round 0; not re-verified in this exploration. read in full: the reveal, ongoing feedback and optional challenge mode became the pre-soak and rinse stations"
         },
         {
           "k": "devblog",
           "t": "Road to the IGF: Ghost Town Games' Overcooked (Game Developer)",
           "href": "https://gamedeveloper.com/design/road-to-the-igf-ghost-town-games-i-overcooked-i-",
-          "note": "read in full: stations and shared pressure, restrictions added to prevent frustration; tuned by watching people play"
+          "note": "Inherited from round 0; not re-verified in this exploration. read in full: stations and shared pressure, restrictions added to prevent frustration; tuned by watching people play"
         },
         {
           "k": "design",
           "t": "The Develop Post-Mortem: Overcooked (MCV)",
           "href": "https://mcvuk.com/the-develop-post-mortem-overcooked/",
-          "note": "found by search, not read in full"
+          "note": "Inherited from round 0; not re-verified in this exploration. found by search, not read in full"
         },
         {
           "k": "design",
           "t": "PowerWash Simulator 2: how FuturLab built the sequel (Xbox Wire)",
           "href": "https://news.xbox.com/en-us/2025/10/23/powerwash-simulator-2-how-futurlab-built-a-sparking-sequel/",
-          "note": "found by search, not read in full"
+          "note": "Inherited from round 0; not re-verified in this exploration. found by search, not read in full"
         },
         {
           "k": "design",
           "t": "The Toca Boca story and its open-ended play",
           "href": "https://collect.readwriterespond.com/toca-boca-story",
-          "note": "found by search, not read in full; the no-fail, toy-box feel"
+          "note": "Inherited from round 0; not re-verified in this exploration. found by search, not read in full; the no-fail, toy-box feel"
         },
         {
           "k": "research",
           "t": "Rose Royce, Car Wash (the song the anthem is inspired by, not copied from)",
           "href": "https://en.wikipedia.org/wiki/Car_Wash_(song)",
-          "note": "copyrighted; licensing is the route for the real one"
+          "note": "Inherited from round 0; not re-verified in this exploration. copyrighted; licensing is the route for the real one"
         }
       ]
     },
@@ -3761,17 +3795,41 @@
     },
     "world-browser": {
       "items": [
-        {"k": "canon", "t": "Evan's #617 direction (World Browser, Capture, shared-by-default)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/617"},
-        {"k": "canon", "t": "Winchester flow study (#614)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/winchester-flow/index.html"},
-        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+        {
+          "k": "canon",
+          "t": "Evan's #617 direction (World Browser, Capture, shared-by-default)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/617"
+        },
+        {
+          "k": "canon",
+          "t": "Winchester flow study (#614)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/studies/winchester-flow/index.html"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        }
       ],
       "recorded": "2026-10-24, no outside sources used; built from the issue text and our canon"
     },
     "player-home": {
       "items": [
-        {"k": "canon", "t": "Evan's #619 direction (player and signature home)", "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/619"},
-        {"k": "canon", "t": "Backpack study: default bunny look and the charm list", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md"},
-        {"k": "canon", "t": "Interaction grammar", "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"}
+        {
+          "k": "canon",
+          "t": "Evan's #619 direction (player and signature home)",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/issues/619"
+        },
+        {
+          "k": "canon",
+          "t": "Backpack study: default bunny look and the charm list",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/backpack/BACKPACK_STUDY.md"
+        },
+        {
+          "k": "canon",
+          "t": "Interaction grammar",
+          "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/design/INTERACTION_GRAMMAR.md"
+        }
       ],
       "recorded": "2026-10-24, no outside sources used; the two reference photos were not readable from the cloud worker, so the issue's written description was used"
     },

@@ -1,0 +1,5 @@
+node_modules/
+*.log
+oracle.mjs
+deployment*.json
+live*.json
