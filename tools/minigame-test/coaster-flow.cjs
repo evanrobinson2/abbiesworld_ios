@@ -14,9 +14,9 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   await p.evaluate(() => coaster.start()); await p.waitForTimeout(1800); await shot('1-flow-a');
   await until(() => coaster.S.mode === 'zoom'); await p.waitForTimeout(1500); await shot('2-flow-b');
   await until(() => coaster.S.ready); await shot('3-zoom-tiltshift');
-  await p.evaluate(() => { const c = coaster.cam; Object.assign(c, {tx: 10, ty: 1, tz: 6, dist: 16, az: 10, pitch: 16}); }); await p.waitForTimeout(900); await shot('3a-garage');
+  await shot('3-toybox-closed'); await p.evaluate(() => coaster.openBox()); await until(() => !coaster.S.box || coaster.toyBox.userData.open >= 1); await p.waitForTimeout(2500); await shot('3a-toybox-open');
   await p.evaluate(() => coaster.choose(coaster.cars.find(c => c.userData.def.id === 'cart'))); await p.waitForTimeout(2500);
-  await p.evaluate(() => { Object.assign(coaster.cam, {tx: 0, ty: 17, tz: -2, dist: 9, az: 40, pitch: 18}); }); await p.waitForTimeout(900); await shot('3b-cart');
+  await shot('3b-cart');
   await p.evaluate(() => coaster.repaint('#ff5d8f')); await p.waitForTimeout(500);
   // the Toy car charm unlocks the fire-wheels card on the garage floor; turn it on for the ride
   await p.evaluate(() => { coaster.BP.earnCharm('toy-car'); coaster.FW.setFireWheels(true); }); await p.waitForTimeout(600); await shot('3c-fire-card');
@@ -33,7 +33,10 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   // the strip's controls drive the ride's world: night, then rain
   await p.click('#v2-chrono .ch-dial').catch(() => {}); await p.waitForTimeout(800); await shot('14-strip-open');
   await p.evaluate(() => { const b = id => document.getElementById(id)?.click(); b('scene-clock-control'); b('scene-clock-control'); b('scene-weather-control'); b('scene-weather-control'); }); await p.waitForTimeout(4000); await shot('15-night-rain');
+  // ride again: the run is on the scoreboard and the garage comes back
+  await p.click('#again'); await until(() => coaster.S.mode === 'zoom'); await p.waitForTimeout(2500); await shot('16-again');
+  console.log(JSON.stringify(await p.evaluate(() => ({board: coaster.SB.rows().length, score: coaster.SC.total}))));
   const fin = await p.evaluate(() => ({mode: coaster.S.mode})); if (fin.mode !== 'end') throw new Error('the ride did not reach its finish: ' + fin.mode);
-  console.log(JSON.stringify(await p.evaluate(() => ({stars: coaster.S.stars, mode: coaster.S.mode, won: coaster.S.won, car: coaster.car.userData.def.id, photo: !!coaster.S.photo}))));
+  console.log(JSON.stringify(await p.evaluate(() => ({score: coaster.SC.total, medal: coaster.SC.medal(), stars: coaster.S.stars, mode: coaster.S.mode, won: coaster.S.won, car: coaster.car.userData.def.id, photo: !!coaster.S.photo}))));
   await b.close(); console.log('GAME-TEST PASS coaster');
 })();

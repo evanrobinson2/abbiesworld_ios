@@ -82,6 +82,8 @@ export const CHARMS = [
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
  {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
  {id: 'toy-car', name: 'Toy car', icon: '🏎️', quest: 'Collect 10 of the 16 stars in the toy-car coaster'},
+ // Gold medal on the toy-car coaster's rail game (Evan, 2026-10-24: points, prizes and a leaderboard). A bonus: not needed for the heart.
+ {id: 'golden-wheel', name: 'Golden wheel', icon: '🛞', quest: 'Score a gold medal on the toy-car coaster', bonus: true},
  {id: 'moon-buggy', name: 'Moon buggy', icon: '🚙', quest: 'Roll the Moon Buggy through the carwash and get soaked'},
  // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
  // Halloween (experimental): knock on five doors in one night. Seasonal, so it never counts toward 'all-memories'.
@@ -127,7 +129,7 @@ export function earnedCharms() {
  const s = progress(), given = saved().charms || {};
  const has = new Set(CHARMS.filter(c => !c.crown && (given[c.id] || (c.when && c.when(s)))).map(c => c.id));
  // The heart comes with every other one-off charm (moon cheese, which she can win again and again, doesn't count).
- const all = CHARMS.every(c => c.crown || c.repeat || has.has(c.id));
+ const all = CHARMS.every(c => c.crown || c.repeat || c.bonus || has.has(c.id)); // bonus charms (skill prizes) never hold back the heart
  return CHARMS.filter(c => has.has(c.id) || (c.crown && (given[c.id] || all))).map(c => c.id);
 }
 export const coinCount = () => progress().coins;
@@ -470,6 +472,10 @@ function charmMesh(id, m) {
   for (const z of [-1, 1]) add(new T.BoxGeometry(.036, .016, .002), glass, 'car window', -.006, .019, z * .0205);
   for (const x of [-.03, .03]) for (const z of [-1, 1]) add(new T.CylinderGeometry(.013, .013, .01, 10), tyre, 'car wheel', x, -.02, z * .024).rotation.x = Math.PI / 2;
   for (const z of [-1, 1]) add(new T.BoxGeometry(.004, .006, .008), gold, 'car headlight', .046, -.002, z * .013);
+ } else if (id === 'golden-wheel') { // a gold wheel: a fat tyre, five spokes and a hub
+  add(new T.TorusGeometry(.042, .014, 8, 20), gold, 'golden tyre');
+  for (let i = 0; i < 5; i++) { const sp = add(new T.BoxGeometry(.006, .044, .006), gold, 'golden spoke'); sp.rotation.z = i * Math.PI * 2 / 5; sp.position.set(Math.sin(i * Math.PI * 2 / 5) * -.011, Math.cos(i * Math.PI * 2 / 5) * .011, 0); }
+  add(new T.CylinderGeometry(.012, .012, .012, 10), gold, 'golden hub').rotation.x = Math.PI / 2;
  } else if (id === 'moon-buggy') { // a little Moon Buggy: big lugged tyres, a split nose, tall bars
   const body = M('enamel buggy slate', '#4a6a8a', {roughness: .3}), tyre = M('rubber tyre', '#1d1b20', {roughness: .7}), lamp = M('enamel buggy lamp', '#e8f6ff', {roughness: .2, emissive: '#bfeaff', emissiveIntensity: .6});
   add(new T.BoxGeometry(.07, .02, .04), body, 'buggy frame', 0, -.004, 0); add(new T.BoxGeometry(.03, .024, .036), body, 'buggy nose', .026, .008, 0); add(new T.BoxGeometry(.028, .01, .03), M('enamel buggy seat', '#1e2128', {roughness: .8}), 'buggy seat', -.012, .012, 0);

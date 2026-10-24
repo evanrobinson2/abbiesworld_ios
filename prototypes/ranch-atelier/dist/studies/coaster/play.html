@@ -27,6 +27,23 @@ body:not(.tucked) #back{top:calc(max(12px,env(safe-area-inset-top)) + 84px)}
  color:#fff;font:800 16px/1 ui-rounded,"SF Pro Rounded",system-ui,sans-serif;font-variant-numeric:tabular-nums;text-shadow:0 1px 2px rgba(20,40,70,.6)}
 #hud i{width:16px;height:16px;background:#ffe08a;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);filter:drop-shadow(0 0 4px #ffb020)}
 #hud.bump{animation:bump .35s ease-out}
+#hud em{font-style:normal;opacity:.55;font-weight:600}
+#hud #sc{font-size:18px;min-width:3ch;text-align:right}
+/* points float up from the middle of the view: overlay, numbers only */
+#pts{position:fixed;left:50%;top:30%;translate:-50% 0;pointer-events:none;z-index:3;font:900 30px/1 ui-rounded,"SF Pro Rounded",system-ui,sans-serif;color:#fff;
+ text-shadow:0 2px 0 #e85d04,0 4px 14px rgba(120,40,0,.5);opacity:0;white-space:nowrap}
+#pts.go{animation:rise .9s ease-out}
+#pts small{font-size:20px;color:#ffe08a;margin-left:6px}
+@keyframes rise{0%{opacity:0;transform:translateY(16px) scale(.7)}15%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-40px)}}
+/* the end card: score, medal; the riders (helmets) pick who the run belongs to on the family scoreboard */
+#score{left:50%;top:max(16px,env(safe-area-inset-top));translate:-50% 0;display:none;align-items:center;gap:10px;padding:8px 16px 8px 10px;z-index:3;color:#fff;
+ font:900 28px/1 ui-rounded,"SF Pro Rounded",system-ui,sans-serif;font-variant-numeric:tabular-nums;text-shadow:0 1px 3px rgba(20,40,70,.6);animation:pop .7s cubic-bezier(.2,1.6,.4,1)}
+#medal{width:38px;height:38px;border-radius:50%;box-shadow:inset 0 -4px 0 rgba(0,0,0,.18),0 0 0 3px rgba(255,255,255,.7);display:none}
+#score .rank{font-size:18px;opacity:.9}
+#riders{left:max(14px,env(safe-area-inset-left));bottom:max(22px,env(safe-area-inset-bottom));display:none;gap:6px;padding:6px;z-index:3}
+#riders button{width:34px;height:34px;border-radius:50% 50% 40% 40%;border:0;cursor:pointer;box-shadow:inset 0 -6px 0 rgba(0,0,0,.18);transition:transform .2s ease;position:relative}
+#riders button::after{content:"";position:absolute;left:22%;right:14%;top:42%;height:22%;border-radius:4px;background:#3ad1e0}
+#riders button.on{transform:scale(1.25);box-shadow:inset 0 -6px 0 rgba(0,0,0,.18),0 0 0 3px #fff}
 @keyframes bump{40%{transform:scale(1.25)}}
 #prog{left:50%;top:max(14px,env(safe-area-inset-top));translate:-50% 0;width:120px;height:6px;display:none;overflow:hidden;z-index:3}
 #prog b{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffd76a,#ff7a14)}
@@ -53,7 +70,10 @@ body.inspecting #putback,body.inspecting #keep{opacity:1;pointer-events:auto;tra
 </head>
 <body>
 <a id="back" class="glass" href="./" aria-label="Back"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></a>
-<div id="hud" class="glass" aria-label="Stars"><i></i><b id="ns">0</b></div>
+<div id="hud" class="glass" aria-label="Stars and points"><i></i><b id="ns">0</b><em>|</em><b id="sc">0</b></div>
+<div id="pts" aria-hidden="true"></div>
+<div id="score" class="glass" aria-label="Your score"><span id="medal"></span><b id="scoreN">0</b><span class="rank" id="rank"></span></div>
+<div id="riders" class="glass" role="radiogroup" aria-label="Who is riding"></div>
 <div id="prog" class="glass" aria-hidden="true"><b id="pb"></b></div>
 <div id="go" class="glass" role="button" aria-label="Play"><svg width="36" height="36" viewBox="0 0 24 24"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></div>
 <div id="photo" aria-label="Your ride photo"><img id="photoImg" alt="You, in the air over the gap"><span id="photoStars">★</span></div>
@@ -69,8 +89,9 @@ import {CARS, buildCar} from '/simulations/coaster-cars.mjs';
 import {coasterAudio} from '/simulations/coaster-audio.mjs?v=3';
 import {buildWorld, buildGates, HEX_C} from './coaster-world.mjs';
 import {TOON_LOOKS, toonify} from '/simulations/toon-kit.mjs';
+import {buildToyBox} from '/simulations/toy-box.mjs';
 const opt = async p => { try { return await import(p); } catch { return {}; } };
-const [BP, CH, FW] = await Promise.all([opt('/simulations/backpack.mjs'), opt('/simulations/chrono-host.mjs?v=1'), opt('/simulations/fire-wheels.mjs')]);
+const [BP, CH, FW, RS] = await Promise.all([opt('/simulations/backpack.mjs'), opt('/simulations/chrono-host.mjs?v=1'), opt('/simulations/fire-wheels.mjs'), opt('/simulations/rail-score.mjs')]);
 const Q = new URLSearchParams(location.search), TEST = Q.has('test'), SKIP = Q.get('skip') === 'tile';
 const $ = id => document.getElementById(id);
 const from = Q.get('from'); if (from) $('back').href = from;
@@ -129,31 +150,36 @@ const world = buildWorld(T); scene.add(world);
 const gates = buildGates(T, trk); scene.add(gates.group);
 const trackG = trackMeshes(T, trk); scene.add(trackG);
 
-// ---------- the garage: six original toy cars on a painted display stage at the foot of the start tower ----------
-const garage = new T.Group(); garage.name = 'garage stage'; scene.add(garage);
-{ const m = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .5, flatShading: true, ...o});
-  const stage = new T.Mesh(new T.BoxGeometry(17, .5, 4.4), m('#2f3a4f')); stage.position.set(10.5, .25, 6); stage.receiveShadow = stage.castShadow = true; stage.name = 'garage stage'; garage.add(stage);
-  const lip = new T.Mesh(new T.BoxGeometry(17.2, .14, .3), m('#ffcf3a', {emissive: '#ffb020', emissiveIntensity: .4})); lip.position.set(10.5, .5, 8.2); garage.add(lip);
-  for (let i = 0; i < 6; i++) { const pad = new T.Mesh(new T.CylinderGeometry(1.05, 1.1, .12, 20), m(['#ff5d8f', '#ffcf3a', '#3ad1e0', '#9be84c', '#c58bff', '#ff7a14'][i])); pad.position.set(3.2 + i * 2.9, .56, 6); pad.name = 'turntable'; garage.add(pad); }
-  const back = new T.Mesh(new T.BoxGeometry(17, 2.6, .25), m('#26324a')); back.position.set(10.5, 1.55, 3.9); back.castShadow = true; garage.add(back);
-  for (let i = 0; i < 14; i++) { const b = new T.Mesh(new T.SphereGeometry(.09, 6, 4), new T.MeshStandardMaterial({color: '#fff', emissive: ['#ff5d8f', '#ffcf3a', '#3ad1e0', '#9be84c', '#c58bff'][i % 5], emissiveIntensity: 1.6})); b.position.set(2.6 + i * 1.22, 2.95, 4.05); garage.add(b); } }
-const cars = CARS.map((def, i) => { const c = buildCar(T, def); c.position.set(3.2 + i * 2.9, .62, 6); c.rotation.y = Math.PI + .5; c.userData.slot = c.position.clone(); c.userData.slotRot = c.rotation.y; scene.add(c); return c; });
+// ---------- the toy box: every car lives in a painted toy chest at the foot of the start tower ----------
+// (Evan, 2026-10-24 16:58Z.) Tap the box: the lid swings up and the toys pop out in a fan. Tap one to ride it (the rest tumble back
+// in), hold one to lift it and turn it. The chosen car waits on the start line; the scoreboard beside the box keeps the family's best runs.
+const garage = new T.Group(); garage.name = 'toy box corner'; scene.add(garage);
+const toyBox = buildToyBox(T); toyBox.position.set(9, 0, 7); garage.add(toyBox); toyBox.updateMatrixWorld(true);
+const SB = RS.board ? RS.board('coaster') : null, sbTex = RS.paintBoard ? RS.paintBoard(T, SB.rows()) : null;
+const scoreboard = new T.Group(); scoreboard.name = 'scoreboard';
+{ const wood = new T.MeshStandardMaterial({name: 'painted wood post', color: '#7a5530', roughness: .8, flatShading: true});
+  for (const sx of [-1, 1]) { const p = new T.Mesh(new T.BoxGeometry(.25, 5.4, .25), wood); p.position.set(sx * 1.95, 2.7, 0); p.castShadow = true; scoreboard.add(p); }
+  const face = new T.Mesh(new T.BoxGeometry(3.6, 4.5, .15), [wood, wood, wood, wood, new T.MeshStandardMaterial({name: 'painted scoreboard', map: sbTex, roughness: .7}), wood]);
+  face.name = 'scoreboard face'; face.position.y = 3.45; face.castShadow = true; scoreboard.add(face); }
+scoreboard.position.set(15.8, 0, 5.2); scoreboard.rotation.y = -.4; garage.add(scoreboard);
+const cars = CARS.map(def => buildCar(T, def));
 const tapProxy = c => { const p = new T.Mesh(new T.SphereGeometry(1.25, 8, 6), new T.MeshBasicMaterial({visible: false})); p.name = 'tap proxy'; p.position.y = .55; c.add(p); };
-cars.forEach(tapProxy);
+cars.forEach(c => { tapProxy(c); scene.add(c); });
 let car = cars[0];
 const saved = (() => { try { return JSON.parse(localStorage.getItem('aw-coaster') || '{}'); } catch { return {}; } })();
 if (saved.car) car = cars.find(c => c.userData.def.id === saved.car) || car;
 if (saved.paint) car.userData.paint(saved.paint);
-// the toy cars made from free Printables models (models/toy-cars.json) park on a second stage in front of the first
+const boxMouth = () => toyBox.userData.mouth();
+// each car's place in the fan; inside the box it is hidden at the mouth
+function layout() { cars.forEach((c, i) => { const p = toyBox.localToWorld(toyBox.userData.fan(i, cars.length)); c.userData.slot = p; c.userData.slotRot = Math.PI + Math.atan2(p.x - toyBox.position.x, 9) * .6; if (c !== car && !c.userData.out) { c.visible = false; c.position.copy(boxMouth()); } }); }
+layout();
+// the toy cars made from free Printables models (models/toy-cars.json) go into the same box
 const modelCars = (async () => { const TM = await opt('/simulations/toy-car-models.mjs'); const list = TM.modelCarList ? await TM.modelCarList() : []; if (!list.length) return;
-  const m = (c, o = {}) => new T.MeshStandardMaterial({color: c, roughness: .5, flatShading: true, ...o}), n = list.length, w = n * 2.9 + 1.4;
-  const stage = new T.Mesh(new T.BoxGeometry(w, .3, 3.6), m('#3a2f4f')); stage.position.set(2.2 + w / 2 - .7, .15, 10.2); stage.receiveShadow = true; stage.name = 'garage stage (free models)'; garage.add(stage);
-  await Promise.all(list.map(async (def, i) => { try { const c = await TM.loadModelCar(T, def); const x = 2.9 + i * 2.9;
-    const pad = new T.Mesh(new T.CylinderGeometry(1.05, 1.1, .1, 20), m(['#ffcf3a', '#3ad1e0', '#ff5d8f', '#9be84c', '#c58bff', '#ff7a14', '#f4ece0', '#1fb6c9'][i % 8])); pad.position.set(x, .35, 10.2); pad.name = 'turntable'; garage.add(pad);
-    c.position.set(x, .4, 10.2); c.rotation.y = Math.PI + .5; c.userData.slot = c.position.clone(); c.userData.slotRot = c.rotation.y; tapProxy(c); scene.add(c); cars.push(c);
-    if (saved.car === def.id && S.mode !== 'ride' && car !== c) { const old = car; old.position.copy(old.userData.slot); old.rotation.set(0, old.userData.slotRot, 0); car = c; parkAtStart(c); if (saved.paint) c.userData.paint(saved.paint); }
-  } catch (e) { console.warn('toy car', def.id, e.message); } }));
-  if (S.mode === 'zoom' && !tween) tweenTo(frameGarage(), 1.2); })();
+  const got = await Promise.all(list.map(def => TM.loadModelCar(T, def).catch(e => { console.warn('toy car', def.id, e.message); return null; })));
+  for (const c of got) { if (!c) continue; tapProxy(c); scene.add(c); cars.push(c); }
+  const pick = saved.car && cars.find(c => c.userData.def.id === saved.car);
+  if (pick && pick !== car && S.mode !== 'ride') { car.visible = false; car = pick; car.visible = true; parkAtStart(car); if (saved.paint) car.userData.paint(saved.paint); }
+  layout(); if (S.box) cars.forEach((c, i) => { if (c !== car && !c.userData.out) popOut(c, i * .06); }); })();
 
 // the mirror charms: whatever Abbie has earned hangs in front of her, inside whichever car she picks
 const charmRig = new T.Group(); charmRig.name = 'mirror charms';
@@ -165,11 +191,11 @@ const charms = [];
     const tex = new T.CanvasTexture(cv); tex.colorSpace = T.SRGBColorSpace; const sp = new T.Sprite(new T.SpriteMaterial({map: tex, transparent: true})); sp.scale.setScalar(.075); sp.position.y = -.08;
     const g2 = new T.Group(); g2.position.set(-.04 + k * .022, -.02, 0); g2.add(sp); charmRig.add(g2); charms.push({g: g2, ph: k * 1.3}); }); }
 charmRig.visible = false;
-const driver = new T.Group(); driver.name = 'Abbie (toy figure)';
+let driverHelmet = null; const driver = new T.Group(); driver.name = 'Abbie (toy figure)';
 { const m = (n, c, o = {}) => new T.MeshStandardMaterial({name: n, color: c, roughness: .45, ...o});
   const body = new T.Mesh(new T.CapsuleGeometry(.13, .16, 3, 10), m('jacket pink', '#ff6fa8')); body.position.y = -.2; driver.add(body);
   const head = new T.Mesh(new T.SphereGeometry(.12, 14, 10), m('skin', '#f2c6a0')); head.position.y = .02; driver.add(head);
-  const helmet = new T.Mesh(new T.SphereGeometry(.15, 16, 10, 0, Math.PI * 2, 0, Math.PI * .55), m('helmet pink gloss', '#ff3d8b', {roughness: .2})); helmet.position.y = .04; driver.add(helmet);
+  const helmet = new T.Mesh(new T.SphereGeometry(.15, 16, 10, 0, Math.PI * 2, 0, Math.PI * .55), m('helmet pink gloss', '#ff3d8b', {roughness: .2})); helmet.position.y = .04; driver.add(helmet); driverHelmet = helmet.material;
   const visor = new T.Mesh(new T.SphereGeometry(.152, 16, 6, -Math.PI * .35 - Math.PI / 2, Math.PI * .7, Math.PI * .32, Math.PI * .2), m('visor glass', '#3ad1e0', {metalness: .5, roughness: .1})); visor.position.y = .04; driver.add(visor);
   const pack = new T.Mesh(new T.BoxGeometry(.2, .2, .1), m('backpack canvas', '#c58bff')); pack.position.set(0, -.18, .15); driver.add(pack);
   for (let i = 0; i < 3; i++) { const ch = new T.Mesh(new T.SphereGeometry(.025, 6, 4), m('charm', ['#ffd23a', '#3ad1e0', '#ff5d8f'][i], {metalness: .6, roughness: .2})); ch.position.set(-.05 + i * .05, -.28, .21); driver.add(ch); }
@@ -204,6 +230,21 @@ const N_STARS = 16, WIN = 10, stars = [];
     g.position.copy(S.p).addScaledVector(rt, lane).addScaledVector(up, .95); g.quaternion.copy(S.q); g.add(new T.Mesh(sg, sm), new T.Mesh(rg, rm)); scene.add(g);
     stars.push({g, s: S.s, lane, got: false, ph: k}); } }
 
+// ---------- the rail game: points, combos, medals and prizes ----------
+// Stars are 100 times the combo (each star in a row adds one, up to five; missing one resets it). Lean away from the tennis ball for a
+// dodge (300), sit in the middle of a booster (50) and land the jump straight (200). Medals: bronze, silver, gold. Gold wins the Golden
+// wheel charm; ten stars still win the Toy car charm. Every run goes on the family scoreboard by the toy box.
+const SC = RS.railScore ? RS.railScore({medals: [1500, 3500, 5500]}) : {total: 0, combo: 1, add: () => ({pts: 0, combo: 1}), chain() {}, breakChain() {}, medal: () => 0, reset() {}};
+let ptsT = 0;
+function points(p, why, combo) { const r = SC.add(p, why, {combo}); $('sc').textContent = SC.total.toLocaleString('en-US');
+  const el = $('pts'); el.innerHTML = '+' + r.pts + (combo && r.combo > 1 ? '<small>×' + r.combo + '</small>' : ''); el.classList.remove('go'); void el.offsetWidth; el.classList.add('go'); return r; }
+// riders: the family cast, as helmets; the driver's helmet takes the rider's colour
+function riderUI() { const box = $('riders'); if (!box.childElementCount && RS.RIDERS) RS.RIDERS.forEach(r => { const b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'radio'); b.setAttribute('aria-label', r.name); b.style.background = r.colour; b.dataset.id = r.id;
+    b.onclick = () => { S.rider = r.id; remember({rider: r.id}); AU.play('pop-2', {rate: 1.2, gain: .5}); if (S.lastRun) { SB.setRider?.(S.lastRun, r.id); repaintBoard(); } riderUI(); }; box.append(b); });
+  [...box.children].forEach(b => { b.classList.toggle('on', b.dataset.id === S.rider); b.setAttribute('aria-checked', b.dataset.id === S.rider ? 'true' : 'false'); });
+  box.style.display = ['zoom', 'end'].includes(S.mode) ? 'flex' : 'none'; const rc = RS.RIDERS?.find(r => r.id === S.rider); if (rc) driverHelmet?.color.set(rc.colour); }
+function repaintBoard() { if (sbTex && SB) RS.paintBoard(T, SB.rows(), sbTex); }
+
 // speed lines (meta: the body's feeling of speed), drawn on the camera and never in the world
 const SL = 90, slPos = new Float32Array(SL * 6), slSeed = [...Array(SL)].map(() => ({a: Math.random() * 6.283, r: .5 + Math.random() * 1.6, z: -Math.random() * 6}));
 const slGeo = new T.BufferGeometry(); slGeo.setAttribute('position', new T.BufferAttribute(slPos, 3));
@@ -229,10 +270,9 @@ const CAM_TILE = {tx: HX + 80, ty: 0, tz: HZ - 10, dist: 560, az: 35, pitch: 40,
 // entering the garage: the camera moves on purpose to frame the whole row of cars (the free-model stage included), whatever
 // the screen shape, so every car is in view and easy to tap
 function frameGarage() {
-  if (!cars.length) return CAM_ZOOM;
-  const a = cars.map(c => c.userData.slot || c.position), x0 = Math.min(...a.map(p => p.x)), x1 = Math.max(...a.map(p => p.x)), z0 = Math.min(...a.map(p => p.z)), z1 = Math.max(...a.map(p => p.z));
+  const a = [toyBox.position.clone().setY(1), scoreboard.position.clone().setY(3), ...(S.box ? cars.filter(c => c !== car).map(c => c.userData.slot) : [toyBox.localToWorld(new T.Vector3(0, 1, 5))])], x0 = Math.min(...a.map(p => p.x)), x1 = Math.max(...a.map(p => p.x)), z0 = Math.min(...a.map(p => p.z)), z1 = Math.max(...a.map(p => p.z));
   const r = Math.hypot(x1 - x0, z1 - z0) / 2 + 2.6, half = Math.tan(CAM_ZOOM.fov * Math.PI / 360) * Math.min(1, innerWidth / innerHeight);
-  return Object.assign(CAM_ZOOM, {tx: (x0 + x1) / 2, ty: 1.2, tz: (z0 + z1) / 2, dist: Math.max(20, r * 1.12 / half), az: 12, pitch: 46, shift: 0});
+  return Object.assign(CAM_ZOOM, {tx: (x0 + x1) / 2, ty: 1.4, tz: (z0 + z1) / 2, dist: Math.max(16, r * 1.12 / half), az: 10, pitch: 30, shift: 0});
 }
 Object.assign(cam, SKIP ? CAM_LOW : CAM_TILE);
 const ease = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
@@ -243,7 +283,7 @@ const orbitPose = () => { const az = cam.az * Math.PI / 180, p = cam.pitch * Mat
   const m = new T.Matrix4().lookAt(pos, new T.Vector3(cam.tx, cam.ty, cam.tz), new T.Vector3(0, 1, 0)); return {pos, quat: new T.Quaternion().setFromRotationMatrix(m), fov: cam.fov, shift: cam.shift}; };
 
 // ---------- state ----------
-const S = {mode: SKIP ? 'intro' : 'tile', time: 0, lat: 0, latT: 0, stars: 0, count: 0, camQ: new T.Quaternion(), shake: 0, fovK: 0, won: false, ts: 1, bars: SKIP ? 1 : 0, barsT: SKIP ? 1 : 0, flash: 0, photo: null, near: new Set(), dtl: 0};
+const S = {mode: SKIP ? 'intro' : 'tile', time: 0, lat: 0, latT: 0, stars: 0, count: 0, camQ: new T.Quaternion(), shake: 0, fovK: 0, won: false, ts: 1, bars: SKIP ? 1 : 0, barsT: SKIP ? 1 : 0, flash: 0, photo: null, near: new Set(), dtl: 0, box: 0, rider: saved.rider || 'abbie'};
 const pose = {}; poseAt(T, trk, 0, pose);
 const startPos = () => { const s = trk.S[0]; return {p: s.p.clone(), q: s.q.clone()}; };
 function placeCar() { car.position.copy(pose.p); car.quaternion.copy(pose.q); if (S.lat) car.position.addScaledVector(new T.Vector3(1, 0, 0).applyQuaternion(pose.q), S.lat); }
@@ -283,8 +323,19 @@ addEventListener('pointerup', up); addEventListener('pointercancel', up);
 renderer.domElement.addEventListener('wheel', e => { if (S.mode === 'zoom' || S.mode === 'tile') cam.dist = Math.max(10, Math.min(700, cam.dist * (1 + e.deltaY * .001))); }, {passive: true});
 const keys = {}; addEventListener('keydown', e => { keys[e.key] = 1; if ((e.key === ' ' || e.key === 'Enter') && S.mode === 'zoom') getIn(); if (S.mode === 'zoom' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) choose(cars[(cars.indexOf(car) + (e.key === 'ArrowRight' ? 1 : cars.length - 1)) % cars.length]); });
 addEventListener('keyup', e => { keys[e.key] = 0; });
+// the box: open pops every other car out into its place in the fan, a little after each other; close tumbles them back in
+function popOut(c, delay = 0) { c.userData.out = true; c.visible = true; c.position.copy(boxMouth()); hop(c, c.userData.slot.clone(), new T.Quaternion().setFromEuler(new T.Euler(0, c.userData.slotRot, 0)), .7, delay); }
+function popIn(c, delay = 0) { c.userData.out = false; hop(c, boxMouth(), c.quaternion.clone(), .55, delay, () => { if (!c.userData.out && c !== car) c.visible = false; }); }
+function openBox() { if (S.box || S.mode !== 'zoom') return; S.box = 1; AU.play('slide-up', {gain: .6}); AU.play('magic-whoosh', {gain: .5, when: .25});
+  cars.filter(c => c !== car).forEach((c, i) => { popOut(c, .25 + i * .07); AU.play('pop-2', {when: .3 + i * .07, rate: .9 + i * .04, gain: .4}); });
+  hint.visible = false; tweenTo(frameGarage(), 1.1); }
+function closeBox(delay = 0) { if (!S.box) return; S.box = 0; cars.filter(c => c !== car && c.userData.out).forEach((c, i) => popIn(c, delay + i * .04)); AU.play('slide-down', {gain: .5, when: delay + .3}); AU.play('jump-land-2', {gain: .4, when: delay + .9});
+  setTimeout(() => { if (S.mode === 'zoom') { hint.visible = true; tweenTo(frameGarage(), 1.1); } }, (delay + .8) * 1000); }
+const within = (o, root) => { while (o) { if (o === root) return true; o = o.parent; } return false; };
 function tap(x, y) {
-  const h = pick(x, y, [...cars, ...(world.userData.buckets || [])]); if (!h) return;
+  const h = pick(x, y, [...cars.filter(c => c.visible), toyBox, scoreboard, ...(world.userData.buckets || [])]); if (!h) return;
+  if (within(h.object, toyBox)) { S.box ? closeBox() : openBox(); return; }
+  if (within(h.object, scoreboard)) { AU.play('click-2', {gain: .5}); return; }
   let b = h.object; while (b && !(typeof b.userData.paint === 'string' && b.name.startsWith('paint bucket'))) b = b.parent;
   if (b) { repaint(b.userData.paint); return; }
   const c = cars.find(c => { let p = h.object; while (p) { if (p === c) return true; p = p.parent; } return false; });
@@ -294,11 +345,11 @@ function repaint(c) { car.userData.paint(c); AU.play('pop-2', {rate: .8}); remem
 function remember(o) { try { localStorage.setItem('aw-coaster', JSON.stringify({...saved, car: car.userData.def.id, ...o})); Object.assign(saved, o, {car: car.userData.def.id}); } catch {} }
 // choosing: the old car hops home to its turntable, the new one hops up to the start line
 const hops = [];
-function hop(c, toP, toQ, dur = .9) { hops.push({c, p0: c.position.clone(), q0: c.quaternion.clone(), p1: toP, q1: toQ, t: 0, dur}); }
+function hop(c, toP, toQ, dur = .9, delay = 0, done) { for (let i = hops.length - 1; i >= 0; i--) if (hops[i].c === c) hops.splice(i, 1); hops.push({c, p0: c.position.clone(), q0: c.quaternion.clone(), p1: toP, q1: toQ, t: -delay, dur, done}); }
 function choose(c) {
-  if (c === car || S.mode !== 'zoom') return; const old = car; car = c;
-  hop(old, old.userData.slot.clone(), new T.Quaternion().setFromEuler(new T.Euler(0, old.userData.slotRot, 0)), .8);
-  const s = startPos(); hop(c, s.p, s.q, 1.1); AU.play('slide-up', {gain: .6}); AU.play('magic-whoosh', {gain: .5, when: .5}); remember({});
+  if (c === car || S.mode !== 'zoom') return; const old = car; car = c; if (!S.box) { S.box = 1; c.visible = true; }
+  const s = startPos(); c.userData.out = false; hop(c, s.p, s.q, 1.1); AU.play('slide-up', {gain: .6}); AU.play('magic-whoosh', {gain: .5, when: .5}); remember({});
+  old.userData.out = true; closeBox(.5); // the old car joins the others going back into the box
 }
 
 // ---------- inspecting: hold a car to lift it out of the row, turn it with a finger, put it back or choose it ----------
@@ -311,7 +362,7 @@ function carMid(c) { const sq = c.quaternion.clone(), sp = c.position.clone(); c
   const b = new T.Box3(); c.traverse(o => { if (o.isMesh && o.name !== 'tap proxy') b.expandByObject(o); }); c.quaternion.copy(sq); c.position.copy(sp); c.updateMatrixWorld(true);
   return {mid: b.getCenter(new T.Vector3()), size: Math.max(.5, b.getSize(new T.Vector3()).length())}; }
 function armLift(x, y) { clearTimeout(liftT); if (S.mode !== 'zoom' || tween || S.blend || hops.length) return;
-  liftT = setTimeout(() => { if (dragMoved >= 8 || pts.size !== 1 || S.mode !== 'zoom') return; const h = pick(x, y, cars); const c = h && cars.find(c => { let p = h.object; while (p) { if (p === c) return true; p = p.parent; } return false; }); if (c) lift(c); }, 340); }
+  liftT = setTimeout(() => { if (dragMoved >= 8 || pts.size !== 1 || S.mode !== 'zoom') return; const h = pick(x, y, cars.filter(c => c.visible)); const c = h && cars.find(c => { let p = h.object; while (p) { if (p === c) return true; p = p.parent; } return false; }); if (c) lift(c); }, 340); }
 function lift(c) {
   if (S.mode !== 'zoom') return; const m = carMid(c); Object.assign(insp, {car: c, mid: m.mid, size: m.size, k: 1, t: 0, from: {p: c.position.clone(), q: c.quaternion.clone()}}); insp.q.copy(c.quaternion); insp.spin.set(0, 0);
   S.mode = 'inspect'; hint.visible = false; document.body.classList.add('inspecting'); AU.play('slide-up', {gain: .5}); }
@@ -342,7 +393,7 @@ function intro() { // from the town: an establishing shot low in the skate park,
   tweenTo({...CAM_LOW, az: 120}, .01, () => tweenTo(frameGarage(), 3.6, () => { S.mode = 'zoom'; S.barsT = 0; hint.visible = true; S.ready = true; }));
 }
 function getIn() {
-  if (S.mode !== 'zoom') return; hint.visible = false; tween = null; AU.play('click-2'); AU.state('ride');
+  if (S.mode !== 'zoom') return; if (S.box) closeBox(); hint.visible = false; tween = null; AU.play('click-2'); AU.state('ride');
   S.barsT = 1; S.camQ.copy(camNow.quat); S.mode = 'ride'; S.time = 0; S.count = 3.8; car.userData.inCar(true); car.add(charmRig); charmRig.visible = true;
   { const d = car.userData.def; charmRig.position.set(0, d.eye[0] + .16, d.eye[1] - .5); car.add(driver); driver.position.set(0, d.eye[0] - .02, d.eye[1] + .02); driver.visible = false; }
   poseAt(T, trk, 0, pose); placeCar(); startBlend(1.6, () => { S.barsT = 0; });
@@ -355,23 +406,18 @@ function finish() {
   Object.assign(cam, {tx: car.position.x, ty: car.position.y + 1, tz: car.position.z, dist: 9, az: 150, pitch: 14, fov: 40, shift: .25}); startBlend(1.6);
   setTimeout(() => { AU.play(win ? 'tada' : 'win-sting', {gain: .9}); S.barsT = 0;
     if (S.photo) { $('photoImg').src = S.photo; $('photoStars').textContent = '★ ' + S.stars + ' / ' + N_STARS; $('photo').style.display = 'block'; }
+    const medal = SC.medal(); $('scoreN').textContent = SC.total.toLocaleString('en-US'); $('medal').style.display = medal ? 'block' : 'none';
+    if (medal) $('medal').style.background = `radial-gradient(circle at 35% 30%, #fff8, transparent 45%), ${RS.MEDAL_COLOUR[medal]}`;
+    if (SB) { const best = SB.best(); const rank = SB.add({rider: S.rider, score: SC.total, medal, car: car.userData.def.id}); S.lastRun = SB.rows()[rank - 1]?.at; $('rank').textContent = rank ? '#' + rank : ''; repaintBoard(); if (SC.total > best) AU.play('cymbal', {gain: .5, when: .4}); }
+    $('score').style.display = 'flex'; $('hud').style.display = 'none';
+    if (medal === 3 && BP.earnCharm) { const fresh = BP.earnCharm('golden-wheel'); if (fresh) AU.play('fairy', {gain: .7, when: .8}); }
     if (win && BP.earnCharm) { const fresh = BP.earnCharm('toy-car'); fireUI(!!fresh); const c = (BP.CHARMS || []).find(x => x.id === 'toy-car'); $('prize').textContent = c ? c.icon : '🏎️'; $('prize').style.display = 'grid'; if (!fresh) $('prize').style.opacity = .85; AU.play('keys', {when: .3}); }
-    $('again').style.display = 'grid'; }, 2000);
+    $('again').style.display = 'grid'; riderUI(); }, 2000);
 }
 $('again').addEventListener('click', () => reset());
 function reset() {
   S.mode = 'zoom'; S.time = 0; S.lat = S.latT = 0; S.stars = 0; S.started = false; S.near.clear(); S.photo = null; S.ts = 1; AU.slow(1); AU.state('garage'); AU.bed('stadium', 0);
-  ['hud', 'prize', 'again', 'photo'].forEach(id => { $(id).style.display = 'none'; }); $('ns').textContent = '0'; car.userData.inCar(false); charmRig.visible = false; car.remove(driver);
-const driver = new T.Group(); driver.name = 'Abbie (toy figure)';
-{ const m = (n, c, o = {}) => new T.MeshStandardMaterial({name: n, color: c, roughness: .45, ...o});
-  const body = new T.Mesh(new T.CapsuleGeometry(.13, .16, 3, 10), m('jacket pink', '#ff6fa8')); body.position.y = -.2; driver.add(body);
-  const head = new T.Mesh(new T.SphereGeometry(.12, 14, 10), m('skin', '#f2c6a0')); head.position.y = .02; driver.add(head);
-  const helmet = new T.Mesh(new T.SphereGeometry(.15, 16, 10, 0, Math.PI * 2, 0, Math.PI * .55), m('helmet pink gloss', '#ff3d8b', {roughness: .2})); helmet.position.y = .04; driver.add(helmet);
-  const visor = new T.Mesh(new T.SphereGeometry(.152, 16, 6, -Math.PI * .35 - Math.PI / 2, Math.PI * .7, Math.PI * .32, Math.PI * .2), m('visor glass', '#3ad1e0', {metalness: .5, roughness: .1})); visor.position.y = .04; driver.add(visor);
-  const pack = new T.Mesh(new T.BoxGeometry(.2, .2, .1), m('backpack canvas', '#c58bff')); pack.position.set(0, -.18, .15); driver.add(pack);
-  for (let i = 0; i < 3; i++) { const ch = new T.Mesh(new T.SphereGeometry(.025, 6, 4), m('charm', ['#ffd23a', '#3ad1e0', '#ff5d8f'][i], {metalness: .6, roughness: .2})); ch.position.set(-.05 + i * .05, -.28, .21); driver.add(ch); }
-  for (const sx of [-1, 1]) { const arm = new T.Mesh(new T.CapsuleGeometry(.04, .14, 2, 6), m('jacket pink', '#ff6fa8')); arm.position.set(sx * .15, -.14, -.1); arm.rotation.x = 1.1; driver.add(arm); }
-  driver.traverse(o => { if (o.isMesh) o.castShadow = true; }); }
+  ['hud', 'prize', 'again', 'photo', 'score'].forEach(id => { $(id).style.display = 'none'; }); $('ns').textContent = '0'; SC.reset(); $('sc').textContent = '0'; S.lastRun = 0; stars.forEach(st => { st.missed = false; }); NEAR.forEach(n => { n.judged = false; n.path = null; }); car.userData.inCar(false); charmRig.visible = false; car.remove(driver);
   stars.forEach(s => { s.got = false; s.g.visible = true; }); poseAt(T, trk, 0, pose); parkAtStart(car); gates.lamps.forEach(l => { l.material.emissive.set('#000'); l.material.color.set('#222'); });
   startBlend(1.2); Object.assign(cam, CAM_ZOOM); hint.visible = true; speedLines.material.opacity = 0;
 }
@@ -398,6 +444,8 @@ function nearMisses() {
     n.obj.position.set(A.x * a + C.x * b + B.x * c, A.y * a + C.y * b + B.y * c, A.z * a + C.z * b + B.z * c);
     n.obj.rotation.x += S.dtg * n.spin; n.obj.rotation.y += S.dtg * n.spin * .6;
     if (n.obj === plane) n.obj.lookAt(B);
+    if (n.slow < 1 && !n.judged && S.time >= n.t) { n.judged = true; const lean = S.lat * n.side; // lean away from the ball: a dodge; lean into it: bonk
+      if (lean < -.12) { points(300, 'dodge'); AU.play('tada', {gain: .5, rate: 1.3}); } else if (lean > .12) { S.shakeKick = 1.5; AU.play('balloon', {gain: .7}); SC.breakChain(); } else points(100, 'close call'); }
     if (ph > 1.15) n.obj.visible = false;
   }
 }
@@ -412,17 +460,18 @@ function ride(dt) {
   // slow motion: the ride clock runs at S.ts; the tennis ball and the jump slow it right down
   let want = 1; if (S.slowUntil && !S.slowFrom) { if (S.time < S.slowUntil) want = S.slowTo; else { S.slowUntil = 0; AU.slow(1); AU.play('whoosh-2', {gain: .5}); S.barsT = 0; } }
   if (S.time > JUMP.t0 + .1 && S.time < JUMP.t1 - .05) { want = Math.min(want, .3); if (!S.jumpSlow) { S.jumpSlow = true; S.barsT = 1; AU.slow(.3); AU.play('whoosh-3', {gain: .6, rate: .7}); } }
-  else if (S.jumpSlow) { S.jumpSlow = false; S.barsT = 0; AU.slow(1); AU.play('jump-land-2', {gain: 1}); S.shakeKick = 1; }
+  else if (S.jumpSlow) { S.jumpSlow = false; S.barsT = 0; AU.slow(1); AU.play('jump-land-2', {gain: 1}); S.shakeKick = 1; points(Math.abs(S.lat) < .2 ? 200 : 50, 'landing'); }
   S.ts += (want - S.ts) * (1 - Math.exp(-dt * (want < S.ts ? 14 : 5)));
   const dtg = dt * S.ts; S.dtg = dtg;
   const k = (keys.ArrowRight || keys.d) - (keys.ArrowLeft || keys.a); if (k) S.latT = Math.max(-.42, Math.min(.42, S.latT + k * dt * .9));
   const prevS = pose.s; S.time += dtg; poseAt(T, trk, S.time, pose);
   const prevLat = S.lat; S.lat += (S.latT - S.lat) * (1 - Math.exp(-dt * 7)); placeCar();
-  for (const st of stars) if (!st.got && st.s >= prevS && st.s <= pose.s + .01 && Math.abs(S.lat - st.lane) < .34) { st.got = true; st.g.visible = false; S.stars++; $('ns').textContent = S.stars; AU.play('pop-2', {rate: 1 + S.stars * .03}); AU.play('keys', {gain: .4}); charmSwing = 1; $('hud').classList.remove('bump'); void $('hud').offsetWidth; $('hud').classList.add('bump'); }
+  for (const st of stars) if (!st.got && st.s >= prevS && st.s <= pose.s + .01 && Math.abs(S.lat - st.lane) < .34) { st.got = true; st.g.visible = false; S.stars++; $('ns').textContent = S.stars; points(100, 'star', true); SC.chain(); AU.play('pop-2', {rate: 1 + S.stars * .03}); AU.play('keys', {gain: .4}); charmSwing = 1; $('hud').classList.remove('bump'); void $('hud').offsetWidth; $('hud').classList.add('bump'); }
+  for (const st of stars) if (!st.got && !st.missed && st.s < pose.s - 1.5) { st.missed = true; if (SC.combo > 1) AU.play('click-2', {rate: .6, gain: .4}); SC.breakChain(); }
   nearMisses();
   // the on-ride photo: at the top of the jump, a camera flash in the bleachers
   if (!S.photo && S.time >= JUMP.mid) { S.wantPhoto = true; S.flash = 1; AU.play('click-2', {gain: 1}); }
-  for (const tag of ['boost1', 'boost2', 'boost3']) { const m = trk.marks[tag]; if (m && !S.near.has(tag) && pose.s >= m.s0) { S.near.add(tag); AU.play('magic-whoosh', {gain: .7}); } }
+  for (const tag of ['boost1', 'boost2', 'boost3']) { const m = trk.marks[tag]; if (m && !S.near.has(tag) && pose.s >= m.s0) { S.near.add(tag); AU.play('magic-whoosh', {gain: .7}); if (Math.abs(S.lat) < .2) points(50, 'boost'); } }
   if (!S.near.has('loop') && pose.s >= trk.marks.loop.s0) { S.near.add('loop'); AU.play('slide-up', {gain: .35}); }
   if (!S.near.has('cork') && pose.s >= trk.marks.corkscrew.s0) { S.near.add('cork'); AU.play('whoosh-1', {gain: .5}); }
   $('pb').style.width = Math.min(100, S.time / trk.seconds * 100) + '%';
@@ -458,11 +507,12 @@ function frame() {
   stars.forEach(s => { if (!s.got) s.g.children[0].rotation.y = t * 2 + s.ph; });
   if (S.mode === 'tile' && !tween) cam.az += dt * 1.6;
   // the garage: parked cars turn slowly on their turntables; hops arc through the air
-  cars.forEach(c => { if (c !== car && c !== insp.car && !hops.some(h => h.c === c)) { c.rotation.y += dt * .5; } }); stepInspect(dt);
-  for (let i = hops.length - 1; i >= 0; i--) { const h = hops[i]; h.t += dt; const e = ease(h.t / h.dur); h.c.position.lerpVectors(h.p0, h.p1, e); h.c.position.y += Math.sin(e * Math.PI) * 4; h.c.quaternion.slerpQuaternions(h.q0, h.q1, e); if (h.t >= h.dur) { hops.splice(i, 1); if (h.c !== car) h.c.userData.slotRot = h.c.rotation.y; else AU.play('jump-land-2', {gain: .5}); } }
+  cars.forEach(c => { if (c !== car && c.userData.out && c !== insp.car && !hops.some(h => h.c === c)) { c.rotation.y += dt * .5; } }); stepInspect(dt);
+  if (toyBox.userData.open !== S.box) toyBox.userData.setOpen(toyBox.userData.open + Math.sign(S.box - toyBox.userData.open) * dt / .55);
+  for (let i = hops.length - 1; i >= 0; i--) { const h = hops[i]; h.t += dt; if (h.t < 0) continue; if (!h.started) { h.started = true; h.p0.copy(h.c.position); } const e = ease(h.t / h.dur); h.c.position.lerpVectors(h.p0, h.p1, e); h.c.position.y += Math.sin(e * Math.PI) * 4; h.c.quaternion.slerpQuaternions(h.q0, h.q1, e); if (h.t >= h.dur) { hops.splice(i, 1); if (h.done) h.done(); else if (h.c !== car) h.c.userData.slotRot = h.c.rotation.y; else AU.play('jump-land-2', {gain: .5}); } }
   hint.visible = hint.visible && (S.mode === 'zoom'); if (hint.visible) { hint.position.copy(car.position).setY(car.position.y + .55); hint.quaternion.copy(camera.quaternion); hint.scale.setScalar((1 + .12 * Math.sin(t * 5)) * Math.max(1, cam.dist / 40)); }
   stepSky(dt); if (trail && S.mode !== 'ride') trail.update(dt, null);
-  if (S.mode !== S.lastMode) { S.lastMode = S.mode; tuck(['ride', 'flow', 'intro'].includes(S.mode)); fireUI(); }
+  if (S.mode !== S.lastMode) { S.lastMode = S.mode; tuck(['ride', 'flow', 'intro'].includes(S.mode)); fireUI(); riderUI(); }
   if (S.mode === 'ride') ride(SKY.paused ? 0 : dt); // the strip's pause button holds the ride too
   if (conf) { conf.t += dt; const p = conf.m.geometry.attributes.position; for (let i = 0; i < conf.v.length; i++) { p.array[i * 3] += conf.v[i][0] * dt + Math.sin(t * 3 + i) * .01; p.array[i * 3 + 1] += conf.v[i][1] * dt; p.array[i * 3 + 2] += conf.v[i][2] * dt; } p.needsUpdate = true; if (conf.t > 9) { scene.remove(conf.m); conf = null; } }
   if (S.mode === 'end' && !S.blend) cam.az += dt * 8;
@@ -489,7 +539,7 @@ function snapPhoto() {
 }
 
 // ---------- hooks for the headless test ----------
-window.coaster = {S, trk, cam, T, scene, camera, get car() { return car; }, cars, stars, start: () => $('go').click(), getIn, finish, reset, repaint, choose, skipTo(t) { S.time = t; }, FX, NEAR, JUMP, BP, FW, SKY, summon};
+window.coaster = {S, trk, cam, T, scene, camera, get car() { return car; }, cars, stars, start: () => $('go').click(), getIn, finish, reset, repaint, choose, skipTo(t) { S.time = t; }, FX, NEAR, JUMP, BP, FW, SKY, summon, SC, SB, toyBox, openBox, closeBox, scoreboard};
 if (SKIP) intro();
 requestAnimationFrame(frame);
 </script>
