@@ -38,6 +38,34 @@ def bundle(label):
     return manifest, files
 
 class PublisherTests(unittest.TestCase):
+    def test_remote_assets_require_declaration_but_navigation_does_not(self):
+        p.validate_refs({'index.html': b'<a href="https://example.com/docs">Docs</a>'}, [])
+        for markup in [b'<script src="https://example.com/a.js"></script>', b'<link href="https://example.com/a.css">', b'<img src="//example.com/a.png">']:
+            with self.subTest(markup=markup), self.assertRaisesRegex(ValueError, 'Undeclared external asset'):
+                p.validate_refs({'index.html': markup}, [])
+        p.validate_refs({'index.html': b'<img src="https://example.com/a.png">'}, ['https://example.com/a.png'])
+
+    def test_pack_instruments_subpages_and_keeps_fragments_as_data(self):
+        source = 'a' * 40
+        prefix = 'preview/proof/'
+        spec = {'schemaVersion': 1, 'id': 'proof', 'maturity': 'Draft', 'entry': 'index.html', 'title': 'Proof', 'intent': 'Test', 'reviewQuestion': 'Works?', 'ownerThread': 'test'}
+        blobs = {prefix + 'study.json': p.canonical(spec), p.CONTEXT: p.canonical({'studies': {'proof': {'title': 'Proof'}}}),
+                 prefix + 'index.html': b'<html><body><script src="/view-context.js"></script></body></html>',
+                 prefix + 'nested/page.html': b'<!doctype html><html><body>Page</body></html>',
+                 prefix + 'fragment.html': b'<span>data</span>',
+                 'tools/study-publish/review.mjs': b'// shared review', 'tools/study-publish/review.css': b'/* shared */'}
+        def fake_git(*args):
+            if args[0] == 'rev-parse':
+                return source.encode()
+            return '\n'.join(k for k in blobs if k.startswith(prefix)).encode()
+        with patch.object(p, 'git', fake_git), patch.object(p, 'blob', lambda sha, path: blobs[path]):
+            manifest, files = p.pack('proof', source)
+            again, _ = p.pack('proof', source)
+        self.assertEqual(manifest['revision'], again['revision'])
+        self.assertEqual(files['index.html'].count(b'/view-context.js'), 1)
+        self.assertIn(b'../_review/review.mjs', files['nested/page.html'])
+        self.assertEqual(files['fragment.html'], b'<span>data</span>')
+
     def test_publish_promote_update_rollback_preserves_versions(self):
         store = MemoryR2()
         a, af = bundle('first'); b, bf = bundle('second')

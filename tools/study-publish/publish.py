@@ -5,6 +5,7 @@ Study source is read as Git blobs, never imported or executed. See docs/design/S
 import argparse
 import datetime as dt
 import hashlib
+from html.parser import HTMLParser
 import hmac
 import json
 import mimetypes
@@ -47,7 +48,18 @@ def git(*args):
 def blob(sha, path):
     row = git('ls-tree', sha, '--', path).decode().strip()
     require(row.startswith('100644 blob ') or row.startswith('100755 blob '), 'Only tracked regular files may publish: ' + path)
+    require(int(git('cat-file', '-s', sha + ':' + path)) <= 50 * 1024 * 1024, 'Individual file exceeds bundle limit: ' + path)
     return git('show', sha + ':' + path)
+
+class AssetReferences(HTMLParser):
+    def __init__(self):
+        super().__init__()
+        self.assets = []
+
+    def handle_starttag(self, tag, attrs):
+        for key, value in attrs:
+            if value and (key == 'src' or key == 'href' and tag not in ('a', 'area')):
+                self.assets.append(value)
 
 def references(name, data):
     if PurePosixPath(name).suffix not in {'.html', '.js', '.mjs', '.css'}:
@@ -61,6 +73,12 @@ def references(name, data):
 
 def validate_refs(files, external):
     for name, data in files.items():
+        if name.endswith('.html'):
+            parser = AssetReferences()
+            parser.feed(data.decode('utf-8'))
+            for ref in parser.assets:
+                if ref.startswith(('https://', '//')):
+                    require(ref in external, 'Undeclared external asset: ' + ref)
         for ref in references(name, data):
             if ref.startswith(('#', 'data:', 'mailto:', 'https://')):
                 # Navigation links are allowed; remote code/assets must be declared separately in the manifest.
@@ -115,16 +133,23 @@ def pack(study, sha):
     external = spec.get('external', [])
     require(isinstance(external, list) and all(isinstance(x, str) and (x.startswith('/') and not x.startswith('//') or x.startswith('https://')) for x in external), 'Invalid external dependencies')
     validate_refs(files, external)
-    # The publisher adds the same review UI to every entry, from trusted main tooling.
-    html = files[entry].decode('utf-8')
-    require('<body' in html.lower() and '</body>' in html.lower(), 'Use an explicit HTML body')
-    require(not re.search(r'\bon[a-z]+\s*=', html, re.I), 'Use module event listeners, not inline handlers')
-    depth = len(PurePosixPath(entry).parts) - 1
-    relative = '../' * depth
-    bridge = '' if re.search(r'<script[^>]+src=["\']/view-context\.js["\']', html) else '<script src="/view-context.js"></script>'
-    html = re.sub(r'(<body\b[^>]*>)', r'\1' + bridge, html, count=1, flags=re.I)
-    html = re.sub(r'</body>', f'<script type="module" src="{relative}_review/review.mjs"></script></body>', html, count=1, flags=re.I)
-    files[entry] = html.encode()
+    # Instrument full HTML documents, including subpages; fetched HTML fragments remain data.
+    for name in list(files):
+        if not name.endswith('.html'):
+            continue
+        html = files[name].decode('utf-8')
+        if name != entry and not re.search(r'<html\b|<!doctype', html, re.I):
+            continue
+        require('<body' in html.lower() and '</body>' in html.lower(), 'Use an explicit HTML body')
+        require(not re.search(r'\bon[a-z]+\s*=', html, re.I), 'Use module event listeners, not inline handlers')
+        relative = '../' * (len(PurePosixPath(name).parts) - 1)
+        bridges = re.findall(r'<script[^>]+src=["\']/view-context\.js["\'][^>]*>\s*</script>', html, re.I)
+        require(len(bridges) <= 1, 'Duplicate capture bridge')
+        if bridges:
+            html = html.replace(bridges[0], '')
+        html = re.sub(r'(<body\b[^>]*>)', r'\1<script src="/view-context.js"></script>', html, count=1, flags=re.I)
+        html = re.sub(r'</body>', f'<script type="module" src="{relative}_review/review.mjs"></script></body>', html, count=1, flags=re.I)
+        files[name] = html.encode()
     publisher_sha = git('rev-parse', 'HEAD').decode().strip()
     for name in ['review.mjs', 'review.css']:
         # Read Git bytes, not OS checkout line endings, for reproducible bundles.
@@ -135,6 +160,10 @@ def pack(study, sha):
     manifest['revision'] = revision
     files['study-release.json'] = canonical(manifest)
     return manifest, files
+
+class NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
 
 class R2:
     """Small SigV4 transport: no SDK install, redirects, shell commands or credential output."""
@@ -163,7 +192,7 @@ class R2:
         heads['Authorization'] = f'AWS4-HMAC-SHA256 Credential={self.key}/{scope}, SignedHeaders={names}, Signature={signature}'
         req = urllib.request.Request('https://' + host + uri, data=body if method == 'PUT' else None, headers=heads, method=method)
         try:
-            with urllib.request.urlopen(req, timeout=60) as response:
+            with urllib.request.build_opener(NoRedirect()).open(req, timeout=60) as response:
                 return response.status, response.read(), dict(response.headers)
         except urllib.error.HTTPError as error:
             if error.code in (404, 409, 412):
