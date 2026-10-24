@@ -23,6 +23,7 @@ th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;verti
 .bar{position:absolute;left:8px;top:14%;display:flex;flex-direction:column;gap:9px;padding:8px;border-radius:22px;background:rgba(255,255,255,.28);border:1px solid rgba(255,255,255,.6);box-shadow:0 6px 18px rgba(40,20,80,.25),inset 0 1px 0 rgba(255,255,255,.7)}
 .bead{width:44px;height:44px;border-radius:50%;border:2px solid rgba(255,255,255,.85);background:#fff center/cover;box-shadow:0 3px 8px rgba(40,20,80,.3);position:relative}
 .bead.you{outline:3px solid var(--pink)}
+.bead.mirror{border:4px solid var(--gold);box-shadow:0 0 0 2px #fff8,0 3px 8px rgba(40,20,80,.3)}
 .bead.ghost{filter:grayscale(1) brightness(1.5);opacity:.55;background:#d9d4e8}
 .bead.ghost::after{content:"";position:absolute;inset:10px 14px 4px;border-radius:50% 50% 40% 40%;background:#9d96b5}
 .bead.icon{display:grid;place-items:center;font-size:19px}
@@ -55,10 +56,10 @@ code{background:var(--card);padding:1px 6px;border-radius:6px;font-size:13px}
 <h2>2. The flow (three taps at most, none over the world)</h2>
 <div class="screens">
  <div><div class="screen"><div class="hill"></div><div class="house"></div>
-  <div class="bar"><div class="bead you" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead icon">👜</div><div class="bead icon">📓</div><div class="bead icon">🚙</div></div></div>
-  <p class="cap"><b>A. Playing.</b> The top bead on the left bar is the person you are right now, a small 3D head-and-shoulders. It replaces the separate mirror bead. Nothing else changes; the play HUD stays under 8%.</p></div>
+  <div class="bar"><div class="bead you mirror" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead icon">👜</div><div class="bead icon">📓</div><div class="bead icon">🚙</div></div></div>
+  <p class="cap"><b>A. Playing.</b> The top bead on the left bar is the person you are right now, a small 3D head-and-shoulders. It sits in the round gold mirror frame (agreed with the Backpack thread) so it still reads as "go dress up". Nothing else changes; the play HUD stays under 8%.</p></div>
  <div><div class="screen"><div class="hill"></div><div class="house"></div>
-  <div class="bar"><div class="bead you" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead icon">👜</div><div class="bead icon">📓</div><div class="bead icon">🚙</div></div>
+  <div class="bar"><div class="bead you mirror" style="background-image:url(img/body-A1-paint-suit.jpg)"></div><div class="bead icon">👜</div><div class="bead icon">📓</div><div class="bead icon">🚙</div></div>
   <div class="fan"><div class="bead" style="background-image:url(img/body-A2-paint-suit.jpg)"></div><div class="bead" style="background-image:url(img/body-A3-paint-suit.jpg)"></div><div class="bead ghost"></div><div class="bead ghost"></div><div class="bead ghost"></div></div></div>
   <p class="cap"><b>B. Tap your own bead.</b> The family fans out beside it. People who have a model are in colour. People who don't yet are grey silhouettes (the same "greyed-out until it exists" language as the world effects). Tap a person and a soft pop swaps them in, standing exactly where you were.</p></div>
  <div><div class="screen" style="background:linear-gradient(#cdbcff 0 45%,#a8d08d 45% 100%)"><div class="pop"></div>
@@ -94,7 +95,7 @@ code{background:var(--card);padding:1px 6px;border-radius:6px;font-size:13px}
 <div class="card"><h3>Body</h3><p>Height and stride change, so the camera height and walking speed follow the person (Daddy sees from higher up than Abbie).</p></div>
 <div class="card"><h3>Voice and lines</h3><p>Each person has a designed voice. Townsfolk greet whoever you are ("Hello, Ani!") through the same quest givers.</p></div>
 <div class="card"><h3>Car mode</h3><p>The rider on the toy car becomes the chosen hero in place of the nine-block Abbie.</p></div>
-<div class="card"><h3>The bag</h3><p>The backpack is worn by whoever you are, in their colours, using the existing chest-bone mount.</p></div>
+<div class="card"><h3>The bag</h3><p>The backpack is worn by whoever you are, using the existing chest-bone mount. It keeps its own look (<code>aw-backpack</code>), not one per person.</p></div>
 </div>
 
 <h2>6. Design card</h2>
