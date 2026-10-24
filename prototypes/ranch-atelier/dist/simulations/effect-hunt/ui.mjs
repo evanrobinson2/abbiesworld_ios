@@ -24,7 +24,7 @@ const CSS = `
 .hunt-top .group{display:flex;gap:8px}
 .hunt-top button{width:clamp(38px,9vw,46px);font-size:clamp(18px,4.5vw,22px)}
 .hunt-top button.on{box-shadow:0 0 16px #ff7eb6,inset 0 1px 3px rgba(255,255,255,.75)}
-.hunt-pads button.has3d{font-size:0;display:grid;place-items:center;padding:0}
+.hunt-top button.has3d,.hunt-pads button.has3d{font-size:0;display:grid;place-items:center;padding:0}
 html.aw-town-hud .hunt-ui{display:none}
 html.aw-town-hud .hunt-top{top:calc(max(10px,env(safe-area-inset-top)) + 100px)}
 .hunt-fuel{position:fixed;left:50%;bottom:calc(max(10px,env(safe-area-inset-bottom)) + clamp(48px,11vw,66px));transform:translateX(-50%);width:min(34vw,160px);height:6px;border-radius:3px;background:rgba(255,255,255,.25);overflow:hidden;z-index:20;pointer-events:none}
@@ -44,9 +44,9 @@ export function mountUi({root = document.body, onExit, onCast, onMode, onJet, on
  document.documentElement.classList.add('hunt-on');
  const top = document.createElement('div'); top.className = 'hunt-top'; top.dataset.ui = '';
  const grp = document.createElement('div'); grp.className = 'group'; top.append(grp);
- const modeBtn = modes.map(m => { const b = document.createElement('button'); b.textContent = m.icon; b.setAttribute('aria-label', m.name); b.dataset.ui = ''; b.addEventListener('click', () => onMode(m.id)); grp.append(b); return [m.id, b]; });
+ const modeBtn = modes.map(m => { const b = document.createElement('button'); b.textContent = m.icon; if (icons?.mount(b, m.id, {size: 34})) { icons.setCharged(m.id, true); b.classList.add('has3d'); } b.setAttribute('aria-label', m.name); b.dataset.ui = ''; b.addEventListener('click', () => onMode(m.id)); grp.append(b); return [m.id, b]; });
  const fuel = document.createElement('div'); fuel.className = 'hunt-fuel'; fuel.dataset.ui = ''; fuel.innerHTML = '<i></i>';
- if (onExit) { const x = document.createElement('div'); x.className = 'group'; const b = document.createElement('button'); b.textContent = '📓'; b.setAttribute('aria-label', 'Back to the notebook'); b.dataset.ui = ''; b.addEventListener('click', onExit); x.append(b); top.append(x); }
+ if (onExit && !icons) { const x = document.createElement('div'); x.className = 'group'; const b = document.createElement('button'); b.textContent = '📓'; b.setAttribute('aria-label', 'Back to the notebook'); b.dataset.ui = ''; b.addEventListener('click', onExit); x.append(b); top.append(x); }
  root.append(tray, pads, top, fuel);
  return {
   setMode(id) { modeBtn.forEach(([k, b]) => b.classList.toggle('on', k === id)); pads.style.display = id === 'god' ? 'none' : ''; fuel.style.display = id === 'god' ? 'none' : ''; },
