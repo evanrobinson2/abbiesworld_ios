@@ -13,6 +13,17 @@
       "link": "/town"
     },
     {
+      "id": "2026-10-24-town-wasd",
+      "date": "2026-10-24",
+      "title": "Slide around the map with WASD",
+      "line": "On the Winchester map, W, A, S and D (or the arrow keys) slide the view over the ground. Hold Shift to go faster.",
+      "image": "/whats-new/2026-10-23-charm-intro.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-the-farm",
       "date": "2026-10-24",
       "title": "The Farm",
