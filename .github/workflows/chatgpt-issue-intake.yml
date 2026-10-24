@@ -7,7 +7,7 @@
 name: chatgpt-issue-intake
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
   workflow_dispatch:
     inputs:
       issue:
@@ -42,14 +42,10 @@ jobs:
             // (abbies-dispatch marker) have their own routine and relay; never double-handle them.
             const body = issue.body || '';
             const labels = issue.labels.map((l) => (typeof l === 'string' ? l : l.name));
-            const looksLikeRequest =
-              /^\s*(dispatch|research|build|fix|implement)\b/i.test(issue.title) ||
-              /for claude/i.test(body) ||
-              labels.includes('claude-intake');
             if (issue.pull_request || issue.state !== 'open') return core.info('not an open issue');
             if (!manual && !TRUSTED.has(issue.author_association)) return core.info(`ignoring ${issue.user.login} (${issue.author_association})`);
             if (body.includes('abbies-dispatch:v1') || labels.includes('dispatch')) return core.info('bridge dispatch, handled by dispatch-relay');
-            if (!manual && !looksLikeRequest) return core.info('not a request for Claude');
+            if (issue.user.type === 'Bot') return core.info('bot issue');
 
             // Once per issue: the handshake comment is the lock.
             const comments = await github.paginate(github.rest.issues.listComments, { owner, repo, issue_number: number, per_page: 100 });
