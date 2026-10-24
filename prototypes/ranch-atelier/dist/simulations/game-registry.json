@@ -1,0 +1,462 @@
+{
+ "about": "Every minigame and feature that can reach a player. status 'live' = reachable from abbies.world and it has BOTH a real scene in the world (scene.gates are keys of ENTRANCES in simulations/abbietown/entrances.mjs, each with a scene id) AND a passing automated end-to-end run in headless Chrome (test). Anything else is 'experimental': it stays out of the live town and opens only with ?exp=<id> or in developer mode (simulations/experimental.mjs). Rules and checks: tools/game-registry/README.md. Evan, 2026-10-24.",
+ "entries": [
+  {
+   "id": "cafe",
+   "name": "The caf\u00e9",
+   "kind": "feature",
+   "status": "live",
+   "owner": "AW-STUDY-0013",
+   "tour": true,
+   "pages": [
+    "studies/cafe/diorama.html"
+   ],
+   "scene": {
+    "gates": [
+     "town:cafe-door"
+    ],
+    "note": "caf\u00e9 diorama, reached from the curb in Downtown"
+   },
+   "test": {
+    "script": "tools/minigame-test/route-cafe-basement.cjs",
+    "marker": "ROUTE OK",
+    "covers": "caf\u00e9, register key, old door, basement, back out to the town"
+   }
+  },
+  {
+   "id": "basement",
+   "name": "Grace's basement",
+   "kind": "minigame",
+   "status": "live",
+   "owner": "AW-STUDY-0024",
+   "tour": true,
+   "pages": [
+    "studies/basement/play.html"
+   ],
+   "scene": {
+    "gates": [
+     "town:cafe-cellar"
+    ],
+    "note": "the cellar bulkhead behind the caf\u00e9"
+   },
+   "test": {
+    "script": "tools/minigame-test/route-cafe-basement.cjs",
+    "marker": "ROUTE OK",
+    "covers": "plays the chores, the gold disk and the ending, then climbs out"
+   }
+  },
+  {
+   "id": "school-jump",
+   "name": "The school jump",
+   "kind": "minigame",
+   "status": "live",
+   "owner": "AW-STUDY-0032",
+   "tour": true,
+   "pages": [
+    "studies/school/play.html"
+   ],
+   "scene": {
+    "gates": [
+     "town:school-door"
+    ],
+    "note": "Muraco front door, Abbie and Daddy side"
+   },
+   "test": {
+    "script": "tools/minigame-test/school-flow.cjs",
+    "args": [
+     "1280",
+     "720"
+    ],
+    "marker": "GAME-TEST PASS school-jump",
+    "covers": "toss, climb, roof, caught, busted, hang drop"
+   }
+  },
+  {
+   "id": "coaster",
+   "name": "The toy-car coaster",
+   "kind": "minigame",
+   "status": "live",
+   "owner": "AW-STUDY-0054",
+   "tour": true,
+   "pages": [
+    "studies/coaster/play.html"
+   ],
+   "scene": {
+    "gates": [
+     "town:skate-park"
+    ],
+    "note": "the skate park pad by the caf\u00e9"
+   },
+   "test": {
+    "script": "tools/minigame-test/coaster-flow.cjs",
+    "args": [
+     "1280",
+     "720"
+    ],
+    "marker": "GAME-TEST PASS coaster",
+    "covers": "garage, pick a car, the whole ride to the finish"
+   },
+   "mounts": [
+    "coaster-town.mjs"
+   ]
+  },
+  {
+   "id": "ranch",
+   "name": "The ranch gate",
+   "kind": "feature",
+   "status": "live",
+   "owner": "ranch",
+   "tour": false,
+   "pages": [
+    "index.html"
+   ],
+   "scene": {
+    "gates": [
+     "town:ranch-gate"
+    ],
+    "note": "the ranch gate on the Abbie and Daddy side"
+   },
+   "test": {
+    "script": "tools/game-registry/smoke.cjs",
+    "args": [
+     "/",
+     "#map"
+    ],
+    "marker": "GAME-TEST PASS smoke",
+    "covers": "the Ranch map loads and throws no page errors (smoke only)"
+   }
+  },
+  {
+   "id": "moon-mission",
+   "name": "The Moon Mission",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "AW-STUDY-0036",
+   "tour": false,
+   "pages": [
+    "studies/moon-mission/play.html"
+   ],
+   "scene": {
+    "gates": [
+     "town:truck",
+     "town:launch"
+    ],
+    "note": "the black truck at the caf\u00e9 curb and the launch pad north of home"
+   },
+   "needs": [
+    "a headless-Chrome run that plays the mission from the truck to the end (only unit tests today)"
+   ]
+  },
+  {
+   "id": "carwash",
+   "name": "The carwash and Moon Buggy",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "carwash thread",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "module": "simulations/carwash/index.mjs",
+    "note": "the roofless carwash on Main Street"
+   },
+   "needs": [
+    "a headless-Chrome run: drive the buggy through, get soaked, earn it, hop on from the left bar"
+   ]
+  },
+  {
+   "id": "effect-hunt",
+   "name": "The effect hunt (buggy)",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "effect hunt thread",
+   "tour": false,
+   "pages": [
+    "studies/effect-hunt/play.html"
+   ],
+   "scene": {
+    "module": "simulations/effect-hunt/town-mount.mjs",
+    "note": "mounted on the town by the carwash buggy"
+   },
+   "needs": [
+    "a scene reachable on its own, not only through the carwash",
+    "a headless-Chrome run to the end of a hunt"
+   ]
+  },
+  {
+   "id": "kart",
+   "name": "Kart mode",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "kart thread",
+   "tour": false,
+   "pages": [
+    "studies/kart/play.html"
+   ],
+   "scene": {
+    "module": "simulations/kart/kart.mjs",
+    "note": "car mode in the town"
+   },
+   "needs": [
+    "a gate in ENTRANCES with a scene",
+    "a headless-Chrome run of a full lap"
+   ]
+  },
+  {
+   "id": "cell",
+   "name": "The cell (science lab)",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "AW-STUDY-0033",
+   "tour": false,
+   "pages": [
+    "studies/cell/play.html"
+   ],
+   "scene": {
+    "note": "parked 2026-10-23: the lab beaker was taken off the town"
+   },
+   "needs": [
+    "a scene in the world (the lab is parked)",
+    "assertions in tools/minigame-test/cell-flow.cjs"
+   ]
+  },
+  {
+   "id": "brute-fight",
+   "name": "Brute fight",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "brute-fight thread",
+   "tour": false,
+   "pages": [
+    "studies/brute-fight/play.html"
+   ],
+   "scene": {
+    "note": "a standalone study page"
+   },
+   "needs": [
+    "a scene in the world",
+    "a headless-Chrome run to a win or loss"
+   ]
+  },
+  {
+   "id": "spacemail",
+   "name": "Space mail",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "spacemail thread",
+   "tour": false,
+   "pages": [
+    "studies/spacemail/play.html"
+   ],
+   "scene": {
+    "note": "a standalone study page"
+   },
+   "needs": [
+    "a scene in the world",
+    "a headless-Chrome run to the end"
+   ]
+  },
+  {
+   "id": "town-intro",
+   "name": "The town intro",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Performance/intro thread",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "stage": "town",
+    "note": "the opening of Winchester"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "?intro=1 replays it: charms circle, fold in, the town drops"
+   },
+   "mounts": [
+    "town-warm.mjs"
+   ]
+  },
+  {
+   "id": "paint-world",
+   "name": "Paint the World (paint balls)",
+   "kind": "feature",
+   "status": "live",
+   "owner": "AW-STUDY-0049",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "stage": "town",
+    "note": "paint balls thrown at the Winchester board"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the paint card and balloons mount on the HUD"
+   },
+   "mounts": [
+    "paint-world/town-mount.mjs"
+   ]
+  },
+  {
+   "id": "town-events",
+   "name": "World effect cards",
+   "kind": "feature",
+   "status": "live",
+   "owner": "World effects thread",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "stage": "town",
+    "note": "effects dropped on the Winchester board"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the effect icons mount in the HUD pill"
+   },
+   "mounts": [
+    "town-events.mjs"
+   ]
+  },
+  {
+   "id": "quests",
+   "name": "Townsfolk quests and the notebook",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Quests thread",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "stage": "town",
+    "note": "townsfolk at the Winchester places"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "townsfolk stand at their places on the board"
+   },
+   "mounts": [
+    "abbietown/townsfolk.mjs",
+    "abbietown/quest-guide.mjs"
+   ]
+  },
+  {
+   "id": "backpack",
+   "name": "The backpack, charms and loadout",
+   "kind": "feature",
+   "status": "live",
+   "owner": "AW-STUDY-0046",
+   "tour": false,
+   "pages": [],
+   "scene": {
+    "stage": "town",
+    "note": "the backpack on the left bar of the town"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the inventory takes an item and gives it back"
+   }
+  },
+  {
+   "id": "farm",
+   "name": "The Wright farm",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Farm tiles thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "farm/wright-farm.mjs"
+   ],
+   "scene": {
+    "stage": "town",
+    "note": "the farm hex on the Winchester board"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the farm hex is on the board (stage.tiles.farm)"
+   }
+  },
+  {
+   "id": "town-dressing",
+   "name": "Town dressing (library props)",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Hex city thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "abbietown/library-props.mjs"
+   ],
+   "scene": {
+    "stage": "town",
+    "note": "library models on Main Street and in the yards"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the board carries 'library-*' instanced props"
+   }
+  },
+  {
+   "id": "heroes",
+   "name": "Meshy heroes in town",
+   "kind": "feature",
+   "status": "live",
+   "owner": "Meshy heroes thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "abbietown/heroes.mjs"
+   ],
+   "scene": {
+    "stage": "town",
+    "note": "Abbie, Ani and the other animated heroes beside their places"
+   },
+   "test": {
+    "script": "tools/game-registry/town-features.cjs",
+    "marker": "GAME-TEST PASS town-features",
+    "covers": "the hero groups stand on the board with a loaded model"
+   }
+  },
+  {
+   "id": "medallions",
+   "name": "Mission medallions",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "Medallions thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "medallions.mjs"
+   ],
+   "scene": {
+    "note": "mounted on the board behind ?medallions"
+   },
+   "needs": [
+    "a headless-Chrome run that collects a medallion and starts its mission"
+   ]
+  },
+  {
+   "id": "halloween",
+   "name": "Halloween mode",
+   "kind": "minigame",
+   "status": "experimental",
+   "owner": "Halloween thread",
+   "tour": false,
+   "pages": [],
+   "mounts": [
+    "halloween-mode/town.mjs"
+   ],
+   "scene": {
+    "note": "lanterns, costumes and doors on the board"
+   },
+   "needs": [
+    "a headless-Chrome run that trick-or-treats a door",
+    "Evan's go"
+   ]
+  }
+ ]
+}

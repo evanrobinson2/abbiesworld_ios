@@ -89,3 +89,8 @@ node tools/game-feel-check/lint.mjs origin/<base-branch>
 Briefs that carry the design card: `docs/design/briefs/`. The full HUD study: `docs/oracle/hud/HUD_STUDY.md`.
 Game feel laws and banned web patterns: `GAME_FEEL.md` in the project files (`/mnt/project-files/game-feel/`; section 2b
 has the same principles).
+
+## 4. Invariants (INVARIANTS.md)
+Before you call anything shipped: it has a scene in the world and a passing headless-Chrome run (else it stays experimental,
+`?exp=<id>`); the town HUD tag is intact; every sound comes from the catalogue (no MIDI, no oscillators); every voice is
+ElevenLabs. Run `node tools/game-registry/check.mjs` and `node tools/audio-check/check.mjs`.

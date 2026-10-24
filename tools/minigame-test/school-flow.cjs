@@ -31,5 +31,6 @@ const {chromium} = require(process.env.PLAYWRIGHT || 'playwright');
   await p.waitForTimeout(700); await shot('6-busted'); await until(() => schoolJump.S.mode === 'roof'); await log('after bust');
   // the hang drop's timing ring
   await p.evaluate(() => { for (const b of schoolJump.balls) if (b.state !== 'yard') b.state = 'yard'; schoolJump.startHang(); }); await until(() => !schoolJump.S.tween); await p.waitForTimeout(1500); await shot('7-hang');
-  await b.close();
+  const end = await p.evaluate(() => ({mode: schoolJump.S.mode})); if (!end.mode) throw new Error('school jump ended with no mode');
+  await b.close(); console.log('GAME-TEST PASS school-jump');
 })();

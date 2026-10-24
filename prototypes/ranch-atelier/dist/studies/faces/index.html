@@ -247,7 +247,7 @@ const c2 = $('#c2'), ctx2 = c2.getContext('2d');
 const exprBox = $('#exprs');
 for (const [k, e] of Object.entries(EXPRESSIONS)) {
  const b = document.createElement('button'); b.className = 'tog'; b.dataset.e = k; b.setAttribute('aria-pressed', 'false'); b.innerHTML = `<i></i>${e.label}`;
- b.onclick = () => { driver.stop(); speechSynthesis?.cancel?.(); driver.set(k, {hold: 6}); mark(k); }; exprBox.append(b);
+ b.onclick = () => { driver.stop(); driver.set(k, {hold: 6}); mark(k); }; exprBox.append(b);
 }
 function mark(k) { for (const b of exprBox.children) b.setAttribute('aria-pressed', b.dataset.e === k); }
 const MODE_NAMES = {rig: 'Bones + blendshapes', painted: 'Painted swap', faceless: 'Faceless · body only'};
@@ -270,13 +270,8 @@ function showLine() {
 }
 $('#text').addEventListener('input', showLine); showLine();
 function say() {
- showLine(); speechSynthesis?.cancel?.(); mark(null);
+ showLine(); mark(null);
  const plan = driver.say($('#text').value);
- if (false && useVoice && 'speechSynthesis' in window) { // no synthetic speech
-  const u = new SpeechSynthesisUtterance(plan.text); u.pitch = 1.35; u.rate = 1;
-  u.onboundary = e => driver.sync(e.charIndex); // pull the mouth back onto the voice at each word
-  speechSynthesis.speak(u);
- }
 }
 $('#speak').onclick = say;
 

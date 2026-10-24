@@ -714,4 +714,4 @@ const EXPO = h => 0.42 + 0.63 * Math.max(0, Math.sin(Math.PI * (h - 5) / 14)) **
 addEventListener('aw-world-clock', e => { if (stage?.renderer) stage.renderer.toneMappingExposure = EXPO(e.detail.hour) * (e.detail.weather === 'Rain' ? 0.82 : e.detail.weather === 'Cloudy' ? 0.92 : 1); });
 </script>
 <!-- The play HUD has its own file so a merge cannot drop it: simulations/town-hud-boot.mjs -->
-<script type="module" src="/simulations/town-hud-boot.mjs?v=1"></script>
+<script type="module" src="/simulations/town-hud-boot.mjs?v=2"></script>

@@ -1,7 +1,7 @@
 // One opt-in audio context, no timers; short-lived voices disconnect on completion.
 // With the sound store (tools/sound-engineer) it plays a looping bed for the hour and weather and, now and then,
 // the rooster at dawn, birds by day, an owl at night, thunder in storms and the animals on the ranch.
-// Without it (no catalogue or no audio yet) it keeps the original synthesised chirp.
+// Without it (no catalogue or no audio yet) it stays quiet: nothing is synthesized.
 const SOURCES=['/api/sounds','/sounds/manifest.json'];
 const MASTER=.55,BED=.5,SHOT=.7;
 function bedFor(h,weather,front){if(weather==='hail')return 'rain-heavy';if(weather==='rain')return 'rain-light';if(weather==='snow')return 'snowy';if(weather==='wind'||front?.front==='arriving'&&front.inHours<=1)return 'wind-gentle';if(h>=5&&h<7)return 'farm-morning';if(h>=7&&h<18)return 'farm-day';if(h>=18&&h<21)return 'countryside-evening';return 'night-insects';}
@@ -12,7 +12,7 @@ function buffer(s){if(!buffers.has(s.id))buffers.set(s.id,fetch(s.urls.audio).th
 function pick(slot){const list=catalogue?.get(slot);return list?.length?list[Math.floor(rand()*list.length)]:null;}
 async function setBed(slot){if(slot===bedSlot)return;bedSlot=slot;const s=pick(slot),old=bed;bed=null;const t=context.currentTime;if(old){old.gain.gain.setTargetAtTime(0,t,1.2);old.source.stop(t+5);}if(!s)return;const b=await buffer(s);if(!b||bedSlot!==slot||!enabled)return;const source=context.createBufferSource(),gain=context.createGain();source.buffer=b;source.loop=true;gain.gain.value=0;source.connect(gain).connect(master);source.start();gain.gain.setTargetAtTime(BED,context.currentTime,1.2);source.onended=()=>{source.disconnect();gain.disconnect();};bed={source,gain};}
 async function oneShot(slot,delay=0){const s=pick(slot);if(!s)return false;voices++;const b=await buffer(s);if(!b||!enabled){voices--;return false;}const source=context.createBufferSource(),gain=context.createGain(),pan=context.createStereoPanner?context.createStereoPanner():null;source.buffer=b;gain.gain.value=SHOT*(.6+.4*rand());let node=source.connect(gain);if(pan){pan.pan.value=rand()*1.6-.8;node=node.connect(pan);}node.connect(master);source.onended=()=>{source.disconnect();gain.disconnect();pan?.disconnect();voices--;};source.start(context.currentTime+delay);return true;}
-function chirp(h){const oscillator=context.createOscillator(),gain=context.createGain();const t=context.currentTime;oscillator.type='sine';oscillator.frequency.setValueAtTime(h<8?1400:h>18?2400:380,t);oscillator.frequency.exponentialRampToValueAtTime(h<8?2200:h>18?1800:180,t+.12);gain.gain.setValueAtTime(.0001,t);gain.gain.exponentialRampToValueAtTime(.012,t+.02);gain.gain.exponentialRampToValueAtTime(.0001,t+.2);oscillator.connect(gain).connect(context.destination);voices++;oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();voices--;};oscillator.start(t);oscillator.stop(t+.22);}
+function chirp(h){} // no synthesized fallback (INVARIANTS.md): without the catalogue the ranch is quiet
 return {// Thunder follows the lightning the player saw, after the sound's travel time.
 thunder(delay=1.5){if(enabled&&context?.state==='running'&&catalogue&&voices<4)oneShot('thunder',delay);},
 async enable(value){enabled=value;if(!value){if(context)await context.suspend();return;}context??=new (window.AudioContext||window.webkitAudioContext)();if(!master){master=context.createGain();master.gain.value=MASTER;master.connect(context.destination);}await context.resume();loading??=loadCatalogue().then(c=>{catalogue=c;});},

@@ -75,24 +75,16 @@ export function heart(parent, y, size = 1.6) {
  const s = new T.Sprite(new T.SpriteMaterial({map: heartTexture(), transparent: true, depthWrite: false, depthTest: false})); s.scale.setScalar(size); s.position.set((Math.random() - .5) * 1.2, y, (Math.random() - .5) * 1.2); s.renderOrder = 20; s.userData.presentation = true; s.userData.age = 0; parent.add(s); return s;
 }
 
-// ---- voices: tiny synthesised calls, soft, never until the page has been touched
-let ac = null, master = null;
-const unlock = () => { try { ac ||= new (window.AudioContext || window.webkitAudioContext)(); master ||= Object.assign(ac.createGain(), {gain: {value: .5}}); master.connect(ac.destination); ac.resume?.(); } catch {} };
+// ---- voices: the sound catalogue's animal takes, soft, never until the page has been touched (INVARIANTS.md)
+import {sfx as catalogSfx, sfxContext} from '../catalog-sfx.mjs';
+let touched = false;
+const unlock = () => { touched = true; sfxContext(); };
 if (typeof addEventListener === 'function') addEventListener('pointerdown', unlock, {once: true});
-const CALLS = { // [type, [freq points], seconds, vibrato Hz, filter Hz]
- cow: [['sawtooth', [120, 150, 95], .9, 6, 520]], pig: [['square', [260, 190], .12, 0, 900], ['square', [240, 170], .16, 0, 800]], goat: [['sawtooth', [520, 430, 470], .6, 28, 1400]],
- sheep: [['sawtooth', [380, 300, 330], .7, 22, 1100]], chicken: [['triangle', [700, 480], .09, 0, 2200], ['triangle', [650, 440], .12, 0, 2200]], duck: [['square', [520, 360], .13, 0, 1400], ['square', [500, 330], .15, 0, 1400]],
- horse: [['sawtooth', [420, 900, 360], .9, 9, 1800]], alpaca: [['sine', [300, 340, 280], .8, 5, 900]], rabbit: [], dog: [['sawtooth', [320, 200], .13, 0, 1200], ['sawtooth', [330, 210], .15, 0, 1200]], cat: [['sine', [760, 980, 520], .6, 4, 2600]]
-};
+const CALL_IDS = {cow: ['cow-1', 'cow-2'], pig: ['pig-1', 'pig-2'], goat: ['goat-1', 'goat-2'], sheep: ['sheep-1', 'sheep-2'], chicken: ['hen-1', 'hen-2'], duck: ['duck-1'],
+ horse: ['horse-whinny-1', 'horse-whinny-2'], dog: ['dog-bark-1', 'dog-bark-2'], cat: ['cat-meow-1', 'cat-meow-2']}; // alpacas and rabbits stay quiet: the catalogue has no take for them
 export function voice(kind, gain = 1) {
- if (!ac || ac.state === 'suspended' || gain <= .02) return; const notes = CALLS[kind] || []; let t0 = ac.currentTime + .01;
- for (const [type, pts, dur, vib, lp] of notes) {
-  const o = ac.createOscillator(), g = ac.createGain(), f = ac.createBiquadFilter(); o.type = type; f.type = 'lowpass'; f.frequency.value = lp;
-  pts.forEach((fr, i) => o.frequency.linearRampToValueAtTime(fr, t0 + dur * i / Math.max(1, pts.length - 1)));
-  if (vib) { const l = ac.createOscillator(), lg = ac.createGain(); l.frequency.value = vib; lg.gain.value = pts[0] * .05; l.connect(lg); lg.connect(o.frequency); l.start(t0); l.stop(t0 + dur + .05); }
-  g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(.16 * gain, t0 + .03); g.gain.exponentialRampToValueAtTime(.001, t0 + dur);
-  o.connect(f); f.connect(g); g.connect(master); o.start(t0); o.stop(t0 + dur + .05); t0 += dur * .9;
- }
+ if (!touched || gain <= .02) return; const ids = CALL_IDS[kind]; if (!ids) return;
+ catalogSfx(ids[Math.floor(Math.random() * ids.length)], {gain: .5 * gain});
 }
 
 // ---- the little mind

@@ -10,6 +10,7 @@
 // Presentation layer (drawn for the player, invisible to every perception): the thought bubbles, the twinkle over
 //   whatever is under the finger, the pointer, and the sparkle that marks places that open into something.
 // Drafted 2026-10-24.
+import {sfx} from '../catalog-sfx.mjs';
 
 const LAMP = .3, PROP = 1.4, TREE = 6; // instance scale bands: lamp posts are thin, bushes and flowers small, trees mid, shops wide
 
@@ -42,42 +43,11 @@ const PLACE = {
 const HOUSE = ['🎵', '☕', '😴', '📻', '🍪', '💤', '🧶'];
 const OWNED = ['giver', 'link']; // userData another module reads to handle its own tap: people, the coaster, the moon truck
 
-// ---- sound: a few tiny synthesised cues (diegetic: a bell, a knock; no files, nothing to load)
-let ac = null;
-function tone(freq, dur, {type = 'sine', gain = .12, slide = 0, at = 0} = {}) {
-  try {
-    ac ||= new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume();
-    const o = ac.createOscillator(), g = ac.createGain(), t0 = ac.currentTime + at;
-    o.type = type; o.frequency.setValueAtTime(freq, t0); if (slide) o.frequency.exponentialRampToValueAtTime(Math.max(30, freq + slide), t0 + dur);
-    g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(gain, t0 + .01); g.gain.exponentialRampToValueAtTime(.0001, t0 + dur);
-    o.connect(g).connect(ac.destination); o.start(t0); o.stop(t0 + dur + .05);
-  } catch {}
-}
-function noise(dur, {gain = .08, at = 0, lp = 2400} = {}) {
-  try {
-    ac ||= new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume();
-    const n = Math.floor(ac.sampleRate * dur), buf = ac.createBuffer(1, n, ac.sampleRate), d = buf.getChannelData(0);
-    for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
-    const s = ac.createBufferSource(), f = ac.createBiquadFilter(), g = ac.createGain(), t0 = ac.currentTime + at;
-    s.buffer = buf; f.type = 'lowpass'; f.frequency.value = lp; g.gain.value = gain; s.connect(f).connect(g).connect(ac.destination); s.start(t0);
-  } catch {}
-}
-const SOUND = {
-  bell: () => { tone(988, .9, {gain: .1}); tone(1319, .8, {gain: .06, at: .12}); },
-  chime: () => { [784, 988, 1175].forEach((f, i) => tone(f, .5, {gain: .07, at: i * .1})); },
-  knock: () => { [0, .16].forEach(a => tone(150, .09, {type: 'triangle', gain: .2, slide: -60, at: a})); },
-  chirp: () => { [0, .12, .26].forEach((a, i) => tone(2400 + i * 300, .09, {gain: .05, slide: 500, at: a})); },
-  rustle: () => noise(.5, {gain: .09, lp: 3200}),
-  whistle: () => { tone(660, .5, {gain: .08, slide: 220}); tone(990, .7, {gain: .05, at: .35, slide: -200}); },
-  creak: () => tone(110, .6, {type: 'sawtooth', gain: .05, slide: 40}),
-  splash: () => { noise(.35, {gain: .1, lp: 1400}); tone(320, .2, {gain: .05, slide: -150}); },
-  rumble: () => { tone(60, 1.1, {type: 'sawtooth', gain: .12, slide: 25}); noise(1, {gain: .06, lp: 500}); },
-  quack: () => { [0, .15].forEach(a => tone(520, .12, {type: 'square', gain: .05, slide: -140, at: a})); },
-  bark: () => { [0, .2].forEach(a => tone(300, .13, {type: 'sawtooth', gain: .09, slide: -120, at: a})); },
-  honk: () => { tone(330, .28, {type: 'square', gain: .07}); tone(415, .28, {type: 'square', gain: .05}); },
-  ding: () => tone(1568, .45, {gain: .08}),
-  pop: () => tone(520, .12, {gain: .08, slide: 380}),
-};
+// ---- sound: the town's own cues, all from the sound catalogue (INVARIANTS.md): a bell, a knock, ducks, bub
+const CUE = {bell: ['church-bell', .5], chime: ['magic-chime', .6], knock: ['knock', .8], chirp: ['songbird-1', .6], rustle: ['wind-chimes', .3],
+  whistle: ['whistle', .6], creak: ['wood-creak', .6], splash: ['splash-small-1', .7], rumble: ['wind-strong', .6], quack: ['duck-1', .7],
+  bark: ['dog-bark-1', .7], honk: ['honk', .6], ding: ['doorbell', .6], pop: ['pop-1', .7]};
+const SOUND = Object.fromEntries(Object.entries(CUE).map(([k, [id, gain]]) => [k, () => { sfx(id, {gain}); }]));
 
 export function mountInteractions(town) {
   const stage = town?.stage, T = stage?.THREE, camera = stage?.camera, canvas = stage?.renderer?.domElement || town?.renderer?.domElement;

@@ -5,6 +5,10 @@
 > melodies: `tools/composer/motifs/`. Open question: which melody is canonical (section 1); see the decision log
 > at the end.
 
+> **Invariant (Evan, 2026-10-24).** No MIDI sounds. All music and effects in the game are produced or recorded audio from
+> the catalogue (`sounds/manifest.json`, `/music/catalog.json`); the `.mid` files in `tools/composer/motifs/` are composing
+> references only and never ship. Enforced by `tools/audio-check/check.mjs`; see `INVARIANTS.md`.
+
 Consolidated creative direction · September–October 2026
 
 The central musical idea behind Abbie's World is that it should have one recognizable musical identity that can

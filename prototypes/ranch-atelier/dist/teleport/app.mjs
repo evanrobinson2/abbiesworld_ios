@@ -73,17 +73,15 @@ function firework(at){
  for(let i=0;i<n;i++){pos.set([at.x,at.y,at.z],i*3);const v=new T.Vector3().randomDirection().multiplyScalar(3+Math.random()*2);vel.push(v);}
  g.setAttribute('position',new T.BufferAttribute(pos,3));
  const p=new T.Points(g,new T.PointsMaterial({size:.35,map:dot,color:col,transparent:true,depthWrite:false,blending:T.AdditiveBlending}));scene.add(p);bursts.push({p,vel,t:0});
- sfx('pop');
+ kindSound('pop');
 }
 function stepBursts(dt){for(let i=bursts.length-1;i>=0;i--){const b=bursts[i];b.t+=dt;const a=b.p.geometry.attributes.position;for(let k=0;k<b.vel.length;k++){b.vel[k].y-=2*dt;a.array[k*3]+=b.vel[k].x*dt;a.array[k*3+1]+=b.vel[k].y*dt;a.array[k*3+2]+=b.vel[k].z*dt;}a.needsUpdate=true;b.p.material.opacity=Math.max(0,1-b.t/1.8);if(b.t>1.8){scene.remove(b.p);b.p.geometry.dispose();b.p.material.dispose();bursts.splice(i,1);}}}
 
-// ---- sound (synthesised, no downloads) ---------------------------------------------------
-let ac=null;
-function sfx(kind){
- if(!S.sound||!S.gesture)return;try{ac??=new AudioContext();}catch{return;}
- const o=ac.createOscillator(),g=ac.createGain(),now=ac.currentTime;o.connect(g);g.connect(ac.destination);
- const set={beam:['sine',220,1400,1.4,.18],pop:['triangle',600,120,.25,.12],ding:['sine',880,1320,.3,.12],whoosh:['sawtooth',90,40,.6,.06],build:['sine',330,660,.12,.05],magic:['triangle',520,1560,.9,.14]}[kind];if(!set)return;
- o.type=set[0];o.frequency.setValueAtTime(set[1],now);o.frequency.exponentialRampToValueAtTime(set[2],now+set[3]);g.gain.setValueAtTime(set[4],now);g.gain.exponentialRampToValueAtTime(.001,now+set[3]);o.start(now);o.stop(now+set[3]);
+// ---- sound (from the sound catalogue) ---------------------------------------------------
+import {sfx as catalogSfx} from '/simulations/catalog-sfx.mjs';
+const KIND_SOUND={beam:['warp',.7],pop:['pop-1',.5],ding:['magic-chime',.5],whoosh:['whoosh-1',.4],build:['place-1',.4],magic:['sparkle-1',.6]};
+function kindSound(kind){
+ if(!S.sound||!S.gesture)return;const k=KIND_SOUND[kind];if(!k)return;catalogSfx(k[0],{gain:k[1]});
 }
 function say(text,{speak=true,seconds}={}){
  const cap=$('#caption');cap.textContent=text;cap.classList.add('show');clearTimeout(say.t);say.t=setTimeout(()=>cap.classList.remove('show'),(seconds??Math.min(9,2.5+text.length/16))*1000);
@@ -156,7 +154,7 @@ let upgrade=null;
 function startUpgrade(){upgrade={t:0,i:0,order:[...entities].sort((a,b)=>a.object.position.length()-b.object.position.length())};}
 function stepUpgrade(dt){
  if(!upgrade)return;upgrade.t+=dt;const want=Math.floor(upgrade.t*45);
- while(upgrade.i<Math.min(want,upgrade.order.length)){const e=upgrade.order[upgrade.i++];setDetail(e,2);e.flash=.4;if(upgrade.i%6===0)sfx('build');}
+ while(upgrade.i<Math.min(want,upgrade.order.length)){const e=upgrade.order[upgrade.i++];setDetail(e,2);e.flash=.4;if(upgrade.i%6===0)kindSound('build');}
  if(upgrade.i>=upgrade.order.length){upgrade=null;updateBuilder('full');}else if(upgrade.i%10===0)updateBuilder('upgrading');
 }
 function updateBuilder(phase){
@@ -178,7 +176,7 @@ function beam(on){
   const m=new T.Mesh(new T.CylinderGeometry(.32,.32,6,24,1,true),new T.MeshBasicMaterial({color:'#7ae8ff',transparent:true,opacity:0,blending:T.AdditiveBlending,depthWrite:false,side:T.DoubleSide}));
   m.position.copy(p.object.position).setY(3);scene.add(m);beams.push({p,m,k:on?0:1,dir:on?1:-1});p.object.visible=true;
  }
- sfx('beam');
+ kindSound('beam');
 }
 function stepBeams(dt){
  for(let i=beams.length-1;i>=0;i--){const b=beams[i],o=b.p.object;b.k+=dt*b.dir*(b.dir>0?.8:1.4);const k=Math.min(1,Math.max(0,b.k));
@@ -219,10 +217,10 @@ function act(a){
  switch(a.do){
   case 'time':S.hourTarget=a.hour;break;
   case 'weather':if(a.mode==='clear'){setParticles(WORLDS[S.worldIndex]?.particles==='stars'?'none':WORLDS[S.worldIndex]?.particles||'none');}else if(a.mode==='fireworks'){for(let i=0;i<6;i++)setTimeout(()=>firework(new T.Vector3(between(-8,8),between(6,10),between(-8,4))),i*350);}else{setParticles(a.mode);}break;
-  case 'remix':{const keys=Object.keys(REMIXES).filter(k=>k!=='night'&&k!==S.remix);const k=a.style==='random'?keys[Math.floor(Math.random()*keys.length)]:a.style;const r=REMIXES[k];S.remix=r.tint||r.sky?k:S.remix;if(r.hour)S.hourTarget=r.hour;if(r.ground)ground?.getObjectByName('ground-top')?.material.color.set(r.ground);if(r.particles)setParticles(r.particles);entities.forEach(e=>tintEntity(e,REMIXES[S.remix]));say(r.label+' world!',{speak:false,seconds:2.5});sfx('magic');break;}
+  case 'remix':{const keys=Object.keys(REMIXES).filter(k=>k!=='night'&&k!==S.remix);const k=a.style==='random'?keys[Math.floor(Math.random()*keys.length)]:a.style;const r=REMIXES[k];S.remix=r.tint||r.sky?k:S.remix;if(r.hour)S.hourTarget=r.hour;if(r.ground)ground?.getObjectByName('ground-top')?.material.color.set(r.ground);if(r.particles)setParticles(r.particles);entities.forEach(e=>tintEntity(e,REMIXES[S.remix]));say(r.label+' world!',{speak:false,seconds:2.5});kindSound('magic');break;}
   case 'sky':skyMat.uniforms.top.value.set(a.color);S.base.sky=[a.color,S.base.sky[1]];break;
   case 'ground':ground?.getObjectByName('ground-top')?.material.color.set(a.color);break;
-  case 'scale':for(const e of targets(a.target)){e.scaleTarget=a.factor===0?e.scale:e.scale*a.factor;}sfx('pop');break;
+  case 'scale':for(const e of targets(a.target)){e.scaleTarget=a.factor===0?e.scale:e.scale*a.factor;}kindSound('pop');break;
   case 'color':for(const e of targets(a.target)){e.color=a.color;const d=e.detail;e.detail=-1;setDetail(e,d);}break;
   case 'chase':{const list=targets(a.target);list.forEach(e=>{e.live='chase';});people.forEach(p=>{p.emote='scared';p.emoteUntil=performance.now()+6000;});setTimeout(()=>list.forEach(e=>{if(e.live==='chase')e.live='wander';}),9000);say('Run!',{seconds:2});break;}
   case 'remove':for(const e of targets(a.target)){e.leaving=0;}break;
@@ -241,7 +239,7 @@ function spawn(a){
   e.drop=4+Math.random()*2;
  }
  if(!a.id){orderModel(a.word,a.color);say(`I've asked the builder for a ${a.word}. Here's a stand-in until it's ready.`,{seconds:5});}
- else sfx('ding');
+ else kindSound('ding');
  updateBuilder('full');
 }
 function orderModel(word,color){
@@ -249,7 +247,7 @@ function orderModel(word,color){
  S.orders.push({word,color,askedIn:WORLDS[S.worldIndex]?.id||'madlibs',at:new Date().toISOString(),detail:'low-first'});store.set('orders',S.orders);renderOrders();
 }
 function magic(){
- sfx('magic');S.hourTarget=21;setParticles('confetti');
+ kindSound('magic');S.hourTarget=21;setParticles('confetti');
  for(let i=0;i<10;i++)setTimeout(()=>firework(new T.Vector3(between(-10,10),between(6,11),between(-10,4))),i*300);
  const c=centre();const r=addEntity('rainbow',{pos:new T.Vector3(c.x,-1.5,c.z-9),scale:1.4,detail:2});r.object.rotation.y=0;
  for(const e of entities)if(e.hero)e.flash=2;
@@ -266,7 +264,7 @@ function frame(){
  stepParticles(dt,t);stepBursts(dt);stepBeams(dt);stepUpgrade(dt);
  const fc=centre();
  for(let i=entities.length-1;i>=0;i--){const e=entities[i],o=e.object;
-  if(e.appear){e.appear.t+=dt;const k=Math.min(1,Math.max(0,e.appear.t/e.appear.d));const s=k<1?(1-Math.pow(1-k,3))*(1+Math.sin(k*Math.PI)*.25):1;o.scale.setScalar(Math.max(.0001,s*e.scale));if(k>=1){e.appear=null;}if(e.appear&&e.appear.t>0&&e.appear.t-dt<=0&&rand()<.15)sfx('build');}
+  if(e.appear){e.appear.t+=dt;const k=Math.min(1,Math.max(0,e.appear.t/e.appear.d));const s=k<1?(1-Math.pow(1-k,3))*(1+Math.sin(k*Math.PI)*.25):1;o.scale.setScalar(Math.max(.0001,s*e.scale));if(k>=1){e.appear=null;}if(e.appear&&e.appear.t>0&&e.appear.t-dt<=0&&rand()<.15)kindSound('build');}
   else if(e.scaleTarget!==undefined){const s=o.scale.x+(e.scaleTarget-o.scale.x)*Math.min(1,dt*5);o.scale.setScalar(s);if(Math.abs(s-e.scaleTarget)<.005){e.scale=e.scaleTarget;e.scaleTarget=undefined;}}
   if(e.leaving!==undefined){e.leaving+=dt*3;o.scale.setScalar(Math.max(.0001,e.scale*(1-e.leaving)));if(e.leaving>=1){world.remove(o);entities.splice(i,1);continue;}}
   if(e.drop){e.drop=Math.max(0,e.drop-dt*9);o.position.y=e.base.y+e.drop;}
@@ -324,7 +322,7 @@ function screen(name){S.mode=name;document.body.dataset.mode=name;}
 async function enterWorld(index){
  if(S.busy)return;S.busy=true;
  const w=WORLDS[index];$('#map').hidden=true;
- if(S.worldIndex>=0&&people.length){beam(false);sfx('whoosh');await wait(1300);}
+ if(S.worldIndex>=0&&people.length){beam(false);kindSound('whoosh');await wait(1300);}
  $('#flash').classList.add('on');await wait(350);
  S.worldIndex=index;S.visited.add(w.id);store.set('visited',[...S.visited]);if(index>=1){S.secretUnlocked=S.secretUnlocked||index>=1;store.set('secret',S.secretUnlocked);}
  buildWorld(w);placeFamily();people.forEach(p=>p.object.visible=false);
@@ -349,7 +347,7 @@ function next(which){
 }
 async function secretReveal(i){
  openMap();await wait(900);
- const card=$('#map .stops');card.classList.add('glitch');sfx('magic');say('Wait a second. There is a stop that is not on the map.');
+ const card=$('#map .stops');card.classList.add('glitch');kindSound('magic');say('Wait a second. There is a stop that is not on the map.');
  await wait(2200);S.secretUnlocked=true;store.set('secret',true);renderMap();card.classList.remove('glitch');
  $('#map .secret')?.classList.add('arrive');await wait(2600);enterWorld(i);
 }
@@ -375,8 +373,8 @@ renderer.domElement.addEventListener('pointerup',e=>{
  ray.setFromCamera(new T.Vector2(e.clientX/innerWidth*2-1,-e.clientY/innerHeight*2+1),camera);
  const hit=ray.intersectObjects([familyGroup,world,ground].filter(Boolean),true)[0];if(!hit)return;
  let o=hit.object;while(o&&!o.userData.person&&!o.userData.entity)o=o.parent;
- if(o?.userData.person){S.selected=people.find(p=>p.object===o);say(S.selected.sheet.name+' selected. Tap where to go.',{speak:false,seconds:2});sfx('ding');return;}
- if(o?.userData.entity){const en=o.userData.entity;en.flash=.5;en.drop=1.2;sfx('pop');const k=KIT[en.kitId];say(en.word&&!KIT[en.kitId]?.tags.includes(en.word)?en.word:k?.name||'Something',{speak:false,seconds:2});return;}
+ if(o?.userData.person){S.selected=people.find(p=>p.object===o);say(S.selected.sheet.name+' selected. Tap where to go.',{speak:false,seconds:2});kindSound('ding');return;}
+ if(o?.userData.entity){const en=o.userData.entity;en.flash=.5;en.drop=1.2;kindSound('pop');const k=KIT[en.kitId];say(en.word&&!KIT[en.kitId]?.tags.includes(en.word)?en.word:k?.name||'Something',{speak:false,seconds:2});return;}
  const point=hit.point.setY(0);const who=S.selected?[S.selected]:people;who.forEach((p,i)=>p.target=point.clone().add(new T.Vector3((i-(who.length-1)/2)*.6,0,0)));
 });
 addEventListener('keydown',e=>{
@@ -402,7 +400,7 @@ function toggleMic(){
 }
 $('#mic').onclick=toggleMic;
 $('#next').onclick=()=>next();$('#map-btn').onclick=openMap;
-$('#sound').onclick=()=>{S.sound=!S.sound;store.set('sound',S.sound);$('#sound').textContent=S.sound?'🔊':'🔇';if(!S.sound)speechSynthesis?.cancel();};$('#sound').textContent=S.sound?'🔊':'🔇';
+$('#sound').onclick=()=>{S.sound=!S.sound;store.set('sound',S.sound);$('#sound').textContent=S.sound?'🔊':'🔇';};$('#sound').textContent=S.sound?'🔊':'🔇';
 $('#builder-btn').onclick=()=>$('#builder').classList.toggle('show');
 
 // ---- setup: the crew (family) -------------------------------------------------------------

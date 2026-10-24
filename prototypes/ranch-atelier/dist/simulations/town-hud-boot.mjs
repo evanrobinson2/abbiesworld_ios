@@ -4,6 +4,11 @@
 // bar back (Evan, 2026-10-24 01:00Z). Do not move this back inline. Runs after the inline module has mounted the chronograph.
 import {mountTownHud} from './town-hud.mjs?v=1';
 
+// The inline module awaits the experimental registry before it builds the board, and a module script does not wait for an
+// earlier one's top-level await, so this file waits for the board itself.
+const ready = () => new Promise(done => { const t = setInterval(() => { if (window.AbbieTown?.stage) { clearInterval(t); done(); } }, 50); });
+await ready();
+
 const town = window.AbbieTown, stage = town?.stage;
 if (document.body.classList.contains('play') && stage) {
   mountTownHud({stage, board: town.board});

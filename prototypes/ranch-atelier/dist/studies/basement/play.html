@@ -52,58 +52,45 @@ const camera = playerCamera(new T.PerspectiveCamera(30, 1, .05, 60));
 let kid = createKid(); kid.scale.setScalar(1.12); scene.add(kid); let rigged = false;
 loadGraceKid().then(g => { const p = kid.position.clone(), r = kid.rotation.y; scene.remove(kid); kid = g; kid.position.copy(p); kid.rotation.y = r; scene.add(kid); rigged = true; }).catch(e => console.warn('[basement] kid', e));
 
-// ---------- Sound: synthesised, each touch shaped by its material. ----------
-let ac = null, hum = null, master = null;
-function audio() { if (!ac) { try { ac = new (window.AudioContext || window.webkitAudioContext)(); master = ac.createGain(); master.connect(ac.destination); } catch { ac = null; } } if (ac?.state === 'suspended') ac.resume(); return ac; }
-function blip({f = 440, t = .08, type = 'square', g = .08, slide = 0, noise = false, lp = 0, hp = 0, at = 0} = {}) {
- const a = audio(); if (!a) return; const now = a.currentTime + at, out = a.createGain(); f *= 1 + (Math.random() - .5) * .08;
- out.gain.setValueAtTime(g, now); out.gain.exponentialRampToValueAtTime(.0001, now + t);
- let src; if (noise) { const b = a.createBuffer(1, Math.max(1, a.sampleRate * t | 0), a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1; src = a.createBufferSource(); src.buffer = b; }
- else { src = a.createOscillator(); src.type = type; src.frequency.setValueAtTime(f, now); if (slide) src.frequency.exponentialRampToValueAtTime(Math.max(20, f + slide), now + t); }
- let node = src; if (lp) { const fl = a.createBiquadFilter(); fl.type = 'lowpass'; fl.frequency.value = lp; node.connect(fl); node = fl; }
- if (hp) { const fl = a.createBiquadFilter(); fl.type = 'highpass'; fl.frequency.value = hp; node.connect(fl); node = fl; }
- node.connect(out).connect(master); src.start(now); src.stop(now + t + .02);
-}
+// ---------- Sound: from the sound catalogue (INVARIANTS.md), each touch shaped by its material. ----------
+import {sfx as catalogSfx, sfxContext, preload} from '/simulations/catalog-sfx.mjs';
+let ac = null, hum = null;
+function audio() { ac = ac || sfxContext(); return ac; }
+const one = (...ids) => ids[Math.floor(Math.random() * ids.length)];
+const P = (id, gain = .6, rate = 1, delay = 0) => catalogSfx(id, {gain, rate: rate * (1 + (Math.random() - .5) * .06), delay});
 const SFX = {
- gb: n => ({move: () => blip({f: 330, t: .025, type: 'square', g: .03, lp: 2400}), turn: () => blip({f: 520, t: .03, type: 'square', g: .03, lp: 2400}), lock: () => blip({f: 120, t: .06, type: 'square', g: .04, lp: 900}),
-  clear: () => [0, 1, 2].forEach(i => blip({f: 520 + i * 160, t: .07, type: 'square', g: .035, lp: 2600, at: i * .06})), big: () => [0, 1, 2, 3, 4].forEach(i => blip({f: 480 + i * 130, t: .08, type: 'square', g: .04, lp: 2800, at: i * .06})),
-  over: () => [0, 1, 2, 3].forEach(i => blip({f: 400 - i * 70, t: .14, type: 'square', g: .04, lp: 1600, at: i * .14})), start: () => [0, 1].forEach(i => blip({f: 600 + i * 300, t: .08, type: 'square', g: .035, lp: 2600, at: i * .08})), click: () => blip({f: 700, t: .03, type: 'square', g: .03, lp: 2400})})[n]?.(),
- click: () => { blip({noise: true, t: .03, g: .25, lp: 3000}); blip({f: 1800, t: .02, g: .05}); },
- stepWood: () => blip({noise: true, t: .09, g: .12, lp: 500}), stepStone: () => blip({noise: true, t: .05, g: .05, lp: 1800}), stepRug: () => blip({noise: true, t: .07, g: .05, lp: 300}),
- creak: () => blip({f: 180, t: .35, type: 'sawtooth', g: .02, slide: 90, lp: 900}),
- thunk: () => { blip({f: 70, t: .25, type: 'sine', g: .3}); blip({noise: true, t: .06, g: .1, lp: 800}); },
- beep: () => blip({f: 880, t: .18, type: 'square', g: .04}),
- disk: () => { for (let i = 0; i < 7; i++) blip({f: 90 + (i % 3) * 40, t: .07, type: 'square', g: .03, lp: 700, at: i * .11}); },
- key: () => blip({noise: true, t: .03, g: .09, lp: 2500}),
- plug: () => { blip({noise: true, t: .04, g: .2, lp: 1500}); blip({f: 140, t: .08, type: 'square', g: .05, lp: 600, at: .03}); },
- spray: () => blip({noise: true, t: .22, g: .06, hp: 2500}), squeak: () => blip({f: 1300, t: .07, type: 'sine', g: .03, slide: 500}),
- rub: () => blip({noise: true, t: .08, g: .03, lp: 900}),
- boop: () => blip({f: 220, t: .12, type: 'sine', g: .06, slide: -60}),
- door: () => { blip({f: 120, t: .5, type: 'sawtooth', g: .02, slide: 60, lp: 700}); blip({noise: true, t: .1, g: .15, lp: 400, at: .45}); },
- page: () => blip({noise: true, t: .12, g: .05, hp: 1500}),
- tick: () => { blip({noise: true, t: .05, g: .07, hp: 3000}); blip({noise: true, t: .05, g: .07, hp: 3000, at: .08}); },
- chime: () => [784, 988, 1175, 1568].forEach((f, i) => blip({f, t: .25, type: 'triangle', g: .05, at: i * .07})),
+ gb: n => ({move: () => P('tick', .25), turn: () => P('click-2', .3), lock: () => P('place-2', .3),
+  clear: () => P('success-1', .35), big: () => P('level-up', .4),
+  over: () => P('lose-sting', .4), start: () => P('select', .4), click: () => P('click-3', .25)})[n]?.(),
+ click: () => P('click-1', .5),
+ stepWood: () => P(one('step-wood-1', 'step-wood-2', 'step-wood-3', 'step-wood-4'), .35), stepStone: () => P(one('step-concrete-1', 'step-concrete-2', 'step-concrete-3'), .3), stepRug: () => P(one('step-carpet-1', 'step-carpet-2', 'step-carpet-3'), .3),
+ creak: () => P('wood-creak', .4),
+ thunk: () => P('switch', .6),
+ beep: () => P('beep-1', .3),
+ disk: () => P('typewriter', .4),
+ key: () => P('type-blip-2', .3),
+ plug: () => P('lock', .6),
+ spray: () => P('faucet', .35), squeak: () => P('squeak-toy', .25),
+ rub: () => P('cloth', .3),
+ boop: () => P('tap-2', .35),
+ door: () => P('door-creak', .6),
+ page: () => P('page-turn', .5),
+ tick: () => { P('tick', .4); P('tick', .4, 1, .08); },
+ chime: () => P('magic-chime', .6),
 };
-function startHum() { const a = audio(); if (!a || hum) return; const o = a.createOscillator(), g = a.createGain(); o.type = 'sawtooth'; o.frequency.value = 120;
- const f = a.createBiquadFilter(); f.type = 'lowpass'; f.frequency.value = 260; g.gain.value = 0; o.connect(f).connect(g).connect(master); o.start(); hum = {o, g}; }
+preload(['click-1', 'tick', 'abbies-world-reimagined', 'room-tone']);
+// the furnace and the computer hum: a looping catalogue bed; hum.g.gain.value is set each frame by the room
+function startHum() {
+ if (hum) return; const h = catalogSfx('room-tone', {gain: 0, loop: true}); let v = 0;
+ hum = {g: {gain: {get value() { return v; }, set value(x) { v = x; h.set(Math.min(1, x * 40)); }}}};
+}
 
-// Faint 8-bit music: our own little tune, a pulse-wave melody over a triangle bass. It is meta (it lives in her body,
-// not in the room) and it grows as she nears Grace's computer, because the computer is calling her.
-const TUNE = {bpm: 92, lead: [76, 0, 79, 81, 79, 76, 74, 0, 72, 74, 76, 0, 74, 72, 69, 0, 72, 0, 74, 76, 79, 76, 74, 72, 74, 0, 0, 0, 67, 69, 72, 0],
- bass: [48, 0, 55, 0, 45, 0, 52, 0, 41, 0, 48, 0, 43, 0, 50, 0]};
+// Her theme, faint: the produced Abbie's World track under the room. It is meta (it lives in her body, not in the room) and
+// it grows as she nears Grace's computer, because the computer is calling her.
 let music = null;
 function startMusic() {
- const a = audio(); if (!a || music) return;
- const gain = a.createGain(); gain.gain.value = 0; gain.connect(master);
- const lp = a.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400; lp.connect(gain);
- const n = 32, re = new Float32Array(n), im = new Float32Array(n); for (let k = 1; k < n; k++) im[k] = 2 / (k * Math.PI) * Math.sin(k * Math.PI * .25);
- const pulse = a.createPeriodicWave(re, im);
- const step = 60 / TUNE.bpm / 2; let next = a.currentTime + .1, i = 0;
- const hz = m => 440 * Math.pow(2, (m - 69) / 12);
- const note = (m, at, len, wave, g) => { if (!m) return; const o = a.createOscillator(), e = a.createGain(); if (wave === 'pulse') o.setPeriodicWave(pulse); else o.type = wave; o.frequency.value = hz(m);
-  e.gain.setValueAtTime(0, at); e.gain.linearRampToValueAtTime(g, at + .01); e.gain.exponentialRampToValueAtTime(.0001, at + len); o.connect(e).connect(lp); o.start(at); o.stop(at + len + .05); };
- const timer = setInterval(() => { while (next < a.currentTime + .4) { note(TUNE.lead[i % 32], next, step * .9, 'pulse', .5); if (i % 2 === 0) note(TUNE.bass[(i / 2) % 16], next, step * 1.8, 'triangle', .7); next += step; i++; } }, 100);
- music = {gain, timer};
+ if (music) return; const h = catalogSfx('abbies-world-reimagined', {gain: 0, loop: true}); let v = 0;
+ music = {gain: {gain: {get value() { return v; }, set value(x) { v = x; h.set(Math.min(1, x * 8)); }}}};
 }
 
 // ---------- Her voice: she thinks out loud. The device speaks it in a bright, curious child's voice. ----------
@@ -432,7 +419,7 @@ renderer.domElement.addEventListener('pointermove', e => {
 });
 addEventListener('pointerup', () => { dragging = false; });
 
-function sparkle() { [1568, 2093, 2637, 3136].forEach((f, i) => blip({f, t: .18, type: 'triangle', g: .025, at: i * .05})); glitter.m.uniforms.time.value += 1.3;
+function sparkle() { P('sparkle-1', .4); glitter.m.uniforms.time.value += 1.3;
  const lines = ["Glitter! Aunt Grace must have had a glitter mishap.", "It's still sparkly after all this time...", "It's on my fingers now!"];
  say(lines[sparkles++ % lines.length]); }
 let sparkles = 0;
@@ -486,7 +473,7 @@ function giveCoin(id, from) {
   if (e < .35) coin.position.copy(a).lerp(top, smooth(e / .35));
   else if (e < .85) { const k = smooth((e - .35) / .5); coin.position.copy(top).lerp(jarTop, k); coin.position.y += Math.sin(k * Math.PI) * .4; }
   else coin.position.copy(jarTop).lerp(jarIn, (e - .85) / .15);
- }, done() { scene.remove(coin); U.addJarCoin(); blip({f: 1400, t: .08, type: 'square', g: .04}); if (found.length === PIECES) wholeMemory(); }};
+ }, done() { scene.remove(coin); U.addJarCoin(); P('coin-1', .5); if (found.length === PIECES) wholeMemory(); }};
 }
 
 // ---------- Coins are pieces of one memory; the memory is the thing in her pocket. ----------
@@ -504,8 +491,8 @@ pocketPieces(); // pieces found on an earlier visit are already in her pocket
 const jarGlow = new T.PointLight('#ffc46a', 0, 1.6, 2); scene.add(jarGlow);
 function wholeMemory() {
  jarGlow.position.copy(U.jar.getWorldPosition(new T.Vector3())).add(new T.Vector3(0, .14, .12)); ending.jar = 1;
- // A music box: the tune's opening, slow and high, over the jar's warm glow.
- [76, 79, 81, 79, 76, 74, 72, 76].forEach((m, i) => blip({f: 440 * Math.pow(2, (m + 12 - 69) / 12), t: .9, type: 'triangle', g: .04, at: .3 + i * .32}));
+ // A music box from the catalogue, over the jar's warm glow.
+ P('music-box', .6, 1, .3);
  say("All ten pieces! Now I can see the whole memory... Daddy, little, typing at this desk with Aunt Grace.", {hold: 7000});
 }
 
@@ -515,8 +502,8 @@ const warmth = new T.HemisphereLight('#ffc890', '#3a2418', 0); scene.add(warmth)
 function callDown() {
  ending.called = true;
  // Muffled through the floor: two syllables, "Ab-bie!", a grown-up's voice filtered by the stairs and the door.
- blip({f: 150, t: .26, type: 'sawtooth', g: .05, slide: 15, lp: 700}); blip({f: 128, t: .5, type: 'sawtooth', g: .05, slide: -30, lp: 600, at: .32});
- blip({f: 150, t: .26, type: 'sawtooth', g: .03, slide: 15, lp: 700, at: 1.5}); blip({f: 128, t: .5, type: 'sawtooth', g: .03, slide: -30, lp: 600, at: 1.82});
+ P('door-creak', .4);
+ P('door-creak', .3, 1, 1.5);
  setTimeout(() => talk.run(ENDING_TALK), 1400);
 }
 // Her talk with herself when Daddy calls: data, not code (memory-kit/dialog.mjs), so Moon Mission scripts can look the same.
@@ -628,7 +615,7 @@ function frame(now) {
  gbLamp.intensity += ((cam.close === 'gameboy' ? .4 : 0) - gbLamp.intensity) * Math.min(1, dt * 3);
  if (!skip && !opened && time > 3.6) { opened = true; opening(); }
  // The era pass: chunky pixels in the room, a crisp tube at the screen; the warm-up when it opens, the power-down at the end.
- if (!skipBoot && time > .2 && time < 1.4 && !hummed) { hummed = true; blip({f: 15700, t: 1.4, type: 'sine', g: .006}); blip({noise: true, t: .25, g: .05, lp: 600, at: 1.1}); }
+ if (!skipBoot && time > .2 && time < 1.4 && !hummed) { hummed = true; P('power-up', .4); }
  era.render(scene, camera, {sharp: atScreen, time, boot: skipBoot ? 9 : time, off: ending.off});
  requestAnimationFrame(frame);
 }
