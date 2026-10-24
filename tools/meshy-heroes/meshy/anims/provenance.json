@@ -810,6 +810,26 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/behit_flyup.glb"
    ]
+  },
+  "174": {
+   "task_id": "01a16b64-fd49-730f-873b-cb5d21cbaf01",
+   "credits": 3,
+   "name": "Face Punch Reaction",
+   "category": "Fighting",
+   "sub_category": "GettingHit",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/face_punch_reaction.glb"
+   ]
+  },
+  "125": {
+   "task_id": "01a16b64-fd4b-77c7-b660-79660910c32c",
+   "credits": 3,
+   "name": "Charged Spell Cast",
+   "category": "Fighting",
+   "sub_category": "CastingSpell",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/charged_spell_cast.glb"
+   ]
   }
  }
 }
