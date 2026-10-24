@@ -1,6 +1,6 @@
 {
  "cap": 2400,
- "total": 2397,
+ "total": 2394,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -828,11 +828,6 @@
    "at": "2026-10-24T00:51:02Z"
   },
   {
-   "what": "anim 464",
-   "credits": 3,
-   "at": "2026-10-24T00:51:02Z"
-  },
-  {
    "what": "anim 450",
    "credits": 3,
    "at": "2026-10-24T00:51:02Z"
@@ -906,6 +901,11 @@
    "what": "anim 125",
    "credits": 3,
    "at": "2026-10-24T00:52:22Z"
+  },
+  {
+   "what": "note: anim 464 refused by Meshy (no longer in the library), not charged",
+   "credits": 0,
+   "at": "2026-10-24T00:51:02Z"
   }
  ],
  "live_balance": {
