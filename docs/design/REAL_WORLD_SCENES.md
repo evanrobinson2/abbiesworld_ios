@@ -1,5 +1,7 @@
 # Real-world uploads become living scenes: architecture brief
 
+> **Update 2026-10-24 (#622):** Evan's latest direction supersedes the private-by-default and two-key promotion in step 7 below: accepted creations join the creator's world and the shared world by default, and keeping one private is paid. Curation is now an open question, not a rule. See `LIVING_TOY_WORLD.md` §4.
+
 Issue #608 (Evan's approved brief, 2026-10-24). **Status: proposed architecture. Nothing here is built.** Evan set aside
 the earlier detailed UI, URL, storage, notification and frame-rate proposals, so none of them are requirements; where
 this page names a mechanism it is a recommendation that reuses what exists. The experimental area's name is undecided
