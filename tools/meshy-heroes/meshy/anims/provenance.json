@@ -930,6 +930,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/talk_passionately.glb"
    ]
+  },
+  "317": {
+   "task_id": "01a16ef6-1b63-7105-89ae-a7e6bbe526a4",
+   "credits": 3,
+   "name": "Shrug",
+   "category": "DailyActions",
+   "sub_category": "Interacting",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/shrug.glb"
+   ]
+  },
+  "36": {
+   "task_id": "01a16ef6-1b68-72e5-8451-f2884210cc7c",
+   "credits": 3,
+   "name": "Confused Scratch",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/confused_scratch.glb"
+   ]
+  },
+  "243": {
+   "task_id": "01a16ef6-1b68-72e7-976f-c425c0dfab80",
+   "credits": 3,
+   "name": "Idle 3",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_3.glb"
+   ]
+  },
+  "48": {
+   "task_id": "01a16ef6-1b64-7744-ac22-8bfae91dfa60",
+   "credits": 3,
+   "name": "Mirror Viewing",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/mirror_viewing.glb"
+   ]
+  },
+  "244": {
+   "task_id": "01a16ef6-1b68-70e1-8518-db40ebadf355",
+   "credits": 3,
+   "name": "Idle 4",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_4.glb"
+   ]
+  },
+  "245": {
+   "task_id": "01a16ef6-6f58-7082-b429-92f1a9b24fdd",
+   "credits": 3,
+   "name": "Idle 5",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_5.glb"
+   ]
+  },
+  "599": {
+   "task_id": "01a16ef6-9953-76a7-a1bf-29984337b361",
+   "credits": 3,
+   "name": "Idle 15",
+   "category": "DailyActions",
+   "sub_category": "Idle",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_15.glb"
+   ]
+  },
+  "66": {
+   "task_id": "01a16ef6-9a87-7141-88ca-371c7079fa3e",
+   "credits": 3,
+   "name": "Boom Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/boom_dance.glb"
+   ]
+  },
+  "63": {
+   "task_id": "01a16ef6-9a30-7415-b596-7897a3b3eb96",
+   "credits": 3,
+   "name": "Arm Circle Shuffle",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/arm_circle_shuffle.glb"
+   ]
+  },
+  "67": {
+   "task_id": "01a16ef6-c050-7169-bdd7-9e091ea6a6d4",
+   "credits": 3,
+   "name": "Bubble Dance",
+   "category": "Dancing",
+   "sub_category": "Dancing",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/bubble_dance.glb"
+   ]
   }
  }
 }
