@@ -40,7 +40,7 @@ import {createMoonBoardTile,joinMoonRuntimes} from './moon/moon-board.mjs';
 import {restoreTerrain} from './board-terrain.mjs';
 import {retainEstablishedLayout,exposedEdges} from './expansion-layout.mjs';
 import {createImpactEffects,sharedImpactSound,IMPACT_DUST} from './tile-drop-impact.mjs?v=2';
-import {landTile as dropTile} from './tile-reveal.mjs?v=1';
+import {landTile as dropTile} from './tile-reveal.mjs?v=2';
 import {createTileChooser} from './tile-chooser.mjs?v=26';
 import {createWarmUpCard} from './warm-up-card.mjs';
 import {createLightBudget} from './light-budget.mjs';
@@ -167,7 +167,8 @@ function playPaintCard(){
 // A ball let go at (x,y) px with velocity (vx,vy) px/s: it starts on the ground under the finger and carries the flick.
 function throwPaintBall(ball,x,y,vx,vy){
  if(!paintWorld||family!=='ranch'||!active)return false;
- const g=groundThrow(T,camera,renderer.domElement,orbit.target,x,y,vx,vy);if(!g)return false;
+ const g=groundThrow(T,camera,renderer.domElement,orbit.target,x,y,vx,vy,(wx,wz)=>active?.heightAt?.(wx,wz)??0);if(!g)return false;
+ if(ball.kind&&ball.kind!=='paint'){dispatchEvent(new CustomEvent('ranch:play-event',{detail:{id:ball.kind,at:{x:g.x+g.vx*.5,z:g.z+g.vz*.5}}}));return true;}
  paintWorld.launch({...g,colour:ball.colour,R:(.75+Math.random()*.4)*ball.R,lift:.45,vy:1.1},farmClock);
  setTimeout(()=>paintWorld.save('ranch-'+paintSeed),4000);return true;
 }
@@ -262,7 +263,7 @@ let worldFx=null;
 // World event cards (event-hand.mjs): the god-view effects. Weather and time are set through the same code the buttons use.
 addEventListener('ranch:play-event',e=>{const id=e.detail?.id,hour=h=>{farmClock={...farmClock,hour:h};updateClock(0);};
  if(id==='paint-rain'){if(typeof playPaintCard==='function')playPaintCard();return;}
- if(['fireball','waterball','cats-dogs','tie-dye'].includes(id)){import('./world-effects.mjs?v=1').then(({createWorldEffects})=>{worldFx||=createWorldEffects({T,scene,orbit,canvas:renderer.domElement,heightAt:(x,z)=>active?.heightAt?.(x,z)??0,clock:()=>farmClock});worldFx.play(id);});return;}
+ if(['fireball','waterball','cats-dogs','tie-dye'].includes(id)){import('./world-effects.mjs?v=1').then(({createWorldEffects})=>{worldFx||=createWorldEffects({T,scene,orbit,canvas:renderer.domElement,heightAt:(x,z)=>active?.heightAt?.(x,z)??0,clock:()=>farmClock});worldFx.play(id,e.detail?.at);});return;}
  const fx={'rain-shower':['rain'],thunderstorm:['hail'],snowfall:['snow'],'morning-fog':['cloudy',6],rainbow:['clear',15],'golden-dawn':['clear',6.5],'starry-night':['clear',22]}[id];
  if(!fx)return;chooseWeather(fx[0]);if(fx[1]!==undefined)hour(fx[1]);});
 // Developer mode only: scripted captures (time, weather, pause) for the weather and light checks.

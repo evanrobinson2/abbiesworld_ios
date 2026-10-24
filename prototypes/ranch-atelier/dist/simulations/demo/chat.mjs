@@ -1,21 +1,15 @@
 // The iPhone chat (Evan, 2026-10-23 20:19Z): a phone on the right of the screen in the tour, a portrait phone in the
 // scientist's group chat. Bloop noises, typing bubbles, reactions. It is the presentation layer: drawn for the player,
 // never part of the world, so no character or AI perceives it. In the tour the lines are also spoken
-// (pre-rendered ElevenLabs mp3 in /simulations/demo/voice/<id>.mp3 when present, else the browser voice).
+// (pre-rendered ElevenLabs mp3 in /simulations/demo/voice/<id>.mp3 when present, else silent).
 import {CAST} from './script.mjs';
 
-let ac = null;
-export const audio = () => ac || (ac = new (window.AudioContext || window.webkitAudioContext)());
-export function tone(freqs, {len = .09, type = 'sine', gain = .06, gap = .07} = {}) {
- try {
-  const a = audio(), t0 = a.currentTime;
-  freqs.forEach((f, i) => {
-   const o = a.createOscillator(), g = a.createGain(); o.type = type; o.frequency.setValueAtTime(f, t0 + i * gap);
-   o.frequency.exponentialRampToValueAtTime(f * 1.35, t0 + i * gap + len);
-   g.gain.setValueAtTime(0, t0 + i * gap); g.gain.linearRampToValueAtTime(gain, t0 + i * gap + .01); g.gain.exponentialRampToValueAtTime(.0001, t0 + i * gap + len + .08);
-   o.connect(g).connect(a.destination); o.start(t0 + i * gap); o.stop(t0 + i * gap + len + .12);
-  });
- } catch {}
+import {sfx, sfxContext} from '../catalog-sfx.mjs';
+
+export const audio = () => sfxContext();
+// A run of catalogue pops pitched to the old notes (INVARIANTS.md: no oscillators). Same call shape as before.
+export function tone(freqs, {gain = .06, gap = .07} = {}) {
+ freqs.forEach((f, i) => sfx('pop-2', {gain: Math.min(1, gain * 8), rate: Math.max(.5, Math.min(2.2, f / 700)), delay: i * gap}));
 }
 export const bloop = who => tone(who === 'sci' ? [330, 262] : who === 'abbie' ? [660, 880] : [587, 740], {type: 'sine'});
 export const pop = () => tone([1100], {len: .05, gain: .04});
@@ -30,9 +24,7 @@ function speakAloud(who, text, id, quiet) {
  if (quiet) return Promise.resolve(false);
  return voiceFor(id).then(url => new Promise(res => {
   if (url) { const a = new Audio(url); a.onended = () => res(true); a.onerror = () => res(false); a.play().catch(() => res(false)); return; }
-  const synth = window.speechSynthesis; if (!synth) return res(false);
-  const u = new SpeechSynthesisUtterance(text); u.pitch = who === 'abbie' ? 1.5 : 1.25; u.rate = 1.05;
-  u.onend = () => res(true); u.onerror = () => res(false); synth.speak(u); setTimeout(() => res(false), 9000);
+  return res(false); // no synthetic speech: lines without a pre-rendered ElevenLabs take stay silent
  }));
 }
 

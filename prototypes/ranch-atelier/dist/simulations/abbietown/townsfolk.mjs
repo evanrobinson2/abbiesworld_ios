@@ -6,12 +6,16 @@
 // World layer: the people are small low-poly figures standing by their place, so the town's own characters can see them.
 // Presentation layer: the ask is a speech bubble on the person (spatial), with a little mark over anyone who has an ask.
 // Visits: when the camera settles close over one of the quest places, report({did: 'visit', at}) ticks off matching steps.
-import {GIVERS, TEMPLATES, offer, accept, decline, report} from '../quests.mjs?v=1';
+import {GIVERS, TEMPLATES, offer, accept, decline, report} from '../quests.mjs?v=2';
+import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+
+// finished library characters in place of the stand-ins (Evan, 2026-10-24: "so why isn't that in the game?"). A giver without a model keeps its stand-in.
+const REAL = {baker: ['/models/mc-seller-upgrade/model.glb', 4.2], gardener: ['/models/mc-seller-whimsical/model.glb', 4.2], neighbour: ['/sets-media/BA-0081.glb', 4.2]};
 
 // the quest engine's place names, as the board's hero spots ('lab' is parked until the high school game, so has none)
-const SPOT = {cafe: 'cafe', school: 'highschool', common: 'common', noticeboard: 'noticeboard', bakery: 'bakery'};
+const SPOT = {cafe: 'cafe', school: 'highschool', common: 'common', noticeboard: 'noticeboard', bakery: 'bakery', farm: 'farm'};
 const LOOK = {baker: ['#f4efe6', '#8a5a3a'], teacher: ['#5b7fb8', '#3b2a22'], librarian: ['#7a5a8c', '#6b4a2a'], postie: ['#c8502c', '#2a2a2a'],
- gardener: ['#5f8f4a', '#c9a35a'], scientist: ['#f4f6f8', '#4a4a4a'], neighbour: ['#d98a45', '#5a3a2a']};
+ gardener: ['#5f8f4a', '#c9a35a'], scientist: ['#f4f6f8', '#4a4a4a'], neighbour: ['#d98a45', '#5a3a2a'], farmer: ['#b5532f', '#6b4a2a']};
 const SKIN = ['#f1c9a5', '#c68a5e', '#8d5a3b', '#e8b48f', '#a86f4a', '#f3d2b6', '#7a4a32'];
 
 function figure(T, [coat, hair], skin) {
@@ -35,9 +39,18 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
   const r = Math.max(size.x, size.z) * .5 + 3; // just outside the building, in front of its door side
   const p = figure(T, LOOK[id] || LOOK.neighbour, SKIN[i % SKIN.length]); p.name = 'townsfolk-' + id;
   p.position.set(c.x + Math.sin(a) * r, box.min.y, c.z + Math.cos(a) * r); p.rotation.y = a; p.scale.setScalar(1.25);
+  p.userData.giver = id; p.userData.standIn = [...p.children]; p.userData.model = REAL[id];
   p.userData.giver = id; town.scene.add(p); s.g.parent.attach(p); people.push(p); // lives on the hex, so it hides with the board
  });
  if (!people.length) return null;
+ const loader = new GLTFLoader(), mixers = [], swayers = [];
+ for (const p of people) { const real = p.userData.model; if (!real) continue;
+  loader.load(real[0], gltf => { const m = gltf.scene, box = new T.Box3().setFromObject(m), size = box.getSize(new T.Vector3()), k = real[1] / Math.max(size.y, .001);
+   const w = new T.Group(); m.scale.setScalar(k); m.position.set(-(box.min.x + box.max.x) / 2 * k, -box.min.y * k, -(box.min.z + box.max.z) / 2 * k); w.add(m); w.rotation.y = Math.PI; // faces out of the doorway
+   m.traverse(o => { if (o.isMesh) { o.castShadow = true; o.receiveShadow = true; } });
+   for (const o of p.userData.standIn) p.remove(o); p.scale.setScalar(1); p.add(w);
+   if (gltf.animations.length) { const mx = new T.AnimationMixer(m); mx.clipAction(gltf.animations[0]).play(); mixers.push(mx); } else swayers.push(w); // idle: the model's own, or a gentle sway
+  }, undefined, () => {}); }
  town.townsfolk = people; // the town's own tap handler leaves these to us
 
  // the bubble and the waiting marks (presentation: drawn for the player, invisible to every perception)
@@ -64,7 +77,7 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
   const q = offer(id);
   if (!q) return say(p, `<b>${giver.name}</b>Thank you for all your help today!`, 3500);
   say(p, `<b>${giver.name}</b>${q.ask}<div class="row"><button class="yes">I'll help</button><button class="no">Not now</button></div>`);
-  bubble.querySelector('.yes').onclick = () => { accept(q.id); say(p, `<b>${giver.name}</b>Thank you! It's in your notebook.`, 3000); };
+  bubble.querySelector('.yes').onclick = () => { accept(q.id); say(p, `<b>${giver.name}</b>Thank you! ${q.item ? (q.item.given ? `Here, carry the ${q.item.icon} ${q.item.name.toLowerCase()} to the green light.` : `Follow the golden light to find the ${q.item.icon} ${q.item.name.toLowerCase()}.`) : ''} It's in your notebook.`, 4200); };
   bubble.querySelector('.no').onclick = () => { decline(id); hush(); };
  }
 
@@ -82,7 +95,7 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
  const places = Object.keys(SPOT).map(at => ({at, s: spotOf(at)})).filter(x => x.s).map(x => ({at: x.at, c: new T.Box3().setFromObject(x.s.g).getCenter(new T.Vector3())}));
  let here = null;
  (function frame() {
-  requestAnimationFrame(frame);
+  requestAnimationFrame(frame); const now = performance.now(), dt = Math.min(.1, (now - (frame.t || now)) / 1000); frame.t = now; mixers.forEach(mx => mx.update(dt)); swayers.forEach((w, i) => { w.rotation.z = Math.sin(now / 900 + i) * .025; w.position.y = Math.abs(Math.sin(now / 1100 + i)) * .12; });
   const near = controls && camera.position.distanceTo(controls.target) < 260;
   const pl = near && places.find(x => Math.hypot(x.c.x - controls.target.x, x.c.z - controls.target.z) < 45);
   if ((pl?.at || null) !== here) { here = pl?.at || null; if (here) report({did: 'visit', at: here}); }
@@ -90,6 +103,9 @@ export function mountTownsfolk(town, {THREE: T, camera, canvas, controls} = {}) 
    marks[i].hidden = !s; if (s) { marks[i].style.left = s[0] + 'px'; marks[i].style.top = s[1] + 'px'; } });
   if (talking) { const s = toScreen(talking, 5.5); if (!s || (shutAt && performance.now() > shutAt)) hush(); else { bubble.style.left = s[0] + 'px'; bubble.style.top = s[1] + 'px'; } }
  })();
+ // the quest places she is sent to light up (quest-guide.mjs); the lights follow the favours she has taken on
+ import('./quest-guide.mjs?v=2').then(m => { town.questGuide ||= m.mountQuestGuide({THREE: T, scene: town.scene, camera, canvas, spots: at => spotOf(at)?.g, fallback: at => { const p = people.find(x => GIVERS[x.userData.giver]?.at === at); return p ? p.getWorldPosition(new T.Vector3()) : null; }, fly: (p, o) => town.stage.flyTo(p, o)}); }).catch(e => console.warn('quest guide', e));
+ import('./quest-help.mjs?v=2').then(m => m.mountHelper(town)).catch(e => console.warn('quest help', e)); // taking her object out of the backpack: close-up, the message again, the camera on its way
  return {people, talk};
 }
 

@@ -5,7 +5,7 @@
 // Nothing is added to the scene. A separate camera renders into a render target, and the player's view is untouched.
 import * as T from 'three';
 import {openCustomizer, installTilePullStyle} from './tile-pull.mjs?v=7';
-import {ZONES} from './town-hand.mjs?v=3';
+import {ZONES} from './town-hand.mjs?v=5';
 
 const R3 = Math.sqrt(3), EL = 48 * Math.PI / 180, FOV = 32;
 const T_ = () => window.AbbieTown;

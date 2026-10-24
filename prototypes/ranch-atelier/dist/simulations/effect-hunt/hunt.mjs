@@ -20,13 +20,13 @@ export const MODES = [
  {id: 'coaster', icon: '🏎️', name: 'Toy car', vehicle: 'coaster'}, {id: 'god', icon: '🛰️', name: 'Overhead', vehicle: null}
 ];
 
-export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll, offset = {x: 0, y: 0, z: 0}, wins = [window], uiRoot = document.body, onExit, fov = 58, camHold = 0, vehicleScale = 1.9, chase = {dist: 20, height: 8.5}, tune = {}}) {
+export function createHunt({scene, camera, renderer, world, paint = null, clock = {day: 1, hour: 18.5}, ui = true, mode = 'cart', beacons = true, onFound, onAll, offset = {x: 0, y: 0, z: 0}, wins = [window], uiRoot = document.body, onExit, start: startAt = null, fov = 58, camHold = 0, vehicleScale = 1.9, chase = {dist: 20, height: 8.5}, tune = {}}) {
  const effectsAt = e => { const s = spotOf(e, world.board), p = world.toScene(s.x, s.y); return {x: p.x, y: world.heightAt(p.x, p.z), z: p.z}; };
  const places = new Map(EFFECTS.map(e => { const p = effectsAt(e); return [e.id, p]; }));
- const beam = createBeacons({scene, effects: EFFECTS, place: e => { const p = places.get(e.id); return {x: p.x, y: p.y, z: p.z}; }});
+ const beam = createBeacons({scene, camera, effects: EFFECTS, place: e => { const p = places.get(e.id); return {x: p.x, y: p.y, z: p.z}; }});
  beam.restore(found()); beam.set(beacons);
  const fx = createFx({scene, heightAt: world.heightAt});
- const start = world.roadStart?.(0, -40) || (() => { const s = world.toScene(0, -40); return {x: s.x, z: s.z, heading: Math.PI}; })();
+ const start = startAt || world.roadStart?.(0, -40) || (() => { const s = world.toScene(0, -40); return {x: s.x, z: s.z, heading: Math.PI}; })();
  const driver = createDriver({world, start, tune});
  const tow = createTow({scene, world, driver, home: world.home});
  const vehicleRoot = new T.Group(); vehicleRoot.name = 'vehicle'; scene.add(vehicleRoot);
@@ -107,6 +107,7 @@ export function createHunt({scene, camera, renderer, world, paint = null, clock 
    wheelSpin += s.speed * dt * 3; vehicle.wheels.forEach(w => { w.rotation.x = wheelSpin; });
    const p = vehicle.parts; if (p.flames) p.flames.forEach((f, i) => { const k = s.jetting ? 1.3 + Math.sin(bobT * 40 + i) * .3 : 0; f.scale.set(.8 + k * .3, Math.max(.001, k), .8 + k * .3); f.visible = k > 0.01; });
    if (p.riders) p.riders.forEach((r, i) => { r.position.y = vehicle.seats[i].y + Math.sin(bobT * 9 + i * 2) * .04 * Math.min(1, Math.abs(s.speed) / 12) + (s.air ? .08 : 0); r.rotation.z = -s.steer * .18 + Math.sin(bobT * 3 + i) * .02; r.rotation.x = s.air ? -.1 : 0; });
+   vehicle.update?.(dt, s, world, VS); // a vehicle may bring its own springs, steering and wobble (the Moon buggy does)
    if (p.flag) p.flag.rotation.z = Math.PI / 2 + Math.sin(bobT * 8) * .25;
   }
   camera_(dt);

@@ -2,6 +2,252 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-24-town-place-garden",
+      "date": "2026-10-24",
+      "title": "Drop a Garden tile onto the board",
+      "line": "A fourth card: drag the Garden onto a glowing hex and planting beds and a shed grow in. The four cards now sit in their own row above the town's hand. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-garden.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place-ranch",
+      "date": "2026-10-24",
+      "title": "Drop a Ranch tile onto the board",
+      "line": "A third card in the town hand: drag the Ranch onto a glowing hex and a working farm, with its animals, prints, rolls and builds itself. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-ranch.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place-moon",
+      "date": "2026-10-24",
+      "title": "Drop a Moon tile onto the board",
+      "line": "A second card in the town hand: drag the Moon onto a glowing hex and a lunar base prints, rolls and builds itself. Experimental, add ?exp.",
+      "image": "/whats-new/2026-10-24-town-place-moon.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-moon-mission-live",
+      "date": "2026-10-24",
+      "title": "Moon Mission starts at its rocket charm",
+      "line": "Tap the rocket charm at the bakery curb: the black truck takes the family from Main Street to the Moon, all the way to the Polaroid. It plays end to end in a test run before anyone sees it.",
+      "image": "/whats-new/2026-10-24-moon-mission-live.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVy8GNXhZaS5vYRrj2Smp8w",
+      "threadTitle": "Invariant contracts",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-town-place",
+      "date": "2026-10-24",
+      "title": "Pull a Meadow card and drop it on the board",
+      "line": "Drag a card to a glowing open hex: it laser-prints, rolls, drops and settles. Experimental, add ?exp to try it.",
+      "image": "/whats-new/2026-10-24-town-place.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+      "threadTitle": "Tile pull and print",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-people-filters",
+      "date": "2026-10-24",
+      "title": "Every figure, filtered by detail and where it lives",
+      "line": "The models page can now filter people by low poly, medium or high detail (real triangle counts) and by whether they live in the game, a study or a branch.",
+      "image": "/whats-new/2026-10-24-people-filters.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9K3YJwLcfEwfvCoPXMCBhL",
+      "threadTitle": "Make all models easy to browse",
+      "tour": false,
+      "link": "/models?type=People"
+    },
+    {
+      "id": "2026-10-24-hud-no-emoji",
+      "date": "2026-10-24",
+      "title": "No more emoji buttons or cards pill",
+      "line": "The cards pill is gone and the hand of cards is always there. The driving mode buttons are little 3D vehicles, and the duplicate notebook button is removed.",
+      "image": "/whats-new/2026-10-24-drive-hud-2.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-drive-hud-3d",
+      "date": "2026-10-24",
+      "title": "Driving controls are little 3D things",
+      "line": "The row of round effect buttons and the cards pill are gone while you drive. The jet and boost buttons are now a real rocket and a lightning bolt.",
+      "image": "/whats-new/2026-10-24-drive-hud.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+      "threadTitle": "Design lead",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-quest-spotlight",
+      "date": "2026-10-24",
+      "title": "A light and an arrow show Abbie where to go",
+      "line": "When a neighbour asks for help, the next place glows with a spotlight, and an arrow at the edge of the screen points to it if it is out of view. Take the object out of your backpack and the favour is said again while the camera flies toward the place.",
+      "image": "/whats-new/2026-10-24-quest-spotlight.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYEeWzej4CnWZpZcVi2UvVEX",
+      "threadTitle": "Add random quests from townsfolk",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-one-world",
+      "date": "2026-10-24",
+      "title": "Just the one world",
+      "line": "The strip of old land and the little floating island behind Winchester are gone. Only the seven-hex board is left in the sky.",
+      "image": "/whats-new/2026-10-24-town-one-world.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "AW-STUDY-0042 - Abbie's Town",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-answers-every-tap",
+      "date": "2026-10-24",
+      "title": "Everything in the town answers a tap",
+      "line": "Tap a house, a tree, a lamp, a shop, the ducks, bub or the little pink car and it reacts: a knock, a bell, a bark, a shower of leaves.",
+      "image": "/whats-new/2026-10-24-town-answers-every-tap.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVgADL9xAHJJaqcShokDe4w",
+      "threadTitle": "Make the world interactive everywhere",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-paint-balloons",
+      "date": "2026-10-24",
+      "title": "Water balloons that carry their type",
+      "line": "The balls are now water balloons that wobble and squash in your hand. Fire, water, cats and dogs and tie-dye each have their own balloon, and when you throw one it lands that effect where it hits.",
+      "image": "/whats-new/2026-10-24-paint-balloons.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFsUNxMs2CS8NZsWeXQJCoG",
+      "threadTitle": "AW-STUDY-0049 - Paint the World",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-drive-exit",
+      "date": "2026-10-24",
+      "title": "Leave drive mode any time, and never lose your car",
+      "line": "A round close button (and Escape) always stops driving. The plain drive now passes through houses, trees and bushes, and a pale outline shows your car where scenery would hide it.",
+      "image": "/whats-new/2026-10-24-drive-exit.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYF9Mas7aH7R2p9xFLqr9qzV",
+      "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-abbie-default-backpack",
+      "date": "2026-10-24",
+      "title": "Abbie's own backpack",
+      "line": "Everyone now starts with Abbie's backpack: the bunny in grape stripes with a heart pocket, pink and gold straps, a rainbow lining and the rainbow bear notebook. She wears it everywhere.",
+      "image": "/whats-new/2026-10-24-abbie-default-backpack.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-one-glass-bar",
+      "date": "2026-10-24",
+      "title": "One glass bar along the top",
+      "line": "Time, weather, the hex glow and the world effects now share a single glass bar, on iPad and phone too.",
+      "image": "/whats-new/2026-10-24-one-glass-bar.png",
+      "thread": "issue-544",
+      "threadTitle": "One top glass bar",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-wasd",
+      "date": "2026-10-24",
+      "title": "Slide around the map with WASD",
+      "line": "On the Winchester map, W, A, S and D (or the arrow keys) slide the view over the ground. Hold Shift to go faster.",
+      "image": "/whats-new/2026-10-23-charm-intro.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYMesXNX8s18wg1GqhEM8vU",
+      "threadTitle": "Performance",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-the-farm",
+      "date": "2026-10-24",
+      "title": "The Farm",
+      "line": "A farm for the kids to explore, with cows, horses, goats, pigs, alpacas, sheep, ducks and bunnies. Find eggs, say hi, and help the farmer.",
+      "image": "/whats-new/2026-10-24-the-farm.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY4HEgYDJ4BwetRSiGJLPmDs",
+      "threadTitle": "Farm and riding school tiles",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-town-dressing",
+      "date": "2026-10-24",
+      "title": "Winchester filled in from the model library",
+      "line": "Main Street now has markets, benches and lamps, yards have gardens, farm bits and mailboxes, the Common has trees and a fountain, and the baker, the gardener and the neighbour are finished characters.",
+      "image": "/whats-new/2026-10-24-town-dressing.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYYAk2DjnpR1EbwfR3Mkwwqf",
+      "threadTitle": "Abbie's Town",
+      "tour": false
+    },
+    {
+      "id": "2026-10-24-car-picker-inspect",
+      "date": "2026-10-24",
+      "title": "Pick up a toy car and turn it around",
+      "line": "The garage now frames every car. Hold one to lift it, turn it with a finger, then put it back or choose it.",
+      "image": "/whats-new/2026-10-24-car-picker-inspect.png",
+      "thread": "issue-539",
+      "threadTitle": "Car picker camera and inspection",
+      "tour": false,
+      "link": "/studies/coaster/play.html"
+    },
+    {
+      "id": "2026-10-24-backpack-inspect",
+      "date": "2026-10-24",
+      "title": "Unzip your backpack and look closely",
+      "line": "Spin the backpack, unzip each pocket, tap a thing to hold it up big with a note about it, then put it back.",
+      "image": "/whats-new/2026-10-24-backpack-inspect.jpg",
+      "thread": "session_01MPyekYkd3HfDuMDGbCtqFv",
+      "threadTitle": "Interactive 3D backpack (issue 536)",
+      "tour": true,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-coaster-music-backpack-fix",
+      "date": "2026-10-24",
+      "title": "Real music on the coaster, and a tidy backpack",
+      "line": "The ride plays our produced Abbie's World track instead of the synth band. The backpack closes cleanly: charms hang back where they belong and no gold coins float inside.",
+      "image": "/whats-new/2026-10-24-carwash-buggy.jpg",
+      "thread": "issue-542",
+      "threadTitle": "Dispatch: coaster music and backpack cleanup",
+      "tour": false,
+      "link": "/studies/coaster/play.html"
+    },
+    {
+      "id": "2026-10-24-backpack-upgrades",
+      "date": "2026-10-24",
+      "title": "Backpack upgrades and a place browser",
+      "line": "The backpack now upgrades with stars: more pockets, a bigger keyring. The cards along the bottom of the town are replaced by arrows that browse the places.",
+      "image": "/whats-new/2026-10-24-backpack-upgrades.jpg",
+      "thread": "issue-535",
+      "threadTitle": "Backpack upgrades, POI browser",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-carwash-moon-buggy",
+      "date": "2026-10-24",
+      "title": "The carwash and your Moon Buggy",
+      "line": "Roll the grubby buggy through the carwash, get soaked, and it's yours. Dress it with toy animals and colours.",
+      "image": "/whats-new/2026-10-24-carwash-buggy.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAZK5mDoYzg7w8wZwWBvd9Q",
+      "threadTitle": "Earn the buggy at the carwash",
+      "tour": true,
+      "link": "/town"
+    },
+    {
       "id": "2026-10-24-town-tile-cards",
       "date": "2026-10-24",
       "title": "Tap a town card to turn its hex",
@@ -22,17 +268,28 @@
       "threadTitle": "AW-STUDY-0058 - Kart mode racetrack",
       "tour": false
     },
-   {
-     "id": "2026-10-24-effect-icons",
-     "date": "2026-10-24",
-     "title": "World effects hover, and charge up",
-     "line": "The effect icons are little 3D things now, greyed out until you charge them with an item from your backpack. Then they glow, and you can drop them on the world.",
-     "image": "/whats-new/2026-10-24-effect-icons.png",
-     "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
-     "threadTitle": "World event cards",
-     "tour": false,
-     "link": "/town"
-   },
+    {
+      "id": "2026-10-24-effect-icons",
+      "date": "2026-10-24",
+      "title": "World effects hover, and charge up",
+      "line": "The effect icons are little 3D things now, greyed out until you charge them with an item from your backpack. Then they glow, and you can drop them on the world.",
+      "image": "/whats-new/2026-10-24-effect-icons.png",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJdzBmSZYFkGKZXLBD25Pag",
+      "threadTitle": "World event cards",
+      "tour": false,
+      "link": "/town"
+    },
+    {
+      "id": "2026-10-24-backpack-loadout",
+      "date": "2026-10-24",
+      "title": "Dress the backpack by its parts",
+      "line": "The card slots are gone. Little glass dots sit on the backpack itself: tap one, or tap the part, and a small row of colours or shapes opens beside it. Tap one and it goes on.",
+      "image": "/whats-new/2026-10-24-backpack-loadout.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz",
+      "threadTitle": "AW-STUDY-0046 Backpack inventory",
+      "tour": false,
+      "link": "/town"
+    },
     {
       "id": "2026-10-24-toy-car-picker",
       "date": "2026-10-24",

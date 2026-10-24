@@ -1,0 +1,5 @@
+{
+ "about": "Synthesized audio and browser speech still in the game (Evan, 2026-10-24: only catalogue sounds, only ElevenLabs voices). Empty means none: new entries fail CI. Counts may only go down.",
+ "files": {},
+ "browserVoice": {}
+}

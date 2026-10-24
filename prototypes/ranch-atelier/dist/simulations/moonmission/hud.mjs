@@ -52,7 +52,7 @@ export function createHud({mission: m, world, container = document.body, quiet =
 let cursor = {daddy: 0, abbie: 0, ani: 0}, sound = !quiet, thrust = 0, tilt = 0, typing = 0;
 
 function speak(who, text) { const s = $('say'); s.className = 'say' + (arguments[2] ? ' thought' : ''); s.innerHTML = `<span class="who" style="background:${color(who)}"></span>`; s.append(text);
- if (sound && 'speechSynthesis' in window) { try { const u = new SpeechSynthesisUtterance(text), v = VOICE[who] || {}; u.pitch = v.pitch || 1; u.rate = v.rate || 1; speechSynthesis.speak(u); } catch {} } }
+ }
 function card(e) { const el = $('card'), t = `${e.org} · ${e.clock} · ${e.place}`; el.innerHTML = '<span></span><i></i>'; const [sp, ln] = [el.firstChild, el.lastChild]; clearInterval(typing); let n = 0;
  typing = setInterval(() => { n++; sp.textContent = t.slice(0, n); ln.style.transform = `scaleX(${n / t.length})`; if (n >= t.length) clearInterval(typing); }, 30); }
 // three cheeses buy one moon cheese backpack charm (Backpack thread API: earnCharm('moon-cheese'), repeatable, 2 on the keychain)
@@ -150,6 +150,26 @@ function bot(until) { sound = false; for (let s = 0; s < 400000 && m.view().beat
  if (st.k === 'ask') for (const p of PLAYERS) m.dispatch({type: 'choose', player: p.id, index: 0}); else if (st.k === 'accept') for (const p of PLAYERS) m.dispatch({type: 'press', player: p.id, key: 'yes'});
  else if (st.k === 'jobs') for (const j of st.jobs) m.dispatch({type: 'press', player: j.owner === 'any' ? 'daddy' : j.owner, key: j.key}); else if (st.k === 'poll') for (const p of PLAYERS) m.dispatch({type: 'press', player: p.id, key: 'go'}); else if (st.k === 'game') for (const e of botMoves(st.game)) m.dispatch({type: 'game', ...e}); } sound = !quiet; }
 
+ // The headless-Chrome run (tools/game-registry/moon-mission-flow.cjs): a bot family plays the real mission through the real HUD,
+ // pressing each player's own button (act), so the town scenes, cards and consoles all draw as they do for a family. Resolves at the end.
+ const fxLog = [];
+ function autoplay({ticksPerFrame = 30} = {}) {
+  return new Promise(res => {
+   const step = () => {
+    for (let i = 0; i < ticksPerFrame && !m.view().done; i++) {
+     const es = m.dispatch({type: 'tick', dt: .1}); for (const e of es) fxLog.push({fx: e.fx, id: e.id, game: e.game}); pump(es);
+     const v = m.view(), st = v.step; if (!st) continue;
+     if (['ask', 'accept', 'poll', 'cutscene'].includes(st.k)) for (const p of PLAYERS) act(p.id);
+     else if (st.k === 'jobs') for (const p of PLAYERS) act(p.id);
+     else if (st.k === 'game') for (const e of botMoves(st.game)) send(e);
+     else if (st.k === 'lander') { const L = st.lander; act('abbie'); act('ani'); m.dispatch({type: 'fly', thrust: L.vy < -2 && L.alt < 60 ? 1 : L.vy < -5 ? .8 : 0, tilt: 0}); }
+    }
+    if (m.view().done) res(fxLog); else requestAnimationFrame(step);
+   };
+   step();
+  });
+ }
+
  pump(m.drain()); render();
- return {frame, pump, bot, act, root: rootEl, get thrust() { return thrust; }, destroy() { clearInterval(typing); for (const [ev, fn] of listeners) removeEventListener(ev, fn); rootEl.remove(); }};
+ return {frame, pump, bot, act, autoplay, fxLog, root: rootEl, get thrust() { return thrust; }, destroy() { clearInterval(typing); for (const [ev, fn] of listeners) removeEventListener(ev, fn); rootEl.remove(); }};
 }

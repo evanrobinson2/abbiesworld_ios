@@ -211,7 +211,7 @@ if (location.pathname === '/town' || /[?&]play\b/.test(location.search)) {
  <section>
   <h2>How it shows</h2>
   <div class="grid2">
-   <div class="card"><h3>In the world, the characters know (diegetic)</h3><p>The church steeple marks the centre, the train comes through, the café turns pink when it becomes Abbie's, coins glint over the places that hold a memory. October colours on every tree.</p></div>
+   <div class="card"><h3>In the world, the characters know (diegetic)</h3><p>The church steeple marks the centre, the train comes through, the café turns pink when it becomes Abbie's, the places that hold a memory keep it to themselves, with nothing floating over them. October colours on every tree.</p></div>
    <div class="card"><h3>In the world, only you know (spatial)</h3><p>A glass pin over each place you can visit, and a bubble on the place when you arrive: its name and one line.</p></div>
    <div class="card"><h3>On the screen, the characters know (meta)</h3><p>Next: the school bell from Muraco at three o'clock, the train's horn, the music of the centre growing as you walk in.</p></div>
    <div class="card"><h3>On the screen, only you know (overlay)</h3><p>One glass bar, no words: the whole town, the previous and next place, the charm slider, and Abbie signing in. About 5% of the stage.</p></div>
@@ -1156,7 +1156,8 @@ function drape(g, s, w, d, c, ox = 0, oz = 0, lift = .35) {
  for (let i = 0; i < p.count; i++) { const lx = p.getX(i) + ox, lz = p.getZ(i) + oz; p.setXYZ(i, lx, G.heightAt(s.x + lx, s.y - lz) - s.z + lift, lz); }
  geo.computeVertexNormals(); const m = new THREE.Mesh(geo, M(c)); m.receiveShadow = true; g.add(m); return m;
 }
-function coin(g, x, y, z) { const m = new THREE.Mesh(new THREE.CylinderGeometry(2.2, 2.2, .5, 24), coinMat); m.rotation.x = Math.PI / 2; m.position.set(x, y, z); m.castShadow = true; g.add(m); coins.push(m); return m; }
+// Floating gold coins over the places were removed (Evan, 2026-10-24: he dislikes them). The memory coins are found, not shown; the calls stay as markers of where each one is hidden.
+function coin(g, x, y, z) { return null; }
 // a family home: a clapboard house facing the street and a treehouse in the backyard; Abbie's has the cellar door of Daddy's hideaway in the grass
 function family(g, wall, accent, pink) {
  const house = new THREE.Mesh(boxGeo, BODY.colonial.map(m => { const c = m.clone(); c.color = new THREE.Color(wall); return c; })); house.scale.set(11, 6.4, 9); house.castShadow = house.receiveShadow = true; g.add(house);
@@ -1326,7 +1327,7 @@ document.getElementById('hexes').onclick = e => { regionsGroup.visible = !region
  clk.onclick = () => { lapse = !lapse; clk.setAttribute('aria-pressed', lapse); bar.hidden = !lapse; if (lapse) { set(HISTORY.from); play.onclick(); } else { stop(); year = 2026; drawHouses(); } };
 }
 let charmTimer = 0;
-document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => buildTown(+e.target.value), 120); };
+document.getElementById('charm').oninput = e => { clearTimeout(charmTimer); charmTimer = setTimeout(() => retown(+e.target.value), 120); };
 
 // ---------- facts and the manifest ----------
 const fmt = n => Math.round(n).toLocaleString('en-US');
@@ -2001,7 +2002,7 @@ function skyFrame(t) {
 function dioFrame(dt, t) {
  skyFrame(t);
  waterU.uWT.value = t;
- const k = 1 - Math.exp(-dt * 3.5), L = look;
+ const k = 1 - Math.exp(-dt * 3.5), L = window.AbbieTown?.lookFilter?.(look) || look; // lookFilter: a mode (Halloween) grades the zone's look without owning it
  if (WC.zone !== (L.wash || 'off')) WC.setZone(L.wash || 'off'); // each zone's opinion about its own distance
  scene.background.lerp(dioC.set(L.bg), k); hemi.color.lerp(dioC.set(L.sky), k); hemi.groundColor.lerp(dioC.set(L.gnd), k); sun.color.lerp(dioC.set(L.sun), k);
  sun.intensity += (L.sunI - sun.intensity) * k; hemi.intensity += (L.hemiI - hemi.intensity) * k; sunDir.lerp(dioV.set(...L.sunDir), k);
@@ -2049,6 +2050,17 @@ function setupStage() {
  const roadSpawns = (every = 30) => { const out = []; for (const d of DIOS) { const o = tileOff(d); for (const rd of dioRoads[d.id] || []) { if (rd.c > 4) continue; let run = 0, next = every / 2; for (let i = 1; i < rd.p.length; i++) { const [ax, ay] = rd.p[i - 1], [bx, by] = rd.p[i], l = Math.hypot(bx - ax, by - ay); while (next <= run + l) { const k = (next - run) / l, px = ax + (bx - ax) * k, py = ay + (by - ay) * k; if (inHex(px, py, DIO_R * .85)) out.push({hex: d.id, x: o.x + px, y: o.y + py, heading: Math.atan2(by - ay, bx - ax), width: rd.c <= 3 ? 5.4 : 4.2}); next += every; } run += l; } } } return out; };
  const board = {name: BOARD.name, hexSide: DIO_R, hexes: DIOS.map(d => ({id: d.id, n: d.n, zone: d.zone, name: d.name})), slots: BOARD_SLOTS, heightAt: boardRaw, obstaclesNear, roadSpawns, tileAt: (px, py) => DIOS.find(d => { const o = tileOff(d); return inHex(px - o.x, py - o.y, DIO_R); })?.id || null}; // board metres east and north of the middle hex
  Object.assign(window.AbbieTown, {board, entrances: ENTRANCES, backUrl, go: (gate, st) => { const e = ENTRANCES[gate]; if (!e || !available(gate, st)) return false; if (e.kind === 'stage') { window.dispatchEvent(new CustomEvent('abbietown:enter', {detail: {gate, scene: e.scene, module: e.module}})); return enterScene(e.scene); } location.href = e.url; return true; }, stage, scenes, enterScene, exitScene, registerScene, mount: mountScene});
+ // a generic place for a new tile card: put its group on an open slot and register it like any hex (the same record the Farm builds by hand). group is in tile-local metres (x east, z = -north), hf(px, py) is its own ground height, spots are {x, z, y, facing, g}
+ window.AbbieTown.placeTile = (slotId, {id, name, zone = 'board', group, hf, spots = {}, houses = [], scene = null} = {}) => {
+  const slot = board.slots.find(q => q.id === slotId); if (!slot || !id || !group || slot.tile || stage.tiles[id] || Object.values(stage.tiles).some(t => t.group && t.group.position && Math.hypot(t.group.position.x - slot.x, t.group.position.z + slot.y) < 1)) return null; // a slot a tile already stands on (the Farm builds its own) is taken
+  group.position.set(slot.x, 0, -slot.y); stage.dioGroup.add(group); slot.tile = id;
+  const centre = new THREE.Vector3(slot.x, 0, -slot.y).add(stage.dioGroup.position);
+  stage.tiles[id] = {hf: hf || ((px, py) => boardRaw(slot.x + px, slot.y + py)), group, centre, spots, houses, slot: slotId};
+  if (!board.hexes.some(h => h.id === id)) board.hexes.push({id, n: 'H' + (board.hexes.length + 1), zone, name: name || id});
+  if (scene) { try { registerScene({id: scene.id || 'dio-' + id, region: id, anchor: [0, 0], bounds: DIO_R, ...scene}); } catch (e) { console.warn('tile scene', e); } }
+  window.dispatchEvent(new CustomEvent('abbietown:tile-placed', {detail: {id, slot: slotId, x: slot.x, y: slot.y}}));
+  return stage.tiles[id];
+ };
  { const at = new URLSearchParams(location.search).get('at'), e = at && ENTRANCES[at]; // coming back from a game: land at the gate you left by
    if (e && scenes[e.scene]) { setView(true); setTimeout(() => enterScene(e.scene, {dist: 70}), 60); } }
  return stage;
@@ -2091,19 +2103,27 @@ if (/[?&](mission|beat=)/.test(location.search)) setTimeout(() => window.AbbieTo
 
 
 // ---------- go ----------
-buildTown(1);
-const {train, line} = placeSpots(); setupDioramas(); makePins();
+function lateReal(fn) { const had = new Set(scene.children); const r = fn(); for (const o of scene.children) if (!had.has(o)) { realLayer.push(o); if (viewDio) { o.userData.realVis = o.visible; o.visible = false; } } return r; } // buildTown and placeSpots run after the board exists, so what they add (trees, houses, the off-map islands, the train) joins the real-map layer and stays hidden while the board shows: no second landmass
+function retown(charm) { lateReal(() => buildTown(charm)); }
+retown(1);
+const {train, line} = lateReal(placeSpots); setupDioramas(); makePins();
 window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID, watercolour: WC, scene, renderer, camera, controls, visit: id => visitDio(id)}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 if (typeof setupStage === 'function') setupStage();
 const mounts = []; // late mounted modules; the opening waits on these (town-warm.mjs) instead of a fixed delay
 mounts.push(import('/simulations/paint-world/town-mount.mjs').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Paint the World', e))); // the Paint card and splat balls on the board (AW-STUDY-0049)
 import('/simulations/world-look.mjs').then(m => { if (m.isDeveloper()) { window.worldLook = m.worldLook(THREE, {scene, renderer, wash: WC}); m.mountWorldLookPanel(window.worldLook); } }).catch(e => console.warn('World look', e)); // developer tools only: the World look switch (Storybook, Sunday toon, Comic ink)
 mounts.push(import('/simulations/coaster-town.mjs').then(m => m.place(window.AbbieTown)).catch(() => {})); // the toy-car coaster on the skate park pad (AW-STUDY-0054); a no-op until that module ships
-mounts.push(import('/simulations/abbietown/townsfolk.mjs?v=1').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e))); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
+mounts.push((/[?&]bare\b/.test(location.search) ? Promise.resolve(null) : import('/simulations/abbietown/library-props.mjs?v=5')).then(m => m && m.dressTown(window.AbbieTown, THREE)).then(r => console.info('Library props', r)).catch(e => console.warn('Library props', e))); // finished library models on Main Street and in the yards
+mounts.push(import('/simulations/carwash/index.mjs?v=1').then(m => m.start(window.AbbieTown)).catch(e => console.warn('Carwash', e))); // the carwash on Main Street where the Moon Buggy is earned, and its left-bar button + garage (AW-STUDY-0059)
+mounts.push(import('/simulations/farm/wright-farm.mjs').then(m => m.mountFarm(window.AbbieTown)).catch(e => console.warn('Farm', e)).then(() => import('/simulations/medallions.mjs')).then(m => { if (m.medallionsOn()) { m.mountMedallions(window.AbbieTown); m.registerTownMedallions(); } }).catch(() => {})); // mission starts as backpack charms floating at their place, behind ?medallions until the old starts go (medallions thread)
+mounts.push(import('/simulations/abbietown/townsfolk.mjs?v=3').then(m => m.mountTownsfolk(window.AbbieTown, window.__town)).catch(e => console.warn('Townsfolk', e))); // people who ask for help; their quests go in the backpack notebook (simulations/quests.mjs)
+mounts.push(import('/simulations/abbietown/heroes.mjs?v=1').then(m => m.mountHeroes(window.AbbieTown, window.__town)).catch(e => console.warn('Heroes', e))); // the Meshy heroes living in town: Abbie, Ani and Daddy on the green, the Moon Mission crew by the launch pad (AW-STUDY-0043)
+setTimeout(() => { if (!window.AbbieTown.questGuide) import('/simulations/abbietown/quest-guide.mjs?v=2').then(m => { window.AbbieTown.questGuide ||= m.mountQuestGuide({THREE, scene, camera, canvas, spots: at => m.placeObject(dioTiles, at), fly: (p, o) => window.AbbieTown.stage.flyTo(p, o)}); }).catch(e => console.warn('quest guide', e)); }, 15000); // if the farm or the people are slow, the spotlight for her favours still comes on
+import('/simulations/halloween-mode/town.mjs?v=1').then(m => m.mountHalloween(window.AbbieTown, window.__town)).catch(e => console.warn('Halloween mode', e)); // Halloween mode: lanterns, costumes, trick-or-treating (experimental flag; simulations/halloween-mode/)
 mounts.push(import('/simulations/town-events.mjs').then(m => m.mountTownEvents({THREE, scene, camera, controls, renderer, heightAt: land.heightAt})).catch(() => {})); // the world event cards (fireball, waterball, cats and dogs, tie-dye)
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 if (document.body.classList.contains('play')) setView(true); if (/[?&]from=cafe\b/.test(location.search)) { setView(true); visitDio('dio-downtown'); }; // /town opens on the three dioramas
-const wcReady = WC.precompile(scene, camera); import('/simulations/town-warm.mjs?v=5').then(m => m.warmTown({renderer, scene, camera, controls, ready: wcReady, mounts})).catch(() => {}); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
+const wcReady = WC.precompile(scene, camera); import('/simulations/town-warm.mjs?v=6').then(m => m.warmTown({renderer, scene, camera, controls, ready: wcReady, mounts})).catch(() => {}); if (/[?&]watercolour=off\b/.test(location.search)) WC.enabled = false; // compiled before the first washed frame; ?watercolour=off for comparing
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
 function onLine(d) { d = ((d % lineLen) + lineLen) % lineLen; for (let i = 1; i < line.length; i++) { const l = Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); if (d <= l) { const t = d / l; return [line[i - 1][0] + (line[i][0] - line[i - 1][0]) * t, line[i - 1][1] + (line[i][1] - line[i - 1][1]) * t]; } d -= l; } return line[line.length - 1]; }
 const tmp = new THREE.Vector3();
@@ -2135,6 +2155,8 @@ const town = window.AbbieTown, stage = town?.stage;
 const EXPO = h => 0.42 + 0.63 * Math.max(0, Math.sin(Math.PI * (h - 5) / 14)) ** 0.6; // dim from dusk to dawn, the town's own 1.05 at midday
 addEventListener('aw-world-clock', e => { if (stage?.renderer) stage.renderer.toneMappingExposure = EXPO(e.detail.hour) * (e.detail.weather === 'Rain' ? 0.82 : e.detail.weather === 'Cloudy' ? 0.92 : 1); });
 </script>
+<!-- The play HUD has its own file so a merge cannot drop it: simulations/town-hud-boot.mjs -->
+<script type="module" src="/simulations/town-hud-boot.mjs?v=2"></script>
 
 </body>
 </html>

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Backpack loadout (drafted)</title>
+<style>
+/* Preview of AW-STUDY-0046 over a still of Winchester: the backpack dressed by its own parts, FPS-loadout style (loadout.mjs). */
+html,body{margin:0;height:100%;overflow:hidden;background:#e7e2da url(town.jpg) center/cover no-repeat;font-family:system-ui,sans-serif}
+#hint{position:fixed;left:50%;top:14px;transform:translateX(-50%);font:600 13px system-ui;color:#3a2a4a;background:#ffffffd8;padding:7px 12px;border-radius:999px;box-shadow:0 4px 12px #0002;white-space:nowrap}
+</style>
+</head>
+<body>
+<div id="hint">Drafted preview: tap the backpack on the left, then a dot on it</div>
+<script type="module">
+import {inventory} from './simulations/inventory.mjs?v=12';
+import * as Q from './simulations/quests.mjs';
+inventory().add({id: 'preview-key', name: 'Brass key', icon: '🔑'});
+// Two favours from the town, one half done, so the notebook has something in it.
+if (!Q.list().length) { const a = Q.offer('baker', () => 0); Q.accept(a.id); Q.report({did: 'visit', at: 'common'}); const b = Q.offer('teacher', () => 0); Q.accept(b.id); }
+addEventListener('click', e => { if (e.target.closest?.('.aw-left-bar')) document.getElementById('hint')?.remove(); }, true);
+</script>
+</body>
+</html>

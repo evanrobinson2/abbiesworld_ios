@@ -1,0 +1,17 @@
+{
+ "job": "charm-rocket-tex",
+ "tasks": [
+  {
+   "stage": "retexture",
+   "task_id": "01a16b56-399f-76ea-bee3-da92ca44323c",
+   "credits": 10,
+   "params": {
+    "input_task_id": "01a16a97-8ee6-76c9-be0d-dfdd45cb24f5",
+    "enable_original_uv": true,
+    "enable_pbr": true
+   },
+   "image_style": "tools/meshy-heroes/refs/charm-rocket/pick.png"
+  }
+ ],
+ "credits": 10
+}

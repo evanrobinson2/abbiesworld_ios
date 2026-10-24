@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Winchester: what we have, what's missing</title>
+<style>
+:root{--bg:#f6f1e8;--ink:#2a2622;--mut:#7a7068;--card:#fffdf8;--line:#e6dccb;--acc:#d9507a;--ok:#3f8f5a;--mid:#c98a1b;--no:#c4483f}
+@media(prefers-color-scheme:dark){:root{--bg:#1b1815;--ink:#f1e9dc;--mut:#a39a8e;--card:#252019;--line:#3a332a;--acc:#ff7aa2;--ok:#6fcf8d;--mid:#e5b04a;--no:#ff7f72}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,system-ui,sans-serif}
+main{max-width:1000px;margin:0 auto;padding:20px 16px 80px}h1{font-size:28px;margin:8px 0}h2{font-size:21px;margin:36px 0 8px}p{margin:8px 0}.mut{color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:16px 0}.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}.stat b{display:block;font-size:26px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:14px}th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--line)}td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+.bar{height:6px;background:var(--line);border-radius:3px;min-width:60px}.bar i{display:block;height:100%;background:var(--acc);border-radius:3px}
+.tabs,.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}button.c{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}button.c.on{background:var(--acc);border-color:var(--acc);color:#fff}
+input[type=search]{width:100%;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit}
+.row{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:9px 12px;margin:6px 0}
+.row .t{font-weight:600}.row small{display:block;color:var(--mut)}.tag{font-size:12px;border-radius:6px;padding:2px 7px;color:#fff;white-space:nowrap}
+.have{background:var(--ok)}.partial{background:var(--mid)}.missing{background:var(--no)}.m{background:var(--mut)}
+.th{display:flex;gap:4px;margin-top:4px}.th img{width:36px;height:36px;border-radius:6px;object-fit:cover;background:var(--line)}
+.box{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin:10px 0}.box h3{margin:0 0 4px;font-size:17px}
+ol,ul{padding-left:20px;margin:6px 0}code{background:var(--line);padding:1px 5px;border-radius:5px;font-size:13px}
+</style></head><body><main>
+<p class="mut">Drafted · Saturday project prep</p>
+<h1>Winchester: what the game uses, and what's still missing</h1>
+<p>You asked two things: finish the review of in-game assets against the model library, and think of 200–300 people, places, things and animals to bring our town to life. Part 1 is the review. Part 2 is a list of <b id="cnt">292</b> items, each marked have, partial or missing against the library, with how I'd build it.</p>
+<div class="stats" id="stats"></div>
+
+<h2>Part 1 · What the game uses, against the library</h2>
+<p>I searched every game source file for each library model's filename. "In game" means some code or catalogue points at that exact file. It doesn't prove the model is on screen right now, only that the game can load it.</p>
+<div id="coltable"></div>
+<div class="box"><h3>What this tells us</h3><ul id="finds"></ul></div>
+
+<h2>Part 2 · What we're missing for Winchester</h2>
+<p class="mut">"Have / partial / missing" comes from matching names against the 1,493 library models, so a few will be wrong (a "Cow" that's really a cow toy). Tap a thumbnail strip to judge. Tick items as you spot them on Saturday; ticks stay on this phone.</p>
+<div class="chips" id="fg"></div><div class="chips" id="fs"></div><div class="chips" id="fp"></div>
+<input type="search" id="q" placeholder="Search, e.g. heron, hydrant, bakery">
+<p class="mut" id="shown"></p><div id="list"></div>
+<button class="c" id="copy">Copy visible list as a checklist</button>
+
+<h2>Part 3 · How I'd build the gaps</h2>
+<div class="box"><h3>1. Two stages, every time</h3><p>Low-poly parts first, so the whole town is populated and playable. Then the upgrade pass on what players actually look at: hero buildings, the people near the camera, the animals you can pet. You're right that this is the best process: it ends up with something in the world on day one, and each upgrade replaces a model without touching the rest.</p></div>
+<div class="box"><h3>2. Scene-Generator-style Blender code is the main builder</h3><p>Most of the list (<b id="nS">0</b> items marked S) is simple engineered shapes: hydrants, poles, signs, awnings, fences, houses, shopfronts, small birds. These are best written as a short Blender Python recipe, the way the ChatGPT scene generator did it, then exported as a named-parts GLB. Each recipe lives with its brief in the asset folder, so a change request makes a new version.</p></div>
+<div class="box"><h3>3. Free kits where they exist</h3><p><b id="nP">0</b> items marked P: farm animals, vehicles, trees and holiday props already have good CC0 / CC-BY models. Check the licence, downsample in the Blender pipeline, record the source in <code>provenance.json</code>. Nothing BY-SA, NC or personal-use.</p></div>
+<div class="box"><h3>4. Variants of what we already have</h3><p><b id="nV">0</b> items marked V are a re-dress of an existing character or animal (new hat, new tool, new colour). Cheapest of all, and they keep the family look.</p></div>
+<div class="box"><h3>5. Meshy only for hero animals and the few organic shapes</h3><p>Meshy untextured plus Blender cleanup stays for the things code can't shape well: the deer, the fox, the heron. About 20 credits each, so 10–15 animals is a sensible first batch.</p></div>
+
+<h2>Saturday: the drone and photo inventory</h2>
+<div class="box"><h3>What to capture</h3><ol>
+<li>A straight-down drone pass over the common, Main Street, the school and Leonard Field, so rooftops and street layout match the real town.</li>
+<li>One low front-on photo of every shopfront on Main Street (sign blank in our version, so only the look is used).</li>
+<li>Three photos of each house type: colonial, cape, victorian, triple-decker, with the door, porch and window trim close up.</li>
+<li>The small stuff, one photo each: hydrant, mailbox, utility pole, street sign, bench, bike rack, storm drain, stone wall.</li>
+<li>The things that make it Winchester: the mill pond spillway, the train station, the town clock, the church steeple, the playground, the skate park.</li>
+<li>Animals you actually see: write down which ones and where. That list is better than mine.</li>
+</ol><p class="mut">No house numbers, no faces, no family addresses in anything we publish. Photos stay private; only the shapes and colours we extract go in the game.</p></div>
+<div class="box"><h3>How the photos become the diorama</h3><p>Drone pass sets the layout and heights. Each photo becomes a brief for a Blender recipe, built low-poly first, then upgraded. Each model is shown next to its source photo in the viewer, like the modeler vision asks.</p></div>
+</main>
+<script>
+const $=s=>document.querySelector(s);const ST={g:'ALL',s:'ALL',p:'ALL'};let D;
+const key='aw-gaps-ticks';let ticks={};try{ticks=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+const MN={S:'Blender code',P:'Free kit',V:'Variant'};
+fetch('gaps.json').then(r=>r.json()).then(d=>{D=d;init()});
+function init(){
+ const R=D.rows,c=k=>R.filter(r=>r.st==k).length;
+ $('#cnt').textContent=R.length;$('#nS').textContent=R.filter(r=>r.m=='S').length;$('#nP').textContent=R.filter(r=>r.m=='P').length;$('#nV').textContent=R.filter(r=>r.m=='V').length;
+ $('#stats').innerHTML=[[D.total,'models in the library'],[D.game,'the game can load'],[c('missing'),'items missing'],[c('partial'),'partial'],[c('have'),'already have']].map(x=>`<div class="stat"><b>${x[0]}</b>${x[1]}</div>`).join('');
+ const rows=Object.entries(D.cols).sort((a,b)=>b[1].total-a[1].total);
+ $('#coltable').innerHTML='<table><tr><th>Collection</th><th class="n">Models</th><th class="n">Viewable</th><th class="n">In game</th><th></th></tr>'+rows.map(([k,v])=>`<tr><td>${k}</td><td class="n">${v.total}</td><td class="n">${v.glb}</td><td class="n">${v.game}</td><td><div class="bar"><i style="width:${v.total?Math.round(100*v.game/v.total):0}%"></i></div></td></tr>`).join('')+'</table>';
+ const g=k=>D.cols[k]||{total:0,game:0};
+ $('#finds').innerHTML=[
+ `${D.game} of ${D.total} models are referenced by game code or study pages (by file name, so this is a generous count). The rest are catalogue, comparison and branch-only models.`,
+ `Café: only ${g('Cafe').game} of ${g('Cafe').total} are named in code. The coffee shop room probably loads its furniture from its own folder; the Coffee Shop thread should confirm.`,
+ `Ranch tiles: only ${g('Ranch tiles').game} of ${g('Ranch tiles').total} GLBs are referenced because the game reads the converted tile mesh format, not the GLB. These are in play, just not by this name.`,
+ `The Meshy moon heroes, zombie gear, tile kit, town kit, starship kit and home and market sets are all wired in. The Roman and Greek set is half wired (${g('Roman and Greek warrior').game} of ${g('Roman and Greek warrior').total}); that thread is to be left alone.`,
+ `Gateway art lab (${g('Gateway art lab (AI model comparison)').total} AI comparison models) is mostly a study, with ${g('Gateway art lab (AI model comparison)').game} referenced. Night scenes (${g('Night scenes').total}) are barely used: ${g('Night scenes').game}.`,
+ `Winchester itself has only 30 models named for it. Everything on the Main Street list in Part 2 is new.`].map(x=>`<li>${x}</li>`).join('');
+ chips('#fg',['ALL','PEOPLE','PLACES','THINGS','ANIMALS'],'g');chips('#fs',['ALL','missing','partial','have'],'s');chips('#fp',['ALL','Saturday (1)','Next (2)','Later (3)'],'p');
+ $('#q').oninput=draw;draw();
+}
+function chips(sel,arr,k){$(sel).innerHTML=arr.map(a=>`<button class="c ${ST[k]==a?'on':''}" data-k="${k}" data-v="${a}">${a}</button>`).join('');$(sel).onclick=e=>{const b=e.target.closest('button');if(!b)return;ST[b.dataset.k]=b.dataset.v;chips(sel,arr,k);draw()}}
+function vis(){const q=$('#q').value.toLowerCase();return D.rows.filter(r=>(ST.g=='ALL'||r.g==ST.g)&&(ST.s=='ALL'||r.st==ST.s)&&(ST.p=='ALL'||'Saturday (1)Next (2)Later (3)'.indexOf(ST.p)>=0&&r.p==ST.p.match(/\d/)[0])&&(!q||(r.n+' '+r.note+' '+r.ex.join(' ')).toLowerCase().includes(q)))}
+function draw(){const v=vis();$('#shown').textContent=v.length+' shown';
+ $('#list').innerHTML=v.map(r=>{const id=r.g+':'+r.n;return `<div class="row"><input type="checkbox" data-id="${id}" ${ticks[id]?'checked':''}><div><span class="t">${r.n}</span><small>${r.note?r.note+' · ':''}priority ${r.p} · ${MN[r.m]}${r.c?' · library: '+r.ex.join(', '):''}</small>${r.th.length?'<div class="th">'+r.th.map(t=>`<img loading="lazy" src="${t.replace('/models/library/t/','/r2/previews/model-library/library/t/')}" onerror="this.remove()">`).join('')+'</div>':''}</div><span class="tag ${r.st}">${r.st}</span></div>`}).join('')}
+document.addEventListener('change',e=>{const i=e.target.closest('input[data-id]');if(!i)return;ticks[i.dataset.id]=i.checked;try{localStorage.setItem(key,JSON.stringify(ticks))}catch(x){}});
+$('#copy').onclick=()=>{const t=vis().map(r=>`- [${ticks[r.g+':'+r.n]?'x':' '}] ${r.n} (${r.g.toLowerCase()}, ${r.st})`).join('\n');navigator.clipboard&&navigator.clipboard.writeText(t);$('#copy').textContent='Copied '+vis().length}
+</script></body></html>

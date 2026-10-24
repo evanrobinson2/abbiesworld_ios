@@ -7,25 +7,11 @@ const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const TIER_HOLD = { seed: 0, sprout: 200, bloom: 450, harvest: 800, sun: 1200 };
 const S = { set: null, cards: [], byId: new Map(), inspect: new Map(), hand: new Map(), masks: new Map(), back: null, handCards: [], hero: null, deals: 0 };
 
-// ---------------------------------------------------------------- sound (tiny synth, starts on first touch)
-let audio = null;
-addEventListener('pointerdown', () => { if (!audio) try { audio = new AudioContext(); } catch { /* silent */ } }, { once: true });
-function blip(freq, dur = 0.09, type = 'triangle', gain = 0.07) {
-  if (!audio) return;
-  const t = audio.currentTime, o = audio.createOscillator(), g = audio.createGain();
-  o.type = type; o.frequency.setValueAtTime(freq, t); o.frequency.exponentialRampToValueAtTime(freq * 1.5, t + dur);
-  g.gain.setValueAtTime(gain, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
-  o.connect(g).connect(audio.destination); o.start(t); o.stop(t + dur + 0.02);
-}
-function flick(pitch = 1) {
-  if (!audio) return;
-  const t = audio.currentTime, n = audio.createBufferSource(), buf = audio.createBuffer(1, audio.sampleRate * 0.08, audio.sampleRate);
-  const d = buf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / d.length) ** 2;
-  const f = audio.createBiquadFilter(); f.type = 'bandpass'; f.frequency.value = 1800 * pitch; f.Q.value = 1.2;
-  const g = audio.createGain(); g.gain.value = 0.25;
-  n.buffer = buf; n.connect(f).connect(g).connect(audio.destination); n.start(t);
-}
-function sting() { [523, 659, 784, 1047].forEach((f, i) => setTimeout(() => blip(f, 0.35, 'sine', 0.06), i * 90)); }
+// ---------------------------------------------------------------- sound (from the sound catalogue)
+import { sfx as catalogSfx } from '/simulations/catalog-sfx.mjs';
+function blip(freq) { catalogSfx('tick', { gain: 0.5, rate: Math.max(0.5, Math.min(2.2, freq / 700)) }); }
+function flick(pitch = 1) { catalogSfx('swipe', { gain: 0.4, rate: pitch }); }
+function sting() { catalogSfx('tada', { gain: 0.6 }); }
 
 // ---------------------------------------------------------------- springs (one rAF loop for everything that moves)
 const springs = new Set();

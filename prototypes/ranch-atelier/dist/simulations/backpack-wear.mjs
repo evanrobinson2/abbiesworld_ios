@@ -10,7 +10,8 @@
 // The backpack and its charms are in the world: other characters can see them ("Ooh, a tardigrade!"). The jingle is
 // diegetic sound, a little bell in the world, not a UI tick. It follows aw-backpack-change, so a charm she earns or
 // moves to the jewellery box shows up (or comes off) without the game doing anything.
-import {three, buildBackpack, loadCharmModels, look as savedLook, keychain} from './backpack.mjs?v=9';
+import {three, buildBackpack, loadCharmModels, look as savedLook, keychain} from './backpack.mjs?v=14';
+import {sfx} from './catalog-sfx.mjs';
 
 let shared = null;
 function audio() {
@@ -25,15 +26,8 @@ function audio() {
  return shared;
 }
 
-// One tiny brass-and-enamel tink: three inharmonic partials that die fast, and a click of metal on metal.
-function tink(ac, dest, pitch, level) {
- const now = ac.currentTime, g = ac.createGain(); g.connect(dest);
- g.gain.setValueAtTime(0, now); g.gain.linearRampToValueAtTime(level, now + .003); g.gain.exponentialRampToValueAtTime(.0001, now + .32);
- for (const [m, a, d] of [[1, 1, .3], [2.76, .5, .16], [5.4, .25, .08]]) {
-  const o = ac.createOscillator(), og = ac.createGain(); o.type = 'sine'; o.frequency.value = pitch * m * (1 + (Math.random() - .5) * .01);
-  og.gain.setValueAtTime(a, now); og.gain.exponentialRampToValueAtTime(.0001, now + d); o.connect(og).connect(g); o.start(now); o.stop(now + d + .02);
- }
-}
+// One tiny brass-and-enamel tink: the catalogue's glass clink, pitched per charm.
+function tink(ac, dest, pitch, level) { sfx('glass-clink', {gain: Math.min(1, level * 3), rate: pitch / 2400}); }
 
 const pitchOf = (id, i) => 2100 + ([...id].reduce((h, c) => h * 31 + c.charCodeAt(0) >>> 0, 7) % 9) * 150 + i * 37;
 

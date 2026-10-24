@@ -21132,5 +21132,75 @@
         "sha256": "305770ec9ea97478f7522ddbbefa95aa6d06bf4690b269967c05a7b81e03bfbc"
       }
     ]
+  },
+  "conveyorStudy": {
+    "game": "mindustry",
+    "commit": "17012d61d9e4c3cbd9820d87e81c24495486ac53",
+    "version": "v160.7",
+    "method": "original release source inspection; this pass did not decompile or observe gameplay",
+    "evidence": [
+      {
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "bytes": 16264,
+        "sha256": "54b33c5d30ede4df2b1e8e2a6fc3dbb27f0497621350852efa275c4f18106baa",
+        "blobSha": "feebf21dd352470c4b8b75af2cff4f516043999f",
+        "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/distribution/Conveyor.java"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Conveyor motion propagates spacing constraints upstream",
+        "finding": "updateTile processes items from the forward end backward, clamps movement against the next item minus itemSpace, and applies a downstream limit derived from an aligned conveyor minitem. Motion uses speed times edelta. This traces local spacing and blocking, not whole-network throughput or conservation.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          265,
+          288
+        ]
+      },
+      {
+        "title": "Conveyor transfer checks receiver acceptance before local removal",
+        "finding": "pass requires a nonnull item and next building, same team, and receiver acceptItem. It invokes receiver handleItem and returns true; updateTile removes its local item only on that success. A rejected transfer remains on the belt. No transaction rollback or exception guarantee was established.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          278,
+          305
+        ]
+      },
+      {
+        "title": "Side loading uses stricter spacing and inserts halfway along the belt",
+        "finding": "acceptItem rejects full capacity or an absent facing edge. Direction-zero input needs minitem>=itemSpace; side input needs minitem>0.7. A rotating source that is also the next building is rejected. handleItem inserts direction-zero input at y=0 and side input at y=0.5 with lateral offset. External callers must honor acceptance; handleItem itself only checks capacity before using the facing edge.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          353,
+          383
+        ]
+      },
+      {
+        "title": "Conveyor saves quantize positions and retain legacy decoding",
+        "finding": "Revision 1 writes item count, short item ID and signed-byte encodings of lateral and forward position. read consumes every declared entry but stores only up to capacity; revision 0 decodes an older packed integer representation. It invokes updateTile after loading, so deserialization includes an update rather than only field assignment. This is not a runtime save/load round-trip or malformed-input validation result.",
+        "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+        "lines": [
+          387,
+          432
+        ]
+      }
+    ],
+    "coverage": {
+      "localMovement": "partial",
+      "transfer": "partial",
+      "saveLoad": "partial: revisioned encoding and bounded storage traced; runtime round-trip unexamined",
+      "networkConservation": "unexamined",
+      "runtime": "unexamined",
+      "neighborCache": "partial: proximity refresh traced; all invalidation callers unexamined"
+    },
+    "next": "Publish four conveyor findings with alignment trace through current production source after full build and deployed API/MCP plus desktop/mobile verification. Reconcile NetHack status-hook caveat in the same batch.",
+    "alignmentTrace": {
+      "path": "core/src/mindustry/world/blocks/distribution/Conveyor.java",
+      "lines": [
+        212,
+        223
+      ],
+      "finding": "onProximityUpdate refreshes visual blend bits and next=front(); nextc is limited to same-team ConveyorBuild, and aligned additionally requires equal rotation. This cached relation controls downstream spacing and lateral-position preservation at handoff. All cache invalidation callers remain unexamined."
+    }
   }
 }

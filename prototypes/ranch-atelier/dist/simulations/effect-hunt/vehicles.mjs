@@ -17,7 +17,7 @@ const cyl = (r0, r1, h, m, x = 0, y = 0, z = 0, seg = 8, name) => { const o = ne
 const ball = (r, m, x = 0, y = 0, z = 0, name) => { const o = new T.Mesh(new T.IcosahedronGeometry(r, 1), m); o.position.set(x, y, z); if (name) o.name = name; return o; };
 
 // A rider is a chunky figure from the neck up with a body, a head, hair and two hands. `kind` picks colours.
-function rider(kind) {
+export function rider(kind) {
  const g = new T.Group(); g.name = 'rider-' + kind;
  const s = {abbie: [M.pink, M.skin, M.hair, .78], ani: [M.purple, M.skinDeep, M.aniHair, .8], daddy: [M.denim, M.skin, null, 1.05]}[kind];
  const body = cyl(.22 * s[3], .26 * s[3], .5 * s[3], s[0], 0, .25 * s[3], 0, 8, 'torso'); g.add(body);

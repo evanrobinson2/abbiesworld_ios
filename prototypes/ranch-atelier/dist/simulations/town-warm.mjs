@@ -6,6 +6,7 @@
 // program is kept so nothing is thrown away between cards.
 import {createCharmIntro} from './intro-charms.mjs';
 import {keepPrograms} from './build-progress.mjs';
+import {mountTownKeys} from './town-keys.mjs';
 const DROP=2600,sleep=ms=>new Promise(r=>setTimeout(r,ms));
 // the whole scene falls from the sky: one fast fall, then two settling bounces (the scene root moves, so every part rides along)
 function dropScene(scene){return new Promise(resolve=>{const t0=performance.now(),F=1050;
@@ -16,6 +17,7 @@ const frames=n=>new Promise(r=>{const f=()=>--n<=0?r():requestAnimationFrame(f);
 const settled=(list,ms)=>Promise.race([Promise.allSettled(list).then(()=>true),sleep(ms).then(()=>false)]);
 export async function warmTown({renderer,scene,camera,controls,ready,mounts=[]}){
  const q=new URLSearchParams(location.search);
+ if(controls)mountTownKeys({camera,controls}); // WASD panning (#545); lives here so the generated town page needs no extra line
  let seen=false;try{seen=sessionStorage.getItem('aw-town-intro')==='1';}catch{}
  const show=q.has('intro')||(!navigator.webdriver&&!q.has('nointro')&&!q.has('nowarm')&&!seen); // ?intro=1 replays it any time
  let intro=null;
