@@ -10,6 +10,11 @@
 //              thought and spoken in the small-girl voice (unless sound is off), then the item drops into the backpack
 //   inventory().has(id), .remove(id), .list(), .on(fn) -> unsubscribe
 //
+// Using things: tap something in the open backpack and window event 'aw-inventory-use' fires with detail {item}; a
+// listener that takes it calls inventory().remove(item.id). The effect pickups (embers, droplets, pet treats, dye
+// drops, counted by effect-charge.mjs, picked up while driving) show in the backpack too, and tapping one charges its
+// world effect there and then (charge(id), Evan 00:16Z: "charge them up ... by consuming an item in your backpack").
+//
 // Kept on this device in localStorage 'aw-inventory'; every change fires window event 'aw-inventory-change'.
 // Presentation layer: the backpack sits on the left bar (#aw-left-bar, the things she can touch), with her notebook under it.
 // It shows only once Abbie carries something or has earned a charm (until then the world just behaves). Tapping it
@@ -22,6 +27,21 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
 const write = list => { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch {} dispatchEvent(new CustomEvent(EVENT, {detail: list})); };
 const isUrl = icon => /^(\/|https?:|data:|\.)/.test(String(icon || ''));
+// The effect pickups, read from effect-charge.mjs (its store is the one count), shown in the backpack as items.
+let EC = null;
+const FUEL_ICON = {ember: '🔥', droplet: '💧', treat: '🦴', dye: '🎨'}, FUEL_PLURAL = {ember: 'embers', droplet: 'droplets', treat: 'pet treats', dye: 'dye drops'};
+const EFFECT_NAME = {fireball: 'fireball', waterball: 'waterball', 'cats-dogs': 'cats and dogs', 'tie-dye': 'tie-dye'};
+const fuelItems = () => !EC ? [] : Object.entries(EC.FUEL).flatMap(([effect, kind]) => { const n = EC.fuel(kind); return n > 0 ? [{id: 'fuel:' + kind, fuel: kind, effect, icon: FUEL_ICON[kind] || '✦',
+  name: (n === 1 ? EC.FUEL_NAME[kind].replace(/^an? /, '').replace(/^./, c => c.toUpperCase()) : `${n} ${FUEL_PLURAL[kind]}`) + `: tap to charge the ${EFFECT_NAME[effect] || effect}`}] : []; });
+const carried = () => [...read(), ...fuelItems()];
+function useItem(item) {
+  if (item.fuel && EC) {
+    const ok = EC.isCharged(item.effect) ? null : EC.charge(item.effect);
+    view?.say(ok ? `The ${EFFECT_NAME[item.effect]} is charged!` : ok === null ? `The ${EFFECT_NAME[item.effect]} is already charged.` : 'Nothing to charge.', 2000);
+    if (ok) { jingle(); view?.bounce(); }
+  }
+  dispatchEvent(new CustomEvent('aw-inventory-use', {detail: {item}}));
+}
 const iconHtml = (icon, cls = '') => isUrl(icon) ? `<img class="${cls}" src="${esc(icon)}" alt="">` : `<span class="${cls}">${esc(icon || '✦')}</span>`;
 
 let api = null;
@@ -47,6 +67,7 @@ export function inventory() {
   addEventListener(EVENT, () => { drawPocket(); checkCharms(); });
   addEventListener('aw-backpack-change', () => { drawPocket(); drawNotebookMini(); checkCharms(); });
   addEventListener('aw-memory-coins-change', () => checkCharms());
+  import('./effect-charge.mjs').then(m => { EC = m; drawPocket(); m.onCharge(() => drawPocket()); }).catch(() => {});
   addEventListener('storage', e => { if (/^aw-(memory-coins|basement-coins|backpack)$/.test(e.key || '')) { drawPocket(); checkCharms(); } });
   import('./presentation-layer.mjs').then(({volunteer}) => volunteer('abbie', {place: 'anywhere', dialect: 'her own backpack', items: [
     {id: 'pocket', says: 'what Abbie carries in her backpack', kind: 'list', who: 'player', for: ['player', 'director'], read: () => read().map(i => i.name), relevant: () => read().length > 0,
@@ -111,7 +132,7 @@ async function miniPack(canvas) {
 }
 function drawPocket(bump = false) {
   if (!document.body) return;
-  const list = read(), p = mountPocket();
+  const list = carried(), p = mountPocket();
   p.querySelector('.aw-pocket-g').innerHTML = glyph(bagLook());
   p.querySelector('.aw-pocket-n')?.remove();
   if (list.length > 1) p.insertAdjacentHTML('beforeend', `<span class="aw-pocket-n">${list.length}</span>`);
@@ -152,7 +173,7 @@ function layout() {
   Object.assign(pop.querySelector('.aw-bp-stage').style, {left: cx - S / 2 + 'px', top: cy - S / 2 + 'px', width: S + 'px', height: S + 'px'});
 }
 async function openPop() {
-  const list = read(), from = pocket?.isConnected ? pocket.getBoundingClientRect() : {left: 12, top: 12, width: 44, height: 44, bottom: 56};
+  const list = carried(), from = pocket?.isConnected ? pocket.getBoundingClientRect() : {left: 12, top: 12, width: 44, height: 44, bottom: 56};
   if (!pop) {
     pop = Object.assign(document.createElement('div'), {className: 'aw-pocket-pop aw-bp-pop aw-bp-float'});
     pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-label', "Abbie's backpack");
@@ -177,7 +198,7 @@ async function openPop() {
   try {
     if (!view) {
       const [B, {loadout}, {coverCanvas}] = await Promise.all([import('./backpack.mjs?v=10'), import('./loadout.mjs?v=1'), import('./notebook.mjs?v=1')]);
-      view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onPart: f => lo?.select(f || null),
+      view = await B.backpackView(st, {...contents, look: bagLook(), spin: false, float: true, onPart: f => lo?.select(f || null), onTap: useItem,
         onChange: l => { setLook(l); drawPeek(); lo?.refresh(); }});
       const peek = pop.querySelector('.aw-bp-peek');
       lo = loadout(pop, {slots: () => slotDefs(B, coverCanvas), value: f => bagLook()[f],

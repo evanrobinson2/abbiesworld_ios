@@ -184,3 +184,8 @@ Reuse: the buggy (carwash) and her clothes can use the same module with their ow
 (`backpack-cards.mjs`) stay for the study page's old decorate mode only.
 
 Tour: no. It is the same backpack, dressed in a simpler way.
+
+Using what she carries (same round): tap a thing in the open backpack and `aw-inventory-use` fires with `{item}`. A
+listener that takes it calls `inventory().remove(item.id)`. The effect pickups picked up while driving (embers, droplets,
+pet treats, dye drops) are counted by `effect-charge.mjs`, the one store, and the backpack shows them as items. Tapping
+one charges its world effect there and then (`charge(id)`), and Abbie says so.

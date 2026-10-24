@@ -948,6 +948,7 @@ export async function backpackView(el, {look: l = look(), items = [], coins = 0,
   },
   unfocus() { if (focus == null) return; const p = bp.charms[focus]; if (p) p.mesh.children[1].quaternion.identity(); focus = null; onFocus?.(null); },
   get focused() { return focus; },
+  say(text, ms) { say(text, null, ms); },
   bounce() { if (bp) bp.group.scale.setScalar(1.12); bp?.charms.forEach(p => p.vz += 3); },
   dispose() { alive = false; cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); canvas.remove(); deck?.dispose(); tag?.remove(); }
  };
