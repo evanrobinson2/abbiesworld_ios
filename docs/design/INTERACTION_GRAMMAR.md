@@ -94,3 +94,28 @@ Tapping your own hand lets it go. Being seen costs ground, not the run: you slid
 - Players are never told this explicitly. It is how the interface is organised, not something a screen explains.
 - When you add a feature, decide which row it belongs to before you design it. A world effect is a card, a piece of
   terrain or a building is a tile, a control is HUD, and anything you do as a person is FPS.
+
+## The town answers every tap (2026-10-24)
+
+Evan's playtest of Winchester: "the world needs you to be able to interact with it." Law 3 above (every touch answers) now
+holds across the whole board, not just the places with a door. The layer is `simulations/abbietown/interactions.mjs`,
+started from `simulations/town-hud-boot.mjs`. It is the "playing in the world" way of acting; it is not a tile, a god card
+or HUD.
+
+- **Everything notable answers.** Houses squash, knock and puff chimney smoke, with a thought bubble of what is going on
+  inside. Trees shake and drop leaves, sometimes a bird flies off. Lamp posts ding, shops ring a bell, the places on the
+  board each have their own sound and bubble (bakery bell, depot whistle, mill creak, Launch rumble). Ducks at Horn Pond
+  quack and hop, bub barks and wags, the town car honks and flashes its lights.
+- **Who owns a tap.** People (quests), the café door, the toy-car coaster and the moon truck keep their own handlers; this
+  layer reads `userData.giver` / `userData.link` and stays out of their way. A thing can opt out with
+  `userData.interact = false`, or opt in with `userData.interact = {kind, id}`.
+- **Showing what answers.** Diegetic first: the thing itself reacts. On a pointer, a small twinkle sits over whatever is
+  under it and the cursor turns to a hand. Places that open into something (café, coaster, Muraco) twinkle softly, so a
+  touch player can tell. No labels, no outlines, no ids.
+- **Doors are offered, never forced.** A place with a gate (Muraco: `town:school-door`) answers with a bubble holding a
+  "Go in" button, so exploring never throws a child out of the town.
+- **Two layers.** World layer (perceivable by characters): the squash, smoke, leaves, birds, ducks, bub and the car.
+  Presentation layer: bubbles, the twinkle, the pointer. The twinkle is a 2D canvas, so no helper object is in the scene.
+- **Test.** `tools/minigame-test/interactions.cjs` taps a house, tree, lamp, shop, prop, place, duck, bub and the car with a
+  real mouse in headless Chromium, checks each answers as the right kind and that bare ground and the sky do nothing.
+- **Next.** Walking in first person as Abbie is not wired on the board yet; tapping bub or a house could hand over to it.
