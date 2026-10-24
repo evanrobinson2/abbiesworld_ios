@@ -120,6 +120,106 @@
    "files": [
     "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/jump_run.glb"
    ]
+  },
+  "16": {
+   "task_id": "01a16b5e-cbcc-7434-8995-a50cdc04cf8a",
+   "credits": 3,
+   "name": "Run Fast",
+   "category": "WalkAndRun",
+   "sub_category": "Running",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/runfast.glb"
+   ]
+  },
+  "523": {
+   "task_id": "01a16b5e-cbcf-729f-b766-0efba8a913e5",
+   "credits": 3,
+   "name": "Cautious Crouch Walk Backward",
+   "category": "WalkAndRun",
+   "sub_category": "CrouchWalking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cautious_crouch_walk_backward.glb"
+   ]
+  },
+  "525": {
+   "task_id": "01a16b5e-cbc8-7470-9f96-11f5a8aad127",
+   "credits": 3,
+   "name": "Cautious Crouch Walk Left",
+   "category": "WalkAndRun",
+   "sub_category": "CrouchWalking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cautious_crouch_walk_left.glb"
+   ]
+  },
+  "571": {
+   "task_id": "01a16b5e-cbcb-735a-aa12-de74adda50ec",
+   "credits": 3,
+   "name": "Run Turn Left",
+   "category": "WalkAndRun",
+   "sub_category": "TurningAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/run_turn_left.glb"
+   ]
+  },
+  "524": {
+   "task_id": "01a16b5e-cbc7-76db-bede-de033ff72099",
+   "credits": 3,
+   "name": "Cautious Crouch Walk Forward",
+   "category": "WalkAndRun",
+   "sub_category": "CrouchWalking",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/cautious_crouch_walk_forward.glb"
+   ]
+  },
+  "572": {
+   "task_id": "01a16b5e-f93b-7043-bb08-07facda4bda6",
+   "credits": 3,
+   "name": "Walk Turn Left",
+   "category": "WalkAndRun",
+   "sub_category": "TurningAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/walk_turn_left.glb"
+   ]
+  },
+  "575": {
+   "task_id": "01a16b5f-22ed-7795-9c4e-4da3bc1c21fc",
+   "credits": 3,
+   "name": "Combat Idle Turn Left",
+   "category": "WalkAndRun",
+   "sub_category": "TurningAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/combat_idle_turn_left.glb"
+   ]
+  },
+  "576": {
+   "task_id": "01a16b5f-2334-77cd-8486-9aa96585382c",
+   "credits": 3,
+   "name": "Idle Turn Left",
+   "category": "WalkAndRun",
+   "sub_category": "TurningAround",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/idle_turn_left.glb"
+   ]
+  },
+  "568": {
+   "task_id": "01a16b5f-236c-7188-966c-f01832b20b17",
+   "credits": 3,
+   "name": "Swim Idle",
+   "category": "WalkAndRun",
+   "sub_category": "Swimming",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/swim_idle.glb"
+   ]
+  },
+  "569": {
+   "task_id": "01a16b5f-237c-7440-8a53-e8dd76f2642e",
+   "credits": 3,
+   "name": "Swim Forward",
+   "category": "WalkAndRun",
+   "sub_category": "Swimming",
+   "files": [
+    "prototypes/ranch-atelier/dist/studies/moon-mission/heroes/anims/swim_forward.glb"
+   ]
   }
  }
 }
