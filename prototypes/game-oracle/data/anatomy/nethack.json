@@ -419,6 +419,139 @@
       "bytes": 112042,
       "blobSha": "79fe7408c858a5c2754a173be2b7ed78e2eb5b65",
       "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/hack.c"
+    },
+    {
+      "game": "nethack",
+      "path": "src/sp_lev.c",
+      "bytes": 174146,
+      "sha256": "a43b3542e376bb6c1b5242910f4fdb37dfea86668d067799f16cb04ce26ac9bd",
+      "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
+      "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c"
     }
-  ]
+  ],
+  "corridorStudy": {
+    "game": "nethack",
+    "version": "NetHack-3.6.7_Released",
+    "commit": "ed600d9f0f3c37677418f0150f59363ca641f3dc",
+    "method": "bounded static inspection of original release source; not decompilation or gameplay observation",
+    "evidence": [
+      {
+        "path": "src/mklev.c",
+        "bytes": 58173,
+        "sha256": "a13daa6e9ee48333b9362b35f702a0faab611716353e8049c6f9d6fbf29bbff6",
+        "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c"
+      },
+      {
+        "path": "src/sp_lev.c",
+        "bytes": 174146,
+        "sha256": "a43b3542e376bb6c1b5242910f4fdb37dfea86668d067799f16cb04ce26ac9bd",
+        "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
+        "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c"
+      }
+    ],
+    "findings": [
+      {
+        "title": "Room corridors use staged connection attempts before extra routes",
+        "finding": "makecorridors attempts adjacent rooms, with a random early break, then rooms two apart with unequal smeq labels, then a bounded cross-room label pass. With more than two rooms it attempts rn2(nroom)+4 extra connections using nxcor=true. This is evidence of staged connectivity construction, not proof that all seeds produce a connected traversable level.",
+        "path": "src/mklev.c",
+        "lines": [
+          319,
+          347
+        ]
+      },
+      {
+        "title": "A failed corridor can leave geometry behind",
+        "finding": "join can create its origin door before calling dig_corridor. The digger changes tiles in place and can later return FALSE on its iteration guard, optional-route random termination, boundary or terrain mismatch. Neither inspected function rolls these writes back. The target door and smeq update occur only after successful digging. Partial corridor stubs are therefore possible in this control flow; their observed frequency remains unknown.",
+        "path": "src/mklev.c",
+        "lines": [
+          294,
+          315
+        ],
+        "additionalEvidence": {
+          "path": "src/sp_lev.c",
+          "lines": [
+            2246,
+            2269
+          ]
+        }
+      },
+      {
+        "title": "Corridor routing is a bounded local walker with secret and obstructed variants",
+        "finding": "dig_corridor chooses axis movement toward the destination, perturbs relative axis distances, tries permissible turns, continues straight where permitted, and changes direction around incompatible terrain. It accepts background terrain, intended floor or secret corridor. Ordinary CORR carving can instead create SCORR; optional nxcor routes can terminate randomly and place boulders. No shortest-path or global reachability guarantee was established.",
+        "path": "src/sp_lev.c",
+        "lines": [
+          2215,
+          2321
+        ]
+      },
+      {
+        "title": "Door placement rules differ between required and extra corridors",
+        "finding": "okdoor requires horizontal or vertical wall, spare door capacity and no cardinally adjacent ordinary or secret door. finddpos first tries a random candidate, scans legal wall positions, then reuses an existing door and finally falls back to a corner coordinate. join bypasses okdoor for nxcor=false at both endpoints; nxcor=true requires it. dodoor retains the capacity check. Thus okdoor is not an unconditional invariant for every corridor endpoint.",
+        "path": "src/mklev.c",
+        "lines": [
+          1237,
+          1256
+        ],
+        "additionalEvidence": [
+          {
+            "path": "src/mklev.c",
+            "lines": [
+              69,
+              95
+            ]
+          },
+          {
+            "path": "src/mklev.c",
+            "lines": [
+              294,
+              310
+            ]
+          },
+          {
+            "path": "src/mklev.c",
+            "lines": [
+              1207,
+              1232
+            ]
+          }
+        ]
+      }
+    ],
+    "coverage": {
+      "corridorControlFlow": "partial",
+      "runtime": "unexamined",
+      "globalConnectivityGuarantee": "unexamined",
+      "smeqInitializationAndPropagation": "partial: creation and join updates traced, repository-wide writers unexamined",
+      "doorAndBoulderSemantics": "partial: doorway constraints and initial door states traced; boulder movement unexamined"
+    },
+    "next": "Publish the four bounded corridor findings and supporting label/door traces after current catalog reconciliation, full build and deployed API/MCP plus desktop/mobile checks. Do not claim universal connectivity or traversability.",
+    "labelTrace": {
+      "initialization": {
+        "path": "src/sp_lev.c",
+        "lines": [
+          1283,
+          1286
+        ],
+        "finding": "Non-vault room creation assigns smeq[nroom]=nroom before add_room."
+      },
+      "update": {
+        "path": "src/mklev.c",
+        "lines": [
+          312,
+          315
+        ],
+        "finding": "After a successful dig, join copies the smaller endpoint label to the other endpoint. This inspected update does not relabel every room sharing the old label. Treat labels as construction bookkeeping; do not claim canonical disjoint-set components or runtime accessibility."
+      },
+      "scope": "Only downloaded source files were searched; whole-repository absence of other writes is not established."
+    },
+    "doorStateTrace": {
+      "path": "src/mklev.c",
+      "lines": [
+        384,
+        447
+      ],
+      "finding": "Door geometry has separate state: ordinary doors may be open, locked, closed or absent; secret doors are closed or locked. Difficulty and shop context affect traps, and some trapped-door branches can create a mimic. A successful corridor dig alone does not establish unimpeded movement."
+    }
+  }
 }

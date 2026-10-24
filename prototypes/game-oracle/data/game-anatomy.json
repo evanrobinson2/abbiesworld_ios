@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "revision": "anatomy-2026-10-24-endless-sky-lifecycle",
-  "updatedAt": "2026-10-24T00:48:15.962960+00:00",
+  "revision": "anatomy-2026-10-24-nethack-corridors",
+  "updatedAt": "2026-10-24T03:48:47.455055+00:00",
   "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
   "counts": {
     "games": 15,
     "extractedPackages": 14,
     "files": 62515,
     "imageFiles": 39516,
-    "findings": 108,
+    "findings": 112,
     "runtimeObserved": 0,
-    "sourceFilesFetched": 70,
+    "sourceFilesFetched": 71,
     "selectedClassesDecompiled": 5
   },
   "method": [
@@ -1631,6 +1631,66 @@
             "url": "/data/anatomy/nethack.json",
             "path": "package inventory / static analysis"
           }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Room corridors use staged connection attempts before extra routes",
+          "finding": "makecorridors attempts adjacent rooms, with a random early break, then rooms two apart with unequal smeq labels, then a bounded cross-room label pass. With more than two rooms it attempts rn2(nroom)+4 extra connections using nxcor=true. This is evidence of staged connectivity construction, not proof that all seeds produce a connected traversable level.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L319-L347",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              319,
+              347
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "A failed corridor can leave geometry behind",
+          "finding": "join can create its origin door before calling dig_corridor. The digger changes tiles in place and can later return FALSE on its iteration guard, optional-route random termination, boundary or terrain mismatch. Neither inspected function rolls these writes back. The target door and smeq update occur only after successful digging. Partial corridor stubs are therefore possible in this control flow; their observed frequency remains unknown.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L294-L315",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              294,
+              315
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Corridor routing is a bounded local walker with secret and obstructed variants",
+          "finding": "dig_corridor chooses axis movement toward the destination, perturbs relative axis distances, tries permissible turns, continues straight where permitted, and changes direction around incompatible terrain. It accepts background terrain, intended floor or secret corridor. Ordinary CORR carving can instead create SCORR; optional nxcor routes can terminate randomly and place boulders. No shortest-path or global reachability guarantee was established.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/sp_lev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/sp_lev.c#L2215-L2321",
+            "blobSha": "2c5628fc3bd9a6e7b2b1f0daa2a2f733653ec06e",
+            "lines": [
+              2215,
+              2321
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Door placement rules differ between required and extra corridors",
+          "finding": "okdoor requires horizontal or vertical wall, spare door capacity and no cardinally adjacent ordinary or secret door. finddpos first tries a random candidate, scans legal wall positions, then reuses an existing door and finally falls back to a corner coordinate. join bypasses okdoor for nxcor=false at both endpoints; nxcor=true requires it. dodoor retains the capacity check. Thus okdoor is not an unconditional invariant for every corridor endpoint.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L1237-L1256",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              1237,
+              1256
+            ]
+          }
         }
       ],
       "coverage": {
@@ -1651,7 +1711,7 @@
         "status": "design inference; not implemented in Ranch Atelier",
         "text": "Generate connectivity and progression requirements before filling a location with incidental content."
       },
-      "nextPass": "Decode packed data, trace turn cost and monster scheduling, and observe inventory, visibility and failure feedback. Do not infer the full ruleset from generation code.",
+      "nextPass": "Trace turn scheduling and failure feedback. Corridor construction is partially traced; global reachability and runtime behavior remain unexamined.",
       "runtimeObserved": false,
       "packedResourceCount": null
     },
