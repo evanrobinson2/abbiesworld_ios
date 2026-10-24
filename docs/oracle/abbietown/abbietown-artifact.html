@@ -2042,6 +2042,17 @@ function setupStage() {
  const roadSpawns = (every = 30) => { const out = []; for (const d of DIOS) { const o = tileOff(d); for (const rd of dioRoads[d.id] || []) { if (rd.c > 4) continue; let run = 0, next = every / 2; for (let i = 1; i < rd.p.length; i++) { const [ax, ay] = rd.p[i - 1], [bx, by] = rd.p[i], l = Math.hypot(bx - ax, by - ay); while (next <= run + l) { const k = (next - run) / l, px = ax + (bx - ax) * k, py = ay + (by - ay) * k; if (inHex(px, py, DIO_R * .85)) out.push({hex: d.id, x: o.x + px, y: o.y + py, heading: Math.atan2(by - ay, bx - ax), width: rd.c <= 3 ? 5.4 : 4.2}); next += every; } run += l; } } } return out; };
  const board = {name: BOARD.name, hexSide: DIO_R, hexes: DIOS.map(d => ({id: d.id, n: d.n, zone: d.zone, name: d.name})), slots: BOARD_SLOTS, heightAt: boardRaw, obstaclesNear, roadSpawns, tileAt: (px, py) => DIOS.find(d => { const o = tileOff(d); return inHex(px - o.x, py - o.y, DIO_R); })?.id || null}; // board metres east and north of the middle hex
  Object.assign(window.AbbieTown, {board, entrances: ENTRANCES, backUrl, go: (gate, st) => { const e = ENTRANCES[gate]; if (!e || !available(gate, st)) return false; if (e.kind === 'stage') { window.dispatchEvent(new CustomEvent('abbietown:enter', {detail: {gate, scene: e.scene, module: e.module}})); return enterScene(e.scene); } location.href = e.url; return true; }, stage, scenes, enterScene, exitScene, registerScene, mount: mountScene});
+ // a generic place for a new tile card: put its group on an open slot and register it like any hex (the same record the Farm builds by hand). group is in tile-local metres (x east, z = -north), hf(px, py) is its own ground height, spots are {x, z, y, facing, g}
+ window.AbbieTown.placeTile = (slotId, {id, name, zone = 'board', group, hf, spots = {}, houses = [], scene = null} = {}) => {
+  const slot = board.slots.find(q => q.id === slotId); if (!slot || !id || !group || slot.tile || stage.tiles[id] || Object.values(stage.tiles).some(t => t.group && t.group.position && Math.hypot(t.group.position.x - slot.x, t.group.position.z + slot.y) < 1)) return null; // a slot a tile already stands on (the Farm builds its own) is taken
+  group.position.set(slot.x, 0, -slot.y); stage.dioGroup.add(group); slot.tile = id;
+  const centre = new THREE.Vector3(slot.x, 0, -slot.y).add(stage.dioGroup.position);
+  stage.tiles[id] = {hf: hf || ((px, py) => boardRaw(slot.x + px, slot.y + py)), group, centre, spots, houses, slot: slotId};
+  if (!board.hexes.some(h => h.id === id)) board.hexes.push({id, n: 'H' + (board.hexes.length + 1), zone, name: name || id});
+  if (scene) { try { registerScene({id: scene.id || 'dio-' + id, region: id, anchor: [0, 0], bounds: DIO_R, ...scene}); } catch (e) { console.warn('tile scene', e); } }
+  window.dispatchEvent(new CustomEvent('abbietown:tile-placed', {detail: {id, slot: slotId, x: slot.x, y: slot.y}}));
+  return stage.tiles[id];
+ };
  { const at = new URLSearchParams(location.search).get('at'), e = at && ENTRANCES[at]; // coming back from a game: land at the gate you left by
    if (e && scenes[e.scene]) { setView(true); setTimeout(() => enterScene(e.scene, {dist: 70}), 60); } }
  return stage;
